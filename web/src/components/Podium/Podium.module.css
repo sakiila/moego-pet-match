@@ -1,0 +1,43 @@
+.podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  gap: var(--space-2);
+}
+
+.place {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-2);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-muted);
+  text-align: center;
+}
+
+.first {
+  padding-top: var(--space-5);
+  background: #fff4ec;
+  box-shadow: inset 0 0 0 2px var(--color-dog-yellow);
+}
+
+.crown {
+  font-size: var(--text-lg);
+  font-weight: 900;
+}
+
+.name {
+  max-width: 100%;
+  font-weight: var(--weight-bold);
+  overflow-wrap: anywhere;
+}
+
+.score {
+  font-size: var(--text-lg);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.first .score {
+  color: var(--color-brand);
+}

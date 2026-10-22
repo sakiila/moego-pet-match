@@ -134,6 +134,8 @@ describe('计分、连锁与道具生成', () => {
     expect(state.served.slice(0, 3)).toEqual([3, 3, 4]);
     expect(state.firstServedSeq.slice(0, 3)).toEqual([1, 2, 3]);
     expect(summary).toMatchObject({ score: 210, clearedCells: 10, maxChain: 3, toolsFired: 0, validMoves: 1 });
+    // 3 格 ×1、3 格 ×2、4 格 ×3：10×(3 + 6 + 12) = 210
+    expect(summary.clearedByMultiplier).toEqual([3, 3, 4, 0, 0]);
   });
 });
 

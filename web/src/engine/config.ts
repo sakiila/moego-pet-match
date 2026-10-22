@@ -1,3 +1,6 @@
+/** 规则版本：对局登记与结算时校验，规则或计分口径变化时递增。 */
+export const RULES_VERSION = 1;
+
 /** 已确认的首版规则数值（V1_RULES / GAME_FLOW）。 */
 export const RULES = {
   size: 7,

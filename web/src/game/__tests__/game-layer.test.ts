@@ -231,3 +231,18 @@ describe('催单条状态', () => {
     expect(rushView(null, 9, 51_500)).toEqual({ state: 'hidden' });
   });
 });
+
+describe('提交结果', () => {
+  it('冻结结果与服务端校验口径一致：分数 = 10 × Σ(倍率 × 格数) + 催单奖励', async () => {
+    const { toResultPayload } = await import('../result');
+    const s0 = createGame({ seed: 1, lineup: LINEUP, board: CASCADE_210, refill: [0, 1, 0, 0, 2, 0, 1, 2, 0] });
+    const r = trySwap(s0, p(4, 4), p(4, 3), 1000);
+    if (!r.ok) throw new Error('rejected');
+    const { getSummary } = await import('../../engine');
+    const payload = toResultPayload(getSummary(r.state), 1);
+    const expected = payload.clearedByMultiplier.reduce((s, n, i) => s + n * (i + 1) * 10, 0) + (payload.rushSucceeded ? 100 : 0);
+    expect(payload.score).toBe(expected);
+    expect(payload.clearedByMultiplier.reduce((a, b) => a + b, 0)).toBe(payload.clearedCells);
+    expect(payload.pets).toHaveLength(6);
+  });
+});

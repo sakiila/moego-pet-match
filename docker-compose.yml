@@ -1,0 +1,17 @@
+# 本地开发与测试数据库（版本与 Supabase 实例一致）。正式数据在 Supabase，不在这里。
+services:
+  db:
+    image: postgres:15.8
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '54329:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./server/db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 2s
+      retries: 30
+volumes:
+  pgdata:

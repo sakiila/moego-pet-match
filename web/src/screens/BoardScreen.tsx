@@ -38,7 +38,7 @@ export function BoardScreen({ game, pets, speed, startAt, onFinished, onExit }: 
 
   return (
     <main className={styles.screen}>
-      <BrandHeader tagline />
+      <BrandHeader tagline="board.tagline" />
       <StatusPanel timeLeftMs={view.timeLeftMs} score={view.frame.score} />
       <RushBar view={view.rush} />
       <div className={styles.boardArea}>

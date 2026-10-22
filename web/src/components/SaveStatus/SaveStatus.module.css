@@ -1,0 +1,12 @@
+.box {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.badge {
+  justify-self: center;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--color-dog-yellow);
+  font-weight: 900;
+}

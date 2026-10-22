@@ -68,6 +68,8 @@ export interface GameState {
   batchSeq: number;
   score: number;
   clearedCells: number;
+  /** 按连锁倍率 ×1…×5 汇总的清除格数，服务端据此核对分数。 */
+  clearedByMultiplier: number[];
   maxChain: number;
   toolsFired: number;
   served: number[];

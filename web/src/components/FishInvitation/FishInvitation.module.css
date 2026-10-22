@@ -1,0 +1,15 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: #0d2a4a;
+  color: var(--color-paper);
+  font-weight: var(--weight-bold);
+  line-height: 1.4;
+}
+
+.icon {
+  font-size: 28px;
+}

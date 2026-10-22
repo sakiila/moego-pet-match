@@ -1,0 +1,12 @@
+.best {
+  margin: 0;
+  text-align: center;
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-muted);
+}
+
+.score {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}

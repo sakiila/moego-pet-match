@@ -32,6 +32,7 @@ export function createGame({ seed, lineup, board, refill = [] }: CreateGameOptio
     batchSeq: 0,
     score: 0,
     clearedCells: 0,
+    clearedByMultiplier: Array(RULES.maxMultiplier).fill(0),
     maxChain: 0,
     toolsFired: 0,
     served: lineup.map(() => 0),
@@ -47,6 +48,7 @@ function cloneState(s: GameState): GameState {
   return {
     ...s,
     refillQueue: [...s.refillQueue],
+    clearedByMultiplier: [...s.clearedByMultiplier],
     served: [...s.served],
     firstServedSeq: [...s.firstServedSeq],
     rush: { ...s.rush },
@@ -131,6 +133,7 @@ export function findHint(state: GameState): Move | null {
 export interface GameSummary {
   score: number;
   clearedCells: number;
+  clearedByMultiplier: number[];
   maxChain: number;
   toolsFired: number;
   validMoves: number;
@@ -144,6 +147,7 @@ export function getSummary(state: GameState): GameSummary {
   return {
     score: state.score,
     clearedCells: state.clearedCells,
+    clearedByMultiplier: [...state.clearedByMultiplier],
     maxChain: state.maxChain,
     toolsFired: state.toolsFired,
     validMoves: state.validMoves,

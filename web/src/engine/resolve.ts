@@ -147,6 +147,7 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
 
     s.score += score + (rushBonus ? RULES.rush.bonus : 0);
     s.clearedCells += cleared.length;
+    s.clearedByMultiplier[multiplier - 1] += cleared.length;
     s.toolsFired += toolsFired.length + (seed?.combo ? 2 : 0);
 
     batches.push({

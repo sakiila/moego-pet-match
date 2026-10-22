@@ -16,3 +16,8 @@ export const PLACEHOLDER_PETS: PetInfo[] = [
 ];
 
 export const petById = (id: string) => PLACEHOLDER_PETS.find((p) => p.id === id)!;
+
+/** 服务端阵容 → 展示信息：占位宠物用 emoji，正式宠物在阶段 3 接入贴纸。 */
+export function petFromLineup(pet: { petId: string; name: string }): PetInfo {
+  return PLACEHOLDER_PETS.find((p) => p.id === pet.petId) ?? { id: pet.petId, name: pet.name, emoji: '🐾' };
+}
