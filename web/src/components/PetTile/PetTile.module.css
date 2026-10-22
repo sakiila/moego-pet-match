@@ -1,0 +1,16 @@
+.tile {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 22%;
+  background: var(--tint);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.7), 0 1px 0 rgb(31 34 39 / 0.08);
+  user-select: none;
+}
+
+.face {
+  font-size: calc(var(--size, 48px) * 0.62);
+  line-height: 1;
+  filter: drop-shadow(0 1px 0 rgb(255 255 255 / 0.9));
+}

@@ -1,0 +1,91 @@
+/* 固定高度：出现与收起都不推动棋盘 */
+.slot {
+  height: 76px;
+}
+
+.bar {
+  height: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: var(--stroke) solid var(--color-brand);
+  border-radius: var(--radius-lg);
+  background: var(--color-paper);
+  box-shadow: 0 3px 0 rgb(249 107 28 / 0.35);
+  animation: rush-in 220ms var(--ease-out) both;
+}
+
+@keyframes rush-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-brand);
+}
+
+.remaining {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.served {
+  flex: none;
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.track {
+  flex: 1;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-line);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-brand);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.message {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+}
+
+.success {
+  border-color: var(--color-success);
+  color: var(--color-success);
+  box-shadow: 0 3px 0 rgb(47 158 107 / 0.35);
+}
+
+.expired {
+  border-color: var(--color-line);
+  color: var(--color-ink-muted);
+  box-shadow: none;
+}

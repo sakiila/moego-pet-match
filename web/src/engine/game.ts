@@ -1,6 +1,7 @@
 import { inBounds, isAdjacent, parseBoard } from './board';
 import { RULES } from './config';
 import { generateBoard, validMoves } from './moves';
+import { comboRange, toolRange } from './tools';
 import { resolveMove } from './resolve';
 import { createRng, shuffleInPlace } from './rng';
 import type { GameEvent, GameState, Move, Pos, SwapRejection, Timeline } from './types';
@@ -101,6 +102,25 @@ export function advance(state: GameState, t: number): { state: GameState; events
 export function confirmExit(state: GameState, t: number): { state: GameState; discarded: boolean } {
   if (state.phase !== 'playing' || t >= RULES.durationMs) return { state, discarded: false };
   return { state: { ...state, phase: 'discarded' }, discarded: true };
+}
+
+/**
+ * 工具直接范围预览：手势已指向相邻目标但未触发交换时调用。
+ * 单工具按交换后的位置计算，两工具按合体与落点计算；不涉及工具时返回 null。
+ * 只描述直接范围，不预测扫到其他道具后的扩展与后续连锁。
+ */
+export function previewRange(state: GameState, from: Pos, to: Pos): Pos[] | null {
+  const size = state.board.length;
+  if (!inBounds(from, size) || !inBounds(to, size) || !isAdjacent(from, to)) return null;
+  const a = state.board[from.r][from.c];
+  const b = state.board[to.r][to.c];
+  let cells: Pos[] | null = null;
+  if (a?.type === 'tool' && b?.type === 'tool') cells = comboRange(a.tool, b.tool, to, size);
+  else if (a?.type === 'tool') cells = toolRange(a.tool, to, size);
+  else if (b?.type === 'tool') cells = toolRange(b.tool, from, size);
+  if (!cells) return null;
+  const unique = new Map(cells.map((p) => [p.r * size + p.c, p]));
+  return [...unique.entries()].sort((x, y) => x[0] - y[0]).map(([, p]) => p);
 }
 
 /** 卡关提示：返回一步当前确实有效的操作；没有时返回 null（应已由洗牌处理）。 */

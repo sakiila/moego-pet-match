@@ -144,7 +144,7 @@ describe('道具发动与合体', () => {
     ['梳＋梳', 'h', 'v', 13, 'comboCC'],
     ['梳＋剪', 'h', 'x', 33, 'comboCS'],
     ['剪＋剪', 'x', 'x', 49, 'comboSS'],
-  ])('%s 以落点为中心首批覆盖 %i 格', (_, a, b, cells, effect) => {
+  ])('%s（%s ⇄ %s）以落点为中心首批覆盖 %i 格', (_, a, b, cells, effect) => {
     const { state, timeline } = swap(twoTools(a, b), p(3, 2), p(3, 3), 1000);
     const first = chain(timeline).batches[0];
     expect(first.cleared).toHaveLength(cells);

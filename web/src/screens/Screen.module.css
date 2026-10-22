@@ -1,0 +1,57 @@
+/* 手机竖屏优先：一屏完成，关键操作不需滚动；桌面居中保持手机宽度 */
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 480px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-4) max(var(--space-3), env(safe-area-inset-bottom));
+}
+
+.grow {
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+}
+
+.footer button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.boardArea {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+@media (max-height: 740px) {
+  .screen {
+    gap: var(--space-2);
+  }
+}
+
+@media (orientation: landscape) and (min-width: 700px) and (max-height: 600px) {
+  .screen {
+    max-width: 920px;
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 420px);
+    align-content: start;
+  }
+}

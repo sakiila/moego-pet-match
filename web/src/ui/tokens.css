@@ -19,6 +19,14 @@
   --color-dog-yellow: #f7b733;
   --color-dog-red: #e5533d;
 
+  /* 本局 6 种宠物的浅底色（按本局 kind 分配，跨局可变，不作为宠物永久身份） */
+  --pet-tint-0: #d6e8ff;
+  --pet-tint-1: #d5f3df;
+  --pet-tint-2: #ffdccf;
+  --pet-tint-3: #e6ddff;
+  --pet-tint-4: #ffd7de;
+  --pet-tint-5: #fff0bd;
+
   /* 状态色 */
   --color-success: #2f9e6b;
   --color-danger: #d64545;
@@ -64,6 +72,10 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 120ms;
   --dur-base: 200ms;
+
+  /* 层级 */
+  --z-overlay: 10;
+  --z-dialog: 100;
 }
 
 /* Peter 鱼关：深蓝水下主题，保留 MoeGo 橙作强调色 */

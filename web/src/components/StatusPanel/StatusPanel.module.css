@@ -1,0 +1,57 @@
+.panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-lg);
+  background: #fff4ec;
+}
+
+.score {
+  background: #eef4ff;
+}
+
+.icon {
+  flex: none;
+  width: 34px;
+  height: 34px;
+}
+
+.label {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.value {
+  display: block;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.time .value {
+  color: var(--color-brand);
+}
+
+.urgent {
+  box-shadow: inset 0 0 0 3px var(--color-danger);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.urgent .value {
+  color: var(--color-danger);
+}
+
+@keyframes pulse {
+  50% {
+    background: #ffe3e3;
+  }
+}

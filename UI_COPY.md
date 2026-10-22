@@ -163,6 +163,13 @@
 | round.last_seconds | 最后 10 秒，稳住这班。 | Final 10 Seconds. You've Got This. |
 | round.finishing | 时间到，收完这波就下班。 | Time's up. Clocking out after this chain. |
 | round.finished | 收工啦！ | Shift Complete! |
+| board.title | Smart Scheduling | Smart Scheduling |
+| board.tagline | 拖一拖，安排明明白白。 | Drag it, sort it. |
+| board.time_label | 本局剩余 | Time Left |
+| board.score_label | 分数 | Score |
+| board.exit | 退出 | Exit |
+| rush.remaining | 催单剩余 {seconds} 秒 | Rush: {seconds}s |
+| rush.served | 已服务 {count}/12 格 | {count}/12 tiles |
 
 催单在游戏时钟第 30 秒触发，目标和倒计时区分主时钟，成功才显示 +100。`board.chain` 的链数与计分倍率分别计算，不因为显示第六轮就变成六倍。新宠提示是局内暂记，正式收集等结算保存；同次连锁合并一条，家庭团聚按同家每局一次。提示、收集和团聚不叠满棋盘。`round.finishing` 只在最后有效连锁仍待结算时显示，`round.last_seconds` 不新增奖励。
 
