@@ -1,0 +1,77 @@
+/*
+ * 设计令牌。组件只引用这里的变量，不写死颜色、阴影与间距。
+ * 初版取值参考 design/concepts/mobile-home-v2.png，精细校准在 UI 阶段对照图稿完成。
+ */
+:root {
+  /* 品牌色 */
+  --color-brand: #f96b1c;
+  --color-brand-strong: #e85a0c;
+  --color-brand-soft: #ffe7d6;
+  --color-ink: #1f2227;
+  --color-ink-muted: #5b6270;
+  --color-paper: #ffffff;
+  --color-surface: #fbfbfc;
+  --color-surface-muted: #f1f4f8;
+  --color-line: #e3e6eb;
+
+  /* 角色辅助色 */
+  --color-cat-blue: #4a8fe0;
+  --color-dog-yellow: #f7b733;
+  --color-dog-red: #e5533d;
+
+  /* 状态色 */
+  --color-success: #2f9e6b;
+  --color-danger: #d64545;
+
+  /* 语义映射 */
+  --bg: var(--color-surface);
+  --fg: var(--color-ink);
+  --fg-muted: var(--color-ink-muted);
+  --accent: var(--color-brand);
+  --accent-fg: var(--color-paper);
+  --panel: var(--color-surface-muted);
+  --border: var(--color-ink);
+
+  /* 形状 */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --stroke: 2px;
+  --shadow-offset: 0 5px 0 var(--color-ink);
+  --shadow-soft: 0 6px 18px rgb(31 34 39 / 0.08);
+
+  /* 字体 */
+  --font-sans: ui-rounded, 'SF Pro Rounded', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 20px;
+  --text-xl: 28px;
+  --text-display: 40px;
+  --weight-regular: 500;
+  --weight-bold: 800;
+
+  /* 间距 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* 动效 */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+}
+
+/* Peter 鱼关：深蓝水下主题，保留 MoeGo 橙作强调色 */
+[data-theme='fish'] {
+  --bg: #0d2a4a;
+  --fg: #ffffff;
+  --fg-muted: #b8cde3;
+  --panel: #dcefff;
+  --border: #06182c;
+  --shadow-offset: 0 5px 0 #06182c;
+}
