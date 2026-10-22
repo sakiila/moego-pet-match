@@ -1,0 +1,36 @@
+Use case: ui-mockup.
+Create ONE cute polished MOBILE PORTRAIT PRE-GAME READY STATE for the MoeGo pet match-three game, canvas853x1844, aspect9:19.5, same full phone viewport as image1. No browser/device frame/collage/annotations. Design only, no game code.
+
+REFERENCES:
+Image1 is the accepted PLAYING board. Reuse its white/orange/charcoal palette, logo/header scale, rounded bold type, sticker portrait and pastel tile treatment, and tall phone proportion. This new image is BEFORE the player starts: DO NOT copy48s, score2480, rush order, tool tiles, range preview or action hint from the active scene.
+Image2 is the SIX-PET CONTACT SHEET. Use only these portraits and correct names, not the contact-sheet page design:
+top row Deedee white long-eared dog; Maodu winking white/brown tabby; Boluo orange cat.
+bottom row Momo gray amber-eyed cat; Marley black floppy-eared dog; Koa peach/cream parrot.
+Preserve every head/pose/marking, complete ears/whiskers, white sticker rim, no neck/body/clothing.
+Image3 is genuine MoeGo logo; preserve its dog/check shape and wordmark.
+
+PURPOSE:
+This is the loaded READY PANEL of the existing gameplay page, not a new business-management route or another mode. Main central content temporarily shows this round's six guests and a short rule reminder; the49-cell board appears when the user starts. Do NOT force a miniature49-cell board behind this roster or add a second board. No running clock, no gameplay score, no order yet. Preparing/reading uses no time.
+Illustrative selected player Bob has Maodu in this actual six-pet lineup, so the friendly "Maodu 也来啦！" note is valid; do not invent ownership for the other names or guarantee future arrivals.
+
+STYLE:
+True white#FFFFFF, orange#F47721, charcoal#292A2F, muted gray instructions. Same lovable crisp pet stickers, soft pastel background squares and slight outlines/offset shadows as image1. Practical readable UI, modest whitespace, not a dashboard or poster. No page-wide beige, glass, gradients or clay3D.
+
+LAYOUT at logical390x844:
+- Compact header y24-65: small real MoeGo logo left; "回门店" and "中 / EN" on right, Chinese active orange. No avatar required, no navigation bar or active HUD.
+- Heading aroundy95: exact "Smart Scheduling", black Smart/orange Scheduling, one readable line around26px. Do not add a marketing subtitle or loading indicator.
+- Aroundy162, section title "本局来客", clearly leading to six portraits.
+- Six equal pet tiles arranged3 columns x2 rows, aroundy205-450, with full head portraits and name below each, legible14-16px. ORDER:
+Row1 Deedee / Maodu / Boluo
+Row2 Momo / Marley / Koa
+Use fixed auxiliary background colors matching the accepted playing board: Deedee pale sky blue, Maodu pale mint, Boluo pale peach, Momo pale lavender, Marley pale rose, Koa pale butter yellow. Same fur colors unaffected. No names inside actual gameplay squares; these names belong to the pre-game roster only. Do not add locks/checkmarks/stats/collection rarity to the portraits.
+- Below roster aroundy480: small friendly orange line "Maodu 也来啦！". Keep its mint tile background intact; no guaranteed drop or bonus claim.
+- Short rule block aroundy525-605, exact copy, natural readable wrapping:
+"交换相邻棋子，让 3 个及以上相同宠物连成一线。"
+"可以拖拽，也可以先点一格、再点相邻格。"
+Small arrows may aid the two instruction lines, not extra buttons. No four/five-match tool tutorial at this stage.
+- Above the main button, aroundy652-705, an exact clear time note in15px:
+"本局 90 秒。准备和读说明不计时，点下方按钮后开始。"
+90秒 can be semibold, but NOT a running timer or countdown ring.
+- ONE large orange bottom-near button x24,y750,width342,height56, paw icon and exact "开始这班", charcoal thin outline/small offset shadow. Comfortable lower safe margin. It is enabled because assets and registration are ready in this illustrative state. NO auto-start countdown.
+No other CTA except header回门店; no skip/pause/shop/refresh lineup/lives/coins/purchases/fish/hidden unlock preview, no celebration or score, no tool inventory. The six familiar pets and simple start action make the next step obvious. Everything fits completely in853x1844 with no clipped names, rule text or footer button.

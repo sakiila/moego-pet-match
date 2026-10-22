@@ -1,0 +1,22 @@
+Create ONE polished mobile portrait UI mockup for the internal MoeGo pet match-three game “毛孩子全明星”. This is a LEADERBOARD screen only. Use the attached accepted mobile Pet Collection and Report Card screens as the exact style family and tall canvas proportion. Deliver an edge-to-edge flat screenshot, EXACTLY 853 x 1844 pixels (same as the first two references), no phone hardware, no perspective, no surrounding desktop, no collage. The third reference is the authentic MoeGo logo.
+
+VISUAL: crisp white background, MoeGo vivid orange #F47721, charcoal #292A2F, generous whitespace, thick cheerful rounded Chinese display typography, very readable neutral sans-serif for names and scores, delicate pale-gray dividers, soft rounded cards. Cute, energetic but organized, about as restrained as the approved Pet Collection screen. Use paw and crown motifs sparingly; ranking information remains the focal point. No large unrelated pet illustration. UI is Chinese with the existing “中 / EN” language switch only; colleague names remain in Latin letters.
+
+SCREEN STRUCTURE, top to bottom, fully within frame with comfortable bottom safe space:
+1. Compact header consistent with accepted references: authentic MoeGo logo on left; “‹ 回门店” and “中 / EN” on right.
+2. Big friendly charcoal page title “排行榜”, with two short orange accent strokes. Below it a broad rounded two-option mode switch: “宠物店” selected orange, “鱼关卡” inactive neutral. This example player has already discovered the hidden fish round: show the ordinary fish tab with NO lock, no unlock message, no communal aquarium progress.
+3. Section “领先玩家”. Three charming small winner podium cards. Place rank 2 on left, rank 1 center slightly taller, rank 3 right. Use LETTER AVATARS in clean circular colored backgrounds, not pet faces and not invented portraits or Slack logos. Keep ALL names fully readable with no truncation:
+LEFT: avatar S, rank “2”, name “Sam Pineda” (may wrap into two neat lines), best score “4,260”.
+CENTER: avatar E, rank “1”, name “Emma”, best score “4,980”, a small orange crown.
+RIGHT: avatar Y, rank “3”, name “Yoo”, best score “3,920”.
+Make the first-place card warm pale orange, the other cards neutral. Every winner’s name and score must be visible. No extra rewards or badges.
+4. Below winners a two-option view selector: “我的名次” active in charcoal/orange underline; “全榜” inactive gray. This is the default nearby-player view.
+5. A compact, beautifully aligned table-like nearby list. Header left “名次”, center “同事”, right “最好成绩”. Four rows EXACTLY:
+rank 6 | circular F avatar | Fiona | 2,640
+rank 7 | circular B avatar | Bob | 2,480
+rank 7 | circular L avatar | Luz | 2,480
+rank 9 | circular R avatar | Rachel Shaw | 2,360
+Highlight ONLY Bob’s row with pale orange fill, orange border and clear orange score, small “你” label beside Bob. Keep the other rows white with pale thin dividers. All scores right-aligned and names fully readable. THESE TWO PLAYERS REALLY TIE: Bob is rank 7, Luz is ALSO rank 7; next Rachel is rank 9. Do NOT renumber Luz as 8. A small quiet “同分并列” note underneath can clarify ties.
+6. One large full-width orange pill button at bottom with white paw icon and the exact label “再挑战一次”, matching the strong outlined orange buttons of the references. Safe space below, no additional bottom navigation.
+
+Exact content matters: 3 podium players, 4 nearby rows, correct repeated rank 7 and skipped rank 8, score 2,480 for Bob and Luz, 2,640 for Fiona, 2,360 for Rachel. Do not insert trophies/prizes/currency, weekly/daily tabs, PVP challenge invite, QR codes, total player counts, full-collection badges, fish locks, personal data disclaimers, technical implementation notes, or pet collection cards. Static illustrative scores and letter avatars are intentional. Keep title, modes, top leaders, nearby list, and the primary CTA ALL visible on a single tall screen, with hierarchy comparable to the accepted references.

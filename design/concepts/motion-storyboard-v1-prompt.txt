@@ -1,0 +1,35 @@
+Use case: ui-mockup / illustration-story.
+Create ONE refined visual MOTION STORYBOARD for the cute MoeGo coworker-pet match-three game. This is an ART-DIRECTION BOARD for discussing animation, NOT a runnable game or full phone screenshot. Square canvas about2048x2048, white background. Four horizontal rows of animation sequences, each with THREE large clear successive frames, making a4-row x3-column storyboard. Keep generous white gutters and little gray arrows between frames. Clear legible Chinese headings, not dense text. No phone frames or full app controls. The diagram should be complete and readable.
+
+REFERENCES:
+Image1 is the accepted mobile board: preserve its orange/charcoal/white pet-sticker look, pastel tile colors, orange comb and silver/orange scissors, white-rim heads. Take ONLY its board/asset style, not its HUD, time, score, tutorial, bottom actions or exact whole screenshot.
+Image2 is the six-pet contact sheet: supporting head portraits ONLY. Reuse these six distinct dog/cat/parrot faces, their markings and poses. Same pet uses the same head throughout. No names or owners inside grid cells. Deedee white dog=pale blue, Maodu winking tabby=pale mint, Boluo orange cat=pale peach, Momo gray cat=pale lavender, Marley black dog=pale rose, Koa parrot=pale yellow. Full ears fit within tiles. No new pets.
+
+VISUAL DESIGN:
+True white paper, compact genuine MoeGo-like orange/charcoal heading at top "洗护动效分镜". Small column headings ONLY "起势", "清除", "补落". Four concise row labels below. Uniform crisp rounded tiles, short lively orange/cyan translucent bubbles, tiny star glints, curved comb motion marks. Cute, energetic, exceptionally clear. No opaque particle clouds, huge scenery, realistic grooming injury, explosive fire, camera shake, gradients, beige page or3D clay. Colored effect overlays must be translucent enough to still recognize pet faces and underlying grid. Background tiles keep still. Same scene order within every row: anticipation, actual effect, fresh pets drop into the cleared holes. No durations, scores, rewards or extra text in the image.
+
+ROW1 LABEL "三消 · 泡泡"
+Use a close-up3x3 patch of the ordinary board, the center row contains THREE identical Deedee dog heads on pale blue.
+Frame1: center three tiles gently squash/rebound with a thin orange outline, subtle motion ticks, no angry/pain expression.
+Frame2: only the three matching heads dissolve into a few light soap bubbles rising diagonally outward; small transparent bubbles, grid cells visibly clearing.
+Frame3: replacement pet tiles slide DOWN into those holes, tiny vertical movement trails. Let the few bubbles fade away. This is a simple service event, no extra power-up, no score text.
+
+ROW2 LABEL "梳子 · 行／列"
+Show a wider7-column x3-row cropped board strip with an ORANGE COMB at the center of its middle row, tiny horizontal direction arrow on tool.
+Frame1: comb makes one quick playful wiggle, short motion ticks.
+Frame2: a narrow grooming-brush stroke sweeps the ENTIRE middle row left and right, affected heads dissolve to light bubbles; rows above/below remain visible and unchanged. No giant comb covering the board.
+Frame3: replacement heads drop into the row, tool is consumed, side rows remain steady. This horizontal example stands for the confirmed row/column tool.
+
+ROW3 LABEL "剪刀 · 十字"
+Show a compact COMPLETE7x7 board with one silver/orange scissors at the center.
+Frame1: scissors open once and start a neat "snip" motion, upright plus ability mark is visible.
+Frame2: a thin orange CROSS clears the center ROW and center COLUMN simultaneously. Only one row +one column, NOT three rows/columns, NOT diagonals. Faces outside the cross remain clear. Little soap bubbles along cross, no giant scissors.
+Frame3: pets fall into the cross gaps, clear trace fades, board becomes readable again. Center intersection counted visually once. No extra reward.
+
+ROW4 LABEL "梳＋剪 · 三行三列"
+Show a compact COMPLETE7x7 board. The actual combo is an adjacent comb and scissors swapped, the center is the second target's landing cell.
+Frame1: two neighboring tools meet with a tiny playful snap/ripple, no big mascot or cinematic.
+Frame2: THREE middle rows AND THREE middle columns form a wide PLUS-SHAPED clear area, clipped to grid edges. Show the correct footprint with transparent orange/cyan strokes: corners outside these three rows/columns remain unchanged, NOT all-board clear. Intersections aren't repeated or filled with duplicate numbers.
+Frame3: new pets drop into that area and effects fade; no leftover activated tools, no unexplained extra tool creation. Stronger than row3 but still readable.
+
+This storyboard shows actual ACTIVATION, not idle shaking or automatic firing just after a tool is created. Do not add other kinds of combination to the picture; those stay in the written rules. Render one charming, clear professional motion-design storyboard, with exactly these4 sequence rows,3 stages and specified headings. No time/score HUD or QR, no sound-on claims, no fish or public activity.

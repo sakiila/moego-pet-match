@@ -1,0 +1,29 @@
+Use case: ui-mockup.
+Create ONE polished MOBILE PORTRAIT HOME SCREEN for "MoeGo 毛孩子全明星", canvas853x1844, aspect9:19.5, a single390x844-like phone viewport. Match the accepted game family. NO device frame/browser chrome/collage/side annotations. Design only, no code.
+
+REFERENCE ROLES:
+Image1: old desktop home. Borrow ONLY the charming orange/white grooming-store awning/counter visual motif. Its public fishbowl, contribution, old declaration, nav arrangement and fictional manager are obsolete. Do not reproduce them.
+Image2: accepted mobile gameplay. Match its genuine white background, vivid orange/charcoal palette, rounded heavy typography, stickers, clear spacing and phone proportions.
+Image3: real Deedee pet head sticker, current daily manager for this illustrative screen. Preserve this happy white dog, long gray-white ears, pink tongue, full head, white sticker outline, no body/neck/paws. Do NOT replace it with a generic mascot.
+Image4: genuine MoeGo logo. Keep its correct dog/check symbol and black/orange wordmark.
+
+Art direction: true white#FFFFFF, MoeGo orange#F47721, charcoal#292A2F, tiny cobalt accents. Friendly, cute, crisp and practical. Sticker edges, rounded typography, selected thin charcoal outlines and small offset shadows. Bright white app, not beige paper wash, gradient, clay3D or glass. One large obvious action, no dashboard card pile.
+
+HOME CONTENT:
+This is a returning player with a self-selected coworker identity Bob (small B avatar is illustrative, NOT authenticated Slack proof). Normal pet-shop personal best2,480. Daily manager Deedee is the same company-wide manager as the other phone concepts. The daily declaration is exactly "你负责排班，我负责可爱。". Do NOT invent owner names, new taglines or login claims.
+Home "开始营业" opens normal-game preparation; it does NOT start the timer. No fish presence on homepage at all, even after discovery.
+
+COMPOSITION, fit EVERYTHING within the full tall viewport:
+- Compact header y24-65: real MoeGo logo left about110 logical px, "中 / EN" right with Chinese orange, small orange B avatar at far right. No nav menus across the tiny header.
+- Large centered game title around y110: "毛孩子全明星", black "毛孩子" and orange "全明星". No tiny badge/eyebrow above it.
+- Below title, short exact line at readable14-15px: "和同事家的毛孩子，来一局 90 秒三消。" Natural wrapping allowed.
+- Central charming grooming-store vignette around y215-410: a modest orange-and-white striped awning, white counter and the real Deedee HEAD sticker peeking from the opening. Keep HEAD ONLY, no invented body/paws/clothing. Do not crowd with other pets. A small hanging scissors/comb sign may echo MoeGo grooming. Attached readable speech bubble says EXACT "你负责排班，我负责可爱。", max2-3 lines. A small integrated nameplate says "今日店长 · Deedee". Do not add extra role labels.
+- ONE prominent full-width orange rounded button x24 around y460, width342,height56 logical, tiny charcoal offset shadow, white paw and EXACT label "开始营业". This is the screen's strongest action.
+- Quiet line beneath: "宠物店个人最好 2,480". No second score, no fish-mode score, no record badge or celebration.
+- Three lightweight equal secondary entries in ONE open row around y585-660, modest outline icons and clear labels: "宠物图鉴", "排行榜", "我的宠物". No nested cards, giant colored feature tiles, bottom tab bar or extra upload CTA. My Pets leads to the existing upload option.
+- Bottom readable manual-photo notice, around y706-756, in muted charcoal12-13px, exact wording with natural two/three-line wrapping:
+"宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob"
+Keep ALL words, do not abbreviate. @Bob is text, not an invented verified deep link.
+- Tiny quiet footer links around y790-820: "信息使用说明", "资料删除申请", "设置", separated lightly, with adequate safe margin. Those are secondary text, not new main buttons.
+
+Hard constraints: actual portrait9:19.5 canvas, complete unclipped main button, footer and notice; very legible Chinese. No fish/fish tank/water level/locked fish/triple-round teaser or public-progress anywhere. No currency/lives/shop purchases/QR/invitations/new badges/random cards. No fake Slack login verification or real integration claims. Preserve cute lively MoeGo personality and the accepted mobile board visual system, while keeping the homepage calm and welcoming.

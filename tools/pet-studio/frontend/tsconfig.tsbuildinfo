@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/api.ts","./src/main.tsx","./src/types.ts","./src/components/cropeditor.tsx","./src/components/inspector.tsx","./src/components/photolibrary.tsx","./src/components/preview.tsx","./src/components/studioheader.tsx","./src/hooks/usestudio.ts","./vite.config.ts"],"version":"5.9.3"}

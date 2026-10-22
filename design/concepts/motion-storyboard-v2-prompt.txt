@@ -1,0 +1,16 @@
+Use case: precise-object-edit / illustration-story.
+Make ONLY ONE correction to this square MoeGo motion storyboard. Preserve the full canvas1254x1254, all headings, all other11 frames, pet identities, rows1-3, typography, colors, layout and arrows.
+
+Correct the BOTTOM ROW, MIDDLE FRAME (row4, column2), the "梳＋剪 · 三行三列" CLEAR-stage board. Its7x7 wide-cross mask must show THREE middle rows PLUS THREE middle columns,33 cells cleared,16 unaffected corner cells.
+Use this exact7x7 map, X=empty light-gray cell with faint soap bubble/soft orange trace, P=unchanged visible pet tile:
+P P X X X P P
+P P X X X P P
+X X X X X X X
+X X X X X X X
+X X X X X X X
+P P X X X P P
+P P X X X P P
+
+In plain terms, the ONLY untouched pets form FOUR2-by-2 CORNER BLOCKS. All remaining33 cells form a WIDE PLUS,3 cells thick vertically AND horizontally. Clear rows3,4,5 and columns3,4,5 simultaneously. The center must NOT be a thin1-cell cross or a2-cell stripe. Keep7 equally spaced rows and7 columns, no merged boxes. Keep the empty cells pale and bubbles small so the footprint is obvious. This is not all-board clear. Do not write P/X labels or counts inside the image.
+
+Do not alter any other frame or label. No extra text, borders, effects outside that one panel or new UI. Return the same complete polished storyboard page.

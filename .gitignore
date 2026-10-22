@@ -1,0 +1,17 @@
+/data/pet-materials/
+/data/pet-studio/
+
+.env
+.env.*
+!.env.example
+
+# 宠物图片与名录数据不进 git（见 TECH_PLAN）
+/assets/pets/
+
+# 本地环境与构建产物
+.idea/
+.DS_Store
+node_modules/
+dist/
+__pycache__/
+*.pyc

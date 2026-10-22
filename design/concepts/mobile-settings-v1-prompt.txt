@@ -1,0 +1,27 @@
+Create ONE polished high-fidelity MOBILE portrait SETTINGS bottom-sheet mockup for the internal MoeGo pet match-three game. EXACTLY 853 x 1844 pixels, identical phone canvas to references 1 and 2. Flat edge-to-edge UI screen, no phone hardware, no browser chrome, no collage.
+
+REFERENCE 1 mobile-home-v2.png is the BACKGROUND PAGE and app style: genuine MoeGo header, game name, Deedee shop-manager illustration, orange-white-charcoal palette, rounded bold Chinese fonts, soft neutral surfaces and clear outline buttons. This settings sheet opens from the SHOP HOME, outside an active game. Preserve the underlying homepage dimmed, with no new scores or pet states.
+REFERENCE 2 mobile-delete-request-v1.png is only the BOTTOM-SHEET ANATOMY: dark scrim, white rounded upper corners, clear close X and safe margins. Do NOT copy the delete form, pet thumbnail, manual-review copy or submit button.
+REFERENCE 3 real MoeGo logo: reproduce faithfully wherever visible in the background.
+
+STATE AND CONTENT:
+An independent illustration of a device that supports haptics, with current preferences Chinese, background music OFF, match sound effects OFF, haptics ON. These match first-use defaults, but this is an ordinary settings panel, not a forced first-use popup. Do not reset or change preferences just by opening it. No real browser settings or account integration is being shown.
+
+LAYOUT:
+A dimmed familiar home page visible in roughly the upper third; the lower two thirds occupied by ONE calm WHITE settings bottom sheet with large rounded upper corners. Header “设置” in bold rounded charcoal, a restrained small orange gear icon if helpful, and close X in a neutral circle at upper right.
+Inside the sheet, ample readable touch targets and clean vertical grouping:
+
+1. “语言” label with small globe icon. Beneath or beside it a broad two-option segmented choice “中文” and “English”. “中文” selected in orange, “English” inactive pale gray. No flags, extra languages or browser-language dropdown.
+
+2. Three spacious independent switch rows, separated by light dividers. All labels stay dark and legible even when OFF; OFF must NOT look like a disabled/unavailable feature:
+- music note icon + exact label “背景音乐”; on the right a clear “关” state label and an OFF switch, pale gray track, white thumb on LEFT.
+- small speaker/spark icon + exact label “消除音效”; right “关” and another OFF switch, pale gray track, white thumb on LEFT.
+- subtle phone-vibration icon + exact label “轻震”; right “开” and ON switch, MoeGo orange track, white thumb on RIGHT.
+The textual 开/关 labels and thumb positions both clearly communicate the state; do not rely only on color. Haptics is available in this scene, do NOT show unsupported messaging simultaneously.
+
+3. Near lower edge a quiet small neutral helper sentence exactly “会记住你的选择。” It is a note, not another toggle. Keep bottom safe spacing.
+No primary action is needed: the switches act directly and X closes back to the home page. Do not add “保存/确定/恢复默认” buttons, a second confirmation, cancel changes, a progress message or feedback popup.
+The whole sheet should fit comfortably and feel organized, with enough whitespace but not a giant blank region. Orange is reserved for the selected language and active haptics switch, with optional tiny branded accent marks. No large pet drawing inside the foreground sheet.
+
+IMPORTANT EXCLUSIONS:
+No volume sliders, test-music/test-vibration buttons, autoplay, extra animation settings, account/profile editing, switch player, Slack/OAuth/login/activity code, password, fish mode/unlock entry, notifications, sharing, leaderboard, pet-management controls, privacy checkbox or terms wall, collection stats, game timer or pause/continue button. This screenshot is the OUT-OF-ROUND settings opened on home, so do not add an in-game timer warning. All exact labels should be readable and consistent with the accepted MoeGo mobile UI. One coherent settings sheet in EXACTLY 853 x 1844.

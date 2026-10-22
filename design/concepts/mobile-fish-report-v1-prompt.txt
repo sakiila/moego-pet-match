@@ -1,0 +1,27 @@
+Use case: ui-mockup.
+Create ONE polished MOBILE PORTRAIT Fish Report Card result screenshot for the MoeGo hidden fish round. Canvas853x1844,9:19.5 tall mobile, exactly same full viewport proportions as refs1/2. No device/browser frame, collage or side annotations. Design only, no code.
+
+REFERENCES:
+1 accepted deep-blue fish gameplay: preserve navy underwater setting, soft water rays, a few edge bubbles/plants, reverse white/orange logo, white text and vivid MoeGo orange.
+2 accepted ordinary report: reuse the legible WHITE receipt sheet with thin charcoal outline, top orange clip, scalloped lower paper edge, score/MVP/quote/stats hierarchy and FIXED bottom replay/share controls. Remove Maodu/dog/parrot, new collection cards, grooming title, grooming review, owner/manager content. This new image is fish mode, not ordinary report recoloring.
+3 exact BLUE FISH sticker: the MVP color category "天蓝色". Preserve its whole body, silvery-blue stripe, fins and tail. It is ONE illustration representing the category, not a named individual fish.
+4 genuine logo: preserve shapes, reverse white Moe/orange Go for the dark header.
+
+ILLUSTRATIVE FROZEN RESULT:
+First completed fish round, successfully SAVED. Score3,260,140 tiles cleared,max5 cascade,4 tools activated,rush succeeded, NO double-bubble-machine full-board combo. ONE title is "连锁反应负责人" because5 cascades outrank rush/tool title. MVP category "天蓝色". Review exact "这波水流，鱼都跟上节奏了。"
+This first fish score establishes a baseline: NO personal-new-record badge/confetti. No new pet collection, owner quiz/family reunion, daily dog manager, another unlock invitation, or public fishbowl contribution.
+
+LAYOUT:
+- Compact dark header y24-65: reverse MoeGo logo left, "回门店" and "中 / EN" right, Chinese active orange.
+- Title aroundy95-155: two readable lines "Fish" in white / "Report Card" in orange, about30px; exact subtitle underneath "今天，这批客人不用吹干。" in white/light cyan16px.
+- ONE true-WHITE receipt panel x12,y210,width366,height490 logical, neat charcoal outline2px, small orange top clip, scalloped bottom. White sheet floats gently over navy, not translucent glass.
+- Receipt top label "本局得分" charcoal left; green check exact "本局结果已保存" right. Large orange "3,260" immediately below, one score only.
+- Center a large WHOLE blue fish sticker, about230 logical pixels wide, preserve ref3 fins/tail/stripe and white rim, no crown/clothing or dog/cat face. Full fish readable against white.
+- Exact label under hero: "本局 MVP · 天蓝色". A single modest orange ribbon/stamp BELOW it with exact "连锁反应负责人", no second title or new record claim.
+- Speech review exact "这波水流，鱼都跟上节奏了。" in17px charcoal, readable one/two lines, minimal rounded speech-note treatment.
+- Three compact stats at receipt bottom: labels "清除格数", "最高连锁", "工具发动次数" with values "140", "5", "4". These are tile/event counts, NOT140 unique fish. Keep small labels readable.
+- Quiet link below receipt aroundy725: "鱼关排行榜" with modest trophy/arrow. No collection card or unlock CTA.
+- FIXED dark navy bottom action area at same baseline as ref2 (divider aroundy1688 in853x1844,buttons y1710-1808). Main orange button left, widthabout206 logical with simple bubble accent and exact "再开一局"; this continues FISH MODE. Secondary dark-blue/white-outline button right, widthabout142 logical, white share icon and exact "分享成绩". Both always available; don't put controls inside the shareable paper sheet. White readable labels, comfortable lower safe area.
+Full receipt and link remain above footer with enough space, no clipped fins, title, stats or button text.
+
+Preserve calm deep-underwater mystery and lovable MoeGo orange/white receipt identity. No running timer/order progress, no scoreboard list, QR, currency/lives, cat/dog pet sprites, automatic Slack share or fake integration badge. Only ONE full portrait853x1844 report screenshot, no short9:16 image, no extra text.

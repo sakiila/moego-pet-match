@@ -1,0 +1,23 @@
+Create ONE beautifully composed standalone shareable results card for the internal MoeGo pet match-three game “毛孩子全明星”. This is the EXPORTED IMAGE ITSELF, not an application screen and not a phone screenshot. Desired canvas is portrait 4:5, 1080 x 1350 pixels. No phone hardware, no browser chrome, no page navigation, no modal buttons, no multiple cards side by side.
+
+REFERENCE INPUTS:
+1 accepted mobile Report Card: use its cheerful editorial white/orange/charcoal style, rounded thick typography, pet sticker and paper report feeling. Do not copy its tall screen, navigation, stats, collection grid or action bar.
+2 exact transparent Maodu head asset: faithfully preserve this character’s tabby-and-white fur, left eye wink, one large green open eye, pink nose, full asymmetrical raised ears, white sticker edge and fine whiskers. Use only its HEAD with full ears, no neck/body/clothes, no new mascot.
+3 authentic MoeGo logo: reproduce faithfully in the branding area.
+
+PURPOSE: a cute bragging card a coworker will voluntarily save and send to coworkers, immediately recognizable as the same game. Pet personality and the funny review are the main emotional focus, score is the clear second focal point, achievement title is a modest stamp, player signature is small but readable. Keep calm white space, crisp legibility and amusing rounded typography.
+
+COMPOSITION:
+A full-frame white card with generous margins, restrained charcoal outline and a subtle grooming receipt / scalloped paper detail near the bottom. Flat polished visual, very soft shadow only, no 3D mockup scene.
+TOP compact branding: genuine MoeGo logo, game name exactly “毛孩子全明星”, small mode label exactly “宠物店”. These establish the game without dominating the image. No language toggle; this image is Chinese, names and logo retain original spelling.
+MAIN UPPER/MIDDLE: a BIG adorable winking Maodu head, clean cutout, the primary graphic hero. A few orange hand-drawn excitement strokes and tiny bubble/paw accents, never cover facial details. Below or attached to the pet, a modest neat label exactly “本局 MVP：Maodu”.
+Near one side of the pet is a small orange achievement stamp with exact label “精准排班大师”. Keep the stamp markedly smaller than the pet and score; no giant medal or ribbon competing with them.
+Under the head, a clear friendly pet-voice speech bubble or neatly framed quote in LARGE readable charcoal rounded Chinese type, with these two lines exactly:
+“临时加单？
+安排得明明白白。”
+The quote is the main sentence and MUST be easy to read, not tiny gray text.
+LOWER AREA: small label “本局得分”, huge vivid orange score exactly “2,480”. Score must remain very legible at thumbnail size.
+BOTTOM understated player signature, separated by a light dotted receipt rule, exact text “本局玩家：Bob”. Use the player’s NAME ONLY, no human avatar, no Slack icon, no pet ownership label. Keep the MVP name and player name separate. Bob is the player who produced this score; the card is NOT a claim about the pet owner.
+The composition should feel like a delightful little grooming receipt written by Maodu after a 90-second shift, with hierarchy pet + quote > bold score > small achievement stamp > quiet signature. Preserve all content with safe margins and no clipping.
+
+Important exact facts: ordinary pet-shop mode; actual example MVP Maodu; score 2,480; rush-order-success quote; title 精准排班大师; player Bob. This is consistent with the previously approved report scene. Add NO new score, ranking, percentile, personal record, reward, date, progress, statistics, collection reveal, unlock invite, owner details, fake credentials, photo caption, QR code, web link, share/save/replay button, click targets, app header tabs, “已上榜” badge or fish. No random text. No call to action. A single finished image for sharing, not a screenshot of a result page. Crisp text, authentic pet, joyful but restrained, same MoeGo white and #F47721 orange and #292A2F charcoal as the references.

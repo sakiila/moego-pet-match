@@ -1,0 +1,29 @@
+Use case: ui-mockup.
+Create ONE polished MOBILE PORTRAIT PET COLLECTION LIST for "MoeGo 毛孩子全明星", canvas853x1844,9:19.5, one complete phone viewport showing the first6 visible cards in a longer scroll list. NO phone/browser frame, collage or annotations. Design only, no code.
+
+REFERENCES:
+1 accepted mobile home: exact bright WHITE/orange/charcoal MoeGo family, logo/header sizing, rounded heavy readable type, crisp head stickers, modest outlines and offset shadows.
+2 old desktop collection: borrow only the collectible card concept and profile relationships. Its fictional mascot names/owners,4/6 count, old filters and nameless lock cards are obsolete. Do not copy Mochi/Blue/Milo/Luna or fake personality/owner quotes.
+3 six-pet contact sheet: supporting portraits ONLY, use correct real heads and names, no page design. Deedee white long-eared dog; Koa peach parrot; Maodu winking white/brown tabby; Boluo orange cat; Momo gray amber-eyed cat; Marley black floppy-eared dog. Heads only, full ears/whiskers, no body/scarf/new pets.
+
+STATE:
+Illustrative ordinary-pet collection with4 collected of81 total. Only the first6 cards are visible, more ordinary pets continue by scrolling. This is a design example, no real online records. The4 collected items are Deedee,Koa,Maodu,Boluo. Most recently collected Deedee and Koa come first. Momo and Marley are NOT collected, their owners and actual faces must not be revealed. No fish category belongs here.
+
+LAYOUT at logical390x844:
+- Compact header y24-65: real black/orange MoeGo logo left; small "回门店" and "中 / EN" right, Chinese orange. No global bottom tabs.
+- Heading aroundy100: "宠物图鉴" bold charcoal28px left; a modest WHITE/orange-outline add button right, small plus and exact "添加我家毛孩子", about13px, does not overpower the title.
+- Progress aroundy145: exact "已收集 4 / 81 位毛同事", highlight4 in orange. Text only, NO progress bar or completion medal.
+- Search field aroundy185,height40,width342: magnifying icon and exact placeholder "搜宠物名或主人名".
+- Readable muted12-13px search-scope note below, natural2-line wrapping:
+"宠物名可搜全部已上架宠物；主人名只搜已收集宠物。"
+- Filter row aroundy270: "全部" selected with orange, "已收集", "未收集" obvious and available. No replacement by old"已服务/未遇见".
+- TWO-COLUMN pet grid from aroundy325 throughy800, cards about166px wide x145px high logical,3 rows with comfortable gutters. Each card is a meaningful pet object, no giant wrapper. Same neutral WHITE or very pale neutral peach surface for ALL collected cards, fine charcoal outline and rounding, not six gameplay auxiliary background colors or rarity gradients.
+EXACT positions:
+row1 LEFT Deedee full white dog head, name "Deedee", owner line "主人 Emma"; RIGHT Koa full parrot, name "Koa", owner line "主人 Sam Pineda".
+row2 LEFT Maodu winking tabby head, name "Maodu", owner line "主人 Bob"; RIGHT Boluo orange cat, name "Boluo", owner line "主人 Bob".
+row3 LEFT Momo: ONLY a solid neutral-gray CAT HEAD SILHOUETTE, clear name "Momo" and small "未收集"; RIGHT Marley: ONLY a solid neutral-gray FLOPPY-EARED DOG HEAD SILHOUETTE, clear name "Marley" and small "未收集".
+Uncollected silhouettes must have NO eyes, facial detail, fur color, original-photo translucency, owner/avatar/name or quote. Names themselves stay visible. Do not use the source portraits faded to gray.
+All4 collected portraits complete, names at17-18px, owners at12-13px. Long "Sam Pineda" fits or wraps cleanly, never cut.
+No selected card highlight yet, no fake badges/star ratings/pet IDs/service totals. The order is collected first, new collected first. NO new UI beyond this: no fish tab, point rewards, universal daily challenge, purchases, bottom navigation or pagination buttons.
+
+Keep full title, search explanation, all6 visible cards and their captions unclipped within853x1844. A scrollable album, not one cramped page with all81 items. Bright true white background, warm familiar MoeGo orange, lovable real pet faces and respectful silhouettes, readable practical phone UI.

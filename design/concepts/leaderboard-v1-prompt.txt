@@ -1,0 +1,31 @@
+Use case: ui-mockup.
+Asset type: a single polished Chinese desktop web game leaderboard screenshot, EXACT CANVAS 1536 pixels wide × 1024 pixels tall, landscape 3:2. Full page composed for this frame, no browser chrome, no device frame, no cropping. Generate the new leaderboard page of the existing MoeGo pet match-three online game.
+
+Input reference images and invariants:
+- Image 1 (/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-v2.png) is the approved home page. Use it as the precise brand, header, type, spacing, illustration and color reference.
+- Image 2 (/Users/bob/WebstormProjects/moego-pet-match/design/concepts/report-v2.png) is the approved report page. Match its cheerful flat sticker cats and dogs, energetic hand drawn marks, simple offset shadows, round bold lettering, clear generous UI hierarchy.
+These are STYLE REFERENCE images, not edit targets. Make ONE new leaderboard page, not a collage of the references.
+
+Visual direction:
+White background, MoeGo orange #F47721, charcoal black #25262A, small cobalt blue accents. Crisp flat 2D UI with subtle hand drawn warmth and very restrained paper texture. Rounded bold handwritten Chinese display type, rounded readable Chinese UI typography; dark thin outlines and tiny lower-right offset shadows. Friendly playful illustrated pet stickers with white cutout borders. Match approved MoeGo dog logo and black/orange wordmark accurately. Do not use 3D, glassmorphism, gradients as the main style, purple, futuristic technology, generic SaaS dashboard, elaborate trophies or visual clutter.
+
+Layout and exact content:
+1. Header is IDENTICAL IN DESIGN to the reference home page: same white full-width top bar about 94px tall, thin light-gray bottom separator; left MoeGo icon and wordmark at x70; navigation labels in this exact order "门店", "宠物图鉴", "排行榜", "我的宠物"; the "排行榜" tab is active with charcoal text and a short orange underline. Right utility "中 / EN", separator line, round orange avatar with white letter "B". Keep all header content aligned on one horizontal baseline.
+2. A spacious centered page heading below the header. Exact title "毛孩子光荣榜" in large playful bold rounded display lettering, charcoal and orange. Exact gray subtitle "今天，谁把毛孩子安排得最明白？" below it, with a tiny cheerful orange accent mark. Title readable and never overlapping.
+3. Below heading, a simple compact two-tab switch: "宠物店" is orange and active. "鱼关卡" is subdued gray and has a small clear lock icon. Directly next to or just below locked tab, small gray hint "鱼缸满后解锁". Do not use daily or weekly tabs.
+4. Upper-middle area: a fun but restrained top-three podium, three clean rounded blocks with thin dark outlines and slight offset shadows, enough white space. Center first place is visibly highest; left second is lower; right third is lowest. Above each podium a CIRCULAR LETTER AVATAR represents a HUMAN PLAYER'S Slack avatar placeholder, never a pet photo. The exact podium data and spatial positions:
+LEFT: rank "#2", orange circular avatar with white "A", player name "Alex", score "4,320 分".
+CENTER: rank "#1", blue circular avatar with white "M", player name "Mia", score "4,860 分". A small simple crown only as an accent.
+RIGHT: rank "#3", pink circular avatar with white "S", player name "Sam", score "3,980 分".
+Be extremely precise: first Mia 4860, second Alex 4320, third Sam 3980. Rank numerals are large and names and scores are independently legible. Keep first, second and third correctly associated. Do not put pets inside player avatars. Add just two familiar MoeGo sticker characters as SMALL CHEERLEADERS at the outer edges of the podium: blue cat and black/white dog, cheering with paws. Pets are supporting decorations only and must not stand in for any human identity.
+5. Below podium, ONE tidy wide leaderboard table, white rounded rectangle with thin charcoal outline or light-gray dividers and a subtle shadow. Four evenly spaced horizontal rows with clean column alignment. Header labels "排名", "玩家", "得分". Exact rows, in this top-to-bottom order:
+rank "#4" | circular letter avatar "J" | "Jo" | "3,520"
+rank "#5" | circular letter avatar "C" | "Chris" | "3,100"
+rank "#6" | circular letter avatar "L" | "Luna" | "2,900"
+rank "#7" | orange circular letter avatar "B" | "Bob（你）" | "2,480"
+Only the Bob row has a very pale orange highlight background. Bob score must be exactly 2,480 to continue the home-page personal best. Letter avatars remain simple human profile placeholders. Do not add more rows or duplicate ranks.
+6. Clear bottom summary/action area still comfortably inside this 1536×1024 frame: left concise text "我的排名 #7"; beside it "个人最佳 2,480"; right one large orange pill-shaped primary button with white paw icon and exact text "再挑战一次". Match orange button outline, rounded character and tiny charcoal offset shadow of the approved home-page button. The summary must not be confused with extra ranking rows. Generous bottom margin. Optionally very tiny unobtrusive gray text "示例数据" inside table top corner.
+
+Composition requirements:
+All content remains readable as a complete desktop page. Use comfortable whitespace, no large blank unused lower half, no overlap, no cut-off text or clipped button. Focus on the podium and clean table rather than adding side widgets. All exact Chinese strings, English player names, avatars, rank numbers and scores above must render faithfully. Maximal text clarity and natural Chinese glyphs.
+Do not add payment, coins, premium currency, invitations, friend system, daily leaderboard, weekly leaderboard, reward offers, settings sidebar, pet adoption buttons, extra navigation, or unconfirmed functionality.

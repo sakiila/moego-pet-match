@@ -1,0 +1,22 @@
+Use case: ui-mockup / precise-object-edit.
+Refine IMAGE1, the MoeGo mobile report FIRST VIEWPORT. Keep its excellent white/orange sticker style, every existing score, text, Maodu portrait and expression, saved state, ONE title, receipt shape, and six-pet art style. IMAGE2 shows the accepted gameplay phone aspect ratio and same design system.
+
+Critical correction: IMAGE1 is too short. Produce a much TALLER portrait image, WIDTH:HEIGHT = 9:19.5 (about0.462), approximately935x2024 or853x1844. This is one ordinary smartphone viewport matching IMAGE2. Do NOT return a9:16/935x1683 screenshot. No physical device frame or side panels. Extend the vertical composition, not the width.
+
+Keep all upper content through the receipt's stats:
+"Grooming Report Card"
+"这班辛苦啦，看看毛孩子怎么说。"
+"本局得分" and "2,480"
+green check "本局结果已保存"
+the winking Maodu cat head, "本局 MVP · Maodu"
+single "精准排班大师" stamp
+quote "临时加单？安排得明明白白。"
+stats "服务格数 120", "最高连锁 4", "工具发动次数 3".
+Preserve real MoeGo header logo, "回门店", "中 / EN".
+
+Use the extra vertical room BELOW the receipt to show the whole existing "本局新收集 2" section:
+Two modest equal tiles side-by-side, WHITE DOG Deedee on the left and PEACH PARROT Koa on the right, same portraits as IMAGE1. Give each a clear visible name UNDER the portrait: "Deedee" and "Koa". Keep the two pet images and names fully above the fixed bottom bar with ample separation. Cards must look clickable without adding new buttons or claims. Do not add another reward type.
+
+Keep a fixed white action bar aligned to the VERY BOTTOM of the taller canvas, full width, same primary orange "再开一局" on left with paw and secondary white outlined "分享成绩" on right with share icon. Comfortable52 logical px buttons plus lower safe space. No text or pet/card/name can be hidden under that bar. Leave some white breathing room between the completed collection row and the fixed bar. Further report contents continue below the scroll viewport, but do not show the Peter invitation in this first view.
+
+NO other content changes, no added date/QR/fish bowl/public contribution/progress badge/personal-best claim, no extra buttons or nav, no code. High-quality legible tall mobile app screenshot, same aspect ratio as image2.

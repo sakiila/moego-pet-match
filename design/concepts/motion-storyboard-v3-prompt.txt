@@ -1,0 +1,6 @@
+Use case: precise-object-edit.
+Keep this entire1254x1254 storyboard identical EXCEPT for one strip in the bottom-row middle board ("梳＋剪·三行三列", clear phase). The vertical band is now correctly3 columns wide. The horizontal band is still only2 rows tall; it needs ONE MORE full cleared row directly BELOW the existing band.
+
+In that small7x7 board (approximatelyx576-873,y933-1228), clear the entire FIFTH ROW from the top, approximatelyy1104-1144, from the left edge of the grid to its right edge. Replace all pets in that one row with the SAME pale empty cells and tiny bubbles as the existing two cleared rows just above it. Extend the orange horizontal sweep outline down by exactly one cell row, so the horizontal band covers rows3,4,5. Leave the two bottom rows6,7 with their center3 columns cleared and their left2/right2 pet tiles intact. The remaining untouched corner blocks must be2x2, not2x3.
+
+This is a surgical one-row correction. Do NOT change the board row/column count, vertical3-column band, other11 frames, headings, any pets outside that FIFTH row, layout or canvas. No extra words or effects. Preserve the charming white/orange soap-bubble storyboard.

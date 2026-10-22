@@ -1,0 +1,31 @@
+Create ONE high-fidelity MOBILE portrait deletion-REQUEST bottom-sheet mockup for the MoeGo pet match-three game. EXACTLY 853 x 1844 pixels, same full phone canvas as references 1 and 2. Flat edge-to-edge app screen, no phone hardware, no browser chrome, no collage.
+
+REFERENCES:
+1 accepted mobile-my-pets-v1.png is the BACKGROUND PAGE: current game profile Bob, Maodu collected and Boluo uncollected. Preserve this underlying page as a dimmed backdrop; do not switch to the global collection.
+2 accepted mobile-pet-detail-v2.png is the BOTTOM-SHEET STYLE only: soft dark scrim, white sheet with large rounded upper corners, close X, clean generous interior. Do not copy its collection badge, giant portrait, original-photo action or content.
+3 exact Maodu transparent head asset is the foreground pet thumbnail: tabby-white head, left wink, green open eye, complete ears, pink nose and white sticker border, no body/neck.
+4 genuine MoeGo logo for consistent brand if visible in the dimmed background.
+
+PURPOSE AND STATE:
+The user clicked “资料删除申请” for Maodu on the My Pets page. Show the request form BEFORE submission, empty optional note. NOTHING has been deleted, hidden, submitted, approved or marked pending. The background Maodu card stays unchanged. This is a lightweight request followed by Bob's manual review, not an irreversible instant-delete operation. No additional confirmation flow.
+
+VISUAL:
+Crisp white sheet, charcoal #292A2F text, restrained MoeGo orange #F47721 accents and primary button, pale gray input border. Same rounded readable Chinese UI typography as the accepted screens. Functional and calm rather than celebratory or alarming; no giant mascot, confetti, trophy, trash-can icon, red danger panel, stamps or fake success tick. Keep reasonable white space and comfortable phone reading sizes.
+
+LAYOUT:
+Dimmed original My Pets page visible in the upper portion: genuine logo, “我的宠物”, Bob profile and add-pet entry, with underlying cards partially behind the scrim. Do not add new text or states to this background.
+One tall WHITE bottom sheet with rounded upper corners occupies approximately the lower 65–70% of the screen (start around y550). It extends to the bottom with adequate safe spacing, ALL form content visible, no keyboard.
+At top, clear headline exactly “申请移除这只宠物？” in dark rounded bold type. Right aligned close X in a small neutral outlined circle. Do not collide title and close control.
+Below, a compact non-editable context row with Maodu's complete head thumbnail on left, “Maodu” bold and smaller “主人：Bob”. This identifies the requested pet; it is not an editable profile or player-switch field. The head should be about 130–160 pixels, not the page hero.
+Below row, a clear readable paragraph exactly:
+“提交后，由 Bob 人工核实和处理；申请不会立即隐藏或删除资料。”
+Keep it in normal dark gray at meaningful body size, wrapping naturally across 2–3 lines; this statement must be easy to read.
+Then label exactly “补充说明（选填）”.
+A large EMPTY rounded textarea, pale outline, with placeholder exactly:
+“可以说明希望移除哪些资料，方便核实。”
+The optional field is empty but submission remains available. No required star, no character limit/counter, no prefilled reason, no scope-checkbox matrix or extra inputs.
+Near bottom, one large orange rounded pill primary action with simple document/request icon if helpful and exact label “提交申请”. Match accepted orange button anatomy with subtle charcoal outline/shadow. The button is visibly ACTIVE despite empty optional note. Safe bottom spacing, no clipping.
+X is enough to close; do not add another confirmation or forced acknowledgement.
+
+EXCLUDE:
+No success text “申请已收到”, no pending/processed status, no completed deletion message, no hiding/fading just Maodu as if removed, no submission count, no time estimate or promise, no identity verification/login/activity code, no owner editing, no direct “删除/立即移除” button, no reason requirement, no save-draft UI, no contact fields, no account deletion, no irreversible warning, no score/collection changes, no QR, no fish mode, no unrelated settings. Keep the entire interface as one coherent pre-submit bottom sheet on the accepted My Pets background. Text must be accurate and all important content readable within EXACTLY 853 x 1844 pixels.

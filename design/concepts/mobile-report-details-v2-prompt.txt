@@ -1,0 +1,10 @@
+Use case: precise-object-edit / ui-mockup.
+Edit IMAGE1 (scrolled-down mobile MoeGo report) ONLY to make its top two pet collection cards exactly the same size as those in IMAGE2 (the first viewport of the SAME page). Both canvas sizes remain853x1844. Scrolling must not resize cards.
+
+Change ONLY the top "本局新收集2" row:
+- Left Deedee pale-peach card: make width320px, height282px, leftx94, topy156, rightx414, bottomy438.
+- Right Koa pale-yellow card: make width324px, height282px, leftx438, topy156, rightx762, bottomy438.
+- Scale the two pet portraits and name labels to match IMAGE2's card proportions; each name "Deedee" / "Koa" must remain fully visible. Do not redraw their faces or change their identity/pose.
+- Keep the heading, with the same font scale as IMAGE2's "本局新收集2". Extra space around the reduced cards remains WHITE.
+
+Preserve EVERYTHING ELSE from IMAGE1: the Peter fish invitation panel at its current position, exact invitation text and "去看看", three fish/tank artwork, daily manager Deedee signature, 排行榜/回门店 links, white background, and especially the fixed bottom two-button bar positions, labels, icons and dimensions. Do not pull the panel upward or resize other elements. No new words/buttons/badges, no score changes, no crop, no extra page header, no phone frame. Return one polished tall mobile screenshot.

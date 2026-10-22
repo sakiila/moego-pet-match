@@ -1,0 +1,18 @@
+Use case: precise-object-edit / ui-mockup.
+Refine IMAGE1, the finished MoeGo MOBILE HOME, keeping its exact content, real Deedee manager head, logo, storefront art, colors, labels, one orange primary button and three secondary entries. IMAGE2 supplies the correct accepted PHONE CANVAS PROPORTION.
+
+Critical correction: make the final screenshot TALLER, aspect WIDTH:HEIGHT9:19.5, exactly853x1844 (same as image2). Current image1 is935x1683, too short; DO NOT return that9:16-like aspect. This must be a tall portrait mobile viewport, no frame/side panel. Redistribute added vertical space as breathing room between existing sections, not larger decorations or new features.
+
+Keep all exact texts:
+"毛孩子全明星"
+"和同事家的毛孩子，来一局 90 秒三消。"
+"你负责排班，我负责可爱。"
+"今日店长 · Deedee"
+main "开始营业"
+"宠物店个人最好 2,480"
+secondary "宠物图鉴", "排行榜", "我的宠物"
+notice "宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob"
+footer "信息使用说明", "资料删除申请", "设置"
+and header "中 / EN", orange B avatar, real MoeGo logo.
+
+Keep the notice and footer completely readable with comfortable lower safe space. Keep main action visible in the middle/lower area, illustration modest, clear hierarchy and genuine white background. Deedee is head-only, no body/paws. NO fish, fish tank, locked fish, progress, QR, extra copy, new buttons, currencies, code or fake login verification. Preserve everything else while matching853x1844 tall phone proportions.

@@ -1,0 +1,16 @@
+Use case: ui-mockup.
+Draw the LOWER SCROLLED POSITION of the SAME mobile report shown in image1, canvas853x1844. Preserve its exact WHITE background, orange/charcoal typography, portrait proportion, and identical fixed bottom replay/share bar. Image2 supplies only fish artwork.
+
+The hero, logo, title, score and Maodu have scrolled out. Begin with "本局新收集 2", then a SMALL CENTERED pair of pet cards, copied at the SAME SIZE as in image1:
+Two modest cards about320px wide by282px high each. They do NOT span the full page width. Place left card atx94, right atx438: generous white outer gutters, narrow24px central gap. Top of both cards at156px. Dog Deedee and parrot Koa retain the image1 pet poses, pale peach/pale yellow backgrounds, full faces and names BELOW. The two cards finish byy438. They are small collection cards, not large hero portraits. Match image1's card and name font size. No extra badge.
+
+Below the cards, leave white breathing room, then one optional fish invitation panel approx x30,y540,width793,height420. Thin charcoal round outline, pale blue interior. Exact text, wrap clearly on the left:
+"Peter 悄悄递来一个鱼缸："
+"这批客人不用吹干。"
+Small round transparent fish tank at right with three orange, gold and blue goldfish derived from image2. Modest white/orange-outline "去看看" button on left below text. This is an invitation after the player's saved third valid ordinary round, not a public progress event. No waterline meter, contribution, unlock count, bonus or automatic start.
+
+Below the panel, a SMALL dog head and handwritten line "今日店长 · Deedee" with a small orange paw signature. Quiet "排行榜" and "回门店" text links beneath. Last content finishes well above the action bar with white lower padding.
+
+BOTTOM BAR MUST BE IDENTICAL TO IMAGE1: divider aroundy1688, orange paw "再开一局" button x39-489,y1710-1808, white outlined "分享成绩" button x503-815,y1710-1808; same sizes, icon shapes, labels and safe space. No duplicates or extra actions.
+
+No big header, no Maodu/score in this scrolled view, no quiz for this illustrative round, no phone/browser frame or annotations. One polished screenshot, SAME page scrolled, SAME pet card size and footer, precise Chinese, simple clear airy MoeGo sticker design.

@@ -1,0 +1,22 @@
+Use case: ui-mockup.
+Create ONE companion MOBILE PORTRAIT screenshot showing the COLLECTED PET DETAIL BOTTOM SHEET after tapping Maodu in the MoeGo Pet Collection. Canvas853x1844,9:19.5, exactly the same viewport as image1. No device/browser frame, collage or annotations. Design only, no code.
+
+REFERENCES:
+Image1 is the newly designed mobile collection list. Preserve that SAME list state behind the overlay:4/81, Deedee and Koa first, Maodu and Boluo collected next, Momo and Marley silhouettes. Same true white/orange/charcoal design, typography and quiet neutral card backgrounds. This is an overlay, NOT a new independent page.
+Image2 is the genuine Maodu head sticker: winking white/brown tabby cat, green open eye, complete tall ears/whiskers, no neck/body/clothes. Keep face and identity faithful; supporting portrait, not an edit target.
+
+STATE AND DATA:
+Maodu is already COLLECTED, owner display name Bob. These are the only profile facts given. DO NOT invent personality, job title, real owner quote, birthday, service counts, badges/rarity, pet number, first-collection date or Slack verification. Missing optional fields are simply absent. Opening/closing the sheet does not collect a pet or change the list order/count.
+
+COMPOSITION:
+- The original list remains in the background with a gentle gray translucent dim layer, including header/logo/progress/search. No popup keyboard, no change to4/81. Main background is blocked visually while sheet is open.
+- One prominent WHITE bottom sheet around logicalx12,y270,width366,height560, large rounded top corners, fine charcoal outline and small offset shadow. Leave a small bottom safe margin. It feels like a collectible pet portrait card, not a form/editor or result report.
+- Sheet top aroundy290: small orange "已收集" state label at left; one clear close-X button at right with comfortable44px touch area. NO drag handle or extra back button inside sheet.
+- Large beautiful Maodu HEAD portrait centered aroundy350-560, about190-210 logical pixels, complete ears/whiskers fit. A white sticker rim, tiny warm orange motion ticks if tasteful, no bone costume/body or fake award.
+- Under portrait: big charcoal name "Maodu" aroundy590,26px rounded bold, readable.
+- Owner line below aroundy640: same ORANGE GENERIC PERSON ICON used in image1, exact text "主人 Bob" in16-18px. No B-avatar replacement, no verified check or Slack logo. Keep name intact.
+- Light divider and one clear wide WHITE/charcoal-outline button aroundy695-745, simple flip-arrows icon and exact "翻面看原图". It leads to the existing back-of-card original photo later; do not show a fake original photo here, and do not add upload/edit/share buttons.
+- At the bottom aroundy785: quiet legible text action "资料删除申请",12-13px gray, plainly a request, NOT an immediate-delete red trash button. No destructive confirmation popup in this scene.
+Keep all content, close control, complete portrait, owner and actions inside the sheet and above the lower safe space. The visible background list retains its privacy: uncollected Momo/Marley do not show owners or faces, even through dimming.
+
+Cute high-taste MoeGo orange/white sticker UI, open breathing room, precise Chinese, same card family as image1. No fish, gameplay score/timer, collection reward/claim, invented copy, technical labels, loading states or QR. Deliver one full polished853x1844 screenshot of the detail sheet over the same collection page.

@@ -1,0 +1,26 @@
+Use case: ui-mockup.
+Create ONE companion MOBILE PORTRAIT screenshot showing the SAME MoeGo Report Card page AFTER SCROLLING DOWN. Canvas853x1844, tall9:19.5 portrait exactly matching reference1, NOT9:16. No phone frame/browser chrome/collage/explanation arrows. This is a SECOND SCROLL POSITION of one page, not a new route or modal.
+
+REFERENCES:
+Image1 is the selected first-viewport mobile report: preserve EXACT style, white background, orange/charcoal text, the same Deedee and Koa sticker portraits and card backgrounds, rounded typography, AND the EXACT FIXED BOTTOM ACTION BAR geometry, button sizes, labels and icons. The top report title, logo, score and Maodu MVP have scrolled out of view; do not repeat them at the top.
+Image2 is the six-pet head contact sheet: supporting insert for Deedee white long-eared dog and Koa peach parrot only; ignore the contact sheet's page/UI.
+Image3 is the fish-color asset contact sheet: use a few of its small goldfish (orange/white, gold and blue) as supporting artwork inside a small fish-tank illustration. Ignore all technical text/cards. This is an invitation illustration, not a board or collection.
+
+SAME RUN:
+Already saved third qualifying completed ordinary game. Same score2,480, Maodu MVP,120 service tiles,max4 cascade,3 tool activations, Scheduling Pro. In this scrolled viewport those upper stats are out of view and must not be repeated or changed. Exactly TWO newly collected pets Deedee and Koa. The hidden Peter invitation is eligible only because this is the saved third valid ordinary game. No guess-owner quiz in this illustrative run; omit it completely. No new rewards.
+
+LAYOUT:
+- Top at logical y24: exact heading "本局新收集 2". Two equal modest rounded pet cards directly below, full Deedee face on the left on the SAME pale peach background as image1, full Koa parrot on the right on SAME pale butter background. Clear names "Deedee" and "Koa" below portraits. Preserve the SAME dimensions and art proportions as in image1, moved up due to scrolling; don't grow them into full-screen pet profiles. Full ears/whiskers clear.
+- After a comfortable gap, around logical y250-515: ONE charming invitation panel width366, very pale blue interior, clean cobalt/charcoal thin outline and tiny offset shadow. It is an in-page optional Easter egg. Exact invitation in readable18px, wrapping naturally:
+"Peter 悄悄递来一个鱼缸："
+"这批客人不用吹干。"
+This text is the panel's main heading, no badge or additional title.
+Below, a small clear round fish tank illustration with 3 colorful little goldfish and a few bubbles, placed to the right. To the left a modest WHITE/orange-outline button "去看看" with a small right arrow; one tap goes to prep later, not auto-start. Keep this button visually secondary to the persistent orange replay button below. No public waterline/progress, no meter, no "+12", no global activity wording, no numeric unlock countdown.
+- Below around y570-650: a small Deedee head sticker and light handwritten-style line "今日店长 · Deedee", plus a tiny orange paw approval mark as the report signature. Reuse the SAME dog portrait, no new animal or name. Gentle breathing room.
+- A quiet text-link row "排行榜" and "回门店" around y680. Keep it secondary.
+- Leave enough blank space after the last link row so no final body content is hidden by the fixed bottom bar.
+
+FIXED BAR INVARIANT:
+At the bottom of this853x1844 image, reproduce reference1's action bar at exactly the same y-position and dimensions: white area with thin gray divider aroundy1688, primary orange paw button "再开一局" xabout39-489,y1710-1808, secondary white charcoal-outline share icon button "分享成绩" xabout503-815,y1710-1808. Preserve lower white safe space. Do NOT move either button with the scrolled content. Do not add duplicates inside body, no extra CTA beside them, no screenshot labels.
+
+White/orange MoeGo sticker art, precise Chinese, highly legible, realistic mobile spacing. Cute surprise, calm optional invitation, no confetti storm, no QR/lives/coins/reward claiming/toast stack/new navigation. Deliver one polished full viewport screenshot with the same visual continuity as image1.

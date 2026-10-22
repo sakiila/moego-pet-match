@@ -1,0 +1,29 @@
+Use case: ui-mockup.
+Create ONE polished MOBILE PORTRAIT first-viewport screenshot of the MoeGo pet match-3 END-OF-SHIFT REPORT. Logical390x844, tall aspect9:19.5, same853x1844 proportions as image1. Full single phone viewport, no device frame/browser chrome/collage/annotations. Chinese interface. Design only, no code.
+
+REFERENCE ROLES:
+1. Accepted mobile game screenshot: match its exact white/orange/charcoal sticker visual system, typography, logo scale, header spacing, cheerful orange, and tall mobile proportions.
+2. Old desktop Report Card: reference ONLY the playful white receipt with charcoal outline, little top clip, rounded/scalloped paper edge, orange award stamp, two-button hierarchy. Its public fishbowl/progress contribution, old subtitle, old 12-pet count and mascot MVP are obsolete; DO NOT reproduce them.
+3. Actual Maodu head sticker: the MVP, a winking white/brown tabby cat, green open eye, full ears/whiskers, NO neck/body. Preserve markings and pose faithfully.
+4. Six-pet contact sheet: supporting insert portraits only. Deedee = white fluffy long-eared dog, Koa = peach/cream parrot. Those are the TWO new collected pets, not invented mascot pets. Ignore contact-sheet labels/cards.
+5. Genuine MoeGo logo: keep correct dog/check symbol and black/orange wordmark.
+
+ART DIRECTION:
+True white#FFFFFF, vivid MoeGo orange#F47721, charcoal#292A2F, tiny semantic green saved check. Cute, warm, clear, professional. Rounded bold numbers, highly readable Chinese. Crisp pet stickers with white edges; thin charcoal outlines/tiny offset shadows. One meaningful receipt sheet, not a dashboard of nested panels. Spacious but practical. No beige whole-page tint, glass, gradient, 3D clay, confetti storm or fake award collection.
+
+SCENE FACTS:
+Illustrative completed ordinary pet game, final score2,480. Service120 TILES (repeat services allowed, NOT120 distinct pets), max4 cascade steps, tools activated3; rush order succeeded, no scissors+scissors full-board combination, so the ONE title is "精准排班大师". MVP Maodu. The server has confirmed save. No personal-best claim. Two new collected pets Deedee and Koa. This is the player's third qualifying saved ordinary game, but the hidden fish invitation is farther down the SAME scrollable report and NOT visible in this first viewport.
+
+COMPOSITION at logical390x844:
+- Top header y22-60: compact real MoeGo logo left, small "回门店" text link and "中 / EN" on right, Chinese active orange. Keep light and readable.
+- Page title around y82-145, two clear lines "Grooming" / "Report Card", charcoal and orange like the accepted style, about28px. Under it exact subtitle "这班辛苦啦，看看毛孩子怎么说。" at15px.
+- One white receipt around x12 y204 width366 through abouty695, charcoal outline2px, small orange top clip, gentle bottom paper scallop.
+- Receipt top line: "本局得分" left, small green check and exact "本局结果已保存" right. Giant orange score "2,480" immediately below. This is a saved state, not a saving animation.
+- Center focal pet: large beautiful Maodu head sticker about120-130 logical pixels, no crown hat/body or clothing. Under it exact "本局 MVP：Maodu". ONE compact orange stamp/ribbon "精准排班大师", modest rather than a huge badge collection.
+- Pet speech quote: exact "临时加单？安排得明明白白。" readable17px, two lines if needed. It is a playful character line, not an owner's quotation.
+- Small three-column stats near receipt bottom with labels "服务格数", "最高连锁", "工具发动次数" and values "120", "4", "3". Distinct service tiles vs unique pets. Keep labels readable12px, no extra metrics.
+- Below receipt around y710-750 start the next existing section: heading "本局新收集" with a small count "2", tiny visible Deedee and Koa stickers to suggest continuation. Report body scrolls; DO NOT compress all lower content into this viewport.
+- FIXED bottom action bar occupies approx y760-844, true white with thin divider and bottom safe space. Main ORANGE rounded button left, widthabout230 height52, exact "再开一局" with small paw. Secondary WHITE charcoal-outline button right widthabout124 height52, exact "分享成绩" with share icon. Both clearly tappable, always at SAME position in subsequent scrolled view. They are page controls, not part of exported score artwork. Leave report content readable above the bar; never cover text or primary pet face.
+
+AVOID:
+No public fish tank waterline/contribution, fish-home入口, coins, lives, QR code, invented owner names, compulsory prize claiming, popups, new nav modules, giant tool icons, freeze/pause, fish progress, extra score bonuses, per-pet service count rows, pseudo browser chrome, new copy beyond specified. No duplicate buttons in the receipt. Must feel like the accepted mobile board's next screen, with a lovable real-pet star.

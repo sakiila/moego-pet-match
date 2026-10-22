@@ -1,0 +1,19 @@
+Use case: precise-object-edit / ui-mockup.
+Refine IMAGE1 (Maodu collected-pet detail sheet) to match the EXACT PHONE CANVAS and unchanged background of IMAGE2 (the collection list).
+
+Critical correction: IMAGE1 is935x1683, too short. Return853x1844, WIDTH:HEIGHT9:19.5, the same tall viewport as IMAGE2. Do NOT return9:16. No phone frame or side panels.
+
+Use IMAGE2's collection page as the background, unchanged at its existing853x1844 geometry: same logo/header/title,4/81, search field exact "搜宠物名或主人名", same scope line, same3 filters and card arrangement. Overlay it with the gray dim mask. Do not rescale/reflow/change the list when opening a sheet.
+
+Reproduce IMAGE1's clean white rounded BOTTOM SHEET on top, now positioned approximatelyx12,y270,width366,height560 at logical390x844 scale. Large top corners, fine charcoal outline, comfortable bottom safe area.
+Keep ONLY the same collected pet data and actions from IMAGE1:
+small orange "已收集" at top-left of sheet;
+one close-X button at top-right with generous touch space;
+large whole Maodu winking tabby HEAD, green eye, full ears/whiskers, no neck/body;
+big name "Maodu";
+orange GENERIC PERSON icon and exact "主人 Bob";
+wide white/charcoal-outline flip-arrows button "翻面看原图";
+quiet gray bottom text action "资料删除申请".
+Keep their hierarchy and breathing room; use extra vertical height for spacing so nothing is clipped or hidden at the bottom. Keep source portrait identity, no new fields/personality/quotes/stats/date/badges/verification. No actual original photo is shown in this front view.
+
+The underlying collection remains4/81 with no record changes; the sheet is an overlay, not a new page. Same white/orange/charcoal style as both images. Background Momo/Marley still have no faces/owners. Return one beautiful readable853x1844 tall detail-state screenshot, preserving exact words and safe spacing.

@@ -1,0 +1,30 @@
+Create ONE refined high-fidelity MOBILE portrait upload form UI for the internal MoeGo pet match-three game “毛孩子全明星”. This round is a static design mockup, no implementation. Output EXACTLY 853 x 1844 pixels, same tall 390:844 proportion as reference image 1. Edge-to-edge flat UI screenshot, no phone hardware, no browser chrome, no montage, no annotations outside the UI.
+
+INPUT REFERENCES:
+1. Accepted mobile-leaderboard-v1.png: follow its exact tall canvas, MoeGo header and orange-white-charcoal design language, rounded bold Chinese typography, whitespace, button style.
+2. Older upload-v1.png: use ONLY the identity of the fictional example photo dog, a photorealistic happy Bernese mountain dog with black fur, continuous white blaze and tan eyebrows, named Oreo, owner Bob. The old desktop page contains obsolete crop tools and many fields: DO NOT reproduce those. Create the drastically simpler mobile form below.
+3. Authentic MoeGo logo: reproduce faithfully.
+
+STYLE: crisp white, MoeGo orange #F47721, charcoal #292A2F, soft pale-gray input surfaces and thin outlines, large rounded corners, restrained orange paw marks, cheerful but not cluttered. Strong readable text, practical clear upload form. Keep the original photo photographic with a natural indoor room background, NOT a sticker or cartoon. Use no big decorative mascot taking space from the photo or form. All quoted Chinese text must be crisp and correct. Names Oreo and Bob stay Latin.
+
+STATE: user has selected one photo and entered pet name Oreo; current chosen colleague identity is Bob; NOT YET SUBMITTED. There is NO success badge, published status, review progress, or new collected pet. The only principal action is “提交”.
+
+LAYOUT, all visible in one tall screen with generous readable spacing:
+TOP compact header matches mobile reference: MoeGo logo left, “‹ 回门店” and “中 / EN” right.
+TITLE large rounded charcoal “添加我家毛孩子”, a couple restrained orange accent strokes.
+SUBTITLE clear smaller text “每次添加一只宠物，选一张主体清楚的照片。”
+PHOTO SECTION:
+- line with label “原图预览” left and orange small text action “换一张” on right.
+- one large rounded landscape photograph of the fictional Oreo dog, front-facing happy Bernese mountain dog sitting in a softly blurred cozy room. Keep whole head, ears and upper body visible, naturally framed. It is a normal user-selected original photo preview only, no crop box, no grid, no handles, no sliders, no zoom buttons, no camera filters, no extra tiny avatar previews. A gentle outline is fine. Photo area around 730 x 440 pixels; do not let it consume the whole screen.
+- below photo, a compact readable two-line note exactly “这是原图预览。游戏形象会在人工处理和核对后上架。”
+FORM:
+- label “宠物名字”, with one full-width rounded input containing “Oreo”. Keep label above the input.
+- below, a subtle pale gray owner panel with small orange circular B default letter avatar and text “主人：Bob”, clearly non-editable identity information.
+- owner hint immediately beneath: “请确认主人信息是否正确。”
+USE INFORMATION before submit, visually quiet but legible:
+- paragraph exactly “处理后的头像用于棋盘和图鉴，原图可在图鉴翻面查看；宠物名字和主人信息也会展示。”
+- orange underlined link exactly “查看照片展示与处理说明”.
+BOTTOM:
+- one strong large orange outlined rounded pill CTA with a white paw icon and exact text “提交”. Consistent with the leaderboard primary button. Comfortable bottom safe area. No second primary action.
+
+Maintain enough font size and clear grouping so the whole short form reads comfortably on a phone, with photo, pet name, owner, use scope and submit all visible. No need huge gaps between groups. No added description/title/quote/breed/age/contact fields, no checkbox, no default consent check, no legal wall of text, no “AI” configuration, no process timeline, no automatic stylization, no style picker, no online crop, no board/collection dual preview, no pending-review list, no progress percentage, no estimated publishing time, no upload-success copy, no “立即上架”, no “已收集”, no fish entry, no QR. This mockup must feel like the same MoeGo mobile app as the first reference, adapted into a very simple pet photo submission page.

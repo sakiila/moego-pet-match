@@ -1,0 +1,8 @@
+Use case: precise-object-edit / ui-mockup.
+EDIT the supplied finished mobile MoeGo game screenshot. Keep its portrait aspect, exact complete layout, ALL Chinese and English text, both timers 00:48 and 8秒, score2,480, 7/12 progress, all49 cells, six pet identities and their fixed colors, exact pet positions, white background, logo, orange palette and footer unchanged. Do not add or remove tiles, cards, controls, text, pets or decorative widgets.
+
+Make ONLY two tiny purposeful icon improvements:
+1. In row4 column3, the orange COMB tool tile: add a small clear CHARCOAL horizontal DOUBLE-HEADED LEFT/RIGHT arrow emblem along the lower part of the tile, separate from its orange comb teeth and from the existing orange drag arrow to the right. The emblem indicates this comb clears horizontally. Keep the full-row orange preview exactly where it is and keep every underlying head clear.
+2. In row5 column6, the SCISSORS tool tile: add a neat small PLUS-SHAPED CROSS ability badge, like a bold upright + within a tiny white circle at the tile's lower-right corner. It indicates a row-and-column clear; distinguish the upright plus from the diagonal scissors blades. Keep orange handles and silver blades recognizable. Badge fits fully inside the existing cell, never on a neighboring head.
+
+Keep the rest of the image pixel-close to the reference. No new words, no tool inventories, no pause icon, no gameplay code, no cropping or phone frame. Deliver the same single polished tall mobile UI screenshot.

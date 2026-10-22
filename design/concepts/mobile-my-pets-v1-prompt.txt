@@ -1,0 +1,27 @@
+Create ONE beautiful MOBILE portrait “我的宠物” screen for the internal MoeGo pet match-three game. Deliver EXACTLY 853 x 1844 pixels, same tall mobile screen proportion as reference 1. Flat edge-to-edge UI, no physical phone, no browser chrome, no collage. It is a static high-fidelity design mockup.
+
+REFERENCES:
+1 accepted mobile-petdex-v1.png for the established app family: white, MoeGo orange #F47721, charcoal #292A2F, rounded bold Chinese typography, warm pale neutral pet cards, restrained orange accent strokes, authentic logo and clear comfortable controls. Do NOT copy its global collection progress, search, filters, or six-pet grid.
+2 Maodu transparent head: preserve tabby-and-white fur, left wink, one big green eye, pink nose, complete large ears, fine whiskers and white sticker border; no neck/body.
+3 Boluo transparent head: preserve orange tabby face, two open golden-green eyes, pink nose, very large full ears, tilted head and white sticker border; no neck/body.
+4 real MoeGo logo: reproduce faithfully.
+
+SCENE:
+Current chosen game profile is Bob. BOTH Maodu and Boluo are already listed and belong to Bob. In this independent illustrative state, Maodu IS collected, Boluo is NOT yet collected. Since this is MY OWN PETS, BOTH have full colored faces and full-profile access. The uncollected Boluo MUST NOT become a silhouette, blurred card, padlock or pending-publication item. Do not claim this page changes collection by viewing. No upload is currently in progress.
+
+LAYOUT:
+Header consistent with reference: genuine MoeGo logo left, “‹ 回门店” and “中 / EN” right.
+Large rounded charcoal title exactly “我的宠物”, with a small orange paw/short accent marks.
+Under title a small quiet identity line, orange default circular B avatar and “Bob”. This states whose own-pets page it is. Do not repeat owner fields on every pet card; do not create an edit/switch identity action.
+A clear prominent orange rounded pill button, white paw/plus icon, exact label “添加我家毛孩子”. It leads to the existing original-photo submission form, NOT a generation/crop tool.
+A compact neutral note below, exact text “新提交的宠物，人工处理并上架后可在这里查看。” This is a static explanation of what the page lists, not a status of a particular submission.
+
+TWO FULL-WIDTH PET CARDS stacked vertically, with enough room so both cards and actions fully fit on the screen:
+CARD 1 MAODU: warm pale neutral rounded card, large complete colored Maodu head on left, name “Maodu” in bold on right. Small green/neutral pill exactly “已收集” near name. Clear modest orange text action “查看资料 ›”. Below it a quiet gray underlined text link exactly “资料删除申请”. This action requests manual removal; do NOT draw a delete icon/button, confirmation popup or an already removed state. No collection instructions under this already-collected pet.
+CARD 2 BOLUO: same card language and full colored Boluo head, name “Boluo”. Small pale-gray pill exactly “未收集”, never “待上架/待审核”. Same “查看资料 ›” and quiet “资料删除申请” actions. Within lower portion of THIS CARD ONLY, separated gently from the pet/name region, show the exact compact collection explanation in readable dark-gray small type:
+“这里能看完整资料；棋盘上服务过 TA，完整收工、成绩保存成功后，就会自动收进图鉴。”
+Wrap naturally into 2–3 lines across the card width; do not squeeze it in a tiny column beside the face. This note applies only to Boluo. No extra reward or “领取” action.
+
+Make the two complete ear-preserving pet heads large and endearing, with neutral shared card backgrounds instead of permanent per-pet game colors. Cards should be practical, comfortably readable on a phone, lively with a few sparse orange marks, and have distinct primary/secondary actions. Keep the bottom edge and card instructions safely visible. Fill the portrait screen naturally without giant empty blank regions.
+
+DO NOT ADD: global collection numbers or denominator, a whole-company pet list, search/filters, upload-review queue, submitted-pet progress, waiting/processing/rejected tabs, estimated publishing time, crop controls, AI style picker, direct delete, edit pet/owner field, switch identity link, entry/activity code or authentication, fish mode or invitation, leaderboard stats, game timer, player score, pet personality/quotes/awards, QR, manual collect/claim button, an extra “开始营业” CTA, fake actual Slack avatars or unrelated pets. Only Bob's TWO already-listed pets with the two different collection states and the add-pet entry. No active app implementation.

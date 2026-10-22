@@ -1,0 +1,24 @@
+Create ONE finished standalone FISH-MODE results sharing card for the internal MoeGo game “毛孩子全明星”. This is the exported share image itself, NOT a screenshot of a mobile app. Portrait approximately 4:5, ideally the SAME 1122 x 1402 dimensions and proportion as reference 2. One image only. No surrounding device or page chrome.
+
+INPUT REFERENCES:
+1 accepted mobile-fish-report-v1.png: exact deep-blue underwater atmosphere, white/orange MoeGo branding, pale receipt-paper report, fish character, blue/cyan water rays and bubbles. Use for fish-mode visual identity, not for app navigation or stats.
+2 accepted share-card-pets-v1.png: use the SAME standalone card family, hierarchy, compact branding, pet-character hero plus quote, huge score, modest achievement stamp, dotted footer and player signature. Replace the ordinary theme with underwater fish theme, do not copy the cat/paws/bone.
+3 fish_color_blue.png: the actual Sky Blue fish category asset. Preserve the recognizable FULL side-view blue fish, pale horizontal stripe, blue fins and forked tail, natural round eye, white sticker edge. One complete fish, facing right. Do NOT make it a new cartoon species, give it a name, add clothes, crop fins/tail, or invent a pet owner.
+4 authentic MoeGo logo: reproduce shape and lettering faithfully, adapted to white and orange where on navy.
+
+STYLE AND COMPOSITION:
+Deep navy underwater environment at edges and header, subtle cyan rays from above, a handful of luminous bubbles and distant unobtrusive fish silhouettes. Keep the focal content on a large pale white/icy-blue receipt card with soft rounded corners and a scalloped lower edge; legibility first, not a busy aquarium picture. MoeGo orange #F47721 for score and achievement, charcoal for text on white, white/cyan on navy. Same cheerful, bold rounded Chinese typography as accepted pet sharing card. Restrained sticker accents and wave lines, no overwhelming glow or glitter. Polished calm whitespace.
+
+TOP compact branding: genuine MoeGo logo, game name exactly “毛孩子全明星”, small mode tag exactly “鱼关卡”. White/orange logo on deep-blue background, readable title. Branding should not overpower the main card.
+MAIN hero: one BIG complete Sky Blue fish on the pale receipt, matched to source asset, its full horizontal body/eye/fins/tail clearly visible. Give the fish room and avoid shrinking it into a tiny ornament. Small bright bubbles/water ripples convey energy. Under or near the fish, a clear label exactly “本局 MVP：天蓝色”. This is the winning COLOR CATEGORY, not an individually named pet. No owner name.
+Beside the hero place a SMALL orange circular or gently ribboned achievement stamp with the exact text “连锁反应负责人”. It is clearly secondary in size.
+MAIN QUOTE in a friendly speech bubble or clean rounded frame, large readable charcoal Chinese, these two lines exactly:
+“这波水流，
+鱼都跟上节奏了。”
+This is the main playful sentence, preserve all characters, punctuation and meaning.
+LOWER SCORE block: label “本局得分”, very large vivid orange score exactly “3,260”. Readable even when the card is shown small.
+BOTTOM dotted receipt rule and understated signature exactly “本局玩家：Bob”. Name only, no player avatar or contact details. Signature refers to the player who earned the score and is distinct from the MVP category.
+All content within safe margins. Maintain consistent visual hierarchy fish + quote > clear score > small achievement > quiet signature. The whole thing should be a delightful underwater companion to the accepted pet sharing card, recognizable as a surprise fish mode.
+
+FACTS/EXCLUSIONS:
+This example is a complete saved fish round by Bob, MVP color Sky Blue/天蓝色, score 3,260, longest cascade 5 and the displayed title 连锁反应负责人; do NOT draw the numeric statistics because the share image is intentionally concise. There is no new personal-record celebration. No cat/dog, no grooming/hair/drying tools or jokes, no comb/scissors, no bone nameplate, no pet owner, no new pet collection, no family/guess-owner quiz, no public aquarium contribution, no progress count, no rank or percentile, no reward. Do NOT reveal how fish mode unlocks: no “three rounds”, no unlock instructions, no key, no lock icon, no hidden-level invitation or entry button. No QR code, no web link, no CTA, no language toggle, no save/share/replay controls, no fake interactive pill button, no app navbar or statusbar. No decorative extra text. Chinese single-language image, existing brand and Bob name unchanged.

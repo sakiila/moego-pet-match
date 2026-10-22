@@ -1,0 +1,28 @@
+Use case: ui-mockup.
+Create ONE finished MOBILE PORTRAIT PRE-GAME READY screenshot for the MoeGo Peter HIDDEN FISH ROUND. Canvas853x1844,9:19.5 tall phone viewport, exactly same proportions as refs1/2. No phone/browser frame, collage or annotations. Design only, no code.
+
+REFERENCES:
+1 accepted fish gameplay: match deep navy underwater background, gentle blue surface rays/bubbles, reverse white/orange MoeGo logo, orange accents, crisp rounded type, uniform pale icy-blue fish tiles.
+2 accepted ordinary READY state: reuse only its information hierarchy: compact header, title, a3x2 guest roster, short matching/controls instructions, static duration note and one orange start button. Remove ALL pet portraits, pet names and the own-pet message. This is the fish version of the same pre-start state.
+3 fish-color contact sheet: supporting portraits and labels only, no technical text/card design. Use6 full fish colors/markings, identical to categories in ref1.
+4 genuine logo: preserve shapes, reverse white Moe/orange Go on navy like ref1.
+
+SCENE: personally discovered fish mode, assets loaded, timer NOT STARTED. This is the ready state of the fish board, not a store page or second new mode. No game score, no00:48/01:30, no active order/tools on board, no ownership weighting, no pet collection or fish-unlock progress.
+
+LAYOUT at logical390x844:
+- Header y24-65: compact reverse MoeGo logo left, "回门店" and "中 / EN" right, Chinese orange.
+- Title y95: exact "小鱼也来排班啦", white with orange "排班", about28px.
+- A neat deep-blue clipboard/roster panel aroundy165-450. Section "本局来客" in white,6 equal UNIFORM PALE ICY-BLUE fish tiles,3 columns x2 rows, whole fins and tails inside, clear color names under each portrait. Same fish colors as ref1, not different pastel backgrounds. EXACT order and labels:
+row1 "珊瑚红" = red/white spots; "金黄色" = solid gold; "翡翠绿" = green/dark vertical bands.
+row2 "天蓝色" = blue/horizontal stripe; "紫罗兰" = violet/dark tail; "黑白色" = black/white saddle.
+These are COLOR CATEGORY NAMES, not individual pet names. No user names, own-pet pill, locks, rarity, checkmarks or extra category.
+- Rule and control block aroundy500-610, readable14-16px white/light-cyan, EXACT:
+"相邻交换，同色小鱼连成一线，3 个及以上即可消除。"
+"可以拖拽，也可以先点一格、再点相邻格。"
+Small simple neighbor-swap arrows allowed, no paw/cat demo. Do not teach tools before they appear. No mini49-cell board behind the roster.
+- Above start button aroundy655-710, static duration note, readable15px:
+"本局 90 秒。准备和读说明不计时，点下方按钮后开始。"
+90秒 may be orange semibold, no running countdown ring.
+- ONE large orange bottom-near button x24,y750,width342,height56 logical, simple small bubble/fish accent icon and exact "开始这班". Thin charcoal outline/offset shadow like the accepted buttons, lower safe space.
+Deep navy scene remains calm, a few outer bubbles and quiet bottom plants, no extra fish portrait outside the6 roster entries. No large store illustration/mascot, active tool previews, game timer/score, Peter invitation repeat, task bar, QR/lives/coins/mode menu/extra CTA.
+Entire single853x1844 image legible and unclipped, same friendly deep-underwater MoeGo family as ref1.

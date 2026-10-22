@@ -1,0 +1,21 @@
+Edit reference image 1 (the existing MoeGo identity-selection mobile page) into the FINAL single-page game entry after removal of the activity-code step. Output exactly 853 x 1844 pixels, same canvas as reference 1. One flat edge-to-edge mobile UI mockup, no phone hardware, no browser chrome, no collage. Reference 2 is the accepted home page for the game name/subtitle styling only; reference 3 is the genuine logo.
+
+GOAL: On the SAME page, first explain what the game is, then let the player search and select their coworker profile, then confirm into the shop. Preserve the original page's white/orange/charcoal identity, rounded bold typography, logo, language control, Bob example selection, information summary and links. Keep it simple and welcoming. This is a revision to the existing page, not a new onboarding screen or a new feature.
+
+CONTENT AND HIERARCHY, all within the same tall screen:
+1 Header: genuine MoeGo logo left and “中 / EN” right. No back-to-shop link or active user avatar before identity confirmation.
+2 At top, bold friendly game title exactly “毛孩子全明星”, with “全明星” orange, following reference 2 at a slightly more compact size so the form fits. Under it, exact subtitle “和同事家的毛孩子，来一局 90 秒三消。” in readable dark text. This is the game context missing from reference 1. No giant separate illustration or shop scene.
+3 Below the title/subtitle, a smaller section heading exactly “你是哪位同事？”. This is a secondary form heading, not the huge main hero title.
+4 Small helpful sentence “选择自己的身份，成绩和图鉴会记在这里。”
+5 A compact readable label “搜索你的 Slack 名字”, then a large rounded search input with magnifying glass icon and typed text “Bob”; small clear X at the right of the input.
+6 ONE selected coworker result card: pale orange fill, orange outline, orange round default avatar with white letter “B”, bold name “Bob”, and a small orange selection tick. Only a UI selection mark, not a verification badge. Keep the card reasonably compact (around 190–220 pixels tall). The little official blue cat from reference 1 may peek over a corner as brand decoration, not as a user pet/portrait. No other profile fields or colleagues.
+7 A modest “当前选择：Bob” line below the result, not enormous.
+8 A quiet pale-gray information block immediately before the primary button, with exact readable paragraph:
+“游戏会记录所选身份、成绩和图鉴进度，并在同事排行榜展示名字、头像与最好成绩。”
+This is the existing short summary; do not change its meaning or add legal text/checkboxes.
+9 One large strong orange rounded pill button with white paw and exact text “以 Bob 身份继续”. Full name is visible, and it matches the selected result. This enters the shop without starting a timer.
+10 Below the button the two small clear text links “信息使用说明” and “资料删除申请”, separated subtly. Safe bottom space.
+
+Please rebalance the vertical layout to fit ALL of these comfortably at 853 x 1844: smaller game-title hero than the home page, compact identity heading and search area, a compact result card, readable summary and a generous main button. Avoid large blank gaps and avoid cramming type. The first impression should clearly say this is the 90-second coworker-pet match-three game while the search is still easy to find.
+
+Preserve the exact existing Bob selected-state concept, not an automatically assigned identity. No invented human portrait, email, job title, employee ID or real Slack data. No activity code/password field or expired-access message, no OAuth/Slack login or identity verification, no extra welcome screen, no “next” step/button, no guest/play-as-any-name route, no additional checkbox or confirmation, no timer, scores, leaderboard, fish teaser/unlock hints, collection stats, player-switch control, upload form, awards, store/pet artwork from the home page. It must be a single clean game introduction + identity form with the same familiar MoeGo design family.

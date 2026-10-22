@@ -1,0 +1,41 @@
+Use case: ui-mockup.
+Create ONE finished, charming, high-fidelity MOBILE PORTRAIT gameplay screenshot for the internal MoeGo coworker pet match-three game "MoeGo 毛孩子全明星". Design only, no code. Single complete phone-sized viewport, logical 390 x 844, tall aspect about 9:19.5, render approximately 1170 x 2532. No physical phone frame, no browser chrome, no collage, no side annotations. Everything fits on ONE SCREEN without scrolling.
+
+INPUT IMAGES:
+Image 1 is the previously liked DESKTOP BOARD: preserve its bright white/orange MoeGo sticker art direction, outlines, rounded playful typography, and warmth, but redesign the layout for mobile. Do NOT copy its outdated giant timer, 12 unique pets claim, animal roster, or sidebar arrangement.
+Image 2 is the genuine MoeGo logo: reproduce its correct dog/check symbol and black/orange wordmark, small in the header.
+Image 3 is a SIX-PET CONTACT SHEET of head stickers. Use ONLY the six pet portraits from it; ignore all contact-sheet labels, cards and captions. Read labels to identify these six references (the order below defines board letters, NOT sheet position):
+A: Deedee, happy white long-eared small dog, pink tongue.
+B: Momo, gray shorthaired cat with amber eyes.
+C: Maodu, winking white-and-brown tabby cat with green eye.
+D: Boluo, orange pointy-eared cat.
+E: Marley, black floppy-eared dog.
+F: Koa, peach-and-cream parrot in side profile.
+Use these six distinct recognizable head portraits in a consistent illustrated sticker finish. Same pet must use the exact same pose, expression and markings EVERY TIME. HEADS ONLY, full ears/whiskers retained, white sticker edge, no necks, bodies, scarves or invented pets. The six portraits are supporting inserts, not edit targets; match their detailed illustrated head style. Do not copy the contact-sheet page design.
+
+STYLE:
+True WHITE #FFFFFF background, vivid MoeGo orange #F47721, charcoal #292A2F, a little cobalt #365BB4. Cute, funny, polished, compact yet breathable. Flat clean UI, softly rounded geometry, thin charcoal outlines with tiny offset shadows and white-rim pet stickers. Clear Chinese sans-serif labels and rounded bold display numbers. No beige page wash, no purple theme, no gradients or glass, no 3D clay. Main focus is the game board, not decorative illustrations. Modest bubbles/sparkles at the outer edge suggest fun grooming motion; never cover a tile face or text.
+
+LAYOUT at logical 390x844:
+1. Header approx y24-66: small genuine MoeGo logo left, compact "中 / EN" right, Chinese active orange. No navigation list.
+2. Compact heading around y92: "Smart Scheduling" in one line, black Smart / orange Scheduling, about 24px; below small exact line "拖一拖，安排明明白白。". This title must NOT crowd the HUD.
+3. Clear open two-column HUD around y155-228. Left label "本局剩余", big orange "00:48" with small clock motif; RIGHT label "分数", big charcoal "2,480". The MAIN time is stronger than the rush timer; no enormous timer circle. No service total or fabricated other metrics.
+4. Dedicated compact rush order strip around y246-324, fixed height, orange outlined clipboard-like strip. Exact visible copy: "加急来啦！" at left, "催单剩余 8 秒" at right, then "已服务 7/12 格" with a partly filled orange progress bar, and smaller "20 秒内服务 12 格". Readable 13-16 logical px. Clearly one secondary timer, not a second main clock. It is NOT complete, so NO success toast and NO +100.
+5. MAIN board around x12 y347 width366 height366. One complete square 7 COLUMNS BY 7 ROWS, EXACTLY 49 distinct tile slots with equal rows and columns. Thin charcoal outline, rounded outer corners, white/pale near-white inset, restrained 3px gutters. Each cell about48px at logical scale. Heads fill most of each cell while ears fit. NO labels or pet names inside tiles.
+Six pastel auxiliary backgrounds remain fixed per pet throughout this round: A pale sky blue, B pale lavender, C pale mint, D pale peach, E pale rose, F pale butter yellow. Real fur colors remain intact. Background is an aid; ordinary matches are by pet identity, not by color.
+
+Use this exact stable 7x7 arrangement so the board has no automatic triple:
+row1 A B C D E F A
+row2 C D E F A B C
+row3 E F A B C D E
+row4 B C H A D E F
+row5 D E F A B X C
+row6 F A B C D E F
+row7 A C D E F B A
+Here H is ONE ORANGE GROOMING COMB tool at row4 column3 instead of a pet, with clear teeth and a tiny horizontal left-right direction mark. X is ONE SILVER SCISSORS tool with orange handles at row5 column6 instead of a pet, with a clear small cross ability mark. The two tools live IN board cells; no tool tray, inventory or extra ability buttons.
+Show a subtle short drag arrow from the comb H toward its right-hand neighbor A. Show only the DIRECT horizontal clearance preview for row4 as a very thin orange outline/soft underlay across its seven cells, with all underlying pet heads fully legible. This is pre-trigger anticipation: no cleared holes, no activated explosion, no pause or modal, no huge hand covering the board.
+6. A reserved small hint below the board, approx y735-775, exact "梳子到位！和邻格交换，梳开一整行或列。" in 14px dark gray, max2 short lines, small comb accent. No big speech bubble or extra mascot. This fixed hint area cannot overlap or move the board.
+7. Bottom y800 utility actions well away from tiles: small gear and "设置" on left; small exit-door icon and "退出" on right. Comfortable touch areas. NO pause symbol, no primary CTA during play. Keep bottom safe space.
+
+CONSTRAINTS:
+Full scene must fit in one actual portrait mobile viewport, clearly readable labels and square tiles. Exactly49 board positions, exactly6 pet types plus the2 tool cells. No fish, fishbowl, home link inside board, coins, lives, shop purchases, leaderboards, public activity progress, tooltip stacks, debug annotations, sample-data badges, QR codes or extra rewards. No forced landscape. Chinese text accurate and unclipped. All numbers are illustrative gameplay mockup state. Deliver a gorgeous practical mobile product screenshot, consistent with the liked desktop style, full screen and no cropping.

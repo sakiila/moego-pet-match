@@ -1,0 +1,33 @@
+Use case: ui-mockup.
+Create ONE high-fidelity MOBILE PORTRAIT gameplay screenshot for Peter's HIDDEN FISH ROUND in the MoeGo coworker pet match-three game. Canvas853x1844, tall9:19.5, same viewport proportions as image1. Full ONE screen, no phone/browser frame, no collage or annotations. Design only, no code.
+
+REFERENCE ROLES:
+Image1 is the accepted ORDINARY mobile board. Preserve its practical geometry: compact top header, title, main time and score, one rush strip, full7x7 board in middle/lower area, single helper area and settings/exit at bottom. Replace ALL dog/cat/bird tiles and grooming tools with fish and aquatic skins; do not copy its pets or white page background.
+Image2 is the existing SIX-COLOR FISH contact sheet: use the six whole fish portraits, NOT its page/card/text design. Same type repeats identical color, marks, orientation and shape: A coral-red with white spots, B solid golden yellow, C emerald-green with dark vertical bands, D sky-blue with horizontal dark stripe, E violet with dark tail, F black-and-white with black saddle. These are6 color categories, not named individual pets. Keep full fins/tails, one fish per tile, no extra species.
+Image3 is genuine MoeGo logo. On the dark background use a REVERSED white "Moe" and orange "Go", white dog outline/orange check, preserving the genuine shapes. Do not leave black logo text invisible on navy.
+
+USER-CHOSEN ART DIRECTION:
+DEEP BLUE UNDERWATER ATMOSPHERE, a secret aquarium under the familiar cheerful game. Navy#071B33 / deep ocean blue#0C3155 environment, restrained soft blue light rays from above, a few small bubbles near the outside edges, tiny plant/rock silhouettes at very bottom. Preserve cute white-rim illustrated fish stickers, rounded heavy typography, neat outlines and subtle offset shadows. MoeGo orange#F47721 for main time/accent/important controls, icy cyan for water traces, high-contrast white text. Do not turn it into a sci-fi neon dashboard or photoreal scene. Water background stays calm behind gameplay; no page-wide flashy effects. This dark palette is specific to the hidden fish round.
+
+MOBILE LAYOUT at logical390x844:
+1. Header y24-65: small real reverse MoeGo logo left; small "中 / EN" right, Chinese orange. No avatar/nav tabs.
+2. Title aroundy95: exact "小鱼也来排班啦", bold white with orange emphasis on "排班", one clean readable line around28px. Under it, exact small rule text in14px, natural2-line wrapping: "相邻交换，同色小鱼连成一线，3 个及以上即可消除。"
+3. Open two-column HUD y165-230: left label "本局剩余", big ORANGE "00:48", small clock icon; right label "分数", big WHITE "2,480". The main timer is visually stronger than the rush timer.
+4. Fixed rush strip y245-325, dark blue interior, thin orange outline and modest clip motif. Exact title "Peter 的小鱼加急啦！", secondary time "催单剩余 8 秒". Below exact "已清除 6/12 格", a half-filled orange progress bar, and small "20 秒内清除 12 格". Use readable13-16px, do not crowd. This rush is NOT COMPLETE: no +100 and no success toast.
+5. Board x12,y347,width366,height366: exactly7 COLUMNS by7 ROWS,49 equally spaced square slots. Dark-blue outer frame with clean pale-cyan outline, modest rounding. UNIFORM very pale icy-blue/near-white tile surfaces across all ordinary fish colors, not6 differently colored backgrounds: the fish's own color and pattern identify its category. Keep black-white fish and purple/blue fish very visible. Full single fish uses most tile width but tails/fins must not crop; detailed but readable at about48 logical px.
+Use EXACT stable arrangement, letters defined above:
+row1 A B C D E F A
+row2 C D E F A B C
+row3 E F A B C D E
+row4 B C H A D E F
+row5 D E F A B X C
+row6 F A B C D E F
+row7 A C D E F B A
+H atrow4 col3 is ONE WATER JET tool replacing a fish: a compact silver/cyan hose nozzle with MoeGo-orange grip, pointing horizontally; clear tiny double-headed left/right arrow at bottom of its tile. No comb teeth. X atrow5 col6 is ONE BUBBLE MACHINE tool replacing a fish: a small rounded orange/white aquarium aerator with a short air tube and a few stylized bubble marks, plus a visible upright CROSS badge. No scissors, bubble wand, color bomb or purchase icon.
+Show a short subtle drag arrow from the Water Jet H to its RIGHT neighbor A. Give ONLY row4 a thin icy-CYAN outline/direct-range preview, all7 underlying slots still fully visible. This is BEFORE activation; no big water blast or cleared holes yet. No falling/cinematic, no +score floating text in this stable preview.
+6. Reserved helper below board y735-775, small water-jet icon and exact text in white/light-gray: "水流喷头：和邻格交换，水流清一行或一列。" Max2 short lines, do not cover the board.
+7. Bottomy800: gear and "设置" left; exit-door and "退出" right, white/light gray with restrained orange accents, comfortably far from tiles. No pause icon or large primary button during active play. Safe bottom space.
+
+FACTS AND AVOID:
+This is an already personally discovered hidden round, not a locked preview/homepage/public event. No global tank progress, contribution, unlock counter, fish leaderboard tab, pet collection, owner names, family/guess-owner cards, dogs/cats/birds, QR, currency/lives, extra skills or rewards. Dog symbol only as the genuine brand logo is allowed. Normal pet and fish scores are separate; figures here are illustrative, not fetched real data.
+Exactly49 slots,47 fish plus2 tool cells,6 fish colors repeated consistently, no existing3-in-line in the stable board. Water Jet clears row/column; Bubble Machine clears cross under original rules. No arbitrary glowing fish or extra bombs. Keep all labels and controls readable on the deep navy background. Deliver one beautiful cute deep-underwater mobile game screen that unmistakably belongs to MoeGo, same game clarity but a surprising hidden-level mood.
