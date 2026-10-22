@@ -12,7 +12,7 @@
 4. [UI_COPY.md](UI_COPY.md)：中英文案
 5. [design/DESIGN_NOTES.md](design/DESIGN_NOTES.md)：视觉方向与已选定图稿；[design/PET_ASSET_STYLE.md](design/PET_ASSET_STYLE.md)：宠物素材规范
 
-[DESIGN_REVIEW.md](DESIGN_REVIEW.md) 第 4–8 条（退出与归零优先级、洗牌约束、匹配组与＋形五格、MVP 平手、催单与到时端点）尚未定案。实现相关规则前先向用户确认，不按建议值默认实现。
+[DESIGN_REVIEW.md](DESIGN_REVIEW.md) 第 4–8 条（退出与归零优先级、洗牌约束、匹配组与＋形五格、MVP 平手、催单与到时端点）已于 2026-10-22 确认并写入 V1_RULES 与 GAME_FLOW。
 
 ## 技术栈与目录
 
