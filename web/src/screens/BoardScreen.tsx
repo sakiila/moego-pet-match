@@ -18,13 +18,16 @@ export interface BoardScreenProps {
   /** 开发验证用：游戏时钟倍速与起始时刻。 */
   speed?: number;
   startAt?: number;
+  /** 本局阵容中尚未收集的宠物与家庭分组（局内贴纸用）。 */
+  uncollected?: ReadonlySet<string>;
+  families?: Readonly<Record<string, string>>;
   onFinished: (summary: GameSummary) => void;
   onExit: () => void;
 }
 
-export function BoardScreen({ game, pets, speed, startAt, onFinished, onExit }: BoardScreenProps) {
+export function BoardScreen({ game, pets, speed, startAt, uncollected, families, onFinished, onExit }: BoardScreenProps) {
   const { t } = useI18n();
-  const session = useGameSession(game, onFinished, { speed, startAt });
+  const session = useGameSession(game, onFinished, { speed, startAt, uncollected, families });
   const { view } = session;
   const [quitOpen, setQuitOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -53,7 +56,7 @@ export function BoardScreen({ game, pets, speed, startAt, onFinished, onExit }: 
           onDraggingChange={session.setDragging}
         />
       </div>
-      <TipBar tip={view.tip} />
+      <TipBar tip={view.tip} pets={pets} />
       <footer className={styles.footer}>
         <button type="button" onClick={() => setSettingsOpen(true)}>
           ⚙️ {t('nav.settings')}

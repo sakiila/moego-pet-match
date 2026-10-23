@@ -205,9 +205,10 @@ describe('提示与带教', () => {
 
   it('提示区同一时刻至多一条，带教与卡关提示不叠加', () => {
     const none = { finishing: false, shuffling: false, tutorial: null, hint: false, lastSeconds: false };
-    expect(pickTip({ ...none, tutorial: 'comb', hint: true })).toBe('tutorial.comb');
-    expect(pickTip({ ...none, finishing: true, hint: true })).toBe('round.finishing');
-    expect(pickTip({ ...none, hint: true, lastSeconds: true })).toBe('board.move_hint');
+    expect(pickTip({ ...none, tutorial: 'comb', hint: true })?.key).toBe('tutorial.comb');
+    expect(pickTip({ ...none, finishing: true, hint: true })?.key).toBe('round.finishing');
+    expect(pickTip({ ...none, hint: true, lastSeconds: true })?.key).toBe('board.move_hint');
+    expect(pickTip({ ...none, hint: true, tutorial: 'comb', event: { key: 'board.reunion', petIds: ['a', 'b'] } })?.key).toBe('board.reunion');
     expect(pickTip(none)).toBeNull();
   });
 });

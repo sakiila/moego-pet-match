@@ -15,15 +15,17 @@ import {
 } from '../engine';
 import type { RushView } from '../components/RushBar/RushBar';
 import { rushView } from './rush';
-import type { MessageKey } from '../i18n';
 import { createGameClock, type GameClock } from './clock';
 import { frameAt, type Frame, type PlaybackBase, type Popup } from './playback';
-import { hintDue, loadSeenTutorials, nextTutorial, pickTip, saveSeenTutorials, type Tutorial } from './tips';
+import { chainStickers } from './stickers';
+import { hintDue, loadSeenTutorials, nextTutorial, pickTip, saveSeenTutorials, type StickerEvent, type TipView, type Tutorial } from './tips';
 
 /** 系统洗牌的演示时长（墙钟）；期间两个计时器同时暂停。 */
 const SHUFFLE_PAUSE_MS = 700;
 const TUTORIAL_MS = 4_000;
 const POPUP_MS = 800;
+/** 局内事件贴纸停留时长（游戏时钟），不暂停、不锁操作。 */
+const STICKER_MS = 2_500;
 
 interface Session {
   state: GameState;
@@ -38,6 +40,16 @@ interface Session {
   seenTutorials: Set<string>;
   popups: Map<number, Popup>;
   finished: boolean;
+  /** 已暂记的新宠与已展示团聚的家庭（本局内）。 */
+  notedNew: Set<string>;
+  shownFamilies: Set<string>;
+  stickers: (StickerEvent & { at: number })[];
+}
+
+/** 局内贴纸所需的本局背景：阵容 id、未收集宠物与家庭分组。 */
+export interface SessionContext {
+  uncollected?: ReadonlySet<string>;
+  families?: Readonly<Record<string, string>>;
 }
 
 export interface GameView {
@@ -45,7 +57,7 @@ export interface GameView {
   frame: Frame;
   timeLeftMs: number;
   rush: RushView;
-  tip: MessageKey | null;
+  tip: TipView | null;
   hint: Move | null;
   popups: Popup[];
   /** 可接收新交换：已开始、未到时、棋盘稳定且不在洗牌中。 */
@@ -69,7 +81,7 @@ const baseOf = (s: GameState): PlaybackBase => ({ board: s.board, score: s.score
 export function useGameSession(
   initial: GameState,
   onFinished: (summary: GameSummary) => void,
-  { speed = 1, startAt = 0 }: { speed?: number; startAt?: number } = {},
+  { speed = 1, startAt = 0, uncollected = new Set(), families = {} }: { speed?: number; startAt?: number } & SessionContext = {},
 ): UseGameSession {
   const session = useRef<Session>(null as unknown as Session);
   if (!session.current) {
@@ -85,9 +97,14 @@ export function useGameSession(
       seenTutorials: loadSeenTutorials(),
       popups: new Map(),
       finished: false,
+      notedNew: new Set(),
+      shownFamilies: new Set(),
+      stickers: [],
     };
   }
   const dragging = useRef(false);
+  const uncollectedRef = useRef(uncollected);
+  const familiesRef = useRef(families);
   const finishedRef = useRef(onFinished);
   finishedRef.current = onFinished;
   const [, setTick] = useState(0);
@@ -145,6 +162,10 @@ export function useGameSession(
     }
   }
 
+  // 局内事件贴纸依次展示，到时后不再补播
+  while (s.stickers.length && g >= s.stickers[0].at + STICKER_MS) s.stickers.shift();
+  const sticker = !timeUp && s.stickers.length && g >= s.stickers[0].at ? s.stickers[0] : null;
+
   const hint = acceptsInput && !dragging.current && !s.tutorial && hintDue(g, s.quietSince) ? findHint(s.state) : null;
 
   const view: GameView = {
@@ -155,6 +176,7 @@ export function useGameSession(
     tip: pickTip({
       finishing: timeUp && s.state.phase === 'playing',
       shuffling,
+      event: sticker,
       tutorial: s.tutorial?.kind ?? null,
       hint: hint !== null,
       lastSeconds: !timeUp && RULES.durationMs - g <= 10_000,
@@ -175,7 +197,19 @@ export function useGameSession(
     cur.state = result.state;
     cur.timeline = result.timeline;
     cur.shuffleHandled = false;
-    if (result.timeline.kind === 'chain') cur.quietSince = result.timeline.busyUntil;
+    if (result.timeline.kind === 'chain') {
+      cur.quietSince = result.timeline.busyUntil;
+      const found = chainStickers(result.timeline, cur.state.lineup, uncollectedRef.current, familiesRef.current, cur.notedNew, cur.shownFamilies);
+      const at = result.timeline.batches[result.timeline.batches.length - 1].settleAt;
+      if (found.reunion) {
+        cur.shownFamilies.add(found.reunion.familyId);
+        cur.stickers.push({ key: 'board.reunion', petIds: found.reunion.pets, at });
+      }
+      if (found.newPets.length) {
+        found.newPets.forEach((id) => cur.notedNew.add(id));
+        cur.stickers.push({ key: 'board.new_pets', vars: { count: found.newPets.length }, petIds: found.newPets, at });
+      }
+    }
     return true;
   }, []);
 

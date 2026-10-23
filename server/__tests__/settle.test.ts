@@ -199,6 +199,8 @@ describe('登记的阵容来源', () => {
 
   it('玩家拥有的宠物按规则可能入选，并在 ownPetIds 中标出', async () => {
     await ctx.pool.query(`UPDATE pet_match.pets SET owner_user_id = 'U_TEST_SAM' WHERE pet_id IN ('mochi', 'tofu')`);
+    // 不带自家宠物时也要有足够的他人宠物补满 6 种
+    await ctx.pool.query(`INSERT INTO pet_match.pets (pet_id, name, status) VALUES ('extra1', 'Extra1', 'published'), ('extra2', 'Extra2', 'published')`);
     const seen = new Set<number>();
     for (let i = 0; i < 40; i++) {
       const game = await register('U_TEST_SAM');

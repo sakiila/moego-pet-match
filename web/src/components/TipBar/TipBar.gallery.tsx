@@ -1,4 +1,5 @@
 import type { GalleryEntry } from '../../dev/gallery/types';
+import { PLACEHOLDER_PETS } from '../../game/pets';
 import { TipBar } from './TipBar';
 
 const entry: GalleryEntry = {
@@ -6,13 +7,18 @@ const entry: GalleryEntry = {
   group: 'components',
   states: {
     'empty (reserves space)': () => <TipBar tip={null} />,
-    'tutorial · comb': () => <TipBar tip="tutorial.comb" />,
-    'tutorial · scissors': () => <TipBar tip="tutorial.scissors" />,
-    'tutorial · combo': () => <TipBar tip="tutorial.tool_combo" />,
-    'move hint': () => <TipBar tip="board.move_hint" />,
-    shuffle: () => <TipBar tip="board.shuffle" />,
-    'last 10 s': () => <TipBar tip="round.last_seconds" />,
-    finishing: () => <TipBar tip="round.finishing" />,
+    'tutorial · comb': () => <TipBar tip={{ key: 'tutorial.comb' }} />,
+    'tutorial · scissors': () => <TipBar tip={{ key: 'tutorial.scissors' }} />,
+    'tutorial · combo': () => <TipBar tip={{ key: 'tutorial.tool_combo' }} />,
+    'move hint': () => <TipBar tip={{ key: 'board.move_hint' }} />,
+    'new pets · 3 merged': () => (
+      <TipBar tip={{ key: 'board.new_pets', vars: { count: 3 }, petIds: ['mochi', 'tofu', 'kiwi'] }} pets={PLACEHOLDER_PETS} />
+    ),
+    'new pets · single': () => <TipBar tip={{ key: 'board.new_pets', vars: { count: 1 }, petIds: ['luna'] }} pets={PLACEHOLDER_PETS} />,
+    reunion: () => <TipBar tip={{ key: 'board.reunion', petIds: ['peanut', 'pepper'] }} pets={PLACEHOLDER_PETS} />,
+    shuffle: () => <TipBar tip={{ key: 'board.shuffle' }} />,
+    'last 10 s': () => <TipBar tip={{ key: 'round.last_seconds' }} />,
+    finishing: () => <TipBar tip={{ key: 'round.finishing' }} />,
   },
 };
 

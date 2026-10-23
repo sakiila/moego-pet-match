@@ -83,6 +83,24 @@
   flex: 1;
 }
 
+.withStickyActions {
+  /* 底部固定操作区的高度，保证正文末尾不被遮住 */
+  padding-bottom: 112px;
+}
+
+.stickyActions {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  z-index: var(--z-overlay);
+  width: 100%;
+  max-width: 480px;
+  padding: var(--space-3) var(--space-4) max(var(--space-3), env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  border-top: 1px solid var(--color-line);
+  background: var(--color-surface);
+}
+
 .boardArea {
   display: flex;
   flex: 1;

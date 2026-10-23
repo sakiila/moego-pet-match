@@ -5,6 +5,7 @@ import type { GameMode, LineupPet, RegisteredGame, ResultPayload, SettleResponse
 import { RULES, RULES_VERSION } from '../../../web/src/engine/config.ts';
 import { inTransaction, type Pool } from '../db/pool.ts';
 import { sampleLineup } from './lineup.ts';
+import { maybeCreateQuiz } from './quiz.ts';
 import { findColleague, loadPlayer } from './players.ts';
 
 /** 第几局普通完整局后解锁 Peter 鱼关。 */
@@ -27,6 +28,8 @@ export async function registerGame(pool: Pool, playerId: string, mode: GameMode)
   const random = () => randomInt(0, 2 ** 32) / 2 ** 32;
   let lineup: LineupPet[];
   let ownPetIds: string[] = [];
+  let uncollectedPetIds: string[] = [];
+  const families: Record<string, string> = {};
   if (mode === 'fish') {
     // 鱼关：固定六种鱼色，不使用自家或未收集偏好
     const { rows } = await pool.query(`SELECT color_id, name_zh, name_en FROM pet_match.fish_colors WHERE status = 'published'`);
@@ -37,7 +40,7 @@ export async function registerGame(pool: Pool, playerId: string, mode: GameMode)
       .slice(0, RULES.kinds)
       .map(({ petId, name, nameEn }) => ({ petId, name, nameEn }));
   } else {
-    const pets = await pool.query(`SELECT pet_id, name, owner_user_id FROM pet_match.pets WHERE status = 'published'`);
+    const pets = await pool.query(`SELECT pet_id, name, owner_user_id, family_id FROM pet_match.pets WHERE status = 'published'`);
     if (pets.rows.length < RULES.kinds) throw new GameError('not_ready', 'not enough published pets');
     const collected = new Set<string>(
       (await pool.query('SELECT pet_id FROM pet_match.collections WHERE player_id = $1', [playerId])).rows.map((r) => r.pet_id),
@@ -48,16 +51,19 @@ export async function registerGame(pool: Pool, playerId: string, mode: GameMode)
       collected,
       random,
     );
+    if (sampled.lineup.length < RULES.kinds) throw new GameError('not_ready', 'not enough pets for a full lineup');
     const nameOf = new Map<string, string>(pets.rows.map((r) => [r.pet_id, r.name]));
     lineup = sampled.lineup.map((id) => ({ petId: id, name: nameOf.get(id)! }));
     ownPetIds = sampled.own;
+    uncollectedPetIds = sampled.lineup.filter((id) => !collected.has(id));
+    for (const r of pets.rows) if (r.family_id && sampled.lineup.includes(r.pet_id)) families[r.pet_id] = r.family_id;
   }
   const seed = randomInt(0, 2 ** 31 - 1);
   const inserted = await pool.query(
     `INSERT INTO pet_match.games (player_id, mode, rules_version, seed, lineup) VALUES ($1, $2, $3, $4, $5) RETURNING game_id`,
     [playerId, mode, RULES_VERSION, seed, lineup.map((p) => p.petId)],
   );
-  return { gameId: inserted.rows[0].game_id, seed, rulesVersion: RULES_VERSION, mode, lineup, ownPetIds };
+  return { gameId: inserted.rows[0].game_id, seed, rulesVersion: RULES_VERSION, mode, lineup, ownPetIds, uncollectedPetIds, families };
 }
 
 const count = z.number().int().min(0);
@@ -193,12 +199,15 @@ export async function settleGame(
       );
     }
 
+    const quiz = counted ? await maybeCreateQuiz(client, gameId, playerId, completed, payload) : null;
+
     const response: SettleResponse = {
       gameId,
       score: payload.score,
       personalBest: { previous, current: isNew ? payload.score : previous!, isNew },
       newCollected,
       progress: { completedNormalGames: completed, fishUnlocked, unlockedNow, counted },
+      quiz,
     };
     await client.query(
       `INSERT INTO pet_match.game_results (game_id, payload, payload_hash, score, counted, response) VALUES ($1, $2, $3, $4, $5, $6)`,

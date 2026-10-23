@@ -1,4 +1,4 @@
-import type { ColleagueResult, GameMode, LeaderboardView, PlayerView, RegisteredGame, ResultPayload, SettleResponse } from './types';
+import type { ColleagueResult, GameMode, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse } from './types';
 
 /**
  * 接口错误分类：not_found（确定不存在）与 unavailable（网络或服务暂时不可用）分开，
@@ -36,6 +36,8 @@ export const api = {
     request<RegisteredGame>('/api/games', { method: 'POST', body: JSON.stringify({ playerId, mode }) }),
   getLeaderboard: (mode: GameMode, playerId: string) =>
     request<LeaderboardView>(`/api/leaderboard?mode=${mode}&playerId=${encodeURIComponent(playerId)}`),
+  answerQuiz: (quizId: string, playerId: string, choice: string | null) =>
+    request<QuizResult>(`/api/quizzes/${encodeURIComponent(quizId)}/answer`, { method: 'POST', body: JSON.stringify({ playerId, choice }) }),
   submitResult: (gameId: string, playerId: string, result: ResultPayload) =>
     request<SettleResponse>(`/api/games/${encodeURIComponent(gameId)}/result`, {
       method: 'POST',

@@ -32,6 +32,8 @@ export interface Batch {
   score: number;
   /** 本批结算后的催单进度；不在催单窗口内为 null。 */
   rushProgress: number | null;
+  /** 本批被服务的宠物格数，按本局 kind 下标（工具本体不计）。 */
+  servedByKind: number[];
   rushBonus: boolean;
   /** 清除、生成道具、下落与补落后的棋盘。 */
   boardAfter: Board;
@@ -72,6 +74,8 @@ export interface GameState {
   clearedByMultiplier: number[];
   maxChain: number;
   toolsFired: number;
+  /** 实际发动的双工具合体次数（称号与评语用）。 */
+  combos: { cc: number; cs: number; ss: number };
   served: number[];
   firstServedSeq: (number | null)[];
   validMoves: number;

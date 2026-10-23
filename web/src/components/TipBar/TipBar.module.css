@@ -27,3 +27,17 @@
     transform: translateY(4px);
   }
 }
+
+.faces {
+  display: inline-flex;
+  flex: none;
+}
+
+.face {
+  width: 36px;
+  height: 36px;
+}
+
+.face + .face {
+  margin-left: -8px;
+}

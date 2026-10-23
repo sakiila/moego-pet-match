@@ -35,6 +35,7 @@ export function createGame({ seed, lineup, board, refill = [] }: CreateGameOptio
     clearedByMultiplier: Array(RULES.maxMultiplier).fill(0),
     maxChain: 0,
     toolsFired: 0,
+    combos: { cc: 0, cs: 0, ss: 0 },
     served: lineup.map(() => 0),
     firstServedSeq: lineup.map(() => null),
     validMoves: 0,
@@ -52,6 +53,7 @@ function cloneState(s: GameState): GameState {
     served: [...s.served],
     firstServedSeq: [...s.firstServedSeq],
     rush: { ...s.rush },
+    combos: { ...s.combos },
     emitted: { ...s.emitted },
   };
 }
@@ -136,6 +138,7 @@ export interface GameSummary {
   clearedByMultiplier: number[];
   maxChain: number;
   toolsFired: number;
+  combos: { cc: number; cs: number; ss: number };
   validMoves: number;
   actedInLastSeconds: boolean;
   rushSucceeded: boolean;
@@ -150,6 +153,7 @@ export function getSummary(state: GameState): GameSummary {
     clearedByMultiplier: [...state.clearedByMultiplier],
     maxChain: state.maxChain,
     toolsFired: state.toolsFired,
+    combos: { ...state.combos },
     validMoves: state.validMoves,
     actedInLastSeconds:
       state.lastValidMoveAt !== null && state.lastValidMoveAt >= RULES.durationMs - RULES.lastSecondsMs,

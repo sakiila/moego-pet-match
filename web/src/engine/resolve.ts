@@ -116,9 +116,11 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
     const settleAt = startAt + TIMING.clearMs[effect];
     clock = settleAt + TIMING.fallMs;
 
+    const servedByKind = s.lineup.map(() => 0);
     for (const p of cleared) {
       const piece = board[p.r][p.c];
       if (piece?.type !== 'pet') continue;
+      servedByKind[piece.kind]++;
       s.served[piece.kind]++;
       s.firstServedSeq[piece.kind] ??= seq;
     }
@@ -149,6 +151,10 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
     s.clearedCells += cleared.length;
     s.clearedByMultiplier[multiplier - 1] += cleared.length;
     s.toolsFired += toolsFired.length + (seed?.combo ? 2 : 0);
+    if (seed?.combo) {
+      const key = seed.effect === 'comboCC' ? 'cc' : seed.effect === 'comboCS' ? 'cs' : 'ss';
+      s.combos[key]++;
+    }
 
     batches.push({
       index,
@@ -164,6 +170,7 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
       spawned,
       score,
       rushProgress: inRush ? s.rush.progress : null,
+      servedByKind,
       rushBonus,
       boardAfter: cloneBoard(board),
     });

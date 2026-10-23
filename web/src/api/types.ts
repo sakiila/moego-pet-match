@@ -28,6 +28,10 @@ export interface RegisteredGame {
   lineup: LineupPet[];
   /** 本局入选的自家宠物（普通局），用于准备页「{petName} 也来啦！」。 */
   ownPetIds: string[];
+  /** 本局阵容中玩家尚未收集的宠物（局中新宠暂记提示用）。 */
+  uncollectedPetIds: string[];
+  /** 本局阵容中属于同主多宠家庭的宠物 → 家庭标识（双宠团聚用）。 */
+  families: Record<string, string>;
 }
 
 /** 客户端提交的冻结结果（来自引擎 getSummary）。 */
@@ -53,6 +57,21 @@ export interface SettleResponse {
   /** 本局新收集的宠物（仅普通局）。 */
   newCollected: LineupPet[];
   progress: { completedNormalGames: number; fishUnlocked: boolean; unlockedNow: boolean; counted: boolean };
+  /** 符合频率与资格时的猜主人题目；不揭晓答案。 */
+  quiz: QuizQuestion | null;
+}
+
+export interface QuizQuestion {
+  quizId: string;
+  petId: string;
+  petName: string;
+  options: { userId: string; name: string }[];
+}
+
+export interface QuizResult {
+  correct: boolean | null;
+  skipped: boolean;
+  owner: { userId: string; name: string };
 }
 
 export interface LeaderboardEntry {

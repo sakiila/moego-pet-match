@@ -25,23 +25,38 @@ export function nextTutorial(board: Board, seen: ReadonlySet<string>): Tutorial 
   return firstTool && !seen.has('tool') ? firstTool : null;
 }
 
+/** 局内事件贴纸（新宠合并、双宠团聚）：带宠物小头像。 */
+export interface StickerEvent {
+  key: MessageKey;
+  vars?: Record<string, string | number>;
+  petIds: string[];
+}
+
+export interface TipView {
+  key: MessageKey;
+  vars?: Record<string, string | number>;
+  petIds?: string[];
+}
+
 export interface TipInputs {
   finishing: boolean;
   shuffling: boolean;
+  event?: StickerEvent | null;
   tutorial: Tutorial | null;
   hint: boolean;
   lastSeconds: boolean;
 }
 
-/** 棋盘外提示区同一时刻至多一条：收尾 > 洗牌 > 带教 > 卡关提示 > 最后 10 秒。 */
-export function pickTip(t: TipInputs): MessageKey | null {
-  if (t.finishing) return 'round.finishing';
-  if (t.shuffling) return 'board.shuffle';
-  if (t.tutorial === 'combo') return 'tutorial.tool_combo';
-  if (t.tutorial === 'comb') return 'tutorial.comb';
-  if (t.tutorial === 'scissors') return 'tutorial.scissors';
-  if (t.hint) return 'board.move_hint';
-  if (t.lastSeconds) return 'round.last_seconds';
+/** 棋盘外提示区同一时刻至多一条：收尾 > 洗牌 > 局内事件贴纸 > 带教 > 卡关提示 > 最后 10 秒。 */
+export function pickTip(t: TipInputs): TipView | null {
+  if (t.finishing) return { key: 'round.finishing' };
+  if (t.shuffling) return { key: 'board.shuffle' };
+  if (t.event) return t.event;
+  if (t.tutorial === 'combo') return { key: 'tutorial.tool_combo' };
+  if (t.tutorial === 'comb') return { key: 'tutorial.comb' };
+  if (t.tutorial === 'scissors') return { key: 'tutorial.scissors' };
+  if (t.hint) return { key: 'board.move_hint' };
+  if (t.lastSeconds) return { key: 'round.last_seconds' };
   return null;
 }
 

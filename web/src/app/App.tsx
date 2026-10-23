@@ -148,6 +148,8 @@ export function App() {
           pets={petsOf(route.session)}
           speed={speed}
           startAt={startAt}
+          uncollected={new Set(route.session.registered.uncollectedPetIds)}
+          families={route.session.registered.families}
           onFinished={(summary) => setRoute({ name: 'report', session: route.session, summary })}
           onExit={toHome}
         />
@@ -158,10 +160,13 @@ export function App() {
           key={route.session.registered.gameId}
           summary={route.summary}
           registered={route.session.registered}
+          pets={petsOf(route.session)}
           playerId={player!.userId}
           onSaved={() => void refreshPlayer()}
           onPlayAgain={() => void toPrep(route.session.registered.mode)}
           onHome={toHome}
+          onLeaderboard={() => setRoute({ name: 'leaderboard' })}
+          onFishInvite={() => void toPrep('fish')}
         />
       );
   }

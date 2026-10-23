@@ -40,15 +40,30 @@ export const petImage = (pet: PetInfo, size: 128 | 512 | 1024) => (pet.imageBase
 
 export const petDisplayName = (pet: PetInfo, locale: 'zh' | 'en') => (locale === 'en' && pet.nameEn ? pet.nameEn : pet.name);
 
-/** 开局前预加载本局棋盘贴纸；任一失败则视为素材未就绪。 */
+const PRELOAD_TIMEOUT_MS = 10_000;
+
+/**
+ * 开局前预加载本局棋盘贴纸；任一失败或超时视为素材未就绪（准备页显示可重试）。
+ * 用 load/error 事件而非 decode()：页面在后台时 decode 可能一直不返回。
+ */
 export async function preloadPets(pets: PetInfo[], size: 128 | 512 = 128): Promise<void> {
-  await Promise.all(
-    pets.map((p) => {
-      const src = petImage(p, size);
-      if (!src) return Promise.resolve();
+  const loads = pets.map((p) => {
+    const src = petImage(p, size);
+    if (!src) return Promise.resolve();
+    return new Promise<void>((resolve, reject) => {
       const img = new Image();
+      img.onload = () => resolve();
+      img.onerror = () => reject(new Error(`failed to load ${src}`));
       img.src = src;
-      return img.decode();
-    }),
-  );
+    });
+  });
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error('preload timeout')), PRELOAD_TIMEOUT_MS);
+  });
+  try {
+    await Promise.race([Promise.all(loads), timeout]);
+  } finally {
+    clearTimeout(timer);
+  }
 }

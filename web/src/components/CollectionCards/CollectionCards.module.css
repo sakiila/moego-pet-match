@@ -1,0 +1,55 @@
+.box {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 900;
+}
+
+.count {
+  margin-left: var(--space-2);
+  color: var(--color-brand);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.card {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--tint);
+  animation: light-up 360ms var(--ease-out) both;
+}
+
+.card img {
+  width: 80%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.emoji {
+  font-size: 56px;
+  line-height: 1.4;
+}
+
+.name {
+  font-weight: 900;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+@keyframes light-up {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}

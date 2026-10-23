@@ -12,8 +12,9 @@ import { listMigrations, migrate } from '../src/db/migrate.ts';
 
 const APPLY = process.argv.includes('--apply');
 const ROLE = 'pet_match_app';
-const RW_TABLES = ['games', 'game_results', 'best_scores', 'collections', 'player_progress', 'submissions'];
-const RO_OBJECTS = ['colleagues', 'pets'];
+const RW_TABLES = ['games', 'game_results', 'best_scores', 'collections', 'player_progress', 'submissions', 'quizzes'];
+const RO_EXTRA = ['fish_colors'];
+const RO_OBJECTS = ['colleagues', 'pets', ...RO_EXTRA];
 
 const grants = [
   `GRANT USAGE ON SCHEMA pet_match TO ${ROLE}`,
