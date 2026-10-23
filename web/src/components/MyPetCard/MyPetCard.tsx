@@ -20,7 +20,7 @@ export function MyPetCard({ name, stickerSrc, collected, request, onView, onRequ
   const { t } = useI18n();
   const [failed, setFailed] = useState(false);
   return (
-    <article className={styles.card} data-testid="my-pet-card">
+    <article className={styles.card} data-collected={collected} data-testid="my-pet-card">
       <div className={styles.main}>
         <span className={styles.art}>{!failed && <img src={stickerSrc} alt="" onError={() => setFailed(true)} />}</span>
         <div className={styles.side}>

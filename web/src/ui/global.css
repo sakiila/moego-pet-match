@@ -12,6 +12,11 @@ body {
   min-height: 100%;
 }
 
+/* 弹层锁滚动时滚动条不消失，页面不会横向抖一下 */
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   /* 页面横向滑入时不产生横向滚动条 */
   overflow-x: clip;
@@ -36,11 +41,11 @@ body {
   position: relative;
   transform: perspective(700px) rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--ts));
   transition: transform 520ms var(--ease-out), filter 520ms var(--ease-out);
-  will-change: transform;
 }
 
 .tilt[data-active] {
   --ts: 1.04;
+  will-change: transform;
   transition: transform 90ms linear, filter 90ms linear;
   filter: drop-shadow(calc(var(--px) * -7px) calc(var(--py) * -7px + 12px) 12px rgb(31 34 39 / 0.2));
 }

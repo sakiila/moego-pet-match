@@ -106,32 +106,41 @@
   box-shadow: var(--shadow-soft);
 }
 
-/* 已收集：流动的亮闪闪边框（彩色光带绕卡片一圈）+ 角落星光 */
-@property --shine-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
-
+/* 已收集：流动的亮闪闪边框（彩色光带绕卡片一圈）+ 角落星光。
+   光带 = 固定的圆环遮罩 + 里面旋转的大块渐变；落地后才开始转（data-settled） */
 .face[data-shine] {
   border-color: transparent;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--color-dog-yellow) 55%, transparent), var(--shadow-soft);
 }
 
-.face[data-shine]::before {
-  content: '';
+.shineRing {
   position: absolute;
   inset: 0;
   z-index: 2;
+  overflow: hidden;
   border-radius: inherit;
   padding: 5px;
-  background: conic-gradient(from var(--shine-angle), var(--color-brand), var(--color-dog-yellow), var(--color-paper), var(--color-dog-yellow), var(--color-brand), var(--color-cat-blue), var(--color-paper), var(--color-brand));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   mask-composite: exclude;
-  filter: drop-shadow(0 0 6px var(--color-dog-yellow));
-  animation: shine-spin 3.6s linear infinite;
   pointer-events: none;
+}
+
+.shineSpin {
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(var(--color-brand), var(--color-dog-yellow), var(--color-paper), var(--color-dog-yellow), var(--color-brand), var(--color-cat-blue), var(--color-paper), var(--color-brand));
+  animation: shine-spin 3.6s linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+
+.overlay[data-settled] .shineSpin {
+  animation-play-state: running;
 }
 
 .twinkle {
@@ -144,6 +153,11 @@
   opacity: 0;
   pointer-events: none;
   animation: twinkle 2.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.overlay[data-settled] .twinkle {
+  animation-play-state: running;
 }
 
 .twinkle[data-i='0'] {
@@ -175,7 +189,7 @@
 
 @keyframes shine-spin {
   to {
-    --shine-angle: 360deg;
+    transform: rotate(360deg);
   }
 }
 
@@ -240,6 +254,13 @@
   font-weight: 900;
   line-height: 1.15;
   overflow-wrap: anywhere;
+}
+
+.ownerSlot {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  min-height: 40px;
 }
 
 .owner {
@@ -366,7 +387,7 @@
   }
 
   /* 减少动态效果：边框静止、星光常亮，不循环闪烁 */
-  .face[data-shine]::before {
+  .shineSpin {
     animation: none;
   }
 

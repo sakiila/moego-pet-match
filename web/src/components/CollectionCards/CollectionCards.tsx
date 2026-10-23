@@ -39,6 +39,7 @@ export function CollectionCards({ pets, onSelect }: { pets: { pet: PetInfo; kind
             <button
               type="button"
               className={styles.card}
+              data-collected="true"
               disabled={!onSelect}
               onClick={(e) => onSelect?.(pet, e.currentTarget)}
               style={{ '--tint': `var(--pet-tint-${kind % 6})`, animationDelay: `${i * 80}ms` } as CSSProperties}
