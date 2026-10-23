@@ -50,3 +50,27 @@
   -webkit-appearance: none;
   appearance: none;
 }
+
+/* 加载状态：细圆环转圈，颜色取自令牌 */
+.spinner {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--color-line);
+  border-top-color: var(--color-brand);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* 减少动态效果：不转，用静态的半环表示「进行中」 */
+  .spinner {
+    animation: none;
+  }
+}

@@ -13,6 +13,7 @@ const entry: GalleryEntry = {
   states: {
     empty: () => <IdentityScreen onConfirm={noop} search={found} />,
     results: () => <IdentityScreen onConfirm={noop} search={found} initialQuery="bob" />,
+    loading: () => <IdentityScreen onConfirm={noop} search={() => new Promise(() => {})} initialQuery="bob" />,
     'not found': () => <IdentityScreen onConfirm={noop} search={async () => []} initialQuery="nobody" />,
     'load failed': () => <IdentityScreen onConfirm={noop} search={() => Promise.reject(new Error('down'))} initialQuery="bob" />,
   },

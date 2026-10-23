@@ -11,7 +11,7 @@ import { Button } from '../ui/primitives/Button';
 import { SearchInput } from '../ui/primitives/SearchInput';
 import styles from './Screen.module.css';
 
-type SearchState = { kind: 'idle' } | { kind: 'loading' } | { kind: 'ok'; results: ColleagueResult[] } | { kind: 'failed' };
+type SearchState = { kind: 'idle' } | { kind: 'ok'; results: ColleagueResult[] } | { kind: 'failed' };
 
 export interface IdentityScreenProps {
   onConfirm: (colleague: ColleagueResult) => void;
@@ -29,20 +29,29 @@ export function IdentityScreen({ onConfirm, onInfo, search = api.searchRoster, i
   const [state, setState] = useState<SearchState>({ kind: 'idle' });
   const [selected, setSelected] = useState<ColleagueResult | null>(null);
   const [attempt, setAttempt] = useState(0);
+  // 输入后到结果回来之间（含 250 ms 防抖）都算搜索中；新结果回来前旧结果保留，列表不闪
+  const [searching, setSearching] = useState(false);
 
   useEffect(() => {
     const q = query.trim();
     if (!q) {
       setState({ kind: 'idle' });
+      setSearching(false);
       return;
     }
     const controller = new AbortController();
+    setSearching(true);
     const timer = setTimeout(() => {
-      setState({ kind: 'loading' });
       search(q, controller.signal)
-        .then((results) => setState({ kind: 'ok', results }))
+        .then((results) => {
+          setState({ kind: 'ok', results });
+          setSearching(false);
+        })
         .catch(() => {
-          if (!controller.signal.aborted) setState({ kind: 'failed' });
+          if (!controller.signal.aborted) {
+            setState({ kind: 'failed' });
+            setSearching(false);
+          }
         });
     }, 250);
     return () => {
@@ -65,13 +74,14 @@ export function IdentityScreen({ onConfirm, onInfo, search = api.searchRoster, i
           placeholder={t('identity.search')}
           aria-label={t('identity.search')}
           clearLabel={t('action.cancel')}
+          loading={searching}
           autoComplete="off"
           data-testid="identity-search"
         />
-        {state.kind === 'failed' && (
+        {state.kind === 'failed' && !searching && (
           <StatusMessage tone="error" text={t('identity.load_failed')} actionLabel={t('action.retry')} onAction={() => setAttempt((n) => n + 1)} />
         )}
-        {state.kind === 'ok' && results.length === 0 && <StatusMessage text={t('identity.not_found')} />}
+        {state.kind === 'ok' && results.length === 0 && !searching && <StatusMessage text={t('identity.not_found')} />}
         <div className={styles.list}>
           {results.map((c) => (
             <ColleagueCard key={c.userId} userId={c.userId} name={c.name} selected={selected?.userId === c.userId} onSelect={() => setSelected(c)} />
