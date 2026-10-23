@@ -10,6 +10,7 @@ import { leaderboardRoutes } from './routes/leaderboard.ts';
 import { petRoutes } from './routes/pets.ts';
 import { playerRoutes } from './routes/players.ts';
 import { rosterRoutes } from './routes/roster.ts';
+import { deletionRoutes } from './routes/deletions.ts';
 import { submissionRoutes } from './routes/submissions.ts';
 import type { SubmissionHooks } from './services/submissions.ts';
 
@@ -46,5 +47,6 @@ export function buildApp(deps: AppDeps) {
   app.register(petRoutes, deps);
   app.register(imageRoutes, deps);
   app.register(submissionRoutes, deps);
+  app.register(deletionRoutes, deps);
   return app;
 }

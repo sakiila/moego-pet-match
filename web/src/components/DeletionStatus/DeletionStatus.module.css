@@ -1,0 +1,23 @@
+.chip {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.3em;
+  max-width: 100%;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-muted);
+  text-align: center;
+}
+
+.part {
+  white-space: nowrap;
+}
+
+.chip[data-status='processed'] {
+  color: var(--color-success);
+}

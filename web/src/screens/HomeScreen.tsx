@@ -3,6 +3,8 @@ import type { DailyManager, PlayerView } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { ManagerCard } from '../components/ManagerCard/ManagerCard';
 import { NavTile } from '../components/NavTile/NavTile';
+import { PageLinks } from '../components/PageLinks/PageLinks';
+import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
 import { PersonalBest } from '../components/PersonalBest/PersonalBest';
 import { PhotoNotice } from '../components/PhotoNotice/PhotoNotice';
 import { avatarUrl, stickerUrl } from '../game/pets';
@@ -19,13 +21,17 @@ export interface HomeScreenProps {
   onOpenShop: () => void;
   onCollection: () => void;
   onLeaderboard: () => void;
+  onMyPets: () => void;
+  /** 信息使用说明；removal 为 true 时直接展开一般删除申请。 */
+  onInfo: (removal: boolean) => void;
   onSwitchIdentity: () => void;
 }
 
-/** 门店：今日店长欢迎、单一主动作「开始营业」、个人最好与次级入口；「我的宠物」在阶段 4 接入。 */
-export function HomeScreen({ player, manager, onOpenShop, onCollection, onLeaderboard, onSwitchIdentity }: HomeScreenProps) {
+/** 门店：今日店长欢迎、单一主动作「开始营业」、个人最好、三个次级入口与页尾链接。 */
+export function HomeScreen({ player, manager, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onSwitchIdentity }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
+  const [settings, setSettings] = useState(false);
   return (
     <main className={styles.screen}>
       <BrandHeader
@@ -47,8 +53,17 @@ export function HomeScreen({ player, manager, onOpenShop, onCollection, onLeader
       <nav className={styles.navRow}>
         <NavTile icon="📖" label={t('nav.collection')} onClick={onCollection} />
         <NavTile icon="🏆" label={t('nav.leaderboard')} onClick={onLeaderboard} />
+        <NavTile icon="🐶" label={t('nav.my_pets')} onClick={onMyPets} />
       </nav>
       <PhotoNotice />
+      <PageLinks
+        links={[
+          { label: t('info.use_link'), onClick: () => onInfo(false), testId: 'link-info' },
+          { label: t('info.removal_link'), onClick: () => onInfo(true), testId: 'link-removal' },
+          { label: t('nav.settings'), onClick: () => setSettings(true), testId: 'link-settings' },
+        ]}
+      />
+      <SettingsDialog open={settings} onClose={() => setSettings(false)} />
       {poster && manager && <ManagerPosterOverlay manager={manager} onClose={() => setPoster(false)} />}
     </main>
   );

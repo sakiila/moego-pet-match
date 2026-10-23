@@ -36,3 +36,12 @@
   font-weight: var(--weight-bold);
   color: var(--color-danger);
 }
+
+.area {
+  min-height: 0;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-md);
+  font-weight: var(--weight-regular);
+  line-height: 1.5;
+  resize: vertical;
+}

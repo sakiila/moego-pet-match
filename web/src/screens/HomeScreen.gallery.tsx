@@ -15,9 +15,9 @@ const entry: GalleryEntry = {
   name: 'HomeScreen',
   group: 'screens',
   states: {
-    'first visit': () => <HomeScreen player={player(null)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onSwitchIdentity={noop} />,
-    'with record': () => <HomeScreen player={player(2480)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onSwitchIdentity={noop} />,
-    'manager unavailable': () => <HomeScreen player={player(2480)} manager={null} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onSwitchIdentity={noop} />,
+    'first visit': () => <HomeScreen player={player(null)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onSwitchIdentity={noop} />,
+    'with record': () => <HomeScreen player={player(2480)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onSwitchIdentity={noop} />,
+    'manager unavailable': () => <HomeScreen player={player(2480)} manager={null} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onSwitchIdentity={noop} />,
   },
 };
 

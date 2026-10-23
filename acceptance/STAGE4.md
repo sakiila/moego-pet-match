@@ -22,3 +22,27 @@
 - Safari 里 HEIC 能否直接预览（只在 Chrome 验证了占位）。
 - 真机系统相册选择、键盘弹出时的布局。
 - 正式库迁移 007 未执行；R2 上的上传链路未实测（本地目录存储）。
+
+## 4B 我的宠物、删除申请、信息说明与页尾（2026-10-23）
+
+- **接口**（迁移 008 `deletion_requests`，Supabase 授权脚本加入该表读写；7 个测试 `server/__tests__/deletions.test.ts`）：`GET /api/my-pets` 只列本人已上架宠物、本人收集状态与该宠物最近一条申请状态；`POST /api/deletion-requests` 宠物申请只接受本人已上架的宠物（别人的 403，未上架或不存在 404），一般申请不需要宠物，补充说明选填、1000 字以内；同一只宠物已有待处理申请时返回原申请；提交后宠物照常上架。`GET /api/deletion-requests` 本人申请与状态，宠物下架后不再返回宠物名。
+- **命令行** `server/scripts/deletions.ts list [--all] | resolve <id> --note "…" [--keep-pet] --yes`：只改状态与处理说明，不删除任何东西；关联宠物仍上架时拒绝（先 `catalog unpublish`，确认无需下架时加 `--keep-pet`）；必须写处理说明。实测拒绝与通过两条路径。
+- **前端**：
+  - 门店补「我的宠物」入口与页尾「信息使用说明 / 资料删除申请 / 设置」（设置复用现有弹层）（[门店](stage4/4b-zh-01-home.jpg)）。
+  - 我的宠物（对照 mobile-my-pets-v1）：完整头像、已收集 / 未收集、查看资料、低强调删除申请，未收集显示收集说明；有申请后显示「资料删除申请 · 待处理」（[列表](stage4/4b-zh-02-my-pets.jpg)、[待处理](stage4/4b-zh-06-my-pets-pending.jpg)）。
+  - 宠物详情：自家宠物即使未收集也显示完整资料与翻面，不放「开始营业」，底部低强调「资料删除申请」（[详情](stage4/4b-zh-03-detail-own.jpg)）。
+  - 删除申请弹层（对照 mobile-delete-request-v1）：关联宠物头像、名字、只读主人，说明、补充说明、提交申请；成功显示「申请已收到，等待人工处理。」，失败保留补充说明可重试；一般申请标题为「资料删除申请」（[申请](stage4/4b-zh-04-delete-sheet.jpg)、[收到](stage4/4b-zh-05-delete-received.jpg)、[一般申请](stage4/4b-zh-09-general-removal.jpg)）。
+  - 信息使用说明页：UI_COPY 2.3 全文（含已改的存储句），本人申请的简单状态，一般申请入口（[说明](stage4/4b-zh-07-info.jpg)）。
+  - 身份页底部「信息使用说明 | 资料删除申请」：未选同事时删除申请置灰，选中后以该身份提交；未选时说明页不显示同意方式一句；从说明页返回保留搜索词（2026-10-23 确认）（[身份页](stage4/4b-en-10-identity-links.jpg)）。
+- **走查**（390 × 844，中英文）：以上流程各走一遍；中文提交后英文再次提交同一只宠物，数据库只有一条待处理申请。陈列页新增 TextArea、DeletionStatus、MyPetCard、DeletionRequestSheet、InfoSections、PageLinks、MyPetsScreen、InfoScreen，PetDetailSheet 增加自家宠物两种状态，无报错。
+- 走查中修正：自家未收集宠物详情多出「开始营业」；英文页尾换行后留下孤立分隔线（改为无分隔符的下划线链接）；状态标签在窄卡片里断在词中间。
+
+### 4B 与图稿的差异
+
+- 门店「我的宠物」图标用 🐶 占位（图稿是线描小狗；另一个任务在做 home-entry-icons 图稿，确认后再换）。
+- 我的宠物的「添加我家毛孩子」按钮无「＋」号；状态标签在窄卡片里分两行。
+
+### 4B 未验证
+
+- 正式库迁移 008 与授权未执行。
+- 真机键盘弹出时删除申请弹层的布局。

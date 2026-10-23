@@ -4,6 +4,7 @@ import type { ColleagueResult } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { ColleagueCard } from '../components/ColleagueCard/ColleagueCard';
 import { InfoSummary } from '../components/InfoSummary/InfoSummary';
+import { PageLinks } from '../components/PageLinks/PageLinks';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
@@ -14,13 +15,15 @@ type SearchState = { kind: 'idle' } | { kind: 'loading' } | { kind: 'ok'; result
 
 export interface IdentityScreenProps {
   onConfirm: (colleague: ColleagueResult) => void;
+  /** 打开信息使用说明（带当前选中的同事）；removal 为 true 时直接展开删除申请。 */
+  onInfo?: (selected: ColleagueResult | null, removal: boolean) => void;
   /** 陈列页用：跳过请求直接展示。 */
   search?: (q: string, signal: AbortSignal) => Promise<ColleagueResult[]>;
   initialQuery?: string;
 }
 
 /** 直接搜索并选择同事身份；未找到与读取失败分开提示；确认后进入门店，不开始计时。 */
-export function IdentityScreen({ onConfirm, search = api.searchRoster, initialQuery = '' }: IdentityScreenProps) {
+export function IdentityScreen({ onConfirm, onInfo, search = api.searchRoster, initialQuery = '' }: IdentityScreenProps) {
   const { t } = useI18n();
   const [query, setQuery] = useState(initialQuery);
   const [state, setState] = useState<SearchState>({ kind: 'idle' });
@@ -81,6 +84,15 @@ export function IdentityScreen({ onConfirm, search = api.searchRoster, initialQu
       <Button size="lg" block disabled={!selected} onClick={() => selected && onConfirm(selected)} data-testid="identity-confirm">
         🐾 {selected ? t('identity.confirm', { playerName: selected.name }) : t('identity.title')}
       </Button>
+      {onInfo && (
+        <PageLinks
+          links={[
+            { label: t('info.use_link'), onClick: () => onInfo(selected, false), testId: 'link-info' },
+            // 删除申请需要知道是谁提交的：选中同事后才能以该身份提交
+            { label: t('info.removal_link'), onClick: () => onInfo(selected, true), disabled: !selected, testId: 'link-removal' },
+          ]}
+        />
+      )}
     </main>
   );
 }

@@ -26,12 +26,15 @@ export interface PetDetailSheetProps {
   onClose: () => void;
   onRetry: () => void;
   onOpenShop: () => void;
+  /** 自家宠物：打开资料删除申请（低强调入口）。 */
+  onRequestRemoval?: () => void;
   inline?: boolean;
 }
 
 /**
  * 图鉴详情：正面只有贴纸、名字与主人；翻面看处理后照片与「主人说」。
  * 未收集只给名字、剪影与解锁说明，并可直接开始营业；下架宠物不再打开原详情。
+ * 自家宠物即使未收集也显示完整资料（「我的宠物」查看资料），并提供资料删除申请入口。
  */
 export function PetDetailSheet(props: PetDetailSheetProps) {
   const { open, name, state, onClose, inline } = props;
@@ -40,12 +43,13 @@ export function PetDetailSheet(props: PetDetailSheetProps) {
   useEffect(() => setBack(false), [open, name]);
 
   const collected = state.kind === 'ready' && state.detail.collected;
+  const full = state.kind === 'ready' && (state.detail.collected || state.detail.own);
   const badge = collected ? <span className={styles.badge}>🐾 {t('collection.filter_collected')}</span> : null;
 
   return (
     <Sheet open={open} inline={inline} label={name} closeLabel={t('action.close')} onClose={onClose} badge={badge}>
       <div className={styles.content} data-testid="pet-detail">
-        {state.kind === 'ready' && collected && back ? (
+        {state.kind === 'ready' && full && back ? (
           <Back {...props} detail={state.detail} onFlip={() => setBack(false)} />
         ) : (
           <Front {...props} onFlip={() => setBack(true)} />
@@ -55,20 +59,21 @@ export function PetDetailSheet(props: PetDetailSheetProps) {
   );
 }
 
-function Front({ name, state, stickerSrc, silhouetteSrc, photoSrc, ownerAvatarSrc, onRetry, onOpenShop, onFlip }: PetDetailSheetProps & { onFlip: () => void }) {
+function Front({ name, state, stickerSrc, silhouetteSrc, photoSrc, ownerAvatarSrc, onRetry, onOpenShop, onRequestRemoval, onFlip }: PetDetailSheetProps & { onFlip: () => void }) {
   const { t } = useI18n();
   if (state.kind === 'unlisted') return <p className={styles.note}>{t('pet.unlisted')}</p>;
   const detail = state.kind === 'ready' ? state.detail : null;
   const collected = !!detail?.collected;
-  const canFlip = collected && (!!photoSrc || !!detail?.quote);
+  const full = collected || !!detail?.own;
+  const canFlip = full && (!!photoSrc || !!detail?.quote);
   return (
     <div className={styles.face} key="front">
       <div className={styles.art} data-loading={state.kind === 'loading'}>
-        {detail && <img src={collected ? stickerSrc : silhouetteSrc} alt="" />}
-        {collected && <Sparks />}
+        {detail && <img src={full ? stickerSrc : silhouetteSrc} alt="" />}
+        {full && <Sparks />}
       </div>
       <h2 className={styles.name}>{detail?.name ?? name}</h2>
-      {collected && detail?.owner && (
+      {full && detail?.owner && (
         <span className={styles.owner}>
           <Avatar name={detail.owner.name} seed={detail.owner.userId} src={ownerAvatarSrc} size={32} />
           {t('pet.owner')} {detail.owner.name}
@@ -82,9 +87,12 @@ function Front({ name, state, stickerSrc, silhouetteSrc, photoSrc, ownerAvatarSr
       {detail && !collected && (
         <>
           <p className={styles.note}>{t('pet.unlock_hint')}</p>
-          <Button size="lg" block onClick={onOpenShop}>
-            🐾 {t('action.open_shop')}
-          </Button>
+          {/* 自家宠物从「我的宠物」查看完整资料，不在这里引导开局（图稿 mobile-my-pets-v1） */}
+          {!detail.own && (
+            <Button size="lg" block onClick={onOpenShop}>
+              🐾 {t('action.open_shop')}
+            </Button>
+          )}
         </>
       )}
       {canFlip && (
@@ -94,6 +102,11 @@ function Front({ name, state, stickerSrc, silhouetteSrc, photoSrc, ownerAvatarSr
             {t('pet.original_photo')}
           </Button>
         </>
+      )}
+      {detail?.own && onRequestRemoval && (
+        <button type="button" className={styles.remove} onClick={onRequestRemoval} data-testid="detail-remove">
+          {t('info.removal_link')}
+        </button>
       )}
     </div>
   );

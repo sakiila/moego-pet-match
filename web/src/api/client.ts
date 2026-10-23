@@ -1,4 +1,4 @@
-import type { CollectionView, ColleagueResult, DailyManager, PetDetail, GameMode, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse } from './types';
+import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse } from './types';
 
 /**
  * 接口错误分类：not_found（确定不存在）与 unavailable（网络或服务暂时不可用）分开，
@@ -73,6 +73,12 @@ export const api = {
   getPetDetail: (petId: string, playerId: string) =>
     request<PetDetail>(`/api/pets/${encodeURIComponent(petId)}?playerId=${encodeURIComponent(playerId)}`),
   getManager: () => request<DailyManager>('/api/manager'),
+  getMyPets: (playerId: string) => request<{ pets: MyPet[] }>(`/api/my-pets?playerId=${encodeURIComponent(playerId)}`).then((r) => r.pets),
+  getDeletionRequests: (playerId: string) =>
+    request<{ requests: DeletionRequestView[] }>(`/api/deletion-requests?playerId=${encodeURIComponent(playerId)}`).then((r) => r.requests),
+  /** 提交删除申请；petId 为 null 为一般申请。提交只记为待处理，不自动下架。 */
+  requestDeletion: (playerId: string, petId: string | null, note: string) =>
+    request<{ requestId: string; status: 'pending' }>('/api/deletion-requests', { method: 'POST', body: JSON.stringify({ playerId, petId, note }) }),
   submitResult: (gameId: string, playerId: string, result: ResultPayload) =>
     request<SettleResponse>(`/api/games/${encodeURIComponent(gameId)}/result`, {
       method: 'POST',

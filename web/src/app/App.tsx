@@ -13,6 +13,8 @@ import { LeaderboardScreen } from '../screens/LeaderboardScreen';
 import { LiveReport } from '../screens/LiveReport';
 import { PetdexScreen } from '../screens/PetdexScreen';
 import { UploadScreen } from '../screens/UploadScreen';
+import { MyPetsScreen } from '../screens/MyPetsScreen';
+import { InfoScreen } from '../screens/InfoScreen';
 import { PrepScreen } from '../screens/PrepScreen';
 import screen from '../screens/Screen.module.css';
 import { loadSavedPlayerId, savePlayerId } from './identity';
@@ -25,11 +27,13 @@ interface Session {
 type Route =
   | { name: 'boot' }
   | { name: 'bootFailed' }
-  | { name: 'identity' }
+  | { name: 'identity'; query?: string }
   | { name: 'home' }
   | { name: 'leaderboard'; mode: GameMode }
   | { name: 'petdex' }
   | { name: 'upload' }
+  | { name: 'myPets' }
+  | { name: 'info'; player: { userId: string; name: string } | null; removal: boolean; back: 'identity' | 'home'; query?: string }
   | { name: 'prep'; mode: GameMode; session: Session | null; failed: boolean }
   | { name: 'board'; session: Session }
   | { name: 'report'; session: Session; summary: GameSummary };
@@ -132,10 +136,12 @@ export function App() {
     case 'identity':
       return (
         <IdentityScreen
+          initialQuery={route.query}
           onConfirm={async (c) => {
             savePlayerId(c.userId);
             await restore();
           }}
+          onInfo={(c, removal) => setRoute({ name: 'info', player: c ? { userId: c.userId, name: c.name } : null, removal, back: 'identity', query: c?.name })}
         />
       );
     case 'home':
@@ -146,6 +152,8 @@ export function App() {
           onOpenShop={() => void toPrep('normal')}
           onCollection={toPetdex}
           onLeaderboard={() => setRoute({ name: 'leaderboard', mode: 'normal' })}
+          onMyPets={() => setRoute({ name: 'myPets' })}
+          onInfo={(removal) => setRoute({ name: 'info', player: { userId: player.userId, name: player.name }, removal, back: 'home' })}
           onSwitchIdentity={() => setRoute({ name: 'identity' })}
         />
       ) : null;
@@ -155,6 +163,19 @@ export function App() {
       return player ? (
         <PetdexScreen player={player} onBack={toHome} onOpenShop={() => void toPrep('normal')} onUpload={() => setRoute({ name: 'upload' })} />
       ) : null;
+    case 'myPets':
+      return player ? (
+        <MyPetsScreen player={player} onBack={toHome} onUpload={() => setRoute({ name: 'upload' })} onOpenShop={() => void toPrep('normal')} />
+      ) : null;
+    case 'info':
+      return (
+        <InfoScreen
+          key={`${route.player?.userId}-${route.removal}`}
+          player={route.player}
+          openRemoval={route.removal}
+          onBack={() => setRoute(route.back === 'identity' ? { name: 'identity', query: route.query } : { name: 'home' })}
+        />
+      );
     case 'upload':
       return player ? <UploadScreen player={player} onHome={toHome} onPlay={() => void toPrep('normal')} /> : null;
     case 'prep':

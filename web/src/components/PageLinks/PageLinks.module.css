@@ -1,0 +1,27 @@
+/* 一行放得下时以细点分隔；放不下时自然换行，不留孤立的分隔符 */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: var(--space-4);
+}
+
+.link {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.link:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

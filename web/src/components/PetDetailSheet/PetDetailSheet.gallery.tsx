@@ -14,7 +14,7 @@ const detail: PetDetail = {
   listed: true,
 };
 
-const sheet = (state: PetDetailState, name = 'Sanxian') => (
+const sheet = (state: PetDetailState, name = 'Sanxian', removable = false) => (
   <PetDetailSheet
     open
     inline
@@ -27,6 +27,7 @@ const sheet = (state: PetDetailState, name = 'Sanxian') => (
     onClose={() => {}}
     onRetry={() => {}}
     onOpenShop={() => {}}
+    onRequestRemoval={removable ? () => {} : undefined}
   />
 );
 
@@ -36,6 +37,8 @@ const entry: GalleryEntry = {
   states: {
     collected: () => sheet({ kind: 'ready', detail }),
     'collected, no photo or quote (no flip)': () => sheet({ kind: 'ready', detail: { ...detail, hasPhoto: false, quote: null } }),
+    'own pet · collected (removal link)': () => sheet({ kind: 'ready', detail: { ...detail, own: true } }, 'Sanxian', true),
+    'own pet · not collected (full profile)': () => sheet({ kind: 'ready', detail: { ...detail, own: true, collected: false } }, 'Sanxian', true),
     uncollected: () => sheet({ kind: 'ready', detail: { ...detail, collected: false, owner: null, quote: null, hasPhoto: false } }),
     loading: () => sheet({ kind: 'loading' }),
     failed: () => sheet({ kind: 'failed' }),

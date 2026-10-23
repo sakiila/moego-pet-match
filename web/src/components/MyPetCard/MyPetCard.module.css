@@ -1,0 +1,96 @@
+.card {
+  padding: var(--space-3);
+  border: 1px solid var(--color-brand-soft);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-brand-soft) 45%, var(--color-paper));
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.art {
+  display: block;
+  aspect-ratio: 1;
+}
+
+.art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.side {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  text-align: center;
+}
+
+.name {
+  margin: 0;
+  max-width: 100%;
+  font-size: var(--text-xl);
+  font-weight: 900;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px 4px 6px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-success) 16%, var(--color-paper));
+  font-weight: var(--weight-bold);
+  color: var(--color-success);
+}
+
+.state[data-collected='false'] {
+  background: var(--color-surface-muted);
+  color: var(--color-ink-muted);
+}
+
+.state svg {
+  width: 22px;
+  height: 22px;
+}
+
+.view {
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  font: inherit;
+  font-weight: 900;
+  color: var(--color-brand-strong);
+  cursor: pointer;
+}
+
+.remove {
+  min-height: 36px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.hint {
+  margin: var(--space-3) 0 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-line);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+}

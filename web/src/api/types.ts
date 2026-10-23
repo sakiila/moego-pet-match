@@ -123,3 +123,23 @@ export interface DailyManager {
   date: string;
   pet: { petId: string; name: string };
 }
+
+/** 删除申请状态：提交后待处理，人工核实并清理后为已处理。 */
+export type DeletionStatus = 'pending' | 'processed';
+
+export interface MyPet {
+  petId: string;
+  name: string;
+  collected: boolean;
+  /** 这只宠物最近一条删除申请；没有申请为 null。 */
+  request: { status: DeletionStatus } | null;
+}
+
+export interface DeletionRequestView {
+  requestId: string;
+  /** 一般申请或宠物已下架时为 null。 */
+  petId: string | null;
+  petName: string | null;
+  status: DeletionStatus;
+  createdAt: string;
+}
