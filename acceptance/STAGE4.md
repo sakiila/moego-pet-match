@@ -62,3 +62,9 @@
 
 - 正式库迁移 007–009 未执行，正式环境没有做过真实下架。
 - 下架共用原图的宠物在真实名录上的效果（测试用夹具验证）。
+
+## Supabase 正式库（2026-10-23）
+
+- 执行前只读确认：正式库 80 只宠物全部上架、名字均不为空，`submissions` 为空，现有约束只有 `pets_status_check`。
+- `supabase-setup.ts --apply`：执行迁移 007–009，`deletion_requests` 加入 `pet_match_app` 读写授权（无删除权限）。核验：迁移到 009；`pets` 有新的状态约束与墓碑约束，`name` 可空，`removed_at`、`submissions.pulled_at` 已加；`pet_match_app` 对 `deletion_requests` 与 `submissions` 可读写、不可删，对 `pets` 只读。
+- `supabase-verify.ts` 以专用角色走通登记与结算并回滚，无残留；`catalog.ts publish --prod` 空跑 80 只全部不变。正式环境未做真实下架。
