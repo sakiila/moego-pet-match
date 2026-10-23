@@ -1,7 +1,7 @@
 import pg from 'pg';
 import { buildApp } from '../src/app.ts';
 import { LOCAL_TEST_URL } from '../src/config.ts';
-import { seedLocal, seedPlaceholderPets } from '../src/db/localSeed.ts';
+import { seedLocal, seedPlaceholderPets, seedTestFishColors } from '../src/db/localSeed.ts';
 import { migrate } from '../src/db/migrate.ts';
 import { createPool } from '../src/db/pool.ts';
 
@@ -17,6 +17,7 @@ export async function freshDatabase() {
     await seedLocal(admin);
     await migrate(admin);
     await seedPlaceholderPets(admin);
+    await seedTestFishColors(admin);
   } finally {
     await admin.end();
   }

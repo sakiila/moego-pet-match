@@ -183,3 +183,30 @@ describe('玩家记录读取', () => {
     expect(res.progress).toEqual({ completedNormalGames: 5, fishUnlocked: true });
   });
 });
+
+describe('登记的阵容来源', () => {
+  it('普通局阵容只来自上架宠物，鱼局阵容是六种鱼色', async () => {
+    const normal = await register('U_TEST_ALICE');
+    const published = (await ctx.pool.query(`SELECT pet_id FROM pet_match.pets WHERE status = 'published'`)).rows.map((r) => r.pet_id);
+    expect(normal.lineup.every((p) => published.includes(p.petId))).toBe(true);
+    expect(normal.ownPetIds).toEqual([]);
+    const fish = await register('U_TEST_BOB', 'fish');
+    expect(fish.lineup.map((p) => p.petId).sort()).toEqual(
+      ['blue', 'green', 'orange', 'purple', 'red', 'yellow'].map((c) => `fish_color_${c}`),
+    );
+    expect(fish.lineup[0].nameEn).toBeTruthy();
+  });
+
+  it('玩家拥有的宠物按规则可能入选，并在 ownPetIds 中标出', async () => {
+    await ctx.pool.query(`UPDATE pet_match.pets SET owner_user_id = 'U_TEST_SAM' WHERE pet_id IN ('mochi', 'tofu')`);
+    const seen = new Set<number>();
+    for (let i = 0; i < 40; i++) {
+      const game = await register('U_TEST_SAM');
+      expect(game.ownPetIds.length).toBeLessThanOrEqual(2);
+      expect(game.ownPetIds.every((id) => game.lineup.some((p) => p.petId === id))).toBe(true);
+      seen.add(game.ownPetIds.length);
+    }
+    // 40 次中 0、1 只都应出现（2 只的概率 20%，大概率也出现）
+    expect(seen.has(0) && seen.has(1)).toBe(true);
+  });
+});

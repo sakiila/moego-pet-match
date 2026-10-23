@@ -135,3 +135,12 @@ describe('测试上传入口', () => {
     expect((await upload(PNG, { playerId: 'U_TEST_GUEST', petName: 'X' })).statusCode).toBe(404);
   });
 });
+
+describe('鱼色贴纸', () => {
+  it('经 /img/fish 代理；未上传贴纸时 404', async () => {
+    await ctx.pool.query(`UPDATE pet_match.fish_colors SET sticker_key = 'fish/fish_color_red/aaa' WHERE color_id = 'fish_color_red'`);
+    await store.put('fish/fish_color_red/aaa/128.png', PNG, 'image/png');
+    expect((await get('/img/fish/fish_color_red/128')).statusCode).toBe(200);
+    expect((await get('/img/fish/fish_color_blue/128')).statusCode).toBe(404);
+  });
+});

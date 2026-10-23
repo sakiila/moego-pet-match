@@ -16,6 +16,8 @@ export interface PlayerView {
 export interface LineupPet {
   petId: string;
   name: string;
+  /** 鱼色有中英文名；宠物名保留原文，不设英文名。 */
+  nameEn?: string;
 }
 
 export interface RegisteredGame {
@@ -24,6 +26,8 @@ export interface RegisteredGame {
   rulesVersion: number;
   mode: GameMode;
   lineup: LineupPet[];
+  /** 本局入选的自家宠物（普通局），用于准备页「{petName} 也来啦！」。 */
+  ownPetIds: string[];
 }
 
 /** 客户端提交的冻结结果（来自引擎 getSummary）。 */

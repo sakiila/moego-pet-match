@@ -19,3 +19,4 @@ __pycache__/
 
 # 服务端本地图片缓存（可随时删除重建）
 server/.cache/
+server/.store/

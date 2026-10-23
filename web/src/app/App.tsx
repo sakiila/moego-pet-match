@@ -4,7 +4,7 @@ import type { GameMode, PlayerView, RegisteredGame } from '../api/types';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { PRESETS } from '../dev/presets';
 import { createGame, type GameState, type GameSummary } from '../engine';
-import { petFromLineup } from '../game/pets';
+import { petFromLineup, preloadPets } from '../game/pets';
 import { useI18n } from '../i18n';
 import { BoardScreen } from '../screens/BoardScreen';
 import { HomeScreen } from '../screens/HomeScreen';
@@ -71,6 +71,8 @@ export function App() {
       setRoute({ name: 'prep', mode, session: null, failed: false });
       try {
         const registered = await api.registerGame(player.userId, mode);
+        // 开局前加载好本局棋盘贴纸，素材就绪才允许开始计时
+        await preloadPets(registered.lineup.map((p) => petFromLineup(p, mode)));
         const game = createGame({
           seed: registered.seed,
           lineup: registered.lineup.map((p) => p.petId),
@@ -95,7 +97,10 @@ export function App() {
   }, [player]);
 
   const toHome = useCallback(() => setRoute({ name: 'home' }), []);
-  const petsOf = (s: Session) => s.game.lineup.map((id) => petFromLineup(s.registered.lineup.find((p) => p.petId === id)!));
+  const petsOf = (s: Session) =>
+    s.game.lineup.map((id) => petFromLineup(s.registered.lineup.find((p) => p.petId === id)!, s.registered.mode));
+  const ownNamesOf = (s: Session) =>
+    s.registered.ownPetIds.map((id) => s.registered.lineup.find((p) => p.petId === id)?.name).filter((n): n is string => !!n);
 
   switch (route.name) {
     case 'boot':
@@ -130,6 +135,7 @@ export function App() {
       return (
         <PrepScreen
           pets={route.session ? petsOf(route.session) : null}
+          ownPetNames={route.session ? ownNamesOf(route.session) : []}
           failed={route.failed}
           onRetry={() => void toPrep(route.mode)}
           onStart={() => route.session && setRoute({ name: 'board', session: route.session })}

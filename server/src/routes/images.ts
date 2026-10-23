@@ -29,11 +29,15 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
     return send(reply, fetched, 'public, max-age=3600');
   });
 
-  app.get<{ Params: { petId: string; size: string } }>('/img/pets/:petId/:size', async (request, reply) => {
-    const { petId, size } = request.params;
-    if (!PET_SIZES.has(size)) return reply.status(404).send();
-    const { rows } = await pool.query('SELECT status, sticker_key FROM pet_match.pets WHERE pet_id = $1', [petId]);
-    const pet = rows[0];
+  const stickerRoute = (prefix: 'pets' | 'fish', sql: string) =>
+    app.get<{ Params: { id: string; size: string } }>(`/img/${prefix}/:id/:size`, async (request, reply) => {
+      const { id, size } = request.params;
+      if (!PET_SIZES.has(size)) return reply.status(404).send();
+      const { rows } = await pool.query(sql, [id]);
+      return serveSticker(reply, rows[0], size);
+    });
+
+  async function serveSticker(reply: FastifyReply, pet: { status: string; sticker_key: string | null } | undefined, size: string) {
     if (!pet || pet.status !== 'published' || !pet.sticker_key) {
       if (pet?.sticker_key) await cache.delete(`pet/${pet.sticker_key}/${size}`);
       return reply.status(404).send();
@@ -47,5 +51,8 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
     if (!obj) return reply.status(404).send();
     await cache.put(cacheKey, obj.body, obj.contentType);
     return send(reply, obj, 'public, max-age=31536000, immutable');
-  });
+  }
+
+  stickerRoute('pets', 'SELECT status, sticker_key FROM pet_match.pets WHERE pet_id = $1');
+  stickerRoute('fish', 'SELECT status, sticker_key FROM pet_match.fish_colors WHERE color_id = $1');
 };

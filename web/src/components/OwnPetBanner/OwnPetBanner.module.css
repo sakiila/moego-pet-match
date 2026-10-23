@@ -1,0 +1,14 @@
+.banner {
+  justify-self: center;
+  margin: 0;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-soft);
+  font-size: var(--text-lg);
+  font-weight: 900;
+  text-align: center;
+}
+
+.name {
+  color: var(--color-brand);
+}

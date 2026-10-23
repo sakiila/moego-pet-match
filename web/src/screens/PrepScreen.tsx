@@ -1,5 +1,6 @@
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { LineupPanel } from '../components/LineupPanel/LineupPanel';
+import { OwnPetBanner } from '../components/OwnPetBanner/OwnPetBanner';
 import { RulesCard } from '../components/RulesCard/RulesCard';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import type { PetInfo } from '../game/pets';
@@ -10,19 +11,24 @@ import styles from './Screen.module.css';
 export interface PrepScreenProps {
   /** 登记成功后的本局阵容；登记中或失败为 null。 */
   pets: PetInfo[] | null;
+  /** 本局入选的自家宠物名字。 */
+  ownPetNames?: string[];
   failed?: boolean;
   onStart: () => void;
   onRetry?: () => void;
 }
 
 /** 开局准备：棋盘的计时前状态，读说明不计时；对局登记成功后才允许点「开始这班」进入 90 秒。 */
-export function PrepScreen({ pets, failed, onStart, onRetry }: PrepScreenProps) {
+export function PrepScreen({ pets, ownPetNames = [], failed, onStart, onRetry }: PrepScreenProps) {
   const { t } = useI18n();
   return (
     <main className={styles.screen}>
       <BrandHeader />
       {pets ? (
-        <LineupPanel pets={pets} />
+        <>
+          <LineupPanel pets={pets} />
+          <OwnPetBanner names={ownPetNames} />
+        </>
       ) : failed ? (
         <StatusMessage tone="error" text={t('prep.failed')} actionLabel={t('action.retry')} onAction={onRetry} />
       ) : (

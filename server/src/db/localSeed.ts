@@ -53,3 +53,14 @@ export async function seedPlaceholderPets(client: pg.Client | pg.PoolClient) {
     );
   }
 }
+
+/** 仅测试：六种占位鱼色（开发库用 catalog publish 导入真实鱼色）。 */
+export async function seedTestFishColors(client: pg.Client | pg.PoolClient) {
+  const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+  for (const c of colors) {
+    await client.query(
+      `INSERT INTO pet_match.fish_colors (color_id, name_zh, name_en, palette_hex) VALUES ($1, $1, $1, '#000000') ON CONFLICT DO NOTHING`,
+      [`fish_color_${c}`],
+    );
+  }
+}

@@ -19,7 +19,7 @@ export function useResultSubmission(gameId: string, playerId: string, payload: R
     const { gameId: id, playerId: who, payload: result } = frozen.current;
     try {
       const response = await api.submitResult(id, who, result);
-      setState({ kind: 'saved', response, newPets: response.newCollected.map(petFromLineup) });
+      setState({ kind: 'saved', response, newPets: response.newCollected.map((p) => petFromLineup(p)) });
       savedRef.current(response);
     } catch (error) {
       // 明确的校验失败：保留报告、说明原因、不反复重试；其他情况可在当前报告重试

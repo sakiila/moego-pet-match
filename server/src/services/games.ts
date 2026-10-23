@@ -4,6 +4,7 @@ import { z } from 'zod';
 import type { GameMode, LineupPet, RegisteredGame, ResultPayload, SettleResponse } from '../../../web/src/api/types.ts';
 import { RULES, RULES_VERSION } from '../../../web/src/engine/config.ts';
 import { inTransaction, type Pool } from '../db/pool.ts';
+import { sampleLineup } from './lineup.ts';
 import { findColleague, loadPlayer } from './players.ts';
 
 /** 第几局普通完整局后解锁 Peter 鱼关。 */
@@ -23,19 +24,40 @@ export async function registerGame(pool: Pool, playerId: string, mode: GameMode)
   const player = await loadPlayer(pool, playerId);
   if (!player) throw new GameError('not_found', 'player');
   if (mode === 'fish' && !player.progress.fishUnlocked) throw new GameError('locked');
-  // 阶段 2：均匀抽样；自家优先与未收集倾向在阶段 3 接入
-  const { rows } = await pool.query(
-    `SELECT pet_id, name FROM pet_match.pets WHERE status = 'published' ORDER BY random() LIMIT $1`,
-    [RULES.kinds],
-  );
-  if (rows.length < RULES.kinds) throw new GameError('not_ready', 'not enough published pets');
-  const lineup: LineupPet[] = rows.map((r) => ({ petId: r.pet_id, name: r.name }));
+  const random = () => randomInt(0, 2 ** 32) / 2 ** 32;
+  let lineup: LineupPet[];
+  let ownPetIds: string[] = [];
+  if (mode === 'fish') {
+    // 鱼关：固定六种鱼色，不使用自家或未收集偏好
+    const { rows } = await pool.query(`SELECT color_id, name_zh, name_en FROM pet_match.fish_colors WHERE status = 'published'`);
+    if (rows.length < RULES.kinds) throw new GameError('not_ready', 'not enough fish colors');
+    lineup = rows
+      .map((r) => ({ petId: r.color_id, name: r.name_zh, nameEn: r.name_en, sort: random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .slice(0, RULES.kinds)
+      .map(({ petId, name, nameEn }) => ({ petId, name, nameEn }));
+  } else {
+    const pets = await pool.query(`SELECT pet_id, name, owner_user_id FROM pet_match.pets WHERE status = 'published'`);
+    if (pets.rows.length < RULES.kinds) throw new GameError('not_ready', 'not enough published pets');
+    const collected = new Set<string>(
+      (await pool.query('SELECT pet_id FROM pet_match.collections WHERE player_id = $1', [playerId])).rows.map((r) => r.pet_id),
+    );
+    const sampled = sampleLineup(
+      pets.rows.map((r) => ({ petId: r.pet_id, ownerUserId: r.owner_user_id })),
+      playerId,
+      collected,
+      random,
+    );
+    const nameOf = new Map<string, string>(pets.rows.map((r) => [r.pet_id, r.name]));
+    lineup = sampled.lineup.map((id) => ({ petId: id, name: nameOf.get(id)! }));
+    ownPetIds = sampled.own;
+  }
   const seed = randomInt(0, 2 ** 31 - 1);
   const inserted = await pool.query(
     `INSERT INTO pet_match.games (player_id, mode, rules_version, seed, lineup) VALUES ($1, $2, $3, $4, $5) RETURNING game_id`,
     [playerId, mode, RULES_VERSION, seed, lineup.map((p) => p.petId)],
   );
-  return { gameId: inserted.rows[0].game_id, seed, rulesVersion: RULES_VERSION, mode, lineup };
+  return { gameId: inserted.rows[0].game_id, seed, rulesVersion: RULES_VERSION, mode, lineup, ownPetIds };
 }
 
 const count = z.number().int().min(0);
