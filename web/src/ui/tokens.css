@@ -59,6 +59,8 @@
   --stroke: 2px;
   --shadow-offset: 0 5px 0 var(--color-ink);
   --shadow-soft: 0 6px 18px rgb(31 34 39 / 0.08);
+  /* 成绩卡（Canvas）上贴纸的投影色 */
+  --share-shadow: rgb(31 34 39 / 0.16);
 
   /* 字体 */
   --font-sans: ui-rounded, 'SF Pro Rounded', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;

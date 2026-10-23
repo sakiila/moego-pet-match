@@ -1,0 +1,20 @@
+Use case: ads-marketing / compositing
+Asset type: one standalone, saveable/shareable “今日店长小海报” image for MoeGo's internal pet match-three game 毛孩子全明星. This is the poster image itself, not an app screenshot, not a dialog or overlay, with no buttons.
+Canvas: portrait 4:5, approximately 1080 × 1350.
+
+Input images and roles:
+Image 1, design/concepts/share-card-pets-v1.png: confirmed ordinary score share card; visual style reference only. Carry over its white receipt-paper field, bottom scalloped/wavy receipt edge, orange #F47721 / charcoal #292A2F / white palette, rounded bold Chinese typography, hand-drawn orange short strokes, little stars and pawprints, and the top brand row composition (MoeGo logo | 毛孩子全明星 | small mode badge). Do not carry over the cat, score, MVP badge, player name, or score-card copy.
+Image 2, design/concepts/mobile-home-v2.png: confirmed mobile home; visual reference for the friendly little shop window/counter, the “今日店长 · Deedee” nameplate, and the playful speech-bubble declaration. Any awning or counter must be restrained and secondary.
+Image 3, assets/pets/stickers-b-head-active-v1/1024/pet_b05057985e11.png: official transparent Deedee head sticker; subject identity reference and source for compositing. Faithfully preserve the same head-only dog: fluffy white fur, long drooping light gray-brown ears, black eyes, open smile with pink tongue, and white sticker outline. Do not redraw into another dog or add a body.
+
+Composition and hierarchy: white receipt poster with neat charcoal outline and bottom wavy edge. At top, the MoeGo brand row: MoeGo logo | 毛孩子全明星 | small bone-shaped mode badge “今日店长”. Large Deedee sticker is the dominant first visual. The declaration is a large, bold, two-line speech bubble near the sticker. Under/near the sticker, an orange/cream nameplate. At bottom, a pale dashed receipt divider and a small date line. Hierarchy: sticker + declaration > nameplate > date. Leave enough breathing room. A simple narrow orange-and-white shop awning or counter is allowed if it echoes the home image without competing with Deedee.
+
+Render ONLY the following text, exactly, legibly, in simplified Chinese/Latin as shown:
+Top: “MoeGo” | “毛孩子全明星” | “今日店长”
+Nameplate: “今日店长 · Deedee”
+Speech bubble line 1: “你负责排班，”
+Speech bubble line 2: “我负责可爱。”
+Bottom date: “2026 年 10 月 23 日 · 北京时间”
+Preserve every character, punctuation mark, space, and the capitalization of MoeGo and Deedee. Do not add any other text.
+
+Do not show scores, title/award seals, player signatures, owner names, rankings, QR codes, links, buttons, fish, other pets, random text, watermark, or any app frame.

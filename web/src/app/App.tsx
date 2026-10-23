@@ -185,6 +185,7 @@ export function App() {
           registered={route.session.registered}
           pets={petsOf(route.session)}
           playerId={player!.userId}
+          playerName={player!.name}
           manager={manager}
           onSaved={() => void refreshPlayer()}
           onPlayAgain={() => void toPrep(route.session.registered.mode)}

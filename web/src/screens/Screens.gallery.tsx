@@ -30,6 +30,7 @@ const reportProps = {
   onFishInvite: noop,
   onCollection: noop,
   onOpenPet: noop,
+  onShare: noop,
   manager: { date: '2026-10-23', pet: { petId: 'pet_4750baaed3f0', name: 'Sanxian' } },
   onAnswerQuiz: async () => ({ correct: true, skipped: false, owner: { userId: 'U2', name: 'Zhang Wei' } }),
 };

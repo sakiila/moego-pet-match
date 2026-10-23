@@ -32,6 +32,8 @@ export interface ReportScreenProps {
   manager: DailyManager | null;
   onCollection: () => void;
   onOpenPet: (pet: PetInfo) => void;
+  /** 打开成绩卡预览；不等揭晓动画，也不等保存结果。 */
+  onShare: () => void;
 }
 
 /**
@@ -39,7 +41,7 @@ export interface ReportScreenProps {
  * 正文可滚动，底部固定「再开一局」。所有判定复用本局冻结结果。
  */
 export function ReportScreen(props: ReportScreenProps) {
-  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onCollection, onOpenPet } = props;
+  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onCollection, onOpenPet, onShare } = props;
   const { t } = useI18n();
   const mvpKind = judgeMvp(summary);
   const kindOf = (id: string) => pets.findIndex((p) => p.id === id);
@@ -83,9 +85,12 @@ export function ReportScreen(props: ReportScreenProps) {
         <NavTile icon="🏆" label={t(fish ? 'fish.leaderboard' : 'nav.leaderboard')} onClick={onLeaderboard} />
         <NavTile icon="🏠" label={t('action.back_to_shop')} onClick={onHome} />
       </nav>
-      <div className={styles.stickyActions}>
+      <div className={`${styles.stickyActions} ${styles.actionPair}`}>
         <Button size="lg" block onClick={onPlayAgain} data-testid="play-again">
           {fish ? '🐟' : '🐾'} {t('action.play_again')}
+        </Button>
+        <Button size="lg" variant="secondary" block onClick={onShare} data-testid="share">
+          {t('share.open')}
         </Button>
       </div>
     </main>

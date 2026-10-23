@@ -103,6 +103,18 @@
   background: var(--bg);
 }
 
+/* 底部并排的主次两个操作（报告：再开一局 / 分享成绩） */
+.actionPair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.actionPair button {
+  padding: 0 var(--space-3);
+  font-size: var(--text-lg);
+}
+
 .boardArea {
   display: flex;
   flex: 1;

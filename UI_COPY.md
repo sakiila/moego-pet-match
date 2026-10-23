@@ -200,6 +200,7 @@
 | share.open | 分享成绩 | Share Results |
 | share.preview | 成绩卡预览 | Results Card Preview |
 | share.save | 保存图片 | Save Image |
+| share.send | 分享图片 | Share Image |
 | share.player | 本局玩家：{playerName} | Played by: {playerName} |
 | share.failed | 图片还没生成好，请重试。 | We couldn't create the image. Please try again. |
 
@@ -210,6 +211,8 @@
 手机报告已确认正文可滚动，底部固定「再开一局 / Play Again」与「分享成绩 / Share Results」。保存状态随正文结果展示；固定操作不增加领取、确认或强制观看步骤，正文末尾不得被按钮遮挡。
 
 成绩重试已确认保持简单：仅在当前报告页保留未保存结果并提供 `report.sync_retry`；离开、刷新或关闭后不提供未保存结果的恢复入口，不增加首页待同步提示或历史页。已发出的请求如果实际保存成功，已保存记录仍保留；提示不能把未确认保存写成已上榜或已解锁。
+
+预览里的操作已确认（2026-10-23）：「保存图片」始终下载 PNG；浏览器支持分享图片文件时另显示「分享图片」（`share.send`），调起系统分享面板，不自动发送。
 
 成绩分享卡的玩家署名已确认使用 `share.player`，取原对局玩家姓名，保持次级字号；不使用当前查看者或 MVP 主人姓名替代，切换语言时姓名保持原文。本轮未增加玩家头像、联系方式或新奖励。
 

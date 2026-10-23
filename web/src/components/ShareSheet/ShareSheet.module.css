@@ -1,0 +1,59 @@
+.title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 900;
+}
+
+.body {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* 预览按导出比例 4:5 占位，生成前后高度不变 */
+.preview {
+  display: grid;
+  place-items: center;
+  width: min(100%, 58dvh * 0.8);
+  aspect-ratio: 4 / 5;
+  justify-self: center;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  overflow: hidden;
+}
+
+.preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.loading {
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  background: var(--color-line);
+  animation: pulse 0.9s ease-in-out infinite alternate;
+}
+
+.failed {
+  margin: 0;
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--color-danger);
+  font-weight: var(--weight-bold);
+}
+
+.actions {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.actions[data-share='true'] {
+  grid-template-columns: 1fr 1fr;
+}
+
+@keyframes pulse {
+  to {
+    opacity: 0.4;
+  }
+}
