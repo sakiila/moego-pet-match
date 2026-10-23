@@ -55,7 +55,7 @@ tools/pet-studio/  已有的独立素材工作台，与游戏代码分开，不�
 - 常用命令（在 `web/` 下）：`npm test`、`npm run typecheck`、`npm run build`、`npm run dev`（端口 5180，陈列页在 `/dev/gallery`）。
 - 服务端（在 `server/` 下）：先在仓库根目录 `docker compose up -d` 启动本地 Postgres（15.8，端口 54329，库 `pet_match_dev` / `pet_match_test`）；`npm run migrate`（本地建模拟人员表、迁移、种占位宠物）、`npm test`、`npm run typecheck`、`npm run dev`（端口 8787，web 开发服务已代理 `/api` `/img`）。
 - 数据库选择：开发与测试只连本地库；只有 `NODE_ENV=production`（`npm start`）才使用 `.env` 的 `PET_MATCH_DATABASE_URL`（Supabase 专用角色 `pet_match_app`）。Supabase 运维只用 `server/scripts/supabase-setup.ts`（默认预览，`--apply` 执行）与 `supabase-verify.ts`（只读核验 + 回滚冒烟）。
-- 素材上下架：`server/scripts/catalog.ts publish|unpublish`（默认只列变更，`--yes` 写入，`--prod` 写 Supabase 需先确认）；读 v4 名录、`assets/pets/stickers-b-head-active-v1` 与已确认的 `data/pet-materials/owner-slack-map.json`。贴纸默认存本地目录 `server/.store/`（与 R2 相同键布局），`OBJECT_STORE=r2` 切到 R2。
+- 素材上下架：`server/scripts/catalog.ts publish|unpublish`（默认只列变更，`--yes` 写入，`--prod` 写 Supabase 需先确认）；读 v4 名录、`assets/pets/stickers-b-head-active-v1` 与已确认的 `data/pet-materials/owner-slack-map.json`。贴纸默认存本地目录 `server/.store/`（与 R2 相同键布局），`OBJECT_STORE=r2` 切到 R2。本地目录的对象用 `server/scripts/store-sync.ts` 补传到 R2（只传桶里没有的键，不覆盖、不删除、不碰数据库；默认只列出，`--yes` 上传）。
 - engine 与 server 的规则改动必须有单元测试并跑通。引擎只认游戏时钟毫秒数；测试用 ASCII 棋盘夹具与固定补落序列（见 `web/src/engine/__tests__/fixtures.ts`）。
 - UI 改动在浏览器 390 × 844 下截图，与对应的已选定图稿（见 DESIGN_NOTES「选定展示文件」）对比并说明差异；同时检查陈列页中的各状态。
 - 未实际运行验证的内容，在交付说明中明确写出。
