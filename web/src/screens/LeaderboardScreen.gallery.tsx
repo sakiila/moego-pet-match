@@ -22,6 +22,12 @@ const entry: GalleryEntry = {
   group: 'screens',
   states: {
     'near me (fish unlocked)': () => <LeaderboardScreen player={player(true)} onBack={noop} onChallenge={noop} load={async () => ranked} />,
+    'opened on fish tab (from Fish Report)': () => (
+      <LeaderboardScreen player={player(true)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
+    ),
+    'fish requested but locked → pet shop tab': () => (
+      <LeaderboardScreen player={player(false)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
+    ),
     'no score yet': () => (
       <LeaderboardScreen player={player(false)} onBack={noop} onChallenge={noop} load={async () => ({ ...ranked, me: null, entries: ranked.entries.filter((e) => e.userId !== 'bob') })} />
     ),

@@ -6,6 +6,8 @@
   border: var(--stroke) solid var(--color-ink);
   border-radius: var(--radius-lg);
   background: var(--color-paper);
+  /* 纸面：鱼关里页面是白字，报告单仍用深色字 */
+  color: var(--color-ink);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
 }

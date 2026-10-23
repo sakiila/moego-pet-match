@@ -12,6 +12,8 @@ import styles from './Screen.module.css';
 
 export interface LeaderboardScreenProps {
   player: PlayerView;
+  /** 打开时选中的榜单；鱼榜只对已发现鱼关的玩家有效，否则回到宠物店榜。 */
+  initialMode?: GameMode;
   onBack: () => void;
   onChallenge: (mode: GameMode) => void;
   /** 陈列页用：替换数据来源。 */
@@ -22,9 +24,9 @@ type View = 'near' | 'all';
 const NEAR_RADIUS = 2;
 
 /** 领先三位 + 我的名次附近；无成绩时先看全榜；鱼榜标签只对已发现鱼关的玩家显示。 */
-export function LeaderboardScreen({ player, onBack, onChallenge, load = api.getLeaderboard }: LeaderboardScreenProps) {
+export function LeaderboardScreen({ player, initialMode = 'normal', onBack, onChallenge, load = api.getLeaderboard }: LeaderboardScreenProps) {
   const { t } = useI18n();
-  const [mode, setMode] = useState<GameMode>('normal');
+  const [mode, setMode] = useState<GameMode>(initialMode === 'fish' && player.progress.fishUnlocked ? 'fish' : 'normal');
   const [view, setView] = useState<View>('near');
   const [data, setData] = useState<LeaderboardView | null>(null);
   const [failed, setFailed] = useState(false);
@@ -91,7 +93,7 @@ export function LeaderboardScreen({ player, onBack, onChallenge, load = api.getL
       )}
       <div className={styles.grow} />
       <Button size="lg" block onClick={() => onChallenge(mode)} data-testid="challenge">
-        🐾 {t('leaderboard.challenge')}
+        {mode === 'fish' ? '🐟' : '🐾'} {t('leaderboard.challenge')}
       </Button>
     </main>
   );

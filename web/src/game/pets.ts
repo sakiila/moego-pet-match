@@ -23,6 +23,16 @@ export const PLACEHOLDER_PETS: PetInfo[] = [
 
 export const petById = (id: string) => PLACEHOLDER_PETS.find((p) => p.id === id)!;
 
+/** 6 种鱼色（陈列页示例；线上以服务端 fish_colors 为准）。 */
+export const SAMPLE_FISH: PetInfo[] = [
+  ['red', '珊瑚红', 'Coral Red'],
+  ['gold', '金黄色', 'Golden Yellow'],
+  ['green', '翡翠绿', 'Emerald Green'],
+  ['blue', '天蓝色', 'Sky Blue'],
+  ['purple', '紫罗兰', 'Violet'],
+  ['panda', '黑白色', 'Black and White'],
+].map(([c, name, nameEn]) => ({ id: `fish_color_${c}`, name, nameEn, imageBase: `/img/fish/fish_color_${c}`, emoji: '🐟' }));
+
 /** 服务端阵容 → 展示信息：贴纸经自有域名 /img 代理；占位宠物沿用 emoji。 */
 export function petFromLineup(pet: LineupPet, mode: GameMode = 'normal'): PetInfo {
   const placeholder = PLACEHOLDER_PETS.find((p) => p.id === pet.petId);

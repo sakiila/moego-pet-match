@@ -26,7 +26,7 @@ type Route =
   | { name: 'bootFailed' }
   | { name: 'identity' }
   | { name: 'home' }
-  | { name: 'leaderboard' }
+  | { name: 'leaderboard'; mode: GameMode }
   | { name: 'petdex' }
   | { name: 'prep'; mode: GameMode; session: Session | null; failed: boolean }
   | { name: 'board'; session: Session }
@@ -143,17 +143,19 @@ export function App() {
           manager={manager}
           onOpenShop={() => void toPrep('normal')}
           onCollection={toPetdex}
-          onLeaderboard={() => setRoute({ name: 'leaderboard' })}
+          onLeaderboard={() => setRoute({ name: 'leaderboard', mode: 'normal' })}
           onSwitchIdentity={() => setRoute({ name: 'identity' })}
         />
       ) : null;
     case 'leaderboard':
-      return player ? <LeaderboardScreen player={player} onBack={toHome} onChallenge={(mode) => void toPrep(mode)} /> : null;
+      return player ? <LeaderboardScreen key={route.mode} player={player} initialMode={route.mode} onBack={toHome} onChallenge={(mode) => void toPrep(mode)} /> : null;
     case 'petdex':
       return player ? <PetdexScreen player={player} onBack={toHome} onOpenShop={() => void toPrep('normal')} /> : null;
     case 'prep':
       return (
         <PrepScreen
+          mode={route.mode}
+          onBack={toHome}
           pets={route.session ? petsOf(route.session) : null}
           ownPetNames={route.session ? ownNamesOf(route.session) : []}
           failed={route.failed}
@@ -164,6 +166,7 @@ export function App() {
     case 'board':
       return (
         <BoardScreen
+          mode={route.session.registered.mode}
           game={route.session.game}
           pets={petsOf(route.session)}
           speed={speed}
@@ -186,7 +189,7 @@ export function App() {
           onSaved={() => void refreshPlayer()}
           onPlayAgain={() => void toPrep(route.session.registered.mode)}
           onHome={toHome}
-          onLeaderboard={() => setRoute({ name: 'leaderboard' })}
+          onLeaderboard={() => setRoute({ name: 'leaderboard', mode: route.session.registered.mode })}
           onCollection={toPetdex}
           onOpenShop={() => void toPrep('normal')}
           onFishInvite={() => void toPrep('fish')}

@@ -1,3 +1,4 @@
+import type { GameMode } from '../api/types';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   RULES,
@@ -48,6 +49,7 @@ interface Session {
 
 /** 局内贴纸所需的本局背景：阵容 id、未收集宠物与家庭分组。 */
 export interface SessionContext {
+  mode?: GameMode;
   uncollected?: ReadonlySet<string>;
   families?: Readonly<Record<string, string>>;
 }
@@ -81,7 +83,7 @@ const baseOf = (s: GameState): PlaybackBase => ({ board: s.board, score: s.score
 export function useGameSession(
   initial: GameState,
   onFinished: (summary: GameSummary) => void,
-  { speed = 1, startAt = 0, uncollected = new Set(), families = {} }: { speed?: number; startAt?: number } & SessionContext = {},
+  { speed = 1, startAt = 0, mode = 'normal', uncollected = new Set(), families = {} }: { speed?: number; startAt?: number } & SessionContext = {},
 ): UseGameSession {
   const session = useRef<Session>(null as unknown as Session);
   if (!session.current) {
@@ -94,7 +96,7 @@ export function useGameSession(
       shuffleHandled: true,
       shuffleResumeAt: null,
       tutorial: null,
-      seenTutorials: loadSeenTutorials(),
+      seenTutorials: loadSeenTutorials(mode),
       popups: new Map(),
       finished: false,
       notedNew: new Set(),
@@ -158,7 +160,7 @@ export function useGameSession(
     if (next) {
       s.tutorial = { kind: next, until: g + TUTORIAL_MS };
       s.seenTutorials.add(next === 'combo' ? 'combo' : 'tool');
-      saveSeenTutorials(s.seenTutorials);
+      saveSeenTutorials(s.seenTutorials, mode);
     }
   }
 
@@ -180,6 +182,7 @@ export function useGameSession(
       tutorial: s.tutorial?.kind ?? null,
       hint: hint !== null,
       lastSeconds: !timeUp && RULES.durationMs - g <= 10_000,
+      mode,
     }),
     hint,
     popups: [...s.popups.values()],

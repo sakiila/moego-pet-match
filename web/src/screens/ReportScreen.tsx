@@ -6,6 +6,7 @@ import { ManagerCard } from '../components/ManagerCard/ManagerCard';
 import { NavTile } from '../components/NavTile/NavTile';
 import { QuizCard } from '../components/QuizCard/QuizCard';
 import { SaveStatus, type SaveState } from '../components/SaveStatus/SaveStatus';
+import { UnderwaterBackdrop } from '../components/UnderwaterBackdrop/UnderwaterBackdrop';
 import { ScoreCard } from '../components/ScoreCard/ScoreCard';
 import type { GameSummary } from '../engine';
 import { stickerUrl, type PetInfo } from '../game/pets';
@@ -23,6 +24,7 @@ export interface ReportScreenProps {
   onRetry: () => void;
   onPlayAgain: () => void;
   onHome: () => void;
+  /** 打开对应模式的排行榜（鱼报告默认选中鱼榜）。 */
   onLeaderboard: () => void;
   onFishInvite: () => void;
   onAnswerQuiz: (quizId: string, choice: string | null) => Promise<QuizResult>;
@@ -43,10 +45,13 @@ export function ReportScreen(props: ReportScreenProps) {
   const kindOf = (id: string) => pets.findIndex((p) => p.id === id);
   const saved = save.kind === 'saved' ? save.response : null;
   const served = summary.clearedCells > 0;
-  const subtitle = mode === 'fish' ? 'fish.report_subtitle' : served ? 'report.subtitle' : 'report.generic_caption';
+  const fish = mode === 'fish';
+  const subtitle = fish ? 'fish.report_subtitle' : served ? 'report.subtitle' : 'report.generic_caption';
 
+  // 鱼报告：不涉及普通图鉴、竞猜、鱼关邀请与店长（服务端也不返回这些），导航为鱼关排行榜与回门店
   return (
-    <main className={`${styles.screen} ${styles.withStickyActions}`}>
+    <main className={`${styles.screen} ${styles.withStickyActions}`} data-theme={fish ? 'fish' : undefined}>
+      {fish && <UnderwaterBackdrop />}
       <BrandHeader heading={t(mode === 'fish' ? 'fish.report_title' : 'report.title')} tagline={subtitle} onBack={onHome} />
       <ScoreCard
         mode={mode}
@@ -60,10 +65,10 @@ export function ReportScreen(props: ReportScreenProps) {
         host={mode === 'normal' && manager ? { name: manager.pet.name, stickerSrc: stickerUrl(manager.pet.petId, 512) } : null}
       />
       <SaveStatus state={save} onRetry={onRetry} />
-      {save.kind === 'saved' && (
+      {!fish && save.kind === 'saved' && (
         <CollectionCards pets={save.newPets.map((p) => ({ pet: pets[kindOf(p.id)] ?? p, kind: kindOf(p.id) }))} onSelect={mode === 'normal' ? onOpenPet : undefined} />
       )}
-      {saved?.quiz && kindOf(saved.quiz.petId) >= 0 && (
+      {!fish && saved?.quiz && kindOf(saved.quiz.petId) >= 0 && (
         <QuizCard
           quiz={saved.quiz}
           pet={pets[kindOf(saved.quiz.petId)]}
@@ -71,16 +76,16 @@ export function ReportScreen(props: ReportScreenProps) {
           onAnswer={(choice) => onAnswerQuiz(saved.quiz!.quizId, choice)}
         />
       )}
-      {saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}
+      {!fish && saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}
       {mode === 'normal' && manager && <ManagerCard variant="signature" name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} />}
       <nav className={styles.navRow}>
-        <NavTile icon="📖" label={t('nav.collection')} onClick={onCollection} />
-        <NavTile icon="🏆" label={t('nav.leaderboard')} onClick={onLeaderboard} />
+        {!fish && <NavTile icon="📖" label={t('nav.collection')} onClick={onCollection} />}
+        <NavTile icon="🏆" label={t(fish ? 'fish.leaderboard' : 'nav.leaderboard')} onClick={onLeaderboard} />
         <NavTile icon="🏠" label={t('action.back_to_shop')} onClick={onHome} />
       </nav>
       <div className={styles.stickyActions}>
         <Button size="lg" block onClick={onPlayAgain} data-testid="play-again">
-          🐾 {t('action.play_again')}
+          {fish ? '🐟' : '🐾'} {t('action.play_again')}
         </Button>
       </div>
     </main>

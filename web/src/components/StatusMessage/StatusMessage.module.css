@@ -6,13 +6,13 @@
   margin: 0;
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
-  background: var(--color-surface-muted);
+  background: var(--panel);
   font-size: var(--text-sm);
   line-height: 1.4;
 }
 
 .error {
-  background: #fdecec;
+  background: var(--error-bg);
   color: var(--color-danger);
 }
 

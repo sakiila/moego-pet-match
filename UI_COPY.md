@@ -333,6 +333,10 @@
 | fish.report_mvp | 本局 MVP：{fishColorName} | This Round's MVP: {fishColorName} |
 | fish.report_tiles | 清除格数 | Tiles Cleared |
 | fish.leaderboard | 鱼关排行榜 | Fish Leaderboard |
+| fish.prep_loading | 小鱼正在入缸…… | The fish are swimming in… |
+| fish.rush_served | 已清除 {count}/12 格 | {count}/12 tiles cleared |
+| tutorial.water_jet | 水流喷头：和邻格交换，水流清一行或一列。 | Water Jet: swap with a neighbor to sweep a row or column. |
+| tutorial.bubble_machine | 气泡机：和邻格交换，泡泡清出一个十字。 | Bubble Machine: swap with a neighbor to clear a row and column. |
 | review.fish.high_chain | 这波水流，鱼都跟上节奏了。 | Now that's a splashy combo. |
 | review.fish.rush_success | 小鱼加急，水到渠成。 | Rush order, smooth sailing. |
 | review.fish.tool_combo | 这波工具搭档，水花刚刚好。 | Tools teamed up. What a splash. |
@@ -340,6 +344,8 @@
 | review.fish.no_service | 先熟悉一下水流，下局再露一手。 | Get a feel for the current. Next round, make a splash. |
 
 邀请仅在第三个有效完整普通局成功保存后的报告出现，不用于首页或提前预告。点击只是进入准备页，个人解锁已保存；未点击也可随后从鱼榜重玩。鱼关规则说明保留「连成一线」含义：直线三消与已确认的四消、五连、L / T 形规则并用；`{fishColorName}` 是本局鱼色类别的界面名称，使用相应语言，不是给个体鱼编造姓名。零服务省略 MVP；水流喷头／气泡机沿用梳子／剪刀能力、合体和称号条件，鱼关不使用毛发评语。
+
+`fish.prep_loading`、`fish.rush_served`、`tutorial.water_jet`、`tutorial.bubble_machine` 于 2026-10-23 确认补入：后三条由已确认的名称、说明与 `fish.rush_progress` 拆分或拼成；鱼关工具合体带教复用通用的 `tutorial.tool_combo`。
 
 鱼关深蓝水下方向已确认。局内标题复用已校读的「小鱼也来排班啦」，不把实际游玩误标为加载或准备状态；鱼关催单进度用「已清除」表达格数，不表示独立鱼的数量，倒计时和奖励条件不变。
 

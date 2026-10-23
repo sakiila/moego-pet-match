@@ -1,6 +1,6 @@
 import type { GalleryEntry } from '../dev/gallery/types';
 import { createGame, type GameSummary } from '../engine';
-import { PLACEHOLDER_PETS } from '../game/pets';
+import { PLACEHOLDER_PETS, SAMPLE_FISH } from '../game/pets';
 import { BoardScreen } from './BoardScreen';
 import { PrepScreen } from './PrepScreen';
 import { ReportScreen } from './ReportScreen';
@@ -42,6 +42,40 @@ const entry: GalleryEntry = {
     'prep · failed': () => <PrepScreen pets={null} failed onStart={noop} onRetry={noop} />,
     'prep · ready': () => <PrepScreen pets={PLACEHOLDER_PETS} onStart={noop} />,
     'board (live, local)': () => <BoardScreen game={createGame({ seed: 11, lineup })} pets={PLACEHOLDER_PETS} onFinished={noop} onExit={noop} />,
+    'fish prep · loading': () => <PrepScreen mode="fish" pets={null} onStart={noop} onBack={noop} />,
+    'fish prep · ready': () => <PrepScreen mode="fish" pets={SAMPLE_FISH} onStart={noop} onBack={noop} />,
+    'fish board (live, local)': () => (
+      <BoardScreen mode="fish" game={createGame({ seed: 11, lineup: SAMPLE_FISH.map((f) => f.id) })} pets={SAMPLE_FISH} onFinished={noop} onExit={noop} />
+    ),
+    'fish report · saved (first fish score)': () => (
+      <ReportScreen
+        {...reportProps}
+        mode="fish"
+        pets={SAMPLE_FISH}
+        summary={{ ...summary, pets: summary.pets.map((p, i) => ({ ...p, id: SAMPLE_FISH[i].id })) }}
+        save={{
+          kind: 'saved',
+          newPets: [],
+          response: {
+            gameId: 'g',
+            score: 2480,
+            personalBest: { previous: null, current: 2480, isNew: true },
+            newCollected: [],
+            progress: { completedNormalGames: 5, fishUnlocked: true, unlockedNow: false, counted: false },
+            quiz: null,
+          },
+        }}
+      />
+    ),
+    'fish report · zero service': () => (
+      <ReportScreen
+        {...reportProps}
+        mode="fish"
+        pets={SAMPLE_FISH}
+        summary={{ ...summary, score: 0, clearedCells: 0, clearedByMultiplier: [0, 0, 0, 0, 0], maxChain: 0, toolsFired: 0, rushSucceeded: false, pets: summary.pets.map((p, i) => ({ ...p, id: SAMPLE_FISH[i].id, served: 0, firstServedSeq: null })) }}
+        save={{ kind: 'saving' }}
+      />
+    ),
     'report · saving': () => <ReportScreen {...reportProps} save={{ kind: 'saving' }} />,
     'report · retryable': () => <ReportScreen {...reportProps} save={{ kind: 'retryable' }} />,
     'report · saved (record, collection, quiz, fish invite)': () => (

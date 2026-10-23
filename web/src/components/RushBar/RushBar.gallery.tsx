@@ -1,4 +1,5 @@
 import type { GalleryEntry } from '../../dev/gallery/types';
+import { FishFrame } from '../../dev/gallery/FishFrame';
 import { RushBar } from './RushBar';
 
 const entry: GalleryEntry = {
@@ -11,6 +12,13 @@ const entry: GalleryEntry = {
     'active last second': () => <RushBar view={{ state: 'active', served: 11, secondsLeft: 1 }} />,
     success: () => <RushBar view={{ state: 'success' }} />,
     expired: () => <RushBar view={{ state: 'expired' }} />,
+    'fish · active 6/12 · success · expired': () => (
+      <FishFrame>
+        <RushBar mode="fish" view={{ state: 'active', served: 6, secondsLeft: 8 }} />
+        <RushBar mode="fish" view={{ state: 'success' }} />
+        <RushBar mode="fish" view={{ state: 'expired' }} />
+      </FishFrame>
+    ),
   },
 };
 

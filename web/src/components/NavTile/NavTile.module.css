@@ -9,12 +9,12 @@
   background: none;
   font: inherit;
   font-weight: var(--weight-bold);
-  color: var(--color-ink);
+  color: var(--fg);
   cursor: pointer;
 }
 
 .tile:hover {
-  background: var(--color-surface-muted);
+  background: var(--panel);
 }
 
 .icon {

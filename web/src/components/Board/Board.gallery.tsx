@@ -3,7 +3,8 @@ import { createGame, previewRange, trySwap, type GameState, type Pos, type Timel
 import { parseBoard } from '../../engine/board';
 import type { GalleryEntry } from '../../dev/gallery/types';
 import { frameAt, type PlaybackBase } from '../../game/playback';
-import { PLACEHOLDER_PETS } from '../../game/pets';
+import { PLACEHOLDER_PETS, SAMPLE_FISH } from '../../game/pets';
+import { UnderwaterBackdrop } from '../UnderwaterBackdrop/UnderwaterBackdrop';
 import { Button } from '../../ui/primitives/Button';
 import { Board } from './Board';
 
@@ -79,6 +80,21 @@ const entry: GalleryEntry = {
       />
     ),
     hint: () => <Board frame={idle(FIXTURE)} pets={PLACEHOLDER_PETS} interactive hint={{ from: p(0, 0), to: p(0, 1) }} />,
+    'fish · tool preview (water jet ⇄ neighbor)': () => (
+      <div data-theme="fish" style={{ position: 'relative', padding: 12, borderRadius: 16, overflow: 'hidden' }}>
+        <UnderwaterBackdrop inline />
+        <div style={{ position: 'relative' }}>
+          <Board
+            mode="fish"
+            frame={idle(FIXTURE)}
+            pets={SAMPLE_FISH}
+            interactive={false}
+            staticSelected={p(2, 3)}
+            staticPreview={previewRange(previewState, p(2, 3), p(2, 4))}
+          />
+        </div>
+      </div>
+    ),
     'live · random': () => <Live />,
     'live · 210 cascade': () => <Replay />,
   },

@@ -6,6 +6,8 @@ import { RushBar } from '../components/RushBar/RushBar';
 import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
 import { StatusPanel } from '../components/StatusPanel/StatusPanel';
 import { TipBar } from '../components/TipBar/TipBar';
+import type { GameMode } from '../api/types';
+import { UnderwaterBackdrop } from '../components/UnderwaterBackdrop/UnderwaterBackdrop';
 import type { GameState, GameSummary } from '../engine';
 import type { PetInfo } from '../game/pets';
 import { useGameSession } from '../game/useGameSession';
@@ -13,6 +15,7 @@ import { useI18n } from '../i18n';
 import styles from './Screen.module.css';
 
 export interface BoardScreenProps {
+  mode?: GameMode;
   game: GameState;
   pets: PetInfo[];
   /** 开发验证用：游戏时钟倍速与起始时刻。 */
@@ -25,9 +28,10 @@ export interface BoardScreenProps {
   onExit: () => void;
 }
 
-export function BoardScreen({ game, pets, speed, startAt, uncollected, families, onFinished, onExit }: BoardScreenProps) {
+export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncollected, families, onFinished, onExit }: BoardScreenProps) {
   const { t } = useI18n();
-  const session = useGameSession(game, onFinished, { speed, startAt, uncollected, families });
+  const session = useGameSession(game, onFinished, { speed, startAt, mode, uncollected, families });
+  const fish = mode === 'fish';
   const { view } = session;
   const [quitOpen, setQuitOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -40,13 +44,15 @@ export function BoardScreen({ game, pets, speed, startAt, uncollected, families,
   if (import.meta.env.DEV) (window as unknown as { __petMatch?: unknown }).__petMatch = { view, attemptSwap: session.attemptSwap, peek: session.peek };
 
   return (
-    <main className={styles.screen}>
-      <BrandHeader tagline="board.tagline" />
+    <main className={styles.screen} data-theme={fish ? 'fish' : undefined}>
+      {fish && <UnderwaterBackdrop />}
+      <BrandHeader title={fish ? 'fish' : 'scheduling'} tagline={fish ? 'fish.prep_rule' : 'board.tagline'} />
       <StatusPanel timeLeftMs={view.timeLeftMs} score={view.frame.score} />
-      <RushBar view={view.rush} />
+      <RushBar view={view.rush} mode={mode} />
       <div className={styles.boardArea}>
         <Board
           frame={view.frame}
+          mode={mode}
           pets={pets}
           interactive={!view.timeUp}
           hint={view.hint}

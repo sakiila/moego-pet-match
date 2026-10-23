@@ -11,6 +11,15 @@ const entry: GalleryEntry = {
     'comb · row': () => cell(<ToolPiece tool="combH" />),
     'comb · column': () => cell(<ToolPiece tool="combV" />),
     scissors: () => cell(<ToolPiece tool="scissors" />),
+    'fish · water jet row / column · bubble machine': () => (
+      <div data-theme="fish" style={{ display: 'flex', gap: 8, padding: 12, background: 'var(--bg)', borderRadius: 12 }}>
+        {cell(<ToolPiece tool="combH" mode="fish" />)}
+        {cell(<ToolPiece tool="combV" mode="fish" />)}
+        {cell(<ToolPiece tool="scissors" mode="fish" />)}
+        {cell(<ToolPiece tool="combH" mode="fish" />, 40)}
+        {cell(<ToolPiece tool="scissors" mode="fish" />, 40)}
+      </div>
+    ),
     'small (40)': () => (
       <div style={{ display: 'flex', gap: 8 }}>
         {cell(<ToolPiece tool="combH" />, 40)}

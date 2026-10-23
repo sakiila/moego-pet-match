@@ -8,6 +8,8 @@
   min-height: 100dvh;
   margin: 0 auto;
   padding: var(--space-3) var(--space-4) max(var(--space-3), env(safe-area-inset-bottom));
+  /* 主题切换在页面根节点上，颜色在这里重新取值（body 继承的是已算好的颜色） */
+  color: var(--fg);
 }
 
 .grow {
@@ -31,7 +33,7 @@
   background: none;
   font: inherit;
   font-weight: var(--weight-bold);
-  color: var(--color-ink);
+  color: var(--fg);
   cursor: pointer;
 }
 
@@ -97,8 +99,8 @@
   max-width: 480px;
   padding: var(--space-3) var(--space-4) max(var(--space-3), env(safe-area-inset-bottom));
   transform: translateX(-50%);
-  border-top: 1px solid var(--color-line);
-  background: var(--color-surface);
+  border-top: 1px solid var(--line);
+  background: var(--bg);
 }
 
 .boardArea {

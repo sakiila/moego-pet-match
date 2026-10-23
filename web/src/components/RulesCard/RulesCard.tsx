@@ -1,8 +1,9 @@
+import type { GameMode } from '../../api/types';
 import { useI18n } from '../../i18n';
 import styles from './RulesCard.module.css';
 
-/** 开局前只教三消与两种交换方式；工具用法留到首次自然出现时提示。 */
-export function RulesCard() {
+/** 开局前只教三消与两种交换方式；工具用法留到首次自然出现时提示。鱼关强调同色匹配。 */
+export function RulesCard({ mode = 'normal' }: { mode?: GameMode }) {
   const { t } = useI18n();
   return (
     <>
@@ -11,7 +12,7 @@ export function RulesCard() {
           <span className={styles.icon} aria-hidden>
             🔁
           </span>
-          {t('prep.rule')}
+          {t(mode === 'fish' ? 'fish.prep_rule' : 'prep.rule')}
         </p>
         <p className={styles.row}>
           <span className={styles.icon} aria-hidden>

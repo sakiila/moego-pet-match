@@ -1,3 +1,4 @@
+import type { GameMode } from '../api/types';
 import { RULES, type Board } from '../engine';
 import type { MessageKey } from '../i18n';
 
@@ -45,6 +46,8 @@ export interface TipInputs {
   tutorial: Tutorial | null;
   hint: boolean;
   lastSeconds: boolean;
+  /** 鱼关的梳子 / 剪刀外观是水流喷头 / 气泡机，带教文案随之切换。 */
+  mode?: GameMode;
 }
 
 /** 棋盘外提示区同一时刻至多一条：收尾 > 洗牌 > 局内事件贴纸 > 带教 > 卡关提示 > 最后 10 秒。 */
@@ -53,26 +56,28 @@ export function pickTip(t: TipInputs): TipView | null {
   if (t.shuffling) return { key: 'board.shuffle' };
   if (t.event) return t.event;
   if (t.tutorial === 'combo') return { key: 'tutorial.tool_combo' };
-  if (t.tutorial === 'comb') return { key: 'tutorial.comb' };
-  if (t.tutorial === 'scissors') return { key: 'tutorial.scissors' };
+  const fish = t.mode === 'fish';
+  if (t.tutorial === 'comb') return { key: fish ? 'tutorial.water_jet' : 'tutorial.comb' };
+  if (t.tutorial === 'scissors') return { key: fish ? 'tutorial.bubble_machine' : 'tutorial.scissors' };
   if (t.hint) return { key: 'board.move_hint' };
   if (t.lastSeconds) return { key: 'round.last_seconds' };
   return null;
 }
 
-const SEEN_KEY = 'pet-match.tutorial-seen';
+/** 两种模式的工具外观不同，看过的带教分开记住。 */
+const seenKey = (mode: GameMode) => (mode === 'fish' ? 'pet-match.tutorial-seen.fish' : 'pet-match.tutorial-seen');
 
-export function loadSeenTutorials(): Set<string> {
+export function loadSeenTutorials(mode: GameMode = 'normal'): Set<string> {
   try {
-    return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) ?? '[]') as string[]);
+    return new Set(JSON.parse(localStorage.getItem(seenKey(mode)) ?? '[]') as string[]);
   } catch {
     return new Set();
   }
 }
 
-export function saveSeenTutorials(seen: ReadonlySet<string>) {
+export function saveSeenTutorials(seen: ReadonlySet<string>, mode: GameMode = 'normal') {
   try {
-    localStorage.setItem(SEEN_KEY, JSON.stringify([...seen]));
+    localStorage.setItem(seenKey(mode), JSON.stringify([...seen]));
   } catch {
     // 无法记住时下次可能再提示一次
   }

@@ -79,6 +79,8 @@
   padding: var(--space-5) var(--space-4);
   background: var(--bg);
   color: var(--fg);
+  /* 页面里 position: fixed 的水下背景与底部操作条，在陈列页里限定在本格内 */
+  contain: layout paint;
 }
 
 @media (max-width: 640px) {

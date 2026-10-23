@@ -7,6 +7,8 @@ import styles from './TipBar.module.css';
 const ICON: Partial<Record<MessageKey, string>> = {
   'tutorial.comb': '🪮',
   'tutorial.scissors': '✂️',
+  'tutorial.water_jet': '💦',
+  'tutorial.bubble_machine': '🫧',
   'tutorial.tool_combo': '🤝',
   'board.move_hint': '👉',
   'board.shuffle': '🔀',

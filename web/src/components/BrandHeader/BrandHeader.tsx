@@ -3,8 +3,8 @@ import { useI18n, type MessageKey } from '../../i18n';
 import styles from './BrandHeader.module.css';
 
 export interface BrandHeaderProps {
-  /** game：游戏名（身份页、门店）；scheduling：Smart Scheduling（准备、棋盘）。 */
-  title?: 'game' | 'scheduling';
+  /** game：游戏名（身份页、门店）；scheduling：Smart Scheduling（准备、棋盘）；fish：鱼关「小鱼也来排班啦」。 */
+  title?: 'game' | 'scheduling' | 'fish';
   /** 标题下的一句说明。 */
   tagline?: MessageKey;
   /** 右上角额外内容（如当前身份头像）。 */
@@ -21,7 +21,9 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
   const [lead, accent] =
     title === 'game'
       ? [t('brand.title_lead'), t('brand.title_accent')]
-      : (() => {
+      : title === 'fish'
+        ? [t('fish.prep_title'), '']
+        : (() => {
           const [first, ...rest] = t('board.title').split(' ');
           return [first, rest.join(' ')];
         })();
@@ -54,8 +56,8 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
       ) : (
         <h1 className={styles.title}>
           {lead}
-          {locale === 'en' || title === 'scheduling' ? ' ' : ''}
-          <em>{accent}</em>
+          {accent && (locale === 'en' || title === 'scheduling') ? ' ' : ''}
+          {accent && <em>{accent}</em>}
         </h1>
       )}
       {tagline && <p className={styles.tagline}>{t(tagline)}</p>}

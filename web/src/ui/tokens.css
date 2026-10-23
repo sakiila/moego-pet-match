@@ -31,14 +31,25 @@
   --color-success: #2f9e6b;
   --color-danger: #d64545;
 
-  /* 语义映射 */
+  /*
+   * 语义映射：直接放在页面底色上的界面（页头、计时、催单、提示、阵容、规则、导航）用这一组，
+   * 鱼关只重定义这一组。报告单、弹层、抽屉等「纸面」继续用上面的原始颜色，因此在鱼关里仍是浅色纸面。
+   */
   --bg: var(--color-surface);
   --fg: var(--color-ink);
   --fg-muted: var(--color-ink-muted);
   --accent: var(--color-brand);
   --accent-fg: var(--color-paper);
   --panel: var(--color-surface-muted);
+  --card: var(--color-paper);
+  --line: var(--color-line);
   --border: var(--color-ink);
+  --board-border: var(--color-ink);
+  --board-bg: #fbf7f1;
+  --time-bg: #fff4ec;
+  --score-bg: #eef4ff;
+  --urgent-bg: #ffe3e3;
+  --error-bg: #fdecec;
 
   /* 形状 */
   --radius-sm: 8px;
@@ -78,12 +89,38 @@
   --z-dialog: 100;
 }
 
-/* Peter 鱼关：深蓝水下主题，保留 MoeGo 橙作强调色 */
+/*
+ * Peter 鱼关：深蓝水下。白字、半透明深蓝面板、浅冰蓝棋格；保留 MoeGo 橙作强调色。
+ * 鱼色本身就是匹配依据，棋格统一浅冰蓝，不再分配辅助底色。
+ */
 [data-theme='fish'] {
-  --bg: #0d2a4a;
+  --bg: #0b2a4d;
   --fg: #ffffff;
-  --fg-muted: #b8cde3;
-  --panel: #dcefff;
+  --fg-muted: #b8d3ee;
+  --panel: rgb(255 255 255 / 0.08);
+  --card: rgb(12 52 94 / 0.72);
+  --line: rgb(140 200 255 / 0.28);
   --border: #06182c;
+  --board-border: #8fd0ff;
+  --board-bg: rgb(120 190 255 / 0.18);
+  --time-bg: rgb(12 52 94 / 0.72);
+  --score-bg: rgb(12 52 94 / 0.72);
+  --urgent-bg: rgb(214 69 69 / 0.35);
+  --error-bg: rgb(214 69 69 / 0.25);
   --shadow-offset: 0 5px 0 #06182c;
+
+  --pet-tint-0: #dcefff;
+  --pet-tint-1: #dcefff;
+  --pet-tint-2: #dcefff;
+  --pet-tint-3: #dcefff;
+  --pet-tint-4: #dcefff;
+  --pet-tint-5: #dcefff;
+
+  /* 水下背景装饰（只用于 UnderwaterBackdrop） */
+  --water-top: #12477a;
+  --water-deep: #061a33;
+  --water-beam: rgb(173 222 255 / 0.12);
+  --water-bubble: rgb(190 230 255 / 0.55);
+  --water-weed: #1f6b5c;
+  --water-rock: #0d2c4a;
 }

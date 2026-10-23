@@ -1,4 +1,5 @@
 import type { GalleryEntry } from '../../dev/gallery/types';
+import { FishFrame } from '../../dev/gallery/FishFrame';
 import { PLACEHOLDER_PETS } from '../../game/pets';
 import { TipBar } from './TipBar';
 
@@ -11,6 +12,13 @@ const entry: GalleryEntry = {
     'tutorial · scissors': () => <TipBar tip={{ key: 'tutorial.scissors' }} />,
     'tutorial · combo': () => <TipBar tip={{ key: 'tutorial.tool_combo' }} />,
     'move hint': () => <TipBar tip={{ key: 'board.move_hint' }} />,
+    'fish · water jet · bubble machine · hint': () => (
+      <FishFrame>
+        <TipBar tip={{ key: 'tutorial.water_jet' }} />
+        <TipBar tip={{ key: 'tutorial.bubble_machine' }} />
+        <TipBar tip={{ key: 'board.move_hint' }} />
+      </FishFrame>
+    ),
     'new pets · 3 merged': () => (
       <TipBar tip={{ key: 'board.new_pets', vars: { count: 3 }, petIds: ['mochi', 'tofu', 'kiwi'] }} pets={PLACEHOLDER_PETS} />
     ),

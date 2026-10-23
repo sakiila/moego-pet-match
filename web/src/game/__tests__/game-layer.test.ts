@@ -5,7 +5,7 @@ import { createGameClock } from '../clock';
 import { resolveDrag, resolveTap } from '../input';
 import { frameAt, type PlaybackBase } from '../playback';
 import { rushView } from '../rush';
-import { hintDue, nextTutorial, pickTip } from '../tips';
+import { hintDue, loadSeenTutorials, nextTutorial, pickTip, saveSeenTutorials } from '../tips';
 
 const LINEUP = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'];
 const DEAD = ['ABCDEFA', 'CDEFABC', 'EFABCDE', 'ABCDEFA', 'CDEFABC', 'EFABCDE', 'ABCDEFA'];
@@ -210,6 +210,25 @@ describe('提示与带教', () => {
     expect(pickTip({ ...none, hint: true, lastSeconds: true })?.key).toBe('board.move_hint');
     expect(pickTip({ ...none, hint: true, tutorial: 'comb', event: { key: 'board.reunion', petIds: ['a', 'b'] } })?.key).toBe('board.reunion');
     expect(pickTip(none)).toBeNull();
+  });
+
+  it('鱼关首次工具带教用水流喷头 / 气泡机文案，合体带教共用', () => {
+    const none = { finishing: false, shuffling: false, tutorial: null, hint: false, lastSeconds: false, mode: 'fish' as const };
+    expect(pickTip({ ...none, tutorial: 'comb' })?.key).toBe('tutorial.water_jet');
+    expect(pickTip({ ...none, tutorial: 'scissors' })?.key).toBe('tutorial.bubble_machine');
+    expect(pickTip({ ...none, tutorial: 'combo' })?.key).toBe('tutorial.tool_combo');
+    expect(pickTip({ ...none, mode: 'normal', tutorial: 'comb' })?.key).toBe('tutorial.comb');
+  });
+
+  it('看过的带教按模式分别记住：普通局看过梳子，鱼关仍提示水流喷头', () => {
+    const store = new Map<string, string>();
+    (globalThis as { localStorage?: Pick<Storage, 'getItem' | 'setItem'> }).localStorage = {
+      getItem: (k) => store.get(k) ?? null,
+      setItem: (k, v) => void store.set(k, v),
+    };
+    saveSeenTutorials(new Set(['tool', 'combo']), 'normal');
+    expect(loadSeenTutorials('normal')).toEqual(new Set(['tool', 'combo']));
+    expect(loadSeenTutorials('fish')).toEqual(new Set());
   });
 });
 

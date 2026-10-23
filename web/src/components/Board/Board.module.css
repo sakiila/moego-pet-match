@@ -1,9 +1,9 @@
 .frame {
   width: 100%;
   padding: var(--space-2);
-  border: var(--stroke) solid var(--color-ink);
+  border: var(--stroke) solid var(--board-border);
   border-radius: var(--radius-lg);
-  background: #fbf7f1;
+  background: var(--board-bg);
   box-shadow: var(--shadow-soft);
 }
 

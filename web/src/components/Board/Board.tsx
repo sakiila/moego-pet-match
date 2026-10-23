@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent } from 'react';
+import type { GameMode } from '../../api/types';
 import { TIMING, type Move, type Pos } from '../../engine';
 import { INPUT, resolveDrag, resolveTap } from '../../game/input';
 import type { PetInfo } from '../../game/pets';
@@ -21,6 +22,8 @@ export interface BoardProps {
   /** 尝试交换；返回是否被受理。 */
   onSwap?: (from: Pos, to: Pos) => boolean;
   onDraggingChange?: (dragging: boolean) => void;
+  /** 鱼关时工具显示为水流喷头 / 气泡机，能力不变。 */
+  mode?: GameMode;
   /** 陈列页用：固定显示的选中格与预览。 */
   staticSelected?: Pos | null;
   staticPreview?: Pos[] | null;
@@ -65,6 +68,7 @@ export function Board({
   getPreview,
   onSwap,
   onDraggingChange,
+  mode = 'normal',
   staticSelected,
   staticPreview,
 }: BoardProps) {
@@ -217,7 +221,7 @@ export function Board({
                   {piece.type === 'pet' ? (
                     <PetTile pet={pets[piece.kind]} tint={piece.kind} size={cellPx} />
                   ) : (
-                    <ToolPiece tool={piece.tool} />
+                    <ToolPiece tool={piece.tool} mode={mode} />
                   )}
                 </div>
               </div>

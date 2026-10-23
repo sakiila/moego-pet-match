@@ -9,6 +9,11 @@
   box-shadow: inset 0 0 0 2px var(--color-brand), 0 2px 0 var(--color-brand-strong);
 }
 
+/* 鱼关：与小鱼同一浅冰蓝棋格，橙色描边仍标明这是工具 */
+.fish {
+  background: var(--pet-tint-0);
+}
+
 .icon {
   width: 70%;
   height: 70%;
