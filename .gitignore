@@ -1,5 +1,7 @@
 /data/pet-materials/
 /data/pet-studio/
+# 同事上传的原图（submissions pull 下载到这里，可能带 EXIF 位置信息）
+/data/submissions/
 
 .env
 .env.*

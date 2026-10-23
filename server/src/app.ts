@@ -10,18 +10,22 @@ import { leaderboardRoutes } from './routes/leaderboard.ts';
 import { petRoutes } from './routes/pets.ts';
 import { playerRoutes } from './routes/players.ts';
 import { rosterRoutes } from './routes/roster.ts';
-import { testUploadRoutes } from './routes/testUpload.ts';
+import { submissionRoutes } from './routes/submissions.ts';
+import type { SubmissionHooks } from './services/submissions.ts';
 
 export interface AppDeps {
   pool: Pool;
   /** 测试用：结算事务中途注入失败。 */
   settleHooks?: SettleHooks;
+  /** 测试用：上传写库前注入失败。 */
+  submissionHooks?: SubmissionHooks;
+  /** 当前时刻（测试可固定，用于每日上限的北京自然日）。 */
+  now?: () => Date;
   images?: {
     cache: DiskCache;
     /** R2 私有桶；未配置时宠物图返回 503。 */
     store: ObjectStore | null;
     fetchAvatar: AvatarFetcher;
-    enableTestUpload?: boolean;
   };
 }
 
@@ -41,6 +45,6 @@ export function buildApp(deps: AppDeps) {
   app.register(leaderboardRoutes, deps);
   app.register(petRoutes, deps);
   app.register(imageRoutes, deps);
-  app.register(testUploadRoutes, deps);
+  app.register(submissionRoutes, deps);
   return app;
 }

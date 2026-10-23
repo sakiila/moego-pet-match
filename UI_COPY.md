@@ -91,7 +91,7 @@
 
 ### 2.3 完整信息使用说明 · 要点已确认，正文为草稿
 
-六项要点已确认：收集内容、展示范围、AI 处理、存储位置、删除方式、同意方式；须如实写出 AI 处理和美国存储位置。正文为友好、直接口吻的草稿，接入前按实际字段再核对一次。
+六项要点已确认：收集内容、展示范围、AI 处理、存储位置、删除方式、同意方式；须如实写出 AI 处理和实际存储位置。2026-10-23 确认保留现有 R2 桶（亚太区域），存储句改为「数据库和游戏服务器在美国，图片在 Cloudflare R2 亚太区域」，上传说明同步。正文为友好、直接口吻的草稿，接入前按实际字段再核对一次。
 
 | 键 | 中文 | English |
 | --- | --- | --- |
@@ -100,7 +100,7 @@
 | info.full.collect | **会记录什么**：你选择的同事身份（Slack ID、名字、头像，来自公司现有人员名单）；对局成绩、图鉴收集、游玩进度与隐藏关状态；你主动上传的宠物照片、名字及与你的主人关联；你提交的删除申请。上传的照片按原文件保存，可能带有拍摄位置等信息；原文件只私有存储，位置等信息不会在游戏中展示。语言与声音偏好只存在你的浏览器里。服务器会保留常规访问日志。 | **What we record**: the coworker profile you pick (Slack ID, name, and avatar from the company's existing people list); your scores, collection, play progress, and hidden-level status; pet photos, names, and owner links you choose to upload; and any removal requests you send. Uploaded photos are stored as original files, which may include details like where they were taken; the original files stay private and those details are never shown in the game. Language and sound settings stay in your browser. The server keeps standard access logs. |
 | info.full.display | **会在哪里展示**：同事排行榜显示你的名字、头像和最好成绩。宠物会出现在棋盘、图鉴、每日店长和主人竞猜中；主人名字在图鉴里收集后才显示。成绩卡只在你主动保存或分享时离开游戏。 | **Where it shows up**: the coworker leaderboard shows your name, avatar, and best score. Pets appear on the board, in the Pet Collection, as Manager of the Day, and in the owner quiz; owner names in the Pet Collection appear only after that pet is collected. Score cards leave the game only when you save or share them. |
 | info.full.ai | **AI 处理**：宠物照片会提交给 AI 图像服务，生成统一画风的头像贴纸，再由 Bob 人工核对后上架；交给 AI 前会先去掉拍摄位置等信息。已收集的同事可以在图鉴卡背面看到 Bob 处理过的照片版本，不会看到原文件。 | **AI processing**: pet photos are sent to an AI image service to create matching-style head stickers, which Bob reviews by hand before they go live. Location details are removed before anything is sent to AI. Coworkers who have collected a pet can see a processed version of the photo on the back of its card, never the original file. |
-| info.full.storage | **存在哪里**：数据存放在美国（Supabase 美西数据库、Cloudflare R2 图片存储，以及洛杉矶的游戏服务器），只用于这个内部游戏活动。 | **Where it's stored**: in the United States (a Supabase database in US West, Cloudflare R2 image storage, and the game server in Los Angeles), used only for this internal game. |
+| info.full.storage | **存在哪里**：数据库和游戏服务器在美国（Supabase 美西、洛杉矶），图片存储在 Cloudflare R2 的亚太区域，只用于这个内部游戏活动。 | **Where it's stored**: the database and game server are in the United States (Supabase US West, Los Angeles); images are stored in Cloudflare R2's Asia-Pacific region. Used only for this internal game. |
 | info.full.removal | **想删除怎么办**：在「我的宠物」或本页提交删除申请，Bob 人工核实后会下架并清理游戏里的资料。已有成绩会保留，但不再显示该宠物的资料。飞书原文档、AI 服务和托管备份中的副本不在游戏控制范围内，处理结果里会如实说明。 | **Want something removed?** Send a request from My Pets or this page. Bob will verify it, take the pet down, and clean up the game's copies. Existing scores stay, but the pet's details are no longer shown. Copies in the original Feishu doc, the AI service, or hosted backups are outside the game's control; the result will say so honestly. |
 | info.full.consent | **同意方式**：点击「以 {playerName} 身份继续」即表示你同意以上使用方式。 | **Consent**: tapping "Continue as {playerName}" means you agree to the above. |
 
@@ -409,7 +409,7 @@
 | Key | 中文 | English |
 | --- | --- | --- |
 | upload.use_title | 照片展示与处理说明 | Photo Use and Processing |
-| upload.use_body | 1. **内部展示**：上架后，处理后的宠物贴纸头像将用于全公司同事可见的三消棋盘、宠物图鉴、每日店长及主人竞猜；已收集该宠物的同事可在图鉴卡背面查看 Bob 处理后的照片版本（已去除 EXIF 位置信息，不直接公开原始文件），并展示宠物名字与你的同事身份。<br>2. **AI 与人工处理**：提交的原图先私有存储在 Cloudflare R2（美国），由 Bob（@Bob）人工下载、去除位置信息后通过 AI 图像服务转换统一贴纸画风，经人工核对后再上架；不会自动直接公开原始上传文件。<br>3. **随时申请移除**：上架后如不希望继续展示，可随时在「我的宠物」或图鉴详情页提交删除申请，由 Bob 人工核实后下架并清理游戏持有的文件。 | 1. **Internal Display**: Once listed, the styled pet sticker portrait will appear on the match-3 board, in the Pet Collection, as Manager of the Day, and in the owner quiz for MoeGo coworkers. Coworkers who collect your pet can flip the card to view a processed photo (with EXIF location details removed, never the raw file) alongside the pet's name and your coworker profile.<br>2. **AI & Manual Review**: Uploaded originals are stored privately in Cloudflare R2 (US). Bob (@Bob) manually reviews each submission, strips location metadata, and uses an AI image service to generate the unified sticker portrait before listing. Raw uploads are never published automatically.<br>3. **Removal Anytime**: If you ever want your pet removed, submit a request from My Pets or the pet's detail card, and Bob will manually verify, unlist, and delete the game's copies. |
+| upload.use_body | 1. **内部展示**：上架后，处理后的宠物贴纸头像将用于全公司同事可见的三消棋盘、宠物图鉴、每日店长及主人竞猜；已收集该宠物的同事可在图鉴卡背面查看 Bob 处理后的照片版本（已去除 EXIF 位置信息，不直接公开原始文件），并展示宠物名字与你的同事身份。<br>2. **AI 与人工处理**：提交的原图先私有存储在 Cloudflare R2（亚太），由 Bob（@Bob）人工下载、去除位置信息后通过 AI 图像服务转换统一贴纸画风，经人工核对后再上架；不会自动直接公开原始上传文件。<br>3. **随时申请移除**：上架后如不希望继续展示，可随时在「我的宠物」或图鉴详情页提交删除申请，由 Bob 人工核实后下架并清理游戏持有的文件。 | 1. **Internal Display**: Once listed, the styled pet sticker portrait will appear on the match-3 board, in the Pet Collection, as Manager of the Day, and in the owner quiz for MoeGo coworkers. Coworkers who collect your pet can flip the card to view a processed photo (with EXIF location details removed, never the raw file) alongside the pet's name and your coworker profile.<br>2. **AI & Manual Review**: Uploaded originals are stored privately in Cloudflare R2 (Asia-Pacific). Bob (@Bob) manually reviews each submission, strips location metadata, and uses an AI image service to generate the unified sticker portrait before listing. Raw uploads are never published automatically.<br>3. **Removal Anytime**: If you ever want your pet removed, submit a request from My Pets or the pet's detail card, and Bob will manually verify, unlist, and delete the game's copies. |
 
 ### 9.2 删除申请 · 关键文案已确认
 
@@ -454,7 +454,7 @@
 
 ## 接入前待核对
 
-- 完整信息使用说明已按六项要点起草（见 2.3），接入前按实际字段再核对；上传照片处理说明沿用同一口径（AI 处理、人工核对、美国存储）。
+- 完整信息使用说明已按六项要点起草（见 2.3），接入前按实际字段再核对；上传照片处理说明沿用同一口径（AI 处理、人工核对；数据库与服务器在美国、图片在 R2 亚太区域）。
 - 宠物下架前已开局及待同步的合法对局按原规则结算已确认；正常到时、基础校验、主动退出不保存与同局去重仍适用，不把这项规则写成无条件保存承诺。结算展示按当前上架目录过滤，符合条件的普通局仍累计隐藏关解锁进度。
 - 本稿没有新增二维码、收齐徽章、公共鱼缸进度、邀请奖励或暂停机制。数字与变量显示、手机换行和英文按钮长度需在实际页面验证；目前仅完成文案草稿。
 

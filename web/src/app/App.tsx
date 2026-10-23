@@ -12,6 +12,7 @@ import { IdentityScreen } from '../screens/IdentityScreen';
 import { LeaderboardScreen } from '../screens/LeaderboardScreen';
 import { LiveReport } from '../screens/LiveReport';
 import { PetdexScreen } from '../screens/PetdexScreen';
+import { UploadScreen } from '../screens/UploadScreen';
 import { PrepScreen } from '../screens/PrepScreen';
 import screen from '../screens/Screen.module.css';
 import { loadSavedPlayerId, savePlayerId } from './identity';
@@ -28,6 +29,7 @@ type Route =
   | { name: 'home' }
   | { name: 'leaderboard'; mode: GameMode }
   | { name: 'petdex' }
+  | { name: 'upload' }
   | { name: 'prep'; mode: GameMode; session: Session | null; failed: boolean }
   | { name: 'board'; session: Session }
   | { name: 'report'; session: Session; summary: GameSummary };
@@ -150,7 +152,11 @@ export function App() {
     case 'leaderboard':
       return player ? <LeaderboardScreen key={route.mode} player={player} initialMode={route.mode} onBack={toHome} onChallenge={(mode) => void toPrep(mode)} /> : null;
     case 'petdex':
-      return player ? <PetdexScreen player={player} onBack={toHome} onOpenShop={() => void toPrep('normal')} /> : null;
+      return player ? (
+        <PetdexScreen player={player} onBack={toHome} onOpenShop={() => void toPrep('normal')} onUpload={() => setRoute({ name: 'upload' })} />
+      ) : null;
+    case 'upload':
+      return player ? <UploadScreen player={player} onHome={toHome} onPlay={() => void toPrep('normal')} /> : null;
     case 'prep':
       return (
         <PrepScreen

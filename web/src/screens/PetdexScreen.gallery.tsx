@@ -33,9 +33,9 @@ const entry: GalleryEntry = {
   name: 'PetdexScreen',
   group: 'screens',
   states: {
-    'some collected': () => <PetdexScreen player={player} onBack={noop} onOpenShop={noop} load={async () => view(3)} loadDetail={detail} />,
-    'none collected': () => <PetdexScreen player={player} onBack={noop} onOpenShop={noop} load={async () => view(0)} loadDetail={detail} />,
-    'load failed': () => <PetdexScreen player={player} onBack={noop} onOpenShop={noop} load={() => Promise.reject(new Error('x'))} loadDetail={detail} />,
+    'some collected': () => <PetdexScreen player={player} onBack={noop} onOpenShop={noop} onUpload={noop} load={async () => view(3)} loadDetail={detail} />,
+    'none collected': () => <PetdexScreen player={player} onBack={noop} onOpenShop={noop} onUpload={noop} load={async () => view(0)} loadDetail={detail} />,
+    'load failed': () => <PetdexScreen player={player} onBack={noop} onOpenShop={noop} onUpload={noop} load={() => Promise.reject(new Error('x'))} loadDetail={detail} />,
   },
 };
 export default entry;

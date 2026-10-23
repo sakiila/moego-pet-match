@@ -141,3 +141,34 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-3);
 }
+
+.summary {
+  display: grid;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+
+/* 正文里的文字链接（如「查看照片展示与处理说明」） */
+.link {
+  justify-self: start;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: var(--weight-bold);
+  color: var(--color-brand-strong);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+/* 标题行：左侧标题或进度，右侧一个次级操作 */
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}

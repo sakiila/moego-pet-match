@@ -19,13 +19,15 @@ export interface PetdexScreenProps {
   player: PlayerView;
   onBack: () => void;
   onOpenShop: () => void;
+  /** 添加我家毛孩子（上传）。 */
+  onUpload: () => void;
   /** 陈列页用：替换数据来源。 */
   load?: (playerId: string) => Promise<CollectionView>;
   loadDetail?: (petId: string, playerId: string) => Promise<PetDetail>;
 }
 
 /** 宠物图鉴：完成度、单个搜索框、三个筛选、两列卡片；点卡片看详情。查看不改变收集或阵容。 */
-export function PetdexScreen({ player, onBack, onOpenShop, load = api.getCollection, loadDetail = api.getPetDetail }: PetdexScreenProps) {
+export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.getCollection, loadDetail = api.getPetDetail }: PetdexScreenProps) {
   const { t } = useI18n();
   const [data, setData] = useState<CollectionView | null>(null);
   const [failed, setFailed] = useState(false);
@@ -52,7 +54,12 @@ export function PetdexScreen({ player, onBack, onOpenShop, load = api.getCollect
   return (
     <main className={styles.screen}>
       <BrandHeader heading={t('nav.collection')} onBack={onBack} />
-      {data && <CollectionProgress collected={data.collected} total={data.total} />}
+      <div className={styles.titleRow}>
+        {data ? <CollectionProgress collected={data.collected} total={data.total} /> : <span />}
+        <Button variant="secondary" onClick={onUpload} data-testid="add-pet">
+          🐾 {t('my_pets.add')}
+        </Button>
+      </div>
       <SearchInput value={query} onChange={setQuery} clearLabel={t('action.cancel')} placeholder={t('collection.search')} aria-label={t('collection.search')} />
       <p className={styles.muted}>{t('collection.search_scope')}</p>
       <Tabs

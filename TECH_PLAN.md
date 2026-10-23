@@ -96,7 +96,7 @@
 ### 存储、缓存与维护边界
 
 - 持久数据不在 DMIT：游戏数据在 Supabase `pet_match` schema，图片在 R2 私有桶。DMIT 只保存应用产物、服务配置与可随时重建的图片缓存，重新发布应用不影响任何持久数据。
-- 为落实已确认的「美国存储」说明，R2 桶创建时须使用 `us` jurisdiction，并使用对应的美国端点；仅设置北美 Location Hint 不构成美国地域保证。实际桶配置在上线前核验，本轮未创建或检查桶。依据见 [R2 数据位置说明](https://developers.cloudflare.com/r2/reference/data-location/)。
+- R2 位置：2026-10-23 核验现有 `star` 桶位置为 APAC、默认 jurisdiction；已确认保留该桶，并把信息说明改为「数据库与服务器在美国、图片在 R2 亚太区域」。原先「桶须使用 `us` jurisdiction」的要求不再适用；如日后改回美国存储，须新建 `us` jurisdiction 的桶并迁移对象，同时改回说明。依据见 [R2 数据位置说明](https://developers.cloudflare.com/r2/reference/data-location/)。
 - 对局结算由 Node 在同一 Postgres 事务中完成，用唯一对局编号约束保证整体保存、重复只记一次；多语句事务走直连，不依赖 Supabase REST 接口。
 - 图片接口：浏览器只访问自有域名下的图片路径（如 `/img/pets/<pet_id>/128`），Node 首次从 R2 拉取后写入本地磁盘缓存，再直接返回；文件名带内容哈希，可设长期浏览器缓存。磁盘缓存设上限（约 1–2 GB）并按最近使用淘汰。
 - 下架即时生效：图片接口返回前检查宠物上架状态（上架名单可在内存缓存数十秒），下架后拒绝返回并清除对应本地缓存。

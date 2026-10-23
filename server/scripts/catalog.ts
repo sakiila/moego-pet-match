@@ -6,16 +6,10 @@
  * 不加 --yes 只列出变更，不写入。
  */
 import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
-import pg from 'pg';
 import { buildCatalog, SIZES, type FishRecord, type PetRecord } from '../src/catalog/build.ts';
 import { coatOf, type Coat } from '../src/catalog/coat.ts';
 import { makeCardPhoto } from '../src/catalog/photo.ts';
-import { LOCAL_DEV_URL } from '../src/config.ts';
-import { readSupabaseAdminConfig } from '../src/db/adminUrl.ts';
-import { localDirStore } from '../src/storage/localDirStore.ts';
-import { r2Store, type ObjectStore } from '../src/storage/objectStore.ts';
-import { r2FromEnv } from '../src/storage/r2.ts';
+import { connect, describeTarget, storeFromEnv } from './cli.ts';
 
 const args = process.argv.slice(2);
 const cmd = args[0];
@@ -23,19 +17,9 @@ const yes = args.includes('--yes');
 const prod = args.includes('--prod');
 const ids = args.slice(1).filter((a) => !a.startsWith('--'));
 
-function storeFromEnv(): ObjectStore {
-  if (process.env.OBJECT_STORE === 'r2') {
-    const r2 = r2FromEnv();
-    if (!r2) throw new Error('R2 not configured');
-    return r2Store(r2);
-  }
-  return localDirStore(process.env.OBJECT_STORE_DIR ?? fileURLToPath(new URL('../.store/', import.meta.url)));
-}
-
-const client = new pg.Client(prod ? readSupabaseAdminConfig() : { connectionString: process.env.DATABASE_URL ?? LOCAL_DEV_URL });
-await client.connect();
+const client = await connect(prod);
 const store = storeFromEnv();
-console.log(`target: ${prod ? 'Supabase (prod)' : 'local dev'} · store: ${process.env.OBJECT_STORE === 'r2' ? 'R2' : 'local dir'}${yes ? '' : ' · DRY RUN'}`);
+console.log(describeTarget(prod, yes));
 
 async function uploadSticker(s: PetRecord['sticker']) {
   for (const size of SIZES) {

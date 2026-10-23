@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { buildApp } from '../src/app.ts';
-import { MAX_UPLOAD_BYTES, sniffImage } from '../src/routes/testUpload.ts';
+import { sniffImage } from '../src/services/submissions.ts';
 import { DiskCache } from '../src/storage/diskCache.ts';
 import { memoryStore } from '../src/storage/objectStore.ts';
 import { freshDatabase } from './helpers.ts';
@@ -29,7 +29,6 @@ beforeAll(async () => {
         avatarCalls++;
         return userId === 'U_TEST_BOB' ? { body: JPEG, contentType: 'image/jpeg' } : null;
       },
-      enableTestUpload: true,
     },
   });
   await ctx.pool.query(`UPDATE pet_match.pets SET sticker_key = 'pets/mochi/abc123' WHERE pet_id = 'mochi'`);
@@ -99,40 +98,13 @@ describe('宠物图代理', () => {
   });
 });
 
-describe('测试上传入口', () => {
-  const upload = (file: Buffer, fields: Record<string, string> = { playerId: 'U_TEST_BOB', petName: 'Mochi' }) => {
-    const boundary = '----pmtest';
-    const parts = [
-      ...Object.entries(fields).map(([k, v]) => `--${boundary}\r\nContent-Disposition: form-data; name="${k}"\r\n\r\n${v}\r\n`),
-      `--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="pet.bin"\r\nContent-Type: application/octet-stream\r\n\r\n`,
-    ];
-    const body = Buffer.concat([Buffer.from(parts.join('')), file, Buffer.from(`\r\n--${boundary}--\r\n`)]);
-    return app.inject({ method: 'POST', url: '/api/test/submissions', payload: body, headers: { 'content-type': `multipart/form-data; boundary=${boundary}` } });
-  };
-
+describe('上传格式识别', () => {
   it('按文件头识别格式', () => {
     expect(sniffImage(PNG)?.ext).toBe('png');
     expect(sniffImage(JPEG)?.ext).toBe('jpg');
     expect(sniffImage(Buffer.from('RIFF0000WEBPVP8 '))?.ext).toBe('webp');
     expect(sniffImage(Buffer.from('0000ftypheic0000'))?.ext).toBe('heic');
     expect(sniffImage(Buffer.from('GIF89a...'))).toBeNull();
-  });
-
-  it('原样保存到 test/ 前缀并记录资料', async () => {
-    const res = await upload(PNG);
-    expect(res.statusCode).toBe(200);
-    const { objectKey, sizeBytes } = res.json();
-    expect(objectKey).toMatch(/^test\/submissions\/.+\.png$/);
-    expect(store.objects.get(objectKey)?.body.equals(PNG)).toBe(true);
-    expect(sizeBytes).toBe(PNG.length);
-    const row = (await ctx.pool.query('SELECT pet_name, player_id, status FROM pet_match.submissions WHERE object_key = $1', [objectKey])).rows[0];
-    expect(row).toEqual({ pet_name: 'Mochi', player_id: 'U_TEST_BOB', status: 'received' });
-  });
-
-  it('拒绝不支持的格式、超过 20 MB 的文件与名单外身份', async () => {
-    expect((await upload(Buffer.from('GIF89a not allowed'))).statusCode).toBe(415);
-    expect((await upload(Buffer.concat([PNG, Buffer.alloc(MAX_UPLOAD_BYTES)]))).statusCode).toBe(413);
-    expect((await upload(PNG, { playerId: 'U_TEST_GUEST', petName: 'X' })).statusCode).toBe(404);
   });
 });
 

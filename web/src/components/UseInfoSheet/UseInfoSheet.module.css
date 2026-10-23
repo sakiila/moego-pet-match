@@ -1,0 +1,15 @@
+.title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 900;
+}
+
+.body {
+  font-size: var(--text-md);
+  line-height: 1.65;
+  color: var(--color-ink);
+}
+
+.body strong {
+  font-weight: 900;
+}

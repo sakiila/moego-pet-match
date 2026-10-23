@@ -18,7 +18,6 @@ const app = buildApp({
     cache: new DiskCache(process.env.IMAGE_CACHE_DIR ?? fileURLToPath(new URL('../.cache/img', import.meta.url)), 1.5 * 1024 ** 3),
     store,
     fetchAvatar: slackAvatarFetcher(process.env.SLACK_BOT_TOKEN),
-    enableTestUpload: process.env.ENABLE_TEST_UPLOAD === '1',
   },
 });
 await app.listen({ port: config.port, host: '127.0.0.1' });
