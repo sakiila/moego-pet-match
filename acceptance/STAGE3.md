@@ -69,4 +69,4 @@
 - 毛色特征由 `server/src/catalog/coat.ts` 从 128 px 贴纸计算（去白描边，Lab 均值 + 深色、浅色占比），迁移 006 `pets.coat`，`catalog publish` 缺失或变化时写入；本地 80 只已写入，再跑为 0 变更。
 - 测试 4 个（`server/__tests__/lineup.test.ts`）：相近组合降到不降权时的 25% 以下、未收集倾向保持 1.6–2.2、全同色仍凑满、自家宠物入选率不变；把系数改回 1 时两条测试失败。
 - 真实 80 只模拟 2 万局：至少有一对相近的局 79% → 18%；纯黑 7 只（Little Black、Mushu、Marley、Kaiba、Elphaba、Nero、Breck）同局 ≥ 2 只 8.1% → 1.6%；蓬松白狗 6 只（Kabao、Casper、Tuantuan、Mochi、Nuonuo、Wangyangyang）约 8% → 2.5%；单只宠物出场率由 7.0–7.9% 变为 5.6–10.1%（毛色独特的宠物略多出场）。
-- 正式库尚未执行迁移 006 与毛色写入。
+- 正式库：迁移 006 已执行，80 只毛色已写入（再跑为 0 变更）；`supabase-verify.ts` 以专用角色走通登记（含毛色抽样）+ 结算并回滚。
