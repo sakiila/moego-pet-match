@@ -14,13 +14,14 @@ const r2 = process.env.OBJECT_STORE === 'r2' ? r2FromEnv() : null;
 const store = r2 ? r2Store(r2) : localDirStore(process.env.OBJECT_STORE_DIR ?? fileURLToPath(new URL('../.store/', import.meta.url)));
 const app = buildApp({
   pool,
+  staticDir: config.staticDir,
   images: {
     cache: new DiskCache(process.env.IMAGE_CACHE_DIR ?? fileURLToPath(new URL('../.cache/img', import.meta.url)), 1.5 * 1024 ** 3),
     store,
     fetchAvatar: slackAvatarFetcher(process.env.SLACK_BOT_TOKEN),
   },
 });
-await app.listen({ port: config.port, host: '127.0.0.1' });
+await app.listen({ port: config.port, host: config.host });
 
 const shutdown = async () => {
   await app.close();

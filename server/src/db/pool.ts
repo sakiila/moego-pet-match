@@ -1,5 +1,5 @@
 import pg from 'pg';
-import { isLocalDatabase } from '../config.ts';
+import { useDatabaseSsl } from '../config.ts';
 
 export type Pool = pg.Pool;
 
@@ -7,7 +7,7 @@ export function createPool(connectionString: string): pg.Pool {
   return new pg.Pool({
     connectionString,
     max: 5,
-    ssl: isLocalDatabase(connectionString) ? false : { rejectUnauthorized: false },
+    ssl: useDatabaseSsl(connectionString) ? { rejectUnauthorized: false } : false,
   });
 }
 

@@ -15,3 +15,16 @@
 - **音色、音量与轻震手感需要真机试听试玩**（无头浏览器没有声音输出，只验证了触发次序与开关）。
 - iOS Safari 的 WebAudio 解锁时机（代码在任意一次按下时解锁）与 Android Chrome 的震动强度。
 - 正式音乐与音效素材（当前为合成占位）。
+
+## 生产运行准备（Docker，2026-10-23）
+
+- **一个服务提供全部**：生产时由 `STATIC_DIR` 指定前端构建目录，同一服务提供页面、API 与图片；带哈希的 `/assets` 长期缓存、`index.html` 不缓存，其他页面路径回退到 `index.html`，`/api`、`/img`、`/assets` 的 404 不返回页面。新增 `GET /api/health`（含数据库检查，2 秒超时，不通返回 503）。新增 `HOST`、`DATABASE_SSL=disable`（只用于本机验证）两个可选变量。测试 7 个（`server/__tests__/static.test.ts`）。
+- **打包**：服务端用 esbuild 打成一个 `server.mjs`（含 `web/src/engine` 等源码），npm 依赖外部安装。
+- **镜像**（根目录 `Dockerfile`）：前端构建 → 服务端打包 → `node:22-slim` 运行层只装生产依赖，以 `node` 用户运行，带 HEALTHCHECK。`.dockerignore` 只放入 `web/` 与 `server/` 源码。
+- **部署文件**（`deploy/`）：`compose.yml`（只映射 `127.0.0.1:8787`、图片缓存卷、日志轮转、自动重启）、`production.env.example`（只列服务运行需要的变量）、`DEPLOY.md`（构建、送达、启动、反向代理要点、更新回滚、上线前待办）。
+- **本机验证**：
+  - 本机架构镜像 464 MB，容器内以 uid 1000（node）运行，`/app` 下只有 `server.mjs`、`public/`、依赖与 `package.json`，没有 `.env`。
+  - 容器连本地开发库与本地目录存储：健康检查 healthy；Playwright 390 × 844 走通选身份 → 门店 → 完整 90 秒一局（真实拖动）→ 报告「已保存」→ 上传照片（文件落到挂载目录、记录写入）→ 图鉴 → 排行榜，无 5xx、无页面错误。
+  - 生产构建里没有调试接口与陈列页（`window.__petMatch`、`__feedbackLog` 均不存在，`/dev/gallery` 只返回应用外壳）。
+  - `linux/amd64` 镜像构建成功（约 1.5 分钟），在模拟下 `sharp` 正常加载。
+- **未做**：没有连正式库或 R2 跑完整一局（会写入正式数据）；没有上传镜像或部署；DMIT 上的反向代理、域名、Supabase 备份与大陆 / 海外实测列在 `deploy/DEPLOY.md` 的上线前待办。

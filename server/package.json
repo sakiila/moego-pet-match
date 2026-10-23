@@ -9,11 +9,13 @@
     "migrate": "tsx --env-file-if-exists=../.env scripts/migrate.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "bundle": "node scripts/bundle.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1156.0",
     "@fastify/multipart": "^9.4.0",
+    "@fastify/static": "^8.3.0",
     "fastify": "^5.12.7",
     "pg": "^8.23.1",
     "sharp": "^0.34.5",
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@types/node": "^22.20.5",
     "@types/pg": "^8.23.1",
+    "esbuild": "^0.25.12",
     "tsx": "^4.23.15",
     "typescript": "~5.8.3",
     "vitest": "^3.2.7"

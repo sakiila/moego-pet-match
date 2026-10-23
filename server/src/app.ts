@@ -12,6 +12,7 @@ import { playerRoutes } from './routes/players.ts';
 import { rosterRoutes } from './routes/roster.ts';
 import { deletionRoutes } from './routes/deletions.ts';
 import { submissionRoutes } from './routes/submissions.ts';
+import { webRoutes } from './routes/web.ts';
 import type { SubmissionHooks } from './services/submissions.ts';
 
 export interface AppDeps {
@@ -22,6 +23,8 @@ export interface AppDeps {
   submissionHooks?: SubmissionHooks;
   /** 当前时刻（测试可固定，用于每日上限的北京自然日）。 */
   now?: () => Date;
+  /** 生产：前端构建产物目录，由同一服务提供页面；开发时为空（页面由 Vite 提供）。 */
+  staticDir?: string;
   images?: {
     cache: DiskCache;
     /** R2 私有桶；未配置时宠物图返回 503。 */
@@ -48,5 +51,6 @@ export function buildApp(deps: AppDeps) {
   app.register(imageRoutes, deps);
   app.register(submissionRoutes, deps);
   app.register(deletionRoutes, deps);
+  app.register(webRoutes, deps);
   return app;
 }

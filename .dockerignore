@@ -1,0 +1,13 @@
+# 镜像只需要 web/ 与 server/ 的源码；凭据、素材、同事数据与本地缓存一律不进构建上下文
+*
+!web/
+!server/
+**/node_modules
+**/dist
+**/*.tsbuildinfo
+server/.store
+server/.cache
+server/__tests__
+web/src/**/__tests__
+.env
+.env.*
