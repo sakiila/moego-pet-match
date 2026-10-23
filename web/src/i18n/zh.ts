@@ -178,6 +178,8 @@ export const zh = {
   'pet.flip_back': '翻回正面',
   'home.manager': '今日店长',
   'home.manager_line': '你负责排班，我负责可爱。',
+  'manager.poster_title': '店长小海报',
+  'manager.poster_date': '{year} 年 {month} 月 {day} 日 · 北京时间',
   'my_pets.view': '查看资料',
 } as const;
 

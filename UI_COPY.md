@@ -115,11 +115,15 @@
 | --- | --- | --- |
 | home.manager | 今日店长 | Today's Shop Manager |
 | home.manager_line | 你负责排班，我负责可爱。 | You handle the schedule. I'll bring the cuteness. |
+| manager.poster_title | 店长小海报 | Manager Poster |
+| manager.poster_date | {year} 年 {month} 月 {day} 日 · 北京时间 | {monthName} {day}, {year} · Beijing Time |
 | home.personal_best | 宠物店个人最好 | Pet Shop Personal Best |
 | home.no_record | 第一份营业纪录，等你来写。 | Your first shop record starts here. |
 | home.photo_notice | 宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob | Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack. |
 
 首页主按钮共用「开始营业 / Open Shop」，进入普通宠物局准备，不直接开始计时；次级入口沿用图鉴、排行榜、我的宠物。个人最好只展示普通宠物局记录，不将鱼关成绩混入首页字段。人工处理提示保留用户指定原句，首页没有鱼关入口或解锁预告。
+
+店长小海报已确认（2026-10-23，图稿 manager-poster-v1）：点门店的今日店长打开预览，海报含店长贴纸、「今日店长 · 名字」、既定宣言与北京日期；不自动弹出。保存与分享沿用成绩卡的 `share.save`、`share.send`、`share.failed`。
 
 默认店长宣言已确认：「你负责排班，我负责可爱。 / You handle the schedule. I'll bring the cuteness.」这是游戏角色台词，不是主人原话，不增加每日随机或其他新机制。
 

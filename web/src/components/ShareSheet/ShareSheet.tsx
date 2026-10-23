@@ -6,6 +6,8 @@ import styles from './ShareSheet.module.css';
 
 export interface ShareSheetProps {
   open: boolean;
+  /** 弹层标题；默认「成绩卡预览」。 */
+  title?: string;
   state: ShareCardState;
   /** 浏览器支持分享图片文件时才显示「分享图片」。 */
   canShare: boolean;
@@ -16,14 +18,15 @@ export interface ShareSheetProps {
   inline?: boolean;
 }
 
-/** 成绩卡预览：先生成预览，玩家主动保存或调用系统分享；不自动发送。 */
-export function ShareSheet({ open, state, canShare, onSave, onShare, onRetry, onClose, inline }: ShareSheetProps) {
+/** 分享图片预览（成绩卡、店长海报）：先生成预览，玩家主动保存或调用系统分享；不自动发送。 */
+export function ShareSheet({ open, title, state, canShare, onSave, onShare, onRetry, onClose, inline }: ShareSheetProps) {
   const { t } = useI18n();
+  const heading = title ?? t('share.preview');
   return (
-    <Sheet open={open} inline={inline} label={t('share.preview')} closeLabel={t('action.close')} onClose={onClose} badge={<h2 className={styles.title}>{t('share.preview')}</h2>}>
+    <Sheet open={open} inline={inline} label={heading} closeLabel={t('action.close')} onClose={onClose} badge={<h2 className={styles.title}>{heading}</h2>}>
       <div className={styles.body} data-testid="share-sheet" data-state={state.kind}>
         <div className={styles.preview}>
-          {state.kind === 'ready' && <img src={state.url} alt={t('share.preview')} data-testid="share-image" />}
+          {state.kind === 'ready' && <img src={state.url} alt={heading} data-testid="share-image" />}
           {state.kind === 'generating' && <span className={styles.loading} aria-busy="true" />}
           {state.kind === 'failed' && <p className={styles.failed}>{t('share.failed')}</p>}
         </div>

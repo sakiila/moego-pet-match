@@ -4,6 +4,22 @@
   padding: 0 var(--space-2);
 }
 
+/* 整个橱窗可点：透明按钮铺满，打开店长小海报 */
+.open {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: none;
+  cursor: pointer;
+}
+
+.open:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 4px;
+}
+
 /* 橙白条纹遮阳篷，底边做成一排半圆垂边 */
 .awning {
   position: relative;

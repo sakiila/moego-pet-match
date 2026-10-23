@@ -51,3 +51,25 @@ export function shareCardModel({ summary, pets, mode, playerName, manager, local
     player: t('share.player', { playerName }),
   };
 }
+
+/** 店长小海报：全公司同一只，宣言为游戏模板台词；日期取服务端给出的北京日期，不按本机时区换算。 */
+export interface ManagerPosterModel {
+  mode: string;
+  brand: { lead: string; accent: string };
+  hero: { src: string; label: string; kind: 'manager' };
+  line: string;
+  date: string;
+}
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+export function managerPosterModel({ manager, locale, t }: { manager: DailyManager } & Pick<ShareCardInput, 'locale' | 't'>): ManagerPosterModel {
+  const [year, month, day] = manager.date.split('-').map(Number);
+  return {
+    mode: t('home.manager'),
+    brand: { lead: t('brand.title_lead'), accent: t('brand.title_accent') },
+    hero: { src: stickerUrl(manager.pet.petId, 1024), label: `${t('home.manager')} · ${manager.pet.name}`, kind: 'manager' },
+    line: t('home.manager_line'),
+    date: t('manager.poster_date', { year, month, day, monthName: locale === 'en' ? MONTHS[month - 1] : '' }),
+  };
+}

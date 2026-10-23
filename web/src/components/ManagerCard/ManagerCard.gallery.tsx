@@ -10,6 +10,7 @@ const entry: GalleryEntry = {
   group: 'components',
   states: {
     shop: () => wrap(<ManagerCard name="Sanxian" stickerSrc={src} />),
+    'shop · clickable (opens poster)': () => wrap(<ManagerCard name="Sanxian" stickerSrc={src} onOpen={() => alert('poster')} />),
     'shop, long name': () => wrap(<ManagerCard name="Sir Fluffington" stickerSrc={src} />),
     'shop, image error': () => wrap(<ManagerCard name="Sanxian" stickerSrc="/missing.png" />),
     signature: () => wrap(<ManagerCard name="Sanxian" stickerSrc={src} variant="signature" />),

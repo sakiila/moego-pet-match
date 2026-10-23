@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { GameSummary } from '../../engine';
 import { translate } from '../../i18n';
 import type { PetInfo } from '../pets';
-import { shareCardModel } from '../shareCard';
+import { managerPosterModel, shareCardModel } from '../shareCard';
 
 const pets: PetInfo[] = [0, 1, 2, 3, 4, 5].map((i) => ({ id: `pet_${i}`, name: `Pet${i}`, imageBase: `/img/pets/pet_${i}`, emoji: '🐾' }));
 const fish: PetInfo[] = [
@@ -68,5 +68,21 @@ describe('成绩卡内容', () => {
     const m = shareCardModel({ summary: zero(summary()), pets: fish, mode: 'fish', playerName: 'Bob', manager, locale: 'zh', t: zh });
     expect(m.hero).toBeNull();
     expect(m.review).toBe('先熟悉一下水流，下局再露一手。');
+  });
+});
+
+describe('店长小海报内容', () => {
+  it('店长贴纸、名牌、宣言与北京日期（中文）', () => {
+    const m = managerPosterModel({ manager, t: zh, locale: 'zh' });
+    expect(m.hero).toEqual({ src: '/img/pets/pet_mgr/1024', label: '今日店长 · Sanxian', kind: 'manager' });
+    expect(m.mode).toBe('今日店长');
+    expect(m.line).toBe('你负责排班，我负责可爱。');
+    expect(m.date).toBe('2026 年 10 月 23 日 · 北京时间');
+  });
+
+  it('英文日期用月份名，日期按服务端的北京日期，不受本机时区影响', () => {
+    const m = managerPosterModel({ manager: { ...manager, date: '2026-01-05' }, t: en, locale: 'en' });
+    expect(m.date).toBe('January 5, 2026 · Beijing Time');
+    expect(m.line).toBe("You handle the schedule. I'll bring the cuteness.");
   });
 });

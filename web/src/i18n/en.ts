@@ -179,5 +179,7 @@ export const en: Record<MessageKey, string> = {
   'pet.flip_back': 'Flip Back',
   'home.manager': 'Today\'s Shop Manager',
   'home.manager_line': 'You handle the schedule. I\'ll bring the cuteness.',
+  'manager.poster_title': 'Manager Poster',
+  'manager.poster_date': '{monthName} {day}, {year} · Beijing Time',
   'my_pets.view': 'View Profile',
 };

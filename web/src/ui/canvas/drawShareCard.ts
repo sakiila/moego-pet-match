@@ -1,5 +1,5 @@
 import type { GameMode } from '../../api/types';
-import type { ShareCardModel } from '../../game/shareCard';
+import type { ManagerPosterModel, ShareCardModel } from '../../game/shareCard';
 
 /** 导出尺寸：约 4:5 竖幅，与两张已确认的分享卡图稿比例一致。 */
 export const SHARE_CARD = { width: 1080, height: 1350 } as const;
@@ -256,13 +256,19 @@ function bubblePlate(ctx: Ctx, cx: number, cy: number, w: number, h: number, k: 
   bubble(ctx, cx + w / 2 - 8, cy + h / 2 - 10, 18, k);
 }
 
-/** 评语对话气泡：圆角框 + 左上角的小尾巴；先描边再填色，只留外轮廓。 */
-function speech(ctx: Ctx, x: number, y: number, w: number, h: number, k: Tokens) {
+/** 对话气泡：圆角框 + 小尾巴（成绩卡在左上，店长海报在左下指向店长）；先描边再填色，只留外轮廓。 */
+function speech(ctx: Ctx, x: number, y: number, w: number, h: number, k: Tokens, tail: 'top' | 'bottom' = 'top') {
   const shape = () => {
     roundRect(ctx, x, y, w, h, Math.min(90, h / 2));
-    ctx.moveTo(x + 104, y + 10);
-    ctx.lineTo(x + 92, y - 36);
-    ctx.lineTo(x + 166, y + 10);
+    if (tail === 'top') {
+      ctx.moveTo(x + 104, y + 10);
+      ctx.lineTo(x + 92, y - 36);
+      ctx.lineTo(x + 166, y + 10);
+    } else {
+      ctx.moveTo(x + 70, y + h - 10);
+      ctx.lineTo(x + 20, y + h + 54);
+      ctx.lineTo(x + 150, y + h - 10);
+    }
     ctx.closePath();
   };
   ctx.save();
@@ -362,7 +368,7 @@ function background(ctx: Ctx, mode: GameMode, k: Tokens) {
   ctx.stroke();
 }
 
-function header(ctx: Ctx, model: ShareCardModel, mode: GameMode, k: Tokens) {
+function header(ctx: Ctx, model: Pick<ShareCardModel, 'mode' | 'brand'>, mode: GameMode, k: Tokens) {
   const y = LAYOUT[mode].header;
   const fg = mode === 'fish' ? k.paper : k.ink;
   const sep = /[A-Za-z]$/.test(model.brand.lead) ? ' ' : '';
@@ -524,5 +530,126 @@ export async function drawShareCard(model: ShareCardModel, mode: GameMode): Prom
   const [sx, sy] = img ? LAYOUT[mode].stamp : [800, mode === 'fish' ? LAYOUT.fish.paper[1] + 110 : LAYOUT.normal.header + 150];
   stamp(ctx, sx, sy, model.title, k);
   score(ctx, model, mode, k);
+  return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('export failed'))), 'image/png'));
+}
+
+// ---------- 店长小海报（对照 manager-poster-v1） ----------
+
+/** 橙白条纹遮阳篷，底边一排半圆垂边；每段垂边单独描边，白色那段在白纸上也看得出。 */
+function awning(ctx: Ctx, x: number, y: number, w: number, h: number, k: Tokens) {
+  const n = 10;
+  const stripe = w / n;
+  ctx.save();
+  ctx.strokeStyle = k.ink;
+  ctx.lineWidth = 5;
+  for (let i = 0; i < n; i++) {
+    ctx.fillStyle = i % 2 ? k.paper : k.brand;
+    ctx.beginPath();
+    ctx.arc(x + (i + 0.5) * stripe, y + h, stripe / 2, 0, Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  }
+  roundRect(ctx, x, y, w, h, 22);
+  ctx.save();
+  ctx.clip();
+  for (let i = 0; i < n; i++) {
+    ctx.fillStyle = i % 2 ? k.paper : k.brand;
+    ctx.fillRect(x + i * stripe, y, stripe + 1, h);
+  }
+  ctx.restore();
+  roundRect(ctx, x, y, w, h, 22);
+  ctx.stroke();
+  ctx.restore();
+}
+
+/** 按冻结的店长内容绘制店长小海报并导出 PNG。 */
+export async function drawManagerPoster(model: ManagerPosterModel): Promise<Blob> {
+  const k = readTokens('normal');
+  await document.fonts?.ready;
+  const img = trimmed(await loadImage(model.hero.src));
+  const canvas = document.createElement('canvas');
+  canvas.width = SHARE_CARD.width;
+  canvas.height = SHARE_CARD.height;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('canvas unavailable');
+  background(ctx, 'normal', k);
+  header(ctx, model, 'normal', k);
+
+  // 橱窗：遮阳篷与两侧立柱（店长在柜台后探头）
+  ctx.fillStyle = k.brandSoft;
+  ctx.strokeStyle = k.ink;
+  ctx.lineWidth = 5;
+  for (const px of [150, 896]) {
+    ctx.fillRect(px, 300, 34, 640);
+    ctx.strokeRect(px, 300, 34, 640);
+  }
+  awning(ctx, 110, 230, 860, 80, k);
+
+  // 主角：店长贴纸
+  const [cx, cy, bw, bh] = [540, 660, 640, 540];
+  const scale = Math.min(bw / img.width, bh / img.height);
+  const w = img.width * scale;
+  const h = img.height * scale;
+  sparks(ctx, cx - bw / 2 - 10, cy - 60, [190, 215, 240], k.brand, 30);
+  sparks(ctx, cx + bw / 2 + 20, cy + 60, [-30, 0, 30], k.brand, 30);
+  star(ctx, cx - bw / 2 + 10, cy + 150, 34, k.yellow);
+  star(ctx, cx + bw / 2 + 30, cy + 200, 26, k.yellow);
+  paw(ctx, 96, 520, 34, k.brand);
+  paw(ctx, 980, 760, 30, k.brand, 0.3);
+  ctx.save();
+  ctx.shadowColor = k.shadow;
+  ctx.shadowBlur = 24;
+  ctx.shadowOffsetY = 10;
+  ctx.drawImage(img, cx - w / 2, cy + bh / 2 - h, w, h);
+  ctx.restore();
+
+  // 柜台盖住贴纸下缘
+  ctx.fillStyle = k.paper;
+  ctx.strokeStyle = k.ink;
+  ctx.lineWidth = 5;
+  roundRect(ctx, 96, 920, 888, 40, 12);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = k.brandSoft;
+  ctx.fillRect(120, 960, 840, 120);
+  ctx.strokeRect(120, 960, 840, 120);
+  paw(ctx, 540, 1040, 30, k.brand, 0);
+
+  // 名牌压在柜台上
+  ctx.font = `800 46px ${k.font}`;
+  const label = model.hero.label;
+  const lw = Math.min(700, ctx.measureText(label).width) + 120;
+  bonePlate(ctx, 540, 940, lw, 82, k);
+  fit(ctx, (s) => `800 ${s}px ${k.font}`, label, 600, 1, 46, 30);
+  ctx.fillStyle = k.ink;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(label, 540, 942);
+
+  // 宣言气泡：右上，尾巴指向店长
+  // 宣言气泡：右上，尾巴指向店长；最多 3 行，避免压住店长的脸（英文较长时变宽、字变小）
+  const { size, lines } = fit(ctx, (s) => `900 ${s}px ${k.font}`, model.line, 470, 3, 70, 34, reviewLines);
+  const lh = size * 1.25;
+  const bh2 = lines.length * lh + 64;
+  const bw2 = Math.max(...lines.map((l) => ctx.measureText(l).width)) + 90;
+  const bx = 1000 - bw2;
+  const by = Math.max(178, 440 - bh2);
+  speech(ctx, bx, by, bw2, bh2, k, 'bottom');
+  ctx.fillStyle = k.ink;
+  lines.forEach((l, i) => ctx.fillText(l, bx + bw2 / 2, by + 32 + lh * (i + 0.5)));
+
+  // 收据虚线与北京日期
+  ctx.strokeStyle = k.line;
+  ctx.lineWidth = 3;
+  ctx.setLineDash([14, 10]);
+  ctx.beginPath();
+  ctx.moveTo(80, 1132);
+  ctx.lineTo(1000, 1132);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  fit(ctx, (s) => `800 ${s}px ${k.font}`, model.date, 860, 1, 40, 26);
+  ctx.fillStyle = k.ink;
+  ctx.fillText(model.date, 540, 1196);
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('export failed'))), 'image/png'));
 }

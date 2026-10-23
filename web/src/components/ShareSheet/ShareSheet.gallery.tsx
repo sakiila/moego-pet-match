@@ -3,9 +3,10 @@ import type { GameMode } from '../../api/types';
 import type { GalleryEntry } from '../../dev/gallery/types';
 import type { GameSummary } from '../../engine';
 import { SAMPLE_FISH, type PetInfo } from '../../game/pets';
-import { shareCardModel } from '../../game/shareCard';
+import { managerPosterModel, shareCardModel } from '../../game/shareCard';
 import { useShareCard } from '../../game/useShareCard';
 import { useI18n } from '../../i18n';
+import { drawManagerPoster, drawShareCard } from '../../ui/canvas/drawShareCard';
 import { ShareSheet } from './ShareSheet';
 
 const ids = ['pet_644053d683e0', 'pet_b05057985e11', 'pet_4750baaed3f0', 'pet_c7ad902c2024', 'pet_7104fa8cdaea', 'pet_01714a23d2b5'];
@@ -30,12 +31,22 @@ const ZERO = summary([0, 0, 0, 0, 0, 0], { score: 0, clearedCells: 0, maxChain: 
 
 function Live({ mode = 'normal', pets = PETS, s, playerName = 'Bob 包博', noManager = false }: { mode?: GameMode; pets?: PetInfo[]; s: GameSummary; playerName?: string; noManager?: boolean }) {
   const { t, locale } = useI18n();
-  const model = useMemo(
-    () => shareCardModel({ summary: s, pets, mode, playerName, manager: noManager ? null : manager, locale, t }),
-    [s, pets, mode, playerName, noManager, locale, t],
-  );
-  const card = useShareCard(model, mode, `share-${mode}.png`);
+  const draw = useMemo(() => {
+    const model = shareCardModel({ summary: s, pets, mode, playerName, manager: noManager ? null : manager, locale, t });
+    return () => drawShareCard(model, mode);
+  }, [s, pets, mode, playerName, noManager, locale, t]);
+  const card = useShareCard(draw, `share-${mode}.png`);
   return <ShareSheet open inline state={card.state} canShare={card.canShare} onSave={card.save} onShare={card.share} onRetry={card.retry} onClose={() => {}} />;
+}
+
+function Poster({ name = 'Deedee', petId = 'pet_b05057985e11' }: { name?: string; petId?: string }) {
+  const { t, locale } = useI18n();
+  const draw = useMemo(() => {
+    const model = managerPosterModel({ manager: { date: '2026-10-23', pet: { petId, name } }, locale, t });
+    return () => drawManagerPoster(model);
+  }, [name, petId, locale, t]);
+  const card = useShareCard(draw, 'manager.png');
+  return <ShareSheet open inline title={t('manager.poster_title')} state={card.state} canShare={card.canShare} onSave={card.save} onShare={card.share} onRetry={card.retry} onClose={() => {}} />;
 }
 
 const noop = () => {};
@@ -52,6 +63,9 @@ const entry: GalleryEntry = {
       <Live pets={[{ ...PETS[0], name: 'Sir Fluffington the Third' }, ...PETS.slice(1)]} s={summary([40, 1, 1, 1, 1, 1], { score: 128_460, rushSucceeded: false, toolsFired: 4 })} playerName="Alexandria Montgomery-Smith" />
     ),
     'image failed → retry': () => <Live pets={[{ ...PETS[0], imageBase: '/img/pets/missing' }, ...PETS.slice(1)]} s={summary([40, 1, 1, 1, 1, 1])} />,
+    'manager poster': () => <Poster />,
+    'manager poster · long name': () => <Poster name="Sir Fluffington the Third" petId="pet_644053d683e0" />,
+    'manager poster · image failed': () => <Poster petId="missing" />,
     generating: () => <ShareSheet open inline state={{ kind: 'generating' }} canShare={false} onSave={noop} onShare={noop} onRetry={noop} onClose={noop} />,
     'ready with share button': () => <ShareSheet open inline state={{ kind: 'generating' }} canShare onSave={noop} onShare={noop} onRetry={noop} onClose={noop} />,
   },

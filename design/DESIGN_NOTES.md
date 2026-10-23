@@ -36,6 +36,7 @@
 | 手机 Report Card 下半部示意 | [mobile-report-details-v3.png](concepts/mobile-report-details-v3.png) | 邀请区排布已确认；符合条件的 Peter 邀请、店长签名与次级入口；底部操作保持原位 |
 | 普通宠物局成绩分享卡 | [share-card-pets-v1.png](concepts/share-card-pets-v1.png) | 已确认；独立图片，Maodu 与评语为主、分数醒目、小称号与玩家署名 |
 | 鱼关成绩分享卡 | [share-card-fish-v2.png](concepts/share-card-fish-v2.png) | 已确认；独立图片，深蓝水下与白色收据、天蓝色鱼、气泡名牌、评语与玩家署名 |
+| 店长小海报 | [manager-poster-v1.png](concepts/manager-poster-v1.png) | 2026-10-23 已确认；橱窗遮阳篷、店长大头像、宣言气泡、「今日店长 · 名字」骨头名牌与北京日期；实现时收紧柜台与日期间留白 |
 | Peter 鱼关手机实战 | [mobile-fish-board-v1.png](concepts/mobile-fish-board-v1.png) | 已确认；深蓝水下、六色小鱼、统一浅棋格、水流喷头与气泡机、独立催单状态 |
 | Peter 鱼关手机准备 | [mobile-fish-prep-v1.png](concepts/mobile-fish-prep-v1.png) | 已确认；六个鱼色类别、同色匹配与相邻交换、90 秒未计时说明、开始这班 |
 | 手机 Fish Report Card | [mobile-fish-report-v1.png](concepts/mobile-fish-report-v1.png) | 已确认；深蓝背景与浅色报告单、按鱼色选 MVP、鱼关排行、固定再开／分享 |

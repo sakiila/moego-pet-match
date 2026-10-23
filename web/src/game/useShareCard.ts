@@ -1,23 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { GameMode } from '../api/types';
-import { drawShareCard } from '../ui/canvas/drawShareCard';
-import type { ShareCardModel } from './shareCard';
 
 export type ShareCardState = { kind: 'generating' } | { kind: 'ready'; url: string; file: File } | { kind: 'failed' };
 
 /**
- * 生成成绩卡图片并提供保存 / 系统分享。打开时生成一次，失败可重试；
+ * 生成分享图片（成绩卡、店长海报）并提供保存 / 系统分享。draw 需保持引用稳定（useMemo / useCallback）。打开时生成一次，失败可重试；
  * 分享取消（AbortError）不算失败。所有动作都由玩家主动触发，不自动发送。
  */
-export function useShareCard(model: ShareCardModel | null, mode: GameMode, fileName: string) {
+export function useShareCard(draw: (() => Promise<Blob>) | null, fileName: string) {
   const [state, setState] = useState<ShareCardState>({ kind: 'generating' });
   const urlRef = useRef<string | null>(null);
 
   const generate = useCallback(async () => {
-    if (!model) return;
+    if (!draw) return;
     setState({ kind: 'generating' });
     try {
-      const blob = await drawShareCard(model, mode);
+      const blob = await draw();
       if (urlRef.current) URL.revokeObjectURL(urlRef.current);
       const url = URL.createObjectURL(blob);
       urlRef.current = url;
@@ -25,7 +22,7 @@ export function useShareCard(model: ShareCardModel | null, mode: GameMode, fileN
     } catch {
       setState({ kind: 'failed' });
     }
-  }, [model, mode, fileName]);
+  }, [draw, fileName]);
 
   useEffect(() => {
     void generate();
