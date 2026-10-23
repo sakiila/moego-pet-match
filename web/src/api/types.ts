@@ -59,6 +59,8 @@ export interface SettleResponse {
   progress: { completedNormalGames: number; fishUnlocked: boolean; unlockedNow: boolean; counted: boolean };
   /** 符合频率与资格时的猜主人题目；不揭晓答案。 */
   quiz: QuizQuestion | null;
+  /** 本局阵容里当前已下架的宠物（按当前目录计算）：报告与分享卡不再展示它们的资料。 */
+  removedPetIds: string[];
 }
 
 export interface QuizQuestion {

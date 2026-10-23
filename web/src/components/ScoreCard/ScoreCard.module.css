@@ -195,3 +195,10 @@
     display: none;
   }
 }
+
+/* 原 MVP 已下架时的通用 MoeGo 爪印 */
+.generic {
+  width: 60%;
+  height: 60%;
+  color: var(--color-brand);
+}

@@ -75,7 +75,7 @@ export interface UseGameSession {
   /** 确认退出；到时后无效，返回是否作废了本局。 */
   exit: () => boolean;
   /** 开发验证用：直接读取引擎与时钟，不依赖渲染帧。 */
-  peek: () => { g: number; score: number; phase: GameState['phase']; busyUntil: number; paused: boolean; rush: GameState['rush']; hint: Move | null };
+  peek: () => { g: number; score: number; phase: GameState['phase']; busyUntil: number; paused: boolean; rush: GameState['rush']; hint: Move | null; served: number[]; lineup: string[] };
 }
 
 const baseOf = (s: GameState): PlaybackBase => ({ board: s.board, score: s.score, rushProgress: s.rush.progress });
@@ -239,6 +239,8 @@ export function useGameSession(
       paused: cur.clock.paused,
       rush: cur.state.rush,
       hint: findHint(cur.state),
+      served: cur.state.served,
+      lineup: cur.state.lineup,
     };
   }, []);
 

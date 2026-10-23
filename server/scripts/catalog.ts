@@ -1,14 +1,16 @@
 /**
  * 素材上下架（本地运行）：
- *   tsx scripts/catalog.ts publish [pet_id...] [--yes] [--prod]   上架全部或指定宠物与鱼色（只增不减）
- *   tsx scripts/catalog.ts unpublish <pet_id> [--yes] [--prod]   显式下架并删除贴纸对象
+ *   tsx scripts/catalog.ts publish [pet_id...] [--yes] [--prod]   上架全部或指定宠物与鱼色（只增不减；墓碑宠物一律跳过，指定墓碑 pet_id 时拒绝）
+ *   tsx scripts/catalog.ts unpublish <pet_id> [--yes] [--prod]   核实删除申请后下架：记录清成墓碑，删除贴纸与卡背照片对象，
+ *                                                               共用原图的宠物去掉卡背照片，只剩一只的家庭解散
  * 默认写本地开发库与本地对象存储（server/.store）；--prod 写 Supabase（管理员连接），对象存储由 OBJECT_STORE 决定。
  * 不加 --yes 只列出变更，不写入。
  */
 import { readFile } from 'node:fs/promises';
-import { buildCatalog, SIZES, type FishRecord, type PetRecord } from '../src/catalog/build.ts';
+import { buildCatalog, excludeRemoved, SIZES, type FishRecord, type PetRecord } from '../src/catalog/build.ts';
 import { coatOf, type Coat } from '../src/catalog/coat.ts';
 import { makeCardPhoto } from '../src/catalog/photo.ts';
+import { applyUnpublish, planUnpublish } from '../src/catalog/unpublish.ts';
 import { connect, describeTarget, storeFromEnv } from './cli.ts';
 
 const args = process.argv.slice(2);
@@ -31,9 +33,16 @@ async function uploadSticker(s: PetRecord['sticker']) {
 
 try {
   if (cmd === 'publish') {
-    const { pets, fish } = buildCatalog();
-    const selected = ids.length ? pets.filter((p) => ids.includes(p.pet_id)) : pets;
+    const { pets: allPets, fish } = buildCatalog();
     const current = new Map((await client.query('SELECT * FROM pet_match.pets')).rows.map((r) => [r.pet_id, r]));
+    // 已成墓碑的宠物不得重新上架；同时据此重算家庭、屏蔽与墓碑共用的原图
+    const removedIds = new Set([...current.values()].filter((r) => r.status === 'removed').map((r) => r.pet_id as string));
+    const askedRemoved = ids.filter((id) => removedIds.has(id));
+    if (askedRemoved.length) throw new Error(`refusing to publish removed pets: ${askedRemoved.join(', ')}`);
+    const { kept: pets, removed, blockedOriginal } = excludeRemoved(allPets, removedIds);
+    if (removed.length) console.log(`skipped removed (tombstone) pets: ${removed.map((p) => `${p.pet_id} ${p.name}`).join(', ')} — also delete them from the local catalog and assets/pets`);
+    if (blockedOriginal.length) console.log(`no card photo (original shared with a removed pet): ${blockedOriginal.join(', ')}`);
+    const selected = ids.length ? pets.filter((p) => ids.includes(p.pet_id)) : pets;
     const fields = ['name', 'owner_user_id', 'family_id', 'species', 'intro', 'owner_quote'] as const;
     const plan = selected.map((p) => {
       const row = current.get(p.pet_id);
@@ -105,13 +114,18 @@ try {
     }
   } else if (cmd === 'unpublish') {
     if (ids.length !== 1) throw new Error('usage: unpublish <pet_id>');
-    const row = (await client.query('SELECT pet_id, name, status, sticker_key FROM pet_match.pets WHERE pet_id = $1', [ids[0]])).rows[0];
-    if (!row) throw new Error(`unknown pet ${ids[0]}`);
-    console.log(`unpublish ${row.pet_id} ${row.name} (status ${row.status}); delete ${row.sticker_key ? SIZES.length : 0} sticker objects`);
+    const plan = await planUnpublish(client, ids[0]);
+    console.log(`unpublish ${plan.petId} ${plan.name} (owner ${plan.ownerUserId ?? '-'}) → tombstone`);
+    console.log(`  objects to delete: ${plan.objects.length}`);
+    for (const k of plan.objects) console.log(`    ${k}`);
+    if (plan.sharedPhoto.length) console.log(`  card photo removed too (same original photo): ${plan.sharedPhoto.map((s) => `${s.petId} ${s.name}`).join(', ')}`);
+    if (plan.familyDissolves.length) console.log(`  family dissolves (only one pet left): ${plan.familyDissolves.map((s) => `${s.petId} ${s.name}`).join(', ')}`);
+    if (plan.managerDates.length) console.log(`  was manager on: ${plan.managerDates.join(', ')} (today's manager is reselected automatically)`);
+    console.log(`  pending deletion requests: ${plan.pendingRequests.map((r) => r.requestId).join(', ') || 'none'} — resolve with deletions.ts after cleanup`);
     if (yes) {
-      await client.query(`UPDATE pet_match.pets SET status = 'unpublished', updated_at = now() WHERE pet_id = $1`, [row.pet_id]);
-      if (row.sticker_key) for (const s of SIZES) await store.delete(`${row.sticker_key}/${s}.png`);
-      console.log('applied.');
+      const { failed } = await applyUnpublish(client, store, plan);
+      console.log(failed.length ? `applied; objects NOT deleted (retry by hand): ${failed.join(', ')}` : 'applied.');
+      console.log('Also: mark the pet removed in the local catalog, delete its files under assets/pets, and check copies you downloaded for processing.');
     }
   } else {
     console.log('usage: catalog.ts publish [pet_id...] [--yes] [--prod] | unpublish <pet_id> [--yes] [--prod]');

@@ -31,6 +31,9 @@ const entry: GalleryEntry = {
         host={{ name: 'Sanxian', stickerSrc: '/img/pets/pet_4750baaed3f0/512' }}
       />
     ),
+    'MVP removed (generic mark)': () => (
+      <ScoreCard mode="normal" score={2480} saveState="saved" newRecord={false} mvp={{ pet: maodu, kind: 1 }} mvpRemoved review="review.pet.rush_success" title="title.scheduling_pro" stats={stats} />
+    ),
     'fish MVP': () => (
       <ScoreCard
         mode="fish"

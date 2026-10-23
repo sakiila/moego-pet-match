@@ -512,11 +512,25 @@ function score(ctx: Ctx, model: ShareCardModel, mode: GameMode, k: Tokens) {
   ctx.fillText(model.player, 540, L.player);
 }
 
+/** 原 MVP 已下架时的通用 MoeGo 图案：浅橙圆底上的大爪印，画在离屏画布上当作主角图。 */
+function genericMark(k: Tokens): HTMLCanvasElement {
+  const c = document.createElement('canvas');
+  c.width = 400;
+  c.height = 400;
+  const g = c.getContext('2d')!;
+  g.fillStyle = k.brandSoft;
+  g.beginPath();
+  g.arc(200, 200, 190, 0, Math.PI * 2);
+  g.fill();
+  paw(g, 200, 214, 110, k.brand, 0);
+  return c;
+}
+
 /** 按冻结的卡面内容绘制成绩卡并导出 PNG。主角图读取失败时整体失败（由预览提供重试）。 */
 export async function drawShareCard(model: ShareCardModel, mode: GameMode): Promise<Blob> {
   const k = readTokens(mode);
   await document.fonts?.ready;
-  const img = model.hero ? trimmed(await loadImage(model.hero.src)) : null;
+  const img = !model.hero ? null : model.hero.src ? trimmed(await loadImage(model.hero.src)) : genericMark(k);
   const canvas = document.createElement('canvas');
   canvas.width = SHARE_CARD.width;
   canvas.height = SHARE_CARD.height;

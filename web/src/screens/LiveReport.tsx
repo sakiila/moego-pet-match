@@ -46,7 +46,15 @@ export function LiveReport({ summary, registered, pets, playerId, playerName, on
         {...nav}
       />
       {sharing && (
-        <ShareCardOverlay mode={registered.mode} summary={summary} pets={pets} playerName={playerName} manager={nav.manager} onClose={() => setSharing(false)} />
+        <ShareCardOverlay
+          mode={registered.mode}
+          summary={summary}
+          pets={pets}
+          playerName={playerName}
+          manager={nav.manager}
+          removed={state.kind === 'saved' ? state.response.removedPetIds : []}
+          onClose={() => setSharing(false)}
+        />
       )}
       <PetDetailOverlay pet={detail.open} playerId={playerId} onClose={detail.close} onRetry={detail.show} onOpenShop={onOpenShop} />
     </>

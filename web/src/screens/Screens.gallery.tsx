@@ -64,6 +64,7 @@ const entry: GalleryEntry = {
             newCollected: [],
             progress: { completedNormalGames: 5, fishUnlocked: true, unlockedNow: false, counted: false },
             quiz: null,
+            removedPetIds: [],
           },
         }}
       />
@@ -92,6 +93,7 @@ const entry: GalleryEntry = {
             newCollected: [],
             progress: { completedNormalGames: 3, fishUnlocked: true, unlockedNow: true, counted: true },
             quiz: { quizId: 'q', petId: 'kiwi', petName: 'Kiwi', options: [{ userId: 'U1', name: 'Alice' }, { userId: 'U2', name: 'Zhang Wei' }, { userId: 'U3', name: 'Sam' }] },
+            removedPetIds: [],
           },
         }}
       />

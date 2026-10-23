@@ -102,3 +102,24 @@ export function buildCatalog(paths = PATHS): { pets: PetRecord[]; fish: FishReco
   );
   return { pets, fish };
 }
+
+/**
+ * 去掉已成墓碑的宠物（数据库里 status = 'removed'），publish 不得把它们重新上架：
+ * - 同主人剩下不足 2 只时不再成家；
+ * - 与墓碑共用同一张原图的宠物不再生成卡背照片（合照里有已移除的宠物）。
+ * blockedOriginal 列出因此不生成卡背照片的宠物。
+ */
+export function excludeRemoved(pets: PetRecord[], removedIds: ReadonlySet<string>) {
+  const removed = pets.filter((p) => removedIds.has(p.pet_id));
+  const blockedOriginals = new Set(removed.map((p) => p.original).filter((o): o is string => !!o));
+  const rest = pets.filter((p) => !removedIds.has(p.pet_id));
+  const perOwner = new Map<string, number>();
+  for (const p of rest) perOwner.set(p.owner_user_id, (perOwner.get(p.owner_user_id) ?? 0) + 1);
+  const blockedOriginal: string[] = [];
+  const kept = rest.map((p) => {
+    const blocked = !!p.original && blockedOriginals.has(p.original);
+    if (blocked) blockedOriginal.push(p.pet_id);
+    return { ...p, family_id: (perOwner.get(p.owner_user_id) ?? 0) >= 2 ? p.owner_user_id : null, original: blocked ? null : p.original };
+  });
+  return { kept, removed, blockedOriginal };
+}

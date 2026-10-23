@@ -8,8 +8,11 @@ import { judgeMvp, judgeReview, judgeTitle } from './report';
 export interface ShareCardModel {
   mode: string;
   brand: { lead: string; accent: string };
-  /** 主角：本局 MVP；普通局零服务时为今日店长；都没有时为 null（只留评语）。 */
-  hero: { src: string; label: string; kind: 'mvp' | 'manager' } | null;
+  /**
+   * 主角：本局 MVP；普通局零服务时为今日店长；原 MVP 已下架时为通用 MoeGo 图案（src 为 null）与中性标题，
+   * 不另选 MVP；都没有时为 null（只留评语）。
+   */
+  hero: { src: string | null; label: string; kind: 'mvp' | 'manager' | 'generic' } | null;
   title: string;
   review: string;
   scoreLabel: string;
@@ -27,13 +30,17 @@ export interface ShareCardInput {
   manager: DailyManager | null;
   locale: Locale;
   t: (key: MessageKey, vars?: Record<string, string | number>) => string;
+  /** 本局阵容里当前已下架的宠物（结算返回）。 */
+  removed?: ReadonlySet<string>;
 }
 
-export function shareCardModel({ summary, pets, mode, playerName, manager, locale, t }: ShareCardInput): ShareCardModel {
+export function shareCardModel({ summary, pets, mode, playerName, manager, locale, t, removed = new Set() }: ShareCardInput): ShareCardModel {
   const mvpKind = judgeMvp(summary);
   const mvp = mvpKind === null ? null : pets[mvpKind];
   let hero: ShareCardModel['hero'] = null;
-  if (mvp) {
+  if (mvp && removed.has(mvp.id)) {
+    hero = { src: null, label: t('report.generic_title'), kind: 'generic' };
+  } else if (mvp) {
     const src = petImage(mvp, 1024);
     const label = mode === 'fish' ? t('fish.report_mvp', { fishColorName: petDisplayName(mvp, locale) }) : t('report.mvp', { petName: mvp.name });
     hero = src ? { src, label, kind: 'mvp' } : null;

@@ -15,16 +15,20 @@ export interface ShareCardOverlayProps {
   /** 原对局玩家姓名。 */
   playerName: string;
   manager: DailyManager | null;
+  /** 本局阵容里当前已下架的宠物（结算返回）。 */
+  removed?: string[];
   onClose: () => void;
 }
 
 /** 报告的分享预览：打开时按本局冻结结果与当前语言生成成绩卡。 */
-export function ShareCardOverlay({ mode, summary, pets, playerName, manager, onClose }: ShareCardOverlayProps) {
+export function ShareCardOverlay({ mode, summary, pets, playerName, manager, removed = [], onClose }: ShareCardOverlayProps) {
   const { t, locale } = useI18n();
+  // 用内容作依赖，避免每次渲染的新数组重新生成图片
+  const removedKey = removed.join(',');
   const draw = useMemo(() => {
-    const model = shareCardModel({ summary, pets, mode, playerName, manager, locale, t });
+    const model = shareCardModel({ summary, pets, mode, playerName, manager, locale, t, removed: new Set(removedKey ? removedKey.split(',') : []) });
     return () => drawShareCard(model, mode);
-  }, [summary, pets, mode, playerName, manager, locale, t]);
+  }, [summary, pets, mode, playerName, manager, locale, t, removedKey]);
   const card = useShareCard(draw, `moego-pet-allstars-${mode}-${summary.score}.png`);
   return <ShareSheet open state={card.state} canShare={card.canShare} onSave={card.save} onShare={card.share} onRetry={card.retry} onClose={onClose} />;
 }

@@ -133,10 +133,21 @@ export async function settleGame(
     if (!g) throw new GameError('not_found', 'game');
     if (g.player_id !== playerId) throw new GameError('conflict', 'player');
 
+    // 本局阵容里已下架的宠物：按当前目录计算（重试时也重新计算），前端据此不再展示它们的资料
+    const removedOf = async () =>
+      g.mode === 'normal'
+        ? (
+            await client.query(
+              `SELECT x.id FROM unnest($1::text[]) AS x(id) LEFT JOIN pet_match.pets p ON p.pet_id = x.id WHERE p.status IS DISTINCT FROM 'published'`,
+              [g.lineup],
+            )
+          ).rows.map((r) => r.id as string)
+        : [];
+
     const existing = await client.query('SELECT payload_hash, response FROM pet_match.game_results WHERE game_id = $1', [gameId]);
     if (existing.rows[0]) {
       if (existing.rows[0].payload_hash !== hash) throw new GameError('conflict', 'different_result');
-      return existing.rows[0].response as SettleResponse;
+      return { ...(existing.rows[0].response as SettleResponse), removedPetIds: await removedOf() };
     }
 
     const reason = checkConsistency(payload, g.lineup, g.rules_version);
@@ -159,7 +170,11 @@ export async function settleGame(
 
     let newCollected: LineupPet[] = [];
     if (mode === 'normal') {
-      const served = payload.pets.filter((p) => p.served > 0).map((p) => p.id);
+      // 已下架的宠物不再记入图鉴（合法成绩与局数照常保留）
+      const listed = new Set<string>(
+        (await client.query(`SELECT pet_id FROM pet_match.pets WHERE pet_id = ANY($1) AND status = 'published'`, [payload.pets.map((p) => p.id)])).rows.map((r) => r.pet_id),
+      );
+      const served = payload.pets.filter((p) => p.served > 0 && listed.has(p.id)).map((p) => p.id);
       if (served.length) {
         const inserted = await client.query(
           `INSERT INTO pet_match.collections (player_id, pet_id, first_game_id)
@@ -208,6 +223,7 @@ export async function settleGame(
       newCollected,
       progress: { completedNormalGames: completed, fishUnlocked, unlockedNow, counted },
       quiz,
+      removedPetIds: await removedOf(),
     };
     await client.query(
       `INSERT INTO pet_match.game_results (game_id, payload, payload_hash, score, counted, response) VALUES ($1, $2, $3, $4, $5, $6)`,

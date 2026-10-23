@@ -12,7 +12,7 @@ function send(reply: FastifyReply, img: { body: Buffer; contentType: string }, c
 
 /**
  * 图片统一经自有域名返回，浏览器不直连 Slack 或 R2。
- * 宠物图返回前检查上架状态，下架即拒绝并清掉本地缓存；对象键带内容哈希，可长期缓存。
+ * 宠物图返回前检查上架状态，下架即拒绝并清掉该宠物的整组本地缓存；对象键带内容哈希，可长期缓存。
  */
 export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, images }) => {
   if (!images) return;
@@ -30,29 +30,30 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
     return send(reply, fetched, 'public, max-age=3600');
   });
 
+  /** 宠物的全部缓存（贴纸、剪影、卡背照片）放在同一组，下架时一次清掉。 */
+  const groupOf = (prefix: 'pets' | 'fish', id: string) => `${prefix === 'pets' ? 'pet' : 'fish'}:${id}`;
+  const gone = async (reply: FastifyReply, group: string) => {
+    await cache.deleteGroup(group);
+    return reply.status(404).send();
+  };
+
   const stickerRoute = (prefix: 'pets' | 'fish', sql: string) =>
     app.get<{ Params: { id: string; size: string } }>(`/img/${prefix}/:id/:size`, async (request, reply) => {
       const { id, size } = request.params;
       if (!PET_SIZES.has(size)) return reply.status(404).send();
       const { rows } = await pool.query(sql, [id]);
-      return serveSticker(reply, rows[0], size);
+      const pet = rows[0] as { status: string; sticker_key: string | null } | undefined;
+      const group = groupOf(prefix, id);
+      if (!pet || pet.status !== 'published' || !pet.sticker_key) return gone(reply, group);
+      const cacheKey = `${pet.sticker_key}/${size}`;
+      const cached = await cache.get(cacheKey, undefined, group);
+      if (cached) return send(reply, cached, 'public, max-age=31536000, immutable');
+      if (!store) return reply.status(503).send();
+      const obj = await store.get(`${pet.sticker_key}/${size}.png`);
+      if (!obj) return reply.status(404).send();
+      await cache.put(cacheKey, obj.body, obj.contentType, group);
+      return send(reply, obj, 'public, max-age=31536000, immutable');
     });
-
-  async function serveSticker(reply: FastifyReply, pet: { status: string; sticker_key: string | null } | undefined, size: string) {
-    if (!pet || pet.status !== 'published' || !pet.sticker_key) {
-      if (pet?.sticker_key) await cache.delete(`pet/${pet.sticker_key}/${size}`);
-      return reply.status(404).send();
-    }
-    const objectKey = `${pet.sticker_key}/${size}.png`;
-    const cacheKey = `pet/${pet.sticker_key}/${size}`;
-    const cached = await cache.get(cacheKey);
-    if (cached) return send(reply, cached, 'public, max-age=31536000, immutable');
-    if (!store) return reply.status(503).send();
-    const obj = await store.get(objectKey);
-    if (!obj) return reply.status(404).send();
-    await cache.put(cacheKey, obj.body, obj.contentType);
-    return send(reply, obj, 'public, max-age=31536000, immutable');
-  }
 
   stickerRoute('pets', 'SELECT status, sticker_key FROM pet_match.pets WHERE pet_id = $1');
 
@@ -61,15 +62,16 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
     const { id, size } = request.params;
     if (!PET_SIZES.has(size)) return reply.status(404).send();
     const pet = (await pool.query('SELECT status, sticker_key FROM pet_match.pets WHERE pet_id = $1', [id])).rows[0];
-    if (!pet || pet.status !== 'published' || !pet.sticker_key) return reply.status(404).send();
+    const group = groupOf('pets', id);
+    if (!pet || pet.status !== 'published' || !pet.sticker_key) return gone(reply, group);
     const cacheKey = `silhouette/${pet.sticker_key}/${size}`;
-    const cached = await cache.get(cacheKey);
+    const cached = await cache.get(cacheKey, undefined, group);
     if (cached) return send(reply, cached, 'public, max-age=31536000, immutable');
     if (!store) return reply.status(503).send();
     const obj = await store.get(`${pet.sticker_key}/${size}.png`);
     if (!obj) return reply.status(404).send();
     const body = await makeSilhouette(obj.body);
-    await cache.put(cacheKey, body, 'image/png');
+    await cache.put(cacheKey, body, 'image/png', group);
     return send(reply, { body, contentType: 'image/png' }, 'public, max-age=31536000, immutable');
   });
 
@@ -83,15 +85,28 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
       [request.params.id, playerId],
     );
     const pet = rows[0];
-    if (!pet || pet.status !== 'published' || !pet.photo_key || !(pet.collected || pet.owner_user_id === playerId)) return reply.status(404).send();
+    const group = groupOf('pets', request.params.id);
+    if (!pet || pet.status !== 'published') return gone(reply, group);
+    if (!pet.photo_key || !(pet.collected || pet.owner_user_id === playerId)) return reply.status(404).send();
     const cacheKey = `photo/${pet.photo_key}`;
-    const cached = await cache.get(cacheKey);
+    const cached = await cache.get(cacheKey, undefined, group);
     if (cached) return send(reply, cached, 'private, max-age=86400');
     if (!store) return reply.status(503).send();
     const obj = await store.get(pet.photo_key);
     if (!obj) return reply.status(404).send();
-    await cache.put(cacheKey, obj.body, obj.contentType);
+    await cache.put(cacheKey, obj.body, obj.contentType, group);
     return send(reply, obj, 'private, max-age=86400');
   });
+
+  // 启动时清一次已下架宠物的缓存（下架发生在命令行，服务端此前可能没收到对应请求）
+  app.addHook('onReady', async () => {
+    try {
+      const { rows } = await pool.query(`SELECT pet_id FROM pet_match.pets WHERE status <> 'published'`);
+      for (const r of rows) await cache.deleteGroup(groupOf('pets', r.pet_id));
+    } catch (error) {
+      app.log.warn({ error }, 'cache sweep for removed pets failed');
+    }
+  });
+
   stickerRoute('fish', 'SELECT status, sticker_key FROM pet_match.fish_colors WHERE color_id = $1');
 };

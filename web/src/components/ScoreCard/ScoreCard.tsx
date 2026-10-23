@@ -16,6 +16,8 @@ export interface ScoreCardProps {
   stats: { tiles: number; chain: number; tools: number };
   /** 零服务时由今日店长承接鼓励评语（普通局）；不编造 MVP。 */
   host?: { name: string; stickerSrc: string } | null;
+  /** 原 MVP 已下架：以通用 MoeGo 图案与「本局成绩」承接，不另选 MVP。 */
+  mvpRemoved?: boolean;
 }
 
 const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
@@ -24,7 +26,7 @@ const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
  * 报告首屏：分数立即显示；MVP 与称号短促出现；新纪录只在已保存且严格刷新时显示标记与少量彩纸。
  * 零服务省略 MVP，由鼓励评语承接。所有内容来自冻结结果。
  */
-export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host }: ScoreCardProps) {
+export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false }: ScoreCardProps) {
   const { t, locale } = useI18n();
   const fmt = (n: number) => n.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US');
   const mvpLabel = mvp
@@ -63,7 +65,21 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
           ))}
         </span>
       )}
-      {mvp ? (
+      {mvp && mvpRemoved ? (
+        <div className={styles.mvp} data-testid="mvp-removed">
+          <div className={styles.sticker} style={{ '--tint': 'var(--color-brand-soft)' } as CSSProperties}>
+            <svg viewBox="0 0 100 100" className={styles.generic} aria-hidden>
+              <ellipse cx="50" cy="62" rx="20" ry="16" fill="currentColor" />
+              <ellipse cx="28" cy="40" rx="8" ry="10" fill="currentColor" />
+              <ellipse cx="42" cy="28" rx="8" ry="10" fill="currentColor" />
+              <ellipse cx="58" cy="28" rx="8" ry="10" fill="currentColor" />
+              <ellipse cx="72" cy="40" rx="8" ry="10" fill="currentColor" />
+            </svg>
+          </div>
+          <span className={styles.mvpName}>{t('report.generic_title')}</span>
+          <p className={styles.review}>“{t(review)}”</p>
+        </div>
+      ) : mvp ? (
         <div className={styles.mvp} data-testid="mvp">
           <div className={styles.sticker} style={{ '--tint': `var(--pet-tint-${mvp.kind % 6})` } as CSSProperties}>
             {petImage(mvp.pet, 512) ? <img src={petImage(mvp.pet, 512)!} alt={mvp.pet.name} /> : null}

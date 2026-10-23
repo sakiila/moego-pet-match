@@ -46,6 +46,8 @@ export function ReportScreen(props: ReportScreenProps) {
   const mvpKind = judgeMvp(summary);
   const kindOf = (id: string) => pets.findIndex((p) => p.id === id);
   const saved = save.kind === 'saved' ? save.response : null;
+  // 本局阵容里当前已下架的宠物：不再展示它们的资料（原 MVP 下架用通用图案承接）
+  const removed = new Set(saved?.removedPetIds ?? []);
   const served = summary.clearedCells > 0;
   const fish = mode === 'fish';
   const subtitle = fish ? 'fish.report_subtitle' : served ? 'report.subtitle' : 'report.generic_caption';
@@ -61,6 +63,7 @@ export function ReportScreen(props: ReportScreenProps) {
         saveState={save.kind === 'saved' ? 'saved' : save.kind === 'saving' ? 'saving' : 'failed'}
         newRecord={!!saved?.personalBest.isNew && saved.personalBest.previous !== null}
         mvp={mvpKind === null ? null : { pet: pets[mvpKind], kind: mvpKind }}
+        mvpRemoved={mvpKind !== null && removed.has(pets[mvpKind].id)}
         review={judgeReview(summary, mode)}
         title={judgeTitle(summary)}
         stats={{ tiles: summary.clearedCells, chain: summary.maxChain, tools: summary.toolsFired }}
@@ -70,7 +73,7 @@ export function ReportScreen(props: ReportScreenProps) {
       {!fish && save.kind === 'saved' && (
         <CollectionCards pets={save.newPets.map((p) => ({ pet: pets[kindOf(p.id)] ?? p, kind: kindOf(p.id) }))} onSelect={mode === 'normal' ? onOpenPet : undefined} />
       )}
-      {!fish && saved?.quiz && kindOf(saved.quiz.petId) >= 0 && (
+      {!fish && saved?.quiz && kindOf(saved.quiz.petId) >= 0 && !removed.has(saved.quiz.petId) && (
         <QuizCard
           quiz={saved.quiz}
           pet={pets[kindOf(saved.quiz.petId)]}

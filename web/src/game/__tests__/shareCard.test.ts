@@ -71,6 +71,22 @@ describe('成绩卡内容', () => {
   });
 });
 
+describe('原 MVP 已下架', () => {
+  it('主角改为通用 MoeGo 图案与「本局成绩」，不另选 MVP；分数、称号、评语与署名保留', () => {
+    const m = shareCardModel({ summary: summary(), pets, mode: 'normal', playerName: 'Bob', manager, locale: 'zh', t: zh, removed: new Set(['pet_2']) });
+    expect(m.hero).toEqual({ src: null, label: '本局成绩', kind: 'generic' });
+    expect(m.title).toBe('精准排班大师');
+    expect(m.review).toBe('临时加单？安排得明明白白。');
+    expect(m.score).toBe('2,480');
+    expect(m.player).toBe('本局玩家：Bob');
+  });
+
+  it('下架的不是 MVP 时照常显示 MVP', () => {
+    const m = shareCardModel({ summary: summary(), pets, mode: 'normal', playerName: 'Bob', manager, locale: 'zh', t: zh, removed: new Set(['pet_0']) });
+    expect(m.hero?.kind).toBe('mvp');
+  });
+});
+
 describe('店长小海报内容', () => {
   it('店长贴纸、名牌、宣言与北京日期（中文）', () => {
     const m = managerPosterModel({ manager, t: zh, locale: 'zh' });
