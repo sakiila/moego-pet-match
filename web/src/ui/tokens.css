@@ -27,6 +27,10 @@
   --pet-tint-4: #ffd7de;
   --pet-tint-5: #fff0bd;
 
+  /* 报告小票「打印」动画：开始延迟与出纸时长；小票下方内容在此之后依次出现。减少动态效果时为 0 */
+  --print-start: 250ms;
+  --print-ms: 1800ms;
+
   /* 状态色 */
   --color-success: #2f9e6b;
   --color-danger: #d64545;
@@ -131,4 +135,11 @@
   --water-bubble: rgb(190 230 255 / 0.55);
   --water-weed: #1f6b5c;
   --water-rock: #0d2c4a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --print-start: 0ms;
+    --print-ms: 0ms;
+  }
 }

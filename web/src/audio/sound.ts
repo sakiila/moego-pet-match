@@ -101,6 +101,24 @@ export function playFinish() {
   tone(a, PENTA[2], t + 0.16, 0.36, 'triangle', 0.6);
 }
 
+/** 小票送到位的「叮」：高音钟声（基音加一个不谐和的泛音，衰减稍长）。 */
+export function playPrinted() {
+  const a = audio();
+  if (!a || a.ctx.state !== 'running') return;
+  const t = a.ctx.currentTime;
+  tone(a, PENTA[7], t, 0.9, 'sine', 0.7);
+  tone(a, PENTA[7] * 2.4, t, 0.45, 'sine', 0.22);
+}
+
+/** 印章拍下：低沉的「咚」加一点纸面拍击声。 */
+export function playStamp() {
+  const a = audio();
+  if (!a || a.ctx.state !== 'running') return;
+  const t = a.ctx.currentTime;
+  tone(a, 150, t, 0.24, 'sine', 1, 55);
+  noise(a, t, 0.07, 0.5, { type: 'lowpass', from: 1800, to: 300 });
+}
+
 // ---------- 背景音乐：低音量五声音阶循环（占位，日后替换为正式音乐文件） ----------
 
 /** 两小节旋律（八分音符，音阶下标；-1 为休止）与对应的低音根音。 */

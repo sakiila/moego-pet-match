@@ -54,7 +54,7 @@ export function ReportScreen(props: ReportScreenProps) {
 
   // 鱼报告：不涉及普通图鉴、竞猜、鱼关邀请与店长（服务端也不返回这些），导航为鱼关排行榜与回门店
   return (
-    <main className={`${styles.screen} ${styles.withStickyActions}`} data-theme={fish ? 'fish' : undefined}>
+    <main className={`${styles.screen} ${styles.withStickyActions} ${styles.afterPrint}`} data-theme={fish ? 'fish' : undefined}>
       {fish && <UnderwaterBackdrop />}
       <BrandHeader heading={t(mode === 'fish' ? 'fish.report_title' : 'report.title')} headingAccent tagline={subtitle} onBack={onHome} />
       <ScoreCard

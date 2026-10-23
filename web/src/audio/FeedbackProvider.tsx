@@ -3,7 +3,7 @@ import { batchFeedback, createLimiter, FEEDBACK_GAP_MS } from '../game/feedback'
 import { loadPreferences, savePreferences, type SoundPreferences } from '../game/preferences';
 import type { Batch } from '../engine';
 import { cancelVibration, hapticsSupported, vibrate } from './haptics';
-import { playFinish, playSound, startMusic, stopMusic, suspendAudio, unlockAudio } from './sound';
+import { playFinish, playPrinted, playSound, playStamp, startMusic, stopMusic, suspendAudio, unlockAudio } from './sound';
 
 interface Feedback {
   prefs: SoundPreferences;
@@ -12,6 +12,9 @@ interface Feedback {
   /** 一个清除批次结算时调用；按开关与限频播放音效和轻震。 */
   onBatch: (batch: Batch) => void;
   onFinish: () => void;
+  /** 报告小票送到位（「叮」+ 轻震）与印章拍下（「咚」+ 短双点）。 */
+  onPrinted: () => void;
+  onStamp: () => void;
   /** 棋盘计时期间为 true：只有这时（且音乐开关打开）播放背景音乐。 */
   setMusicActive: (active: boolean) => void;
 }
@@ -108,6 +111,18 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
         stopMusic();
         record(`finish:${prefsRef.current.sfx ? 'sfx' : '-'}`);
       },
+      onPrinted: () => {
+        const p = prefsRef.current;
+        if (p.sfx) playPrinted();
+        if (p.haptics) vibrate('tap');
+        record(`printed:${p.sfx ? 'sfx' : '-'}:${p.haptics ? 'tap' : '-'}`);
+      },
+      onStamp: () => {
+        const p = prefsRef.current;
+        if (p.sfx) playStamp();
+        if (p.haptics) vibrate('double');
+        record(`stamp:${p.sfx ? 'sfx' : '-'}:${p.haptics ? 'double' : '-'}`);
+      },
       setMusicActive: (active) => {
         musicActive.current = active;
         if (active) unlockAudio();
@@ -127,6 +142,8 @@ const SILENT: Feedback = {
   setPref: () => {},
   onBatch: () => {},
   onFinish: () => {},
+  onPrinted: () => {},
+  onStamp: () => {},
   setMusicActive: () => {},
 };
 

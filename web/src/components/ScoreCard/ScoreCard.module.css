@@ -1,9 +1,31 @@
 /* 悬浮小票：阴影放在外层并用 drop-shadow，才能跟随撕口锯齿 */
-.wrap {
+/* 出纸口：上沿是裁切线，小票从线下方分几段送出来；左右与下方留出阴影的位置 */
+.printer {
+  position: relative;
   width: 100%;
   max-width: 340px;
   margin: var(--space-2) auto var(--space-3);
+  clip-path: inset(0 -72px -56px -72px);
+}
+
+.slot {
+  position: absolute;
+  top: 0;
+  left: -6px;
+  right: -6px;
+  z-index: 3;
+  height: 8px;
+  border-radius: 0 0 6px 6px;
+  background: var(--color-ink);
+  box-shadow: 0 2px 4px rgb(31 34 39 / 0.25);
+  animation: slot-out 400ms var(--ease-out) calc(var(--print-start) + var(--print-ms) - 150ms) both;
+}
+
+.wrap {
+  width: 100%;
+  transform-origin: 50% 0;
   filter: var(--shadow-float);
+  animation: print var(--print-ms) cubic-bezier(0.3, 0.7, 0.3, 1) var(--print-start) both;
 }
 
 .card {
@@ -74,7 +96,7 @@
   background: var(--color-dog-yellow);
   font-size: var(--text-sm);
   font-weight: 900;
-  animation: pop 560ms var(--ease-out) 350ms both;
+  animation: pop 560ms var(--ease-out) calc(var(--print-start) + var(--print-ms) + 100ms) both;
 }
 
 .confetti {
@@ -90,7 +112,7 @@
   height: 11px;
   border-radius: 2px;
   background: var(--c);
-  animation: confetti 1300ms ease-out 350ms both;
+  animation: confetti 1300ms ease-out calc(var(--print-start) + var(--print-ms) + 100ms) both;
   transform: rotate(var(--rot));
 }
 
@@ -105,7 +127,6 @@
   display: grid;
   justify-items: center;
   gap: var(--space-2);
-  animation: rise 600ms var(--ease-out) 450ms both;
 }
 
 .sticker {
@@ -155,7 +176,7 @@
   line-height: 1.2;
   text-align: center;
   transform: rotate(-8deg);
-  animation: stamp 520ms var(--ease-out) 950ms both;
+  animation: stamp 600ms var(--ease-out) calc(var(--print-start) + var(--print-ms) + 150ms) both;
 }
 
 .noMvp {
@@ -223,9 +244,19 @@
 }
 
 @keyframes stamp {
-  from {
+  0% {
     opacity: 0;
-    transform: rotate(-8deg) scale(1.6);
+    transform: rotate(-8deg) scale(2.3);
+  }
+  55% {
+    opacity: 1;
+    transform: rotate(-8deg) scale(0.9);
+  }
+  75% {
+    transform: rotate(-8deg) scale(1.06);
+  }
+  100% {
+    transform: rotate(-8deg) scale(1);
   }
 }
 
@@ -240,4 +271,77 @@
   width: 60%;
   height: 60%;
   color: var(--color-brand);
+}
+
+/* 打印：分三段送纸，最后像被撕下来：冲过头并大幅甩斜（约 3.6°，绕出纸口摆动），再反向回摆、落定 */
+@keyframes print {
+  0% {
+    transform: translateY(-100%);
+  }
+  20% {
+    transform: translateY(-78%);
+  }
+  26% {
+    transform: translateY(-78%);
+  }
+  54% {
+    transform: translateY(-36%);
+  }
+  60% {
+    transform: translateY(-36%);
+  }
+  80% {
+    transform: translateY(12px) rotate(3.6deg);
+  }
+  90% {
+    transform: translateY(-4px) rotate(-2.4deg);
+  }
+  96% {
+    transform: translateY(1px) rotate(0.8deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes slot-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* 印章拍下的瞬间：整张小票轻震一下，章边扩出一圈冲击波 */
+.card {
+  animation: thud 360ms ease-out calc(var(--print-start) + var(--print-ms) + 150ms + 340ms) both;
+}
+
+@keyframes thud {
+  30% {
+    transform: translateY(3px) scale(0.995);
+  }
+  62% {
+    transform: translateY(-1px);
+  }
+}
+
+.stamp::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 3px solid var(--color-brand);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  animation: stamp-ring 620ms ease-out calc(var(--print-start) + var(--print-ms) + 150ms + 340ms) both;
+}
+
+@keyframes stamp-ring {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7, 1.9);
+  }
 }

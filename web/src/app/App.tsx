@@ -44,6 +44,9 @@ const params = import.meta.env.DEV ? new URLSearchParams(location.search) : new 
 const speed = Number(params.get('speed')) || 1;
 const startAt = Number(params.get('t0')) || 0;
 const preset = import.meta.env.DEV ? PRESETS[params.get('preset') ?? ''] : undefined;
+/** 开发验收：?report=greedy|casual|zero 刷新即「游戏结束」，直接进入报告页（真实登记、结算与保存；可加 &mode=fish）。 */
+const devReport = params.get('report');
+const devReportMode: GameMode = params.get('mode') === 'fish' ? 'fish' : 'normal';
 
 export function App() {
   const { t } = useI18n();
@@ -51,13 +54,25 @@ export function App() {
   const [route, setRoute] = useState<Route>(() => (loadSavedPlayerId() ? { name: 'boot' } : { name: 'identity' }));
   const [manager, setManager] = useState<DailyManager | null>(null);
 
+  // 开发验收（?report=）：登记一局 → 自动打完 → 直接进报告页，等同于玩完一局
+  const devJumpToReport = useCallback(async (p: PlayerView) => {
+    if (!import.meta.env.DEV) return;
+    const { autoplay, parseAutoplayStyle } = await import('../dev/autoplay');
+    const registered = await api.registerGame(p.userId, devReportMode);
+    await preloadPets(registered.lineup.map((x) => petFromLineup(x, devReportMode)));
+    const game = createGame({ seed: registered.seed, lineup: registered.lineup.map((x) => x.petId) });
+    setRoute({ name: 'report', session: { registered, game }, summary: autoplay(game, parseAutoplayStyle(devReport)) });
+  }, []);
+
   // 校验浏览器记住的身份：失效回选择页；读取失败显示重试，不当作身份失效
   const restore = useCallback(async () => {
     const saved = loadSavedPlayerId();
     if (!saved) return setRoute({ name: 'identity' });
     setRoute({ name: 'boot' });
     try {
-      setPlayer(await api.getPlayer(saved));
+      const restored = await api.getPlayer(saved);
+      setPlayer(restored);
+      if (import.meta.env.DEV && devReport) return void (await devJumpToReport(restored));
       setRoute({ name: 'home' });
     } catch (error) {
       if (error instanceof ApiError && error.kind === 'not_found') {
@@ -67,7 +82,7 @@ export function App() {
         setRoute({ name: 'bootFailed' });
       }
     }
-  }, []);
+  }, [devJumpToReport]);
 
   useEffect(() => {
     // 只在首次进入时校验记住的身份

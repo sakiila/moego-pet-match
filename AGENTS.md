@@ -58,6 +58,7 @@ tools/pet-studio/  已有的独立素材工作台，与游戏代码分开，不�
 - 素材上下架：`server/scripts/catalog.ts publish|unpublish`（默认只列变更，`--yes` 写入，`--prod` 写 Supabase 需先确认）；读 v4 名录、`assets/pets/stickers-b-head-active-v1` 与已确认的 `data/pet-materials/owner-slack-map.json`。贴纸默认存本地目录 `server/.store/`（与 R2 相同键布局），`OBJECT_STORE=r2` 切到 R2。删除申请用 `server/scripts/deletions.ts list|resolve`（`resolve` 只改状态、须写 `--note`；关联宠物仍上架时拒绝，先 `catalog unpublish`）。同事上传用 `server/scripts/submissions.ts list|pull|done`（`pull --yes` 把原文件与资料下载到不进 git 的 `data/submissions/<北京日期>/<id>/`；原文件可能带 EXIF，交给 AI 前先去除）。本地目录的对象用 `server/scripts/store-sync.ts` 补传到 R2（只传桶里没有的键，不覆盖、不删除、不碰数据库；默认只列出，`--yes` 上传）。
 - 生产镜像：仓库根目录 `docker buildx build --platform linux/amd64 -t moego-pet-match:<版本> --load .`；部署说明、编排示例与生产环境变量清单在 `deploy/`。不自行部署。
 - engine 与 server 的规则改动必须有单元测试并跑通。引擎只认游戏时钟毫秒数；测试用 ASCII 棋盘夹具与固定补落序列（见 `web/src/engine/__tests__/fixtures.ts`）。
+- 报告页验收（仅开发环境）：打开 `http://localhost:5180/?report=greedy`（或 `casual` 随机走子、`zero` 零服务局；加 `&mode=fish` 看鱼关报告），刷新一次就登记并自动打完一局、直接进入报告页，走真实结算与保存；需要先在浏览器里选过一次身份，会向本地开发库写入对局记录（成绩、图鉴、局数）。生产构建不含此功能。
 - UI 改动在浏览器 390 × 844 下截图，与对应的已选定图稿（见 DESIGN_NOTES「选定展示文件」）对比并说明差异；同时检查陈列页中的各状态。
 - 未实际运行验证的内容，在交付说明中明确写出。
 

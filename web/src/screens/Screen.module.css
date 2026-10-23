@@ -182,3 +182,35 @@
   font-weight: 900;
   overflow-wrap: anywhere;
 }
+
+/* 报告页：小票出完之后，其余内容依次淡入上浮（一直可点，只是视觉上延后） */
+.afterPrint > :not(header):not([data-print]) {
+  animation: after-print 520ms var(--ease-out) calc(var(--print-start) + var(--print-ms) + 100ms) both;
+}
+
+.afterPrint > :not(header):not([data-print]):nth-child(4) {
+  animation-delay: calc(var(--print-start) + var(--print-ms) + 180ms);
+}
+
+.afterPrint > :not(header):not([data-print]):nth-child(5) {
+  animation-delay: calc(var(--print-start) + var(--print-ms) + 260ms);
+}
+
+.afterPrint > :not(header):not([data-print]):nth-child(6) {
+  animation-delay: calc(var(--print-start) + var(--print-ms) + 340ms);
+}
+
+.afterPrint > :not(header):not([data-print]):nth-child(7) {
+  animation-delay: calc(var(--print-start) + var(--print-ms) + 420ms);
+}
+
+.afterPrint > :not(header):not([data-print]):nth-child(n + 8) {
+  animation-delay: calc(var(--print-start) + var(--print-ms) + 500ms);
+}
+
+@keyframes after-print {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
