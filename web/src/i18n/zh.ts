@@ -137,6 +137,26 @@ export const zh = {
   'title.tool_pro': '洗护工具大师',
   'title.last_second': '极限下班选手',
   'title.pet_officer': '毛孩子体验官',
+  // 阶段 3C：图鉴、宠物详情与每日店长（取自 UI_COPY 3.1、6.1；pet.quote_more/less、pet.flip_back 于 2026-10-23 确认补入）
+  'collection.progress': '已收集 {collected} / {total} 位毛同事',
+  'collection.filter_all': '全部',
+  'collection.filter_collected': '已收集',
+  'collection.filter_uncollected': '未收集',
+  'collection.empty': '第一位毛同事，等你开门服务。',
+  'collection.search': '搜宠物名或主人名',
+  'collection.search_scope': '宠物名可搜全部已上架宠物；主人名只搜已收集宠物。',
+  'collection.search_empty': '当前范围里没找到。试试宠物名，或换个筛选。',
+  'pet.unlock_hint': '棋盘上服务过 TA，完整收工、成绩保存成功后，就会自动收集。',
+  'pet.owner': '主人',
+  'pet.original_photo': '翻面看原图',
+  'pet.owner_quote': '主人说',
+  'pet.unlisted': '这位伙伴已下架，回图鉴看看其他伙伴吧。',
+  'pet.quote_more': '展开全文',
+  'pet.quote_less': '收起',
+  'pet.flip_back': '翻回正面',
+  'home.manager': '今日店长',
+  'home.manager_line': '你负责排班，我负责可爱。',
+  'my_pets.view': '查看资料',
 } as const;
 
 export type MessageKey = keyof typeof zh;

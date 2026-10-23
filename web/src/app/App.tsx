@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ApiError, api } from '../api/client';
-import type { GameMode, PlayerView, RegisteredGame } from '../api/types';
+import type { DailyManager, GameMode, PlayerView, RegisteredGame } from '../api/types';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { PRESETS } from '../dev/presets';
 import { createGame, type GameState, type GameSummary } from '../engine';
@@ -11,6 +11,7 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { IdentityScreen } from '../screens/IdentityScreen';
 import { LeaderboardScreen } from '../screens/LeaderboardScreen';
 import { LiveReport } from '../screens/LiveReport';
+import { PetdexScreen } from '../screens/PetdexScreen';
 import { PrepScreen } from '../screens/PrepScreen';
 import screen from '../screens/Screen.module.css';
 import { loadSavedPlayerId, savePlayerId } from './identity';
@@ -26,6 +27,7 @@ type Route =
   | { name: 'identity' }
   | { name: 'home' }
   | { name: 'leaderboard' }
+  | { name: 'petdex' }
   | { name: 'prep'; mode: GameMode; session: Session | null; failed: boolean }
   | { name: 'board'; session: Session }
   | { name: 'report'; session: Session; summary: GameSummary };
@@ -40,6 +42,7 @@ export function App() {
   const { t } = useI18n();
   const [player, setPlayer] = useState<PlayerView | null>(null);
   const [route, setRoute] = useState<Route>(() => (loadSavedPlayerId() ? { name: 'boot' } : { name: 'identity' }));
+  const [manager, setManager] = useState<DailyManager | null>(null);
 
   // 校验浏览器记住的身份：失效回选择页；读取失败显示重试，不当作身份失效
   const restore = useCallback(async () => {
@@ -96,7 +99,20 @@ export function App() {
     }
   }, [player]);
 
+  // 今日店长：回门店时读取（北京时间跨日后自然换人）；失败时门店照常可开局
+  const refreshManager = useCallback(async () => {
+    try {
+      setManager(await api.getManager());
+    } catch {
+      // 保留已读到的店长
+    }
+  }, []);
+  useEffect(() => {
+    if (route.name === 'home') void refreshManager();
+  }, [route.name, refreshManager]);
+
   const toHome = useCallback(() => setRoute({ name: 'home' }), []);
+  const toPetdex = useCallback(() => setRoute({ name: 'petdex' }), []);
   const petsOf = (s: Session) =>
     s.game.lineup.map((id) => petFromLineup(s.registered.lineup.find((p) => p.petId === id)!, s.registered.mode));
   const ownNamesOf = (s: Session) =>
@@ -124,13 +140,17 @@ export function App() {
       return player ? (
         <HomeScreen
           player={player}
+          manager={manager}
           onOpenShop={() => void toPrep('normal')}
+          onCollection={toPetdex}
           onLeaderboard={() => setRoute({ name: 'leaderboard' })}
           onSwitchIdentity={() => setRoute({ name: 'identity' })}
         />
       ) : null;
     case 'leaderboard':
       return player ? <LeaderboardScreen player={player} onBack={toHome} onChallenge={(mode) => void toPrep(mode)} /> : null;
+    case 'petdex':
+      return player ? <PetdexScreen player={player} onBack={toHome} onOpenShop={() => void toPrep('normal')} /> : null;
     case 'prep':
       return (
         <PrepScreen
@@ -162,10 +182,13 @@ export function App() {
           registered={route.session.registered}
           pets={petsOf(route.session)}
           playerId={player!.userId}
+          manager={manager}
           onSaved={() => void refreshPlayer()}
           onPlayAgain={() => void toPrep(route.session.registered.mode)}
           onHome={toHome}
           onLeaderboard={() => setRoute({ name: 'leaderboard' })}
+          onCollection={toPetdex}
+          onOpenShop={() => void toPrep('normal')}
           onFishInvite={() => void toPrep('fish')}
         />
       );

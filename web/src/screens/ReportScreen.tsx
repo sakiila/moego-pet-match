@@ -1,13 +1,14 @@
-import type { GameMode, QuizResult } from '../api/types';
+import type { DailyManager, GameMode, QuizResult } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { CollectionCards } from '../components/CollectionCards/CollectionCards';
 import { FishInvitation } from '../components/FishInvitation/FishInvitation';
+import { ManagerCard } from '../components/ManagerCard/ManagerCard';
 import { NavTile } from '../components/NavTile/NavTile';
 import { QuizCard } from '../components/QuizCard/QuizCard';
 import { SaveStatus, type SaveState } from '../components/SaveStatus/SaveStatus';
 import { ScoreCard } from '../components/ScoreCard/ScoreCard';
 import type { GameSummary } from '../engine';
-import type { PetInfo } from '../game/pets';
+import { stickerUrl, type PetInfo } from '../game/pets';
 import { judgeMvp, judgeReview, judgeTitle } from '../game/report';
 import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
@@ -25,13 +26,18 @@ export interface ReportScreenProps {
   onLeaderboard: () => void;
   onFishInvite: () => void;
   onAnswerQuiz: (quizId: string, choice: string | null) => Promise<QuizResult>;
+  /** 今日店长：零服务承接鼓励，报告末尾留形象与签名；读取失败时省略。 */
+  manager: DailyManager | null;
+  onCollection: () => void;
+  onOpenPet: (pet: PetInfo) => void;
 }
 
 /**
  * 完整 Report Card：分数立即显示，MVP 与称号随后出现，收获在保存成功后点亮；
  * 正文可滚动，底部固定「再开一局」。所有判定复用本局冻结结果。
  */
-export function ReportScreen({ mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz }: ReportScreenProps) {
+export function ReportScreen(props: ReportScreenProps) {
+  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onCollection, onOpenPet } = props;
   const { t } = useI18n();
   const mvpKind = judgeMvp(summary);
   const kindOf = (id: string) => pets.findIndex((p) => p.id === id);
@@ -51,10 +57,11 @@ export function ReportScreen({ mode, summary, pets, save, onRetry, onPlayAgain, 
         review={judgeReview(summary, mode)}
         title={judgeTitle(summary)}
         stats={{ tiles: summary.clearedCells, chain: summary.maxChain, tools: summary.toolsFired }}
+        host={mode === 'normal' && manager ? { name: manager.pet.name, stickerSrc: stickerUrl(manager.pet.petId, 512) } : null}
       />
       <SaveStatus state={save} onRetry={onRetry} />
       {save.kind === 'saved' && (
-        <CollectionCards pets={save.newPets.map((p) => ({ pet: pets[kindOf(p.id)] ?? p, kind: kindOf(p.id) }))} />
+        <CollectionCards pets={save.newPets.map((p) => ({ pet: pets[kindOf(p.id)] ?? p, kind: kindOf(p.id) }))} onSelect={mode === 'normal' ? onOpenPet : undefined} />
       )}
       {saved?.quiz && kindOf(saved.quiz.petId) >= 0 && (
         <QuizCard
@@ -65,7 +72,9 @@ export function ReportScreen({ mode, summary, pets, save, onRetry, onPlayAgain, 
         />
       )}
       {saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}
+      {mode === 'normal' && manager && <ManagerCard variant="signature" name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} />}
       <nav className={styles.navRow}>
+        <NavTile icon="📖" label={t('nav.collection')} onClick={onCollection} />
         <NavTile icon="🏆" label={t('nav.leaderboard')} onClick={onLeaderboard} />
         <NavTile icon="🏠" label={t('action.back_to_shop')} onClick={onHome} />
       </nav>

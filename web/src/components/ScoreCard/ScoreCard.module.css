@@ -136,7 +136,8 @@
 
 .noMvp {
   align-self: center;
-  margin: 0;
+  /* 给绝对定位的称号章留出位置，避免压住鼓励文案 */
+  margin: calc(var(--space-6) * 3) 0 0;
   padding: var(--space-4);
   border-radius: var(--radius-lg);
   background: var(--color-surface-muted);

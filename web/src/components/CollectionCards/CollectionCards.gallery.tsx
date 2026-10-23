@@ -12,6 +12,7 @@ const entry: GalleryEntry = {
   group: 'components',
   states: {
     'two (real)': () => <CollectionCards pets={real.slice(0, 2)} />,
+    'clickable': () => <CollectionCards pets={real} onSelect={() => {}} />,
     'three (real)': () => <CollectionCards pets={real} />,
     'placeholder six': () => <CollectionCards pets={PLACEHOLDER_PETS.map((pet, kind) => ({ pet, kind }))} />,
     'none (renders nothing)': () => <CollectionCards pets={[]} />,

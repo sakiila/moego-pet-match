@@ -1,5 +1,6 @@
 import type { FastifyPluginAsync, FastifyReply } from 'fastify';
 import type { AppDeps } from '../app.ts';
+import { makeSilhouette } from '../catalog/photo.ts';
 import { findColleague } from '../services/players.ts';
 
 const PET_SIZES = new Set(['128', '512', '1024']);
@@ -54,5 +55,43 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
   }
 
   stickerRoute('pets', 'SELECT status, sticker_key FROM pet_match.pets WHERE pet_id = $1');
+
+  // 未收集卡片的剪影：由贴纸透明通道生成，浏览器拿不到真实毛色与花纹
+  app.get<{ Params: { id: string; size: string } }>('/img/silhouettes/:id/:size', async (request, reply) => {
+    const { id, size } = request.params;
+    if (!PET_SIZES.has(size)) return reply.status(404).send();
+    const pet = (await pool.query('SELECT status, sticker_key FROM pet_match.pets WHERE pet_id = $1', [id])).rows[0];
+    if (!pet || pet.status !== 'published' || !pet.sticker_key) return reply.status(404).send();
+    const cacheKey = `silhouette/${pet.sticker_key}/${size}`;
+    const cached = await cache.get(cacheKey);
+    if (cached) return send(reply, cached, 'public, max-age=31536000, immutable');
+    if (!store) return reply.status(503).send();
+    const obj = await store.get(`${pet.sticker_key}/${size}.png`);
+    if (!obj) return reply.status(404).send();
+    const body = await makeSilhouette(obj.body);
+    await cache.put(cacheKey, body, 'image/png');
+    return send(reply, { body, contentType: 'image/png' }, 'public, max-age=31536000, immutable');
+  });
+
+  // 卡背照片（处理后的版本）：只给已收集该宠物的玩家或主人本人
+  app.get<{ Params: { id: string }; Querystring: { playerId?: string } }>('/img/photos/:id', async (request, reply) => {
+    const playerId = request.query.playerId ?? '';
+    const { rows } = await pool.query(
+      `SELECT p.status, p.photo_key, p.owner_user_id,
+              EXISTS (SELECT 1 FROM pet_match.collections c WHERE c.pet_id = p.pet_id AND c.player_id = $2) AS collected
+       FROM pet_match.pets p WHERE p.pet_id = $1`,
+      [request.params.id, playerId],
+    );
+    const pet = rows[0];
+    if (!pet || pet.status !== 'published' || !pet.photo_key || !(pet.collected || pet.owner_user_id === playerId)) return reply.status(404).send();
+    const cacheKey = `photo/${pet.photo_key}`;
+    const cached = await cache.get(cacheKey);
+    if (cached) return send(reply, cached, 'private, max-age=86400');
+    if (!store) return reply.status(503).send();
+    const obj = await store.get(pet.photo_key);
+    if (!obj) return reply.status(404).send();
+    await cache.put(cacheKey, obj.body, obj.contentType);
+    return send(reply, obj, 'private, max-age=86400');
+  });
   stickerRoute('fish', 'SELECT status, sticker_key FROM pet_match.fish_colors WHERE color_id = $1');
 };

@@ -1,0 +1,10 @@
+.progress {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 900;
+}
+
+.count {
+  font-size: var(--text-xl);
+  color: var(--color-brand);
+}

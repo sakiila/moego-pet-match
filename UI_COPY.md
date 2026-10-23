@@ -259,6 +259,9 @@
 | pet.original_photo | 翻面看原图 | Flip for the Original Photo |
 | pet.owner_quote | 主人说 | A Word from Home |
 | pet.unlisted | 这位伙伴已下架，回图鉴看看其他伙伴吧。 | This pet is no longer listed. Browse the rest of the collection. |
+| pet.quote_more | 展开全文 | Read More |
+| pet.quote_less | 收起 | Show Less |
+| pet.flip_back | 翻回正面 | Flip Back |
 
 `pet.owner_quote` 下方显示飞书原介绍的原文摘录（不翻译，过长截取前一两句），或 Bob 手工补录的主人名言；两者都没有时隐藏整块。
 

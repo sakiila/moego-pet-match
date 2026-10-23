@@ -9,12 +9,15 @@ const player = (best: number | null) => ({
   progress: { completedNormalGames: 0, fishUnlocked: false },
 });
 
+const manager = { date: '2026-10-23', pet: { petId: 'pet_4750baaed3f0', name: 'Sanxian' } };
+
 const entry: GalleryEntry = {
   name: 'HomeScreen',
   group: 'screens',
   states: {
-    'first visit': () => <HomeScreen player={player(null)} onOpenShop={noop} onLeaderboard={noop} onSwitchIdentity={noop} />,
-    'with record': () => <HomeScreen player={player(2480)} onOpenShop={noop} onLeaderboard={noop} onSwitchIdentity={noop} />,
+    'first visit': () => <HomeScreen player={player(null)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onSwitchIdentity={noop} />,
+    'with record': () => <HomeScreen player={player(2480)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onSwitchIdentity={noop} />,
+    'manager unavailable': () => <HomeScreen player={player(2480)} manager={null} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onSwitchIdentity={noop} />,
   },
 };
 

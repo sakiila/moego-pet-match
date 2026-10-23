@@ -18,6 +18,19 @@ const entry: GalleryEntry = {
     'zero service (no MVP)': () => (
       <ScoreCard mode="normal" score={0} saveState="saved" newRecord={false} mvp={null} review="review.pet.no_service" title="title.pet_officer" stats={{ tiles: 0, chain: 0, tools: 0 }} />
     ),
+    'zero service (manager host)': () => (
+      <ScoreCard
+        mode="normal"
+        score={0}
+        saveState="saved"
+        newRecord={false}
+        mvp={null}
+        review="review.pet.no_service"
+        title="title.pet_officer"
+        stats={{ tiles: 0, chain: 0, tools: 0 }}
+        host={{ name: 'Sanxian', stickerSrc: '/img/pets/pet_4750baaed3f0/512' }}
+      />
+    ),
     'fish MVP': () => (
       <ScoreCard
         mode="fish"

@@ -14,6 +14,8 @@ export interface ScoreCardProps {
   review: MessageKey;
   title: MessageKey;
   stats: { tiles: number; chain: number; tools: number };
+  /** 零服务时由今日店长承接鼓励评语（普通局）；不编造 MVP。 */
+  host?: { name: string; stickerSrc: string } | null;
 }
 
 const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
@@ -22,7 +24,7 @@ const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
  * 报告首屏：分数立即显示；MVP 与称号短促出现；新纪录只在已保存且严格刷新时显示标记与少量彩纸。
  * 零服务省略 MVP，由鼓励评语承接。所有内容来自冻结结果。
  */
-export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats }: ScoreCardProps) {
+export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host }: ScoreCardProps) {
   const { t, locale } = useI18n();
   const fmt = (n: number) => n.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US');
   const mvpLabel = mvp
@@ -67,6 +69,16 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
             {petImage(mvp.pet, 512) ? <img src={petImage(mvp.pet, 512)!} alt={mvp.pet.name} /> : null}
           </div>
           <span className={styles.mvpName}>{mvpLabel}</span>
+          <p className={styles.review}>“{t(review)}”</p>
+        </div>
+      ) : host ? (
+        <div className={styles.mvp} data-testid="manager-host">
+          <div className={styles.sticker} style={{ '--tint': 'var(--color-surface-muted)' } as CSSProperties}>
+            <img src={host.stickerSrc} alt={host.name} />
+          </div>
+          <span className={styles.mvpName}>
+            {t('home.manager')} · {host.name}
+          </span>
           <p className={styles.review}>“{t(review)}”</p>
         </div>
       ) : (

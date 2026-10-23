@@ -24,6 +24,8 @@ export interface PetRecord {
   intro: string | null;
   owner_quote: string | null;
   sticker: StickerFiles;
+  /** 整张原图（卡背照片的来源）；多宠共用同一张时由 publish 列出供人工过目。 */
+  original: string | null;
 }
 
 export interface FishRecord {
@@ -59,7 +61,7 @@ export function buildCatalog(paths = PATHS): { pets: PetRecord[]; fish: FishReco
     manifest.items.map((i: { pet_id: string }) => [i.pet_id, i]),
   );
 
-  type Raw = { pet_id: string; name: string; kind: string; owner_ids: string[]; duplicate_group?: string; primary_decision?: string; species?: string; individual_intro_excerpt?: string; originalIntro?: string; owner_quote?: string };
+  type Raw = { pet_id: string; name: string; kind: string; owner_ids: string[]; duplicate_group?: string; primary_decision?: string; species?: string; individual_intro_excerpt?: string; originalIntro?: string; owner_quote?: string; original_path?: string };
   const raws: Raw[] = catalog.pets.filter(
     (p: Raw) => p.kind === 'pet_candidate' && (!p.duplicate_group || p.primary_decision === 'accept'),
   );
@@ -84,6 +86,7 @@ export function buildCatalog(paths = PATHS): { pets: PetRecord[]; fish: FishReco
       intro: blank(p.individual_intro_excerpt) ?? blank(p.originalIntro),
       owner_quote: blank(p.owner_quote),
       sticker: sticker('pets', p.pet_id, paths.stickers, s),
+      original: blank(p.original_path),
     };
   });
 

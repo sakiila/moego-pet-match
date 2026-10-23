@@ -88,3 +88,38 @@ export interface LeaderboardView {
   /** 当前玩家在本模式的名次；没有已保存成绩为 null。 */
   me: LeaderboardEntry | null;
 }
+
+export interface CollectionPet {
+  petId: string;
+  name: string;
+  collected: boolean;
+  /** 首次保存收集的时间（新收集靠前排序用）。 */
+  collectedAt: string | null;
+  /** 只对已收集宠物或玩家自己的宠物返回，未收集不泄露主人。 */
+  owner: { userId: string; name: string } | null;
+  own: boolean;
+}
+
+export interface CollectionView {
+  total: number;
+  collected: number;
+  pets: CollectionPet[];
+}
+
+export interface PetDetail {
+  petId: string;
+  name: string;
+  collected: boolean;
+  own: boolean;
+  owner: { userId: string; name: string } | null;
+  /** 主人说：owner_quote 优先，否则飞书原介绍；未收集或没有内容为 null。 */
+  quote: string | null;
+  hasPhoto: boolean;
+  listed: boolean;
+}
+
+export interface DailyManager {
+  /** 北京时间日期 YYYY-MM-DD。 */
+  date: string;
+  pet: { petId: string; name: string };
+}
