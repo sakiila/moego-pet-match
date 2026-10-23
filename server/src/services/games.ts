@@ -40,13 +40,13 @@ export async function registerGame(pool: Pool, playerId: string, mode: GameMode)
       .slice(0, RULES.kinds)
       .map(({ petId, name, nameEn }) => ({ petId, name, nameEn }));
   } else {
-    const pets = await pool.query(`SELECT pet_id, name, owner_user_id, family_id FROM pet_match.pets WHERE status = 'published'`);
+    const pets = await pool.query(`SELECT pet_id, name, owner_user_id, family_id, coat FROM pet_match.pets WHERE status = 'published'`);
     if (pets.rows.length < RULES.kinds) throw new GameError('not_ready', 'not enough published pets');
     const collected = new Set<string>(
       (await pool.query('SELECT pet_id FROM pet_match.collections WHERE player_id = $1', [playerId])).rows.map((r) => r.pet_id),
     );
     const sampled = sampleLineup(
-      pets.rows.map((r) => ({ petId: r.pet_id, ownerUserId: r.owner_user_id })),
+      pets.rows.map((r) => ({ petId: r.pet_id, ownerUserId: r.owner_user_id, coat: r.coat })),
       playerId,
       collected,
       random,

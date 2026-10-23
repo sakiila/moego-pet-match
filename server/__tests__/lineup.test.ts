@@ -56,3 +56,68 @@ describe('阵容抽样', () => {
     expect(Math.max(...counts) / Math.min(...counts)).toBeLessThan(1.25);
   });
 });
+
+describe('阵容抽样 · 毛色错开', () => {
+  // 40 只分成 8 个毛色簇，每簇 5 只（簇内距离 < 阈值，簇间远大于阈值）
+  const coatOfCluster = (k: number, j: number): CandidatePet['coat'] => [20 + k * 10, k % 2 ? 15 : -15, j, k === 0 ? 0.8 : 0, k === 7 ? 0.6 : 0];
+  const clustered: CandidatePet[] = others.map((p, i) => ({ ...p, coat: coatOfCluster(Math.floor(i / 5), i % 5) }));
+  const clusterOf = (id: string) => Math.floor(Number(id.slice(1)) / 5);
+
+  function lookAlikePairs(pets: CandidatePet[], collected = new Set<string>(), trials = 20_000) {
+    const rng = createRng(777);
+    const random = () => rng.next();
+    let pairs = 0;
+    const picks = new Map<string, number>();
+    for (let t = 0; t < trials; t++) {
+      const { lineup } = sampleLineup(pets, 'ME', collected, random);
+      expect(lineup).toHaveLength(6);
+      const ks = lineup.filter((id) => id.startsWith('o')).map(clusterOf);
+      for (let i = 0; i < ks.length; i++) for (let j = i + 1; j < ks.length; j++) if (ks[i] === ks[j]) pairs++;
+      for (const id of lineup) picks.set(id, (picks.get(id) ?? 0) + 1);
+    }
+    return { pairs: pairs / trials, picks };
+  }
+
+  it('同局外观相近的组合明显减少', () => {
+    const without = lookAlikePairs(others.map((p) => ({ ...p })));
+    const withCoat = lookAlikePairs(clustered);
+    // 不降权时每局约 15 × 4/39 ≈ 1.5 对相近
+    expect(without.pairs).toBeGreaterThan(1.3);
+    expect(withCoat.pairs).toBeLessThan(without.pairs * 0.25);
+  });
+
+  it('未收集 : 已收集的倾向基本不变', () => {
+    // 每簇里一半未收集，避免把颜色与收集状态绑在一起
+    const collected = new Set(clustered.filter((_, i) => i % 2 === 0).map((p) => p.petId));
+    const { picks } = lookAlikePairs(clustered, collected);
+    const avg = (ids: string[]) => ids.reduce((s, id) => s + (picks.get(id) ?? 0), 0) / ids.length;
+    const ratio = avg(clustered.filter((p) => !collected.has(p.petId)).map((p) => p.petId)) / avg([...collected]);
+    expect(ratio).toBeGreaterThan(1.6);
+    expect(ratio).toBeLessThan(2.2);
+  });
+
+  it('候选全是同一毛色时照样凑满 6 只', () => {
+    const same: CandidatePet[] = others.slice(0, 8).map((p) => ({ ...p, coat: [30, 0, 0, 0.8, 0] }));
+    const rng = createRng(1);
+    expect(sampleLineup(same, 'ME', new Set(), () => rng.next()).lineup).toHaveLength(6);
+  });
+
+  it('自家宠物不受毛色影响，其他位置避开与它相近的', () => {
+    const mine: CandidatePet[] = own(1).map((p) => ({ ...p, coat: coatOfCluster(0, 0) }));
+    const rng = createRng(99);
+    const random = () => rng.next();
+    let ownIn = 0;
+    let cluster0 = 0;
+    const trials = 20_000;
+    for (let t = 0; t < trials; t++) {
+      const { lineup, own: o } = sampleLineup([...mine, ...clustered], 'ME', new Set(), random);
+      if (o.length) {
+        ownIn++;
+        cluster0 += lineup.filter((id) => id.startsWith('o') && clusterOf(id) === 0).length;
+      }
+    }
+    expect(ownIn / trials).toBeCloseTo(LINEUP_WEIGHTS.ownSingle, 1);
+    // 不降权时 5 个补位里平均有 5 × 5/40 ≈ 0.6 只同簇
+    expect(cluster0 / ownIn).toBeLessThan(0.2);
+  });
+});

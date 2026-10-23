@@ -9,6 +9,7 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import pg from 'pg';
 import { buildCatalog, SIZES, type FishRecord, type PetRecord } from '../src/catalog/build.ts';
+import { coatOf, type Coat } from '../src/catalog/coat.ts';
 import { makeCardPhoto } from '../src/catalog/photo.ts';
 import { LOCAL_DEV_URL } from '../src/config.ts';
 import { readSupabaseAdminConfig } from '../src/db/adminUrl.ts';
@@ -67,16 +68,24 @@ try {
       const key = `photos/${p.pet_id}/${photo.hash}.jpg`;
       if (current.get(p.pet_id)?.photo_key !== key) photoPlan.set(p.pet_id, { key, body: photo.body });
     }
+    // 毛色特征：从 128 px 贴纸计算；缺失或变化时写入（real[] 回读有浮点误差，按容差比较）
+    const sameCoat = (a: number[] | null | undefined, b: Coat) => !!a && a.length === b.length && a.every((v, i) => Math.abs(v - b[i]) < 1e-3);
+    const coatPlan = new Map<string, Coat>();
+    for (const p of selected) {
+      const coat = await coatOf(await readFile(p.sticker.files['128']));
+      if (!sameCoat(current.get(p.pet_id)?.coat, coat)) coatPlan.set(p.pet_id, coat);
+    }
     const shared = new Map<string, string[]>();
     for (const p of selected) if (p.original) shared.set(p.original, [...(shared.get(p.original) ?? []), p.name]);
     const sharedList = [...shared.entries()].filter(([, names]) => names.length > 1);
-    for (const x of plan) if (x.action === 'unchanged' && photoPlan.has(x.p.pet_id)) x.action = 'update';
+    for (const x of plan) if (x.action === 'unchanged' && (photoPlan.has(x.p.pet_id) || coatPlan.has(x.p.pet_id))) x.action = 'update';
     const by = (a: string) => plan.filter((x) => x.action === a);
     console.log(`pets: insert ${by('insert').length}, update ${by('update').length}, unchanged ${by('unchanged').length}`);
     for (const x of [...by('insert'), ...by('update')]) console.log(`  ${x.action.padEnd(6)} ${x.p.pet_id} ${x.p.name} (owner ${x.p.owner_user_id}${x.p.family_id ? ', family' : ''})`);
     const fishRows = new Map((await client.query('SELECT * FROM pet_match.fish_colors')).rows.map((r) => [r.color_id, r]));
     const fishPlan = ids.length ? [] : fish.filter((f) => fishRows.get(f.color_id)?.sticker_key !== f.sticker.key);
     console.log(`card photos to (re)generate: ${photoPlan.size}`);
+    console.log(`coat features to write: ${coatPlan.size}`);
     if (sharedList.length) {
       console.log(`shared original photos (please review): ${sharedList.length}`);
       for (const [, names] of sharedList) console.log(`  ${names.join(' / ')}`);
@@ -97,6 +106,8 @@ try {
           [p.pet_id, p.name, p.owner_user_id, p.family_id, p.species, p.intro, p.owner_quote, p.sticker.key],
         );
         if (photo) await client.query('UPDATE pet_match.pets SET photo_key = $2 WHERE pet_id = $1', [p.pet_id, photo.key]);
+        const coat = coatPlan.get(p.pet_id);
+        if (coat) await client.query('UPDATE pet_match.pets SET coat = $2 WHERE pet_id = $1', [p.pet_id, coat]);
       }
       for (const f of fishPlan as FishRecord[]) {
         await uploadSticker(f.sticker);

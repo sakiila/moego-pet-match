@@ -1,4 +1,5 @@
 import { RULES } from '../../../web/src/engine/config.ts';
+import { coatDistance, type Coat } from '../catalog/coat.ts';
 
 /** 已确认的阵容抽样初值（V1_RULES「自家宠物抽样」「未收集倾向」），可随试玩调整。 */
 export const LINEUP_WEIGHTS = {
@@ -12,11 +13,17 @@ export const LINEUP_WEIGHTS = {
   collected: 1,
   /** 自家宠物最多占几种。 */
   ownCap: 2,
+  /** 毛色距离小于此值视为外观相近（约为全部宠物两两距离的第 10 百分位）。 */
+  coatSimilar: 12,
+  /** 与已入选宠物外观相近的候选，补位权重乘以此值：降权而非排除，候选不足时仍能凑满。 */
+  coatPenalty: 0.1,
 } as const;
 
 export interface CandidatePet {
   petId: string;
   ownerUserId: string | null;
+  /** 毛色特征；缺失时不参与撞色降权。 */
+  coat?: Coat | null;
 }
 
 function pickWithout<T>(items: T[], weight: (t: T) => number, random: () => number): T {
@@ -31,6 +38,7 @@ function pickWithout<T>(items: T[], weight: (t: T) => number, random: () => numb
 
 /**
  * 两步抽样：先按概率抽自家宠物（最多 2 种），再从非自家已上架宠物按未收集 2 : 已收集 1 无放回补满 6 种。
+ * 补位时与已入选宠物（含自家）毛色相近的候选降权，减少同局撞色；自家宠物本身不受影响。
  * 只决定选哪 6 种，局内掉落与计分不受影响。random 返回 [0, 1)。
  */
 export function sampleLineup(
@@ -57,10 +65,13 @@ export function sampleLineup(
   }
 
   const allCollected = others.every((p) => collected.has(p.petId));
-  const weight = (p: CandidatePet) =>
+  const base = (p: CandidatePet) =>
     allCollected ? 1 : collected.has(p.petId) ? LINEUP_WEIGHTS.collected : LINEUP_WEIGHTS.uncollected;
   const pool = [...others];
   const chosenOthers: CandidatePet[] = [];
+  const lookAlike = (p: CandidatePet) =>
+    !!p.coat && [...chosenOwn, ...chosenOthers].some((q) => q.coat && coatDistance(p.coat!, q.coat) < LINEUP_WEIGHTS.coatSimilar);
+  const weight = (p: CandidatePet) => base(p) * (lookAlike(p) ? LINEUP_WEIGHTS.coatPenalty : 1);
   while (chosenOwn.length + chosenOthers.length < RULES.kinds && pool.length > 0) {
     const p = pickWithout(pool, weight, random);
     chosenOthers.push(p);
