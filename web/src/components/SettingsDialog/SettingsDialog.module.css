@@ -1,26 +1,74 @@
+.title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 900;
+}
+
+.gear {
+  width: 32px;
+  height: 32px;
+  color: var(--color-brand);
+}
+
+.body {
+  display: grid;
+}
+
+.language {
+  display: grid;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
 .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-3);
-  color: var(--color-ink);
+  min-height: 64px;
+  border-top: 1px solid var(--color-line);
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-lg);
   font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-ink);
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .segmented {
-  display: inline-flex;
-  padding: 3px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
   border-radius: var(--radius-pill);
   background: var(--color-surface-muted);
 }
 
 .segmented button {
-  min-width: 72px;
-  min-height: 36px;
+  min-height: 44px;
   border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
   font: inherit;
+  font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   color: var(--color-ink-muted);
   cursor: pointer;
@@ -29,4 +77,17 @@
 .segmented button[aria-pressed='true'] {
   background: var(--color-brand);
   color: var(--color-paper);
+}
+
+.note {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.hint {
+  margin: var(--space-2) 0 0;
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
 }

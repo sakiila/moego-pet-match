@@ -1,5 +1,6 @@
 import type { GameMode } from '../api/types';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useFeedback } from '../audio/FeedbackProvider';
 import {
   RULES,
   advance,
@@ -45,6 +46,8 @@ interface Session {
   notedNew: Set<string>;
   shownFamilies: Set<string>;
   stickers: (StickerEvent & { at: number })[];
+  /** 已放过声音与触感的最大全局批序：每个清除批次在结算时刻只反馈一次。 */
+  feedbackSeq: number;
 }
 
 /** 局内贴纸所需的本局背景：阵容 id、未收集宠物与家庭分组。 */
@@ -102,6 +105,7 @@ export function useGameSession(
       notedNew: new Set(),
       shownFamilies: new Set(),
       stickers: [],
+      feedbackSeq: 0,
     };
   }
   const dragging = useRef(false);
@@ -109,6 +113,9 @@ export function useGameSession(
   const familiesRef = useRef(families);
   const finishedRef = useRef(onFinished);
   finishedRef.current = onFinished;
+  const feedback = useFeedback();
+  const feedbackRef = useRef(feedback);
+  feedbackRef.current = feedback;
   const [, setTick] = useState(0);
 
   useEffect(() => {
@@ -129,10 +136,20 @@ export function useGameSession(
         s.shuffleHandled = true;
         s.shuffleResumeAt = s.clock.pauseAt(tl.busyUntil) + SHUFFLE_PAUSE_MS;
       }
+      // 声音与触感：按游戏时钟，每个清除批次到结算时刻放一次（与加分飘字同一时刻）
+      if (tl?.kind === 'chain') {
+        for (const b of tl.batches) {
+          if (b.seq > s.feedbackSeq && g >= b.settleAt) {
+            s.feedbackSeq = b.seq;
+            feedbackRef.current.onBatch(b);
+          }
+        }
+      }
       const { state, events } = advance(s.state, s.clock.elapsed());
       s.state = state;
       if (events.some((e) => e.type === 'finished') && !s.finished) {
         s.finished = true;
+        feedbackRef.current.onFinish();
         finishedRef.current(getSummary(state));
         return;
       }
@@ -140,7 +157,12 @@ export function useGameSession(
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+    // 背景音乐只在棋盘计时期间播放（开关打开时）；离开棋盘即停
+    feedbackRef.current.setMusicActive(true);
+    return () => {
+      cancelAnimationFrame(raf);
+      feedbackRef.current.setMusicActive(false);
+    };
   }, []);
 
   const s = session.current;

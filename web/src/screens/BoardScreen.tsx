@@ -79,7 +79,7 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
           if (session.exit()) onExit();
         }}
       />
-      <SettingsDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <SettingsDialog variant="board" open={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </main>
   );
 }
