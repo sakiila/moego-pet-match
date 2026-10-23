@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { ApiError, api } from '../api/client';
 import type { DailyManager, GameMode, PlayerView, RegisteredGame } from '../api/types';
+import { ScreenTransition } from '../components/ScreenTransition/ScreenTransition';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { PRESETS } from '../dev/presets';
 import { createGame, type GameState, type GameSummary } from '../engine';
@@ -124,104 +125,108 @@ export function App() {
   const ownNamesOf = (s: Session) =>
     s.registered.ownPetIds.map((id) => s.registered.lineup.find((p) => p.petId === id)?.name).filter((n): n is string => !!n);
 
-  switch (route.name) {
-    case 'boot':
-      return <main className={screen.screen} />;
-    case 'bootFailed':
-      return (
-        <main className={`${screen.screen} ${screen.center}`}>
-          <StatusMessage tone="error" text={t('identity.load_failed')} actionLabel={t('action.retry')} onAction={restore} />
-        </main>
-      );
-    case 'identity':
-      return (
-        <IdentityScreen
-          initialQuery={route.query}
-          onConfirm={async (c) => {
-            savePlayerId(c.userId);
-            await restore();
-          }}
-          onInfo={(c, removal) => setRoute({ name: 'info', player: c ? { userId: c.userId, name: c.name } : null, removal, back: 'identity', query: c?.name })}
-        />
-      );
-    case 'home':
-      return player ? (
-        <HomeScreen
-          player={player}
-          manager={manager}
-          onOpenShop={() => void toPrep('normal')}
-          onCollection={toPetdex}
-          onLeaderboard={() => setRoute({ name: 'leaderboard', mode: 'normal' })}
-          onMyPets={() => setRoute({ name: 'myPets' })}
-          onInfo={(removal) => setRoute({ name: 'info', player: { userId: player.userId, name: player.name }, removal, back: 'home' })}
-          onSwitchIdentity={() => setRoute({ name: 'identity' })}
-        />
-      ) : null;
-    case 'leaderboard':
-      return player ? <LeaderboardScreen key={route.mode} player={player} initialMode={route.mode} onBack={toHome} onChallenge={(mode) => void toPrep(mode)} /> : null;
-    case 'petdex':
-      return player ? (
-        <PetdexScreen player={player} onBack={toHome} onOpenShop={() => void toPrep('normal')} onUpload={() => setRoute({ name: 'upload' })} />
-      ) : null;
-    case 'myPets':
-      return player ? (
-        <MyPetsScreen player={player} onBack={toHome} onUpload={() => setRoute({ name: 'upload' })} onOpenShop={() => void toPrep('normal')} />
-      ) : null;
-    case 'info':
-      return (
-        <InfoScreen
-          key={`${route.player?.userId}-${route.removal}`}
-          player={route.player}
-          openRemoval={route.removal}
-          onBack={() => setRoute(route.back === 'identity' ? { name: 'identity', query: route.query } : { name: 'home' })}
-        />
-      );
-    case 'upload':
-      return player ? <UploadScreen player={player} onHome={toHome} onPlay={() => void toPrep('normal')} /> : null;
-    case 'prep':
-      return (
-        <PrepScreen
-          mode={route.mode}
-          onBack={toHome}
-          pets={route.session ? petsOf(route.session) : null}
-          ownPetNames={route.session ? ownNamesOf(route.session) : []}
-          failed={route.failed}
-          onRetry={() => void toPrep(route.mode)}
-          onStart={() => route.session && setRoute({ name: 'board', session: route.session })}
-        />
-      );
-    case 'board':
-      return (
-        <BoardScreen
-          mode={route.session.registered.mode}
-          game={route.session.game}
-          pets={petsOf(route.session)}
-          speed={speed}
-          startAt={startAt}
-          uncollected={new Set(route.session.registered.uncollectedPetIds)}
-          families={route.session.registered.families}
-          onFinished={(summary) => setRoute({ name: 'report', session: route.session, summary })}
-          onExit={toHome}
-        />
-      );
-    case 'report':
-      return (
-        <LiveReport
-          key={route.session.registered.gameId}
-          summary={route.summary}
-          registered={route.session.registered}
-          pets={petsOf(route.session)}
-          playerId={player!.userId}
-          playerName={player!.name}
-          manager={manager}
-          onSaved={() => void refreshPlayer()}
-          onPlayAgain={() => void toPrep(route.session.registered.mode)}
-          onHome={toHome}
-          onLeaderboard={() => setRoute({ name: 'leaderboard', mode: route.session.registered.mode })}
-          onCollection={toPetdex}
-          onOpenShop={() => void toPrep('normal')}
-          onFishInvite={() => void toPrep('fish')}
-        />
-      );
-  }
+  const renderRoute = (): ReactNode => {
+    switch (route.name) {
+      case 'boot':
+        return <main className={screen.screen} />;
+      case 'bootFailed':
+        return (
+          <main className={`${screen.screen} ${screen.center}`}>
+            <StatusMessage tone="error" text={t('identity.load_failed')} actionLabel={t('action.retry')} onAction={restore} />
+          </main>
+        );
+      case 'identity':
+        return (
+          <IdentityScreen
+            initialQuery={route.query}
+            onConfirm={async (c) => {
+              savePlayerId(c.userId);
+              await restore();
+            }}
+            onInfo={(c, removal) => setRoute({ name: 'info', player: c ? { userId: c.userId, name: c.name } : null, removal, back: 'identity', query: c?.name })}
+          />
+        );
+      case 'home':
+        return player ? (
+          <HomeScreen
+            player={player}
+            manager={manager}
+            onOpenShop={() => void toPrep('normal')}
+            onCollection={toPetdex}
+            onLeaderboard={() => setRoute({ name: 'leaderboard', mode: 'normal' })}
+            onMyPets={() => setRoute({ name: 'myPets' })}
+            onInfo={(removal) => setRoute({ name: 'info', player: { userId: player.userId, name: player.name }, removal, back: 'home' })}
+            onSwitchIdentity={() => setRoute({ name: 'identity' })}
+          />
+        ) : null;
+      case 'leaderboard':
+        return player ? <LeaderboardScreen key={route.mode} player={player} initialMode={route.mode} onBack={toHome} onChallenge={(mode) => void toPrep(mode)} /> : null;
+      case 'petdex':
+        return player ? (
+          <PetdexScreen player={player} onBack={toHome} onOpenShop={() => void toPrep('normal')} onUpload={() => setRoute({ name: 'upload' })} />
+        ) : null;
+      case 'myPets':
+        return player ? (
+          <MyPetsScreen player={player} onBack={toHome} onUpload={() => setRoute({ name: 'upload' })} onOpenShop={() => void toPrep('normal')} />
+        ) : null;
+      case 'info':
+        return (
+          <InfoScreen
+            key={`${route.player?.userId}-${route.removal}`}
+            player={route.player}
+            openRemoval={route.removal}
+            onBack={() => setRoute(route.back === 'identity' ? { name: 'identity', query: route.query } : { name: 'home' })}
+          />
+        );
+      case 'upload':
+        return player ? <UploadScreen player={player} onHome={toHome} onPlay={() => void toPrep('normal')} /> : null;
+      case 'prep':
+        return (
+          <PrepScreen
+            mode={route.mode}
+            onBack={toHome}
+            pets={route.session ? petsOf(route.session) : null}
+            ownPetNames={route.session ? ownNamesOf(route.session) : []}
+            failed={route.failed}
+            onRetry={() => void toPrep(route.mode)}
+            onStart={() => route.session && setRoute({ name: 'board', session: route.session })}
+          />
+        );
+      case 'board':
+        return (
+          <BoardScreen
+            mode={route.session.registered.mode}
+            game={route.session.game}
+            pets={petsOf(route.session)}
+            speed={speed}
+            startAt={startAt}
+            uncollected={new Set(route.session.registered.uncollectedPetIds)}
+            families={route.session.registered.families}
+            onFinished={(summary) => setRoute({ name: 'report', session: route.session, summary })}
+            onExit={toHome}
+          />
+        );
+      case 'report':
+        return (
+          <LiveReport
+            key={route.session.registered.gameId}
+            summary={route.summary}
+            registered={route.session.registered}
+            pets={petsOf(route.session)}
+            playerId={player!.userId}
+            playerName={player!.name}
+            manager={manager}
+            onSaved={() => void refreshPlayer()}
+            onPlayAgain={() => void toPrep(route.session.registered.mode)}
+            onHome={toHome}
+            onLeaderboard={() => setRoute({ name: 'leaderboard', mode: route.session.registered.mode })}
+            onCollection={toPetdex}
+            onOpenShop={() => void toPrep('normal')}
+            onFishInvite={() => void toPrep('fish')}
+          />
+        );
+    }
+  };
+
+  return <ScreenTransition routeName={route.name}>{renderRoute()}</ScreenTransition>;
 }

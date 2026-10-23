@@ -1,0 +1,33 @@
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgb(255 255 255 / 0.55);
+  animation: scrim-in 260ms var(--ease-out) both;
+}
+
+.pill {
+  padding: var(--space-3) var(--space-6);
+  border: var(--stroke) solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-soft);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  animation: pill-in 420ms var(--ease-out) 80ms both;
+}
+
+@keyframes scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes pill-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(8px);
+  }
+}

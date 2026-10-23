@@ -10,7 +10,8 @@ export interface MyPetCardProps {
   collected: boolean;
   /** 这只宠物的删除申请状态；有申请时以状态代替申请入口。 */
   request: Status | null;
-  onView: () => void;
+  /** 传出这张卡片，详情卡从它飞出、关闭时飞回。 */
+  onView: (el: HTMLElement) => void;
   onRequestRemoval: () => void;
 }
 
@@ -31,7 +32,7 @@ export function MyPetCard({ name, stickerSrc, collected, request, onView, onRequ
             </svg>
             {t(collected ? 'collection.filter_collected' : 'collection.filter_uncollected')}
           </span>
-          <button type="button" className={styles.view} onClick={onView} data-testid="my-pet-view">
+          <button type="button" className={styles.view} onClick={(e) => onView(e.currentTarget.closest('article') ?? e.currentTarget)} data-testid="my-pet-view">
             {t('my_pets.view')} ›
           </button>
           {request ? (

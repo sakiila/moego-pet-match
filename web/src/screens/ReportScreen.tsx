@@ -31,7 +31,7 @@ export interface ReportScreenProps {
   /** 今日店长：零服务承接鼓励，报告末尾留形象与签名；读取失败时省略。 */
   manager: DailyManager | null;
   onCollection: () => void;
-  onOpenPet: (pet: PetInfo) => void;
+  onOpenPet: (pet: PetInfo, el: HTMLElement) => void;
   /** 打开成绩卡预览；不等揭晓动画，也不等保存结果。 */
   onShare: () => void;
 }
@@ -56,7 +56,7 @@ export function ReportScreen(props: ReportScreenProps) {
   return (
     <main className={`${styles.screen} ${styles.withStickyActions}`} data-theme={fish ? 'fish' : undefined}>
       {fish && <UnderwaterBackdrop />}
-      <BrandHeader heading={t(mode === 'fish' ? 'fish.report_title' : 'report.title')} tagline={subtitle} onBack={onHome} />
+      <BrandHeader heading={t(mode === 'fish' ? 'fish.report_title' : 'report.title')} headingAccent tagline={subtitle} onBack={onHome} />
       <ScoreCard
         mode={mode}
         score={summary.score}

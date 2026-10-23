@@ -20,7 +20,7 @@ const summary = (served: number[], over: Partial<GameSummary> = {}): GameSummary
   clearedByMultiplier: [120, 40, 20, 6, 0],
   maxChain: 4,
   toolsFired: 2,
-  combos: { cc: 0, cs: 0, ss: 0 },
+  combos: { cc: 0, cs: 0, dryer: 0 },
   validMoves: 40,
   actedInLastSeconds: false,
   rushSucceeded: true,

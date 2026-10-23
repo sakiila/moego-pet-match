@@ -100,7 +100,7 @@
 | info.full.collect | **会记录什么**：你选择的同事身份（Slack ID、名字、头像，来自公司现有人员名单）；对局成绩、图鉴收集、游玩进度与隐藏关状态；你主动上传的宠物照片、名字及与你的主人关联；你提交的删除申请。上传的照片按原文件保存，可能带有拍摄位置等信息；原文件只私有存储，位置等信息不会在游戏中展示。语言与声音偏好只存在你的浏览器里。服务器会保留常规访问日志。 | **What we record**: the coworker profile you pick (Slack ID, name, and avatar from the company's existing people list); your scores, collection, play progress, and hidden-level status; pet photos, names, and owner links you choose to upload; and any removal requests you send. Uploaded photos are stored as original files, which may include details like where they were taken; the original files stay private and those details are never shown in the game. Language and sound settings stay in your browser. The server keeps standard access logs. |
 | info.full.display | **会在哪里展示**：同事排行榜显示你的名字、头像和最好成绩。宠物会出现在棋盘、图鉴、每日店长和主人竞猜中；主人名字在图鉴里收集后才显示。成绩卡只在你主动保存或分享时离开游戏。 | **Where it shows up**: the coworker leaderboard shows your name, avatar, and best score. Pets appear on the board, in the Pet Collection, as Manager of the Day, and in the owner quiz; owner names in the Pet Collection appear only after that pet is collected. Score cards leave the game only when you save or share them. |
 | info.full.ai | **AI 处理**：宠物照片会提交给 AI 图像服务，生成统一画风的头像贴纸，再由 Bob 人工核对后上架；交给 AI 前会先去掉拍摄位置等信息。已收集的同事可以在图鉴卡背面看到 Bob 处理过的照片版本，不会看到原文件。 | **AI processing**: pet photos are sent to an AI image service to create matching-style head stickers, which Bob reviews by hand before they go live. Location details are removed before anything is sent to AI. Coworkers who have collected a pet can see a processed version of the photo on the back of its card, never the original file. |
-| info.full.storage | **存在哪里**：数据库和游戏服务器在美国（Supabase 美西、洛杉矶），图片存储在 Cloudflare R2 的亚太区域，只用于这个内部游戏活动。 | **Where it's stored**: the database and game server are in the United States (Supabase US West, Los Angeles); images are stored in Cloudflare R2's Asia-Pacific region. Used only for this internal game. |
+| info.full.storage | **存在哪里**：数据库在美国（Supabase），图片存储在亚太区域（Cloudflare R2），只用于这个内部游戏活动。 | **Where it's stored**: the database is in the United States (Supabase); images are stored in the Asia-Pacific region (Cloudflare R2). Used only for this internal game. |
 | info.full.removal | **想删除怎么办**：在「我的宠物」或本页提交删除申请，Bob 人工核实后会下架并清理游戏里的资料。已有成绩会保留，但不再显示该宠物的资料。飞书原文档、AI 服务和托管备份中的副本不在游戏控制范围内，处理结果里会如实说明。 | **Want something removed?** Send a request from My Pets or this page. Bob will verify it, take the pet down, and clean up the game's copies. Existing scores stay, but the pet's details are no longer shown. Copies in the original Feishu doc, the AI service, or hosted backups are outside the game's control; the result will say so honestly. |
 | info.full.consent | **同意方式**：点击「以 {playerName} 身份继续」即表示你同意以上使用方式。 | **Consent**: tapping "Continue as {playerName}" means you agree to the above. |
 
@@ -229,7 +229,7 @@
 | 1 | 有效服务格数 `== 0` | `review.pet.no_service` / 零服务，由店长鼓励 | 没关系，店长陪你热个身。 | Just warming up. Your shop manager's here to help. |
 | 2 | 单次操作最高连锁 `>= 5` | `review.pet.high_chain` / 高连锁 | 这波连锁，把我梳服了。 | Smooth combo. Even smoother fur. |
 | 3 | `rushCompleted == true` | `review.pet.rush_success` / 催单成功 | 临时加单？安排得明明白白。 | A rush order? You made room like a pro. |
-| 4 | 发动过任意双工具合体（梳＋梳／梳＋剪／剪＋剪） | `review.pet.tool_combo` / 实际发动过道具合体 | 工具一搭档，排班有两下。 | Tools teamed up. Nicely scheduled. |
+| 4 | 发动过梳＋梳、梳＋剪合体或吹风机 | `review.pet.tool_combo` / 实际发动过道具合体 | 工具一搭档，排班有两下。 | Tools teamed up. Nicely scheduled. |
 | 5 | 其他有真实服务的完整对局（有效服务格数 `>= 1`） | `review.pet.normal` / 有真实服务的普通完成 | 今天这班，有你就放心啦。 | This shift was in good hands. |
 
 鱼关 `review.fish.*`（见第 8 节）按完全相同的 1–5 优先级判定。英文表达不是主人的真实名言。
@@ -259,7 +259,7 @@
 | collection.filter_uncollected | 未收集 | Not Collected |
 | collection.empty | 第一位毛同事，等你开门服务。 | Your first furry colleague is waiting. Time to open up! |
 | collection.search | 搜宠物名或主人名 | Search pets or owners |
-| collection.search_scope | 宠物名可搜全部已上架宠物；主人名只搜已收集宠物。 | Search all listed pets by name. Owner searches include collected pets only. |
+| collection.search_scope | 宠物名可搜全部已上架宠物；主人名搜已收集和自家的宠物。 | Search all listed pets by name. Owner searches cover collected pets and your own. |
 | collection.search_empty | 当前范围里没找到。试试宠物名，或换个筛选。 | No matches in this view. Try a pet's name or a different filter. |
 | pet.unlock_hint | 棋盘上服务过 TA，完整收工、成绩保存成功后，就会自动收集。 | Serve this pet on the board and finish the round. They'll join your collection automatically once your result is saved. |
 | pet.owner | 主人 | Owner |

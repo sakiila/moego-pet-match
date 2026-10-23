@@ -1,7 +1,7 @@
 import { inBounds, isAdjacent, parseBoard } from './board';
 import { RULES } from './config';
 import { generateBoard, validMoves } from './moves';
-import { comboRange, toolRange } from './tools';
+import { comboRange, isMerge, toolRange } from './tools';
 import { resolveMove } from './resolve';
 import { createRng, shuffleInPlace } from './rng';
 import type { GameEvent, GameState, Move, Pos, SwapRejection, Timeline } from './types';
@@ -35,7 +35,7 @@ export function createGame({ seed, lineup, board, refill = [] }: CreateGameOptio
     clearedByMultiplier: Array(RULES.maxMultiplier).fill(0),
     maxChain: 0,
     toolsFired: 0,
-    combos: { cc: 0, cs: 0, ss: 0 },
+    combos: { cc: 0, cs: 0, dryer: 0 },
     served: lineup.map(() => 0),
     firstServedSeq: lineup.map(() => null),
     validMoves: 0,
@@ -119,8 +119,10 @@ export function previewRange(state: GameState, from: Pos, to: Pos): Pos[] | null
   const a = state.board[from.r][from.c];
   const b = state.board[to.r][to.c];
   let cells: Pos[] | null = null;
-  if (a?.type === 'tool' && b?.type === 'tool') cells = comboRange(a.tool, b.tool, to, size);
-  else if (a?.type === 'tool') cells = toolRange(a.tool, to, size);
+  if (a?.type === 'tool' && b?.type === 'tool') {
+    // 两个剪刀只合成吹风机，没有清除范围；预览标出将合并的两格
+    cells = isMerge(a.tool, b.tool) ? [from, to] : comboRange(a.tool, b.tool, to, size);
+  } else if (a?.type === 'tool') cells = toolRange(a.tool, to, size);
   else if (b?.type === 'tool') cells = toolRange(b.tool, from, size);
   if (!cells) return null;
   const unique = new Map(cells.map((p) => [p.r * size + p.c, p]));
@@ -138,7 +140,7 @@ export interface GameSummary {
   clearedByMultiplier: number[];
   maxChain: number;
   toolsFired: number;
-  combos: { cc: number; cs: number; ss: number };
+  combos: { cc: number; cs: number; dryer: number };
   validMoves: number;
   actedInLastSeconds: boolean;
   rushSucceeded: boolean;

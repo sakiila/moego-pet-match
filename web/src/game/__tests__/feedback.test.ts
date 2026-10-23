@@ -37,7 +37,7 @@ describe('批次反馈', () => {
   });
 
   it('合体只出一个主音，用短双点', () => {
-    for (const effect of ['comboCC', 'comboCS', 'comboSS'] as const) expect(batchFeedback(batch({ effect }))).toMatchObject({ sound: 'combo', haptic: 'double' });
+    for (const effect of ['comboCC', 'comboCS', 'dryer'] as const) expect(batchFeedback(batch({ effect }))).toMatchObject({ sound: 'combo', haptic: 'double' });
   });
 
   it('第 3 批以后的连锁用短双点', () => {

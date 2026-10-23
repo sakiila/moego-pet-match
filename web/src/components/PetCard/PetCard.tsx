@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useI18n } from '../../i18n';
 import { Avatar } from '../../ui/primitives/Avatar';
+import { Tilt } from '../Tilt/Tilt';
 import styles from './PetCard.module.css';
 
 export interface PetCardProps {
@@ -10,7 +11,8 @@ export interface PetCardProps {
   imageSrc: string;
   /** 只对已收集宠物传入。 */
   owner?: { name: string; userId: string; avatarSrc: string } | null;
-  onOpen: () => void;
+  /** 传出被点的卡片元素，详情卡从它飞出、关闭时飞回。 */
+  onOpen: (el: HTMLElement) => void;
 }
 
 /** 图鉴卡片：已收集展示贴纸与主人；未收集只展示名字与剪影，不泄露主人。 */
@@ -18,21 +20,23 @@ export function PetCard({ name, collected, imageSrc, owner, onOpen }: PetCardPro
   const { t } = useI18n();
   const [failed, setFailed] = useState(false);
   return (
-    <button type="button" className={styles.card} data-collected={collected} onClick={onOpen} data-testid="pet-card">
-      <span className={styles.art}>
-        {!failed && <img src={imageSrc} alt="" loading="lazy" onError={() => setFailed(true)} />}
-      </span>
-      <span className={styles.name}>{name}</span>
-      {collected && owner ? (
-        <span className={styles.chip}>
-          <Avatar name={owner.name} seed={owner.userId} src={owner.avatarSrc} size={22} />
-          <span className={styles.chipText}>
-            {t('pet.owner')} {owner.name}
-          </span>
+    <Tilt radius="var(--radius-lg)">
+      <button type="button" className={styles.card} data-collected={collected} onClick={(e) => onOpen(e.currentTarget)} data-testid="pet-card">
+        <span className={styles.art}>
+          {!failed && <img src={imageSrc} alt="" loading="lazy" onError={() => setFailed(true)} />}
         </span>
-      ) : (
-        <span className={`${styles.chip} ${styles.muted}`}>{t('collection.filter_uncollected')}</span>
-      )}
-    </button>
+        <span className={styles.name}>{name}</span>
+        {collected && owner ? (
+          <span className={styles.chip}>
+            <Avatar name={owner.name} seed={owner.userId} src={owner.avatarSrc} size={22} />
+            <span className={styles.chipText}>
+              {t('pet.owner')} {owner.name}
+            </span>
+          </span>
+        ) : (
+          <span className={`${styles.chip} ${styles.muted}`}>{t('collection.filter_uncollected')}</span>
+        )}
+      </button>
+    </Tilt>
   );
 }

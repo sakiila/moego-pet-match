@@ -3,7 +3,7 @@ import type { ToolType } from '../../engine';
 import { useI18n } from '../../i18n';
 import styles from './ToolPiece.module.css';
 
-const LABEL: Record<ToolType, string> = { combH: 'comb (row)', combV: 'comb (column)', scissors: 'scissors' };
+const LABEL: Record<ToolType, string> = { combH: 'comb (row)', combV: 'comb (column)', scissors: 'scissors', dryer: 'hair dryer' };
 
 function Comb() {
   return (
@@ -52,9 +52,38 @@ function BubbleMachine() {
   );
 }
 
+/** 吹风机：机身、喷口与风线。 */
+function Dryer() {
+  return (
+    <svg className={styles.icon} viewBox="0 0 48 48" aria-hidden>
+      <path d="M8 12 Q8 8 12 8 L30 8 Q38 8 38 16 L38 20 Q38 26 30 26 L12 26 Q8 26 8 22 Z" fill="var(--color-brand)" stroke="var(--color-ink)" strokeWidth="2.5" strokeLinejoin="round" />
+      <path d="M16 26 L13 42 L22 42 L24 26" fill="var(--color-brand-strong)" stroke="var(--color-ink)" strokeWidth="2.5" strokeLinejoin="round" />
+      <path d="M42 11 l4 -2 M43 17 h4 M42 23 l4 2" stroke="var(--color-cat-blue)" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** 鱼关的吹风机外观：大浪花（卷起的浪头）。 */
+function BigWave() {
+  return (
+    <svg className={styles.icon} viewBox="0 0 48 48" aria-hidden>
+      <path d="M5 38 Q5 16 24 12 Q38 10 42 22 Q36 18 30 22 Q34 24 33 30 Q30 38 20 38 Z" fill="var(--color-brand)" stroke="var(--color-ink)" strokeWidth="2.5" strokeLinejoin="round" />
+      <path d="M5 40 Q14 36 24 40 T43 40" fill="none" stroke="var(--color-cat-blue)" strokeWidth="3" strokeLinecap="round" />
+      <circle cx="38" cy="10" r="3" fill="none" stroke="var(--color-cat-blue)" strokeWidth="2.5" />
+    </svg>
+  );
+}
+
 /** 方向／能力角标：横向 ↔，竖向 ↕，十字 ＋；鱼关沿用同一套标识，与实际清除范围一致。 */
 function Badge({ tool }: { tool: ToolType }) {
-  const d = tool === 'combH' ? 'M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4' : tool === 'combV' ? 'M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4' : 'M12 5v14M5 12h14';
+  const d =
+    tool === 'combH'
+      ? 'M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4'
+      : tool === 'combV'
+        ? 'M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4'
+        : tool === 'dryer'
+          ? 'M12 3v18M3 12h18M6 6l12 12M18 6L6 18'
+          : 'M12 5v14M5 12h14';
   return (
     <span className={styles.badge}>
       <svg viewBox="0 0 24 24" aria-hidden>
@@ -68,10 +97,14 @@ function Badge({ tool }: { tool: ToolType }) {
 export function ToolPiece({ tool, mode = 'normal' }: { tool: ToolType; mode?: GameMode }) {
   const { t } = useI18n();
   const fish = mode === 'fish';
-  const label = fish ? `${t(tool === 'scissors' ? 'fish.bubble_machine' : 'fish.water_jet')}${tool === 'scissors' ? '' : tool === 'combH' ? ' ↔' : ' ↕'}` : LABEL[tool];
+  const label = fish
+    ? tool === 'dryer'
+      ? t('fish.big_wave')
+      : `${t(tool === 'scissors' ? 'fish.bubble_machine' : 'fish.water_jet')}${tool === 'scissors' ? '' : tool === 'combH' ? ' ↔' : ' ↕'}`
+    : LABEL[tool];
   return (
     <div className={`${styles.tool} ${fish ? styles.fish : ''}`} role="img" aria-label={label}>
-      {fish ? tool === 'scissors' ? <BubbleMachine /> : <WaterJet /> : tool === 'scissors' ? <Scissors /> : <Comb />}
+      {tool === 'dryer' ? fish ? <BigWave /> : <Dryer /> : fish ? tool === 'scissors' ? <BubbleMachine /> : <WaterJet /> : tool === 'scissors' ? <Scissors /> : <Comb />}
       <Badge tool={tool} />
     </div>
   );

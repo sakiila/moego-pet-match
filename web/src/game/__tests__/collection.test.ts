@@ -34,12 +34,26 @@ describe('图鉴浏览', () => {
     expect(ids(browseCollection(pets, 'all', 'app'))).toEqual(['Apple']);
   });
 
-  it('主人名只匹配已收集宠物，自家未收集宠物也不被主人名揭晓', () => {
-    expect(ids(browseCollection(pets, 'all', 'bob'))).toEqual(['Cookie']);
+  it('主人名匹配已收集宠物和自家宠物，其他未收集宠物不被主人名揭晓', () => {
+    expect(ids(browseCollection(pets, 'all', 'bob'))).toEqual(['Cookie', 'Dumpling']);
+    // 别人家的未收集宠物：即使数据里带了主人也不通过搜索揭晓
+    const hidden = [pet('Mystery', { owner: { userId: 'U3', name: 'Carol' } })];
+    expect(ids(browseCollection(hidden, 'all', 'carol'))).toEqual([]);
+  });
+
+  it('多个词不分顺序、不怕多余空格；每个词都要命中，且不绕过未收集限制', () => {
+    const list: CollectionPet[] = [
+      { ...pets[1], name: 'Gugu', owner: { userId: 'u9', name: 'Pinxuan Lin 林品璇' } },
+      { ...pets[0], name: 'Pip', collected: false, collectedAt: null, owner: { userId: 'u9', name: 'Pinxuan Lin 林品璇' } },
+    ];
+    for (const q of ['lin pinxuan', '  Pinxuan   LIN ', '林品璇 pinxuan', 'ｐｉｎｘｕａｎ']) expect(ids(browseCollection(list, 'all', q))).toEqual([list[0].petId]);
+    expect(ids(browseCollection(list, 'all', 'gugu 林品璇'))).toEqual([list[0].petId]);
+    expect(ids(browseCollection(list, 'all', 'lin 张三'))).toEqual([]);
   });
 
   it('搜索配合当前筛选', () => {
-    expect(ids(browseCollection(pets, 'uncollected', 'bob'))).toEqual([]);
+    expect(ids(browseCollection(pets, 'uncollected', 'bob'))).toEqual(['Dumpling']);
+    expect(ids(browseCollection(pets, 'collected', 'bob'))).toEqual(['Cookie']);
   });
 });
 

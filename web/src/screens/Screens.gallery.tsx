@@ -13,7 +13,7 @@ const summary: GameSummary = {
   clearedByMultiplier: [120, 40, 20, 6, 0],
   maxChain: 4,
   toolsFired: 6,
-  combos: { cc: 0, cs: 1, ss: 0 },
+  combos: { cc: 0, cs: 1, dryer: 0 },
   validMoves: 40,
   actedInLastSeconds: true,
   rushSucceeded: true,

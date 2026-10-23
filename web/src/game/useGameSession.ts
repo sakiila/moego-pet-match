@@ -181,7 +181,7 @@ export function useGameSession(
     const next = nextTutorial(frame.board, s.seenTutorials);
     if (next) {
       s.tutorial = { kind: next, until: g + TUTORIAL_MS };
-      s.seenTutorials.add(next === 'combo' ? 'combo' : 'tool');
+      s.seenTutorials.add(next === 'combo' || next === 'merge' || next === 'dryer' ? next : 'tool');
       saveSeenTutorials(s.seenTutorials, mode);
     }
   }

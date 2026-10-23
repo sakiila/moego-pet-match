@@ -35,88 +35,90 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
       : t('report.mvp', { petName: mvp.pet.name })
     : null;
   return (
-    <section className={styles.card} data-testid="score-card">
-      <div className={styles.top}>
-        <div>
-          <span className={styles.scoreLabel}>{t('report.final_score')}</span>
-          <span className={styles.score} data-testid="report-score">
-            {fmt(score)}
+    <div className={styles.wrap}>
+      <section className={styles.card} data-testid="score-card">
+        <div className={styles.top}>
+          <div>
+            <span className={styles.scoreLabel}>{t('report.final_score')}</span>
+            <span className={styles.score} data-testid="report-score">
+              {fmt(score)}
+            </span>
+            {newRecord && <span className={styles.record}>{t('report.personal_best')}</span>}
+          </div>
+          <span className={styles.saveBadge} data-state={saveState}>
+            {saveState === 'saved' ? `✓ ${t('report.saved')}` : saveState === 'saving' ? t('report.saving') : ''}
           </span>
-          {newRecord && <span className={styles.record}>{t('report.personal_best')}</span>}
         </div>
-        <span className={styles.saveBadge} data-state={saveState}>
-          {saveState === 'saved' ? `✓ ${t('report.saved')}` : saveState === 'saving' ? t('report.saving') : ''}
-        </span>
-      </div>
-      {newRecord && (
-        <span className={styles.confetti} aria-hidden>
-          {Array.from({ length: 14 }, (_, i) => (
-            <span
-              key={i}
-              style={
-                {
-                  '--c': CONFETTI[i % CONFETTI.length],
-                  '--dx': `${Math.cos(i) * 70}px`,
-                  '--dy': `${Math.sin(i * 1.7) * 50 + 30}px`,
-                  '--rot': `${i * 37}deg`,
-                } as CSSProperties
-              }
-            />
-          ))}
-        </span>
-      )}
-      {mvp && mvpRemoved ? (
-        <div className={styles.mvp} data-testid="mvp-removed">
-          <div className={styles.sticker} style={{ '--tint': 'var(--color-brand-soft)' } as CSSProperties}>
-            <svg viewBox="0 0 100 100" className={styles.generic} aria-hidden>
-              <ellipse cx="50" cy="62" rx="20" ry="16" fill="currentColor" />
-              <ellipse cx="28" cy="40" rx="8" ry="10" fill="currentColor" />
-              <ellipse cx="42" cy="28" rx="8" ry="10" fill="currentColor" />
-              <ellipse cx="58" cy="28" rx="8" ry="10" fill="currentColor" />
-              <ellipse cx="72" cy="40" rx="8" ry="10" fill="currentColor" />
-            </svg>
-          </div>
-          <span className={styles.mvpName}>{t('report.generic_title')}</span>
-          <p className={styles.review}>“{t(review)}”</p>
-        </div>
-      ) : mvp ? (
-        <div className={styles.mvp} data-testid="mvp">
-          <div className={styles.sticker} style={{ '--tint': `var(--pet-tint-${mvp.kind % 6})` } as CSSProperties}>
-            {petImage(mvp.pet, 512) ? <img src={petImage(mvp.pet, 512)!} alt={mvp.pet.name} /> : null}
-          </div>
-          <span className={styles.mvpName}>{mvpLabel}</span>
-          <p className={styles.review}>“{t(review)}”</p>
-        </div>
-      ) : host ? (
-        <div className={styles.mvp} data-testid="manager-host">
-          <div className={styles.sticker} style={{ '--tint': 'var(--color-surface-muted)' } as CSSProperties}>
-            <img src={host.stickerSrc} alt={host.name} />
-          </div>
-          <span className={styles.mvpName}>
-            {t('home.manager')} · {host.name}
+        {newRecord && (
+          <span className={styles.confetti} aria-hidden>
+            {Array.from({ length: 14 }, (_, i) => (
+              <span
+                key={i}
+                style={
+                  {
+                    '--c': CONFETTI[i % CONFETTI.length],
+                    '--dx': `${Math.cos(i) * 70}px`,
+                    '--dy': `${Math.sin(i * 1.7) * 50 + 30}px`,
+                    '--rot': `${i * 37}deg`,
+                  } as CSSProperties
+                }
+              />
+            ))}
           </span>
-          <p className={styles.review}>“{t(review)}”</p>
-        </div>
-      ) : (
-        <p className={styles.noMvp}>{t(review)}</p>
-      )}
-      <span className={styles.stamp} data-testid="title-stamp">
-        {t(title)}
-      </span>
-      <dl className={styles.stats}>
-        <div>
-          <dt>{t(mode === 'fish' ? 'fish.report_tiles' : 'report.service_tiles')}</dt>
-          <dd>{fmt(stats.tiles)}</dd>
-        </div>
-        <div>
-          <dt>{t('report.highest_chain')}</dt>
-          <dd>{fmt(stats.chain)}</dd>
-        </div>
-        <div>
-          <dt>{t('report.tools_used')}</dt>
-          <dd>{fmt(stats.tools)}</dd>
-        </div>
-      </dl>
-    </section>
+        )}
+        {mvp && mvpRemoved ? (
+          <div className={styles.mvp} data-testid="mvp-removed">
+            <div className={styles.sticker} style={{ '--tint': 'var(--color-brand-soft)' } as CSSProperties}>
+              <svg viewBox="0 0 100 100" className={styles.generic} aria-hidden>
+                <ellipse cx="50" cy="62" rx="20" ry="16" fill="currentColor" />
+                <ellipse cx="28" cy="40" rx="8" ry="10" fill="currentColor" />
+                <ellipse cx="42" cy="28" rx="8" ry="10" fill="currentColor" />
+                <ellipse cx="58" cy="28" rx="8" ry="10" fill="currentColor" />
+                <ellipse cx="72" cy="40" rx="8" ry="10" fill="currentColor" />
+              </svg>
+            </div>
+            <span className={styles.mvpName}>{t('report.generic_title')}</span>
+            <p className={styles.review}>“{t(review)}”</p>
+          </div>
+        ) : mvp ? (
+          <div className={styles.mvp} data-testid="mvp">
+            <div className={styles.sticker} style={{ '--tint': `var(--pet-tint-${mvp.kind % 6})` } as CSSProperties}>
+              {petImage(mvp.pet, 512) ? <img src={petImage(mvp.pet, 512)!} alt={mvp.pet.name} /> : null}
+            </div>
+            <span className={styles.mvpName}>{mvpLabel}</span>
+            <p className={styles.review}>“{t(review)}”</p>
+          </div>
+        ) : host ? (
+          <div className={styles.mvp} data-testid="manager-host">
+            <div className={styles.sticker} style={{ '--tint': 'var(--color-surface-muted)' } as CSSProperties}>
+              <img src={host.stickerSrc} alt={host.name} />
+            </div>
+            <span className={styles.mvpName}>
+              {t('home.manager')} · {host.name}
+            </span>
+            <p className={styles.review}>“{t(review)}”</p>
+          </div>
+        ) : (
+          <p className={styles.noMvp}>{t(review)}</p>
+        )}
+        <span className={styles.stamp} data-testid="title-stamp">
+          {t(title)}
+        </span>
+        <dl className={styles.stats}>
+          <div>
+            <dt>{t(mode === 'fish' ? 'fish.report_tiles' : 'report.service_tiles')}</dt>
+            <dd>{fmt(stats.tiles)}</dd>
+          </div>
+          <div>
+            <dt>{t('report.highest_chain')}</dt>
+            <dd>{fmt(stats.chain)}</dd>
+          </div>
+          <div>
+            <dt>{t('report.tools_used')}</dt>
+            <dd>{fmt(stats.tools)}</dd>
+          </div>
+        </dl>
+      </section>
+    </div>
   );
 }

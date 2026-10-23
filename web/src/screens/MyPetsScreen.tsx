@@ -75,7 +75,7 @@ export function MyPetsScreen({ player, onBack, onUpload, onOpenShop, load = api.
             stickerSrc={stickerUrl(p.petId, 512)}
             collected={p.collected}
             request={p.request?.status ?? null}
-            onView={() => void detail.show(p.petId, p.name)}
+            onView={(el) => void detail.show(p.petId, p.name, el)}
             onRequestRemoval={() => removal.open({ kind: 'pet', petId: p.petId, name: p.name, ownerName: player.name })}
           />
         ))}

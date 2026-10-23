@@ -5,6 +5,10 @@
 
 ## 视觉方向
 
+2026-10-23 独立素材修正：2026-10-23：用户反馈「不对，你这个素材和之前讨论的样式不一致」。本套手工 SVG 重绘稿样式未通过，已撤回作为当前交付的推荐。文件格式、透明通道和压缩包校验通过，不代表视觉一致性通过。以已确认原稿为基准的修正进行中。 此前 59 枚 SVG／236 张 PNG 的重绘交付已退回，不能作为已确认样式的最终素材。原始 10 批选定图稿仍是视觉基准，修正稿另存版本；游戏代码未改动。
+
+2026-10-23 图标方向更新：第 1–10 批已确认，见下方选定展示文件及[可放大设计总览](reviews/2026-10-23-icon-library-v1/index.html)；图标以原稿炭黑圆角描边、橙白主色与轻量层次为基准。第 10 批[通用动作 v3](concepts/common-actions-original-v3.png)补齐回门店、退出、换一张、保存图片和重试；按标注收圆重试箭头的右上转折，保持大小图一致。旧高光系列及其原始图、导出和留档已按用户明确要求删除；原始页面、宠物素材及新方向图稿保留。当前范围、批次与清理记录见 [ICON_REDESIGN_PLAN.md](ICON_REDESIGN_PLAN.md)。本轮未修改游戏代码。
+
 参考用户提供的 [MoeGo 素材库](https://mengshikeji.feishu.cn/wiki/Mmt2wf5JQiEsSqkcquscbpVdnV7)，已在登录浏览器中查看品牌标志、猫狗角色及洗护插画，并将实际品牌图片作为 ImageGen 输入参考。
 
 以 MoeGo 橙、炭黑与白色为主，辅以蓝猫、黄犬、红犬等角色色；采用贴纸感角色、圆润粗体、轻量描边与偏移阴影。整体是一间明亮有趣的宠物小店，保留清楚的按钮与阅读层级。
@@ -25,6 +29,16 @@
 
 | 页面 | 文件 | 设计重点 |
 | --- | --- | --- |
+| 首页入口图标 | [home-entry-icons-v3.png](concepts/home-entry-icons-v3.png) | 2026-10-23 效果图已确认；开始营业爪印、图鉴书本、杯形奖杯、猫狗头像；炭黑描边与橙白配色；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 通用功能图标 | [common-function-icons-v1.png](concepts/common-function-icons-v1.png) | 2026-10-23 已确认；返回、关闭、搜索、设置、选择照片、分享、翻面、信息说明；与首页 v3 同风格；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 局内操作与状态图标 | [round-operation-icons-v1.png](concepts/round-operation-icons-v1.png) | 2026-10-23 已确认；相邻交换、两步点选、拼图合体、系统洗牌、时钟、计分星形；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 普通／鱼关道具图标 | [tool-family-original-v6.png](concepts/tool-family-original-v6.png) | 2026-10-23 已确认动感版；弧形扫梳、斜向剪刀、海螺与贝壳、风势与浪花；橙色能力标识；吹风机与大浪花仅全盘演出；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 催单反馈图标 | [rush-feedback-original-v1.png](concepts/rush-feedback-original-v1.png) | 2026-10-23 已确认；完整横夹小票、闭合绿色勾印记、灰夹收起小票；普通／鱼关共用；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 结算标记 | [report-marks-original-v4.png](concepts/report-marks-original-v4.png) | 2026-10-23 已确认；MVP 奖章、去回折线并恢复投影的燕尾小旗、保留左侧角花的圆角称号框；圆戳移除；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 排行榜名次徽记 | [leaderboard-marks-original-v1.png](concepts/leaderboard-marks-original-v1.png) | 2026-10-23 已确认；数字 1 皇冠、2 盾牌、3 六角章；并列使用实际名次，本人行橙色高亮；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 图鉴收集与空态 | [collection-marks-original-v1.png](concepts/collection-marks-original-v1.png) | 2026-10-23 已确认；入册书签、零收集空册、搜索无结果索引卡；保留未收集名字＋剪影列表；宠物源素材未改，尚未导出独立素材或接入代码 ；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 设置与声音触感图标 | [settings-feedback-original-v1.png](concepts/settings-feedback-original-v1.png) | 2026-10-23 已确认；语言、背景音乐、消除音效、轻震；门店默认、局内开启与设备不可用样例；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 通用动作图标 | [common-actions-original-v3.png](concepts/common-actions-original-v3.png) | 2026-10-23 已确认；回门店、退出、换照片、保存图片、重试；重试为连续回环，右上转折收圆，大小图一致；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
 | 手机首次入口与身份确认 | [mobile-identity-v2.png](concepts/mobile-identity-v2.png) | 已确认；游戏名与 90 秒介绍、直接搜索与选中 Bob、默认头像、带名字的按钮与信息摘要，同页完成 |
 | 门店首页 | [home-v2.png](concepts/home-v2.png) | 开始营业按钮、今日店长、个人纪录、上传与图鉴入口；图中鱼缸区已取消，后续加入人工处理提示 |
 | 手机门店首页 | [mobile-home-v2.png](concepts/mobile-home-v2.png) | 已确认；Deedee 店长与既定宣言、唯一主动作开始营业、普通局个人最好、三个次级入口和完整人工处理提示 |
@@ -53,6 +67,18 @@
 | 手机上传宠物 | [mobile-upload-v1.png](concepts/mobile-upload-v1.png) | 已确认；原图预览、名字、主人核对、展示说明与提交，遵循简化首版流程 |
 
 原六页均已检查品牌与配色、文字层级、按钮、留白、角色连续性与视口完整性；棋盘为 7 行 7 列。首页补入个人最好成绩，报告卡进度条按 68% 做定向校准。
+
+### 2026-10-23 更新：首页与常用入口图标
+
+用户重新指定原始 `outputs/` 目录作为视觉基准，已确认[首页入口 v3](concepts/home-entry-icons-v3.png)。新图标采用炭黑圆角描边、橙白主色与轻量层次，首页保留一个主动作和三个次级入口；开始营业用单个爪印，图鉴用打开的书本，排行榜用中央橙星的杯形奖杯，我的宠物用白犬与蓝猫头像组合。完整请求见[v3 提示词](concepts/home-entry-icons-v3-prompt.txt)。
+
+用户随后要求继续下一批，并删除之前的高光类型。旧首页、道具、奖励、催单、鱼缸、名次徽记和操作提示的高光图稿、独立素材、预览、下载包、提示词及原始输出已清理，不再提供或选用旧文件。原始页面设计、宠物／单鱼内容素材及 v3 保留；清理范围与核验见[记录](reviews/2026-10-23-icon-style-cleanup/manifest.json)。新方向第 1–10 批已确认，文件见上方选定展示表及[设计总览](reviews/2026-10-23-icon-library-v1/index.html)；第 10 批选定[通用动作 v3](concepts/common-actions-original-v3.png)，v1／v2 作为重试箭头的过程稿留档。全套独立重绘稿因样式不符已退回，留档见[退回稿](../assets/icons/library-original-v1/preview.html)；尚未接入页面，原宠物 PNG 和卡片实现未改动。
+
+### 2026-10-23 更新：鱼关道具统一为海底元素
+
+用户确认用海螺、珍珠贝壳和大浪花替代水流喷头、气泡机与涡流泵。海螺通过螺壳开口、水流朝向与橙色箭头区分横扫／竖扫；珍珠贝壳以扇形轮廓、中央珍珠和橙色十字标识承接十字清除；两个珍珠贝壳的全盘合体以大浪花演出，不新增独立棋子。生成条件、三种合体范围、计分和统计沿用原能力规则。
+
+此前海底元素方案对应的高光 PNG、图稿与下载包已按用户要求删除，外观改按[原稿风格计划](ICON_REDESIGN_PLAN.md)重新设计。普通局保留梳子、剪刀与吹风机演出题材，鱼关保留海螺、珍珠贝壳与大浪花题材；生成、发动、方向、合体范围、计分与统计规则不变。历史完整页面图仍用于布局参考，不能据此恢复旧设备外观。本轮未改游戏代码。
 
 ### 2026-10-22 更新：首次入口直接选择同事身份
 
@@ -254,7 +280,8 @@
 | 剪刀发动 | 开合一次 → 所在行与列同时清除 → 补落 | 约 540 ms |
 | 梳＋梳 | 两工具合体提示 → 十字清除 → 补落 | 约 540 ms |
 | 梳＋剪 | 两工具合体提示 → 三行三列清除 → 补落 | 约 580 ms |
-| 剪＋剪 | 双工具开合 → 全盘短波纹与泡泡 → 补落 | 约 620 ms |
+| 两剪刀合成 | 两把剪刀合拢 → 变为吹风机 → 补落 | 约 460 ms |
+| 吹风机发动 | 吹风机鼓风 → 全盘短波纹与泡泡 → 补落 | 约 620 ms |
 
 参考时间包含一次交换、一个清除批次与补落，假设没有后续连锁。普通三消的分段参考为：视觉交换约 100 ms、轻弹约 60 ms、泡泡清除约 80 ms、下落约 160 ms、落位缓动约 40 ms；分段可随手感调整。交换达到既定阈值即生效，100 ms 不是新增确认步骤；后续连锁不重复交换阶段，也不承诺整段连锁都在表内时间结束。
 

@@ -1,7 +1,7 @@
 import type { Board, Piece, Pos, ToolType } from './types';
 
-const TOOL_CHARS: Record<string, ToolType> = { h: 'combH', v: 'combV', x: 'scissors' };
-const CHAR_OF_TOOL: Record<ToolType, string> = { combH: 'h', combV: 'v', scissors: 'x' };
+const TOOL_CHARS: Record<string, ToolType> = { h: 'combH', v: 'combV', x: 'scissors', d: 'dryer' };
+const CHAR_OF_TOOL: Record<ToolType, string> = { combH: 'h', combV: 'v', scissors: 'x', dryer: 'd' };
 
 export const posKey = (p: Pos, size: number) => p.r * size + p.c;
 export const keyPos = (k: number, size: number): Pos => ({ r: Math.floor(k / size), c: k % size });
@@ -19,7 +19,7 @@ export function cloneBoard(board: Board): Board {
 }
 
 /**
- * ASCII 夹具：`A`–`F` 为宠物 kind 0–5，`h` / `v` / `x` 为横梳 / 竖梳 / 剪刀，`.` 为空。
+ * ASCII 夹具：`A`–`F` 为宠物 kind 0–5，`h` / `v` / `x` / `d` 为横梳 / 竖梳 / 剪刀 / 吹风机，`.` 为空。
  */
 export function parseBoard(rows: string[], firstId = 1): { board: Board; nextId: number } {
   let nextId = firstId;

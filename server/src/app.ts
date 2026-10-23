@@ -13,6 +13,7 @@ import { rosterRoutes } from './routes/roster.ts';
 import { deletionRoutes } from './routes/deletions.ts';
 import { submissionRoutes } from './routes/submissions.ts';
 import { webRoutes } from './routes/web.ts';
+import type { SlackDirectory } from './services/slackDirectory.ts';
 import type { SubmissionHooks } from './services/submissions.ts';
 
 export interface AppDeps {
@@ -25,6 +26,8 @@ export interface AppDeps {
   now?: () => Date;
   /** 生产：前端构建产物目录，由同一服务提供页面；开发时为空（页面由 Vite 提供）。 */
   staticDir?: string;
+  /** 实时 Slack 目录：补充人员表里没有的同事；未配置时只用人员表。 */
+  directory?: SlackDirectory | null;
   images?: {
     cache: DiskCache;
     /** R2 私有桶；未配置时宠物图返回 503。 */

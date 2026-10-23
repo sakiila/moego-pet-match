@@ -15,7 +15,7 @@ const summary = (over: Partial<GameSummary> = {}): GameSummary => ({
   clearedByMultiplier: [100, 20, 0, 0, 0],
   maxChain: 3,
   toolsFired: 1,
-  combos: { cc: 0, cs: 0, ss: 0 },
+  combos: { cc: 0, cs: 0, dryer: 0 },
   validMoves: 30,
   actedInLastSeconds: false,
   rushSucceeded: true,

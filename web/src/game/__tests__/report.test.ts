@@ -8,7 +8,7 @@ const base: GameSummary = {
   clearedByMultiplier: [30, 0, 0, 0, 0],
   maxChain: 2,
   toolsFired: 0,
-  combos: { cc: 0, cs: 0, ss: 0 },
+  combos: { cc: 0, cs: 0, dryer: 0 },
   validMoves: 5,
   actedInLastSeconds: false,
   rushSucceeded: false,
@@ -36,7 +36,7 @@ describe('MVP', () => {
 
 describe('主称号优先级', () => {
   it.each([
-    [{ combos: { cc: 0, cs: 0, ss: 1 }, maxChain: 6, rushSucceeded: true }, 'title.cleanup_chief'],
+    [{ combos: { cc: 0, cs: 0, dryer: 1 }, maxChain: 6, rushSucceeded: true }, 'title.cleanup_chief'],
     [{ maxChain: 5, rushSucceeded: true, toolsFired: 4 }, 'title.chain_lead'],
     [{ rushSucceeded: true, toolsFired: 4, actedInLastSeconds: true }, 'title.scheduling_pro'],
     [{ toolsFired: 3, actedInLastSeconds: true }, 'title.tool_pro'],
@@ -46,16 +46,16 @@ describe('主称号优先级', () => {
     expect(judgeTitle({ ...base, ...over })).toBe(title);
   });
   it('梳＋剪合体计 2 个工具，再加 1 个即达到洗护工具大师', () => {
-    expect(judgeTitle({ ...base, toolsFired: 3, combos: { cc: 0, cs: 1, ss: 0 } })).toBe('title.tool_pro');
+    expect(judgeTitle({ ...base, toolsFired: 3, combos: { cc: 0, cs: 1, dryer: 0 } })).toBe('title.tool_pro');
   });
 });
 
 describe('角色评语优先级', () => {
   it.each([
     [{ clearedCells: 0, maxChain: 0, rushSucceeded: false }, 'no_service'],
-    [{ maxChain: 5, rushSucceeded: true, combos: { cc: 1, cs: 0, ss: 0 } }, 'high_chain'],
-    [{ rushSucceeded: true, combos: { cc: 1, cs: 0, ss: 0 } }, 'rush_success'],
-    [{ combos: { cc: 0, cs: 1, ss: 0 } }, 'tool_combo'],
+    [{ maxChain: 5, rushSucceeded: true, combos: { cc: 1, cs: 0, dryer: 0 } }, 'high_chain'],
+    [{ rushSucceeded: true, combos: { cc: 1, cs: 0, dryer: 0 } }, 'rush_success'],
+    [{ combos: { cc: 0, cs: 1, dryer: 0 } }, 'tool_combo'],
     [{}, 'normal'],
   ] as const)('%o → %s', (over, which) => {
     expect(judgeReview({ ...base, ...over }, 'normal')).toBe(`review.pet.${which}`);

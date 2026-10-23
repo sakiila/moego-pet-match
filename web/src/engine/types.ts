@@ -1,4 +1,4 @@
-export type ToolType = 'combH' | 'combV' | 'scissors';
+export type ToolType = 'combH' | 'combV' | 'scissors' | 'dryer';
 
 /** 棋子带稳定 id，UI 据此在时间线前后追踪同一枚棋子的移动。 */
 export type Piece = { id: number; type: 'pet'; kind: number } | { id: number; type: 'tool'; tool: ToolType };
@@ -12,10 +12,10 @@ export interface Pos {
 }
 
 /** 决定本批清除时长的效果强度，由弱到强。 */
-export type Effect = 'match' | 'comb' | 'scissors' | 'comboCC' | 'comboCS' | 'comboSS';
+export type Effect = 'match' | 'merge' | 'comb' | 'scissors' | 'comboCC' | 'comboCS' | 'dryer';
 
 export interface Batch {
-  /** 本次操作内的批序，从 1 开始，决定倍率。 */
+  /** 本次操作内的计分批序，从 1 开始，决定倍率；合成批不计分，序号为 0。 */
   index: number;
   /** 整局的全局批序，用于 MVP「首次服务批次」比较。 */
   seq: number;
@@ -26,6 +26,8 @@ export interface Batch {
   effect: Effect;
   groups: Pos[][];
   combo: { tools: [ToolType, ToolType]; center: Pos } | null;
+  /** 两个剪刀合成吹风机：不消除、不计分，吹风机生成在 to（落点）。 */
+  merge: { from: Pos; to: Pos } | null;
   toolsFired: { pos: Pos; tool: ToolType }[];
   cleared: Pos[];
   spawned: { pos: Pos; piece: Piece }[];
@@ -75,7 +77,7 @@ export interface GameState {
   maxChain: number;
   toolsFired: number;
   /** 实际发动的双工具合体次数（称号与评语用）。 */
-  combos: { cc: number; cs: number; ss: number };
+  combos: { cc: number; cs: number; dryer: number };
   served: number[];
   firstServedSeq: (number | null)[];
   validMoves: number;

@@ -128,13 +128,25 @@ describe('时间线播放', () => {
     expect(frameAt(base, bounce.timeline, 5240).busy).toBe(false);
   });
 
-  it('剪＋剪合体在清除段带出合体范围', () => {
+  it('吹风机发动时清除段整盘清除，并带出吹风机扫描', () => {
+    const s = createGame({ seed: 1, lineup: LINEUP, board: withCells(DEAD, { '3,2': 'd' }) });
+    const r = trySwap(s, p(3, 2), p(3, 3), 0);
+    if (!r.ok) throw new Error('rejected');
+    const f = frameAt(baseOf(s), r.timeline, 200);
+    expect(f.sweeps[0]).toEqual({ kind: 'tool', tool: 'dryer', at: p(3, 3) });
+    expect(f.clearing.size).toBe(49);
+  });
+
+  it('两剪刀合成：清除段只带走两把剪刀、无扫描，分数与弹分不变', () => {
     const s = createGame({ seed: 1, lineup: LINEUP, board: withCells(DEAD, { '3,2': 'x', '3,3': 'x' }) });
     const r = trySwap(s, p(3, 2), p(3, 3), 0);
     if (!r.ok) throw new Error('rejected');
     const f = frameAt(baseOf(s), r.timeline, 200);
-    expect(f.sweeps[0]).toEqual({ kind: 'combo', tools: ['scissors', 'scissors'], center: p(3, 3) });
-    expect(f.clearing.size).toBe(49);
+    expect(f.sweeps).toEqual([]);
+    expect(f.clearing.size).toBe(2);
+    const done = frameAt(baseOf(s), r.timeline, r.timeline.busyUntil);
+    expect(done.board[3][3]).toMatchObject({ type: 'tool', tool: 'dryer' });
+    expect(done.popups.some((x) => x.score === 0)).toBe(false);
   });
 });
 
@@ -198,6 +210,12 @@ describe('提示与带教', () => {
     const pair = parseBoard(withCells(DEAD, { '0,0': 'h', '0,1': 'x' })).board;
     expect(nextTutorial(one, new Set())).toBe('comb');
     expect(nextTutorial(parseBoard(withCells(DEAD, { '2,2': 'x' })).board, new Set())).toBe('scissors');
+    // 两把剪刀相邻：先教合成吹风机；已看过合成后回到通用搭档提示；场上出现吹风机教发动
+    const twin = parseBoard(withCells(DEAD, { '2,2': 'x', '2,3': 'x' })).board;
+    expect(nextTutorial(twin, new Set())).toBe('merge');
+    expect(nextTutorial(twin, new Set(['merge']))).toBe('combo');
+    expect(nextTutorial(parseBoard(withCells(DEAD, { '2,2': 'd' })).board, new Set())).toBe('dryer');
+    expect(nextTutorial(parseBoard(withCells(DEAD, { '2,2': 'd' })).board, new Set(['dryer', 'tool']))).toBeNull();
     expect(nextTutorial(pair, new Set())).toBe('combo');
     expect(nextTutorial(pair, new Set(['combo']))).toBe('comb');
     expect(nextTutorial(pair, new Set(['combo', 'tool']))).toBeNull();
@@ -216,6 +234,10 @@ describe('提示与带教', () => {
     const none = { finishing: false, shuffling: false, tutorial: null, hint: false, lastSeconds: false, mode: 'fish' as const };
     expect(pickTip({ ...none, tutorial: 'comb' })?.key).toBe('tutorial.water_jet');
     expect(pickTip({ ...none, tutorial: 'scissors' })?.key).toBe('tutorial.bubble_machine');
+    expect(pickTip({ ...none, tutorial: 'merge' })?.key).toBe('tutorial.big_wave_merge');
+    expect(pickTip({ ...none, tutorial: 'dryer' })?.key).toBe('tutorial.big_wave');
+    expect(pickTip({ ...none, tutorial: 'dryer', mode: 'normal' })?.key).toBe('tutorial.dryer');
+    expect(pickTip({ ...none, tutorial: 'merge', mode: 'normal' })?.key).toBe('tutorial.dryer_merge');
     expect(pickTip({ ...none, tutorial: 'combo' })?.key).toBe('tutorial.tool_combo');
     expect(pickTip({ ...none, mode: 'normal', tutorial: 'comb' })?.key).toBe('tutorial.comb');
   });

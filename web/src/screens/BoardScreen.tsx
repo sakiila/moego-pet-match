@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'motion/react';
 import { Board } from '../components/Board/Board';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { QuitDialog } from '../components/QuitDialog/QuitDialog';
 import { RushBar } from '../components/RushBar/RushBar';
 import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
 import { StatusPanel } from '../components/StatusPanel/StatusPanel';
+import { TimeUpBanner } from '../components/TimeUpBanner/TimeUpBanner';
 import { TipBar } from '../components/TipBar/TipBar';
 import type { GameMode } from '../api/types';
 import { UnderwaterBackdrop } from '../components/UnderwaterBackdrop/UnderwaterBackdrop';
@@ -12,6 +14,7 @@ import type { GameState, GameSummary } from '../engine';
 import type { PetInfo } from '../game/pets';
 import { useGameSession } from '../game/useGameSession';
 import { useI18n } from '../i18n';
+import { MOTION } from '../ui/motion';
 import styles from './Screen.module.css';
 
 export interface BoardScreenProps {
@@ -30,7 +33,17 @@ export interface BoardScreenProps {
 
 export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncollected, families, onFinished, onExit }: BoardScreenProps) {
   const { t } = useI18n();
-  const session = useGameSession(game, onFinished, { speed, startAt, mode, uncollected, families });
+  // 时间到后先停一拍显示「收工」，再进入报告；结果已冻结，成绩在进入报告时提交
+  const [ending, setEnding] = useState<GameSummary | null>(null);
+  const reduced = useReducedMotion();
+  const finishedRef = useRef(onFinished);
+  finishedRef.current = onFinished;
+  useEffect(() => {
+    if (!ending) return;
+    const id = window.setTimeout(() => finishedRef.current(ending), reduced ? MOTION.timeUpHoldReducedMs : MOTION.timeUpHoldMs);
+    return () => window.clearTimeout(id);
+  }, [ending, reduced]);
+  const session = useGameSession(game, setEnding, { speed, startAt, mode, uncollected, families });
   const fish = mode === 'fish';
   const { view } = session;
   const [quitOpen, setQuitOpen] = useState(false);
@@ -80,6 +93,7 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
         }}
       />
       <SettingsDialog variant="board" open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      {ending && <TimeUpBanner />}
     </main>
   );
 }

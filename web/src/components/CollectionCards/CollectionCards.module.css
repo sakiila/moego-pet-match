@@ -22,6 +22,8 @@
 
 .card {
   display: grid;
+  width: 100%;
+  height: 100%;
   justify-items: center;
   gap: var(--space-1);
   padding: var(--space-3);

@@ -15,6 +15,21 @@ const entry: GalleryEntry = {
     saving: () => (
       <ScoreCard mode="normal" score={2480} saveState="saving" newRecord={false} mvp={{ pet: maodu, kind: 2 }} review="review.pet.normal" title="title.pet_officer" stats={stats} />
     ),
+    'save failed (retry below)': () => (
+      <ScoreCard mode="normal" score={2480} saveState="failed" newRecord={false} mvp={{ pet: maodu, kind: 3 }} review="review.pet.normal" title="title.pet_officer" stats={stats} />
+    ),
+    'long English names + 6-digit score': () => (
+      <ScoreCard
+        mode="normal"
+        score={123456}
+        saveState="saved"
+        newRecord
+        mvp={{ pet: { ...maodu, name: 'Sir Reginald Fluffington III' }, kind: 4 }}
+        review="review.pet.high_chain"
+        title="title.cleanup_chief"
+        stats={{ tiles: 1234, chain: 12, tools: 56 }}
+      />
+    ),
     'zero service (no MVP)': () => (
       <ScoreCard mode="normal" score={0} saveState="saved" newRecord={false} mvp={null} review="review.pet.no_service" title="title.pet_officer" stats={{ tiles: 0, chain: 0, tools: 0 }} />
     ),

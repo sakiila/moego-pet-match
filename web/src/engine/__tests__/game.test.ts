@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { formatBoard } from '../board';
 import { RULES } from '../config';
-import { advance, confirmExit, createGame, findHint, getSummary, trySwap } from '../game';
+import { advance, confirmExit, createGame, findHint, getSummary, previewRange, trySwap } from '../game';
 import { findLines } from '../match';
 import { isDead, isPlayable, shuffleBoard, validMoves } from '../moves';
 import { chainMultiplier } from '../resolve';
@@ -145,7 +145,6 @@ describe('道具发动与合体', () => {
   it.each([
     ['梳＋梳', 'h', 'v', 13, 'comboCC'],
     ['梳＋剪', 'h', 'x', 33, 'comboCS'],
-    ['剪＋剪', 'x', 'x', 49, 'comboSS'],
   ])('%s（%s ⇄ %s）以落点为中心首批覆盖 %i 格', (_, a, b, cells, effect) => {
     const { state, timeline } = swap(twoTools(a, b), p(3, 2), p(3, 3), 1000);
     const first = chain(timeline).batches[0];
@@ -154,6 +153,82 @@ describe('道具发动与合体', () => {
     expect(first.combo?.center).toEqual(p(3, 3));
     expect(first.score).toBe(cells * 10);
     expect(state.toolsFired).toBeGreaterThanOrEqual(2);
+  });
+
+  it('剪＋剪不清除：合成一个吹风机在落点，不计分、不计催单、不计清除格数', () => {
+    const { state, timeline } = swap(twoTools('x', 'x'), p(3, 2), p(3, 3), 1000);
+    const { batches } = chain(timeline);
+    const first = batches[0];
+    expect(first.effect).toBe('merge');
+    expect(first.merge).toEqual({ from: p(3, 2), to: p(3, 3) });
+    expect(first.index).toBe(0);
+    expect(first.score).toBe(0);
+    expect(first.cleared).toEqual([p(3, 2), p(3, 3)]);
+    expect(first.spawned).toEqual([{ pos: p(3, 3), piece: expect.objectContaining({ type: 'tool', tool: 'dryer' }) }]);
+    expect(first.boardAfter[3][3]).toMatchObject({ type: 'tool', tool: 'dryer' });
+    // 合成后只有这一枚吹风机，另一枚剪刀已消失
+    expect(formatBoard(first.boardAfter).join('').match(/d/g)).toHaveLength(1);
+    expect(formatBoard(first.boardAfter).join('')).not.toContain('x');
+    expect(state.score).toBe(batches.reduce((sum, b) => sum + b.score, 0));
+    expect(state.toolsFired).toBe(0);
+    expect(state.combos).toEqual({ cc: 0, cs: 0, dryer: 0 });
+    expect(state.rush.progress).toBe(0);
+    expect(state.validMoves).toBe(1);
+  });
+
+  it('合成后的连锁倍率从 ×1 开始，合成批不抬高倍率', () => {
+    for (let seed = 1; seed <= 30; seed++) {
+      const s = createGame({ seed, lineup: LINEUP, board: withCells(DEAD, { '3,2': 'x', '3,3': 'x' }) });
+      const { timeline } = swap(s, p(3, 2), p(3, 3), 1000);
+      const scoring = chain(timeline).batches.filter((b) => !b.merge);
+      scoring.forEach((b, i) => expect(b.index).toBe(i + 1));
+      expect(chain(timeline).batches[0].multiplier).toBe(1);
+    }
+  });
+
+  it('吹风机与任意相邻宠物交换即发动：清全盘 49 格并计分', () => {
+    const s = game(withCells(DEAD, { '3,3': 'd' }));
+    const { state, timeline } = swap(s, p(3, 3), p(3, 4), 1000);
+    const first = chain(timeline).batches[0];
+    expect(first.effect).toBe('dryer');
+    expect(first.cleared).toHaveLength(49);
+    expect(first.score).toBe(490);
+    expect(first.multiplier).toBe(1);
+    expect(first.toolsFired).toEqual([{ pos: p(3, 4), tool: 'dryer' }]);
+    expect(state.toolsFired).toBeGreaterThanOrEqual(1);
+    expect(state.combos.dryer).toBe(1);
+    expect(state.clearedCells).toBeGreaterThanOrEqual(49);
+  });
+
+  it('吹风机与梳子 / 剪刀 / 另一吹风机交换：只发动吹风机，被扫到的道具各自计一次', () => {
+    const withComb = chain(swap(game(withCells(DEAD, { '3,3': 'd', '3,4': 'h' })), p(3, 3), p(3, 4), 1000).timeline).batches[0];
+    expect(withComb.effect).toBe('dryer');
+    expect(withComb.combo).toBeNull();
+    expect(withComb.cleared).toHaveLength(49);
+    expect(withComb.toolsFired.map((f) => f.tool).sort()).toEqual(['combH', 'dryer']);
+    const withScissors = chain(swap(game(withCells(DEAD, { '3,3': 'd', '3,4': 'x' })), p(3, 3), p(3, 4), 1000).timeline).batches[0];
+    expect(withScissors.combo).toBeNull();
+    expect(withScissors.toolsFired.map((f) => f.tool).sort()).toEqual(['dryer', 'scissors']);
+    const two = game(withCells(DEAD, { '3,3': 'd', '3,4': 'd' }));
+    const { state, timeline } = swap(two, p(3, 3), p(3, 4), 1000);
+    expect(chain(timeline).batches[0].cleared).toHaveLength(49);
+    expect(state.combos.dryer).toBeGreaterThanOrEqual(1);
+  });
+
+  it('吹风机被别的道具扫到时连锁引爆，清全盘', () => {
+    const s = game(withCells(DEAD, { '3,1': 'h', '3,5': 'd' }));
+    const { timeline } = swap(s, p(3, 1), p(3, 0), 1000);
+    const first = chain(timeline).batches[0];
+    expect(first.cleared).toHaveLength(49);
+    expect(first.toolsFired.map((f) => f.tool).sort()).toEqual(['combH', 'dryer']);
+    expect(first.effect).toBe('dryer');
+  });
+
+  it('吹风机与普通棋子的预览为整盘，两剪刀的预览为将合并的两格', () => {
+    const dry = game(withCells(DEAD, { '3,3': 'd' }));
+    expect(previewRange(dry, p(3, 3), p(3, 4))).toHaveLength(49);
+    const two = game(withCells(DEAD, { '3,2': 'x', '3,3': 'x' }));
+    expect(previewRange(two, p(3, 2), p(3, 3))).toEqual([p(3, 2), p(3, 3)]);
   });
 
   it('扫到其他道具时继续发动，同批覆盖去重', () => {
@@ -185,10 +260,10 @@ describe('道具发动与合体', () => {
 });
 
 describe('催单与时间端点', () => {
-  const ss = () => game(withCells(DEAD, { '3,2': 'x', '3,3': 'x' }));
+  const ss = () => game(withCells(DEAD, { '3,2': 'd' }));
 
   it('结算时刻 49 999 ms 计入催单，达标加一次 100 分', () => {
-    // 交换 120 + 剪剪清除 360 = 480 ms
+    // 交换 120 + 吹风机清除 360 = 480 ms
     const { state, timeline } = swap(ss(), p(3, 2), p(3, 3), 49_519);
     const { batches } = chain(timeline);
     expect(batches[0].settleAt).toBe(49_999);

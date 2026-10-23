@@ -50,7 +50,7 @@ describe('登记新局', () => {
     const game = await register('U_TEST_BOB');
     expect(game.lineup).toHaveLength(6);
     expect(game.seed).toBeGreaterThanOrEqual(0);
-    expect(game.rulesVersion).toBe(1);
+    expect(game.rulesVersion).toBe(2);
   });
 
   it('名单外玩家不能登记；未解锁不能开鱼局', async () => {

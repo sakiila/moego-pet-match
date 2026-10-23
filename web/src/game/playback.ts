@@ -123,7 +123,7 @@ export function frameAt(base: PlaybackBase, timeline: Timeline | null, g: number
     score += b.score + (b.rushBonus ? RULES.rush.bonus : 0);
     if (b.rushProgress !== null) rushProgress = b.rushProgress;
     if (b.rushBonus) rushSucceededAt = b.settleAt;
-    popups.push({ key: b.seq, score: b.score, chain: b.index, at: centroid(b.cleared), startAt: b.settleAt });
+    if (!b.merge) popups.push({ key: b.seq, score: b.score, chain: b.index, at: centroid(b.cleared), startAt: b.settleAt });
   }
   const totals = { score, rushProgress, rushSucceededAt, popups };
 

@@ -13,10 +13,12 @@ export interface BrandHeaderProps {
   heading?: string;
   /** 提供时在右上角显示「回门店」。 */
   onBack?: () => void;
+  /** heading 居中，首词深色、其余品牌色（与 Smart Scheduling 一致）。 */
+  headingAccent?: boolean;
 }
 
 /** 顶部：MoeGo 字标 + 中/EN 切换 + 标题；切换只改界面文字，不影响本局。 */
-export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack }: BrandHeaderProps) {
+export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack, headingAccent }: BrandHeaderProps) {
   const { t, locale, setLocale } = useI18n();
   const [lead, accent] =
     title === 'game'
@@ -51,7 +53,11 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
           {trailing}
         </span>
       </div>
-      {heading ? (
+      {heading && headingAccent ? (
+        <h1 className={styles.title}>
+          {heading.split(' ')[0]} <em>{heading.split(' ').slice(1).join(' ')}</em>
+        </h1>
+      ) : heading ? (
         <h1 className={`${styles.title} ${styles.heading}`}>{heading}</h1>
       ) : (
         <h1 className={styles.title}>

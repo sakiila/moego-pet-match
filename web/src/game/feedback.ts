@@ -19,7 +19,7 @@ export const FEEDBACK_GAP_MS = 90;
  */
 export function batchFeedback(batch: Batch): BatchFeedback {
   const step = Math.max(0, batch.index - 1);
-  const combo = batch.effect === 'comboCC' || batch.effect === 'comboCS' || batch.effect === 'comboSS';
+  const combo = batch.effect === 'comboCC' || batch.effect === 'comboCS' || batch.effect === 'dryer';
   const sound: SoundKind = combo ? 'combo' : batch.effect === 'comb' ? 'brush' : batch.effect === 'scissors' ? 'snip' : 'pop';
   return { sound, step, haptic: combo || batch.index >= 3 ? 'double' : 'tap' };
 }

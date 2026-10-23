@@ -19,9 +19,9 @@ export function judgeMvp(summary: GameSummary): number | null {
 
 export type TitleKey = Extract<MessageKey, `title.${string}`>;
 
-/** 主称号：按固定优先级取首个满足的一项（合体中的两个工具按两个计）。 */
+/** 主称号：按固定优先级取首个满足的一项（合体中的两个工具按两个计；发动吹风机即「全店大扫除」）。 */
 export function judgeTitle(summary: GameSummary): TitleKey {
-  if (summary.combos.ss > 0) return 'title.cleanup_chief';
+  if (summary.combos.dryer > 0) return 'title.cleanup_chief';
   if (summary.maxChain >= 5) return 'title.chain_lead';
   if (summary.rushSucceeded) return 'title.scheduling_pro';
   if (summary.toolsFired >= 3) return 'title.tool_pro';
@@ -32,7 +32,7 @@ export function judgeTitle(summary: GameSummary): TitleKey {
 /** 角色评语：零服务 > 单次最高连锁 ≥ 5 > 催单成功 > 发动过合体 > 普通完成；鱼关用 review.fish.*。 */
 export function judgeReview(summary: GameSummary, mode: GameMode): MessageKey {
   const prefix = mode === 'fish' ? 'review.fish' : 'review.pet';
-  const combos = summary.combos.cc + summary.combos.cs + summary.combos.ss;
+  const combos = summary.combos.cc + summary.combos.cs + summary.combos.dryer;
   const which =
     summary.clearedCells === 0
       ? 'no_service'

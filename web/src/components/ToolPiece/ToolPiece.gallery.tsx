@@ -11,11 +11,13 @@ const entry: GalleryEntry = {
     'comb · row': () => cell(<ToolPiece tool="combH" />),
     'comb · column': () => cell(<ToolPiece tool="combV" />),
     scissors: () => cell(<ToolPiece tool="scissors" />),
+    'dryer · 两把剪刀合成': () => cell(<ToolPiece tool="dryer" />),
     'fish · water jet row / column · bubble machine': () => (
       <div data-theme="fish" style={{ display: 'flex', gap: 8, padding: 12, background: 'var(--bg)', borderRadius: 12 }}>
         {cell(<ToolPiece tool="combH" mode="fish" />)}
         {cell(<ToolPiece tool="combV" mode="fish" />)}
         {cell(<ToolPiece tool="scissors" mode="fish" />)}
+        {cell(<ToolPiece tool="dryer" mode="fish" />)}
         {cell(<ToolPiece tool="combH" mode="fish" />, 40)}
         {cell(<ToolPiece tool="scissors" mode="fish" />, 40)}
       </div>
@@ -25,6 +27,7 @@ const entry: GalleryEntry = {
         {cell(<ToolPiece tool="combH" />, 40)}
         {cell(<ToolPiece tool="combV" />, 40)}
         {cell(<ToolPiece tool="scissors" />, 40)}
+        {cell(<ToolPiece tool="dryer" />, 40)}
       </div>
     ),
   },

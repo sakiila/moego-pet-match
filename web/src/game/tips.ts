@@ -2,7 +2,7 @@ import type { GameMode } from '../api/types';
 import { RULES, type Board } from '../engine';
 import type { MessageKey } from '../i18n';
 
-export type Tutorial = 'comb' | 'scissors' | 'combo';
+export type Tutorial = 'comb' | 'scissors' | 'combo' | 'merge' | 'dryer';
 
 /** 卡关提示：棋盘稳定且约 5 秒没有有效操作。无效交换不重置计时。 */
 export function hintDue(g: number, quietSince: number): boolean {
@@ -17,10 +17,13 @@ export function nextTutorial(board: Board, seen: ReadonlySet<string>): Tutorial 
     for (let c = 0; c < size; c++) {
       const p = board[r][c];
       if (p?.type !== 'tool') continue;
+      if (p.tool === 'dryer' && !seen.has('dryer')) return 'dryer';
       firstTool ??= p.tool === 'scissors' ? 'scissors' : 'comb';
       const right = board[r][c + 1];
       const down = board[r + 1]?.[c];
-      if (!seen.has('combo') && (right?.type === 'tool' || down?.type === 'tool')) return 'combo';
+      const neighbours = [right, down].filter((n) => n?.type === 'tool');
+      if (!seen.has('merge') && p.tool === 'scissors' && neighbours.some((n) => n?.type === 'tool' && n.tool === 'scissors')) return 'merge';
+      if (!seen.has('combo') && neighbours.length > 0) return 'combo';
     }
   }
   return firstTool && !seen.has('tool') ? firstTool : null;
@@ -57,6 +60,8 @@ export function pickTip(t: TipInputs): TipView | null {
   if (t.event) return t.event;
   if (t.tutorial === 'combo') return { key: 'tutorial.tool_combo' };
   const fish = t.mode === 'fish';
+  if (t.tutorial === 'merge') return { key: fish ? 'tutorial.big_wave_merge' : 'tutorial.dryer_merge' };
+  if (t.tutorial === 'dryer') return { key: fish ? 'tutorial.big_wave' : 'tutorial.dryer' };
   if (t.tutorial === 'comb') return { key: fish ? 'tutorial.water_jet' : 'tutorial.comb' };
   if (t.tutorial === 'scissors') return { key: fish ? 'tutorial.bubble_machine' : 'tutorial.scissors' };
   if (t.hint) return { key: 'board.move_hint' };

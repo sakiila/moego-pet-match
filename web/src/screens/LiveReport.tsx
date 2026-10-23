@@ -41,7 +41,7 @@ export function LiveReport({ summary, registered, pets, playerId, playerName, on
         save={state}
         onRetry={retry}
         onAnswerQuiz={(quizId, choice) => api.answerQuiz(quizId, playerId, choice)}
-        onOpenPet={(pet) => void detail.show(pet.id, pet.name)}
+        onOpenPet={(pet, el) => void detail.show(pet.id, pet.name, el)}
         onShare={() => setSharing(true)}
         {...nav}
       />

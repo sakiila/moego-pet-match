@@ -6,6 +6,7 @@ import { DiskCache } from './storage/diskCache.ts';
 import { localDirStore } from './storage/localDirStore.ts';
 import { r2Store } from './storage/objectStore.ts';
 import { r2FromEnv } from './storage/r2.ts';
+import { slackDirectory } from './services/slackDirectory.ts';
 import { slackAvatarFetcher } from './storage/slackAvatar.ts';
 
 const pool = createPool(config.databaseUrl);
@@ -15,6 +16,7 @@ const store = r2 ? r2Store(r2) : localDirStore(process.env.OBJECT_STORE_DIR ?? f
 const app = buildApp({
   pool,
   staticDir: config.staticDir,
+  directory: slackDirectory(process.env.SLACK_BOT_TOKEN),
   images: {
     cache: new DiskCache(process.env.IMAGE_CACHE_DIR ?? fileURLToPath(new URL('../.cache/img', import.meta.url)), 1.5 * 1024 ** 3),
     store,

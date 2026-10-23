@@ -86,7 +86,7 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
             collected={p.collected}
             imageSrc={p.collected ? stickerUrl(p.petId, 512) : silhouetteUrl(p.petId, 512)}
             owner={p.collected && p.owner ? { ...p.owner, avatarSrc: avatarUrl(p.owner.userId) } : null}
-            onOpen={() => void detail.show(p.petId, p.name)}
+            onOpen={(el) => void detail.show(p.petId, p.name, el)}
           />
         ))}
       </div>

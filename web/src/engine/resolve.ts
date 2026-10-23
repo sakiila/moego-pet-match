@@ -3,13 +3,15 @@ import { RULES, TIMING } from './config';
 import { findGroups, spawnPosition, toolForGroup, type Group } from './match';
 import { isDead, shuffleBoard } from './moves';
 import type { Rng } from './rng';
-import { comboEffect, comboRange, strongerEffect, toolEffect, toolRange } from './tools';
+import { comboEffect, comboRange, isMerge, strongerEffect, toolEffect, toolRange } from './tools';
 import type { Batch, Board, Effect, GameState, Move, Piece, Pos, Timeline, ToolType } from './types';
 
 interface Seed {
   cells: Pos[];
   fired: { pos: Pos; tool: ToolType }[];
   combo: Batch['combo'];
+  /** 两剪刀合成吹风机：本批不清除、不计分，吹风机生成在落点。 */
+  merge: Batch['merge'];
   effect: Effect;
   consumed: Pos[];
 }
@@ -17,25 +19,34 @@ interface Seed {
 /** 一次操作内首批 ×1，之后每批 +1，最高 ×5。 */
 export const chainMultiplier = (index: number) => Math.min(index, RULES.maxMultiplier);
 
-/** 道具交换在第一批直接发动：两道具为合体，单道具在交换后的位置发动。 */
+/**
+ * 道具交换在第一批直接发动：梳＋梳、梳＋剪为合体；两个剪刀合成吹风机（不清除）；
+ * 吹风机与任意相邻棋子交换即发动、清全盘；其余单道具在交换后的位置发动。
+ */
 function toolSeed(a: Piece | null, b: Piece | null, move: Move, size: number): Seed | null {
-  if (a?.type === 'tool' && b?.type === 'tool') {
+  if (a?.type === 'tool' && b?.type === 'tool' && isMerge(a.tool, b.tool)) {
+    return { cells: [move.from, move.to], fired: [], combo: null, merge: { from: move.from, to: move.to }, effect: 'merge', consumed: [move.from, move.to] };
+  }
+  const dryer = a?.type === 'tool' && a.tool === 'dryer' ? a : b?.type === 'tool' && b.tool === 'dryer' ? b : null;
+  if (!dryer && a?.type === 'tool' && b?.type === 'tool') {
     const center = move.to;
     return {
       cells: comboRange(a.tool, b.tool, center, size),
       fired: [],
       combo: { tools: [a.tool, b.tool], center },
+      merge: null,
       effect: comboEffect(a.tool, b.tool),
       consumed: [move.from, move.to],
     };
   }
-  const tool = a?.type === 'tool' ? a : b?.type === 'tool' ? b : null;
+  const tool = dryer ?? (a?.type === 'tool' ? a : b?.type === 'tool' ? b : null);
   if (!tool) return null;
   const pos = tool === a ? move.to : move.from;
   return {
     cells: toolRange(tool.tool, pos, size),
     fired: [{ pos, tool: tool.tool }],
     combo: null,
+    merge: null,
     effect: toolEffect(tool.tool),
     consumed: [pos],
   };
@@ -80,7 +91,11 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
   const batches: Batch[] = [];
   let clock = t + TIMING.swapMs;
 
-  for (let index = 1; seed || groups.length > 0; index++) {
+  let chainIndex = 0;
+  while (seed || groups.length > 0) {
+    const merging = seed?.merge ?? null;
+    // 合成批不计分，序号 0；之后的连锁从 ×1 开始
+    const index = merging ? 0 : ++chainIndex;
     const cover = new Map<number, Pos>();
     const add = (p: Pos) => cover.set(posKey(p, size), p);
     groups.forEach((g) => g.cells.forEach(add));
@@ -109,8 +124,8 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
     }
 
     const cleared = [...cover.entries()].sort((x, y) => x[0] - y[0]).map(([, p]) => p);
-    const multiplier = chainMultiplier(index);
-    const score = cleared.length * RULES.baseScore * multiplier;
+    const multiplier = merging ? 1 : chainMultiplier(index);
+    const score = merging ? 0 : cleared.length * RULES.baseScore * multiplier;
     const seq = ++s.batchSeq;
     const startAt = clock;
     const settleAt = startAt + TIMING.clearMs[effect];
@@ -126,7 +141,7 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
     }
 
     // 催单只计结算时刻 30 s ≤ t < 50 s 的批次；达标加一次固定奖励，不乘倍率
-    const inRush = settleAt >= RULES.rush.startMs && settleAt < RULES.rush.endMs;
+    const inRush = !merging && settleAt >= RULES.rush.startMs && settleAt < RULES.rush.endMs;
     let rushBonus = false;
     if (inRush && !s.rush.succeeded) {
       s.rush.progress += cleared.length;
@@ -138,9 +153,10 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
     }
 
     const spawned: Batch['spawned'] = [];
+    if (merging) spawned.push({ pos: merging.to, piece: { id: s.nextId++, type: 'tool', tool: 'dryer' } });
     for (const g of groups) {
       const tool = toolForGroup(g);
-      if (tool) spawned.push({ pos: spawnPosition(g, index === 1 ? move : undefined), piece: { id: s.nextId++, type: 'tool', tool } });
+      if (tool) spawned.push({ pos: spawnPosition(g, batches.length === 0 ? move : undefined), piece: { id: s.nextId++, type: 'tool', tool } });
     }
 
     for (const p of cleared) board[p.r][p.c] = null;
@@ -148,13 +164,13 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
     applyGravity(board, s, rng);
 
     s.score += score + (rushBonus ? RULES.rush.bonus : 0);
-    s.clearedCells += cleared.length;
-    s.clearedByMultiplier[multiplier - 1] += cleared.length;
-    s.toolsFired += toolsFired.length + (seed?.combo ? 2 : 0);
-    if (seed?.combo) {
-      const key = seed.effect === 'comboCC' ? 'cc' : seed.effect === 'comboCS' ? 'cs' : 'ss';
-      s.combos[key]++;
+    if (!merging) {
+      s.clearedCells += cleared.length;
+      s.clearedByMultiplier[multiplier - 1] += cleared.length;
     }
+    s.toolsFired += toolsFired.length + (seed?.combo ? 2 : 0);
+    if (seed?.combo) s.combos[seed.effect === 'comboCC' ? 'cc' : 'cs']++;
+    if (toolsFired.some((f) => f.tool === 'dryer')) s.combos.dryer++;
 
     batches.push({
       index,
@@ -165,6 +181,7 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
       effect,
       groups: groups.map((g) => g.cells),
       combo: seed?.combo ?? null,
+      merge: merging,
       toolsFired,
       cleared,
       spawned,
@@ -180,7 +197,7 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
   }
 
   s.busyUntil = clock;
-  s.maxChain = Math.max(s.maxChain, batches.length);
+  s.maxChain = Math.max(s.maxChain, chainIndex);
   s.validMoves++;
   s.lastValidMoveAt = t;
 

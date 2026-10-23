@@ -13,12 +13,85 @@ body {
 }
 
 body {
+  /* 页面横向滑入时不产生横向滚动条 */
+  overflow-x: clip;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
   font-weight: var(--weight-regular);
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* 卡片随指针倾斜（Apple TV 风格），配合 components/Tilt 使用。
+   触摸设备由组件在卡片滚动进入屏幕时设置 data-nudge 与 --nudge-i，依次自动倾斜扫一次。 */
+.tilt {
+  --rx: 0deg;
+  --ry: 0deg;
+  --gx: 50%;
+  --gy: 50%;
+  --px: 0;
+  --py: 0;
+  --ts: 1;
+  position: relative;
+  transform: perspective(700px) rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--ts));
+  transition: transform 520ms var(--ease-out), filter 520ms var(--ease-out);
+  will-change: transform;
+}
+
+.tilt[data-active] {
+  --ts: 1.04;
+  transition: transform 90ms linear, filter 90ms linear;
+  filter: drop-shadow(calc(var(--px) * -7px) calc(var(--py) * -7px + 12px) 12px rgb(31 34 39 / 0.2));
+}
+
+.tilt[data-active][data-pointer='touch'] {
+  --ts: 0.98;
+}
+
+/* 跟随指针的高光 */
+.tilt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--tilt-radius, var(--radius-lg));
+  background: radial-gradient(circle at var(--gx) var(--gy), rgb(255 255 255 / 0.5), rgb(255 255 255 / 0) 62%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms var(--ease-out);
+}
+
+.tilt[data-active]::after {
+  opacity: 1;
+}
+
+/* 景深：图片与倾斜方向相反微移 */
+.tilt img {
+  transform: translate(calc(var(--px) * -6px), calc(var(--py) * -6px));
+  transition: transform 520ms var(--ease-out);
+}
+
+.tilt[data-active] img {
+  transition: transform 90ms linear;
+}
+
+@keyframes tilt-sweep {
+  0% {
+    transform: perspective(700px) rotateY(0deg) scale(1);
+  }
+  35% {
+    transform: perspective(700px) rotateY(-11deg) rotateX(3deg) scale(1.03);
+  }
+  70% {
+    transform: perspective(700px) rotateY(9deg) rotateX(-2deg) scale(1.02);
+  }
+  100% {
+    transform: perspective(700px) rotateY(0deg) scale(1);
+  }
+}
+
+.tilt[data-nudge] {
+  animation: tilt-sweep 900ms var(--ease-out) calc(var(--nudge-i, 0) * 140ms + 300ms) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -46,9 +46,10 @@ function sweepRects(s: Sweep, size: number): { r0: number; c0: number; rows: num
   if (s.kind === 'tool') {
     if (s.tool === 'combH') return [row(s.at.r)];
     if (s.tool === 'combV') return [col(s.at.c)];
+    if (s.tool === 'dryer') return [{ r0: 0, c0: 0, rows: size, cols: size }];
     return [row(s.at.r), col(s.at.c)];
   }
-  const combs = s.tools.filter((t) => t !== 'scissors').length;
+  const combs = s.tools.filter((t) => t === 'combH' || t === 'combV').length;
   if (combs === 2) return [row(s.center.r), col(s.center.c)];
   if (combs === 0) return [{ r0: 0, c0: 0, rows: size, cols: size }];
   const r0 = Math.max(0, s.center.r - 1);
