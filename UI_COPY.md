@@ -137,17 +137,17 @@
 | --- | --- | --- |
 | prep.loading | 毛孩子正在集合…… | Getting the pets ready… |
 | prep.guests | 本局来客 | This Round's Guests |
+| prep.guests_lead | 本局 | This Round's |
+| prep.guests_accent | 来客 | Guests |
 | prep.own_pet | {petName} 也来啦！ | {petName} is here too! |
 | prep.rule | 交换相邻棋子，让 3 个及以上相同宠物连成一线。 | Swap neighbors. Line up 3 or more of the same pet. |
 | prep.controls | 可以拖拽，也可以先点一格、再点相邻格。 | Drag to swap, or tap a tile and then its neighbor. |
 | prep.timer_hint | 本局 90 秒。准备和读说明不计时，点下方按钮后开始。 | This round lasts 90 seconds. The timer starts when you tap the button below. |
-| prep.guests_lead | 本局 | This Round's |
-| prep.guests_accent | 来客 | Guests |
+| prep.timer_duration | 90 秒 | 90 seconds |
 | prep.start | 开始这班 | Start My Shift |
 | prep.failed | 本局还没准备好，请重试。 | This round isn't ready yet. Please try again. |
 
 只有实际入选自家宠物时显示 `prep.own_pet`。最多显示一行，只提示阵容中第一只自家宠物；长名字省略末尾，保留「也来啦」后缀，完整名字保留在悬停提示中。准备、加载和读规则不计时；玩家确认开始后才进入 90 秒。首页不显示鱼缸、鱼关入口或三局预告，`@Bob` 关联已核实的 Slack 身份 `U03FPQWGTN2`（工作区 `T011CF3CMJN`，可指向 `slack://user?team=T011CF3CMJN&id=U03FPQWGTN2` 或 `https://moego.slack.com/team/U03FPQWGTN2`）。
-| prep.timer_duration | 90 秒 | 90 seconds |
 
 准备是棋盘的计时前状态，不新增独立经营页面；素材与对局准备完成后，才允许点击开始。首次只说明三消和交换方式，工具用法继续按首次自然出现时轻提示。按钮已确认使用「开始这班 / Start My Shift」，90 秒时长写在按钮上方的说明里，保持按钮简短；计时规则不变。其他文案为校读修订稿。
 
@@ -276,14 +276,14 @@
 | collection.sheet_share | 分享贴纸册图片 | Share Sticker Album |
 | collection.sheet_share_hint | 把这一页毛孩子，存成你的收藏 | Save a page of furry coworkers to your collection |
 | collection.sheet_preview | 贴纸册图片预览 | Sticker Album Preview |
-| pet.unlisted | 这位伙伴已下架，回图鉴看看其他伙伴吧。 | This pet is no longer listed. Browse the rest of the collection. |
-| pet.quote_more | 展开全文 | Read More |
-| pet.quote_less | 收起 | Show Less |
-| pet.flip_back | 翻回正面 | Flip Back |
 | pet.unlock_hint | 棋盘上服务过 TA，完整收工、成绩保存成功后，就会自动收集。 | Serve this pet on the board and finish the round. They'll join your collection automatically once your result is saved. |
 | pet.owner | 主人 | Owner |
 | pet.original_photo | 翻面看原图 | Flip for the Original Photo |
 | pet.owner_quote | 主人说 | A Word from Home |
+| pet.unlisted | 这位伙伴已下架，回图鉴看看其他伙伴吧。 | This pet is no longer listed. Browse the rest of the collection. |
+| pet.quote_more | 展开全文 | Read More |
+| pet.quote_less | 收起 | Show Less |
+| pet.flip_back | 翻回正面 | Flip Back |
 | pet.known_by_one | 已有 1 位同事认识了 TA | 1 coworker has met this pet |
 | pet.known_by_other | 已有 {count} 位同事认识了 TA | {count} coworkers have met this pet |
 | pet.known_by_more | 还有 {count} 位同事 | and {count} more |
@@ -291,6 +291,10 @@
 `pet.owner_quote` 下方显示飞书原介绍的原文摘录（不翻译，过长截取前一两句），或 Bob 手工补录的主人名言；两者都没有时隐藏整块。
 
 `pet.known_by_*` 只在已收集或自家宠物详情正面底部出现，人数为 0 时整区隐藏，人数为 1 用 `_one`，其余用 `_other`；下方头像叠放超出 5 位时显示「+{count}」，`pet.known_by_more` 作为该标记的无障碍朗读文本。
+
+图鉴展示的关键文案已确认。解锁说明使用「自动收集」，对应本局实际服务过该宠物、完整结束且结果保存成功，不要求另点领取或手动保存。单纯登场、点选或查看卡片不算收集。搜索空结果只说明当前范围没有匹配，不表示该同事没有宠物。没有已收集宠物时，提示与未收集剪影列表并存，不以空白页替代列表。既定排序、搜索范围和收集条件不变。
+
+### 6.2 我的宠物 · 关键文案已确认
 
 | Key | 中文 | English |
 | --- | --- | --- |
@@ -328,24 +332,24 @@
 | leaderboard.best_score | 最好成绩 | Best Score |
 | leaderboard.no_score | 本模式还没有你的已保存成绩。开一局，留下第一笔纪录。 | No saved score in this mode yet. Play a round to get on the board. |
 | leaderboard.tied_rank | 同分并列 | Shared Rank |
-| leaderboard.challenge | 再挑战一次 | Play Another Round |
-| leaderboard.load_failed | 暂时没能读取排行榜，请重试。 | We couldn't load the leaderboard. Please try again. |
-
-默认领先玩家＋本人附近，名次使用真实并列结果，未保存的成绩不生成名次。鱼榜标签仅对个人已发现鱼关的玩家显示，不放锁定标签或解锁预告。挑战当前榜单对应模式，不新增挑战邀请或相同棋盘对战。
 | leaderboard.top_players | 领先玩家 | Top Players |
 | leaderboard.hall_of_fame | 毛孩子光荣榜 | Pet Hall of Fame |
 | leaderboard.tagline | 谁把毛孩子安排得最明白？ | Who keeps the fur crew in line? |
 | leaderboard.points | {score} 分 | {score} pts |
 | leaderboard.colleague | 同事 | Coworker |
 | leaderboard.you | 你 | You |
+| leaderboard.challenge | 再挑战一次 | Play Another Round |
+| leaderboard.load_failed | 暂时没能读取排行榜，请重试。 | We couldn't load the leaderboard. Please try again. |
 
-聚焦本人及相邻名次的视图标签已确认使用「我的名次 / My Rank」，保留已定的邻近排名列表，不改成只显示本人；「回到我的名次」回到该视图。全榜标签用「All Rankings」，与棋盘区分。无成绩提示仅在数据读取成功且当前模式确无已保存成绩时显示，读取失败用对应重试提示；真实已保存的 0 分仍是记录。无成绩时先展示全榜，不生成虚构名次。本页展示的关键文案已确认，排名规则与模式入口不变。
-
-## 8. 已发现后的 Peter 小鱼关 · 关键文案已确认
+默认领先玩家＋本人附近，名次使用真实并列结果，未保存的成绩不生成名次。鱼榜标签仅对个人已发现鱼关的玩家显示，不放锁定标签或解锁预告。挑战当前榜单对应模式，不新增挑战邀请或相同棋盘对战。
 
 `leaderboard.top_players`（领先三人小标题）、`leaderboard.colleague`（列表表头，与 `leaderboard.rank`、`leaderboard.best_score` 一起）、`leaderboard.you`（本人行标记）于 2026-10-24 按 mobile-leaderboard-v1 确认补入；并列仍在行内标「同分并列」，不另加页脚说明。
 
 2026-10-24 排行榜页改为「毛孩子光荣榜 / Pet Hall of Fame」标题字标（图片，读屏读 `leaderboard.hall_of_fame`）与副标题 `leaderboard.tagline`；排行记录的是个人最好成绩，副标题不写「今天」。领奖台分数用 `leaderboard.points`。领奖台上方不再显示 `leaderboard.top_players`。鱼关页签仍只对已发现鱼关的玩家显示，不加锁定标签或解锁预告。
+
+聚焦本人及相邻名次的视图标签已确认使用「我的名次 / My Rank」，保留已定的邻近排名列表，不改成只显示本人；「回到我的名次」回到该视图。全榜标签用「All Rankings」，与棋盘区分。无成绩提示仅在数据读取成功且当前模式确无已保存成绩时显示，读取失败用对应重试提示；真实已保存的 0 分仍是记录。无成绩时先展示全榜，不生成虚构名次。本页展示的关键文案已确认，排名规则与模式入口不变。
+
+## 8. 已发现后的 Peter 小鱼关 · 关键文案已确认
 
 | Key | 中文 | English |
 | --- | --- | --- |
@@ -402,6 +406,9 @@
 | upload.preview_hint | 这是原图预览。游戏形象会在人工处理和核对后上架。 | This is the original photo. The game portrait will be manually prepared and checked before it goes live. |
 | upload.pet_name | 宠物名字 | Pet Name |
 | upload.pet_name_placeholder | 填写宠物名字 | Enter your pet's name |
+| upload.owner_quote | 主人说（选填） | A Word from Home (Optional) |
+| upload.owner_quote_placeholder | 用英文写一句想对大家说的话 | Say something about your pet, in English |
+| upload.owner_quote_english | 主人说只能用英文字母、数字和英文标点。 | Please use English letters, numbers, and punctuation only. |
 | upload.owner | 主人：{ownerName} | Owner: {ownerName} |
 | upload.owner_hint | 将以当前游戏身份提交。 | This submission will use your current game profile. |
 | upload.use_info | 查看照片展示与处理说明 | Photo Use and Processing |
@@ -410,9 +417,6 @@
 | upload.submitting | 正在提交照片和资料…… | Sending Your Photo and Details… |
 | upload.received | 资料收到啦！核对处理好，就让毛孩子来上班。 | Submission received! We'll prepare and review it before your pet joins the crew. |
 | upload.photo_required | 先选一张照片吧。 | Choose a photo first. |
-| upload.owner_quote | 主人说（选填） | A Word from Home (Optional) |
-| upload.owner_quote_placeholder | 用英文写一句想对大家说的话 | Say something about your pet, in English |
-| upload.owner_quote_english | 主人说只能用英文字母、数字和英文标点。 | Please use English letters, numbers, and punctuation only. |
 | upload.name_required | 请填写宠物名字。 | Enter your pet's name. |
 | upload.preview_unavailable | 已选择 {fileName}，这里暂时预览不了，可以照常提交。 | {fileName} selected. Preview isn't available here, but you can still submit. |
 | upload.too_large | 照片超过 20 MB，换一张小一点的吧。 | This photo is over 20 MB. Please choose a smaller one. |
