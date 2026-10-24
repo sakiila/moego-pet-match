@@ -22,7 +22,7 @@ console.log(describeTarget(prod, yes));
 try {
   if (cmd === 'list' || cmd === 'pull') {
     const { rows } = await client.query(
-      `SELECT s.submission_id, s.player_id, c.name AS owner_name, s.pet_name, s.object_key, s.content_type, s.size_bytes, s.created_at
+      `SELECT s.submission_id, s.player_id, c.name AS owner_name, s.pet_name, s.owner_quote, s.object_key, s.content_type, s.size_bytes, s.created_at
          FROM pet_match.submissions s LEFT JOIN pet_match.colleagues c ON c.user_id = s.player_id
         WHERE s.pulled_at IS NULL ORDER BY s.created_at`,
     );
@@ -40,7 +40,7 @@ try {
         await mkdir(dir, { recursive: true });
         const ext = r.object_key.split('.').pop();
         await writeFile(`${dir}original.${ext}`, obj.body);
-        const info = { submissionId: r.submission_id, petName: r.pet_name, ownerUserId: r.player_id, ownerName: r.owner_name, contentType: r.content_type, sizeBytes: r.size_bytes, submittedAt: r.created_at };
+        const info = { submissionId: r.submission_id, petName: r.pet_name, ownerQuote: r.owner_quote, ownerUserId: r.player_id, ownerName: r.owner_name, contentType: r.content_type, sizeBytes: r.size_bytes, submittedAt: r.created_at };
         await writeFile(`${dir}info.json`, `${JSON.stringify(info, null, 2)}\n`);
         await client.query('UPDATE pet_match.submissions SET pulled_at = now() WHERE submission_id = $1', [r.submission_id]);
         console.log(`  pulled → ${dir}`);

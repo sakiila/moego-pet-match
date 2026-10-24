@@ -7,6 +7,14 @@ export const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
 /** 每个身份每个北京自然日最多保存成功的提交次数。 */
 export const SUBMISSION_DAILY_LIMIT = 10;
 export const PET_NAME_MAX = 40;
+export const OWNER_QUOTE_MAX = 200;
+
+/**
+ * 主人说只收英文：可打印 ASCII（字母、数字、空格、英文标点）与换行，
+ * 另放行手机输入法自动替换出的弯引号、省略号和长短破折号。前端 UploadScreen 同一规则。
+ */
+const ENGLISH_TEXT = /^[\x20-\x7e\n\u2018\u2019\u201c\u201d\u2026\u2013\u2014]*$/;
+export const isEnglishText = (text: string) => ENGLISH_TEXT.test(text);
 
 /** 按文件头判断真实格式（不信任文件名与声明的类型）：JPEG、PNG、WebP、HEIC。 */
 export function sniffImage(buf: Buffer): { ext: string; contentType: string } | null {
@@ -41,7 +49,7 @@ const beijingDayStart = (now: Date) => new Date(`${beijingDate(now)}T00:00:00+08
 export async function createSubmission(
   pool: Pool,
   store: ObjectStore,
-  input: { playerId: string; petName: string; file: Buffer },
+  input: { playerId: string; petName: string; ownerQuote: string | null; file: Buffer },
   now: Date,
   hooks: SubmissionHooks = {},
 ): Promise<{ submissionId: string }> {
@@ -61,9 +69,9 @@ export async function createSubmission(
       if ((await countToday(client)) >= SUBMISSION_DAILY_LIMIT) throw new SubmissionError('daily_limit');
       await hooks.beforeInsert?.();
       const { rows } = await client.query(
-        `INSERT INTO pet_match.submissions (player_id, pet_name, object_key, content_type, size_bytes, created_at)
-         VALUES ($1, $2, $3, $4, $5, $6) RETURNING submission_id`,
-        [input.playerId, input.petName, key, type.contentType, input.file.length, now],
+        `INSERT INTO pet_match.submissions (player_id, pet_name, owner_quote, object_key, content_type, size_bytes, created_at)
+         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING submission_id`,
+        [input.playerId, input.petName, input.ownerQuote, key, type.contentType, input.file.length, now],
       );
       return { submissionId: rows[0].submission_id as string };
     });

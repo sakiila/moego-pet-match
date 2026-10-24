@@ -30,7 +30,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 /** 上传失败的原因，对应 UI_COPY 9.1 的提示文案。 */
-export type UploadErrorKind = 'too_large' | 'invalid_photo' | 'daily_limit' | 'name_required' | 'failed';
+export type UploadErrorKind = 'too_large' | 'invalid_photo' | 'daily_limit' | 'name_required' | 'quote_not_english' | 'failed';
 
 export class UploadError extends Error {
   constructor(readonly kind: UploadErrorKind) {
@@ -39,10 +39,11 @@ export class UploadError extends Error {
 }
 
 /** 上传照片：multipart 原样发送；把服务端错误码映射成提示类别。 */
-async function submitPet(playerId: string, petName: string, photo: File): Promise<{ submissionId: string }> {
+async function submitPet(playerId: string, petName: string, ownerQuote: string, photo: File): Promise<{ submissionId: string }> {
   const body = new FormData();
   body.append('playerId', playerId);
   body.append('petName', petName);
+  if (ownerQuote) body.append('ownerQuote', ownerQuote);
   body.append('photo', photo, photo.name);
   let res: Response;
   try {
@@ -56,6 +57,7 @@ async function submitPet(playerId: string, petName: string, photo: File): Promis
   if (res.status === 415 || error === 'unsupported_type') throw new UploadError('invalid_photo');
   if (res.status === 429 || error === 'daily_limit') throw new UploadError('daily_limit');
   if (error === 'name_required') throw new UploadError('name_required');
+  if (error === 'quote_not_english') throw new UploadError('quote_not_english');
   throw new UploadError('failed');
 }
 

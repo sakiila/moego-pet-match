@@ -88,6 +88,27 @@ describe('上传提交', () => {
     expect(noFile.statusCode).toBe(400);
   });
 
+  it('主人说选填：不填存空，英文与手机弯引号可存，首尾空白去掉', async () => {
+    await upload(PNG);
+    await upload(PNG, { playerId: 'U_TEST_BOB', petName: 'Kiwi', ownerQuote: '  She’s a “couch potato”… loves naps!\r\nBest girl :)  ' });
+    const rows = (await ctx.pool.query('SELECT pet_name, owner_quote FROM pet_match.submissions ORDER BY pet_name')).rows;
+    expect(rows).toEqual([
+      { pet_name: 'Kiwi', owner_quote: 'She’s a “couch potato”… loves naps!\nBest girl :)' },
+      { pet_name: 'Oreo', owner_quote: null },
+    ]);
+  });
+
+  it('主人说含中文、全角标点或 emoji，或超过 200 字，被拒且不落对象', async () => {
+    for (const ownerQuote of ['爱睡觉', 'Hi，there', 'Good boy 🐶']) {
+      const res = await upload(PNG, { playerId: 'U_TEST_BOB', petName: 'Oreo', ownerQuote });
+      expect(res.statusCode).toBe(400);
+      expect(res.json().error).toBe('quote_not_english');
+    }
+    expect((await upload(PNG, { playerId: 'U_TEST_BOB', petName: 'Oreo', ownerQuote: 'a'.repeat(201) })).statusCode).toBe(400);
+    expect((await upload(PNG, { playerId: 'U_TEST_BOB', petName: 'Oreo', ownerQuote: 'a'.repeat(200) })).statusCode).toBe(200);
+    expect(store.objects.size).toBe(1);
+  });
+
   it('名单外身份被拒', async () => {
     expect((await upload(PNG, { playerId: 'U_TEST_GUEST', petName: 'X' })).statusCode).toBe(404);
   });

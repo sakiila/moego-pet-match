@@ -2,11 +2,11 @@ import multipart from '@fastify/multipart';
 import type { FastifyPluginAsync } from 'fastify';
 import type { AppDeps } from '../app.ts';
 import { findColleague } from '../services/players.ts';
-import { createSubmission, MAX_UPLOAD_BYTES, PET_NAME_MAX, SubmissionError } from '../services/submissions.ts';
+import { createSubmission, isEnglishText, MAX_UPLOAD_BYTES, OWNER_QUOTE_MAX, PET_NAME_MAX, SubmissionError } from '../services/submissions.ts';
 
 /**
  * 上传我家毛孩子：一次一只，照片原样私有保存，由 Bob 用命令行取走后人工处理上架。
- * 主人固定为当前游戏身份；成功只表示已收到，不进入阵容。
+ * 主人固定为当前游戏身份；「主人说」选填、只收英文。成功只表示已收到，不进入阵容。
  */
 export const submissionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, images, now = () => new Date(), submissionHooks }) => {
   await app.register(multipart, { limits: { fileSize: MAX_UPLOAD_BYTES, files: 1, fields: 4 } });
@@ -27,9 +27,12 @@ export const submissionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool,
     if (!playerId) return reply.status(400).send({ error: 'invalid_request' });
     if (!petName) return reply.status(400).send({ error: 'name_required' });
     if ([...petName].length > PET_NAME_MAX) return reply.status(400).send({ error: 'invalid_request', detail: 'name too long' });
+    const ownerQuote = field('ownerQuote').replace(/\r\n?/g, '\n');
+    if ([...ownerQuote].length > OWNER_QUOTE_MAX) return reply.status(400).send({ error: 'invalid_request', detail: 'quote too long' });
+    if (!isEnglishText(ownerQuote)) return reply.status(400).send({ error: 'quote_not_english' });
     if (!(await findColleague(pool, playerId))) return reply.status(404).send({ error: 'not_found' });
     try {
-      return await createSubmission(pool, store, { playerId, petName, file }, now(), submissionHooks);
+      return await createSubmission(pool, store, { playerId, petName, ownerQuote: ownerQuote || null, file }, now(), submissionHooks);
     } catch (error) {
       if (error instanceof SubmissionError) return reply.status(error.code === 'daily_limit' ? 429 : 415).send({ error: error.code });
       throw error;

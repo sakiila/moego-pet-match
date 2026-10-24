@@ -10,6 +10,6 @@ function Live({ initial = '' }: { initial?: string }) {
 const entry: GalleryEntry = {
   name: 'TextArea',
   group: 'primitives',
-  states: { empty: () => <Live />, filled: () => <Live initial={'请移除图鉴背面的照片。\n名字可以保留。'} />, disabled: () => <TextArea label="Details" value="…" onChange={() => {}} disabled /> },
+  states: { empty: () => <Live />, filled: () => <Live initial={'请移除图鉴背面的照片。\n名字可以保留。'} />, disabled: () => <TextArea label="Details" value="…" onChange={() => {}} disabled />, error: () => <TextArea label="主人说（选填）" value="爱睡觉" onChange={() => {}} error="主人说只能用英文字母、数字和英文标点。" /> },
 };
 export default entry;

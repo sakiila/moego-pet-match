@@ -265,10 +265,6 @@
 | collection.search | 搜宠物名或主人名 | Search pets or owners |
 | collection.search_scope | 宠物名可搜全部已上架宠物；主人名搜已收集和自家的宠物。 | Search all listed pets by name. Owner searches cover collected pets and your own. |
 | collection.search_empty | 当前范围里没找到。试试宠物名，或换个筛选。 | No matches in this view. Try a pet's name or a different filter. |
-| pet.unlock_hint | 棋盘上服务过 TA，完整收工、成绩保存成功后，就会自动收集。 | Serve this pet on the board and finish the round. They'll join your collection automatically once your result is saved. |
-| pet.owner | 主人 | Owner |
-| pet.original_photo | 翻面看原图 | Flip for the Original Photo |
-| pet.owner_quote | 主人说 | A Word from Home |
 | collection.view_list | 列表 | List |
 | collection.view_sheet | 贴纸册 | Sticker Book |
 | collection.sheet_hint | 按主人和宠物名排序 · 点贴纸看详情 | Sorted by owner, then pet name · Tap a sticker for details |
@@ -280,15 +276,15 @@
 | pet.quote_more | 展开全文 | Read More |
 | pet.quote_less | 收起 | Show Less |
 | pet.flip_back | 翻回正面 | Flip Back |
-
-`pet.owner_quote` 下方显示飞书原介绍的原文摘录（不翻译，过长截取前一两句），或 Bob 手工补录的主人名言；两者都没有时隐藏整块。
-
-图鉴展示的关键文案已确认。解锁说明使用「自动收集」，对应本局实际服务过该宠物、完整结束且结果保存成功，不要求另点领取或手动保存。单纯登场、点选或查看卡片不算收集。搜索空结果只说明当前范围没有匹配，不表示该同事没有宠物。没有已收集宠物时，提示与未收集剪影列表并存，不以空白页替代列表。既定排序、搜索范围和收集条件不变。
+| pet.unlock_hint | 棋盘上服务过 TA，完整收工、成绩保存成功后，就会自动收集。 | Serve this pet on the board and finish the round. They'll join your collection automatically once your result is saved. |
+| pet.owner | 主人 | Owner |
+| pet.original_photo | 翻面看原图 | Flip for the Original Photo |
+| pet.owner_quote | 主人说 | A Word from Home |
 | pet.known_by_one | 已有 1 位同事认识了 TA | 1 coworker has met this pet |
 | pet.known_by_other | 已有 {count} 位同事认识了 TA | {count} coworkers have met this pet |
 | pet.known_by_more | 还有 {count} 位同事 | and {count} more |
 
-### 6.2 我的宠物 · 关键文案已确认
+`pet.owner_quote` 下方显示飞书原介绍的原文摘录（不翻译，过长截取前一两句），或 Bob 手工补录的主人名言；两者都没有时隐藏整块。
 
 `pet.known_by_*` 只在已收集或自家宠物详情正面底部出现，人数为 0 时整区隐藏，人数为 1 用 `_one`，其余用 `_other`；下方头像叠放超出 5 位时显示「+{count}」，`pet.known_by_more` 作为该标记的无障碍朗读文本。
 
@@ -410,6 +406,9 @@
 | upload.submitting | 正在提交照片和资料…… | Sending Your Photo and Details… |
 | upload.received | 资料收到啦！核对处理好，就让毛孩子来上班。 | Submission received! We'll prepare and review it before your pet joins the crew. |
 | upload.photo_required | 先选一张照片吧。 | Choose a photo first. |
+| upload.owner_quote | 主人说（选填） | A Word from Home (Optional) |
+| upload.owner_quote_placeholder | 用英文写一句想对大家说的话 | Say something about your pet, in English |
+| upload.owner_quote_english | 主人说只能用英文字母、数字和英文标点。 | Please use English letters, numbers, and punctuation only. |
 | upload.name_required | 请填写宠物名字。 | Enter your pet's name. |
 | upload.preview_unavailable | 已选择 {fileName}，这里暂时预览不了，可以照常提交。 | {fileName} selected. Preview isn't available here, but you can still submit. |
 | upload.too_large | 照片超过 20 MB，换一张小一点的吧。 | This photo is over 20 MB. Please choose a smaller one. |
