@@ -27,6 +27,7 @@ export const zh = {
   'board.score': '分数 {score}',
   'board.time_left': '本局剩余 {seconds} 秒',
   'board.chain': '{chain} 连锁！',
+  'board.chain_max': '×5 顶格！',
   'board.wave_score': '+{waveScore}',
   'board.new_pets': '新认识了 {count} 位毛孩子',
   'board.reunion': '终于一起下班了！',

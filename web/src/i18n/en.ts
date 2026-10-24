@@ -28,6 +28,7 @@ export const en: Record<MessageKey, string> = {
   'board.score': 'Score {score}',
   'board.time_left': 'Time Left: {seconds}s',
   'board.chain': '{chain}-Step Cascade!',
+  'board.chain_max': 'MAX ×5!',
   'board.wave_score': '+{waveScore}',
   'board.new_pets': 'Met {count} New Pets',
   'board.reunion': 'Clocking Out Together!',

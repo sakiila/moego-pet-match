@@ -69,12 +69,14 @@ function noise(a: { ctx: AudioContext; out: AudioNode }, at: number, dur: number
   src.start(at);
 }
 
-/** 播放一个批次的音效；step 为连锁级别（逐级上扬）。 */
-export function playSound(kind: SoundKind, step = 0) {
+/** 播放一个批次的音效；step 为连锁级别（逐级上扬），level 为强度等级：×4 叠高八度亮音，×5 再加短琶音收尾。 */
+export function playSound(kind: SoundKind, step = 0, level = 1) {
   const a = audio();
   if (!a || a.ctx.state !== 'running') return;
   const t = a.ctx.currentTime;
   const note = PENTA[Math.min(step, PENTA.length - 1)];
+  if (level >= 4) tone(a, note * 2, t + 0.01, 0.16, 'sine', 0.35);
+  if (level >= 5 && kind !== 'combo') [2, 4, 6].forEach((i, k) => tone(a, PENTA[Math.min(step + i, PENTA.length - 1)], t + 0.09 + k * 0.05, 0.2, 'triangle', 0.4));
   if (kind === 'pop') {
     // 「啵」：短促上滑的正弦泡泡
     tone(a, note, t, 0.11, 'sine', 0.9, note * 1.5);

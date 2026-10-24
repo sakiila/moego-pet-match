@@ -102,14 +102,24 @@ describe('时间线播放', () => {
     expect([...fall.dropRows.values()]).toEqual([3, 3, 3]);
   });
 
-  it('每批一条飘字，连锁批序随批次递增', () => {
+  it('每批一条飘字，连锁批序随批次递增，飘字带强度等级', () => {
     const f = frameAt(base, timeline, 1940);
-    expect(f.popups.map((x) => [x.score, x.chain])).toEqual([
-      [30, 1],
-      [60, 2],
-      [120, 3],
+    expect(f.popups.map((x) => [x.score, x.chain, x.level])).toEqual([
+      [30, 1, 1],
+      [60, 2, 2],
+      [120, 3, 3],
     ]);
     expect(f.spawnedIds.size).toBe(1);
+  });
+
+  it('清除段带强度等级与定格时长：×1 不定格，×3 定格 50 ms；×3 以下没有震屏', () => {
+    const first = frameAt(base, timeline, 1200);
+    expect(first).toMatchObject({ phase: 'clear', clearLevel: 1, holdMs: 0, impact: null });
+    const third = timeline.batches[2];
+    const f = frameAt(base, timeline, third.startAt + 10);
+    expect(f).toMatchObject({ phase: 'clear', clearLevel: 3, holdMs: 50, impact: null });
+    const fall = frameAt(base, timeline, third.settleAt + 10);
+    expect(fall).toMatchObject({ phase: 'fall', clearLevel: 0, holdMs: 0, impact: null });
   });
 
   it('忙碌结束后回到空闲，分数与引擎一致', () => {
@@ -135,6 +145,9 @@ describe('时间线播放', () => {
     const f = frameAt(baseOf(s), r.timeline, 200);
     expect(f.sweeps[0]).toEqual({ kind: 'tool', tool: 'dryer', at: p(3, 3) });
     expect(f.clearing.size).toBe(49);
+    // 吹风机按 ×5：定格 90 ms，整盘震屏，震屏 key 跟随批次
+    const seq = (r.timeline as Extract<Timeline, { kind: 'chain' }>).batches[0].seq;
+    expect(f).toMatchObject({ clearLevel: 5, holdMs: 90, impact: { kind: 'shake', key: seq } });
   });
 
   it('两剪刀合成：清除段只带走两把剪刀、无扫描，分数与弹分不变', () => {

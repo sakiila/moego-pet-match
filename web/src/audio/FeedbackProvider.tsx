@@ -102,9 +102,9 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
         if (!allow.current(performance.now())) return;
         const f = batchFeedback(batch);
         const p = prefsRef.current;
-        if (p.sfx) playSound(f.sound, f.step);
+        if (p.sfx) playSound(f.sound, f.step, f.level);
         if (p.haptics) vibrate(f.haptic);
-        record(`batch:${f.sound}:${f.step}:${p.sfx ? 'sfx' : '-'}:${p.haptics ? f.haptic : '-'}`);
+        record(`batch:${f.sound}:${f.step}:L${f.level}:${p.sfx ? 'sfx' : '-'}:${p.haptics ? f.haptic : '-'}`);
       },
       onFinish: () => {
         if (prefsRef.current.sfx) playFinish();

@@ -1,4 +1,5 @@
 import { RULES, TIMING, type Board, type Batch, type Pos, type Timeline, type ToolType } from '../engine';
+import { batchLevel, clearHoldMs, impactOf, type ImpactKind } from './feedback';
 
 /** 时间线开始前的显示状态。 */
 export interface PlaybackBase {
@@ -16,6 +17,8 @@ export interface Popup {
   score: number;
   /** 本次操作内的批序，≥ 2 时显示连锁。 */
   chain: number;
+  /** 强度等级 1–5，飘字按它分级（合体与吹风机为 5）。 */
+  level: number;
   at: { r: number; c: number };
   startAt: number;
 }
@@ -27,6 +30,11 @@ export interface Frame {
   moveMs: number;
   clearing: Set<number>;
   clearMs: number;
+  /** 当前清除批次的强度等级（非清除阶段为 0）与定格时长；定格占用既有清除时长。 */
+  clearLevel: number;
+  holdMs: number;
+  /** 整盘震屏：×4 轻挤压、×5 抖动；key 跟随批次，用于重启动画。非清除阶段为 null。 */
+  impact: { kind: Exclude<ImpactKind, 'none'>; key: number } | null;
   sweeps: Sweep[];
   spawnedIds: Set<number>;
   /** 补落的新棋子 → 从棋盘上方几格落下。 */
@@ -90,6 +98,9 @@ export function frameAt(base: PlaybackBase, timeline: Timeline | null, g: number
     moveMs: TIMING.fallMs,
     clearing: EMPTY,
     clearMs: 0,
+    clearLevel: 0,
+    holdMs: 0,
+    impact: null,
     sweeps: [],
     spawnedIds: EMPTY,
     dropRows: new Map(),
@@ -123,7 +134,7 @@ export function frameAt(base: PlaybackBase, timeline: Timeline | null, g: number
     score += b.score + (b.rushBonus ? RULES.rush.bonus : 0);
     if (b.rushProgress !== null) rushProgress = b.rushProgress;
     if (b.rushBonus) rushSucceededAt = b.settleAt;
-    if (!b.merge) popups.push({ key: b.seq, score: b.score, chain: b.index, at: centroid(b.cleared), startAt: b.settleAt });
+    if (!b.merge) popups.push({ key: b.seq, score: b.score, chain: b.index, level: batchLevel(b), at: centroid(b.cleared), startAt: b.settleAt });
   }
   const totals = { score, rushProgress, rushSucceededAt, popups };
 
@@ -148,6 +159,8 @@ export function frameAt(base: PlaybackBase, timeline: Timeline | null, g: number
 
   if (g < batch.settleAt) {
     const prev = i === 0 ? null : landing(i === 1 ? timeline.boardAfterSwap : batches[i - 2].boardAfter, batches[i - 1]);
+    const level = batch.merge ? 0 : batchLevel(batch);
+    const impact = impactOf(level);
     return {
       ...idle(before),
       ...totals,
@@ -155,6 +168,9 @@ export function frameAt(base: PlaybackBase, timeline: Timeline | null, g: number
       phase: 'clear',
       clearing: idsAt(before, batch.cleared),
       clearMs: batch.settleAt - batch.startAt,
+      clearLevel: level,
+      holdMs: clearHoldMs(level),
+      impact: impact === 'none' ? null : { kind: impact, key: batch.seq },
       sweeps: sweepsOf(batch),
       busy: true,
     };

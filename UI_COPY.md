@@ -161,6 +161,7 @@
 | board.score | 分数 {score} | Score {score} |
 | board.time_left | 本局剩余 {seconds} 秒 | Time Left: {seconds}s |
 | board.chain | {chain} 连锁！ | {chain}-Step Cascade! |
+| board.chain_max | ×5 顶格！ | MAX ×5! |
 | board.wave_score | +{waveScore} | +{waveScore} |
 | board.new_pets | 新认识了 {count} 位毛孩子 | Met {count} New Pets |
 | board.reunion | 终于一起下班了！ | Clocking Out Together! |

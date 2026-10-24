@@ -4,6 +4,8 @@ export interface Burst {
   key: number;
   /** 以格为单位的中心点。 */
   cells: { r: number; c: number }[];
+  /** 每格泡泡数，按强度等级分级；缺省 3。 */
+  perCell?: number;
 }
 
 interface Bubble {
@@ -33,7 +35,7 @@ export function ParticleLayer({ bursts, cellPx, size }: { bursts: Burst[]; cellP
       if (seen.current.has(burst.key)) continue;
       seen.current.add(burst.key);
       for (const cell of burst.cells) {
-        for (let i = 0; i < PER_CELL && bubbles.current.length < MAX_BUBBLES; i++) {
+        for (let i = 0; i < (burst.perCell ?? PER_CELL) && bubbles.current.length < MAX_BUBBLES; i++) {
           const angle = Math.random() * Math.PI * 2;
           const speed = 0.04 + Math.random() * 0.08;
           bubbles.current.push({

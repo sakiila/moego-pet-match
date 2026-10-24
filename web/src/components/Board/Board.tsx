@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent } from 'react';
 import type { GameMode } from '../../api/types';
 import { TIMING, type Move, type Pos } from '../../engine';
+import { particlesPerCell } from '../../game/feedback';
 import { INPUT, resolveDrag, resolveTap } from '../../game/input';
 import type { PetInfo } from '../../game/pets';
 import type { Frame, Popup, Sweep } from '../../game/playback';
@@ -174,14 +175,21 @@ export function Board({
     if (frame.phase !== 'clear' || frame.clearing.size === 0) return [];
     const cells: Pos[] = [];
     frame.board.forEach((row, r) => row.forEach((p, c) => p && frame.clearing.has(p.id) && cells.push({ r, c })));
-    return [{ key: Math.min(...frame.clearing), cells }];
+    return [{ key: Math.min(...frame.clearing), cells, perCell: particlesPerCell(frame.clearLevel) }];
   }, [frame]);
 
+  // 减少动态效果：不定格、不震屏；分级飘字与音效照常
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const holdMs = reduced ? 0 : frame.holdMs;
+  const impact = reduced ? null : frame.impact;
   const style = {
     '--cell': `${cellPx}px`,
     '--move-ms': `${frame.moveMs}ms`,
     '--fall-ms': `${TIMING.fallMs}ms`,
     '--clear-ms': `${frame.clearMs}ms`,
+    '--hold-ms': `${holdMs}ms`,
+    '--out-ms': `${Math.max(0, frame.clearMs - holdMs)}ms`,
+    '--hold-scale': holdMs > 0 ? 1.18 : 1,
   } as CSSProperties;
 
   return (
@@ -196,6 +204,8 @@ export function Board({
         onPointerCancel={endDrag}
         data-testid="board"
         data-busy={frame.busy || undefined}
+        data-level={frame.clearLevel || undefined}
+        data-impact={impact ? `${impact.kind}-${impact.key % 2}` : undefined}
       >
         {frame.board.flatMap((row, r) =>
           row.map((piece, c) => {
@@ -268,8 +278,14 @@ export function Board({
             }}
             data-popup
           >
-            <span className={styles.popupScore}>{t('board.wave_score', { waveScore: p.score })}</span>
-            {p.chain >= 2 && <span className={styles.popupChain}>{t('board.chain', { chain: p.chain })}</span>}
+            <span className={styles.popupScore} data-level={p.level}>
+              {t('board.wave_score', { waveScore: p.score })}
+            </span>
+            {(p.chain >= 2 || p.level >= 5) && (
+              <span className={styles.popupChain} data-level={p.level}>
+                {p.level >= 5 ? t('board.chain_max') : t('board.chain', { chain: p.chain })}
+              </span>
+            )}
           </div>
         ))}
       </div>

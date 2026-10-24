@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { createGame, previewRange, trySwap, type GameState, type Pos, type Timeline } from '../../engine';
 import { parseBoard } from '../../engine/board';
 import type { GalleryEntry } from '../../dev/gallery/types';
+import { clearHoldMs, impactOf } from '../../game/feedback';
 import { frameAt, type PlaybackBase } from '../../game/playback';
 import { PLACEHOLDER_PETS, SAMPLE_FISH } from '../../game/pets';
 import { UnderwaterBackdrop } from '../UnderwaterBackdrop/UnderwaterBackdrop';
@@ -13,6 +14,24 @@ const FIXTURE = ['ABxDEFA', 'CDEFABC', 'EFAhCDE', 'ABCvEFA', 'CDEFABC', 'EFABCDE
 const CASCADE_210 = ['EFEFDFD', 'DEDEFEF', 'FDFCEDE', 'EFEBDFD', 'DEDFAEF', 'EDFACDE', 'DEBABCC'];
 
 const idle = (rows: string[]) => frameAt({ board: parseBoard(rows).board, score: 0, rushProgress: 0 }, null, 0);
+
+/** 静态的清除帧：第 3 行三格正在清除，按强度等级带定格与震屏（陈列页用，动画会在挂载时播一次）。 */
+function clearingFrame(level: number) {
+  const base = idle(FIXTURE);
+  const ids = [base.board[3][2], base.board[3][3], base.board[3][4]].map((x) => x!.id);
+  const impact = impactOf(level);
+  return {
+    ...base,
+    phase: 'clear' as const,
+    busy: true,
+    clearing: new Set(ids),
+    clearMs: 180,
+    clearLevel: level,
+    holdMs: clearHoldMs(level),
+    impact: impact === 'none' ? null : { kind: impact, key: level },
+  };
+}
+const popup = (chain: number, level: number) => ({ key: level, score: 30 * level, chain, level, at: { r: 3, c: 3 }, startAt: 0 });
 
 /** 可交互：真实引擎 + 墙钟驱动的时间线播放，方便单独调手感。 */
 function Live({ rows, refill }: { rows?: string[]; refill?: number[] }) {
@@ -80,6 +99,11 @@ const entry: GalleryEntry = {
       />
     ),
     hint: () => <Board frame={idle(FIXTURE)} pets={PLACEHOLDER_PETS} interactive hint={{ from: p(0, 0), to: p(0, 1) }} />,
+    'clearing ×1 (no hold)': () => <Board frame={clearingFrame(1)} pets={PLACEHOLDER_PETS} interactive={false} popups={[popup(1, 1)]} />,
+    'clearing ×3 (hold 50 ms, orange chain tag)': () => <Board frame={clearingFrame(3)} pets={PLACEHOLDER_PETS} interactive={false} popups={[popup(3, 3)]} />,
+    'clearing ×4 (hold 70 ms, punch)': () => <Board frame={clearingFrame(4)} pets={PLACEHOLDER_PETS} interactive={false} popups={[popup(4, 4)]} />,
+    'clearing ×5 (hold 90 ms, shake, MAX tag)': () => <Board frame={clearingFrame(5)} pets={PLACEHOLDER_PETS} interactive={false} popups={[popup(5, 5)]} />,
+    'popup: dryer at first batch (MAX tag without cascade)': () => <Board frame={idle(FIXTURE)} pets={PLACEHOLDER_PETS} interactive={false} popups={[popup(1, 5)]} />,
     'fish · tool preview (water jet ⇄ neighbor)': () => (
       <div data-theme="fish" style={{ position: 'relative', padding: 12, borderRadius: 16, overflow: 'hidden' }}>
         <UnderwaterBackdrop inline />
