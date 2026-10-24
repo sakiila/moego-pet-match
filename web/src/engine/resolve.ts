@@ -1,5 +1,6 @@
 import { cloneBoard, keyPos, posKey } from './board';
 import { RULES, TIMING } from './config';
+import { luckOf, pickWeighted, refillWeights, stageFactor } from './director';
 import { findGroups, spawnPosition, toolForGroup, type Group } from './match';
 import { isDead, shuffleBoard } from './moves';
 import type { Rng } from './rng';
@@ -52,8 +53,16 @@ function toolSeed(a: Piece | null, b: Piece | null, move: Move, size: number): S
   };
 }
 
-function applyGravity(board: Board, s: GameState, rng: Rng) {
+/**
+ * 下落并补落。补落先按固定序列从顶到底消耗（测试用）；其余空格交给补落导演：
+ * 自底向上逐格按局部形态加权抽样，使「下方」邻居总是已落定；导演关闭时均匀随机。
+ * atMs 为本批结算时刻，决定阶段系数。
+ */
+function applyGravity(board: Board, s: GameState, rng: Rng, atMs: number) {
   const size = board.length;
+  const kinds = s.lineup.length;
+  const luck = s.director ? luckOf(s.drought, s.director) : 0;
+  const stage = s.director ? stageFactor(atMs, s.director) : 1;
   for (let c = 0; c < size; c++) {
     const stack: Piece[] = [];
     for (let r = size - 1; r >= 0; r--) {
@@ -61,9 +70,15 @@ function applyGravity(board: Board, s: GameState, rng: Rng) {
       if (p) stack.push(p);
     }
     for (let r = size - 1; r >= 0; r--) board[r][c] = stack[size - 1 - r] ?? null;
-    for (let r = 0; r < size && board[r][c] === null; r++) {
-      const kind = s.refillQueue.length > 0 ? s.refillQueue.shift()! : rng.int(s.lineup.length);
-      board[r][c] = { id: s.nextId++, type: 'pet', kind };
+    let top = 0;
+    while (top < size && board[top][c] === null) top++;
+    let r = 0;
+    for (; r < top && s.refillQueue.length > 0; r++) {
+      board[r][c] = { id: s.nextId++, type: 'pet', kind: s.refillQueue.shift()! };
+    }
+    for (let rr = top - 1; rr >= r; rr--) {
+      const kind = s.director ? pickWeighted(refillWeights(board, { r: rr, c }, kinds, luck, stage, s.director), rng) : rng.int(kinds);
+      board[rr][c] = { id: s.nextId++, type: 'pet', kind };
     }
   }
 }
@@ -161,7 +176,7 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
 
     for (const p of cleared) board[p.r][p.c] = null;
     for (const sp of spawned) board[sp.pos.r][sp.pos.c] = sp.piece;
-    applyGravity(board, s, rng);
+    applyGravity(board, s, rng, settleAt);
 
     s.score += score + (rushBonus ? RULES.rush.bonus : 0);
     if (!merging) {
@@ -198,6 +213,7 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
 
   s.busyUntil = clock;
   s.maxChain = Math.max(s.maxChain, chainIndex);
+  s.drought = chainIndex >= 2 ? 0 : s.drought + 1;
   s.validMoves++;
   s.lastValidMoveAt = t;
 

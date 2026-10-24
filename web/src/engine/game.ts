@@ -1,5 +1,5 @@
 import { inBounds, isAdjacent, parseBoard } from './board';
-import { RULES } from './config';
+import { DIRECTOR, RULES, type DirectorConfig } from './config';
 import { generateBoard, validMoves } from './moves';
 import { comboRange, isMerge, toolRange } from './tools';
 import { resolveMove } from './resolve';
@@ -12,11 +12,13 @@ export interface CreateGameOptions {
   lineup: string[];
   /** 固定棋盘夹具（测试用）。 */
   board?: string[];
-  /** 优先使用的补落 kind 序列（测试用），用完后回到随机。 */
+  /** 优先使用的补落 kind 序列（测试用），用完后交给补落导演。 */
   refill?: number[];
+  /** 补落导演参数；默认 DIRECTOR，传 null 关闭（测试与调参用）。 */
+  director?: DirectorConfig | null;
 }
 
-export function createGame({ seed, lineup, board, refill = [] }: CreateGameOptions): GameState {
+export function createGame({ seed, lineup, board, refill = [], director = DIRECTOR }: CreateGameOptions): GameState {
   if (lineup.length !== RULES.kinds) throw new Error(`Lineup must have ${RULES.kinds} entries`);
   const rng = createRng(seed);
   const registered = shuffleInPlace([...lineup], rng);
@@ -26,6 +28,8 @@ export function createGame({ seed, lineup, board, refill = [] }: CreateGameOptio
     lineup: registered,
     rngState: rng.state,
     refillQueue: [...refill],
+    director,
+    drought: 0,
     nextId: initial.nextId,
     phase: 'playing',
     busyUntil: 0,

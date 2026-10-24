@@ -1,5 +1,5 @@
-/** 规则版本：对局登记与结算时校验，规则或计分口径变化时递增。 */
-export const RULES_VERSION = 2;
+/** 规则版本：对局登记与结算时校验，规则或计分口径变化时递增。版本 3：补落导演。 */
+export const RULES_VERSION = 3;
 
 /** 已确认的首版规则数值（V1_RULES / GAME_FLOW）。 */
 export const RULES = {
@@ -33,3 +33,37 @@ export const TIMING = {
     dryer: 360,
   },
 } as const;
+
+/**
+ * 补落导演参数。补落时只看落点的局部形态给各类加权，不按宠物身份加权：
+ * 落定后能与已稳定邻居（下方、左右）直接形成三连的种类拿 boost3，形成「差一个」的种类拿 boost2，
+ * 其余权重 1。加权部分 = (base + luck × 运气) × 阶段系数；运气随玩家连续无连锁的步数上升。
+ * 定义放在本文件，因为服务端也直接引用 config.ts。
+ */
+export interface DirectorConfig {
+  /** 形成三连的加权：base 恒有，luck 随运气 0…1 线性叠加。 */
+  boost3: { base: number; luck: number };
+  /** 形成「差一个」（两连）的加权。 */
+  boost2: { base: number; luck: number };
+  /** 连续多少步无连锁时运气达到 1。 */
+  droughtCap: number;
+  /** 阶段系数，按游戏时钟半开区间取最后一个 fromMs ≤ t 的项；须按 fromMs 升序且首项 fromMs 为 0。 */
+  phases: { fromMs: number; factor: number }[];
+}
+
+/**
+ * 补落导演默认参数（V1_RULES「补落导演」，2026-10-24 确认，可随试玩调整）。
+ * 加权只看落点局部形态，不看宠物身份；运气在连续 4 步无连锁时到顶；
+ * 阶段：开局基线、催单期略高、催单后回落、最后 15 秒冲刺最高。
+ */
+export const DIRECTOR: DirectorConfig = {
+  boost3: { base: 0.6, luck: 2.4 },
+  boost2: { base: 0.3, luck: 0.6 },
+  droughtCap: 4,
+  phases: [
+    { fromMs: 0, factor: 1 },
+    { fromMs: 30_000, factor: 1.3 },
+    { fromMs: 50_000, factor: 1 },
+    { fromMs: 75_000, factor: 1.8 },
+  ],
+};

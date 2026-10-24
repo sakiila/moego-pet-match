@@ -1,3 +1,5 @@
+import type { DirectorConfig } from './config';
+
 export type ToolType = 'combH' | 'combV' | 'scissors' | 'dryer';
 
 /** 棋子带稳定 id，UI 据此在时间线前后追踪同一枚棋子的移动。 */
@@ -65,7 +67,12 @@ export interface GameState {
   /** 本局阵容登记顺序（开局随机打乱后固定），kind 即其下标。 */
   lineup: string[];
   rngState: number;
+  /** 优先使用的补落 kind 序列（测试用）；为空时由补落导演按局部形态加权抽样。 */
   refillQueue: number[];
+  /** 补落导演参数；null 表示关闭，补落退回均匀随机。 */
+  director: DirectorConfig | null;
+  /** 连续多少次有效操作没有出现连锁（回弹不计）；连锁出现时归零，决定导演的运气。 */
+  drought: number;
   nextId: number;
   phase: 'playing' | 'ended' | 'discarded';
   busyUntil: number;
