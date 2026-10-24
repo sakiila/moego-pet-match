@@ -4,6 +4,7 @@ import { petDisplayName, petImage, type PetInfo } from '../../game/pets';
 import type { TitleKey } from '../../game/report';
 import { useI18n, type MessageKey } from '../../i18n';
 import { Icon } from '../../ui/primitives/Icon';
+import type { SettleResponse } from '../../api/types';
 import type { Standing } from '../../game/standing';
 import { TitleStamp } from '../TitleStamp/TitleStamp';
 import { TodayStanding } from '../TodayStanding/TodayStanding';
@@ -28,6 +29,8 @@ export interface ScoreCardProps {
   quizBonus?: number;
   /** 今日榜上的名次（保存成功后读取）；null 或未提供时不显示。 */
   standing?: Standing | null;
+  /** 结算返回的连续开工天数；只在本局是今天第一次打卡时显示一行。 */
+  streak?: SettleResponse['streak'] | null;
 }
 
 const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
@@ -39,7 +42,7 @@ const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
 /** 读 :root 上的毫秒令牌（--print-start / --print-ms），与 CSS 动画同一时间线。 */
 const cssMs = (name: string) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
 
-export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null }: ScoreCardProps) {
+export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null, streak = null }: ScoreCardProps) {
   const { t, locale } = useI18n();
   // 声音与轻震跟着打印动画的节拍：纸送到位的瞬间「叮」，印章拍下的瞬间「咚」
   const feedback = useFeedback();
@@ -84,6 +87,11 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
                 </span>
               )}
               {standing && <TodayStanding standing={standing} />}
+              {streak?.firstToday && (
+                <span className={styles.streak} data-testid="report-streak">
+                  {streak.days >= 2 ? t('report.streak_days', { days: streak.days }) : t('report.streak_first_day')}
+                </span>
+              )}
             </div>
             <span className={styles.saveBadge} data-state={saveState}>
               {saveState === 'saved' ? (

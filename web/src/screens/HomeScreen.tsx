@@ -5,6 +5,7 @@ import { ManagerCard } from '../components/ManagerCard/ManagerCard';
 import { NavTile } from '../components/NavTile/NavTile';
 import { PageLinks } from '../components/PageLinks/PageLinks';
 import { PlayerMenu } from '../components/PlayerMenu/PlayerMenu';
+import { StreakLine } from '../components/StreakLine/StreakLine';
 import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
 import { PhotoNotice } from '../components/PhotoNotice/PhotoNotice';
 import { avatarUrl, stickerUrl } from '../game/pets';
@@ -47,6 +48,7 @@ export function HomeScreen({ player, manager, onOpenShop, onCollection, onLeader
       <Button size="lg" block onClick={onOpenShop} data-testid="open-shop">
         {t('action.open_shop')}
       </Button>
+      <StreakLine streak={player.streak} />
       <nav className={styles.navRow}>
         <NavTile icon="pet-collection" label={t('nav.collection')} onClick={onCollection} />
         <NavTile icon="leaderboard" label={t('nav.leaderboard')} onClick={onLeaderboard} />

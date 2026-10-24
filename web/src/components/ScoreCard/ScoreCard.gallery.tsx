@@ -38,6 +38,23 @@ const entry: GalleryEntry = {
         standing={{ rank: 1, score: 18410, leaderScore: 18410, participants: 12 }}
       />
     ),
+    'today standing + streak day 3 (first clock-in today)': () => (
+      <ScoreCard
+        mode="normal"
+        score={13420}
+        saveState="saved"
+        newRecord={false}
+        mvp={{ pet: maodu, kind: 1 }}
+        review="review.pet.high_chain"
+        title="title.cleanup_chief"
+        stats={{ tiles: 684, chain: 6, tools: 13 }}
+        standing={{ rank: 3, score: 13420, leaderScore: 14660, participants: 12 }}
+        streak={{ days: 3, today: true, firstToday: true }}
+      />
+    ),
+    'streak first day': () => (
+      <ScoreCard mode="normal" score={2480} saveState="saved" newRecord={false} mvp={{ pet: maodu, kind: 2 }} review="review.pet.normal" title="title.pet_officer" stats={stats} streak={{ days: 1, today: true, firstToday: true }} />
+    ),
     'today standing: alone today': () => (
       <ScoreCard mode="normal" score={2480} saveState="saved" newRecord={false} mvp={{ pet: maodu, kind: 2 }} review="review.pet.normal" title="title.pet_officer" stats={stats} standing={{ rank: 1, score: 2480, leaderScore: 2480, participants: 1 }} />
     ),

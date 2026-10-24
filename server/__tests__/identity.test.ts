@@ -42,6 +42,7 @@ describe('玩家身份校验', () => {
       name: 'Bob',
       best: { normal: null, fish: null },
       progress: { completedNormalGames: 0, fishUnlocked: false },
+      streak: { days: 0, today: false },
     });
   });
 

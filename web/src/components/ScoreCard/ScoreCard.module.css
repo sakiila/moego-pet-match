@@ -93,6 +93,15 @@
   font-weight: normal;
 }
 
+/* 今天第一次打卡：今日名次小条下的一行小字 */
+.streak {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-muted);
+}
+
 /* 新纪录：小旗 + 橙色文字（report-marks-original-v4） */
 .record {
   display: flex;

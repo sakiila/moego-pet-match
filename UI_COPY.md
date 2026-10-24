@@ -121,6 +121,9 @@
 | manager.poster_date | {year} 年 {month} 月 {day} 日 · 北京时间 | {monthName} {day}, {year} · Beijing Time |
 | home.personal_best | 宠物店个人最好 | Pet Shop Personal Best |
 | home.no_record | 第一份营业纪录，等你来写。 | Your first shop record starts here. |
+| home.streak_active | 连续 {days} 天开工 · 今天已打卡 | {days}-day streak · clocked in today |
+| home.streak_pending | 连续 {days} 天开工 · 今天还没开工 | {days}-day streak · not clocked in yet today |
+| home.streak_none | 今天开一局，打卡从今天算起 | Play a round today to start your streak |
 | home.photo_notice | 宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob | Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack. |
 
 首页主按钮共用「开始营业 / Open Shop」，进入普通宠物局准备，不直接开始计时；次级入口沿用图鉴、排行榜、我的宠物。个人最好只展示普通宠物局记录，不将鱼关成绩混入首页字段。人工处理提示保留用户指定原句，首页没有鱼关入口或解锁预告。
@@ -349,6 +352,8 @@
 | report.today_rank | 今日第 {rank} 名 | #{rank} today |
 | report.today_gap | 距第一还差 {points} 分 | {points} pts behind #1 |
 | report.today_alone | 今天第一个开工，等同事来挑战 | First to clock in today. Let's see who follows. |
+| report.streak_first_day | 今天打卡完成，明天继续 | Clocked in. See you tomorrow. |
+| report.streak_days | 今天打卡完成，连续 {days} 天开工 | Clocked in. {days} days in a row. |
 | report.next_up_label | 下一件事 | Up next |
 | report.next_up_go_collection | 去图鉴 | Pet Collection |
 | report.next_up_fish_1 | “Peter 让我带话：下班别走。” | "Peter asked me to pass it on: don't leave after this shift." |

@@ -119,6 +119,7 @@ export function ReportScreen(props: ReportScreenProps) {
         stats={{ tiles: summary.clearedCells, chain: summary.maxChain, tools: summary.toolsFired }}
         host={mode === 'normal' && manager ? { name: manager.pet.name, stickerSrc: stickerUrl(manager.pet.petId, 512) } : null}
         standing={standing}
+        streak={saved?.streak ?? null}
       />
       <SaveStatus state={save} onRetry={onRetry} />
       {saved && <AchievementUnlocks ids={saved.newAchievements ?? []} equippedTitle={props.equippedTitle} onEquip={props.onEquipTitle} onOpenTitles={props.onTitles} />}

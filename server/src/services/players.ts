@@ -1,6 +1,7 @@
 import type pg from 'pg';
 import type { Pool } from '../db/pool.ts';
 import type { SlackDirectory } from './slackDirectory.ts';
+import { loadStreak } from './streak.ts';
 
 import type { PlayerView } from '../../../web/src/api/types.ts';
 
@@ -50,5 +51,6 @@ export async function loadPlayer(db: Queryable, userId: string): Promise<PlayerV
       completedNormalGames: progress.rows[0]?.completed_normal_games ?? 0,
       fishUnlocked: progress.rows[0]?.fish_unlocked_at != null,
     },
+    streak: await loadStreak(db, userId),
   };
 }

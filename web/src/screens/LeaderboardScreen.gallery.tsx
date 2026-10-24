@@ -8,7 +8,7 @@ const player = (fishUnlocked: boolean) => ({
   userId: 'bob',
   name: 'Bob',
   best: { normal: 2480, fish: null },
-  progress: { completedNormalGames: 3, fishUnlocked },
+  progress: { completedNormalGames: 3, fishUnlocked }, streak: { days: 0, today: false },
 });
 const names = ['Emma', 'Sam Pineda', 'Yoo', 'Kai', 'Mia', 'Fiona', 'Bob', 'Luz', 'Rachel Shaw', 'Theo'];
 const scores = [4980, 4260, 3920, 3100, 2900, 2640, 2480, 2480, 2360, 1200];

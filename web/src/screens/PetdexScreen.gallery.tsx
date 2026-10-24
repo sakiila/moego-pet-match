@@ -3,7 +3,7 @@ import type { GalleryEntry } from '../dev/gallery/types';
 import { PetdexScreen } from './PetdexScreen';
 
 const noop = () => {};
-const player = { userId: 'U_TEST_BOB', name: 'Bob', best: { normal: 2480, fish: null }, progress: { completedNormalGames: 3, fishUnlocked: true } };
+const player = { userId: 'U_TEST_BOB', name: 'Bob', best: { normal: 2480, fish: null }, progress: { completedNormalGames: 3, fishUnlocked: true }, streak: { days: 0, today: false } };
 const ids = ['pet_4750baaed3f0', 'pet_b05057985e11', 'pet_7104fa8cdaea', 'pet_01714a23d2b5', 'pet_c7ad902c2024'];
 const names = ['Sanxian', 'Deedee', 'Banjo', 'Zuko', '7-Eleven'];
 const view = (collectedCount: number): CollectionView => ({

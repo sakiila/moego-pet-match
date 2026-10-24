@@ -10,6 +10,7 @@ import { maybeCreateQuiz } from './quiz.ts';
 import { beijingDate } from './pets.ts';
 import { findColleague, loadPlayer } from './players.ts';
 import { lockAchievements, syncAchievements } from './achievements.ts';
+import { computeStreak, playedDates } from './streak.ts';
 
 /** 第几局普通完整局后解锁 Peter 鱼关。 */
 export const FISH_UNLOCK_GAMES = 3;
@@ -223,6 +224,11 @@ export async function settleGame(
     }
 
     const newAchievements = await syncAchievements(client, playerId, gameId);
+    // 连续开工：本局有有效操作就算今天打卡（结果还没写入，手动把登记日加进去）
+    const boardDate: string = (await client.query('SELECT board_date::text AS d FROM pet_match.games WHERE game_id = $1', [gameId])).rows[0].d;
+    const before = await playedDates(client, playerId);
+    const clocksIn = payload.validMoves > 0;
+    const streak = { ...computeStreak(clocksIn ? [boardDate, ...before] : before, beijingDate()), firstToday: clocksIn && !before.includes(boardDate) };
     const quiz = counted ? await maybeCreateQuiz(client, gameId, playerId, completed, payload) : null;
 
     const response: SettleResponse = {
@@ -234,6 +240,7 @@ export async function settleGame(
       quiz,
       removedPetIds: await removedOf(),
       newAchievements,
+      streak,
     };
     await client.query(
       `INSERT INTO pet_match.game_results (game_id, payload, payload_hash, score, counted, response) VALUES ($1, $2, $3, $4, $5, $6)`,

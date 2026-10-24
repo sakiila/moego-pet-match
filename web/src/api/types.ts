@@ -20,12 +20,19 @@ export interface ColleagueResult {
   name: string;
 }
 
+/** 连续开工天数：days 为连续天数（今天没开则连到昨天），today 为今天是否已开工。 */
+export interface Streak {
+  days: number;
+  today: boolean;
+}
+
 export interface PlayerView {
   userId: string;
   name: string;
   best: { normal: number | null; fish: number | null };
   progress: { completedNormalGames: number; fishUnlocked: boolean };
   equippedTitle?: AchievementId | null;
+  streak: Streak;
 }
 
 export interface LineupPet {
@@ -79,6 +86,8 @@ export interface SettleResponse {
   removedPetIds: string[];
   /** 本局首次授予的成就；旧结算快照可能没有此字段。 */
   newAchievements?: AchievementId[];
+  /** 结算后的连续开工天数；firstToday 为本局是否今天第一次打卡。旧结算快照可能没有此字段。 */
+  streak?: Streak & { firstToday: boolean };
 }
 
 export interface QuizQuestion {
