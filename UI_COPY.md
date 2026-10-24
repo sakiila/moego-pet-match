@@ -349,6 +349,18 @@
 | report.today_rank | 今日第 {rank} 名 | #{rank} today |
 | report.today_gap | 距第一还差 {points} 分 | {points} pts behind #1 |
 | report.today_alone | 今天第一个开工，等同事来挑战 | First to clock in today. Let's see who follows. |
+| report.next_up_label | 下一件事 | Up next |
+| report.next_up_go_collection | 去图鉴 | Pet Collection |
+| report.next_up_fish_1 | “Peter 让我带话：下班别走。” | "Peter asked me to pass it on: don't leave after this shift." |
+| report.next_up_fish_2 | “听说两个班后来一批不用吹干的，爽。” | "Word is, two shifts from now a batch arrives that needs no blow-dry. Nice." |
+| report.next_up_cats | “群主位置给你留着，先把那 {n} 只猫认全。” | "The cat club saved you the admin seat. {n} more to meet." |
+| report.next_up_dogs | “我们狗这边就缺你一个了，还差 {n} 只。” | "The dog crew is one human short. {n} more to go." |
+| report.next_up_friends | “再认 {n} 个，这条街没人不认识你。” | "{n} more and the whole street knows your name." |
+| report.next_up_species | “猫狗你都混熟了，再认 {n} 种别的毛？” | "Cats and dogs are covered. {n} more kind of fur?" |
+| report.next_up_neighbors | “还有 {n} 家没去过，人家都给你留门了。” | "{n} more homes to visit. They've left the door open." |
+| report.next_up_album | “最后 {n} 位在赶来签到，别下班。” | "The last {n} are rushing in to sign the roster. Don't clock out." |
+| report.next_up_milestone | “再认 {n} 只，店里 {percent}% 的毛孩子都见过你了，剩下的在打听你。” | "{n} more and {percent}% of the shop has met you. The rest are asking around." |
+| report.next_up_tomorrow | “今天的榜睡一觉就没了，明天重新来。” | "Today's board is gone after a nap. Fresh start tomorrow." |
 | leaderboard.challenge | 再挑战一次 | Play Another Round |
 | leaderboard.load_failed | 暂时没能读取排行榜，请重试。 | We couldn't load the leaderboard. Please try again. |
 

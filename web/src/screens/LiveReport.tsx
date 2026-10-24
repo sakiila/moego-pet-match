@@ -37,6 +37,7 @@ export function LiveReport({ summary, registered, pets, playerId, playerName, on
   const detail = usePetDetail(playerId);
   const [sharing, setSharing] = useState(false);
   const [quizScore, setQuizScore] = useState<number | null>(null);
+  const loadAchievements = useCallback(() => api.getAchievements(playerId).then((v) => v.achievements), [playerId]);
   const loadStanding = useCallback(
     () => api.getLeaderboard(registered.mode, playerId, 'today').then((view) => todayStanding(view, playerId)),
     [registered.mode, playerId],
@@ -62,6 +63,7 @@ export function LiveReport({ summary, registered, pets, playerId, playerName, on
         onOpenPet={(pet, el) => void detail.show(pet.id, pet.name, el)}
         onShare={() => setSharing(true)}
         loadStanding={loadStanding}
+        loadAchievements={loadAchievements}
         {...nav}
       />
       {sharing && (

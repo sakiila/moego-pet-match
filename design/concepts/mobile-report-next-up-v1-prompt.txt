@@ -1,0 +1,9 @@
+Use case: ui-mockup / precise-object-edit.
+Refine IMAGE1, a real screenshot (780x1688) of the LOWER HALF of the current MoeGo "毛孩子全明星" mobile Grooming Report Card. Output ONE flat portrait screenshot EXACTLY 853 x 1844 pixels, no phone frame, no collage. Keep IMAGE1 pixel-faithful: the bottom of the cream receipt (MVP bone label "本局 MVP：Oreo", dashed quote bubble, three stat rows 785 / 7 / 23, barcode, zigzag tear edge), the "本局新收集 2" heading with the two pet cards Fish and Qiqi, the three nav tiles "宠物图鉴 / 排行榜 / 回门店", and the two bottom buttons "再开一局" and "分享成绩". Same fonts, same orange #F47721, same charcoal, same spacing.
+
+ONLY ADD one new block, an "up next" teaser, placed BETWEEN the two new-collection cards and the three nav tiles, full content width with the same side margins as the cards:
+- Left: a small round pet sticker avatar (about 56px in the 853 frame) of the grey husky-mix dog Oreo, white cutout border, like the receipt's MVP sticker but small.
+- Right of it: a white rounded speech bubble (corner radius similar to the pet cards, thin charcoal outline, tiny lower-right offset shadow) with a small triangular tail pointing left to the avatar. Inside the bubble, top-left, a tiny orange uppercase-style label "下一件事" in small bold text; below it one line of charcoal text in the same rounded font as the receipt quote, exactly: “群主位置给你留着，先把那 2 只猫认全。”; bottom-right inside the bubble a small orange link text with a chevron: "去图鉴 ›".
+- The block is quiet and secondary: smaller than the new-collection cards, no extra icons, no confetti.
+
+Do NOT add anything else and do not change any existing text, numbers or art. Keep all Chinese strings exactly as given, readable and natural. Final composition fits the full 853x1844 frame with the two buttons at the bottom as in IMAGE1; shift the nav tiles down by the new block's height.

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { AchievementId, DailyManager, GameMode, QuizResult } from '../api/types';
+import type { AchievementId, AchievementStatus, DailyManager, GameMode, QuizResult } from '../api/types';
 import { AchievementUnlocks } from '../components/AchievementUnlocks/AchievementUnlocks';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { CollectionCards } from '../components/CollectionCards/CollectionCards';
@@ -7,12 +7,14 @@ import { FishInvitation } from '../components/FishInvitation/FishInvitation';
 import { ManagerCard } from '../components/ManagerCard/ManagerCard';
 import { ModeMark } from '../components/ModeMark/ModeMark';
 import { NavTile } from '../components/NavTile/NavTile';
+import { NextUp } from '../components/NextUp/NextUp';
 import { QuizCard } from '../components/QuizCard/QuizCard';
 import { SaveStatus, type SaveState } from '../components/SaveStatus/SaveStatus';
 import { UnderwaterBackdrop } from '../components/UnderwaterBackdrop/UnderwaterBackdrop';
 import { ScoreCard } from '../components/ScoreCard/ScoreCard';
 import type { GameSummary } from '../engine';
-import { stickerUrl, type PetInfo } from '../game/pets';
+import { pickNextUp } from '../game/nextUp';
+import { petImage, stickerUrl, type PetInfo } from '../game/pets';
 import { judgeMvp, judgeReview, judgeTitle } from '../game/report';
 import type { Standing } from '../game/standing';
 import { useI18n } from '../i18n';
@@ -40,6 +42,8 @@ export interface ReportScreenProps {
   onShare: () => void;
   /** 读取今日榜上的名次：保存成功后调用一次，猜主人加分后再调一次；失败或不提供时不显示。 */
   loadStanding?: () => Promise<Standing | null>;
+  /** 读取成就进度，用于「下一件事」：保存成功后调用一次；失败时仍按鱼关与兜底预告。 */
+  loadAchievements?: () => Promise<AchievementStatus[]>;
   equippedTitle?: AchievementId | null;
   onEquipTitle?: (id: AchievementId) => Promise<void>;
   onTitles?: () => void;
@@ -50,7 +54,7 @@ export interface ReportScreenProps {
  * 正文可滚动，底部固定「再开一局」。所有判定复用本局冻结结果。
  */
 export function ReportScreen(props: ReportScreenProps) {
-  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onCollection, onOpenPet, onShare, loadStanding } = props;
+  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onCollection, onOpenPet, onShare, loadStanding, loadAchievements } = props;
   const { t } = useI18n();
   const mvpKind = judgeMvp(summary);
   const kindOf = (id: string) => pets.findIndex((p) => p.id === id);
@@ -73,6 +77,26 @@ export function ReportScreen(props: ReportScreenProps) {
   }, [savedScore, loadStanding]);
   // 本局阵容里当前已下架的宠物：不再展示它们的资料（原 MVP 下架用通用图案承接）
   const removed = new Set(saved?.removedPetIds ?? []);
+  // 下一件事：保存成功后读一次成就进度；本局弹出鱼关邀请时不再叠加预告
+  const [achievements, setAchievements] = useState<AchievementStatus[] | null | undefined>(undefined);
+  const savedGameId = saved?.gameId ?? null;
+  useEffect(() => {
+    if (!savedGameId) return;
+    let live = true;
+    (loadAchievements?.() ?? Promise.resolve(null))
+      .then((a) => live && setAchievements(a))
+      .catch(() => live && setAchievements(null));
+    return () => {
+      live = false;
+    };
+  }, [savedGameId, loadAchievements]);
+  const nextUp = saved && achievements !== undefined && !saved.progress.unlockedNow ? pickNextUp({ progress: saved.progress, achievements }) : null;
+  const speaker =
+    mvpKind !== null && !removed.has(pets[mvpKind].id) && petImage(pets[mvpKind], 512)
+      ? { name: pets[mvpKind].name, src: petImage(pets[mvpKind], 512)! }
+      : manager
+        ? { name: manager.pet.name, src: stickerUrl(manager.pet.petId, 512) }
+        : null;
   const served = summary.clearedCells > 0;
   const fish = mode === 'fish';
   const subtitle = fish ? 'fish.report_subtitle' : served ? 'report.subtitle' : 'report.generic_caption';
@@ -114,6 +138,7 @@ export function ReportScreen(props: ReportScreenProps) {
         />
       )}
       {!fish && saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}
+      {!fish && nextUp && <NextUp nextUp={nextUp} speaker={speaker} onOpenCollection={onCollection} />}
       {mode === 'normal' && manager && <ManagerCard variant="signature" name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} />}
       <nav className={styles.navRow}>
         {!fish && <NavTile icon="pet-collection" label={t('nav.collection')} onClick={onCollection} />}
