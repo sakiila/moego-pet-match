@@ -20,6 +20,12 @@ export function browseCollection(pets: readonly CollectionPet[], filter: Collect
   return [...collected, ...uncollected].filter((p) => inFilter(p) && matches(p));
 }
 
+/** 贴纸册格位：按服务端 sheetOrder（主人英文名、再宠物英文名）排列；顺序里缺的宠物接在末尾，不丢格。 */
+export function sheetCollection(pets: readonly CollectionPet[], sheetOrder: readonly string[]): CollectionPet[] {
+  const rank = new Map(sheetOrder.map((id, i) => [id, i]));
+  return [...pets].sort((a, b) => (rank.get(a.petId) ?? Infinity) - (rank.get(b.petId) ?? Infinity));
+}
+
 /**
  * 「主人说」先显示前一两句，可展开全文。按中英文句末标点切分；
  * 返回 null 表示原文已足够短，不需要展开。

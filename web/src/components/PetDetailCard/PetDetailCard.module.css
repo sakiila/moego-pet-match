@@ -4,6 +4,8 @@
   z-index: var(--z-card);
   display: grid;
   place-items: center;
+  align-items: safe center;
+  overflow-y: auto;
   padding: var(--space-4);
   color: var(--color-ink);
 }
@@ -12,16 +14,17 @@
   position: relative;
   inset: auto;
   min-height: 640px;
+  overflow: visible;
 }
 
 .backdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background: var(--scrim);
 }
 
 .close {
-  position: absolute;
+  position: fixed;
   top: max(var(--space-4), env(safe-area-inset-top));
   right: var(--space-4);
   z-index: 1;
@@ -37,9 +40,9 @@
   cursor: pointer;
 }
 
-.close svg {
-  width: 20px;
-  height: 20px;
+.inline .backdrop,
+.inline .close {
+  position: absolute;
 }
 
 .column {
@@ -48,7 +51,12 @@
   justify-items: center;
   gap: var(--space-3);
   width: 100%;
+  margin-bottom: var(--space-6);
   pointer-events: none;
+}
+
+.inline .column {
+  margin-bottom: 0;
 }
 
 .column > * {
@@ -120,6 +128,8 @@
   overflow: hidden;
   border-radius: inherit;
   padding: 5px;
+  animation: fade-in 320ms var(--ease-out) both;
+  container-type: size;
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
@@ -128,11 +138,13 @@
 }
 
 .shineSpin {
+  /* 能盖住卡片对角线的正方形（长边的 √2 倍），比原来 2 倍宽高的图层小约四分之一；横屏矮卡也盖得住四角 */
   position: absolute;
-  left: -50%;
-  top: -50%;
-  width: 200%;
-  height: 200%;
+  left: 50%;
+  top: 50%;
+  width: 142cqmax;
+  height: 142cqmax;
+  translate: -50% -50%;
   background: conic-gradient(var(--color-brand), var(--color-dog-yellow), var(--color-paper), var(--color-dog-yellow), var(--color-brand), var(--color-cat-blue), var(--color-paper), var(--color-brand));
   animation: shine-spin 3.6s linear infinite;
   animation-play-state: paused;
@@ -210,6 +222,22 @@
   background: var(--receipt-paper);
 }
 
+.flipHint {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  padding: var(--space-2);
+  pointer-events: none;
+}
+
+.face .flipIcon {
+  transform: none;
+  transition: none;
+}
+
 .frontBody {
   display: grid;
   justify-items: center;
@@ -222,7 +250,7 @@
 
 .art {
   position: relative;
-  width: min(64vw, 250px);
+  width: min(64vw, 250px, 30dvh);
   aspect-ratio: 1;
 }
 
@@ -238,6 +266,11 @@
   height: 100%;
   object-fit: contain;
   -webkit-user-drag: none;
+}
+
+.art .underlay {
+  position: absolute;
+  inset: 0;
 }
 
 .sparks {
@@ -275,6 +308,25 @@
   font-weight: var(--weight-bold);
 }
 
+.knownBySlot {
+  min-height: calc(var(--text-sm) * 1.5 + var(--space-2) + var(--space-5));
+}
+
+.knownBy {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  font-weight: var(--weight-regular);
+  animation: fade-in 240ms var(--ease-out) both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
 .backBody {
   display: grid;
   align-content: start;
@@ -282,6 +334,7 @@
   gap: var(--space-3);
   height: 100%;
   padding: var(--space-3);
+  padding-bottom: calc(var(--space-6) + var(--space-3) * 3);
   overflow-y: auto;
 }
 
@@ -335,11 +388,19 @@
 }
 
 .actions {
+  position: absolute;
+  top: calc(100% + var(--space-3));
+  left: 0;
+  right: 0;
   display: grid;
   justify-items: center;
   gap: var(--space-2);
   min-height: 0;
   text-align: center;
+}
+
+.inline .actions {
+  position: static;
 }
 
 .note {
@@ -395,10 +456,15 @@
     animation: none;
     opacity: 0.9;
   }
+
+  .knownBy {
+    animation: none;
+  }
 }
 
 @media (max-height: 700px) {
   .fly {
-    height: min(56dvh, 400px);
+    min-height: var(--pet-detail-min-height);
   }
+
 }

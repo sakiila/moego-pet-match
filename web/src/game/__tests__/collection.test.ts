@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { CollectionPet } from '../../api/types';
-import { browseCollection, quoteExcerpt } from '../collection';
+import { browseCollection, quoteExcerpt, sheetCollection } from '../collection';
 
 const pet = (petId: string, over: Partial<CollectionPet> = {}): CollectionPet => ({
   petId,
@@ -66,5 +66,15 @@ describe('主人说摘录', () => {
   it('两句以内不需要展开', () => {
     expect(quoteExcerpt('只有一句')).toBeNull();
     expect(quoteExcerpt('One. Two.')).toBeNull();
+  });
+});
+
+describe('贴纸册格位', () => {
+  it('按 sheetOrder 排列，与收集状态无关', () => {
+    expect(ids(sheetCollection(pets, ['Dumpling', 'Apple', 'Cookie', 'Biscuit']))).toEqual(['Dumpling', 'Apple', 'Cookie', 'Biscuit']);
+  });
+
+  it('顺序里缺的宠物接在末尾，保持原相对顺序', () => {
+    expect(ids(sheetCollection(pets, ['Cookie']))).toEqual(['Cookie', 'Apple', 'Biscuit', 'Dumpling']);
   });
 });

@@ -4,8 +4,10 @@ import type { PetDetail } from '../../api/types';
 import { quoteExcerpt } from '../../game/collection';
 import { useI18n } from '../../i18n';
 import { Avatar } from '../../ui/primitives/Avatar';
+import { AvatarStack } from '../../ui/primitives/AvatarStack';
 import { Button } from '../../ui/primitives/Button';
 import { Tilt } from '../Tilt/Tilt';
+import { Icon } from '../../ui/primitives/Icon';
 import styles from './PetDetailCard.module.css';
 
 export type PetDetailState =
@@ -23,6 +25,8 @@ export interface PetDetailCardProps {
   /** 处理后照片；无照片时为 null。 */
   photoSrc: string | null;
   ownerAvatarSrc: string | null;
+  /** 认识人数区的同事头像地址。 */
+  colleagueAvatarSrc: (userId: string) => string | null;
   /** 被点开的列表卡片：从它的位置翻转飞出，关闭时飞回它当前所在的位置；缺省时淡入淡出。 */
   origin?: HTMLElement | null;
   onClose: () => void;
@@ -54,12 +58,24 @@ function moveTo(from: DOMRect, to: DOMRect) {
  * 未收集只给名字、剪影与解锁说明；自家宠物即使未收集也显示完整资料。开始营业、重试、资料删除申请放在卡片下方。
  */
 export function PetDetailCard(props: PetDetailCardProps) {
-  const { name, state, origin, onClose, onRetry, onOpenShop, onRequestRemoval, inline } = props;
+  const { name, origin, onClose, onRetry, onOpenShop, onRequestRemoval, inline } = props;
   const { t } = useI18n();
   const [flipped, setFlipped] = useState(false);
   const [closing, setClosing] = useState(false);
   // 落地后才开始循环动画，避免飞行期间每帧重绘
   const [settled, setSettled] = useState(!!inline);
+  // 第一次落地后才换上读取到的详情：飞行途中换内容（主人行、认识人数头像、背面大照片）会让卡片中途重排、重新光栅化而顿一下。
+  // 只置一次，关闭飞回时不再切回读取中
+  const [landed, setLanded] = useState(!!inline);
+  const state: PetDetailState = landed ? props.state : { kind: 'loading' };
+  // 背面照片（长边 1600）落地后稍等再加载，或一翻面就加载；背面的光带第一次翻面才挂上
+  const [photoReady, setPhotoReady] = useState(!!inline);
+  const [everFlipped, setEverFlipped] = useState(false);
+  useEffect(() => {
+    if (!landed || photoReady) return;
+    const timer = window.setTimeout(() => setPhotoReady(true), 500);
+    return () => window.clearTimeout(timer);
+  }, [landed, photoReady]);
   // 详情读取完成前，沿用被点卡片上已有的贴纸与「已收集」状态，飞行期间内容不跳变
   const [hint] = useState(() => ({ src: origin?.querySelector('img')?.currentSrc || null, collected: origin?.dataset.collected === 'true' }));
   const flyRef = useRef<HTMLDivElement>(null);
@@ -69,7 +85,10 @@ export function PetDetailCard(props: PetDetailCardProps) {
   const detail = state.kind === 'ready' ? state.detail : null;
   const collected = detail ? detail.collected : hint.collected;
   const full = !!detail && (detail.collected || detail.own);
-  const canFlip = full && (!!props.photoSrc || !!detail?.quote);
+  const availableDetail = props.state.kind === 'ready' ? props.state.detail : null;
+  const hasFlipSide = !!availableDetail && (availableDetail.collected || availableDetail.own) && (!!props.photoSrc || !!availableDetail.quote);
+  const canFlip = full && hasFlipSide;
+  const decorated = collected && landed;
 
   // 打开：起点卡片先隐藏（像被拿起来），再翻转着飞到屏幕中央
   useLayoutEffect(() => {
@@ -83,6 +102,7 @@ export function PetDetailCard(props: PetDetailCardProps) {
     if (!from || reduced()) {
       fly.animate([{ opacity: 0, transform: 'scale(0.92)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'ease-out', fill: 'backwards' });
       setSettled(true);
+      setLanded(true);
       return;
     }
     // 起点卡片先留着，飞行前 100 ms 内与飞出的卡片交叉淡入，再隐藏，避免一帧空位
@@ -91,10 +111,16 @@ export function PetDetailCard(props: PetDetailCardProps) {
     }, 100);
     fly.animate([{ opacity: 0, transform: moveTo(from, fly.getBoundingClientRect()) }, { opacity: 1, offset: 0.18 }, { opacity: 1, transform: 'none' }], { duration: OPEN_MS, easing: OPEN_EASE });
     flipper.animate([{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(360deg)' }], { duration: OPEN_MS, easing: OPEN_EASE });
-    const settle = window.setTimeout(() => setSettled(true), OPEN_MS);
+    // 落地后先换内容、挂上光带与星光（此时卡片静止，重绘不显卡），再隔两帧才让光带转起来
+    let frame = 0;
+    const settle = window.setTimeout(() => {
+      setLanded(true);
+      frame = requestAnimationFrame(() => (frame = requestAnimationFrame(() => setSettled(true))));
+    }, OPEN_MS);
     return () => {
       window.clearTimeout(hide);
       window.clearTimeout(settle);
+      cancelAnimationFrame(frame);
       if (origin) origin.style.visibility = '';
     };
   }, [inline, origin]);
@@ -144,7 +170,12 @@ export function PetDetailCard(props: PetDetailCardProps) {
     return () => window.removeEventListener('keydown', onKey);
   });
 
-  const flip = () => canFlip && !closing && setFlipped((f) => !f);
+  const flip = () => {
+    if (!canFlip || closing) return;
+    setEverFlipped(true);
+    setPhotoReady(true);
+    setFlipped((f) => !f);
+  };
   const onKey = (e: KeyboardEvent) => {
     if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) {
       e.preventDefault();
@@ -156,9 +187,7 @@ export function PetDetailCard(props: PetDetailCardProps) {
     <div className={`${styles.overlay} ${inline ? styles.inline : ''}`} role="dialog" aria-modal="true" aria-label={detail?.name ?? name} data-testid="pet-detail" data-closing={closing || undefined} data-settled={settled || undefined}>
       <div className={styles.backdrop} ref={backdropRef} onClick={close} aria-hidden />
       <button type="button" className={styles.close} onClick={close} aria-label={t('action.close')} data-testid="detail-close">
-        <svg viewBox="0 0 24 24" aria-hidden>
-          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-        </svg>
+        <Icon name="close" size={20} />
       </button>
       <div className={styles.column}>
         <div className={styles.fly} ref={flyRef}>
@@ -174,14 +203,17 @@ export function PetDetailCard(props: PetDetailCardProps) {
               data-testid="flip"
             >
               <div className={styles.flipper} ref={flipperRef} data-flipped={flipped || undefined}>
-                <div className={`${styles.face} ${styles.front}`} data-shine={collected || undefined} data-testid="detail-front">
-                  <Front {...props} previewSrc={hint.src} />
-                  {collected && <ShineRing />}
-                  {collected && <Twinkles />}
+                {/* 飞行期间卡片保持素面：光带、星光、发光阴影都等落地后再挂，起飞第一帧不用光栅化大块渐变与遮罩 */}
+                <div className={`${styles.face} ${styles.front}`} data-shine={decorated || undefined} data-testid="detail-front">
+                  <Front {...props} state={state} previewSrc={hint.src} previewCollected={hint.collected} />
+                  {decorated && <ShineRing />}
+                  {decorated && <Twinkles />}
+                  {hasFlipSide && <FlipHint />}
                 </div>
-                <div className={`${styles.face} ${styles.back}`} data-shine={collected || undefined} data-testid="detail-back">
-                  {full && detail ? <Back detail={detail} photoSrc={props.photoSrc} /> : <Pattern />}
-                  {collected && <ShineRing />}
+                <div className={`${styles.face} ${styles.back}`} data-shine={decorated || undefined} data-testid="detail-back">
+                  {full && detail ? <Back detail={detail} photoSrc={photoReady ? props.photoSrc : null} /> : <Pattern />}
+                  {decorated && everFlipped && <ShineRing />}
+                  {hasFlipSide && <FlipHint />}
                 </div>
               </div>
             </div>
@@ -190,7 +222,7 @@ export function PetDetailCard(props: PetDetailCardProps) {
         <div className={styles.actions}>
           {state.kind === 'unlisted' && <p className={styles.note}>{t('pet.unlisted')}</p>}
           {state.kind === 'failed' && (
-            <Button variant="secondary" onClick={onRetry}>
+            <Button variant="secondary" iconName="retry" onClick={onRetry}>
               {t('action.retry')}
             </Button>
           )}
@@ -199,8 +231,8 @@ export function PetDetailCard(props: PetDetailCardProps) {
               <p className={styles.note}>{t('pet.unlock_hint')}</p>
               {/* 自家宠物从「我的宠物」查看完整资料，不在这里引导开局（图稿 mobile-my-pets-v1） */}
               {!detail.own && (
-                <Button size="lg" onClick={onOpenShop}>
-                  🐾 {t('action.open_shop')}
+                <Button size="lg" iconName="open-shop-white" onClick={onOpenShop}>
+                  {t('action.open_shop')}
                 </Button>
               )}
             </>
@@ -217,14 +249,29 @@ export function PetDetailCard(props: PetDetailCardProps) {
   return inline ? overlay : createPortal(overlay, document.body);
 }
 
-function Front({ name, state, stickerSrc, silhouetteSrc, ownerAvatarSrc, previewSrc }: PetDetailCardProps & { previewSrc: string | null }) {
+function Front({
+  name,
+  state,
+  stickerSrc,
+  silhouetteSrc,
+  ownerAvatarSrc,
+  colleagueAvatarSrc,
+  previewSrc,
+  previewCollected,
+}: PetDetailCardProps & { previewSrc: string | null; previewCollected: boolean }) {
   const { t } = useI18n();
   const detail = state.kind === 'ready' ? state.detail : null;
   const full = !!detail && (detail.collected || detail.own);
+  // 大图地址一开始就按被点卡片的收集状态定下，读取完成后通常不变，飞行途中不换图；
+  // 起点卡片的小图（如贴纸册 128）垫在下面，大图解码完成盖上后再撤掉，不闪空白
+  const src = detail ? (full ? stickerSrc : silhouetteSrc) : previewSrc ? (previewCollected ? stickerSrc : silhouetteSrc) : null;
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
+  const underlay = previewSrc && previewSrc !== src && loadedSrc !== src ? previewSrc : null;
   return (
     <div className={styles.frontBody}>
       <div className={styles.art} data-loading={state.kind === 'loading' && !previewSrc}>
-        {(detail || previewSrc) && <img src={detail ? (full ? stickerSrc : silhouetteSrc) : previewSrc!} alt="" draggable={false} />}
+        {underlay && <img className={styles.underlay} src={underlay} alt="" draggable={false} />}
+        {src && <img src={src} alt="" draggable={false} decoding="async" onLoad={() => setLoadedSrc(src)} />}
         {full && <Sparks />}
       </div>
       <h2 className={styles.name}>{detail?.name ?? name}</h2>
@@ -237,6 +284,20 @@ function Front({ name, state, stickerSrc, silhouetteSrc, ownerAvatarSrc, preview
           </span>
         )}
       </div>
+      {/* 认识人数区始终占位，落地补上详情时不改变头像与名字的位置。 */}
+      <div className={styles.knownBySlot}>
+        {full && detail?.knownBy && detail.knownBy.count > 0 && (
+          <div className={styles.knownBy}>
+            {detail.knownBy.count === 1 ? t('pet.known_by_one') : t('pet.known_by_other', { count: detail.knownBy.count })}
+            <AvatarStack
+              people={detail.knownBy.recent.map((c) => ({ name: c.name, seed: c.userId, src: colleagueAvatarSrc(c.userId) }))}
+              total={detail.knownBy.count}
+              moreLabel={(rest) => t('pet.known_by_more', { count: rest })}
+              size={24}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -247,7 +308,7 @@ function Back({ detail, photoSrc }: { detail: PetDetail; photoSrc: string | null
   const excerpt = detail.quote ? quoteExcerpt(detail.quote) : null;
   return (
     <div className={styles.backBody}>
-      {photoSrc && <img className={styles.photo} src={photoSrc} alt={detail.name} draggable={false} />}
+      {photoSrc && <img className={styles.photo} src={photoSrc} alt={detail.name} draggable={false} decoding="async" />}
       {detail.quote && (
         <section className={styles.quote}>
           <h3>{t('pet.owner_quote')}</h3>
@@ -267,6 +328,14 @@ function Back({ detail, photoSrc }: { detail: PetDetail; photoSrc: string | null
         </section>
       )}
     </div>
+  );
+}
+
+function FlipHint() {
+  return (
+    <span className={styles.flipHint} aria-hidden>
+      <Icon name="flip-card-vertical-v3" size={28} className={styles.flipIcon} />
+    </span>
   );
 }
 

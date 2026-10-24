@@ -1,7 +1,13 @@
 import type { CollectionView, DailyManager, PetDetail } from '../../../web/src/api/types.ts';
 import { inTransaction, type Pool } from '../db/pool.ts';
 
-/** 图鉴目录：全部上架普通宠物 + 本人收集状态；未收集只给名字，主人仅对已收集或自家宠物返回。 */
+const byEnglishName = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
+
+/**
+ * 图鉴目录：全部上架普通宠物 + 本人收集状态；未收集只给名字，主人仅对已收集或自家宠物返回。
+ * pets 按宠物名；sheetOrder 是贴纸册格位：按主人英文名、再按宠物英文名，没有主人的排最后。
+ * 只下发 petId 顺序，不带主人字段（相邻格位可能暗示同一主人，2026-10-24 已确认接受）。
+ */
 export async function listCollection(pool: Pool, playerId: string): Promise<CollectionView> {
   const { rows } = await pool.query(
     `SELECT p.pet_id, p.name, p.owner_user_id, c.name AS owner_name, col.collected_at
@@ -24,7 +30,16 @@ export async function listCollection(pool: Pool, playerId: string): Promise<Coll
       own,
     };
   });
-  return { total: pets.length, collected: pets.filter((p) => p.collected).length, pets };
+  const sheetOrder = [...rows]
+    .sort(
+      (a, b) =>
+        Number(!a.owner_name) - Number(!b.owner_name) ||
+        byEnglishName.compare(a.owner_name ?? '', b.owner_name ?? '') ||
+        byEnglishName.compare(a.name, b.name) ||
+        a.pet_id.localeCompare(b.pet_id),
+    )
+    .map((r) => r.pet_id as string);
+  return { total: pets.length, collected: pets.filter((p) => p.collected).length, pets, sheetOrder };
 }
 
 export async function petDetail(pool: Pool, petId: string, playerId: string): Promise<PetDetail | null> {
@@ -49,7 +64,21 @@ export async function petDetail(pool: Pool, petId: string, playerId: string): Pr
     quote: visible ? (r.owner_quote ?? r.intro ?? null) : null,
     hasPhoto: visible && !!r.photo_key,
     listed,
+    knownBy: visible ? await knownBy(pool, petId) : null,
   };
+}
+
+/** 认识人数：保存过该宠物收集记录、仍在名单内的同事数，附最近收集的至多 5 位。 */
+async function knownBy(pool: Pool, petId: string): Promise<PetDetail['knownBy']> {
+  const { rows } = await pool.query(
+    `SELECT count(*) OVER () AS total, col.player_id, c.name
+     FROM pet_match.collections col JOIN pet_match.colleagues c ON c.user_id = col.player_id
+     WHERE col.pet_id = $1
+     ORDER BY col.collected_at DESC, col.player_id
+     LIMIT 5`,
+    [petId],
+  );
+  return { count: rows.length ? Number(rows[0].total) : 0, recent: rows.map((x) => ({ userId: x.player_id, name: x.name })) };
 }
 
 /** 北京时间（UTC+8，无夏令时）的自然日。 */

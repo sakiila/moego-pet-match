@@ -82,7 +82,7 @@
 | identity.not_found | 没找到你的同事身份。换个名字试试，或联系 Bob 更新资料。 | We couldn't find your coworker profile. Try another name or contact Bob. |
 | identity.load_failed | 暂时没能读取同事名单，请重试。 | We couldn't load the team directory. Please try again. |
 | info.use_link | 信息使用说明 | How Your Information Is Used |
-| info.entry_summary | 游戏会记录所选身份、成绩和图鉴进度，并在同事排行榜展示名字、头像与最好成绩；宠物照片会经 AI 统一画风。 | The game records your selected profile, scores, and collection progress. Your name, avatar, and best score appear on the coworker leaderboard, and pet photos are restyled with AI. |
+| info.entry_summary | 游戏会记录所选身份、成绩和图鉴进度，并在排行榜展示名字、头像与最好成绩，在你收集过的宠物卡上展示头像。 | The game records your selected profile, scores, and collection progress, shows your name, avatar, and best score on the leaderboard, and shows your avatar on cards for pets you've collected. |
 | info.removal_link | 资料删除申请 | Request Data Removal |
 
 身份来自现有 Supabase 可参与名单；选择名字不写成「已验证 Slack 本人」。查询失败与未找到身份使用不同提示，头像缺失使用默认头像，不阻止有效同事游戏。完整说明见下方 2.3。
@@ -98,7 +98,7 @@
 | info.full.title | 这个游戏会用到哪些信息 | What This Game Uses |
 | info.full.intro | 毛孩子全明星是 MoeGo 同事之间的内部小游戏。下面把会用到的信息讲清楚。 | MoeGo Pet All-Stars is an internal game just for MoeGo coworkers. Here's exactly what it uses. |
 | info.full.collect | **会记录什么**：你选择的同事身份（Slack ID、名字、头像，来自公司现有人员名单）；对局成绩、图鉴收集、游玩进度与隐藏关状态；你主动上传的宠物照片、名字及与你的主人关联；你提交的删除申请。上传的照片按原文件保存，可能带有拍摄位置等信息；原文件只私有存储，位置等信息不会在游戏中展示。语言与声音偏好只存在你的浏览器里。服务器会保留常规访问日志。 | **What we record**: the coworker profile you pick (Slack ID, name, and avatar from the company's existing people list); your scores, collection, play progress, and hidden-level status; pet photos, names, and owner links you choose to upload; and any removal requests you send. Uploaded photos are stored as original files, which may include details like where they were taken; the original files stay private and those details are never shown in the game. Language and sound settings stay in your browser. The server keeps standard access logs. |
-| info.full.display | **会在哪里展示**：同事排行榜显示你的名字、头像和最好成绩。宠物会出现在棋盘、图鉴、每日店长和主人竞猜中；主人名字在图鉴里收集后才显示。成绩卡只在你主动保存或分享时离开游戏。 | **Where it shows up**: the coworker leaderboard shows your name, avatar, and best score. Pets appear on the board, in the Pet Collection, as Manager of the Day, and in the owner quiz; owner names in the Pet Collection appear only after that pet is collected. Score cards leave the game only when you save or share them. |
+| info.full.display | **会在哪里展示**：同事排行榜显示你的名字、头像和最好成绩。宠物会出现在棋盘、图鉴、每日店长和主人竞猜中；主人名字在图鉴里收集后才显示。你收集过的宠物，其图鉴卡会显示一共有多少同事收集了 TA，并可能展示你的头像。成绩卡只在你主动保存或分享时离开游戏。 | **Where it shows up**: the coworker leaderboard shows your name, avatar, and best score. Pets appear on the board, in the Pet Collection, as Manager of the Day, and in the owner quiz; owner names in the Pet Collection appear only after that pet is collected. Cards for pets you've collected show how many coworkers have collected them and may show your avatar. Score cards leave the game only when you save or share them. |
 | info.full.ai | **AI 处理**：宠物照片会提交给 AI 图像服务，生成统一画风的头像贴纸，再由 Bob 人工核对后上架；交给 AI 前会先去掉拍摄位置等信息。已收集的同事可以在图鉴卡背面看到 Bob 处理过的照片版本，不会看到原文件。 | **AI processing**: pet photos are sent to an AI image service to create matching-style head stickers, which Bob reviews by hand before they go live. Location details are removed before anything is sent to AI. Coworkers who have collected a pet can see a processed version of the photo on the back of its card, never the original file. |
 | info.full.storage | **存在哪里**：数据库在美国（Supabase），图片存储在亚太区域（Cloudflare R2），只用于这个内部游戏活动。 | **Where it's stored**: the database is in the United States (Supabase); images are stored in the Asia-Pacific region (Cloudflare R2). Used only for this internal game. |
 | info.full.removal | **想删除怎么办**：在「我的宠物」或本页提交删除申请，Bob 人工核实后会下架并清理游戏里的资料。已有成绩会保留，但不再显示该宠物的资料。飞书原文档、AI 服务和托管备份中的副本不在游戏控制范围内，处理结果里会如实说明。 | **Want something removed?** Send a request from My Pets or this page. Bob will verify it, take the pet down, and clean up the game's copies. Existing scores stay, but the pet's details are no longer shown. Copies in the original Feishu doc, the AI service, or hosted backups are outside the game's control; the result will say so honestly. |
@@ -269,6 +269,13 @@
 | pet.owner | 主人 | Owner |
 | pet.original_photo | 翻面看原图 | Flip for the Original Photo |
 | pet.owner_quote | 主人说 | A Word from Home |
+| collection.view_list | 列表 | List |
+| collection.view_sheet | 贴纸册 | Sticker Book |
+| collection.sheet_hint | 按主人和宠物名排序 · 点贴纸看详情 | Sorted by owner, then pet name · Tap a sticker for details |
+| collection.sheet_title | {playerName} 的贴纸册 | {playerName}'s Sticker Album |
+| collection.sheet_share | 分享贴纸册图片 | Share Sticker Album |
+| collection.sheet_share_hint | 把这一页毛孩子，存成你的收藏 | Save a page of furry coworkers to your collection |
+| collection.sheet_preview | 贴纸册图片预览 | Sticker Album Preview |
 | pet.unlisted | 这位伙伴已下架，回图鉴看看其他伙伴吧。 | This pet is no longer listed. Browse the rest of the collection. |
 | pet.quote_more | 展开全文 | Read More |
 | pet.quote_less | 收起 | Show Less |
@@ -277,8 +284,13 @@
 `pet.owner_quote` 下方显示飞书原介绍的原文摘录（不翻译，过长截取前一两句），或 Bob 手工补录的主人名言；两者都没有时隐藏整块。
 
 图鉴展示的关键文案已确认。解锁说明使用「自动收集」，对应本局实际服务过该宠物、完整结束且结果保存成功，不要求另点领取或手动保存。单纯登场、点选或查看卡片不算收集。搜索空结果只说明当前范围没有匹配，不表示该同事没有宠物。没有已收集宠物时，提示与未收集剪影列表并存，不以空白页替代列表。既定排序、搜索范围和收集条件不变。
+| pet.known_by_one | 已有 1 位同事认识了 TA | 1 coworker has met this pet |
+| pet.known_by_other | 已有 {count} 位同事认识了 TA | {count} coworkers have met this pet |
+| pet.known_by_more | 还有 {count} 位同事 | and {count} more |
 
 ### 6.2 我的宠物 · 关键文案已确认
+
+`pet.known_by_*` 只在已收集或自家宠物详情正面底部出现，人数为 0 时整区隐藏，人数为 1 用 `_one`，其余用 `_other`；下方头像叠放超出 5 位时显示「+{count}」，`pet.known_by_more` 作为该标记的无障碍朗读文本。
 
 | Key | 中文 | English |
 | --- | --- | --- |

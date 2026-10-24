@@ -17,6 +17,7 @@ const view = (collectedCount: number): CollectionView => ({
     owner: i < collectedCount ? { userId: 'U_TEST_ALICE', name: 'Alice Chen' } : null,
     own: false,
   })),
+  sheetOrder: [...ids].reverse(),
 });
 const detail = async (petId: string): Promise<PetDetail> => ({
   petId,
@@ -27,6 +28,7 @@ const detail = async (petId: string): Promise<PetDetail> => ({
   quote: 'Loves naps. Hates baths! Will trade anything for cheese.',
   hasPhoto: true,
   listed: true,
+  knownBy: ids.indexOf(petId) < 3 ? { count: 12, recent: [{ userId: 'U_TEST_ALICE', name: 'Alice Chen' }, { userId: 'U_TEST_BOB', name: 'Bob' }] } : null,
 });
 
 const entry: GalleryEntry = {

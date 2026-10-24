@@ -30,6 +30,13 @@ describe('图鉴目录', () => {
     expect(by('kiwi')).toMatchObject({ collected: false, owner: null });
   });
 
+  it('贴纸册顺序：先按主人英文名、再按宠物名，没有主人的排最后，只给 petId', async () => {
+    const view = (await get('/api/pets?playerId=U_TEST_ZHANG')).json();
+    const ownerless = view.pets.filter((p: { petId: string }) => !['mochi', 'tofu'].includes(p.petId)).map((p: { petId: string }) => p.petId);
+    expect(view.sheetOrder).toEqual(['mochi', 'tofu', ...ownerless]);
+    expect(view.pets.find((p: { petId: string }) => p.petId === 'mochi').owner).toBeNull();
+  });
+
   it('下架宠物不在目录里，也不计入总数', async () => {
     await ctx.pool.query(`UPDATE pet_match.pets SET status = 'unpublished' WHERE pet_id = 'pepper'`);
     expect((await get('/api/pets?playerId=U_TEST_BOB')).json().total).toBe(5);
@@ -53,6 +60,32 @@ describe('宠物详情', () => {
 
   it('自家宠物即使未收集也能看完整资料（原介绍回退）', async () => {
     expect((await get('/api/pets/tofu?playerId=U_TEST_BOB')).json()).toMatchObject({ own: true, collected: false, quote: 'Intro of Tofu', hasPhoto: true });
+  });
+});
+
+describe('认识人数', () => {
+  it('计已保存收集且仍在名单内的同事，头像取最近收集的 5 位', async () => {
+    await ctx.pool.query(`INSERT INTO public."user" (user_id, email, real_name_normalized, team_id) VALUES ('U_TEST_NEW', 'new@moego.pet', 'New Hire', 'T011CF3CMJN')`);
+    const g = await ctx.pool.query(`SELECT game_id FROM pet_match.games LIMIT 1`);
+    const order = ['U_TEST_BOB', 'U_TEST_ALICE', 'U_TEST_ZHANG', 'U_TEST_SAM', 'U_TEST_LONG', 'U_TEST_NEW', 'U_TEST_GONE'];
+    for (const [i, id] of order.entries()) {
+      await ctx.pool.query(
+        `INSERT INTO pet_match.collections (player_id, pet_id, first_game_id, collected_at) VALUES ($1, 'kiwi', $2, $3)`,
+        [id, g.rows[0].game_id, new Date(Date.UTC(2026, 9, 24, 0, i))],
+      );
+    }
+    const { knownBy } = (await get('/api/pets/kiwi?playerId=U_TEST_BOB')).json();
+    expect(knownBy.count).toBe(6);
+    expect(knownBy.recent.map((x: { userId: string }) => x.userId)).toEqual(['U_TEST_NEW', 'U_TEST_LONG', 'U_TEST_SAM', 'U_TEST_ZHANG', 'U_TEST_ALICE']);
+    expect(knownBy.recent[0]).toEqual({ userId: 'U_TEST_NEW', name: 'New Hire' });
+  });
+
+  it('他人未收集的宠物不返回', async () => {
+    expect((await get('/api/pets/mochi?playerId=U_TEST_ZHANG')).json().knownBy).toBeNull();
+  });
+
+  it('自家宠物未收集也返回，尚无人收集时为 0', async () => {
+    expect((await get('/api/pets/tofu?playerId=U_TEST_BOB')).json().knownBy).toEqual({ count: 0, recent: [] });
   });
 });
 

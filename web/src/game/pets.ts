@@ -53,6 +53,17 @@ export const photoUrl = (petId: string, playerId: string) =>
   `/img/photos/${encodeURIComponent(petId)}?playerId=${encodeURIComponent(playerId)}`;
 export const avatarUrl = (userId: string) => `/img/avatars/${encodeURIComponent(userId)}`;
 
+const preloaded = new Set<string>();
+/** 提前把图片拉进浏览器缓存并解码（如手指按下贴纸时预取详情大图）；同一地址只发一次。 */
+export function preloadImage(src: string) {
+  if (preloaded.has(src) || typeof Image === 'undefined') return;
+  preloaded.add(src);
+  const img = new Image();
+  img.decoding = 'async';
+  img.src = src;
+  void img.decode().catch(() => preloaded.delete(src));
+}
+
 export const petImage = (pet: PetInfo, size: 128 | 512 | 1024) => (pet.imageBase ? `${pet.imageBase}/${size}` : null);
 
 export const petDisplayName = (pet: PetInfo, locale: 'zh' | 'en') => (locale === 'en' && pet.nameEn ? pet.nameEn : pet.name);

@@ -28,6 +28,7 @@ export function PetDetailOverlay({ pet, playerId, onClose, onRetry, onOpenShop, 
         silhouetteSrc={silhouetteUrl(pet.petId, 512)}
         photoSrc={detail?.hasPhoto ? photoUrl(pet.petId, playerId) : null}
         ownerAvatarSrc={detail?.owner ? avatarUrl(detail.owner.userId) : null}
+        colleagueAvatarSrc={avatarUrl}
         origin={pet.origin}
         onClose={onClose}
         onRetry={() => onRetry(pet.petId, pet.name)}
