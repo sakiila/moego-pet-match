@@ -4,7 +4,9 @@ import { petDisplayName, petImage, type PetInfo } from '../../game/pets';
 import type { TitleKey } from '../../game/report';
 import { useI18n, type MessageKey } from '../../i18n';
 import { Icon } from '../../ui/primitives/Icon';
+import type { Standing } from '../../game/standing';
 import { TitleStamp } from '../TitleStamp/TitleStamp';
+import { TodayStanding } from '../TodayStanding/TodayStanding';
 import styles from './ScoreCard.module.css';
 
 export interface ScoreCardProps {
@@ -24,6 +26,8 @@ export interface ScoreCardProps {
   mvpRemoved?: boolean;
   /** 已计入 score 的猜主人奖励；大于 0 时在分数下注明，分数轻弹一下。 */
   quizBonus?: number;
+  /** 今日榜上的名次（保存成功后读取）；null 或未提供时不显示。 */
+  standing?: Standing | null;
 }
 
 const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
@@ -35,7 +39,7 @@ const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
 /** 读 :root 上的毫秒令牌（--print-start / --print-ms），与 CSS 动画同一时间线。 */
 const cssMs = (name: string) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
 
-export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0 }: ScoreCardProps) {
+export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null }: ScoreCardProps) {
   const { t, locale } = useI18n();
   // 声音与轻震跟着打印动画的节拍：纸送到位的瞬间「叮」，印章拍下的瞬间「咚」
   const feedback = useFeedback();
@@ -79,6 +83,7 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
                   {t('report.personal_best')}
                 </span>
               )}
+              {standing && <TodayStanding standing={standing} />}
             </div>
             <span className={styles.saveBadge} data-state={saveState}>
               {saveState === 'saved' ? (

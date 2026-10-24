@@ -1,5 +1,5 @@
 import type { AchievementId, AchievementView } from './types';
-import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse } from './types';
+import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse } from './types';
 
 /**
  * 接口错误分类：not_found（确定不存在）与 unavailable（网络或服务暂时不可用）分开，
@@ -70,8 +70,8 @@ export const api = {
   getPlayer: (userId: string) => request<PlayerView>(`/api/players/${encodeURIComponent(userId)}`),
   registerGame: (playerId: string, mode: GameMode) =>
     request<RegisteredGame>('/api/games', { method: 'POST', body: JSON.stringify({ playerId, mode }) }),
-  getLeaderboard: (mode: GameMode, playerId: string) =>
-    request<LeaderboardView>(`/api/leaderboard?mode=${mode}&playerId=${encodeURIComponent(playerId)}`),
+  getLeaderboard: (mode: GameMode, playerId: string, scope: LeaderboardScope = 'all') =>
+    request<LeaderboardView>(`/api/leaderboard?mode=${mode}&scope=${scope}&playerId=${encodeURIComponent(playerId)}`),
   answerQuiz: (quizId: string, playerId: string, choice: string | null) =>
     request<QuizResult>(`/api/quizzes/${encodeURIComponent(quizId)}/answer`, { method: 'POST', body: JSON.stringify({ playerId, choice }) }),
   getCollection: (playerId: string) => request<CollectionView>(`/api/pets?playerId=${encodeURIComponent(playerId)}`),

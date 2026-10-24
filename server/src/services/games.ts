@@ -4,8 +4,10 @@ import { z } from 'zod';
 import type { GameMode, LineupPet, RegisteredGame, ResultPayload, SettleResponse } from '../../../web/src/api/types.ts';
 import { RULES, RULES_VERSION } from '../../../web/src/engine/config.ts';
 import { inTransaction, type Pool } from '../db/pool.ts';
+import { dailySeed } from './dailyBoard.ts';
 import { sampleLineup } from './lineup.ts';
 import { maybeCreateQuiz } from './quiz.ts';
+import { beijingDate } from './pets.ts';
 import { findColleague, loadPlayer } from './players.ts';
 import { lockAchievements, syncAchievements } from './achievements.ts';
 
@@ -21,8 +23,11 @@ export class GameError extends Error {
   }
 }
 
-/** 登记新局：确认身份在名单内（鱼局需已解锁），服务端定种子并抽 6 只上架宠物。 */
-export async function registerGame(pool: Pool, playerId: string, mode: GameMode): Promise<RegisteredGame> {
+/**
+ * 登记新局：确认身份在名单内（鱼局需已解锁），抽 6 只上架宠物；
+ * 种子按登记当天的北京自然日派生（每日同盘），日期一并记录供今日榜分组。
+ */
+export async function registerGame(pool: Pool, playerId: string, mode: GameMode, now = new Date()): Promise<RegisteredGame> {
   const player = await loadPlayer(pool, playerId);
   if (!player) throw new GameError('not_found', 'player');
   if (mode === 'fish' && !player.progress.fishUnlocked) throw new GameError('locked');
@@ -59,10 +64,11 @@ export async function registerGame(pool: Pool, playerId: string, mode: GameMode)
     uncollectedPetIds = sampled.lineup.filter((id) => !collected.has(id));
     for (const r of pets.rows) if (r.family_id && sampled.lineup.includes(r.pet_id)) families[r.pet_id] = r.family_id;
   }
-  const seed = randomInt(0, 2 ** 31 - 1);
+  const boardDate = beijingDate(now);
+  const seed = dailySeed(mode, boardDate);
   const inserted = await pool.query(
-    `INSERT INTO pet_match.games (player_id, mode, rules_version, seed, lineup) VALUES ($1, $2, $3, $4, $5) RETURNING game_id`,
-    [playerId, mode, RULES_VERSION, seed, lineup.map((p) => p.petId)],
+    `INSERT INTO pet_match.games (player_id, mode, rules_version, seed, lineup, board_date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING game_id`,
+    [playerId, mode, RULES_VERSION, seed, lineup.map((p) => p.petId), boardDate],
   );
   return { gameId: inserted.rows[0].game_id, seed, rulesVersion: RULES_VERSION, mode, lineup, ownPetIds, uncollectedPetIds, families };
 }

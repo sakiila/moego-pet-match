@@ -107,8 +107,14 @@ export interface LeaderboardEntry {
   equippedTitle?: AchievementId | null;
 }
 
+export type LeaderboardScope = 'today' | 'all';
+
 export interface LeaderboardView {
   mode: GameMode;
+  /** today：当天（北京自然日）每人最好；all：个人历史最好。 */
+  scope: LeaderboardScope;
+  /** 服务端当前的北京日期（YYYY-MM-DD），今日榜据此显示。 */
+  date: string;
   /** 按名次排序的全部已保存成绩（同分并列 1、2、2、4）。 */
   entries: LeaderboardEntry[];
   /** 当前玩家在本模式的名次；没有已保存成绩为 null。 */

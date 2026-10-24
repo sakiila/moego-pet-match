@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { AchievementId, DailyManager, GameMode, QuizResult } from '../api/types';
 import { AchievementUnlocks } from '../components/AchievementUnlocks/AchievementUnlocks';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
@@ -14,6 +14,7 @@ import { ScoreCard } from '../components/ScoreCard/ScoreCard';
 import type { GameSummary } from '../engine';
 import { stickerUrl, type PetInfo } from '../game/pets';
 import { judgeMvp, judgeReview, judgeTitle } from '../game/report';
+import type { Standing } from '../game/standing';
 import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
 import styles from './Screen.module.css';
@@ -37,6 +38,8 @@ export interface ReportScreenProps {
   onOpenPet: (pet: PetInfo, el: HTMLElement) => void;
   /** 打开成绩卡预览；不等揭晓动画，也不等保存结果。 */
   onShare: () => void;
+  /** 读取今日榜上的名次：保存成功后调用一次，猜主人加分后再调一次；失败或不提供时不显示。 */
+  loadStanding?: () => Promise<Standing | null>;
   equippedTitle?: AchievementId | null;
   onEquipTitle?: (id: AchievementId) => Promise<void>;
   onTitles?: () => void;
@@ -47,7 +50,7 @@ export interface ReportScreenProps {
  * 正文可滚动，底部固定「再开一局」。所有判定复用本局冻结结果。
  */
 export function ReportScreen(props: ReportScreenProps) {
-  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onCollection, onOpenPet, onShare } = props;
+  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onCollection, onOpenPet, onShare, loadStanding } = props;
   const { t } = useI18n();
   const mvpKind = judgeMvp(summary);
   const kindOf = (id: string) => pets.findIndex((p) => p.id === id);
@@ -55,6 +58,19 @@ export function ReportScreen(props: ReportScreenProps) {
   // 猜主人作答后以服务端返回的总分与最好成绩为准（答对已含奖励）
   const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
   const best = quizResult?.personalBest ?? saved?.personalBest;
+  // 今日名次：结果保存成功后读取；答对竞猜后总分变了，再读一次
+  const [standing, setStanding] = useState<Standing | null>(null);
+  const savedScore = quizResult?.score ?? saved?.score ?? null;
+  useEffect(() => {
+    if (savedScore === null || !loadStanding) return;
+    let live = true;
+    loadStanding()
+      .then((s) => live && setStanding(s))
+      .catch(() => live && setStanding(null));
+    return () => {
+      live = false;
+    };
+  }, [savedScore, loadStanding]);
   // 本局阵容里当前已下架的宠物：不再展示它们的资料（原 MVP 下架用通用图案承接）
   const removed = new Set(saved?.removedPetIds ?? []);
   const served = summary.clearedCells > 0;
@@ -78,6 +94,7 @@ export function ReportScreen(props: ReportScreenProps) {
         title={judgeTitle(summary)}
         stats={{ tiles: summary.clearedCells, chain: summary.maxChain, tools: summary.toolsFired }}
         host={mode === 'normal' && manager ? { name: manager.pet.name, stickerSrc: stickerUrl(manager.pet.petId, 512) } : null}
+        standing={standing}
       />
       <SaveStatus state={save} onRetry={onRetry} />
       {saved && <AchievementUnlocks ids={saved.newAchievements ?? []} equippedTitle={props.equippedTitle} onEquip={props.onEquipTitle} onOpenTitles={props.onTitles} />}

@@ -1,0 +1,10 @@
+Use case: ui-mockup / precise-object-edit.
+Refine IMAGE1, which is a real screenshot (780x1688) of the CURRENT MoeGo "毛孩子全明星" mobile leaderboard page. Output ONE flat portrait screenshot EXACTLY 853 x 1844 pixels, no phone frame, no collage. Keep IMAGE1's existing design system pixel-faithful: MoeGo logo header with "回门店" and "中 / EN", the "毛孩子光荣榜" display title with orange accent strokes and subtitle "谁把毛孩子安排得最明白？", the orange pill mode switch "宠物店 / 鱼关卡", the three-step podium with the blue cat and black/white dog cheerleaders, the "我的名次 / 全榜" underline tabs, the gray table header, the rows with crown/shield rank marks, and the big orange "再挑战一次" button. Same typography, same orange #F47721 and charcoal, same spacing rhythm.
+
+ONLY ADD the following, nothing else:
+1. Directly BELOW the "宠物店 / 鱼关卡" mode switch and ABOVE the podium, insert a compact scope selector of two underline tabs in the same style as the existing "我的名次 / 全榜" tabs: "今日榜" ACTIVE (charcoal text, orange underline) and "总榜" inactive gray. Center it. It must read as a separate level from the mode switch.
+2. Directly under that selector, one small centered gray caption line: "10 月 24 日 · 今天全公司同一盘棋", with a tiny orange calendar or paw accent at the left. Quiet, 13–14px equivalent, not a card.
+3. In the table header change the right column label from "最好成绩" to "今日最好". Rows keep the same layout; scores may be smaller numbers typical of a single day, e.g. first row "Bob 包博 你 18,410", second "Bob 17,580", third "Alice Chen 13,770".
+4. Podium labels stay identical except the scores match the rows.
+
+Do NOT add any other new elements: no date pickers, no countdown, no rewards, no streak badges, no weekly tab, no extra buttons, no change to the header, title, podium illustrations, button or colors. Do not shrink the podium. Keep all Chinese strings exactly as given, crisp and readable. Final composition fits the full 853x1844 frame with the orange button at the bottom as in IMAGE1.

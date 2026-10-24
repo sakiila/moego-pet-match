@@ -12,6 +12,35 @@ const entry: GalleryEntry = {
     'saved + new record': () => (
       <ScoreCard mode="normal" score={2480} saveState="saved" newRecord mvp={{ pet: maodu, kind: 1 }} review="review.pet.rush_success" title="title.scheduling_pro" stats={stats} />
     ),
+    'today standing: rank 3, 1,240 behind': () => (
+      <ScoreCard
+        mode="normal"
+        score={13420}
+        saveState="saved"
+        newRecord={false}
+        mvp={{ pet: maodu, kind: 1 }}
+        review="review.pet.high_chain"
+        title="title.cleanup_chief"
+        stats={{ tiles: 684, chain: 6, tools: 13 }}
+        standing={{ rank: 3, score: 13420, leaderScore: 14660, participants: 12 }}
+      />
+    ),
+    'today standing: first + new record': () => (
+      <ScoreCard
+        mode="normal"
+        score={18410}
+        saveState="saved"
+        newRecord
+        mvp={{ pet: maodu, kind: 1 }}
+        review="review.pet.rush_success"
+        title="title.scheduling_pro"
+        stats={stats}
+        standing={{ rank: 1, score: 18410, leaderScore: 18410, participants: 12 }}
+      />
+    ),
+    'today standing: alone today': () => (
+      <ScoreCard mode="normal" score={2480} saveState="saved" newRecord={false} mvp={{ pet: maodu, kind: 2 }} review="review.pet.normal" title="title.pet_officer" stats={stats} standing={{ rank: 1, score: 2480, leaderScore: 2480, participants: 1 }} />
+    ),
     'owner quiz bonus (+100 included)': () => (
       <ScoreCard mode="normal" score={2580} quizBonus={100} saveState="saved" newRecord mvp={{ pet: maodu, kind: 1 }} review="review.pet.normal" title="title.pet_officer" stats={stats} />
     ),

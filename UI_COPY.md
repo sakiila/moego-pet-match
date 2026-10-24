@@ -338,6 +338,17 @@
 | leaderboard.points | {score} 分 | {score} pts |
 | leaderboard.colleague | 同事 | Coworker |
 | leaderboard.you | 你 | You |
+| leaderboard.scope | 榜单范围 | Board range |
+| leaderboard.today | 今日榜 | Today |
+| leaderboard.all_time | 总榜 | All-Time |
+| leaderboard.today_caption | {date} · 今天全公司同一盘棋 | {date} · Same board for everyone today |
+| leaderboard.today_best | 今日最好 | Today's Best |
+| leaderboard.today_empty | 今天还没有人开工，你来第一个。 | Nobody has clocked in today. Be the first. |
+| leaderboard.today_no_score | 今天还没有你的成绩。开一局，上今日榜。 | No score from you today yet. Play a round to get on today's board. |
+| report.today_first | 今日第 1 名，全店最明白 | #1 today. Nobody runs the shop better. |
+| report.today_rank | 今日第 {rank} 名 | #{rank} today |
+| report.today_gap | 距第一还差 {points} 分 | {points} pts behind #1 |
+| report.today_alone | 今天第一个开工，等同事来挑战 | First to clock in today. Let's see who follows. |
 | leaderboard.challenge | 再挑战一次 | Play Another Round |
 | leaderboard.load_failed | 暂时没能读取排行榜，请重试。 | We couldn't load the leaderboard. Please try again. |
 

@@ -1,5 +1,5 @@
 import type { LeaderboardEntry } from '../../api/types';
-import { useI18n } from '../../i18n';
+import { useI18n, type MessageKey } from '../../i18n';
 import { RankMark } from '../RankMark/RankMark';
 import styles from './LeaderboardRow.module.css';
 import { AchievementAvatar } from '../AchievementAvatar/AchievementAvatar';
@@ -31,14 +31,14 @@ export function LeaderboardRow({ entry, isMe, tied }: LeaderboardRowProps) {
   );
 }
 
-/** 列表表头：名次 / 同事 / 最好成绩，列宽与 LeaderboardRow 一致。 */
-export function LeaderboardHeader() {
+/** 列表表头：名次 / 同事 / 最好成绩（今日榜为「今日最好」），列宽与 LeaderboardRow 一致。 */
+export function LeaderboardHeader({ scoreLabel = 'leaderboard.best_score' }: { scoreLabel?: MessageKey }) {
   const { t } = useI18n();
   return (
     <div className={`${styles.row} ${styles.header}`} aria-hidden>
       <span className={styles.rank}>{t('leaderboard.rank')}</span>
       <span className={styles.colleague}>{t('leaderboard.colleague')}</span>
-      <span className={styles.score}>{t('leaderboard.best_score')}</span>
+      <span className={styles.score}>{t(scoreLabel)}</span>
     </div>
   );
 }

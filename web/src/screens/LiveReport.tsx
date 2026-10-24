@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { api } from '../api/client';
 import type { AchievementId, DailyManager, QuizResult, RegisteredGame, SettleResponse } from '../api/types';
 import type { GameSummary } from '../engine';
 import type { PetInfo } from '../game/pets';
 import { toResultPayload } from '../game/result';
+import { todayStanding } from '../game/standing';
 import { usePetDetail } from '../game/usePetDetail';
 import { useResultSubmission } from '../game/useResultSubmission';
 import { ShareCardOverlay } from './ShareCardOverlay';
@@ -36,6 +37,10 @@ export function LiveReport({ summary, registered, pets, playerId, playerName, on
   const detail = usePetDetail(playerId);
   const [sharing, setSharing] = useState(false);
   const [quizScore, setQuizScore] = useState<number | null>(null);
+  const loadStanding = useCallback(
+    () => api.getLeaderboard(registered.mode, playerId, 'today').then((view) => todayStanding(view, playerId)),
+    [registered.mode, playerId],
+  );
   // 答对加分后总分与最好成绩变了：分享卡用新总分，并按新结果刷新玩家资料
   const answerQuiz = async (quizId: string, choice: string | null): Promise<QuizResult> => {
     const result = await api.answerQuiz(quizId, playerId, choice);
@@ -56,6 +61,7 @@ export function LiveReport({ summary, registered, pets, playerId, playerName, on
         onAnswerQuiz={answerQuiz}
         onOpenPet={(pet, el) => void detail.show(pet.id, pet.name, el)}
         onShare={() => setSharing(true)}
+        loadStanding={loadStanding}
         {...nav}
       />
       {sharing && (
