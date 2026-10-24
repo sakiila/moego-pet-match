@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { ApiError, api } from '../api/client';
-import type { DailyManager, GameMode, PlayerView, RegisteredGame } from '../api/types';
+import type { AchievementId, DailyManager, GameMode, PlayerView, RegisteredGame } from '../api/types';
+import { AchievementOverlay } from '../screens/AchievementOverlay';
 import { ScreenTransition } from '../components/ScreenTransition/ScreenTransition';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { PRESETS } from '../dev/presets';
@@ -53,6 +54,21 @@ export function App() {
   const [player, setPlayer] = useState<PlayerView | null>(null);
   const [route, setRoute] = useState<Route>(() => (loadSavedPlayerId() ? { name: 'boot' } : { name: 'identity' }));
   const [manager, setManager] = useState<DailyManager | null>(null);
+  const [showTitles, setShowTitles] = useState(false);
+  const closeTitles = useCallback(() => setShowTitles(false), []);
+  const titleVersion = useRef(0);
+  const playerId = player?.userId;
+  const onEquipped = useCallback((id: AchievementId | null) => {
+    titleVersion.current++;
+    setPlayer(p => p && p.userId === playerId && p.equippedTitle !== id ? { ...p, equippedTitle: id } : p);
+  }, [playerId]);
+  const equipTitle = async (id: AchievementId) => {
+    if (!player) return;
+    const owner = player.userId;
+    const result = await api.equipTitle(owner, id);
+    titleVersion.current++;
+    setPlayer(p => p?.userId === owner ? { ...p, equippedTitle: result.equippedTitle } : p);
+  };
 
   // 开发验收（?report=）：登记一局 → 自动打完 → 直接进报告页，等同于玩完一局
   const devJumpToReport = useCallback(async (p: PlayerView) => {
@@ -115,7 +131,9 @@ export function App() {
   const refreshPlayer = useCallback(async () => {
     if (!player) return;
     try {
-      setPlayer(await api.getPlayer(player.userId));
+      const version = titleVersion.current;
+      const data = await api.getPlayer(player.userId);
+      setPlayer(p => p?.userId === data.userId ? { ...data, equippedTitle: version === titleVersion.current ? data.equippedTitle : p.equippedTitle } : p);
     } catch {
       // 门店展示用，读取失败时沿用旧数据
     }
@@ -170,8 +188,14 @@ export function App() {
             onCollection={toPetdex}
             onLeaderboard={() => setRoute({ name: 'leaderboard', mode: 'normal' })}
             onMyPets={() => setRoute({ name: 'myPets' })}
+            onTitles={() => setShowTitles(true)}
             onInfo={(removal) => setRoute({ name: 'info', player: { userId: player.userId, name: player.name }, removal, back: 'home' })}
-            onSwitchIdentity={() => setRoute({ name: 'identity' })}
+            onClockOut={() => {
+              setShowTitles(false);
+              savePlayerId(null);
+              setPlayer(null);
+              setRoute({ name: 'identity' });
+            }}
           />
         ) : null;
       case 'leaderboard':
@@ -238,10 +262,13 @@ export function App() {
             onCollection={toPetdex}
             onOpenShop={() => void toPrep('normal')}
             onFishInvite={() => void toPrep('fish')}
+            equippedTitle={player?.equippedTitle}
+            onEquipTitle={equipTitle}
+            onTitles={() => setShowTitles(true)}
           />
         );
     }
   };
 
-  return <ScreenTransition routeName={route.name}>{renderRoute()}</ScreenTransition>;
+  return <><ScreenTransition routeName={route.name}>{renderRoute()}</ScreenTransition>{showTitles && player && <AchievementOverlay key={player.userId} playerId={player.userId} onEquipped={onEquipped} onClose={closeTitles} />}</>;
 }

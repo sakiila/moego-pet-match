@@ -14,14 +14,15 @@ export const leaderboardRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool
     const q = Query.safeParse(request.query);
     if (!q.success) return reply.status(400).send({ error: 'invalid_request' });
     const { rows } = await pool.query(
-      `SELECT RANK() OVER (ORDER BY b.score DESC)::int AS rank, b.player_id, c.name, b.score
+      `SELECT RANK() OVER (ORDER BY b.score DESC)::int AS rank, b.player_id, c.name, b.score, t.equipped_title
        FROM pet_match.best_scores b
        JOIN pet_match.colleagues c ON c.user_id = b.player_id
+       LEFT JOIN pet_match.player_titles t ON t.player_id = b.player_id
        WHERE b.mode = $1
        ORDER BY b.score DESC, c.name ASC`,
       [q.data.mode],
     );
-    const entries = rows.map((r) => ({ rank: r.rank, userId: r.player_id, name: r.name, score: r.score }));
+    const entries = rows.map((r) => ({ rank: r.rank, userId: r.player_id, name: r.name, score: r.score, ...(r.equipped_title ? { equippedTitle: r.equipped_title } : {}) }));
     const view: LeaderboardView = {
       mode: q.data.mode,
       entries,

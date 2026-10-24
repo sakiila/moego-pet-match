@@ -1,0 +1,24 @@
+.stamp {
+  display: block;
+  flex: none;
+  align-self: flex-start;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+}
+
+/* 图片缺失时的文字小章 */
+.fallback {
+  display: inline-block;
+  max-width: 120px;
+  padding: 6px 10px;
+  border: 3px solid var(--color-brand);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+  font-size: var(--text-sm);
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--color-brand);
+  transform: rotate(-8deg);
+}

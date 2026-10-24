@@ -283,7 +283,18 @@ function speech(ctx: Ctx, x: number, y: number, w: number, h: number, k: Tokens,
   ctx.restore();
 }
 
-/** 称号章：略微倾斜的橙色徽章。 */
+/** 称号章图片：与报告页同一枚趣味称号章，略微倾斜盖在主角图右上。 */
+function stampImage(ctx: Ctx, cx: number, cy: number, img: HTMLImageElement) {
+  const size = 280;
+  const h = (size * img.height) / img.width;
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(0.14);
+  ctx.drawImage(img, -size / 2, -h / 2, size, h);
+  ctx.restore();
+}
+
+/** 称号章图片读取失败时的文字小章：略微倾斜的橙色徽章。 */
 function stamp(ctx: Ctx, cx: number, cy: number, text: string, k: Tokens) {
   ctx.save();
   ctx.translate(cx, cy);
@@ -526,11 +537,23 @@ function genericMark(k: Tokens): HTMLCanvasElement {
   return c;
 }
 
+/** 画布不会触发网页字体下载：先显式加载卡面用到的圆体字重，再绘制。 */
+async function loadFonts(family: string) {
+  try {
+    await Promise.all(['500', '800', '900'].map((w) => document.fonts?.load(`${w} 40px ${family}`, '毛孩子全明星 Aa 0123')));
+  } catch {
+    // 加载失败时照常绘制，回退系统字体
+  }
+  await document.fonts?.ready;
+}
+
 /** 按冻结的卡面内容绘制成绩卡并导出 PNG。主角图读取失败时整体失败（由预览提供重试）。 */
 export async function drawShareCard(model: ShareCardModel, mode: GameMode): Promise<Blob> {
   const k = readTokens(mode);
-  await document.fonts?.ready;
+  await loadFonts(k.font);
   const img = !model.hero ? null : model.hero.src ? trimmed(await loadImage(model.hero.src)) : genericMark(k);
+  // 称号章读取失败不影响出图，退回文字小章
+  const stampImg = model.titleStamp ? await loadImage(model.titleStamp).catch(() => null) : null;
   const canvas = document.createElement('canvas');
   canvas.width = SHARE_CARD.width;
   canvas.height = SHARE_CARD.height;
@@ -542,7 +565,8 @@ export async function drawShareCard(model: ShareCardModel, mode: GameMode): Prom
   review(ctx, model.review, mode, !!img, k);
   if (img && model.hero) plate(ctx, model.hero.label, mode, k);
   const [sx, sy] = img ? LAYOUT[mode].stamp : [800, mode === 'fish' ? LAYOUT.fish.paper[1] + 110 : LAYOUT.normal.header + 150];
-  stamp(ctx, sx, sy, model.title, k);
+  if (stampImg) stampImage(ctx, sx, sy, stampImg);
+  else stamp(ctx, sx, sy, model.title, k);
   score(ctx, model, mode, k);
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('export failed'))), 'image/png'));
 }
@@ -580,7 +604,7 @@ function awning(ctx: Ctx, x: number, y: number, w: number, h: number, k: Tokens)
 /** 按冻结的店长内容绘制店长小海报并导出 PNG。 */
 export async function drawManagerPoster(model: ManagerPosterModel): Promise<Blob> {
   const k = readTokens('normal');
-  await document.fonts?.ready;
+  await loadFonts(k.font);
   const img = trimmed(await loadImage(model.hero.src));
   const canvas = document.createElement('canvas');
   canvas.width = SHARE_CARD.width;

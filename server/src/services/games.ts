@@ -7,6 +7,7 @@ import { inTransaction, type Pool } from '../db/pool.ts';
 import { sampleLineup } from './lineup.ts';
 import { maybeCreateQuiz } from './quiz.ts';
 import { findColleague, loadPlayer } from './players.ts';
+import { lockAchievements, syncAchievements } from './achievements.ts';
 
 /** 第几局普通完整局后解锁 Peter 鱼关。 */
 export const FISH_UNLOCK_GAMES = 3;
@@ -156,6 +157,7 @@ export async function settleGame(
 
     const mode: GameMode = g.mode;
     const counted = mode === 'normal' && payload.validMoves > 0;
+    await lockAchievements(client, playerId);
 
     const best = await client.query('SELECT score FROM pet_match.best_scores WHERE player_id = $1 AND mode = $2 FOR UPDATE', [playerId, mode]);
     const previous: number | null = best.rows[0]?.score ?? null;
@@ -214,6 +216,7 @@ export async function settleGame(
       );
     }
 
+    const newAchievements = await syncAchievements(client, playerId, gameId);
     const quiz = counted ? await maybeCreateQuiz(client, gameId, playerId, completed, payload) : null;
 
     const response: SettleResponse = {
@@ -224,6 +227,7 @@ export async function settleGame(
       progress: { completedNormalGames: completed, fishUnlocked, unlockedNow, counted },
       quiz,
       removedPetIds: await removedOf(),
+      newAchievements,
     };
     await client.query(
       `INSERT INTO pet_match.game_results (game_id, payload, payload_hash, score, counted, response) VALUES ($1, $2, $3, $4, $5, $6)`,

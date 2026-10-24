@@ -1,6 +1,11 @@
 import type { FastifyPluginAsync } from 'fastify';
 import type { AppDeps } from '../app.ts';
 import { loadPlayer, registerFromSlack } from '../services/players.ts';
+import { findColleague } from '../services/players.ts';
+import { z } from 'zod';
+import { inTransaction } from '../db/pool.ts';
+import { readAchievements } from '../services/achievements.ts';
+import { ACHIEVEMENT_IDS } from '../../../web/src/game/achievementRules.ts';
 
 /** 回访校验所选身份：仍在可参与名单则返回资料与个人记录，否则 404；名单外的在职 Slack 同事首次选中时登记。 */
 export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, directory }) => {
@@ -16,6 +21,31 @@ export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, dir
       }
     }
     if (!player) return reply.status(404).send({ error: 'not_found' });
+    const titles = await inTransaction(pool, client => readAchievements(client, player!.userId));
+    if (titles.equippedTitle) player.equippedTitle = titles.equippedTitle;
+    else delete player.equippedTitle;
     return player;
+  });
+
+  app.get<{ Params: { id: string } }>('/api/players/:id/achievements', async (request, reply) => {
+    const playerId = request.params.id;
+    if (!await findColleague(pool, playerId)) return reply.status(404).send({ error: 'not_found' });
+    return inTransaction(pool, client => readAchievements(client, playerId));
+  });
+
+  app.patch<{ Params: { id: string } }>('/api/players/:id/title', async (request, reply) => {
+    const body = z.object({ title: z.enum(ACHIEVEMENT_IDS).nullable() }).strict().safeParse(request.body);
+    if (!body.success) return reply.status(400).send({ error: 'invalid_request' });
+    const playerId = request.params.id;
+    if (!await findColleague(pool, playerId)) return reply.status(404).send({ error: 'not_found' });
+    const result = await inTransaction(pool, async client => {
+      const view = await readAchievements(client, playerId);
+      if (body.data.title && !view.achievements.some(a => a.id === body.data.title && a.unlockedAt)) return null;
+      await client.query(`INSERT INTO pet_match.player_titles(player_id,equipped_title) VALUES($1,$2)
+        ON CONFLICT(player_id) DO UPDATE SET equipped_title=EXCLUDED.equipped_title`, [playerId, body.data.title]);
+      return { ...view, equippedTitle: body.data.title };
+    });
+    if (!result) return reply.status(409).send({ error: 'locked' });
+    return result;
   });
 };

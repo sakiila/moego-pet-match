@@ -1,0 +1,5 @@
+.badge { display: inline-flex; align-items: center; justify-content: center; flex: none; vertical-align: middle; }
+.chip { max-width: 100%; gap: var(--space-1); padding: 0 var(--space-2) 0 0; border: var(--achievement-chip-stroke) solid var(--color-brand); border-radius: var(--radius-pill); background: var(--achievement-chip-bg); color: var(--color-ink); font-size: var(--achievement-chip-text); font-weight: var(--weight-bold); line-height: 1.25; }
+.chip > img { margin: calc(-1 * var(--achievement-chip-stroke)); }
+.name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.locked { filter: grayscale(1); opacity: var(--achievement-locked-opacity); }

@@ -1,3 +1,4 @@
+import type { AchievementId, AchievementView } from './types';
 import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse } from './types';
 
 /**
@@ -60,6 +61,8 @@ async function submitPet(playerId: string, petName: string, photo: File): Promis
 
 export const api = {
   submitPet,
+  getAchievements: (playerId: string) => request<AchievementView>(`/api/players/${encodeURIComponent(playerId)}/achievements`),
+  equipTitle: (playerId: string, title: AchievementId | null) => request<AchievementView>(`/api/players/${encodeURIComponent(playerId)}/title`, { method: 'PATCH', body: JSON.stringify({ title }) }),
   searchRoster: (q: string, signal?: AbortSignal) =>
     request<{ results: ColleagueResult[] }>(`/api/roster?q=${encodeURIComponent(q)}`, { signal }).then((r) => r.results),
   getPlayer: (userId: string) => request<PlayerView>(`/api/players/${encodeURIComponent(userId)}`),

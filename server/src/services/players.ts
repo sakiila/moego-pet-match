@@ -36,12 +36,15 @@ export async function loadPlayer(db: Queryable, userId: string): Promise<PlayerV
   if (!colleague) return null;
   const best = await db.query('SELECT mode, score FROM pet_match.best_scores WHERE player_id = $1', [userId]);
   const progress = await db.query(
-    'SELECT completed_normal_games, fish_unlocked_at FROM pet_match.player_progress WHERE player_id = $1',
+    `SELECT p.completed_normal_games, p.fish_unlocked_at, t.equipped_title
+     FROM (SELECT $1::text AS id) s LEFT JOIN pet_match.player_progress p ON p.player_id=s.id
+     LEFT JOIN pet_match.player_titles t ON t.player_id=s.id`,
     [userId],
   );
   const bestOf = (mode: string) => best.rows.find((r) => r.mode === mode)?.score ?? null;
   return {
     ...colleague,
+    ...(progress.rows[0]?.equipped_title ? { equippedTitle: progress.rows[0].equipped_title } : {}),
     best: { normal: bestOf('normal'), fish: bestOf('fish') },
     progress: {
       completedNormalGames: progress.rows[0]?.completed_normal_games ?? 0,

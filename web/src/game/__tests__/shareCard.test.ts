@@ -32,7 +32,8 @@ describe('成绩卡内容', () => {
     const m = shareCardModel({ summary: summary(), pets, mode: 'normal', playerName: 'Bob 包博', manager, locale: 'zh', t: zh });
     expect(m.hero).toEqual({ src: '/img/pets/pet_2/1024', label: '本局 MVP：Pet2', kind: 'mvp' });
     expect(m.review).toBe('临时加单？安排得明明白白。');
-    expect(m.title).toBe('精准排班大师');
+    expect(m.title).toBe('急什么我会消');
+    expect(m.titleStamp).toMatch(/03-got-this-zh/);
     expect(m.mode).toBe('宠物店');
     expect(m.score).toBe('2,480');
     expect(m.scoreLabel).toBe('本局得分');
@@ -75,7 +76,7 @@ describe('原 MVP 已下架', () => {
   it('主角改为通用 MoeGo 图案与「本局成绩」，不另选 MVP；分数、称号、评语与署名保留', () => {
     const m = shareCardModel({ summary: summary(), pets, mode: 'normal', playerName: 'Bob', manager, locale: 'zh', t: zh, removed: new Set(['pet_2']) });
     expect(m.hero).toEqual({ src: null, label: '本局成绩', kind: 'generic' });
-    expect(m.title).toBe('精准排班大师');
+    expect(m.title).toBe('急什么我会消');
     expect(m.review).toBe('临时加单？安排得明明白白。');
     expect(m.score).toBe('2,480');
     expect(m.player).toBe('本局玩家：Bob');

@@ -3,6 +3,7 @@ import type { GameSummary } from '../engine';
 import type { Locale, MessageKey } from '../i18n';
 import { petDisplayName, petImage, stickerUrl, type PetInfo } from './pets';
 import { judgeMvp, judgeReview, judgeTitle } from './report';
+import { titleStampUrl } from './titleStamps';
 
 /** 成绩卡上的全部文字与主角图，来自本局冻结结果；分享不重新判定 MVP、称号或评语。 */
 export interface ShareCardModel {
@@ -14,6 +15,8 @@ export interface ShareCardModel {
    */
   hero: { src: string | null; label: string; kind: 'mvp' | 'manager' | 'generic' } | null;
   title: string;
+  /** 称号章图片（当前语言版本）；为 null 时画文字小章。 */
+  titleStamp: string | null;
   review: string;
   scoreLabel: string;
   score: string;
@@ -54,6 +57,7 @@ export function shareCardModel({ summary, pets, mode, playerName, manager, local
     brand: { lead: t('brand.title_lead'), accent: t('brand.title_accent') },
     hero,
     title: t(judgeTitle(summary)),
+    titleStamp: titleStampUrl(judgeTitle(summary), locale),
     review: t(judgeReview(summary, mode)),
     scoreLabel: t('report.final_score'),
     score: score.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US'),

@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import type { DailyManager, GameMode, QuizResult } from '../api/types';
+import type { AchievementId, DailyManager, GameMode, QuizResult } from '../api/types';
+import { AchievementUnlocks } from '../components/AchievementUnlocks/AchievementUnlocks';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { CollectionCards } from '../components/CollectionCards/CollectionCards';
 import { FishInvitation } from '../components/FishInvitation/FishInvitation';
 import { ManagerCard } from '../components/ManagerCard/ManagerCard';
+import { ModeMark } from '../components/ModeMark/ModeMark';
 import { NavTile } from '../components/NavTile/NavTile';
 import { QuizCard } from '../components/QuizCard/QuizCard';
 import { SaveStatus, type SaveState } from '../components/SaveStatus/SaveStatus';
@@ -35,6 +37,9 @@ export interface ReportScreenProps {
   onOpenPet: (pet: PetInfo, el: HTMLElement) => void;
   /** 打开成绩卡预览；不等揭晓动画，也不等保存结果。 */
   onShare: () => void;
+  equippedTitle?: AchievementId | null;
+  onEquipTitle?: (id: AchievementId) => Promise<void>;
+  onTitles?: () => void;
 }
 
 /**
@@ -75,6 +80,7 @@ export function ReportScreen(props: ReportScreenProps) {
         host={mode === 'normal' && manager ? { name: manager.pet.name, stickerSrc: stickerUrl(manager.pet.petId, 512) } : null}
       />
       <SaveStatus state={save} onRetry={onRetry} />
+      {saved && <AchievementUnlocks ids={saved.newAchievements ?? []} equippedTitle={props.equippedTitle} onEquip={props.onEquipTitle} onOpenTitles={props.onTitles} />}
       {!fish && save.kind === 'saved' && (
         <CollectionCards pets={save.newPets.map((p) => ({ pet: pets[kindOf(p.id)] ?? p, kind: kindOf(p.id) }))} onSelect={mode === 'normal' ? onOpenPet : undefined} />
       )}
@@ -93,15 +99,15 @@ export function ReportScreen(props: ReportScreenProps) {
       {!fish && saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}
       {mode === 'normal' && manager && <ManagerCard variant="signature" name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} />}
       <nav className={styles.navRow}>
-        {!fish && <NavTile icon="📖" label={t('nav.collection')} onClick={onCollection} />}
-        <NavTile icon="🏆" label={t(fish ? 'fish.leaderboard' : 'nav.leaderboard')} onClick={onLeaderboard} />
-        <NavTile icon="🏠" label={t('action.back_to_shop')} onClick={onHome} />
+        {!fish && <NavTile icon="pet-collection" label={t('nav.collection')} onClick={onCollection} />}
+        <NavTile icon="leaderboard" label={t(fish ? 'fish.leaderboard' : 'nav.leaderboard')} onClick={onLeaderboard} />
+        <NavTile icon="back-to-shop" label={t('action.back_to_shop')} onClick={onHome} />
       </nav>
       <div className={`${styles.stickyActions} ${styles.actionPair}`}>
-        <Button size="lg" block onClick={onPlayAgain} data-testid="play-again">
-          {fish ? '🐟' : '🐾'} {t('action.play_again')}
+        <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onPlayAgain} data-testid="play-again">
+          {t('action.play_again')}
         </Button>
-        <Button size="lg" variant="secondary" block onClick={onShare} data-testid="share">
+        <Button size="lg" variant="secondary" block iconName="share-image" onClick={onShare} data-testid="share">
           {t('share.open')}
         </Button>
       </div>

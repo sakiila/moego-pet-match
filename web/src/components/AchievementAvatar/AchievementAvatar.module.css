@@ -1,0 +1,42 @@
+.root {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  width: var(--achievement-avatar-size);
+  height: var(--achievement-avatar-size);
+  vertical-align: middle;
+}
+
+.marker {
+  position: absolute;
+  left: var(--achievement-avatar-anchor);
+  top: var(--achievement-avatar-anchor);
+  display: grid;
+  place-items: center;
+  width: var(--achievement-avatar-badge-size);
+  height: var(--achievement-avatar-badge-size);
+  transform: translate(-50%, -50%);
+  line-height: 0;
+}
+
+.marker > img {
+  filter: drop-shadow(var(--achievement-avatar-keyline) 0 0 var(--color-paper))
+    drop-shadow(calc(-1 * var(--achievement-avatar-keyline)) 0 0 var(--color-paper))
+    drop-shadow(0 var(--achievement-avatar-keyline) 0 var(--color-paper))
+    drop-shadow(0 calc(-1 * var(--achievement-avatar-keyline)) 0 var(--color-paper));
+}
+
+.interactive {
+  width: var(--leaderboard-title-hit-size);
+  height: var(--leaderboard-title-hit-size);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  cursor: pointer;
+}
+
+.interactive:focus-visible {
+  outline: var(--stroke) solid var(--color-brand);
+  outline-offset: var(--space-1);
+}

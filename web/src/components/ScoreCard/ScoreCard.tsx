@@ -1,7 +1,10 @@
 import { useEffect, useRef, type CSSProperties } from 'react';
 import { useFeedback } from '../../audio/FeedbackProvider';
 import { petDisplayName, petImage, type PetInfo } from '../../game/pets';
+import type { TitleKey } from '../../game/report';
 import { useI18n, type MessageKey } from '../../i18n';
+import { Icon } from '../../ui/primitives/Icon';
+import { TitleStamp } from '../TitleStamp/TitleStamp';
 import styles from './ScoreCard.module.css';
 
 export interface ScoreCardProps {
@@ -13,7 +16,7 @@ export interface ScoreCardProps {
   newRecord: boolean;
   mvp: { pet: PetInfo; kind: number } | null;
   review: MessageKey;
-  title: MessageKey;
+  title: TitleKey;
   stats: { tiles: number; chain: number; tools: number };
   /** 零服务时由今日店长承接鼓励评语（普通局）；不编造 MVP。 */
   host?: { name: string; stickerSrc: string } | null;
@@ -70,10 +73,21 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
                   {t('report.quiz_bonus', { points: fmt(quizBonus) })}
                 </span>
               )}
-              {newRecord && <span className={styles.record}>{t('report.personal_best')}</span>}
+              {newRecord && (
+                <span className={styles.record}>
+                  <Icon name="new-record-flag" size={34} />
+                  {t('report.personal_best')}
+                </span>
+              )}
             </div>
             <span className={styles.saveBadge} data-state={saveState}>
-              {saveState === 'saved' ? `✓ ${t('report.saved')}` : saveState === 'saving' ? t('report.saving') : ''}
+              {saveState === 'saved' ? (
+                t('report.saved')
+              ) : saveState === 'saving' ? (
+                t('report.saving')
+              ) : (
+                ''
+              )}
             </span>
           </div>
           {newRecord && (
@@ -96,13 +110,7 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
           {mvp && mvpRemoved ? (
             <div className={styles.mvp} data-testid="mvp-removed">
               <div className={styles.sticker} style={{ '--tint': 'var(--color-brand-soft)' } as CSSProperties}>
-                <svg viewBox="0 0 100 100" className={styles.generic} aria-hidden>
-                  <ellipse cx="50" cy="62" rx="20" ry="16" fill="currentColor" />
-                  <ellipse cx="28" cy="40" rx="8" ry="10" fill="currentColor" />
-                  <ellipse cx="42" cy="28" rx="8" ry="10" fill="currentColor" />
-                  <ellipse cx="58" cy="28" rx="8" ry="10" fill="currentColor" />
-                  <ellipse cx="72" cy="40" rx="8" ry="10" fill="currentColor" />
-                </svg>
+                <Icon name="open-shop" size={96} className={styles.generic} />
               </div>
               <span className={styles.mvpName}>{t('report.generic_title')}</span>
               <p className={styles.review}>“{t(review)}”</p>
@@ -112,7 +120,10 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
               <div className={styles.sticker} style={{ '--tint': `var(--pet-tint-${mvp.kind % 6})` } as CSSProperties}>
                 {petImage(mvp.pet, 512) ? <img src={petImage(mvp.pet, 512)!} alt={mvp.pet.name} /> : null}
               </div>
-              <span className={styles.mvpName}>{mvpLabel}</span>
+              <span className={styles.mvpName}>
+                <Icon name="mvp-medal" size={30} />
+                {mvpLabel}
+              </span>
               <p className={styles.review}>“{t(review)}”</p>
             </div>
           ) : host ? (
@@ -129,7 +140,7 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
             <p className={styles.noMvp}>{t(review)}</p>
           )}
           <span className={styles.stamp} data-testid="title-stamp">
-            {t(title)}
+            <TitleStamp title={title} />
           </span>
           <dl className={styles.stats}>
             <div>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { api } from '../api/client';
-import type { DailyManager, QuizResult, RegisteredGame, SettleResponse } from '../api/types';
+import type { AchievementId, DailyManager, QuizResult, RegisteredGame, SettleResponse } from '../api/types';
 import type { GameSummary } from '../engine';
 import type { PetInfo } from '../game/pets';
 import { toResultPayload } from '../game/result';
@@ -25,6 +25,9 @@ export interface LiveReportProps {
   onCollection: () => void;
   onFishInvite: () => void;
   onOpenShop: () => void;
+  equippedTitle?: AchievementId | null;
+  onEquipTitle?: (id: AchievementId) => Promise<void>;
+  onTitles?: () => void;
 }
 
 /** 报告页 + 提交：进入即提交一次，失败可在本页重试；竞猜作答归属原对局玩家，答对加分后分享卡用新总分；新收集卡打开图鉴详情。 */

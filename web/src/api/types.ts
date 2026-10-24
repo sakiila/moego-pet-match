@@ -1,4 +1,18 @@
 /** 前后端共用的接口数据形状；server 直接引用本文件。 */
+import type { AchievementId } from '../game/achievementRules.ts';
+export type { AchievementId } from '../game/achievementRules.ts';
+
+export interface AchievementStatus {
+  id: AchievementId;
+  current: number;
+  target: number;
+  unlockedAt: string | null;
+}
+export interface AchievementView {
+  achievements: AchievementStatus[];
+  equippedTitle: AchievementId | null;
+}
+
 export type GameMode = 'normal' | 'fish';
 
 export interface ColleagueResult {
@@ -11,6 +25,7 @@ export interface PlayerView {
   name: string;
   best: { normal: number | null; fish: number | null };
   progress: { completedNormalGames: number; fishUnlocked: boolean };
+  equippedTitle?: AchievementId | null;
 }
 
 export interface LineupPet {
@@ -62,6 +77,8 @@ export interface SettleResponse {
   quiz: QuizQuestion | null;
   /** 本局阵容里当前已下架的宠物（按当前目录计算）：报告与分享卡不再展示它们的资料。 */
   removedPetIds: string[];
+  /** 本局首次授予的成就；旧结算快照可能没有此字段。 */
+  newAchievements?: AchievementId[];
 }
 
 export interface QuizQuestion {
@@ -87,6 +104,7 @@ export interface LeaderboardEntry {
   userId: string;
   name: string;
   score: number;
+  equippedTitle?: AchievementId | null;
 }
 
 export interface LeaderboardView {

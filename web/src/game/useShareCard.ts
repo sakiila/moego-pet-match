@@ -9,31 +9,32 @@ export type ShareCardState = { kind: 'generating' } | { kind: 'ready'; url: stri
 export function useShareCard(draw: (() => Promise<Blob>) | null, fileName: string) {
   const [state, setState] = useState<ShareCardState>({ kind: 'generating' });
   const urlRef = useRef<string | null>(null);
+  const generationRef = useRef(0);
 
   const generate = useCallback(async () => {
     if (!draw) return;
+    const generation = ++generationRef.current;
     setState({ kind: 'generating' });
     try {
       const blob = await draw();
+      if (generation !== generationRef.current) return;
       if (urlRef.current) URL.revokeObjectURL(urlRef.current);
       const url = URL.createObjectURL(blob);
       urlRef.current = url;
       setState({ kind: 'ready', url, file: new File([blob], fileName, { type: 'image/png' }) });
     } catch {
-      setState({ kind: 'failed' });
+      if (generation === generationRef.current) setState({ kind: 'failed' });
     }
   }, [draw, fileName]);
 
   useEffect(() => {
     void generate();
-  }, [generate]);
-
-  useEffect(
-    () => () => {
+    return () => {
+      generationRef.current++;
       if (urlRef.current) URL.revokeObjectURL(urlRef.current);
-    },
-    [],
-  );
+      urlRef.current = null;
+    };
+  }, [generate]);
 
   const canShare = state.kind === 'ready' && typeof navigator.canShare === 'function' && navigator.canShare({ files: [state.file] });
 

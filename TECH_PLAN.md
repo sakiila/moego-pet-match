@@ -268,3 +268,12 @@ Slack 的 [users.list](https://docs.slack.dev/reference/methods/users.list/) 支
 访问与域名参考：[Workers Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/)、[China Network 的适用范围](https://developers.cloudflare.com/china-network/)、[D1 数据位置](https://developers.cloudflare.com/d1/configuration/data-location/)。
 
 结算事务与去重由 Postgres 唯一约束和事务落实，具体约束在实现时设计；本轮尚未验证运行行为。
+
+
+### 收集成就（2026-10-24）
+
+迁移 `013_collection_achievements` 新建 `pet_match.achievement_awards`（玩家/成就复合主键、授予目标、时间、来源对局）与 `player_titles`（当前佩戴；复合外键确保只佩戴已授予项）。只读当前上架目录与已保存 collections；服务端归一物种后汇总总数、猫狗、动物类别、不同主人及完整家庭。事务级玩家 advisory lock 串行授予与佩戴，唯一约束防重。
+
+结算响应 `newAchievements` 保存本局首次授予 id 列表，旧结果快照缺少字段时前端按空列表处理。`GET /api/players/:id/achievements` 补发并读取汇总进度；`PATCH /api/players/:id/title` 接受已解锁 id 或 null，未解锁返回 409。玩家资料与排行榜带可选 equippedTitle。进度不下发未知主人/家庭关系。
+
+本地开发库已应用 013；生产尚未执行。`supabase-setup.ts` 的应用角色授权清单已包含两张新表，后续正式迁移按既有预览/确认流程执行，不自行部署。

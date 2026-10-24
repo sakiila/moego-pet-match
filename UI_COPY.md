@@ -242,14 +242,14 @@
 
 | 实际触发条件（按既定优先级） | 中文 | English |
 | --- | --- | --- |
-| 剪刀＋剪刀全盘合体；鱼关对应气泡机双合体 | 全店大扫除负责人 | Whole-Shop Cleanup Chief |
-| 单次操作最高连锁达到 5 轮 | 连锁反应负责人 | Chain Reaction Lead |
-| 催单成功 | 精准排班大师 | Scheduling Pro |
-| 实际发动至少 3 个工具 | 洗护工具大师 | Grooming Tool Pro |
-| 最后 3 秒发起有效操作 | 极限下班选手 | Last-Second Finisher |
-| 其他完整结束的对局 | 毛孩子体验官 | Pet Experience Officer |
+| 剪刀＋剪刀全盘合体；鱼关对应珍珠贝壳双合体 | 这下真没了 | Poof. All gone. |
+| 单次操作最高连锁达到 5 轮 | 我手都松开了 | I let go. It kept going. |
+| 催单成功 | 急什么我会消 | Relax. I got this. |
+| 实际发动至少 3 个工具 | 道具比我还忙 | My tools work harder. |
+| 最后 3 秒发起有效操作 | 差点准时下班 | Almost clocked out. |
+| 其他完整结束的对局 | 这班没白上 | That counts as work. |
 
-普通局和鱼关使用同一套既定称号及判定，鱼关工具按对应能力计数。称号只发一个，不能因换外观或语言切换重新判定。
+2026-10-24 用户确认改用趣味称号章（`assets/icons/report-title-stamps-original-v1`，每款中英两版）上的文案，替换原「全店大扫除负责人」等称号名；i18n key、触发条件与优先级不变，报告页与分享卡显示对应语言的称号章图片。普通局和鱼关使用同一套既定称号及判定，鱼关工具按对应能力计数。称号只发一个，不能因换外观或语言切换重新判定。
 
 ## 6. 图鉴、搜索、我的宠物与竞猜
 
@@ -301,7 +301,7 @@
 
 题目、答对、答错与跳过四处文案已确认。答题后在原卡片揭晓真实主人头像与名字，错误反馈不责备玩家；可跳过，不增加确认步骤，也不影响本局成绩与下一局。文案不承诺答题奖励。
 
-排序保持已收集优先、新收集靠前；未收集始终是名字与剪影，搜索不揭晓主人。`collection.empty` 仅在没有任何已收集宠物时显示；搜索空结果不表示目录缺资料或该同事没有宠物。`my_pets.collection_hint` 仅用于尚未收集的自家宠物。主人名言只在真实、自愿提供时显示，缺少时省略。竞猜沿用既定频率及资格，不编造候选主人；答对总分 +100，答错不扣分。首版不放收齐徽章或额外收齐庆祝。
+排序保持已收集优先、新收集靠前；未收集始终是名字与剪影，搜索不揭晓主人。`collection.empty` 仅在没有任何已收集宠物时显示；搜索空结果不表示目录缺资料或该同事没有宠物。`my_pets.collection_hint` 仅用于尚未收集的自家宠物。主人名言只在真实、自愿提供时显示，缺少时省略。竞猜沿用既定频率及资格，不编造候选主人；答对总分 +100，答错不扣分。2026-10-24 已加入永久收集成就，按本节新增文案展示称号与本局新解锁徽章，成就不加竞技分。贴纸册视图格内不放文字，读屏按「宠物名 · 未收集」朗读未收集格（复用 `collection.filter_uncollected`），已收集格只读宠物名。
 
 ## 7. 排行榜 · 关键文案已确认
 
@@ -464,3 +464,43 @@
 - 宠物下架前已开局及待同步的合法对局按原规则结算已确认；正常到时、基础校验、主动退出不保存与同局去重仍适用，不把这项规则写成无条件保存承诺。结算展示按当前上架目录过滤，符合条件的普通局仍累计隐藏关解锁进度。
 - 本稿没有新增二维码、收齐徽章、公共鱼缸进度、邀请奖励或暂停机制。数字与变量显示、手机换行和英文按钮长度需在实际页面验证；目前仅完成文案草稿。
 
+
+
+### 永久收集成就与称号（2026-10-24）
+
+| Key | 中文 | English |
+| --- | --- | --- |
+| achievement.cats | 猫猫亲友团 | Cat Circle |
+| achievement.dogs | 汪汪好朋友 | Dog Besties |
+| achievement.friends | 毛孩子熟人 | Familiar Faces |
+| achievement.species | 跨物种交友家 | Across Species |
+| achievement.neighbors | 串门小能手 | Neighborhood Pal |
+| achievement.family | 一家都熟 | Family Friend |
+| achievement.album | 全员点名成功 | Full Album Club |
+| achievement.cats_condition | 猫猫 · {current} / {target} 只 | Cats · {current} / {target} |
+| achievement.dogs_condition | 狗狗 · {current} / {target} 只 | Dogs · {current} / {target} |
+| achievement.friends_condition | 毛孩子 · {current} / {target} 只 | Pets · {current} / {target} |
+| achievement.species_condition | 动物 · {current} / {target} 种 | Species · {current} / {target} |
+| achievement.neighbors_condition | 主人 · {current} / {target} 位 | Owners · {current} / {target} |
+| achievement.family_condition | 多宠家庭 · {current} / {target} 个 | Pet families · {current} / {target} |
+| achievement.album_condition | 当期名册 · {current} / {target} 只 | Catalog · {current} / {target} |
+| achievement.my_titles | 我的称号 | My Titles |
+| achievement.rarity_common | 普通 | Common |
+| achievement.rarity_rare | 稀有 | Rare |
+| achievement.rarity_epic | 史诗 | Epic |
+| achievement.rarity_legendary | 传说 | Legendary |
+| achievement.wearing_named | 正在佩戴「{title}」 | Wearing {title} |
+| achievement.pick_hint | 解锁后，挑一个喜欢的挂上。 | Unlock a title, then pick your favorite to wear. |
+| achievement.unlocked_count | 已解锁 {count} / {total} | Unlocked {count} / {total} |
+| achievement.remove | 不佩戴 | No Title |
+| achievement.equip | 佩戴 | Wear |
+| achievement.equip_named | 佩戴「{title}」 | Wear {title} |
+| achievement.wearing | 佩戴中 | Wearing |
+| achievement.locked | 未解锁 | Locked |
+| achievement.no_score | 只改变展示，不影响分数 | Just for display. Your score stays the same. |
+| achievement.loading | 正在整理你的徽章… | Gathering your badges… |
+| achievement.load_failed | 徽章暂时没读到，请重试。 | We couldn’t load your badges. Please try again. |
+| achievement.equip_failed | 称号没换成功，请再试一次。 | We couldn’t change your title. Please try again. |
+| achievement.new_unlocks | 新称号解锁！ | New Titles Unlocked! |
+| achievement.worn_by | {playerName} 的称号 | {playerName}'s Title |
+| achievement.view_worn | 查看 {playerName} 的称号：{title} | View {playerName}'s title: {title} |

@@ -78,23 +78,29 @@
 }
 
 .saveBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   flex: none;
   font-size: var(--text-xs);
   font-weight: var(--weight-bold);
   color: var(--color-ink-muted);
 }
 
+/* 已保存只是轻提示：不带图标，淡灰常规字重，不抢分数 */
 .saveBadge[data-state='saved'] {
-  color: var(--color-success);
+  color: color-mix(in srgb, var(--color-ink-muted) 60%, var(--color-paper));
+  font-weight: normal;
 }
 
+/* 新纪录：小旗 + 橙色文字（report-marks-original-v4） */
 .record {
-  display: inline-block;
-  margin-top: var(--space-2);
-  padding: 3px 12px;
-  border-radius: var(--radius-pill);
-  background: var(--color-dog-yellow);
-  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+  color: var(--color-brand);
+  font-size: var(--text-md);
   font-weight: 900;
   animation: pop 560ms var(--ease-out) calc(var(--print-start) + var(--print-ms) + 100ms) both;
 }
@@ -143,7 +149,10 @@
 }
 
 .mvpName {
-  padding: 4px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 4px 14px 4px 6px;
   border-radius: var(--radius-pill);
   background: #fbe7cf;
   font-weight: 900;
@@ -163,19 +172,11 @@
 
 .stamp {
   position: absolute;
-  top: 120px;
-  right: 12px;
-  max-width: 120px;
-  padding: 8px 10px;
-  border: 3px solid var(--color-brand);
-  border-radius: var(--radius-md);
-  background: var(--color-paper);
-  color: var(--color-brand);
-  font-weight: 900;
-  font-size: var(--text-sm);
-  line-height: 1.2;
-  text-align: center;
-  transform: rotate(-8deg);
+  top: 96px;
+  right: 6px;
+  /* 圆形红章略微倾斜，像随手盖上去的 */
+  rotate: 8deg;
+  /* 称号框原图已自带倾斜，这里不再整体旋转 */
   animation: stamp 600ms var(--ease-out) calc(var(--print-start) + var(--print-ms) + 150ms) both;
 }
 
@@ -246,17 +247,17 @@
 @keyframes stamp {
   0% {
     opacity: 0;
-    transform: rotate(-8deg) scale(2.3);
+    transform: scale(2.3);
   }
   55% {
     opacity: 1;
-    transform: rotate(-8deg) scale(0.9);
+    transform: scale(0.9);
   }
   75% {
-    transform: rotate(-8deg) scale(1.06);
+    transform: scale(1.06);
   }
   100% {
-    transform: rotate(-8deg) scale(1);
+    transform: scale(1);
   }
 }
 
@@ -303,9 +304,8 @@
 
 /* 原 MVP 已下架时的通用 MoeGo 爪印 */
 .generic {
-  width: 60%;
-  height: 60%;
-  color: var(--color-brand);
+  width: 50%;
+  height: 50%;
 }
 
 /* 打印：分三段送纸，最后像被撕下来：冲过头并大幅甩斜（约 3.6°，绕出纸口摆动），再反向回摆、落定 */
@@ -362,9 +362,10 @@
 .stamp::before {
   content: '';
   position: absolute;
-  inset: -3px;
+  /* 扩散环贴合圆形称号章的外轮廓 */
+  inset: 4%;
   border: 3px solid var(--color-brand);
-  border-radius: inherit;
+  border-radius: 50%;
   opacity: 0;
   pointer-events: none;
   animation: stamp-ring 620ms ease-out calc(var(--print-start) + var(--print-ms) + 150ms + 340ms) both;

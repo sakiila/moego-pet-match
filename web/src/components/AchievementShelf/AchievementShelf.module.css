@@ -1,0 +1,56 @@
+.root { display: grid; gap: var(--space-3); }
+.title { display: inline-flex; align-items: center; gap: var(--space-2); margin: 0; font-size: var(--text-xl); font-weight: var(--weight-bold); }
+.hint, .footnote { margin: 0; color: var(--color-ink-muted); font-size: var(--text-sm); }
+.footnote { text-align: center; font-size: var(--text-xs); }
+.summary { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); background: var(--color-surface-muted); font-size: var(--text-sm); }
+.remove { padding: var(--space-1); border: 0; background: none; color: var(--color-brand-strong); font: inherit; font-weight: var(--weight-bold); cursor: pointer; }
+.remove:disabled { color: var(--color-ink-muted); opacity: var(--achievement-locked-opacity); cursor: default; }
+.list { display: grid; gap: var(--space-2); list-style: none; margin: 0; padding: 0; }
+.row {
+  --rarity-accent: var(--achievement-common);
+  --rarity-ink: var(--achievement-common-ink);
+  --rarity-bg: var(--achievement-common-bg);
+  --rarity-line: var(--achievement-common-line);
+  display: grid;
+  grid-template-columns: var(--achievement-shelf-icon) minmax(0, 1fr) var(--achievement-equip-width);
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-2);
+  border: var(--stroke) solid var(--rarity-line);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+}
+.row[data-rarity='rare'] {
+  --rarity-accent: var(--achievement-rare);
+  --rarity-ink: var(--achievement-rare-ink);
+  --rarity-bg: var(--achievement-rare-bg);
+  --rarity-line: var(--achievement-rare-line);
+}
+.row[data-rarity='epic'] {
+  --rarity-accent: var(--achievement-epic);
+  --rarity-ink: var(--achievement-epic-ink);
+  --rarity-bg: var(--achievement-epic-bg);
+  --rarity-line: var(--achievement-epic-line);
+}
+.row[data-rarity='legendary'] {
+  --rarity-accent: var(--achievement-epic);
+  --rarity-ink: var(--achievement-epic-ink);
+  --rarity-bg: var(--achievement-rainbow-bg);
+  border-color: transparent;
+  background: linear-gradient(var(--color-paper), var(--color-paper)) padding-box, var(--achievement-rainbow) border-box;
+}
+.row[data-wearing] { border-color: var(--rarity-accent); background: var(--rarity-bg); }
+.row[data-wearing][data-rarity='legendary'] { border-color: transparent; background: linear-gradient(var(--rarity-bg), var(--rarity-bg)) padding-box, var(--achievement-rainbow) border-box; }
+.row[data-locked] { --rarity-line: var(--color-line); }
+.details { display: grid; min-width: 0; gap: var(--space-1); font-size: var(--text-md); overflow-wrap: anywhere; }
+.rarity { justify-self: start; padding: 0 var(--space-2); border-radius: var(--radius-pill); background: var(--rarity-bg); color: var(--rarity-ink); font-size: var(--text-xs); font-weight: var(--weight-bold); }
+.row[data-rarity='legendary'] .rarity { background: var(--achievement-rainbow); color: var(--color-ink); }
+.condition { color: var(--color-ink-muted); font-size: var(--text-xs); }
+.progress { width: 100%; height: var(--achievement-progress-height); border: 0; border-radius: var(--radius-pill); overflow: hidden; background: var(--color-line); accent-color: var(--rarity-accent); }
+.progress::-webkit-progress-bar { background: var(--color-line); }
+.progress::-webkit-progress-value { background: var(--rarity-accent); border-radius: var(--radius-pill); }
+.equip { display: grid; place-items: center; min-height: var(--leaderboard-title-hit-size); width: 100%; padding: var(--space-1); border: var(--achievement-chip-stroke) solid var(--rarity-line); border-radius: var(--radius-pill); background: var(--color-paper); color: var(--rarity-ink); font: inherit; font-size: var(--text-xs); font-weight: var(--weight-bold); cursor: pointer; }
+.equip:disabled { opacity: var(--achievement-locked-opacity); cursor: wait; }
+.equip[aria-pressed='true'] { border-color: var(--rarity-accent); background: var(--rarity-bg); opacity: 1; cursor: default; }
+.equip:focus-visible, .remove:focus-visible { outline: var(--stroke) solid var(--rarity-accent, var(--color-brand)); outline-offset: var(--space-1); }
+.locked { text-align: center; color: var(--color-ink-muted); font-size: var(--text-xs); }
