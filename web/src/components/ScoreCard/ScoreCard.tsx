@@ -19,6 +19,8 @@ export interface ScoreCardProps {
   host?: { name: string; stickerSrc: string } | null;
   /** 原 MVP 已下架：以通用 MoeGo 图案与「本局成绩」承接，不另选 MVP。 */
   mvpRemoved?: boolean;
+  /** 已计入 score 的猜主人奖励；大于 0 时在分数下注明，分数轻弹一下。 */
+  quizBonus?: number;
 }
 
 const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
@@ -30,7 +32,7 @@ const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
 /** 读 :root 上的毫秒令牌（--print-start / --print-ms），与 CSS 动画同一时间线。 */
 const cssMs = (name: string) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
 
-export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false }: ScoreCardProps) {
+export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0 }: ScoreCardProps) {
   const { t, locale } = useI18n();
   // 声音与轻震跟着打印动画的节拍：纸送到位的瞬间「叮」，印章拍下的瞬间「咚」
   const feedback = useFeedback();
@@ -60,9 +62,14 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
           <div className={styles.top}>
             <div>
               <span className={styles.scoreLabel}>{t('report.final_score')}</span>
-              <span className={styles.score} data-testid="report-score">
+              <span key={quizBonus} className={styles.score} data-bump={quizBonus > 0 || undefined} data-testid="report-score">
                 {fmt(score)}
               </span>
+              {quizBonus > 0 && (
+                <span className={styles.bonus} data-testid="quiz-bonus">
+                  {t('report.quiz_bonus', { points: fmt(quizBonus) })}
+                </span>
+              )}
               {newRecord && <span className={styles.record}>{t('report.personal_best')}</span>}
             </div>
             <span className={styles.saveBadge} data-state={saveState}>

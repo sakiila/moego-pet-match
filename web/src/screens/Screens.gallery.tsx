@@ -32,7 +32,15 @@ const reportProps = {
   onOpenPet: noop,
   onShare: noop,
   manager: { date: '2026-10-23', pet: { petId: 'pet_4750baaed3f0', name: 'Sanxian' } },
-  onAnswerQuiz: async () => ({ correct: true, skipped: false, owner: { userId: 'U2', name: 'Zhang Wei' } }),
+  // 模拟服务端：Zhang Wei 是主人，答对 +100
+  onAnswerQuiz: async (_quizId: string, choice: string | null) => ({
+    correct: choice === null ? null : choice === 'U2',
+    skipped: choice === null,
+    owner: { userId: 'U2', name: 'Zhang Wei' },
+    bonus: choice === 'U2' ? 100 : 0,
+    score: choice === 'U2' ? 2580 : 2480,
+    personalBest: { previous: 1200, current: choice === 'U2' ? 2580 : 2480, isNew: true },
+  }),
 };
 
 const entry: GalleryEntry = {

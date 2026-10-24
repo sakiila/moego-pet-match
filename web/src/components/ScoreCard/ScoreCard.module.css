@@ -260,9 +260,44 @@
   }
 }
 
+/* 猜主人答对：分数轻弹，下方注明加分来源 */
+.score[data-bump] {
+  animation: score-bump 520ms var(--ease-out);
+}
+
+@keyframes score-bump {
+  40% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bonus {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-success);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  animation: bonus-in 360ms var(--ease-out) both;
+}
+
+@keyframes bonus-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .confetti {
     display: none;
+  }
+
+  .score[data-bump],
+  .bonus {
+    animation: none;
   }
 }
 

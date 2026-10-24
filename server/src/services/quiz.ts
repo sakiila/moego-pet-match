@@ -1,9 +1,11 @@
 import { randomInt } from 'node:crypto';
 import type pg from 'pg';
-import type { QuizQuestion, QuizResult, ResultPayload } from '../../../web/src/api/types.ts';
+import type { QuizQuestion, QuizResult, ResultPayload, SettleResponse } from '../../../web/src/api/types.ts';
 
 /** 两次出题至少间隔的完整普通局数。 */
 export const QUIZ_INTERVAL = 3;
+/** 答对加到本局总分（并参与最好成绩比较）的分数；答错、跳过不扣分。 */
+export const QUIZ_BONUS = 100;
 
 const shuffle = <T>(items: T[]) => {
   const a = [...items];
@@ -62,7 +64,10 @@ export async function maybeCreateQuiz(
   return { quizId: inserted.rows[0].quiz_id, petId: pet.pet_id, petName: pet.name, options: options.map((o) => ({ userId: o.user_id, name: o.name })) };
 }
 
-/** 作答或跳过；同一题只记录第一次。跳过不算「答过」，该宠物之后仍可能出题。 */
+/**
+ * 作答或跳过；同一题只记录第一次。跳过不算「答过」，该宠物之后仍可能出题。
+ * 第一次答对时在同一事务内把奖励加进本局总分与缓存的结算结果，并重新比较个人最好成绩。
+ */
 export async function answerQuiz(client: pg.PoolClient, quizId: string, playerId: string, choice: string | null): Promise<QuizResult | null> {
   const q = (await client.query('SELECT * FROM pet_match.quizzes WHERE quiz_id = $1 FOR UPDATE', [quizId])).rows[0];
   if (!q || q.player_id !== playerId) return null;
@@ -75,7 +80,37 @@ export async function answerQuiz(client: pg.PoolClient, quizId: string, playerId
     q.answer_user_id = choice;
     q.correct = choice === null ? null : choice === q.owner_user_id;
     q.skipped = choice === null;
+    if (q.correct) await addBonus(client, q.game_id, playerId);
   }
   const owner = (await client.query('SELECT name FROM pet_match.colleagues WHERE user_id = $1', [q.owner_user_id])).rows[0];
-  return { correct: q.correct, skipped: q.skipped, owner: { userId: q.owner_user_id, name: owner?.name ?? '' } };
+  const settled = (await client.query('SELECT quiz_bonus, response FROM pet_match.game_results WHERE game_id = $1', [q.game_id])).rows[0];
+  const response = settled.response as SettleResponse;
+  return {
+    correct: q.correct,
+    skipped: q.skipped,
+    owner: { userId: q.owner_user_id, name: owner?.name ?? '' },
+    bonus: settled.quiz_bonus,
+    score: response.score,
+    personalBest: response.personalBest,
+  };
+}
+
+/** 本局总分 +QUIZ_BONUS；超过当前最好成绩则更新排行。personalBest 仍以本局之前的最好成绩为参照。 */
+async function addBonus(client: pg.PoolClient, gameId: string, playerId: string) {
+  const row = (await client.query('SELECT score, response FROM pet_match.game_results WHERE game_id = $1 FOR UPDATE', [gameId])).rows[0];
+  const response = row.response as SettleResponse;
+  const score: number = row.score + QUIZ_BONUS;
+  const { previous } = response.personalBest;
+  const isNew = previous === null || score > previous;
+  const next: SettleResponse = { ...response, score, personalBest: { previous, current: isNew ? score : previous, isNew } };
+  await client.query('UPDATE pet_match.game_results SET score = $2, quiz_bonus = quiz_bonus + $3, response = $4 WHERE game_id = $1', [
+    gameId,
+    score,
+    QUIZ_BONUS,
+    next,
+  ]);
+  await client.query(
+    `UPDATE pet_match.best_scores SET score = $3, game_id = $4, achieved_at = now() WHERE player_id = $1 AND mode = $2 AND score < $3`,
+    [playerId, 'normal', score, gameId],
+  );
 }

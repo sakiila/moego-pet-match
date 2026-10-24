@@ -12,6 +12,9 @@ const entry: GalleryEntry = {
     'saved + new record': () => (
       <ScoreCard mode="normal" score={2480} saveState="saved" newRecord mvp={{ pet: maodu, kind: 1 }} review="review.pet.rush_success" title="title.scheduling_pro" stats={stats} />
     ),
+    'owner quiz bonus (+100 included)': () => (
+      <ScoreCard mode="normal" score={2580} quizBonus={100} saveState="saved" newRecord mvp={{ pet: maodu, kind: 1 }} review="review.pet.normal" title="title.pet_officer" stats={stats} />
+    ),
     saving: () => (
       <ScoreCard mode="normal" score={2480} saveState="saving" newRecord={false} mvp={{ pet: maodu, kind: 2 }} review="review.pet.normal" title="title.pet_officer" stats={stats} />
     ),

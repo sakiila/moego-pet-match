@@ -14,7 +14,7 @@ export interface QuizCardProps {
   onAnswer: (choice: string | null) => Promise<QuizResult>;
 }
 
-/** 猜主人：可跳过；作答后在原卡片揭晓真实主人与头像，答错不责备，不影响得分。 */
+/** 猜主人：可跳过；作答后在原卡片揭晓真实主人与头像。答对总分加分，答错不责备、不扣分。 */
 export function QuizCard({ quiz, pet, kind, onAnswer }: QuizCardProps) {
   const { t } = useI18n();
   const [picked, setPicked] = useState<string | null>(null);
@@ -56,7 +56,7 @@ export function QuizCard({ quiz, pet, kind, onAnswer }: QuizCardProps) {
       </div>
       {result ? (
         <p className={styles.reveal} role="status">
-          {result.correct ? t('quiz.correct') : t('quiz.incorrect', { ownerName: result.owner.name })}
+          {result.correct ? t('quiz.correct', { points: result.bonus }) : t('quiz.incorrect', { ownerName: result.owner.name })}
         </p>
       ) : (
         <button type="button" className={styles.skip} onClick={() => answer(null)} disabled={busy}>

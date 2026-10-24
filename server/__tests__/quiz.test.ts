@@ -1,5 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { RegisteredGame, ResultPayload, SettleResponse } from '../../web/src/api/types.ts';
+import { QUIZ_BONUS } from '../src/services/quiz.ts';
 import { freshDatabase } from './helpers.ts';
 
 let ctx: Awaited<ReturnType<typeof freshDatabase>>;
@@ -36,6 +37,8 @@ async function play(servedIds: string[]): Promise<SettleResponse> {
   expect(res.statusCode, res.body).toBe(200);
   return res.json();
 }
+const bestScore = async () =>
+  (await ctx.pool.query(`SELECT score FROM pet_match.best_scores WHERE player_id = $1 AND mode = 'normal'`, [PLAYER])).rows[0]?.score as number;
 const answer = async (quizId: string, choice: string | null, playerId = PLAYER) =>
   ctx.app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/answer`, payload: { playerId, choice } });
 
@@ -67,8 +70,11 @@ describe('猜主人', () => {
   it('作答只记第一次，揭晓真实主人；别人不能替答', async () => {
     expect((await answer(firstQuiz.quizId, 'U_TEST_ZHANG', 'U_TEST_ALICE')).statusCode).toBe(404);
     const wrong = firstQuiz.options.find((o) => o.userId !== 'U_TEST_ZHANG')!.userId;
-    expect((await answer(firstQuiz.quizId, wrong)).json()).toEqual({ correct: false, skipped: false, owner: { userId: 'U_TEST_ZHANG', name: 'Zhang Wei(张伟)' } });
-    expect((await answer(firstQuiz.quizId, 'U_TEST_ZHANG')).json().correct).toBe(false);
+    expect((await answer(firstQuiz.quizId, wrong)).json()).toMatchObject({
+      correct: false, skipped: false, owner: { userId: 'U_TEST_ZHANG', name: 'Zhang Wei(张伟)' }, bonus: 0, score: 30,
+    });
+    expect((await answer(firstQuiz.quizId, 'U_TEST_ZHANG')).json()).toMatchObject({ correct: false, bonus: 0, score: 30 });
+    expect(await bestScore()).toBe(60);
   });
 
   it('答过的宠物不再出题；跳过不算答过', async () => {
@@ -78,7 +84,38 @@ describe('猜主人', () => {
     expect((await play(['kiwi'])).quiz).toBeNull();
     const skipQuiz = (await play(['peanut'])).quiz!;
     expect(skipQuiz.petId).toBe('peanut');
-    expect((await answer(skipQuiz.quizId, null)).json()).toMatchObject({ skipped: true, correct: null });
+    expect((await answer(skipQuiz.quizId, null)).json()).toMatchObject({ skipped: true, correct: null, bonus: 0 });
+  });
+
+  it('答对总分 +100，越过最好成绩即更新排行；重复作答不重复加分；结算重试返回加分后的结果', async () => {
+    // 已有最好成绩 60（首局服务 6 格）；再过 3 局出 tofu 题，本局 30 分，答对 → 30 + 100 = 130
+    await play([]);
+    await play([]);
+    const res = await play(['tofu']);
+    expect(res.quiz?.petId).toBe('tofu');
+    expect(res.personalBest).toEqual({ previous: 60, current: 60, isNew: false });
+    const first = (await answer(res.quiz!.quizId, 'U_TEST_ALICE')).json();
+    expect(first).toMatchObject({ correct: true, bonus: QUIZ_BONUS, score: 30 + QUIZ_BONUS, personalBest: { previous: 60, current: 130, isNew: true } });
+    expect(await bestScore()).toBe(130);
+    expect((await answer(res.quiz!.quizId, 'U_TEST_ALICE')).json()).toEqual(first);
+    expect(await bestScore()).toBe(130);
+
+    const stored = (await ctx.pool.query('SELECT payload, score, quiz_bonus FROM pet_match.game_results WHERE game_id = $1', [res.gameId])).rows[0];
+    expect(stored).toMatchObject({ score: 130, quiz_bonus: QUIZ_BONUS });
+    expect(stored.payload.score).toBe(30);
+    const retry = await ctx.app.inject({ method: 'POST', url: `/api/games/${res.gameId}/result`, payload: { playerId: PLAYER, result: stored.payload } });
+    expect(retry.json()).toMatchObject({ score: 130, personalBest: { previous: 60, current: 130, isNew: true } });
+  });
+
+  it('答对但加分后未超过最好成绩：只改本局总分，不动排行', async () => {
+    await play([]);
+    await play([]);
+    const res = await play(['mochi']);
+    expect(res.quiz?.petId).toBe('mochi');
+    expect((await answer(res.quiz!.quizId, 'U_TEST_ALICE')).json()).toMatchObject({
+      correct: true, bonus: QUIZ_BONUS, score: 130, personalBest: { previous: 130, current: 130, isNew: false },
+    });
+    expect(await bestScore()).toBe(130);
   });
 
   it('结算重试返回同一道题', async () => {

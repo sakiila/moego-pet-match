@@ -194,6 +194,7 @@
 | report.tools_used | 工具发动次数 | Tools Activated |
 | report.new_collection | 本局新收集 | New to Your Collection |
 | report.personal_best | 个人新纪录！ | New Personal Best! |
+| report.quiz_bonus | 含猜家长 +{points} | Incl. owner quiz +{points} |
 | report.saving | 正在保存本局结果…… | Saving Your Results… |
 | report.saved | 本局结果已保存 | Results Saved |
 | report.sync_retryable | 暂未确认保存，可在当前报告重试。 | Saving hasn't been confirmed. You can retry from this report. |
@@ -291,13 +292,13 @@
 | Key | 中文 | English |
 | --- | --- | --- |
 | quiz.question | {petName} 的家长是谁？ | Who is {petName}'s human? |
-| quiz.correct | 认亲成功！ | You Found Their Human! |
+| quiz.correct | 认亲成功！总分 +{points} | You Found Their Human! +{points} points |
 | quiz.incorrect | 差一点！原来是 {ownerName}。 | Not quite! It's {ownerName}. |
 | quiz.skip | 跳过 | Skip |
 
 题目、答对、答错与跳过四处文案已确认。答题后在原卡片揭晓真实主人头像与名字，错误反馈不责备玩家；可跳过，不增加确认步骤，也不影响本局成绩与下一局。文案不承诺答题奖励。
 
-排序保持已收集优先、新收集靠前；未收集始终是名字与剪影，搜索不揭晓主人。`collection.empty` 仅在没有任何已收集宠物时显示；搜索空结果不表示目录缺资料或该同事没有宠物。`my_pets.collection_hint` 仅用于尚未收集的自家宠物。主人名言只在真实、自愿提供时显示，缺少时省略。竞猜沿用既定频率及资格，不编造候选主人，不改变得分。首版不放收齐徽章或额外收齐庆祝。
+排序保持已收集优先、新收集靠前；未收集始终是名字与剪影，搜索不揭晓主人。`collection.empty` 仅在没有任何已收集宠物时显示；搜索空结果不表示目录缺资料或该同事没有宠物。`my_pets.collection_hint` 仅用于尚未收集的自家宠物。主人名言只在真实、自愿提供时显示，缺少时省略。竞猜沿用既定频率及资格，不编造候选主人；答对总分 +100，答错不扣分。首版不放收齐徽章或额外收齐庆祝。
 
 ## 7. 排行榜 · 关键文案已确认
 

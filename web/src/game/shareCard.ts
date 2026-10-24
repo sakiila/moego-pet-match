@@ -32,9 +32,11 @@ export interface ShareCardInput {
   t: (key: MessageKey, vars?: Record<string, string | number>) => string;
   /** 本局阵容里当前已下架的宠物（结算返回）。 */
   removed?: ReadonlySet<string>;
+  /** 本局总分（含猜主人奖励）；缺省为引擎分数。 */
+  score?: number;
 }
 
-export function shareCardModel({ summary, pets, mode, playerName, manager, locale, t, removed = new Set() }: ShareCardInput): ShareCardModel {
+export function shareCardModel({ summary, pets, mode, playerName, manager, locale, t, removed = new Set(), score = summary.score }: ShareCardInput): ShareCardModel {
   const mvpKind = judgeMvp(summary);
   const mvp = mvpKind === null ? null : pets[mvpKind];
   let hero: ShareCardModel['hero'] = null;
@@ -54,7 +56,7 @@ export function shareCardModel({ summary, pets, mode, playerName, manager, local
     title: t(judgeTitle(summary)),
     review: t(judgeReview(summary, mode)),
     scoreLabel: t('report.final_score'),
-    score: summary.score.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US'),
+    score: score.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US'),
     player: t('share.player', { playerName }),
   };
 }

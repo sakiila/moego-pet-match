@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { DailyManager, GameMode, QuizResult } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { CollectionCards } from '../components/CollectionCards/CollectionCards';
@@ -46,6 +47,9 @@ export function ReportScreen(props: ReportScreenProps) {
   const mvpKind = judgeMvp(summary);
   const kindOf = (id: string) => pets.findIndex((p) => p.id === id);
   const saved = save.kind === 'saved' ? save.response : null;
+  // 猜主人作答后以服务端返回的总分与最好成绩为准（答对已含奖励）
+  const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
+  const best = quizResult?.personalBest ?? saved?.personalBest;
   // 本局阵容里当前已下架的宠物：不再展示它们的资料（原 MVP 下架用通用图案承接）
   const removed = new Set(saved?.removedPetIds ?? []);
   const served = summary.clearedCells > 0;
@@ -59,9 +63,10 @@ export function ReportScreen(props: ReportScreenProps) {
       <BrandHeader heading={t(mode === 'fish' ? 'fish.report_title' : 'report.title')} headingAccent tagline={subtitle} onBack={onHome} />
       <ScoreCard
         mode={mode}
-        score={summary.score}
+        score={quizResult?.score ?? saved?.score ?? summary.score}
+        quizBonus={quizResult?.bonus}
         saveState={save.kind === 'saved' ? 'saved' : save.kind === 'saving' ? 'saving' : 'failed'}
-        newRecord={!!saved?.personalBest.isNew && saved.personalBest.previous !== null}
+        newRecord={!!best?.isNew && best.previous !== null}
         mvp={mvpKind === null ? null : { pet: pets[mvpKind], kind: mvpKind }}
         mvpRemoved={mvpKind !== null && removed.has(pets[mvpKind].id)}
         review={judgeReview(summary, mode)}
@@ -78,7 +83,11 @@ export function ReportScreen(props: ReportScreenProps) {
           quiz={saved.quiz}
           pet={pets[kindOf(saved.quiz.petId)]}
           kind={kindOf(saved.quiz.petId)}
-          onAnswer={(choice) => onAnswerQuiz(saved.quiz!.quizId, choice)}
+          onAnswer={async (choice) => {
+            const result = await onAnswerQuiz(saved.quiz!.quizId, choice);
+            setQuizResult(result);
+            return result;
+          }}
         />
       )}
       {!fish && saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}

@@ -52,6 +52,7 @@ export interface ResultPayload {
 
 export interface SettleResponse {
   gameId: string;
+  /** 本局总分：引擎原始分，加上已答对的猜主人奖励。 */
   score: number;
   personalBest: { previous: number | null; current: number; isNew: boolean };
   /** 本局新收集的宠物（仅普通局）。 */
@@ -74,6 +75,11 @@ export interface QuizResult {
   correct: boolean | null;
   skipped: boolean;
   owner: { userId: string; name: string };
+  /** 本题带来的加分：答对为固定奖励，答错或跳过为 0。 */
+  bonus: number;
+  /** 作答后的本局总分与个人最好成绩。 */
+  score: number;
+  personalBest: SettleResponse['personalBest'];
 }
 
 export interface LeaderboardEntry {

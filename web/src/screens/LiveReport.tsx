@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { api } from '../api/client';
-import type { DailyManager, RegisteredGame, SettleResponse } from '../api/types';
+import type { DailyManager, QuizResult, RegisteredGame, SettleResponse } from '../api/types';
 import type { GameSummary } from '../engine';
 import type { PetInfo } from '../game/pets';
 import { toResultPayload } from '../game/result';
@@ -27,11 +27,21 @@ export interface LiveReportProps {
   onOpenShop: () => void;
 }
 
-/** 报告页 + 提交：进入即提交一次，失败可在本页重试；竞猜作答归属原对局玩家；新收集卡打开图鉴详情。 */
+/** 报告页 + 提交：进入即提交一次，失败可在本页重试；竞猜作答归属原对局玩家，答对加分后分享卡用新总分；新收集卡打开图鉴详情。 */
 export function LiveReport({ summary, registered, pets, playerId, playerName, onSaved, onOpenShop, ...nav }: LiveReportProps) {
   const { state, retry } = useResultSubmission(registered.gameId, playerId, toResultPayload(summary, registered.rulesVersion), onSaved);
   const detail = usePetDetail(playerId);
   const [sharing, setSharing] = useState(false);
+  const [quizScore, setQuizScore] = useState<number | null>(null);
+  // 答对加分后总分与最好成绩变了：分享卡用新总分，并按新结果刷新玩家资料
+  const answerQuiz = async (quizId: string, choice: string | null): Promise<QuizResult> => {
+    const result = await api.answerQuiz(quizId, playerId, choice);
+    if (result.bonus > 0 && state.kind === 'saved') {
+      setQuizScore(result.score);
+      onSaved({ ...state.response, score: result.score, personalBest: result.personalBest });
+    }
+    return result;
+  };
   return (
     <>
       <ReportScreen
@@ -40,7 +50,7 @@ export function LiveReport({ summary, registered, pets, playerId, playerName, on
         pets={pets}
         save={state}
         onRetry={retry}
-        onAnswerQuiz={(quizId, choice) => api.answerQuiz(quizId, playerId, choice)}
+        onAnswerQuiz={answerQuiz}
         onOpenPet={(pet, el) => void detail.show(pet.id, pet.name, el)}
         onShare={() => setSharing(true)}
         {...nav}
@@ -53,6 +63,7 @@ export function LiveReport({ summary, registered, pets, playerId, playerName, on
           playerName={playerName}
           manager={nav.manager}
           removed={state.kind === 'saved' ? state.response.removedPetIds : []}
+          score={quizScore ?? (state.kind === 'saved' ? state.response.score : undefined)}
           onClose={() => setSharing(false)}
         />
       )}
