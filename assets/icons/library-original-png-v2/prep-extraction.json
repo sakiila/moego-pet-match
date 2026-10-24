@@ -1,0 +1,88 @@
+[
+  {
+    "id": "prep-adjacent-swap",
+    "source": "design/concepts/prep-adjacent-swap-preview-v1.png",
+    "roi": [
+      90,
+      310,
+      725,
+      555
+    ],
+    "size": [
+      602,
+      214
+    ],
+    "preserved_tile_interiors": [
+      [
+        115,
+        337,
+        304,
+        524
+      ],
+      [
+        502,
+        337,
+        691,
+        524
+      ]
+    ],
+    "source_sha256": "3e32f58d0bd7991a39e1e60ddeaf1f5e5022d5a089ef8e384802cf5e913658e9",
+    "png_sha256": "78e3e77bc08949752777d8706a83985670e71fccee21777d2ef19ee793bfa4f4",
+    "checks": {
+      "source_crop_size": [
+        635,
+        245
+      ],
+      "raw_roi_edge_visible_pixels": 0,
+      "opaque_pixels_unchanged_rgb": true,
+      "opaque_rgb_max_delta": 0,
+      "composite_on_source_background_mae": 5.924,
+      "hole_seeds": [],
+      "visible_pixels": 43351,
+      "transparent_pixels": 112224
+    }
+  },
+  {
+    "id": "prep-sequential-tap",
+    "source": "design/concepts/prep-sequential-tap-preview-v1.png",
+    "roi": [
+      90,
+      245,
+      725,
+      620
+    ],
+    "size": [
+      606,
+      344
+    ],
+    "preserved_tile_interiors": [
+      [
+        117,
+        341,
+        306,
+        524
+      ],
+      [
+        507,
+        340,
+        696,
+        524
+      ]
+    ],
+    "source_sha256": "92a1454d43ac6e9c64c235d204a0793cdfd10f38bc51711975e7e911bf9b7824",
+    "png_sha256": "39184a90978fd299838e49f2ec999e8a473633b2357000469659f510f540ce99",
+    "checks": {
+      "source_crop_size": [
+        635,
+        375
+      ],
+      "raw_roi_edge_visible_pixels": 0,
+      "opaque_pixels_unchanged_rgb": true,
+      "opaque_rgb_max_delta": 0,
+      "composite_on_source_background_mae": 1.7592,
+      "hole_seeds": [],
+      "visible_pixels": 81134,
+      "transparent_pixels": 156991
+    }
+  }
+]

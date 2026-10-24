@@ -1,0 +1,733 @@
+{
+  "source": "design/concepts/collection-title-rarity-v1.png",
+  "sourceSha256": "7bd26de0ec11fd030f9d2beb2184c81548a5f05e8de15804c1b62d3d7caa89b1",
+  "method": "Approved source pixels; external white-background removal with protected ivory faces; compact variants remove detached stars only; no redraw",
+  "sizes": [
+    32,
+    48,
+    64,
+    96,
+    128,
+    192,
+    256,
+    512
+  ],
+  "upsampledExports": [
+    512
+  ],
+  "items": [
+    {
+      "id": "cats",
+      "titleZh": "猫猫亲友团",
+      "rarity": "common",
+      "sourceBox": [
+        28,
+        72,
+        369,
+        396
+      ],
+      "sourceVisibleBox": [
+        35,
+        81,
+        362,
+        390
+      ],
+      "avatarTrimInShowcase": [
+        0,
+        0,
+        327,
+        309
+      ],
+      "showcaseSize": [
+        327,
+        309
+      ],
+      "avatarSize": [
+        327,
+        309
+      ],
+      "detachedAccentsRemoved": 0,
+      "showcaseSha256": "7c7378ff57d58e415d20b029f613e5cd61c027857d533bc043560fe38321ff0a",
+      "avatarSha256": "7c7378ff57d58e415d20b029f613e5cd61c027857d533bc043560fe38321ff0a"
+    },
+    {
+      "id": "dogs",
+      "titleZh": "汪汪好朋友",
+      "rarity": "common",
+      "sourceBox": [
+        374,
+        72,
+        712,
+        396
+      ],
+      "sourceVisibleBox": [
+        383,
+        84,
+        707,
+        389
+      ],
+      "avatarTrimInShowcase": [
+        0,
+        0,
+        324,
+        305
+      ],
+      "showcaseSize": [
+        324,
+        305
+      ],
+      "avatarSize": [
+        324,
+        305
+      ],
+      "detachedAccentsRemoved": 0,
+      "showcaseSha256": "37e111b6c589cfece8d9b7d2b55b75d7f477ecb9cff7cb0ca26e9b1351fd074d",
+      "avatarSha256": "37e111b6c589cfece8d9b7d2b55b75d7f477ecb9cff7cb0ca26e9b1351fd074d"
+    },
+    {
+      "id": "friends",
+      "titleZh": "毛孩子熟人",
+      "rarity": "common",
+      "sourceBox": [
+        725,
+        72,
+        1068,
+        396
+      ],
+      "sourceVisibleBox": [
+        733,
+        83,
+        1058,
+        391
+      ],
+      "avatarTrimInShowcase": [
+        0,
+        0,
+        325,
+        308
+      ],
+      "showcaseSize": [
+        325,
+        308
+      ],
+      "avatarSize": [
+        325,
+        308
+      ],
+      "detachedAccentsRemoved": 0,
+      "showcaseSha256": "58161a79ca0bd2a094d21632df08b43664b7cbe3379f5af83004cf31e63c5a99",
+      "avatarSha256": "58161a79ca0bd2a094d21632df08b43664b7cbe3379f5af83004cf31e63c5a99"
+    },
+    {
+      "id": "species",
+      "titleZh": "跨物种交友家",
+      "rarity": "epic",
+      "sourceBox": [
+        1071,
+        61,
+        1430,
+        396
+      ],
+      "sourceVisibleBox": [
+        1080,
+        70,
+        1415,
+        390
+      ],
+      "avatarTrimInShowcase": [
+        2,
+        0,
+        335,
+        320
+      ],
+      "showcaseSize": [
+        335,
+        320
+      ],
+      "avatarSize": [
+        333,
+        320
+      ],
+      "detachedAccentsRemoved": 4,
+      "showcaseSha256": "fe14c1f483a41c58102fc6b240d6446f52d2e81187ee74783946f34bc3e9f985",
+      "avatarSha256": "1137ea74a7f41419ad4fa145eb22c58005245bfac4e6aaf3e434cf573b23ed34"
+    },
+    {
+      "id": "neighbors",
+      "titleZh": "串门小能手",
+      "rarity": "rare",
+      "sourceBox": [
+        168,
+        541,
+        510,
+        830
+      ],
+      "sourceVisibleBox": [
+        175,
+        547,
+        497,
+        826
+      ],
+      "avatarTrimInShowcase": [
+        0,
+        0,
+        322,
+        279
+      ],
+      "showcaseSize": [
+        322,
+        279
+      ],
+      "avatarSize": [
+        322,
+        279
+      ],
+      "detachedAccentsRemoved": 0,
+      "showcaseSha256": "d6ecb640dc28ae2cd0a203f276b8a0096f4e4fd79764422551021793aa5bbf31",
+      "avatarSha256": "d6ecb640dc28ae2cd0a203f276b8a0096f4e4fd79764422551021793aa5bbf31"
+    },
+    {
+      "id": "family",
+      "titleZh": "一家都熟",
+      "rarity": "rare",
+      "sourceBox": [
+        550,
+        541,
+        898,
+        830
+      ],
+      "sourceVisibleBox": [
+        559,
+        548,
+        887,
+        828
+      ],
+      "avatarTrimInShowcase": [
+        0,
+        0,
+        328,
+        280
+      ],
+      "showcaseSize": [
+        328,
+        280
+      ],
+      "avatarSize": [
+        328,
+        280
+      ],
+      "detachedAccentsRemoved": 0,
+      "showcaseSha256": "8347469fa60e40351cfd6142964271af1648115290861d7c9fd05fcdbad87fb7",
+      "avatarSha256": "8347469fa60e40351cfd6142964271af1648115290861d7c9fd05fcdbad87fb7"
+    },
+    {
+      "id": "album",
+      "titleZh": "全员点名成功",
+      "rarity": "legendary",
+      "sourceBox": [
+        904,
+        538,
+        1320,
+        832
+      ],
+      "sourceVisibleBox": [
+        914,
+        545,
+        1302,
+        825
+      ],
+      "avatarTrimInShowcase": [
+        30,
+        0,
+        351,
+        280
+      ],
+      "showcaseSize": [
+        388,
+        280
+      ],
+      "avatarSize": [
+        321,
+        280
+      ],
+      "detachedAccentsRemoved": 3,
+      "showcaseSha256": "6d609c4ba828e41e3b7904bce02d3ebaf9bd98f1a90540f21fccb924dd1225c3",
+      "avatarSha256": "7b23616548adc07980ff2aac4e868f4bd2bdcf3b4508b987b0d48cbf29ceb69f"
+    }
+  ],
+  "exports": [
+    {
+      "path": "png/avatar/title-album@128.png",
+      "sha256": "43b78b2866d89aea02b5999d02448e8f0561db4ddbd7530037e32d956f6edcdd"
+    },
+    {
+      "path": "png/avatar/title-album@192.png",
+      "sha256": "3aa080716391fd7d96111b0e4471f8dea5c05715c256d39693e797d361a24d43"
+    },
+    {
+      "path": "png/avatar/title-album@256.png",
+      "sha256": "2de803975520e8119ca3f2a1a5b2e2cb40bef4d3d6637c8f1eeec47fa63ab52c"
+    },
+    {
+      "path": "png/avatar/title-album@32.png",
+      "sha256": "7a3be6b3e06aa4c1d47f146b306a0dbcb05800cd40dd53ee15225c1d9efd272a"
+    },
+    {
+      "path": "png/avatar/title-album@48.png",
+      "sha256": "ddc9476c66b24cfa66e98d305e59fa15ba58ce14029e9b07937e842b65b96314"
+    },
+    {
+      "path": "png/avatar/title-album@512.png",
+      "sha256": "e9f8ed93015da59776056d8043b8bd619726e3e8b1837aa3a2dc8bbfce2a914a"
+    },
+    {
+      "path": "png/avatar/title-album@64.png",
+      "sha256": "18193d86c432b549f05d64cbc52780cd49ded79ac53deea9e299257ad7d16b85"
+    },
+    {
+      "path": "png/avatar/title-album@96.png",
+      "sha256": "157e70c9dfc83975e651881f7a283e07c18c93ee4cac1f79cb22ea3f9cc7bd61"
+    },
+    {
+      "path": "png/avatar/title-cats@128.png",
+      "sha256": "3e7e23c67a3816c7788b79ad737d898b330fa5fa34ce02304c2eb60b26a61859"
+    },
+    {
+      "path": "png/avatar/title-cats@192.png",
+      "sha256": "b0d84027594151afa0663c5c18d6761f8ffa3dee1f26eddc5765926b1bf2a468"
+    },
+    {
+      "path": "png/avatar/title-cats@256.png",
+      "sha256": "703919a983736eb2dd983609aeb97fd39e2a749be4b8754bdfedd721e33e0ddd"
+    },
+    {
+      "path": "png/avatar/title-cats@32.png",
+      "sha256": "239e260cb24f0db4d808a379f352994a651b086d04ce92f1222a95a1c75aa8d4"
+    },
+    {
+      "path": "png/avatar/title-cats@48.png",
+      "sha256": "4611273d7213cbb53020e21730b3dec64fb793f497a289822dfddcc57468c54f"
+    },
+    {
+      "path": "png/avatar/title-cats@512.png",
+      "sha256": "d8edbb5873c03e4bbc63ccb8f1b583249a5caff9593c8896654641094323556b"
+    },
+    {
+      "path": "png/avatar/title-cats@64.png",
+      "sha256": "513c9f61078f6df93bc3f62e6e19bef8568aa4b7cee2581603ae97fa5888783f"
+    },
+    {
+      "path": "png/avatar/title-cats@96.png",
+      "sha256": "ea1eec53c78c328395d7c0ec23cea8b9be688c61c8b63bea810395b21d710ea8"
+    },
+    {
+      "path": "png/avatar/title-dogs@128.png",
+      "sha256": "01c38b2b0bc4649191993e49a1ec9c47f09f40580d72cce294e0fd77f73cfbe8"
+    },
+    {
+      "path": "png/avatar/title-dogs@192.png",
+      "sha256": "d2387d5af92f8a74f20fae93a974d46afce471f5a6fe1e6113fb90cdc9dc1dfc"
+    },
+    {
+      "path": "png/avatar/title-dogs@256.png",
+      "sha256": "176780f93704dd4bfbe6973d69b8be0074fda67efe81bcb1c0c7acdf78cc9497"
+    },
+    {
+      "path": "png/avatar/title-dogs@32.png",
+      "sha256": "b9c6e3b421d5bd3152f0370b0ccdcfd7e9cba63421770f2136ac7a4697797f4e"
+    },
+    {
+      "path": "png/avatar/title-dogs@48.png",
+      "sha256": "5480be2ec3e61debaef52cb244354731e1430dd95be4944e49d63a132e2a325b"
+    },
+    {
+      "path": "png/avatar/title-dogs@512.png",
+      "sha256": "43917a3f2bc9e737dbcc53ccc0d0abe8431059b05d67f63b1ea2f687e9a478e2"
+    },
+    {
+      "path": "png/avatar/title-dogs@64.png",
+      "sha256": "9bfeaea151a709f33f46fd2bde1c80d9f304310353bf7b7e5db0f419222091ac"
+    },
+    {
+      "path": "png/avatar/title-dogs@96.png",
+      "sha256": "fbf89ca366f42ebf529818a86ddf98d6e09832864bc85bbbc1b0efd2261cdf8e"
+    },
+    {
+      "path": "png/avatar/title-family@128.png",
+      "sha256": "ca5ea9bdad9bfa98d40df376b0be685651690f26db5452503c34e8da2dcaaea7"
+    },
+    {
+      "path": "png/avatar/title-family@192.png",
+      "sha256": "04c88241a3ec25ef9e2564e8450748c0b4e7d72068b8022a7ef943bf559082f7"
+    },
+    {
+      "path": "png/avatar/title-family@256.png",
+      "sha256": "b4ba01cdc726c25ae4925f00f0dbaf3f157be1c060fe9fe9046e8fd85432bb1e"
+    },
+    {
+      "path": "png/avatar/title-family@32.png",
+      "sha256": "8a540c8c9d9aead362bf836985cf1e19726f08d9a57ecdbda381e6dbcc453a55"
+    },
+    {
+      "path": "png/avatar/title-family@48.png",
+      "sha256": "da82c08fb6a3307db1dc33f85dc0c221aba246a5a9ee5f71f7c33d455d094804"
+    },
+    {
+      "path": "png/avatar/title-family@512.png",
+      "sha256": "018cf385641ddf63ad0681db74d50d976d7c60a3a80f2ce9fb755dc8bf1dd6eb"
+    },
+    {
+      "path": "png/avatar/title-family@64.png",
+      "sha256": "423b0d04e5b7f20bd67d567ccdfb2ee2882f0c00a826f66b1a3999074e9c9607"
+    },
+    {
+      "path": "png/avatar/title-family@96.png",
+      "sha256": "ee2c903dc0ff33358d94f07094d402bbb9854574ecce04c6583a12f554cee948"
+    },
+    {
+      "path": "png/avatar/title-friends@128.png",
+      "sha256": "ed4cbda5eb6a78a697d6912136ae55dc177629af4c81c886433ae58bd4f9464c"
+    },
+    {
+      "path": "png/avatar/title-friends@192.png",
+      "sha256": "250d8cea7f143433b30e691e601b378a80d43e0503ea44471e84a07f88777594"
+    },
+    {
+      "path": "png/avatar/title-friends@256.png",
+      "sha256": "122f7579b18f2ad95af0e6e8417e1d6ff7af0faac04d6a0907f45e50d4941185"
+    },
+    {
+      "path": "png/avatar/title-friends@32.png",
+      "sha256": "a0d10c95a85cae78139c4518f9c76ef7d1212dbe240af0b622366f1d012da054"
+    },
+    {
+      "path": "png/avatar/title-friends@48.png",
+      "sha256": "8fdfb1b28dc85089582d8b627363714155447ad5a0e0d6f6f631258ecf7c6730"
+    },
+    {
+      "path": "png/avatar/title-friends@512.png",
+      "sha256": "7b7714528c632bb43b07c95b94211acc902c0fa075d86ae6e909979a55339075"
+    },
+    {
+      "path": "png/avatar/title-friends@64.png",
+      "sha256": "3bd4789bba3d3329b1bd7b10b86baed6351938baff60df0073ac3a6f59099304"
+    },
+    {
+      "path": "png/avatar/title-friends@96.png",
+      "sha256": "0c21221c9a20a5897d498254a665355ceefad673652590670a17998f83746a30"
+    },
+    {
+      "path": "png/avatar/title-neighbors@128.png",
+      "sha256": "aae2cb1e072be8273012ae3ed26a4ccbb8795e0f76d8d6cb2ee548755ebe8e0c"
+    },
+    {
+      "path": "png/avatar/title-neighbors@192.png",
+      "sha256": "0fc34660657c10b72caf25a19a3621b91456f421f47f033c320d7f579d2038eb"
+    },
+    {
+      "path": "png/avatar/title-neighbors@256.png",
+      "sha256": "5d83e7ab16ace6ed23908b1dde733166f9ba79141af41afd1152f5226e77a8f6"
+    },
+    {
+      "path": "png/avatar/title-neighbors@32.png",
+      "sha256": "4d4eb073bab5c7ac9ad5fb3e047c269947b2a78b649a4b247a8a6fa8b0fa35aa"
+    },
+    {
+      "path": "png/avatar/title-neighbors@48.png",
+      "sha256": "cef3dea34b3bcd07c744233e70a9d907ac3fadeab3c7db5ba81e1b0a3dd900b3"
+    },
+    {
+      "path": "png/avatar/title-neighbors@512.png",
+      "sha256": "b60360719d9487fa8be0fcbf5ed9ef0bc5e36dc48a21c23f8037e706aa542dd1"
+    },
+    {
+      "path": "png/avatar/title-neighbors@64.png",
+      "sha256": "eb0df8eaaf2be5b608fff1876787a06a06f0bf5716f0396683e03b515aa617b3"
+    },
+    {
+      "path": "png/avatar/title-neighbors@96.png",
+      "sha256": "6f1915031dad7e91fe89695e23b80d152e041e435df044957e6fd8bf6709cd7c"
+    },
+    {
+      "path": "png/avatar/title-species@128.png",
+      "sha256": "d4bc0ac858e13a4156604c3cb9da46c7ab2507bc4f591952772aa43482e3c6af"
+    },
+    {
+      "path": "png/avatar/title-species@192.png",
+      "sha256": "9137fdbb4bc35128d6c8ad9bbf4f64318508bc897b5fcb54c16375622b2e8da8"
+    },
+    {
+      "path": "png/avatar/title-species@256.png",
+      "sha256": "f55bde0dfabac5ae4a448ef23da8ca631cf06bdbb47e79556d3c82c373a5a59f"
+    },
+    {
+      "path": "png/avatar/title-species@32.png",
+      "sha256": "c9dce6ed2adcbfe45d6eeb106b9403c1ab87f315d313d06d6d20e06000345e26"
+    },
+    {
+      "path": "png/avatar/title-species@48.png",
+      "sha256": "5bb4d2c42fa5d4e3b117da2534a57def5fad77baf42b25d6e9be196e1eb1f5a8"
+    },
+    {
+      "path": "png/avatar/title-species@512.png",
+      "sha256": "bc0eef95528fa930d3fd560f5e888838842adf393bb9830c4e969c3b098473bb"
+    },
+    {
+      "path": "png/avatar/title-species@64.png",
+      "sha256": "1a3dfb06f13a049290d7b7c30d170796aa2209b6b5f732f0e9b51fe7fa1758d8"
+    },
+    {
+      "path": "png/avatar/title-species@96.png",
+      "sha256": "c0920508016e0a3133b3e0ca49ff6b2ceb920813d6e477e54125dae64c0c4111"
+    },
+    {
+      "path": "png/showcase/title-album@128.png",
+      "sha256": "3f66f167195309396433b2df15a573d9e499f857b31b9cc55c55f22c444ee093"
+    },
+    {
+      "path": "png/showcase/title-album@192.png",
+      "sha256": "28d42f0f99a44c84a89073c92432ce215fb75b6febe2588f07caf0516b6f3f23"
+    },
+    {
+      "path": "png/showcase/title-album@256.png",
+      "sha256": "50c8459436b1d0628581eb3340c70ef4af09eb2c4f9789e3d34081c5afd9f30b"
+    },
+    {
+      "path": "png/showcase/title-album@32.png",
+      "sha256": "1f9860f452efd3f27197706b9b3b64c9fc737c1e7e1de52d26950c30994aeb20"
+    },
+    {
+      "path": "png/showcase/title-album@48.png",
+      "sha256": "335f955cba8e1ddcdb017e269e389fedb183d59290ab84739bf1e7ca673a559d"
+    },
+    {
+      "path": "png/showcase/title-album@512.png",
+      "sha256": "1c976218e6caa3220b2549caab8968098c7275a9ee836d5b4c2a81bfffec5e9b"
+    },
+    {
+      "path": "png/showcase/title-album@64.png",
+      "sha256": "89d391c96c0ff2130177210641ca03604933c346c19714864b68946402c56df2"
+    },
+    {
+      "path": "png/showcase/title-album@96.png",
+      "sha256": "9db071845c807aef902341ef0f5ebe890df37c743bbcb9b2a919c9e6cd4c6c80"
+    },
+    {
+      "path": "png/showcase/title-cats@128.png",
+      "sha256": "3e7e23c67a3816c7788b79ad737d898b330fa5fa34ce02304c2eb60b26a61859"
+    },
+    {
+      "path": "png/showcase/title-cats@192.png",
+      "sha256": "b0d84027594151afa0663c5c18d6761f8ffa3dee1f26eddc5765926b1bf2a468"
+    },
+    {
+      "path": "png/showcase/title-cats@256.png",
+      "sha256": "703919a983736eb2dd983609aeb97fd39e2a749be4b8754bdfedd721e33e0ddd"
+    },
+    {
+      "path": "png/showcase/title-cats@32.png",
+      "sha256": "239e260cb24f0db4d808a379f352994a651b086d04ce92f1222a95a1c75aa8d4"
+    },
+    {
+      "path": "png/showcase/title-cats@48.png",
+      "sha256": "4611273d7213cbb53020e21730b3dec64fb793f497a289822dfddcc57468c54f"
+    },
+    {
+      "path": "png/showcase/title-cats@512.png",
+      "sha256": "d8edbb5873c03e4bbc63ccb8f1b583249a5caff9593c8896654641094323556b"
+    },
+    {
+      "path": "png/showcase/title-cats@64.png",
+      "sha256": "513c9f61078f6df93bc3f62e6e19bef8568aa4b7cee2581603ae97fa5888783f"
+    },
+    {
+      "path": "png/showcase/title-cats@96.png",
+      "sha256": "ea1eec53c78c328395d7c0ec23cea8b9be688c61c8b63bea810395b21d710ea8"
+    },
+    {
+      "path": "png/showcase/title-dogs@128.png",
+      "sha256": "01c38b2b0bc4649191993e49a1ec9c47f09f40580d72cce294e0fd77f73cfbe8"
+    },
+    {
+      "path": "png/showcase/title-dogs@192.png",
+      "sha256": "d2387d5af92f8a74f20fae93a974d46afce471f5a6fe1e6113fb90cdc9dc1dfc"
+    },
+    {
+      "path": "png/showcase/title-dogs@256.png",
+      "sha256": "176780f93704dd4bfbe6973d69b8be0074fda67efe81bcb1c0c7acdf78cc9497"
+    },
+    {
+      "path": "png/showcase/title-dogs@32.png",
+      "sha256": "b9c6e3b421d5bd3152f0370b0ccdcfd7e9cba63421770f2136ac7a4697797f4e"
+    },
+    {
+      "path": "png/showcase/title-dogs@48.png",
+      "sha256": "5480be2ec3e61debaef52cb244354731e1430dd95be4944e49d63a132e2a325b"
+    },
+    {
+      "path": "png/showcase/title-dogs@512.png",
+      "sha256": "43917a3f2bc9e737dbcc53ccc0d0abe8431059b05d67f63b1ea2f687e9a478e2"
+    },
+    {
+      "path": "png/showcase/title-dogs@64.png",
+      "sha256": "9bfeaea151a709f33f46fd2bde1c80d9f304310353bf7b7e5db0f419222091ac"
+    },
+    {
+      "path": "png/showcase/title-dogs@96.png",
+      "sha256": "fbf89ca366f42ebf529818a86ddf98d6e09832864bc85bbbc1b0efd2261cdf8e"
+    },
+    {
+      "path": "png/showcase/title-family@128.png",
+      "sha256": "ca5ea9bdad9bfa98d40df376b0be685651690f26db5452503c34e8da2dcaaea7"
+    },
+    {
+      "path": "png/showcase/title-family@192.png",
+      "sha256": "04c88241a3ec25ef9e2564e8450748c0b4e7d72068b8022a7ef943bf559082f7"
+    },
+    {
+      "path": "png/showcase/title-family@256.png",
+      "sha256": "b4ba01cdc726c25ae4925f00f0dbaf3f157be1c060fe9fe9046e8fd85432bb1e"
+    },
+    {
+      "path": "png/showcase/title-family@32.png",
+      "sha256": "8a540c8c9d9aead362bf836985cf1e19726f08d9a57ecdbda381e6dbcc453a55"
+    },
+    {
+      "path": "png/showcase/title-family@48.png",
+      "sha256": "da82c08fb6a3307db1dc33f85dc0c221aba246a5a9ee5f71f7c33d455d094804"
+    },
+    {
+      "path": "png/showcase/title-family@512.png",
+      "sha256": "018cf385641ddf63ad0681db74d50d976d7c60a3a80f2ce9fb755dc8bf1dd6eb"
+    },
+    {
+      "path": "png/showcase/title-family@64.png",
+      "sha256": "423b0d04e5b7f20bd67d567ccdfb2ee2882f0c00a826f66b1a3999074e9c9607"
+    },
+    {
+      "path": "png/showcase/title-family@96.png",
+      "sha256": "ee2c903dc0ff33358d94f07094d402bbb9854574ecce04c6583a12f554cee948"
+    },
+    {
+      "path": "png/showcase/title-friends@128.png",
+      "sha256": "ed4cbda5eb6a78a697d6912136ae55dc177629af4c81c886433ae58bd4f9464c"
+    },
+    {
+      "path": "png/showcase/title-friends@192.png",
+      "sha256": "250d8cea7f143433b30e691e601b378a80d43e0503ea44471e84a07f88777594"
+    },
+    {
+      "path": "png/showcase/title-friends@256.png",
+      "sha256": "122f7579b18f2ad95af0e6e8417e1d6ff7af0faac04d6a0907f45e50d4941185"
+    },
+    {
+      "path": "png/showcase/title-friends@32.png",
+      "sha256": "a0d10c95a85cae78139c4518f9c76ef7d1212dbe240af0b622366f1d012da054"
+    },
+    {
+      "path": "png/showcase/title-friends@48.png",
+      "sha256": "8fdfb1b28dc85089582d8b627363714155447ad5a0e0d6f6f631258ecf7c6730"
+    },
+    {
+      "path": "png/showcase/title-friends@512.png",
+      "sha256": "7b7714528c632bb43b07c95b94211acc902c0fa075d86ae6e909979a55339075"
+    },
+    {
+      "path": "png/showcase/title-friends@64.png",
+      "sha256": "3bd4789bba3d3329b1bd7b10b86baed6351938baff60df0073ac3a6f59099304"
+    },
+    {
+      "path": "png/showcase/title-friends@96.png",
+      "sha256": "0c21221c9a20a5897d498254a665355ceefad673652590670a17998f83746a30"
+    },
+    {
+      "path": "png/showcase/title-neighbors@128.png",
+      "sha256": "aae2cb1e072be8273012ae3ed26a4ccbb8795e0f76d8d6cb2ee548755ebe8e0c"
+    },
+    {
+      "path": "png/showcase/title-neighbors@192.png",
+      "sha256": "0fc34660657c10b72caf25a19a3621b91456f421f47f033c320d7f579d2038eb"
+    },
+    {
+      "path": "png/showcase/title-neighbors@256.png",
+      "sha256": "5d83e7ab16ace6ed23908b1dde733166f9ba79141af41afd1152f5226e77a8f6"
+    },
+    {
+      "path": "png/showcase/title-neighbors@32.png",
+      "sha256": "4d4eb073bab5c7ac9ad5fb3e047c269947b2a78b649a4b247a8a6fa8b0fa35aa"
+    },
+    {
+      "path": "png/showcase/title-neighbors@48.png",
+      "sha256": "cef3dea34b3bcd07c744233e70a9d907ac3fadeab3c7db5ba81e1b0a3dd900b3"
+    },
+    {
+      "path": "png/showcase/title-neighbors@512.png",
+      "sha256": "b60360719d9487fa8be0fcbf5ed9ef0bc5e36dc48a21c23f8037e706aa542dd1"
+    },
+    {
+      "path": "png/showcase/title-neighbors@64.png",
+      "sha256": "eb0df8eaaf2be5b608fff1876787a06a06f0bf5716f0396683e03b515aa617b3"
+    },
+    {
+      "path": "png/showcase/title-neighbors@96.png",
+      "sha256": "6f1915031dad7e91fe89695e23b80d152e041e435df044957e6fd8bf6709cd7c"
+    },
+    {
+      "path": "png/showcase/title-species@128.png",
+      "sha256": "7c4f8babe9cb599c97c8174049cd29926cc8bf59a3dc4090647dba81194af2da"
+    },
+    {
+      "path": "png/showcase/title-species@192.png",
+      "sha256": "ccbe00ec6a03158620c71ff9c2751ec77dc79b9cb294fc84f894368ccfa1040e"
+    },
+    {
+      "path": "png/showcase/title-species@256.png",
+      "sha256": "91464481dff31810c6ff0e642192621226e5ae2cac8418a4c2672f1fcc33a31c"
+    },
+    {
+      "path": "png/showcase/title-species@32.png",
+      "sha256": "cc8cd018e2943a0d801c800383663903d2f57ccf31457723075ed917d3cfbdce"
+    },
+    {
+      "path": "png/showcase/title-species@48.png",
+      "sha256": "17314fb56a8be4ea8e89a88204a2c5b7b8f3e3a3c7864a687ec3060219edab81"
+    },
+    {
+      "path": "png/showcase/title-species@512.png",
+      "sha256": "88cfc8319a3064a3d3e76fb9df5053505d3e2efb97308e4e4aa4a380822807a1"
+    },
+    {
+      "path": "png/showcase/title-species@64.png",
+      "sha256": "ab3f5fb008e44916789ed51cc737984eac2d4d961f9e7245e2c75aeae065ccde"
+    },
+    {
+      "path": "png/showcase/title-species@96.png",
+      "sha256": "4f10186ef11fc9a4076520c2f33797f34e7fdf7f287aa3213b4bcaa3aff3ebde"
+    }
+  ],
+  "avatarPlacement": {
+    "version": 2,
+    "anchor": "lower-right 45-degree point on avatar circumference",
+    "badgeToAvatarDiameter": 0.375,
+    "whiteKeyline": true,
+    "example": {
+      "avatarDiameter": 128,
+      "badgeDiameter": 48,
+      "badgeCenter": [
+        169.255,
+        144.255
+      ],
+      "avatarOrigin": [
+        60,
+        35
+      ]
+    },
+    "overview": "preview-v2.png",
+    "detail": "avatar-placement-v2.png",
+    "applicationCodeChanged": false,
+    "filesSha256": {
+      "preview-v2.png": "985632e8d464a211d8408db5ee98a7169d1e12d4354a4d0074352a444e33d97f",
+      "avatar-placement-v2.png": "a4cb366d675ffa2defff59fb611c8460f0f1105d1248a84b2965324d955d1d38"
+    }
+  }
+}

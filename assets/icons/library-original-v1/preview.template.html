@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MoeGo · 完整独立图标素材库</title>
+  <style>
+    :root { --paper:#faf8f3; --card:#fff; --ink:#24282e; --muted:#696d76; --orange:#ff6b18; --line:#e2ded7; --dark:#0b2a4d; --check:#eeece6; --radius:16px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:24px; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; }
+    main { max-width:1440px; margin:auto; padding:36px 28px; }
+    h1 { font-size:clamp(25px,3vw,36px); line-height:1.3; margin:6px 0 12px; }
+    h2 { font-size:22px; margin:0; }
+    .eyebrow { color:var(--orange); letter-spacing:.06em; font-weight:700; margin:0; }
+    .intro { color:var(--muted); margin:0 0 18px; }
+    a { color:var(--ink); text-underline-offset:4px; }
+    button { color:inherit; font:inherit; cursor:pointer; background:var(--card); border:1px solid var(--line); border-radius:9px; padding:5px 10px; min-height:36px; }
+    button[aria-pressed="true"] { background:var(--ink); color:var(--card); border-color:var(--ink); }
+    :focus-visible { outline:3px solid var(--orange); outline-offset:3px; }
+    .downloads { display:flex; flex-wrap:wrap; gap:12px 20px; font-size:14px; }
+    .primary { display:inline-block; border-radius:10px; background:var(--orange); color:var(--card); font-weight:600; padding:8px 16px; text-decoration:none; }
+    .downloads>a { align-content:center; }
+    .controls { display:flex; gap:12px 24px; flex-wrap:wrap; padding:20px 0; margin-top:14px; border-bottom:1px solid var(--line); }
+    .control { display:flex; flex-wrap:wrap; align-items:center; gap:6px; font-size:14px; }
+    .control>span { color:var(--muted); margin-right:4px; }
+    nav { display:flex; gap:8px 18px; flex-wrap:wrap; padding:18px 0; font-size:14px; }
+    nav a { color:var(--muted); }
+    section { padding-top:26px; margin-bottom:30px; }
+    .section-head { display:flex; gap:12px; align-items:baseline; margin-bottom:16px; }
+    .count { color:var(--muted); font-size:14px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:18px 14px; }
+    article { min-width:0; }
+    .surface { height:154px; display:flex; align-items:center; justify-content:center; border-radius:var(--radius); border:1px solid var(--line); background-color:var(--card); background-image:linear-gradient(45deg,var(--check) 25%,transparent 25%),linear-gradient(-45deg,var(--check) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--check) 75%),linear-gradient(-45deg,transparent 75%,var(--check) 75%); background-size:20px 20px; background-position:0 0,0 10px,10px -10px,-10px 0; }
+    .surface img { max-width:100%; height:auto; display:block; }
+    article[data-white="true"] .surface { background:var(--orange); }
+    #library[data-background="dark"] .surface { background:var(--dark); }
+    #library[data-background="orange"] .surface { background:var(--orange); }
+    h3 { font-size:16px; margin:9px 0 1px; line-height:1.4; font-weight:600; }
+    .id { color:var(--muted); font-size:12px; overflow-wrap:anywhere; margin:0; }
+    .asset-links { display:flex; gap:14px; font-size:13px; margin:5px 0 0; }
+    details { margin-top:18px; font-size:14px; }
+    summary { cursor:pointer; color:var(--muted); }
+    details img { display:block; width:min(100%,1000px); height:auto; margin-top:12px; border-radius:var(--radius); }
+    footer { border-top:1px solid var(--line); padding-top:20px; color:var(--muted); font-size:14px; }
+    @media(max-width:560px) { main { padding:26px 16px; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 12px; } .controls { gap:12px; } .surface { height:140px; } h2 { font-size:20px; } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+  <main id="library" data-background="checker">
+    <header>
+      <p class="eyebrow">MOEGO · 全套独立素材</p>
+      <h1>重绘稿 · 样式未通过</h1><p style="color:#a33b22;font-weight:600">2026-10-23：用户反馈「不对，你这个素材和之前讨论的样式不一致」。本套手工 SVG 重绘稿样式未通过，已撤回作为当前交付的推荐。文件格式、透明通道和压缩包校验通过，不代表视觉一致性通过。以已确认原稿为基准的修正进行中。</p>
+      <p class="intro" id="summary"></p>
+      <div class="downloads"><span class="primary">已退回 · 不作为当前交付</span><a href="overview.png">查看整张总览</a><a href="sprite.svg" download>下载 SVG Sprite</a><a href="README.md">素材说明</a></div>
+    </header>
+    <div class="controls">
+      <div class="control" role="group" aria-label="图标尺寸"><span>尺寸</span><button type="button" data-size="32" aria-pressed="false">32 px</button><button type="button" data-size="40" aria-pressed="false">40 px</button><button type="button" data-size="48" aria-pressed="false">48 px</button><button type="button" data-size="96" aria-pressed="true">96 px</button><button type="button" data-size="128" aria-pressed="false">128 px</button></div>
+      <div class="control" role="group" aria-label="素材格式"><span>格式</span><button type="button" data-format="png" aria-pressed="true">PNG</button><button type="button" data-format="svg" aria-pressed="false">SVG</button></div>
+      <div class="control" role="group" aria-label="预览背景"><span>背景</span><button type="button" data-background="checker" aria-pressed="true">透明棋盘</button><button type="button" data-background="dark" aria-pressed="false">深色</button><button type="button" data-background="orange" aria-pressed="false">橙色</button></div>
+    </div>
+    <nav id="navigation" aria-label="十批素材分类"></nav>
+    <div id="groups"></div>
+    <footer>47 枚主图标与 12 枚复用变体均已制作。小票、旗帜与称号框保留原稿投影；称号文字、数字、计时和开关状态由界面动态表达。此处为独立素材预览，尚未接入游戏。<a href="manifest.json">完整文件与校验清单</a></footer>
+  </main>
+  <script id="library-data" type="application/json">__LIBRARY_DATA__</script>
+  <script>
+    const data = JSON.parse(document.getElementById('library-data').textContent);
+    const root = document.getElementById('library');
+    const sections = document.getElementById('groups');
+    const navigation = document.getElementById('navigation');
+    const images = [];
+    let size = 96;
+    let format = 'png';
+    document.getElementById('summary').textContent = data.asset_count + ' 枚 SVG · ' + data.png_count + ' 张透明 PNG · 32 / 40 / 48 / 512 px。白色版默认使用橙色背景。';
+    function updateImages() {
+      images.forEach(({ element, asset }) => {
+        element.src = format === 'svg' ? asset.svg : asset.png.find(file => file.width === ([32,40,48].includes(size) ? size : 512)).file;
+        element.style.width = size + 'px';
+        element.style.height = (size * asset.height / asset.width) + 'px';
+      });
+    }
+    data.groups.forEach(group => {
+      const link = document.createElement('a');
+      link.href = '#' + group.id;
+      link.textContent = group.title;
+      navigation.append(link);
+      const section = document.createElement('section');
+      section.id = group.id;
+      const head = document.createElement('div');
+      head.className = 'section-head';
+      const title = document.createElement('h2');
+      title.textContent = group.title;
+      const count = document.createElement('span');
+      count.className = 'count';
+      count.textContent = group.asset_count + ' 枚';
+      head.append(title, count);
+      const grid = document.createElement('div');
+      grid.className = 'grid';
+      data.exports.filter(asset => asset.group === group.id).forEach(asset => {
+        const article = document.createElement('article');
+        article.dataset.white = String(asset.variant === 'white');
+        const surface = document.createElement('div');
+        surface.className = 'surface';
+        const image = document.createElement('img');
+        image.alt = asset.label;
+        image.width = 96;
+        image.height = Math.round(96 * asset.height / asset.width);
+        surface.append(image);
+        images.push({ element: image, asset });
+        const heading = document.createElement('h3');
+        heading.textContent = asset.label;
+        const id = document.createElement('p');
+        id.className = 'id';
+        id.textContent = asset.id;
+        const links = document.createElement('p');
+        links.className = 'asset-links';
+        [['SVG',asset.svg],['PNG 512',asset.png.find(file => file.width === 512).file]].forEach(([text,href]) => {
+          const a = document.createElement('a');
+          a.textContent = text;
+          a.href = href;
+          a.download = '';
+          links.append(a);
+        });
+        article.append(surface, heading, id, links);
+        grid.append(article);
+      });
+      const details = document.createElement('details');
+      const summary = document.createElement('summary');
+      summary.textContent = '对照已确认原稿';
+      const reference = document.createElement('img');
+      reference.src = group.reference_file;
+      reference.alt = group.title + '已确认原稿';
+      reference.width = 1536;
+      reference.height = 1024;
+      details.append(summary, reference);
+      section.append(head, grid, details);
+      sections.append(section);
+    });
+    document.querySelectorAll('button[data-size]').forEach(button => button.addEventListener('click', () => {
+      size = Number(button.dataset.size);
+      document.querySelectorAll('button[data-size]').forEach(peer => peer.setAttribute('aria-pressed', String(peer === button)));
+      updateImages();
+    }));
+    document.querySelectorAll('button[data-format]').forEach(button => button.addEventListener('click', () => {
+      format = button.dataset.format;
+      document.querySelectorAll('button[data-format]').forEach(peer => peer.setAttribute('aria-pressed', String(peer === button)));
+      updateImages();
+    }));
+    document.querySelectorAll('button[data-background]').forEach(button => button.addEventListener('click', () => {
+      root.dataset.background = button.dataset.background;
+      document.querySelectorAll('button[data-background]').forEach(peer => peer.setAttribute('aria-pressed', String(peer === button)));
+    }));
+    updateImages();
+  </script>
+</body>
+</html>

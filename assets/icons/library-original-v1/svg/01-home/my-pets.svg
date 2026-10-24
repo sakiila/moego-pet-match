@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title"><title id="title">我的宠物</title><defs>
+  <linearGradient id="orange" x1="0" y1="0" x2="0.25" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#ff781f"/><stop offset="1" stop-color="#f36313"/>
+  </linearGradient>
+  <linearGradient id="paper" x1="0" y1="0" x2="0.7" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#ffffff"/><stop offset="1" stop-color="#fffaf1"/>
+  </linearGradient>
+  <linearGradient id="blue" x1="0" y1="0" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#69aff4"/><stop offset="1" stop-color="#539de8"/>
+  </linearGradient></defs><g transform="translate(8 8) scale(.94)">
+  <path d="M135 90L143 55Q147 41 155 50L176 75Q189 75 201 82L224 68Q237 60 236 79L232 116Q240 143 219 159L202 175Q181 185 161 173L140 147Q128 124 135 90Z" fill="url(#blue)" stroke="#24282e" stroke-width="7.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#12191f">
+    <ellipse cx="166" cy="112" rx="6.7" ry="7.4"/>
+    <ellipse cx="207" cy="121" rx="6.7" ry="7.4"/>
+    <path d="M179 126Q184 124 189 129Q190 132 184 135Q179 132 179 126Z"/>
+  </g>
+  <path d="M183 135Q178 141 173 135M184 135Q188 143 193 138M228 134L243 138M228 145L241 152" fill="none" stroke="#24282e" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M66 121C52 121 42 136 31 150L17 171C10 183 20 194 29 201L40 214Q48 225 57 213L69 192C75 170 73 143 66 121Z" fill="url(#paper)" stroke="#24282e" stroke-width="7.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M139 123C155 121 164 136 177 151L193 172Q204 185 191 198L179 211Q172 224 163 214L153 199C147 182 144 155 139 123Z" fill="url(#paper)" stroke="#24282e" stroke-width="7.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36 197Q45 210 48 213L57 199L60 177Q54 191 47 198Q42 202 36 197ZM170 204L177 200L187 190Q178 202 172 191L161 169L164 196Z" fill="#f8eddc"/>
+  <path d="M73 112C90 101 116 103 133 112C150 123 158 143 158 170V195C156 220 137 232 110 233C82 234 59 220 58 197V167C58 143 61 124 73 112Z" fill="url(#paper)" stroke="#24282e" stroke-width="7.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#12191f">
+    <ellipse cx="83" cy="159" rx="7.1" ry="8"/>
+    <ellipse cx="131" cy="160" rx="7.1" ry="8"/>
+    <path d="M97 179C99 172 119 173 122 180C124 187 115 192 109 192C103 191 95 186 97 179Z"/>
+  </g>
+  <path d="M102 198H118V211C118 225 102 225 102 211Z" fill="#f66a38"/>
+  <path d="M94 198Q100 206 109 199Q118 207 125 198" fill="none" stroke="#24282e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 202V216" fill="none" stroke="#f36313" stroke-width="2" stroke-linecap="round"/>
+  <path d="M220 43L230 27M235 63L246 57" fill="none" stroke="#ff6b18" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/></g></svg>

@@ -1,0 +1,33 @@
+{
+  "selected_source": "design/concepts/flip-card-vertical-v2.png",
+  "raw_copy": "source-crops/11-supplement/flip-card-vertical-v2.png",
+  "master": "masters/11-supplement/flip-card-vertical-v2.png",
+  "method": "Crop peripheral transparent margin and alpha <= 8 noise; preserve all RGBA pixels within the crop; proportional exports with export_web.fit",
+  "alpha_threshold": 8,
+  "crop_bounds_exclusive": [
+    221,
+    132,
+    1033,
+    1110
+  ],
+  "source_size": [
+    1254,
+    1254
+  ],
+  "master_size": [
+    812,
+    978
+  ],
+  "source_sha256": "90f50d1b0c9597756283a053ef985abef3e8147e14fc71e2811f066ef43f41e8",
+  "master_sha256": "59e02911c37b7a7f65295da4cac4b5be6e01db865c671f41dad94a895af5f8bc",
+  "crop_pixels_preserved": true,
+  "export_widths": [
+    32,
+    48,
+    72,
+    96,
+    144,
+    192,
+    288
+  ]
+}

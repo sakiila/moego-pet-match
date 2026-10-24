@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MoeGo · 按确认原稿拆分的透明 PNG</title>
+  <style>
+    :root { --paper:#faf8f3; --card:#fff; --ink:#24282e; --muted:#696d76; --orange:#ff6b18; --line:#e2ded7; --dark:#0b2a4d; --check:#e9e6df; --radius:16px; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--paper); color:var(--ink); }
+    main { max-width:1440px; margin:auto; padding:36px 28px; }
+    h1 { font-size:clamp(25px,3vw,36px); line-height:1.3; margin:7px 0 12px; }
+    h2 { font-size:21px; margin:0; }
+    .eyebrow { margin:0; color:var(--orange); font-weight:700; letter-spacing:.06em; }
+    .intro { color:var(--muted); margin:0 0 18px; }
+    a { color:var(--ink); text-underline-offset:4px; }
+    .downloads { display:flex; gap:12px 20px; flex-wrap:wrap; font-size:14px; align-items:center; }
+    .primary { padding:8px 16px; background:var(--orange); color:var(--card); border-radius:10px; font-weight:600; text-decoration:none; }
+    .controls { display:flex; flex-wrap:wrap; gap:12px 20px; margin-top:16px; padding:18px 0; border-bottom:1px solid var(--line); }
+    .control { display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:14px; }
+    .control>span { color:var(--muted); margin-right:4px; }
+    button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:9px; min-height:36px; padding:5px 10px; font:inherit; cursor:pointer; }
+    button[aria-pressed="true"] { background:var(--ink); color:var(--card); border-color:var(--ink); }
+    :focus-visible { outline:3px solid var(--orange); outline-offset:3px; }
+    nav { display:flex; flex-wrap:wrap; gap:8px 18px; padding:18px 0; font-size:14px; }
+    nav a { color:var(--muted); }
+    section { margin:26px 0 32px; scroll-margin-top:24px; }
+    .section-head { display:flex; gap:12px; align-items:baseline; margin-bottom:15px; }
+    .count { color:var(--muted); font-size:14px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:22px 18px; }
+    article { min-width:0; scroll-margin-top:24px; }
+    .pair { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    figure { min-width:0; margin:0; }
+    .surface { height:192px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+    .source .surface { background:var(--card); }
+    .after .surface { background-color:var(--card); background-image:linear-gradient(45deg,var(--check) 25%,transparent 25%),linear-gradient(-45deg,var(--check) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--check) 75%),linear-gradient(-45deg,transparent 75%,var(--check) 75%); background-size:20px 20px; background-position:0 0,0 10px,10px -10px,-10px 0; }
+    .surface img { display:block; max-width:100%; height:auto; object-fit:contain; }
+    article[data-white="true"] .after .surface { background:var(--orange); }
+    #review[data-background="dark"] .after .surface { background:var(--dark); }
+    #review[data-background="orange"] .after .surface { background:var(--orange); }
+    figcaption { text-align:center; font-size:12px; color:var(--muted); margin-top:4px; }
+    h3 { font-size:16px; margin:9px 0 1px; line-height:1.4; font-weight:600; }
+    .id { margin:0; font-size:12px; color:var(--muted); overflow-wrap:anywhere; }
+    .asset-links { display:flex; gap:16px; margin:5px 0 0; font-size:13px; }
+    #review[data-view="assets"] .grid { grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); }
+    #review[data-view="assets"] .pair { grid-template-columns:1fr; }
+    #review[data-view="assets"] .source { display:none; }
+    details { margin-top:16px; font-size:14px; }
+    summary { cursor:pointer; color:var(--muted); }
+    details img { display:block; width:min(100%,1000px); height:auto; margin-top:12px; border-radius:var(--radius); }
+    footer { margin-top:30px; border-top:1px solid var(--line); padding-top:20px; color:var(--muted); font-size:14px; }
+    @media(max-width:560px) { main { padding:26px 16px; } .grid { grid-template-columns:1fr; } .surface { height:188px; } #review[data-view="assets"] .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  </style>
+</head>
+<body>
+  <main id="review" data-view="compare" data-background="checker">
+    <header>
+      <p class="eyebrow">MOEGO · 原稿保真 PNG v2</p>
+      <h1>直接拆分原稿，保留已确认样式</h1>
+      <p class="intro">47 枚主图标＋原稿已有的 2 枚白色按钮图标。左侧是原图区域，右侧是去底后的透明稿；不重新绘制造型、色彩或明暗。</p>
+      <div class="downloads"><a class="primary" href="moego-original-png-v2.zip" download>下载全部透明 PNG</a><a href="overview.png">查看全套总览</a><a href="README.md">文件说明</a></div>
+    </header>
+    <div class="controls">
+      <div class="control" role="group" aria-label="查看方式"><span>查看</span><button type="button" data-view="compare" aria-pressed="true">原稿对照</button><button type="button" data-view="assets" aria-pressed="false">独立素材</button></div>
+      <div class="control" role="group" aria-label="显示宽度"><span>宽度</span><button type="button" data-size="32" aria-pressed="false">32 px</button><button type="button" data-size="40" aria-pressed="false">40 px</button><button type="button" data-size="48" aria-pressed="false">48 px</button><button type="button" data-size="128" aria-pressed="true">128 px</button></div>
+      <div class="control" role="group" aria-label="透明稿背景"><span>背景</span><button type="button" data-background="checker" aria-pressed="true">透明棋盘</button><button type="button" data-background="dark" aria-pressed="false">深色</button><button type="button" data-background="orange" aria-pressed="false">橙色</button></div>
+    </div>
+    <nav id="navigation" aria-label="十批素材分类"></nav>
+    <div id="groups"></div>
+    <footer>原尺寸透明母版 49 份，另含 32／40／48／512 px 导出 196 份。白色材质、杯柄与指环镂空、原稿浅投影已单独核对。前一套 SVG 重绘稿已退回，本版不包含重新设计的 SVG；未接入游戏。<a href="manifest.json">来源与校验清单</a></footer>
+  </main>
+  <script id="review-data" type="application/json">__LIBRARY_DATA__</script>
+  <script>
+    const data = JSON.parse(document.getElementById('review-data').textContent);
+    const root = document.getElementById('review');
+    const groups = document.getElementById('groups');
+    const navigation = document.getElementById('navigation');
+    const pictures = [];
+    let size = 128;
+    let mode = 'compare';
+    data.groups.forEach(group => {
+      const nav = document.createElement('a');
+      nav.href = '#' + group.id;
+      nav.textContent = group.title;
+      navigation.append(nav);
+      const section = document.createElement('section');
+      section.id = group.id;
+      const head = document.createElement('div'); head.className = 'section-head';
+      const title = document.createElement('h2'); title.textContent = group.title;
+      const count = document.createElement('span'); count.className = 'count'; count.textContent = group.asset_count + ' 枚';
+      head.append(title, count);
+      const grid = document.createElement('div'); grid.className = 'grid';
+      data.exports.filter(asset => asset.group === group.id).forEach(asset => {
+        const article = document.createElement('article'); article.id = asset.id; article.dataset.white = String(asset.variant === 'white');
+        const pair = document.createElement('div'); pair.className = 'pair';
+        const handles = {};
+        [['source','原图区域'],['after','透明 PNG']].forEach(([kind,label]) => {
+          const figure = document.createElement('figure'); figure.className = kind;
+          const surface = document.createElement('div'); surface.className = 'surface';
+          const image = document.createElement('img'); image.alt = asset.label + ' · ' + label;
+          handles[kind] = image; surface.append(image);
+          const caption = document.createElement('figcaption'); caption.textContent = label;
+          figure.append(surface, caption); pair.append(figure);
+        });
+        pictures.push({ asset, ...handles });
+        const label = document.createElement('h3'); label.textContent = asset.label;
+        const id = document.createElement('p'); id.className = 'id'; id.textContent = asset.id;
+        const links = document.createElement('p'); links.className = 'asset-links';
+        [['原尺寸透明稿',asset.master.file],['PNG 512',asset.png.find(file => file.width === 512).file]].forEach(([text,href]) => {
+          const a = document.createElement('a'); a.textContent = text; a.href = href; a.download = ''; links.append(a);
+        });
+        article.append(pair, label, id, links); grid.append(article);
+      });
+      const details = document.createElement('details');
+      const summary = document.createElement('summary'); summary.textContent = '查看该批已确认完整原稿';
+      const reference = document.createElement('img'); reference.src = group.reference_file; reference.alt = group.title + '完整已确认图稿'; reference.loading = 'lazy';
+      details.append(summary, reference); section.append(head, grid, details); groups.append(section);
+    });
+    function update() {
+      root.dataset.view = mode;
+      pictures.forEach(({ asset, source, after }) => {
+        source.src = asset.source_crop.file;
+        source.style.width = size + 'px'; source.style.height = (size * asset.master.height / asset.master.width) + 'px';
+        const selected = mode === 'compare' ? asset.master : asset.png.find(file => file.width === ([32,40,48].includes(size) ? size : 512));
+        after.src = selected.file;
+        after.style.width = size + 'px'; after.style.height = (size * selected.height / selected.width) + 'px';
+      });
+    }
+    document.querySelectorAll('button[data-view]').forEach(button => button.addEventListener('click', () => {
+      mode = button.dataset.view;
+      document.querySelectorAll('button[data-view]').forEach(peer => peer.setAttribute('aria-pressed', String(peer === button)));
+      update();
+    }));
+    document.querySelectorAll('button[data-size]').forEach(button => button.addEventListener('click', () => {
+      size = Number(button.dataset.size);
+      document.querySelectorAll('button[data-size]').forEach(peer => peer.setAttribute('aria-pressed', String(peer === button)));
+      update();
+    }));
+    document.querySelectorAll('button[data-background]').forEach(button => button.addEventListener('click', () => {
+      root.dataset.background = button.dataset.background;
+      document.querySelectorAll('button[data-background]').forEach(peer => peer.setAttribute('aria-pressed', String(peer === button)));
+    }));
+    if (location.protocol === 'file:') document.querySelector('.primary').style.display = 'none';
+    update();
+    if (location.hash) {
+      const target = document.getElementById(location.hash.slice(1));
+      if (target) target.scrollIntoView({block:'start'});
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+[
+  {"id":"01-home","title":"首页入口","reference":"home-entry-icons-v3"},
+  {"id":"02-common","title":"通用功能","reference":"common-function-icons-v1"},
+  {"id":"03-operations","title":"局内操作与状态","reference":"round-operation-icons-v1"},
+  {"id":"04-tools","title":"普通局／鱼关道具","reference":"tool-family-original-v6"},
+  {"id":"05-rush","title":"催单反馈","reference":"rush-feedback-original-v1"},
+  {"id":"06-report","title":"结算标记","reference":"report-marks-original-v4"},
+  {"id":"07-rankings","title":"排行榜名次","reference":"leaderboard-marks-original-v1"},
+  {"id":"08-collection","title":"图鉴收集与空态","reference":"collection-marks-original-v1"},
+  {"id":"09-settings","title":"设置与声音触感","reference":"settings-feedback-original-v1"},
+  {"id":"10-actions","title":"通用动作","reference":"common-actions-original-v3"}
+]

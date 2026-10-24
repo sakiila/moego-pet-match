@@ -1,0 +1,747 @@
+{
+  "authorization": {
+    "date": "2026-10-23",
+    "user_choice": "按原图拆分透明 PNG（推荐）",
+    "method": "Local deterministic splitting and background removal, no redrawing",
+    "question": "是否改为按原图本地拆分、去底，导出独立透明 PNG，不重绘？",
+    "scope": "Exception explicitly chosen by user for this source-PNG asset extraction. No game integration is authorized."
+  },
+  "groups": [
+    {
+      "id": "01-home",
+      "title": "首页入口",
+      "source": "home-entry-icons-v3",
+      "assets": [
+        {
+          "id": "open-shop",
+          "label": "开始营业",
+          "roi": [
+            118,
+            228,
+            355,
+            433
+          ]
+        },
+        {
+          "id": "pet-collection",
+          "label": "宠物图鉴",
+          "roi": [
+            453,
+            197,
+            744,
+            440
+          ]
+        },
+        {
+          "id": "leaderboard",
+          "label": "排行榜",
+          "roi": [
+            804,
+            197,
+            1078,
+            437
+          ],
+          "holes": [
+            [
+              848,
+              314
+            ],
+            [
+              1008,
+              314
+            ]
+          ]
+        },
+        {
+          "id": "my-pets",
+          "label": "我的宠物",
+          "roi": [
+            1127,
+            196,
+            1490,
+            440
+          ]
+        },
+        {
+          "id": "open-shop-white",
+          "label": "开始营业白色版",
+          "roi": [
+            541,
+            598,
+            656,
+            705
+          ],
+          "background": "orange",
+          "variant": "white"
+        }
+      ]
+    },
+    {
+      "id": "02-common",
+      "title": "通用功能",
+      "source": "common-function-icons-v1",
+      "assets": [
+        {
+          "id": "back",
+          "label": "返回",
+          "roi": [
+            136,
+            200,
+            319,
+            347
+          ]
+        },
+        {
+          "id": "close",
+          "label": "关闭",
+          "roi": [
+            514,
+            201,
+            670,
+            348
+          ]
+        },
+        {
+          "id": "search",
+          "label": "搜索",
+          "roi": [
+            853,
+            184,
+            1032,
+            358
+          ]
+        },
+        {
+          "id": "settings",
+          "label": "设置",
+          "roi": [
+            1216,
+            177,
+            1409,
+            367
+          ]
+        },
+        {
+          "id": "choose-photo",
+          "label": "选择照片",
+          "roi": [
+            119,
+            486,
+            322,
+            653
+          ]
+        },
+        {
+          "id": "share-image",
+          "label": "分享图片",
+          "roi": [
+            505,
+            482,
+            681,
+            649
+          ]
+        },
+        {
+          "id": "flip-card",
+          "label": "翻面看原图",
+          "roi": [
+            848,
+            470,
+            1049,
+            654
+          ]
+        },
+        {
+          "id": "information",
+          "label": "信息说明",
+          "roi": [
+            1244,
+            482,
+            1403,
+            655
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-operations",
+      "title": "局内操作与状态",
+      "source": "round-operation-icons-v1",
+      "assets": [
+        {
+          "id": "adjacent-swap",
+          "label": "相邻交换",
+          "roi": [
+            182,
+            175,
+            426,
+            397
+          ]
+        },
+        {
+          "id": "tap-swap",
+          "label": "点选交换",
+          "roi": [
+            632,
+            169,
+            950,
+            415
+          ],
+          "exclude": [
+            [
+              632,
+              403,
+              856,
+              415
+            ]
+          ]
+        },
+        {
+          "id": "tool-combo",
+          "label": "工具合体",
+          "roi": [
+            1118,
+            173,
+            1399,
+            393
+          ]
+        },
+        {
+          "id": "automatic-shuffle",
+          "label": "自动洗牌",
+          "roi": [
+            179,
+            516,
+            441,
+            694
+          ]
+        },
+        {
+          "id": "time-left",
+          "label": "本局剩余",
+          "roi": [
+            675,
+            510,
+            862,
+            699
+          ]
+        },
+        {
+          "id": "score",
+          "label": "分数",
+          "roi": [
+            1157,
+            518,
+            1340,
+            697
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-tools",
+      "title": "普通局／鱼关道具",
+      "source": "tool-family-original-v6",
+      "assets": [
+        {
+          "id": "comb-horizontal",
+          "label": "横扫梳子",
+          "roi": [
+            158,
+            210,
+            480,
+            399
+          ],
+          "mode": "pets",
+          "ability": "row"
+        },
+        {
+          "id": "comb-vertical",
+          "label": "竖扫梳子",
+          "roi": [
+            538,
+            191,
+            781,
+            399
+          ],
+          "mode": "pets",
+          "ability": "column"
+        },
+        {
+          "id": "scissors",
+          "label": "十字剪刀",
+          "roi": [
+            818,
+            190,
+            1127,
+            406
+          ],
+          "holes": [
+            [
+              891,
+              324
+            ],
+            [
+              974,
+              364
+            ]
+          ],
+          "shadows": [
+            [
+              889,
+              380,
+              1042,
+              402
+            ]
+          ],
+          "mode": "pets",
+          "ability": "cross",
+          "exclude": [
+            [
+              900,
+              403,
+              1105,
+              406
+            ]
+          ]
+        },
+        {
+          "id": "hair-dryer",
+          "label": "吹风机",
+          "roi": [
+            1180,
+            158,
+            1524,
+            406
+          ],
+          "exclude": [
+            [
+              1180,
+              158,
+              1425,
+              199
+            ],
+            [
+              1180,
+              403,
+              1524,
+              406
+            ]
+          ],
+          "shadows": [
+            [
+              1235,
+              378,
+              1427,
+              402
+            ]
+          ],
+          "mode": "pets",
+          "ability": "full-board-performance-only"
+        },
+        {
+          "id": "conch-horizontal",
+          "label": "横向海螺",
+          "roi": [
+            170,
+            484,
+            526,
+            687
+          ],
+          "shadows": [
+            [
+              205,
+              653,
+              435,
+              683
+            ]
+          ],
+          "mode": "fish",
+          "ability": "row",
+          "exclude": [
+            [
+              170,
+              680,
+              526,
+              687
+            ]
+          ]
+        },
+        {
+          "id": "conch-vertical",
+          "label": "纵向海螺",
+          "roi": [
+            577,
+            452,
+            785,
+            687
+          ],
+          "mode": "fish",
+          "ability": "column",
+          "exclude": [
+            [
+              577,
+              452,
+              694,
+              470
+            ],
+            [
+              577,
+              681,
+              785,
+              687
+            ]
+          ]
+        },
+        {
+          "id": "pearl-shell",
+          "label": "珍珠贝壳",
+          "roi": [
+            817,
+            477,
+            1128,
+            690
+          ],
+          "mode": "fish",
+          "ability": "cross",
+          "exclude": [
+            [
+              817,
+              685,
+              1128,
+              690
+            ]
+          ]
+        },
+        {
+          "id": "big-wave",
+          "label": "大浪花",
+          "roi": [
+            1169,
+            476,
+            1524,
+            686
+          ],
+          "mode": "fish",
+          "ability": "full-board-performance-only"
+        }
+      ]
+    },
+    {
+      "id": "05-rush",
+      "title": "催单反馈",
+      "source": "rush-feedback-original-v1",
+      "assets": [
+        {
+          "id": "rush-ticket",
+          "label": "加急小票",
+          "roi": [
+            166,
+            138,
+            450,
+            377
+          ],
+          "shadows": [
+            [
+              209,
+              342,
+              450,
+              377
+            ]
+          ]
+        },
+        {
+          "id": "completed-mark",
+          "label": "完成印记",
+          "roi": [
+            630,
+            154,
+            909,
+            381
+          ],
+          "shadows": [
+            [
+              688,
+              351,
+              909,
+              381
+            ]
+          ]
+        },
+        {
+          "id": "expired-ticket",
+          "label": "收起小票",
+          "roi": [
+            1114,
+            157,
+            1355,
+            381
+          ],
+          "shadows": [
+            [
+              1128,
+              345,
+              1355,
+              381
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-report",
+      "title": "结算标记",
+      "source": "report-marks-original-v4",
+      "assets": [
+        {
+          "id": "mvp-medal",
+          "label": "MVP 奖章",
+          "roi": [
+            151,
+            128,
+            449,
+            431
+          ],
+          "shadows": [
+            [
+              154,
+              394,
+              434,
+              431
+            ]
+          ]
+        },
+        {
+          "id": "new-record-flag",
+          "label": "新纪录小旗",
+          "roi": [
+            636,
+            158,
+            909,
+            432
+          ],
+          "shadows": [
+            [
+              640,
+              395,
+              905,
+              432
+            ]
+          ]
+        },
+        {
+          "id": "title-stamp",
+          "label": "称号印章空框",
+          "roi": [
+            1016,
+            164,
+            1480,
+            432
+          ],
+          "shadows": [
+            [
+              1030,
+              387,
+              1460,
+              432
+            ]
+          ],
+          "wide": true
+        }
+      ]
+    },
+    {
+      "id": "07-rankings",
+      "title": "排行榜名次",
+      "source": "leaderboard-marks-original-v1",
+      "assets": [
+        {
+          "id": "rank-1",
+          "label": "第 1 名皇冠",
+          "roi": [
+            172,
+            177,
+            498,
+            433
+          ],
+          "rank": 1
+        },
+        {
+          "id": "rank-2",
+          "label": "第 2 名盾牌",
+          "roi": [
+            639,
+            170,
+            891,
+            434
+          ],
+          "rank": 2
+        },
+        {
+          "id": "rank-3",
+          "label": "第 3 名六角章",
+          "roi": [
+            1085,
+            169,
+            1338,
+            435
+          ],
+          "rank": 3
+        }
+      ]
+    },
+    {
+      "id": "08-collection",
+      "title": "图鉴收集与空态",
+      "source": "collection-marks-original-v1",
+      "assets": [
+        {
+          "id": "collected-bookmark",
+          "label": "已收集印记",
+          "roi": [
+            219,
+            154,
+            389,
+            374
+          ]
+        },
+        {
+          "id": "empty-collection",
+          "label": "尚无收集",
+          "roi": [
+            584,
+            166,
+            947,
+            386
+          ]
+        },
+        {
+          "id": "empty-search",
+          "label": "搜索无结果",
+          "roi": [
+            1086,
+            159,
+            1416,
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-settings",
+      "title": "设置与声音触感",
+      "source": "settings-feedback-original-v1",
+      "assets": [
+        {
+          "id": "language",
+          "label": "语言",
+          "roi": [
+            143,
+            148,
+            322,
+            319
+          ]
+        },
+        {
+          "id": "music",
+          "label": "背景音乐",
+          "roi": [
+            491,
+            152,
+            666,
+            319
+          ]
+        },
+        {
+          "id": "sound-effects",
+          "label": "消除音效",
+          "roi": [
+            842,
+            156,
+            1049,
+            320
+          ]
+        },
+        {
+          "id": "haptics",
+          "label": "轻震",
+          "roi": [
+            1198,
+            145,
+            1391,
+            320
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-actions",
+      "title": "通用动作",
+      "source": "common-actions-original-v3",
+      "assets": [
+        {
+          "id": "back-to-shop",
+          "label": "回门店",
+          "roi": [
+            47,
+            201,
+            294,
+            423
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "退出",
+          "roi": [
+            374,
+            201,
+            597,
+            423
+          ]
+        },
+        {
+          "id": "change-photo",
+          "label": "换一张照片",
+          "roi": [
+            651,
+            197,
+            892,
+            433
+          ]
+        },
+        {
+          "id": "save-image",
+          "label": "保存图片",
+          "roi": [
+            965,
+            212,
+            1179,
+            423
+          ]
+        },
+        {
+          "id": "retry",
+          "label": "重试",
+          "roi": [
+            1273,
+            202,
+            1494,
+            427
+          ]
+        },
+        {
+          "id": "save-image-white",
+          "label": "保存图片白色版",
+          "roi": [
+            502,
+            825,
+            574,
+            890
+          ],
+          "background": "orange",
+          "variant": "white"
+        }
+      ]
+    }
+  ]
+}

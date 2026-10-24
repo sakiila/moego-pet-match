@@ -1,0 +1,312 @@
+{
+  "source": "design/concepts/report-title-stamps-bilingual-v1.png",
+  "source_size": [
+    1341,
+    1173
+  ],
+  "source_sha256": "0a1098cbedeed0c19524fe661c095a1713d3b5721dedb4d38f4b173701ecb821",
+  "method": "Native-resolution source crops; alpha-only paper removal; no redraw, recolor, resampling or text changes.",
+  "asset_count_per_set": 12,
+  "assets": [
+    {
+      "id": 1,
+      "language": "zh",
+      "title": "我手都松开了",
+      "filename": "01-hands-off-zh.png",
+      "source_box": [
+        27,
+        152,
+        336,
+        435
+      ],
+      "size": [
+        309,
+        283
+      ],
+      "original_crop": "original-crops/01-hands-off-zh.png",
+      "transparent": "transparent/01-hands-off-zh.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "40e6011e9a25c43b11072a34851be6c3d07a55215a2c5130c844c41f04b978ba"
+    },
+    {
+      "id": 1,
+      "language": "en",
+      "title": "I let go. It kept going.",
+      "filename": "01-hands-off-en.png",
+      "source_box": [
+        361,
+        152,
+        669,
+        436
+      ],
+      "size": [
+        308,
+        284
+      ],
+      "original_crop": "original-crops/01-hands-off-en.png",
+      "transparent": "transparent/01-hands-off-en.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "1d0b1d5cf6f8e81120abfd0039d391b24b7049faab2fa3085f17a3ff57833445"
+    },
+    {
+      "id": 2,
+      "language": "zh",
+      "title": "这下真没了",
+      "filename": "02-all-gone-zh.png",
+      "source_box": [
+        689,
+        144,
+        994,
+        438
+      ],
+      "size": [
+        305,
+        294
+      ],
+      "original_crop": "original-crops/02-all-gone-zh.png",
+      "transparent": "transparent/02-all-gone-zh.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "ee88e6416200221ae108e6252c753b2c72e9673b59a74e2237e467277f825490"
+    },
+    {
+      "id": 2,
+      "language": "en",
+      "title": "Poof. All gone.",
+      "filename": "02-all-gone-en.png",
+      "source_box": [
+        1017,
+        146,
+        1322,
+        438
+      ],
+      "size": [
+        305,
+        292
+      ],
+      "original_crop": "original-crops/02-all-gone-en.png",
+      "transparent": "transparent/02-all-gone-en.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "fa3b865d8177a4307f84f80620519bf31a9c4379d9d163f86bd9a4584bff536a"
+    },
+    {
+      "id": 3,
+      "language": "zh",
+      "title": "急什么我会消",
+      "filename": "03-got-this-zh.png",
+      "source_box": [
+        30,
+        504,
+        337,
+        788
+      ],
+      "size": [
+        307,
+        284
+      ],
+      "original_crop": "original-crops/03-got-this-zh.png",
+      "transparent": "transparent/03-got-this-zh.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "36221dd85bfd33a8a4b0b685324bb6c003771b3a24b57e0ddce69fc85f5fcc11"
+    },
+    {
+      "id": 3,
+      "language": "en",
+      "title": "Relax. I got this.",
+      "filename": "03-got-this-en.png",
+      "source_box": [
+        356,
+        502,
+        653,
+        789
+      ],
+      "size": [
+        297,
+        287
+      ],
+      "original_crop": "original-crops/03-got-this-en.png",
+      "transparent": "transparent/03-got-this-en.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "e36e3a24e9b11bec70e52c2b8d6e1f037cdeda034d6b3fe8161b57f73ff8d92c"
+    },
+    {
+      "id": 4,
+      "language": "zh",
+      "title": "道具比我还忙",
+      "filename": "04-tools-work-harder-zh.png",
+      "source_box": [
+        685,
+        497,
+        998,
+        790
+      ],
+      "size": [
+        313,
+        293
+      ],
+      "original_crop": "original-crops/04-tools-work-harder-zh.png",
+      "transparent": "transparent/04-tools-work-harder-zh.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "1927bcc96ebb35db4879e831ed8f9f11cdbb207050f676e1deee61fbd5cef9bf"
+    },
+    {
+      "id": 4,
+      "language": "en",
+      "title": "My tools work harder.",
+      "filename": "04-tools-work-harder-en.png",
+      "source_box": [
+        1021,
+        498,
+        1332,
+        786
+      ],
+      "size": [
+        311,
+        288
+      ],
+      "original_crop": "original-crops/04-tools-work-harder-en.png",
+      "transparent": "transparent/04-tools-work-harder-en.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "47f8b698aedfe4d6e9093b7360d7cd97454ade337121fe64aba7f39cb05c3a5a"
+    },
+    {
+      "id": 5,
+      "language": "zh",
+      "title": "差点准时下班",
+      "filename": "05-almost-clocked-out-zh.png",
+      "source_box": [
+        29,
+        847,
+        329,
+        1132
+      ],
+      "size": [
+        300,
+        285
+      ],
+      "original_crop": "original-crops/05-almost-clocked-out-zh.png",
+      "transparent": "transparent/05-almost-clocked-out-zh.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "e03a080a532e77f437ac0e6baae797d8310f3b4d2d82bcad298a8bb47bb305e0"
+    },
+    {
+      "id": 5,
+      "language": "en",
+      "title": "Almost clocked out.",
+      "filename": "05-almost-clocked-out-en.png",
+      "source_box": [
+        350,
+        846,
+        648,
+        1130
+      ],
+      "size": [
+        298,
+        284
+      ],
+      "original_crop": "original-crops/05-almost-clocked-out-en.png",
+      "transparent": "transparent/05-almost-clocked-out-en.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "012b12e7d8824b51dfd06e1691c8be5f9456146623d3434f83c5fa5398a60a85"
+    },
+    {
+      "id": 6,
+      "language": "zh",
+      "title": "这班没白上",
+      "filename": "06-counts-as-work-zh.png",
+      "source_box": [
+        692,
+        847,
+        984,
+        1134
+      ],
+      "size": [
+        292,
+        287
+      ],
+      "original_crop": "original-crops/06-counts-as-work-zh.png",
+      "transparent": "transparent/06-counts-as-work-zh.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "cb75183adb332231f230d9aaf7a3c8328ecf52ef884ece071ca6f960af822383"
+    },
+    {
+      "id": 6,
+      "language": "en",
+      "title": "That counts as work.",
+      "filename": "06-counts-as-work-en.png",
+      "source_box": [
+        1028,
+        846,
+        1307,
+        1131
+      ],
+      "size": [
+        279,
+        285
+      ],
+      "original_crop": "original-crops/06-counts-as-work-en.png",
+      "transparent": "transparent/06-counts-as-work-en.png",
+      "crop_pixels_equal_source": true,
+      "transparent_rgb_equal_source": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_sha256": "626f332d6d48e36ed53ec4d32a9c64470f2aca470ae53f53abc8ce9e32caea0c"
+    }
+  ]
+}

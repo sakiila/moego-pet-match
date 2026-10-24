@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-24",
+  "count": 6,
+  "method": "Native crops; no redraw, resize, recolor, or lettering changes. White background and enclosed counters removed; boundary RGB unmatted against white. Opaque core RGB preserved exactly.",
+  "assets": [
+    {
+      "id": "smart-scheduling",
+      "text": "Smart Scheduling",
+      "file": "transparent/smart-scheduling.png",
+      "size": [
+        1471,
+        282
+      ],
+      "source": "design/concepts/feature-wordmarks-scheduling-report-v1.png",
+      "source_sha256": "440816e4d08ed2d6213a0662be34c13f7ff0d6d14864a9793210aacf395c965c",
+      "source_box": [
+        29,
+        119,
+        1500,
+        401
+      ],
+      "png_sha256": "89d22ec57473c2b4b6592d44fdfb819ddad8c2aff466fdf2aaa7fa67fa3d87bc",
+      "source_crop_pixel_match": true,
+      "opaque_core_pixel_match": true,
+      "opaque_core_pixels": 110973,
+      "outer_border_transparent": true,
+      "white_recomposite_mean_error_255": 0.7497,
+      "white_recomposite_p99_error_255": 4.0,
+      "transparent_pixels": 274709,
+      "partial_alpha_pixels": 21593
+    },
+    {
+      "id": "grooming-report-card",
+      "text": "Grooming Report Card",
+      "file": "transparent/grooming-report-card.png",
+      "size": [
+        1378,
+        401
+      ],
+      "source": "design/concepts/feature-wordmarks-scheduling-report-v1.png",
+      "source_sha256": "440816e4d08ed2d6213a0662be34c13f7ff0d6d14864a9793210aacf395c965c",
+      "source_box": [
+        95,
+        519,
+        1473,
+        920
+      ],
+      "png_sha256": "8a6f5c14480aa77f754040f8e4023323703db4aced3c2083538bb97e92938e34",
+      "source_crop_pixel_match": true,
+      "opaque_core_pixel_match": true,
+      "opaque_core_pixels": 183618,
+      "outer_border_transparent": true,
+      "white_recomposite_mean_error_255": 0.6942,
+      "white_recomposite_p99_error_255": 4.0,
+      "transparent_pixels": 329723,
+      "partial_alpha_pixels": 29100
+    },
+    {
+      "id": "pet-collection",
+      "text": "Pet Collection",
+      "file": "transparent/pet-collection.png",
+      "size": [
+        1433,
+        286
+      ],
+      "source": "design/concepts/feature-wordmarks-collection-pets-v1.png",
+      "source_sha256": "b431add05544f10131c16068106f743ad56f23d94146cb276b5e849fa474fad7",
+      "source_box": [
+        68,
+        138,
+        1501,
+        424
+      ],
+      "png_sha256": "3ada59b75d48a18df211530a84d77085a267c52af2f77b9dcd06b9b27e895c59",
+      "source_crop_pixel_match": true,
+      "opaque_core_pixel_match": true,
+      "opaque_core_pixels": 149360,
+      "outer_border_transparent": true,
+      "white_recomposite_mean_error_255": 0.6608,
+      "white_recomposite_p99_error_255": 4.0,
+      "transparent_pixels": 231517,
+      "partial_alpha_pixels": 21487
+    },
+    {
+      "id": "my-pets",
+      "text": "My Pets",
+      "file": "transparent/my-pets.png",
+      "size": [
+        1094,
+        309
+      ],
+      "source": "design/concepts/feature-wordmarks-collection-pets-v1.png",
+      "source_sha256": "b431add05544f10131c16068106f743ad56f23d94146cb276b5e849fa474fad7",
+      "source_box": [
+        263,
+        586,
+        1357,
+        895
+      ],
+      "png_sha256": "b22f0904871c631206b025ca75a38832c8b03cb07832f0f403ea028ce333ca1c",
+      "source_crop_pixel_match": true,
+      "opaque_core_pixel_match": true,
+      "opaque_core_pixels": 139274,
+      "outer_border_transparent": true,
+      "white_recomposite_mean_error_255": 0.6278,
+      "white_recomposite_p99_error_255": 4.0,
+      "transparent_pixels": 177605,
+      "partial_alpha_pixels": 15910
+    },
+    {
+      "id": "leaderboard",
+      "text": "Leaderboard",
+      "file": "transparent/leaderboard.png",
+      "size": [
+        1412,
+        290
+      ],
+      "source": "design/concepts/feature-wordmarks-ranking-fish-v1.png",
+      "source_sha256": "af94c75029f073f3fa8a46047f53f364dbf2a4a000df60d64a471697eb41284d",
+      "source_box": [
+        99,
+        99,
+        1511,
+        389
+      ],
+      "png_sha256": "96030efb27865bbdbb004bdae5cec8e711740359d29c7d40ca4d28a25f663ab7",
+      "source_crop_pixel_match": true,
+      "opaque_core_pixel_match": true,
+      "opaque_core_pixels": 142678,
+      "outer_border_transparent": true,
+      "white_recomposite_mean_error_255": 0.7058,
+      "white_recomposite_p99_error_255": 4.0,
+      "transparent_pixels": 239995,
+      "partial_alpha_pixels": 20212
+    },
+    {
+      "id": "fish-report-card",
+      "text": "Fish Report Card",
+      "file": "transparent/fish-report-card.png",
+      "size": [
+        1268,
+        470
+      ],
+      "source": "design/concepts/feature-wordmarks-ranking-fish-v1.png",
+      "source_sha256": "af94c75029f073f3fa8a46047f53f364dbf2a4a000df60d64a471697eb41284d",
+      "source_box": [
+        130,
+        461,
+        1398,
+        931
+      ],
+      "png_sha256": "28dedef51f3531409114f515d84f2896fd83ef5af2532167a08d0be7dd166653",
+      "source_crop_pixel_match": true,
+      "opaque_core_pixel_match": true,
+      "opaque_core_pixels": 209134,
+      "outer_border_transparent": true,
+      "white_recomposite_mean_error_255": 0.7065,
+      "white_recomposite_p99_error_255": 4.0,
+      "transparent_pixels": 350382,
+      "partial_alpha_pixels": 27710
+    }
+  ]
+}

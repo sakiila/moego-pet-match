@@ -1,0 +1,34 @@
+{
+  "selected_source": "design/concepts/flip-card-vertical-v3.png",
+  "edit_reference": "masters/11-supplement/flip-card-vertical-v2.png",
+  "status": "local larger-arrow trial requested by user",
+  "raw_copy": "source-crops/11-supplement/flip-card-vertical-v3.png",
+  "master": "masters/11-supplement/flip-card-vertical-v3.png",
+  "alpha_threshold": 8,
+  "crop_bounds_exclusive": [
+    0,
+    0,
+    1142,
+    1377
+  ],
+  "source_size": [
+    1142,
+    1377
+  ],
+  "master_size": [
+    1142,
+    1377
+  ],
+  "source_sha256": "b6341382f1286a631113fbe71e64a9f240a73b39a985980879c7f18bf082c975",
+  "master_sha256": "e60a3c0ef1e0f8b226cbbf71b50c55cde0427145cb98a051cefeb4663414038c",
+  "crop_pixels_preserved": true,
+  "export_widths": [
+    32,
+    48,
+    72,
+    96,
+    144,
+    192,
+    288
+  ]
+}

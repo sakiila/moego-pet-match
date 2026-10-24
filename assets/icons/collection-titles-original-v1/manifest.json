@@ -1,0 +1,114 @@
+{
+  "source": "design/concepts/collection-title-badges-v3.png",
+  "sourceSha256": "e16095f5b9e4156e1bc8d7b64f9a125bfca5410241b68b19445cb40780751542",
+  "method": "Original pixel crop, connected exterior white-background removal, no redraw",
+  "sizes": [
+    32,
+    48,
+    72,
+    96,
+    144,
+    192,
+    288
+  ],
+  "items": [
+    {
+      "id": "title-cats",
+      "sourceBox": [
+        30,
+        77,
+        368,
+        396
+      ],
+      "size": [
+        327,
+        309
+      ],
+      "sha256": "669c5ea09cddff60b432295b2e99fcb214d47ecd9051dee4aebc97e677020c50"
+    },
+    {
+      "id": "title-dogs",
+      "sourceBox": [
+        375,
+        70,
+        713,
+        397
+      ],
+      "size": [
+        323,
+        304
+      ],
+      "sha256": "fc873e23254b0ce9fbdecb71c848c7512288b595f5ccedce38578f26d6728aaa"
+    },
+    {
+      "id": "title-friends",
+      "sourceBox": [
+        727,
+        70,
+        1068,
+        395
+      ],
+      "size": [
+        325,
+        307
+      ],
+      "sha256": "1a4d31f0a2b6a26a657f11ea0cf9bae93b6881fa2a35a536102f22ae59fcb98d"
+    },
+    {
+      "id": "title-species",
+      "sourceBox": [
+        1087,
+        73,
+        1427,
+        397
+      ],
+      "size": [
+        326,
+        311
+      ],
+      "sha256": "a879b556c8dcc8bd604fc11f6a7d1065fb9503e793b97dcab8516e85732d43e8"
+    },
+    {
+      "id": "title-neighbors",
+      "sourceBox": [
+        168,
+        529,
+        511,
+        832
+      ],
+      "size": [
+        329,
+        299
+      ],
+      "sha256": "65887260d33c1e1d209efe6d8879b7f47a4a4b403aa06fae6d0dd7a1c3b8594d"
+    },
+    {
+      "id": "title-family",
+      "sourceBox": [
+        552,
+        528,
+        903,
+        831
+      ],
+      "size": [
+        334,
+        294
+      ],
+      "sha256": "809340c3c8f9d6e6a0145704ac3e821493ea62a62d5994ccdc58e714fc0e551a"
+    },
+    {
+      "id": "title-album",
+      "sourceBox": [
+        936,
+        527,
+        1285,
+        832
+      ],
+      "size": [
+        330,
+        297
+      ],
+      "sha256": "2ee44d5520de9f36691c224cd136fe82b5bb037e03cf44e7c5cb1a46f2e1275c"
+    }
+  ]
+}

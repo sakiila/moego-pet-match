@@ -1,0 +1,338 @@
+{
+  "date": "2026-10-23",
+  "batch": 1,
+  "status": "rejected_style_mismatch",
+  "direction": "Approved home-entry v3; charcoal outlines, orange/ivory and restrained matte depth",
+  "source_reference": "design/concepts/home-entry-icons-v3.png",
+  "source_sha256": "d18dc7ae5ba7f5c6a02529cd3fe4f4f21b7be3f6cad7dada38595fcbfbdb5be8",
+  "method": "Native SVG paths rebuilt for standalone use; PNGs rendered from these same SVGs with sharp, no concept-image crop or raster embedding.",
+  "scope": "Four home entries plus white primary-action paw; no game-component changes or integration.",
+  "viewBox": "0 0 256 256",
+  "png_sizes": [
+    32,
+    40,
+    48,
+    512
+  ],
+  "palette": "palette.json",
+  "review_reference": "reference/home-entry-icons-v3.png",
+  "exports": [
+    {
+      "name": "open-shop",
+      "title": "开始营业",
+      "svg": "svg/open-shop.svg",
+      "svg_sha256": "a618e939df3df2a0753793af2cf5593b40fe9bc6854e249cf426db5268364fec",
+      "png": [
+        {
+          "file": "png/32/open-shop.png",
+          "size": 32,
+          "sha256": "327120f35ab057399f5bc4c002b5abffba7db2629aad11cdbae0ca4f8c557d21",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 28,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/open-shop.png",
+          "size": 40,
+          "sha256": "9e818de01d3c63b569dc648e300862b3c0b3586ca4bc31582081f2fe97cd5cd3",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 7,
+            "right": 35,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/open-shop.png",
+          "size": 48,
+          "sha256": "2ae685f82d0620474fb1dc0ae088e1b0d347e37c9c996dd31805f63b551099f9",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 9,
+            "right": 42,
+            "bottom": 40
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/open-shop.png",
+          "size": 512,
+          "sha256": "065747732dba197be2432de5664a92e6ca2c1bba696365d318d08bc4212e7fbd",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 55,
+            "top": 100,
+            "right": 450,
+            "bottom": 435
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "name": "pet-collection",
+      "title": "宠物图鉴",
+      "svg": "svg/pet-collection.svg",
+      "svg_sha256": "efa0b8ee8fbf703c96332e58f66be66835de10035ad402d09ba988108820d4ee",
+      "png": [
+        {
+          "file": "png/32/pet-collection.png",
+          "size": 32,
+          "sha256": "1a516b639af49f4f563eeb64dc660af6e8d2c4c31bad976c3b82fdca7ade0514",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 4,
+            "right": 30,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/pet-collection.png",
+          "size": 40,
+          "sha256": "9c1270d15cd76a703ecfab95778da44131193bfc45e5f02055c7c247372e8df6",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 5,
+            "right": 38,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/pet-collection.png",
+          "size": 48,
+          "sha256": "736762cdbbfd7ff051896622a1f56d8d7ca10f05630ebba6c0f34ce71629d007",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 45,
+            "bottom": 42
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/pet-collection.png",
+          "size": 512,
+          "sha256": "e3f9487f393b0db5e0981a4f0a9d6d68f29e4d0ef08275d144856904845ac4b7",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 40,
+            "top": 65,
+            "right": 488,
+            "bottom": 458
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "name": "leaderboard",
+      "title": "排行榜",
+      "svg": "svg/leaderboard.svg",
+      "svg_sha256": "44d8f6029615a734b89eea4872b7e9c15433f371b37df892284acc6d0f289931",
+      "png": [
+        {
+          "file": "png/32/leaderboard.png",
+          "size": 32,
+          "sha256": "884e8d99af0fa48b743b02c7e242fc0d5c01d085b51d59dffdc9b15478f45437",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 5,
+            "right": 29,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/leaderboard.png",
+          "size": 40,
+          "sha256": "593f4d95ed2be464a7aac797367f6fb8fa7b5a8de6d718d895f431b0d5dc94bc",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 7,
+            "right": 37,
+            "bottom": 34
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/leaderboard.png",
+          "size": 48,
+          "sha256": "dd9524ace5b2bd032eeda00a9a9890977839baa1b6bf9c576d904b21c01e6fc7",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 8,
+            "right": 44,
+            "bottom": 41
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/leaderboard.png",
+          "size": 512,
+          "sha256": "7446e0b4ede1b0e8b9d56bc9cd02b46d2333694cd662840c719dd1298a707f00",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 51,
+            "top": 92,
+            "right": 475,
+            "bottom": 447
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "name": "my-pets",
+      "title": "我的宠物",
+      "svg": "svg/my-pets.svg",
+      "svg_sha256": "6d20d688aadf3e8acea9bb4bfea8747f45a8800241a7d271a67e077ebcce3e43",
+      "png": [
+        {
+          "file": "png/32/my-pets.png",
+          "size": 32,
+          "sha256": "5fe3068049318d4f7d8c87a462a55ef332cfada6888d33c60afe7e7f0e3131ef",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 3,
+            "right": 30,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/my-pets.png",
+          "size": 40,
+          "sha256": "5c5d4a7f99c20b3cf7bc6d66a636c747c8715ec073359ad15de190e829f17457",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 4,
+            "right": 37,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/my-pets.png",
+          "size": 48,
+          "sha256": "2a78c572ae44e49eaab0f3441cb24a31deefb60d1abfda538810f7513fb4132c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 5,
+            "right": 45,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/my-pets.png",
+          "size": 512,
+          "sha256": "4fccd7fe81a82e797d541346a8c32f9684898815a4cfa4d98ccf9b3c132b9a96",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 36,
+            "top": 58,
+            "right": 486,
+            "bottom": 461
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "name": "open-shop-white",
+      "title": "开始营业白色版",
+      "svg": "svg/open-shop-white.svg",
+      "svg_sha256": "5a01167ebe23450ade7e652b0928b72904cbd84edfa7c87d5745b540e76ae81a",
+      "png": [
+        {
+          "file": "png/32/open-shop-white.png",
+          "size": 32,
+          "sha256": "d429fdc1c620f10984d09f44010fc7dd74a5820a2aaa9c0275d7a943055f839a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 28,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/open-shop-white.png",
+          "size": 40,
+          "sha256": "e87af5656803d293e0439dfd82aa14a2ce92d618c1c422447babd79d88b53891",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 7,
+            "right": 35,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/open-shop-white.png",
+          "size": 48,
+          "sha256": "aff88b6912ce8bde94f5db413d3fe93aac5fe0b3d87e99e1e48705cd0ecde0cc",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 9,
+            "right": 42,
+            "bottom": 40
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/open-shop-white.png",
+          "size": 512,
+          "sha256": "40a2199647d05e5f10fdfecf619a79f2557a2fc210cce19e5f17e33d17809d11",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 55,
+            "top": 100,
+            "right": 450,
+            "bottom": 435
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "date": "2026-10-23",
+    "result": "pass",
+    "svg_native_paths_only": true,
+    "transparent_pngs_checked": 20,
+    "all_png_perimeter_pixels_transparent": true,
+    "review_reference_unchanged": true,
+    "browser_review": [
+      "All four large PNG icons",
+      "32/40/48 px actual PNG exports",
+      "48 px SVGs on dark background",
+      "White paw on orange button sample"
+    ],
+    "game_integration_tested": false
+  },
+  "user_feedback": "2026-10-23：用户反馈「不对，你这个素材和之前讨论的样式不一致」。本套手工 SVG 重绘稿样式未通过，已撤回作为当前交付的推荐。文件格式、透明通道和压缩包校验通过，不代表视觉一致性通过。以已确认原稿为基准的修正进行中。",
+  "current_replacement": "assets/icons/library-original-png-v2"
+}

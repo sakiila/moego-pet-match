@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title"><title id="title">宠物图鉴</title><defs>
+  <linearGradient id="orange" x1="0" y1="0" x2="0.25" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#ff781f"/><stop offset="1" stop-color="#f36313"/>
+  </linearGradient>
+  <linearGradient id="paper" x1="0" y1="0" x2="0.7" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#ffffff"/><stop offset="1" stop-color="#fffaf1"/>
+  </linearGradient>
+  <linearGradient id="blue" x1="0" y1="0" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#69aff4"/><stop offset="1" stop-color="#539de8"/>
+  </linearGradient></defs><g transform="translate(8 8) scale(.94)">
+  <g stroke="#24282e" stroke-width="7.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M33 94Q17 94 17 111V204Q17 221 35 221L93 218Q111 218 121 229Q128 234 136 229Q149 218 166 218L221 221Q239 221 239 204V111Q239 94 222 94Z" fill="url(#orange)"/>
+    <path d="M128 96C105 77 81 75 55 81Q44 83 44 94V202C76 193 104 198 128 216C153 198 180 190 212 201V94Q212 83 202 80C176 74 151 78 128 96Z" fill="url(#paper)"/>
+  </g>
+  <path d="M48 190C79 182 105 190 126 205L126 213C102 199 76 194 48 200ZM132 205C157 190 182 184 208 192V199C181 191 155 200 132 213Z" fill="#f0ddbf"/>
+  <path d="M128 99V207" fill="none" stroke="#f8eddc" stroke-width="5" stroke-linecap="round"/>
+  <path d="M44 96V201C76 192 104 197 128 215C154 198 180 190 212 200V95" fill="none" stroke="#24282e" stroke-width="7.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M163 80H190V126L177 118L163 126Z" fill="url(#orange)" stroke="#24282e" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M219 49L229 31M234 67L247 59" fill="none" stroke="#ff6b18" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g></svg>

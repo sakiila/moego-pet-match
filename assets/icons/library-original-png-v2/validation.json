@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-23",
+  "status": "pass",
+  "method": "User-authorized source PNG splitting and local background removal, no redrawing",
+  "counts": {
+    "groups": 10,
+    "primary_icons": 47,
+    "white_versions_from_source": 2,
+    "transparent_masters": 49,
+    "size_exports": 196
+  },
+  "opaque_source_rgb_max_delta": 0,
+  "maximum_foreground_composite_mae": 0.6432,
+  "all_source_hashes_match": true,
+  "all_transparent_pngs_rgba": true,
+  "all_canvas_perimeters_transparent": true,
+  "all_explicit_handle_holes_transparent": true,
+  "source_color_profiles_absent": true,
+  "white_material_samples": [
+    {
+      "asset": "pet-collection",
+      "source_xy": [
+        530,
+        310
+      ],
+      "rgba": [
+        253,
+        249,
+        244,
+        255
+      ]
+    },
+    {
+      "asset": "leaderboard",
+      "source_xy": [
+        910,
+        280
+      ],
+      "rgba": [
+        252,
+        250,
+        245,
+        255
+      ]
+    },
+    {
+      "asset": "pearl-shell",
+      "source_xy": [
+        968,
+        595
+      ],
+      "rgba": [
+        255,
+        245,
+        233,
+        255
+      ]
+    },
+    {
+      "asset": "big-wave",
+      "source_xy": [
+        1393,
+        527
+      ],
+      "rgba": [
+        239,
+        244,
+        249,
+        255
+      ]
+    },
+    {
+      "asset": "my-pets",
+      "source_xy": [
+        1250,
+        348
+      ],
+      "rgba": [
+        252,
+        249,
+        244,
+        255
+      ]
+    }
+  ],
+  "browser_checks": [
+    "Source-versus-transparent paired view renders",
+    "Dark background preserves white material and exposes transparent holes",
+    "32 and 48 px modes select actual size PNG exports",
+    "Compare/material mode toggle works",
+    "Category navigation works"
+  ],
+  "game_code_changed": false,
+  "game_integration_tested": false,
+  "reviews": [
+    "reviews/browser-source-comparison.png",
+    "reviews/browser-home-comparison.png",
+    "reviews/browser-source-comparison-detail.png"
+  ]
+}

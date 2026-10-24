@@ -1,0 +1,4182 @@
+{
+  "date": "2026-10-23",
+  "status": "rejected_style_mismatch",
+  "original_designs": "all_10_batches_approved",
+  "standalone_asset_approval": "not_inferred_from_concept_approval",
+  "scope": "All standalone icons in the approved ten-batch scope, plus reusable white/base/ability variants. No pet/fish content regeneration, game component changes, runtime integration or deployment.",
+  "method": "Native SVG paths; PNGs rendered from the same SVGs. No concept-image cutouts or embedded raster content.",
+  "asset_count": 59,
+  "png_count": 236,
+  "png_long_edges": [
+    32,
+    40,
+    48,
+    512
+  ],
+  "colors": {
+    "ink": "#24282e",
+    "feature": "#12191f",
+    "orange": "#ff6b18",
+    "orangeLight": "#ff781f",
+    "orangeDeep": "#f36313",
+    "paper": "#ffffff",
+    "ivory": "#fffaf1",
+    "cream": "#f0ddbf",
+    "creamLight": "#f8eddc",
+    "shadow": "#f7e4cb",
+    "blue": "#69aff4",
+    "blueDeep": "#2995e5",
+    "blueDark": "#2377be",
+    "blueLight": "#b6e6ff",
+    "gray": "#86929e",
+    "grayLight": "#c4c9ce",
+    "grayDark": "#596674",
+    "muted": "#aeb3b9",
+    "window": "#c3d6e0",
+    "green": "#229264",
+    "gold": "#ffb521",
+    "copper": "#ee955f",
+    "copperLight": "#ffc28f",
+    "copperEdge": "#e78c54"
+  },
+  "groups": [
+    {
+      "id": "01-home",
+      "title": "首页入口",
+      "reference": "home-entry-icons-v3",
+      "reference_file": "reference/home-entry-icons-v3.png",
+      "reference_sha256": "d18dc7ae5ba7f5c6a02529cd3fe4f4f21b7be3f6cad7dada38595fcbfbdb5be8",
+      "asset_count": 5
+    },
+    {
+      "id": "02-common",
+      "title": "通用功能",
+      "reference": "common-function-icons-v1",
+      "reference_file": "reference/common-function-icons-v1.png",
+      "reference_sha256": "f705bbaa1a10bf729a08b683a619188baa38a981aa6d71487f4334b316e69bbb",
+      "asset_count": 9
+    },
+    {
+      "id": "03-operations",
+      "title": "局内操作与状态",
+      "reference": "round-operation-icons-v1",
+      "reference_file": "reference/round-operation-icons-v1.png",
+      "reference_sha256": "7a80c905bc48a94540fd4b201f21848af7378de9af0b0eb59e756d73116791fb",
+      "asset_count": 6
+    },
+    {
+      "id": "04-tools",
+      "title": "普通局／鱼关道具",
+      "reference": "tool-family-original-v6",
+      "reference_file": "reference/tool-family-original-v6.png",
+      "reference_sha256": "952dc693e1819701e139e1d0a97994a1add9b563a3aa777c25b95faf130860e1",
+      "asset_count": 17
+    },
+    {
+      "id": "05-rush",
+      "title": "催单反馈",
+      "reference": "rush-feedback-original-v1",
+      "reference_file": "reference/rush-feedback-original-v1.png",
+      "reference_sha256": "6cb1aa7e6c82fd6479c1efc512b2a10afc9979638daaf6d7d95c35468e390df9",
+      "asset_count": 3
+    },
+    {
+      "id": "06-report",
+      "title": "结算标记",
+      "reference": "report-marks-original-v4",
+      "reference_file": "reference/report-marks-original-v4.png",
+      "reference_sha256": "0a62c5da8f57422b3158777e98eb566af7ddb22e39180ee3bc7bcfa05ceb5443",
+      "asset_count": 3
+    },
+    {
+      "id": "07-rankings",
+      "title": "排行榜名次",
+      "reference": "leaderboard-marks-original-v1",
+      "reference_file": "reference/leaderboard-marks-original-v1.png",
+      "reference_sha256": "a9aa5d1d3b3a6e51d1e22017f0777bb188ed05a09d72c5703d9cb1ff662e3add",
+      "asset_count": 3
+    },
+    {
+      "id": "08-collection",
+      "title": "图鉴收集与空态",
+      "reference": "collection-marks-original-v1",
+      "reference_file": "reference/collection-marks-original-v1.png",
+      "reference_sha256": "b3557f80361a9e2f51ba3190e5903423335d671993748477ba810707d1408d8a",
+      "asset_count": 3
+    },
+    {
+      "id": "09-settings",
+      "title": "设置与声音触感",
+      "reference": "settings-feedback-original-v1",
+      "reference_file": "reference/settings-feedback-original-v1.png",
+      "reference_sha256": "f230513bd052e0357fe2160062dba9d20b8d041f074a8140b719d43b8bebe387",
+      "asset_count": 4
+    },
+    {
+      "id": "10-actions",
+      "title": "通用动作",
+      "reference": "common-actions-original-v3",
+      "reference_file": "reference/common-actions-original-v3.png",
+      "reference_sha256": "3122ef03f044f26f4b3e0fc1e12e23c0a7be0c58fb32d9672c08747e06430169",
+      "asset_count": 6
+    }
+  ],
+  "exports": [
+    {
+      "id": "open-shop",
+      "label": "开始营业",
+      "group": "01-home",
+      "width": 256,
+      "height": 256,
+      "source_method": "First-batch native SVG copied byte-for-byte",
+      "svg": "svg/01-home/open-shop.svg",
+      "svg_sha256": "a618e939df3df2a0753793af2cf5593b40fe9bc6854e249cf426db5268364fec",
+      "png": [
+        {
+          "file": "png/32/01-home/open-shop.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "327120f35ab057399f5bc4c002b5abffba7db2629aad11cdbae0ca4f8c557d21",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 28,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/01-home/open-shop.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "9e818de01d3c63b569dc648e300862b3c0b3586ca4bc31582081f2fe97cd5cd3",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 7,
+            "right": 35,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/01-home/open-shop.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "2ae685f82d0620474fb1dc0ae088e1b0d347e37c9c996dd31805f63b551099f9",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 9,
+            "right": 42,
+            "bottom": 40
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/01-home/open-shop.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "065747732dba197be2432de5664a92e6ca2c1bba696365d318d08bc4212e7fbd",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 55,
+            "top": 100,
+            "right": 450,
+            "bottom": 435
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "pet-collection",
+      "label": "宠物图鉴",
+      "group": "01-home",
+      "width": 256,
+      "height": 256,
+      "source_method": "First-batch native SVG copied byte-for-byte",
+      "svg": "svg/01-home/pet-collection.svg",
+      "svg_sha256": "efa0b8ee8fbf703c96332e58f66be66835de10035ad402d09ba988108820d4ee",
+      "png": [
+        {
+          "file": "png/32/01-home/pet-collection.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "1a516b639af49f4f563eeb64dc660af6e8d2c4c31bad976c3b82fdca7ade0514",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 4,
+            "right": 30,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/01-home/pet-collection.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "9c1270d15cd76a703ecfab95778da44131193bfc45e5f02055c7c247372e8df6",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 5,
+            "right": 38,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/01-home/pet-collection.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "736762cdbbfd7ff051896622a1f56d8d7ca10f05630ebba6c0f34ce71629d007",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 45,
+            "bottom": 42
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/01-home/pet-collection.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "e3f9487f393b0db5e0981a4f0a9d6d68f29e4d0ef08275d144856904845ac4b7",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 40,
+            "top": 65,
+            "right": 488,
+            "bottom": 458
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "leaderboard",
+      "label": "排行榜",
+      "group": "01-home",
+      "width": 256,
+      "height": 256,
+      "source_method": "First-batch native SVG copied byte-for-byte",
+      "svg": "svg/01-home/leaderboard.svg",
+      "svg_sha256": "44d8f6029615a734b89eea4872b7e9c15433f371b37df892284acc6d0f289931",
+      "png": [
+        {
+          "file": "png/32/01-home/leaderboard.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "884e8d99af0fa48b743b02c7e242fc0d5c01d085b51d59dffdc9b15478f45437",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 5,
+            "right": 29,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/01-home/leaderboard.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "593f4d95ed2be464a7aac797367f6fb8fa7b5a8de6d718d895f431b0d5dc94bc",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 7,
+            "right": 37,
+            "bottom": 34
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/01-home/leaderboard.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "dd9524ace5b2bd032eeda00a9a9890977839baa1b6bf9c576d904b21c01e6fc7",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 8,
+            "right": 44,
+            "bottom": 41
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/01-home/leaderboard.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "7446e0b4ede1b0e8b9d56bc9cd02b46d2333694cd662840c719dd1298a707f00",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 51,
+            "top": 92,
+            "right": 475,
+            "bottom": 447
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "my-pets",
+      "label": "我的宠物",
+      "group": "01-home",
+      "width": 256,
+      "height": 256,
+      "source_method": "First-batch native SVG copied byte-for-byte",
+      "svg": "svg/01-home/my-pets.svg",
+      "svg_sha256": "6d20d688aadf3e8acea9bb4bfea8747f45a8800241a7d271a67e077ebcce3e43",
+      "png": [
+        {
+          "file": "png/32/01-home/my-pets.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "5fe3068049318d4f7d8c87a462a55ef332cfada6888d33c60afe7e7f0e3131ef",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 3,
+            "right": 30,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/01-home/my-pets.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "5c5d4a7f99c20b3cf7bc6d66a636c747c8715ec073359ad15de190e829f17457",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 4,
+            "right": 37,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/01-home/my-pets.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "2a78c572ae44e49eaab0f3441cb24a31deefb60d1abfda538810f7513fb4132c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 5,
+            "right": 45,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/01-home/my-pets.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "4fccd7fe81a82e797d541346a8c32f9684898815a4cfa4d98ccf9b3c132b9a96",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 36,
+            "top": 58,
+            "right": 486,
+            "bottom": 461
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "open-shop-white",
+      "label": "开始营业白色版",
+      "group": "01-home",
+      "width": 256,
+      "height": 256,
+      "variant": "white",
+      "base": "open-shop",
+      "source_method": "First-batch native SVG copied byte-for-byte",
+      "svg": "svg/01-home/open-shop-white.svg",
+      "svg_sha256": "5a01167ebe23450ade7e652b0928b72904cbd84edfa7c87d5745b540e76ae81a",
+      "png": [
+        {
+          "file": "png/32/01-home/open-shop-white.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "d429fdc1c620f10984d09f44010fc7dd74a5820a2aaa9c0275d7a943055f839a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 28,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/01-home/open-shop-white.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "e87af5656803d293e0439dfd82aa14a2ce92d618c1c422447babd79d88b53891",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 7,
+            "right": 35,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/01-home/open-shop-white.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "aff88b6912ce8bde94f5db413d3fe93aac5fe0b3d87e99e1e48705cd0ecde0cc",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 9,
+            "right": 42,
+            "bottom": 40
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/01-home/open-shop-white.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "40a2199647d05e5f10fdfecf619a79f2557a2fc210cce19e5f17e33d17809d11",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 55,
+            "top": 100,
+            "right": 450,
+            "bottom": 435
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "back",
+      "label": "返回",
+      "group": "02-common",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/02-common/back.svg",
+      "svg_sha256": "ade597666cc3072e820f28ae30ecc377567bb12f16030b85e81a8deec7ccd1d6",
+      "png": [
+        {
+          "file": "png/32/02-common/back.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "ae31660614a7a02052dad19e217042042570eedf4dde48cc0e1e46e53a237df9",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 7,
+            "right": 26,
+            "bottom": 24
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/02-common/back.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "886843e075115971c7f5e7167f95b40d62af22a2d8f1c7b0311d0ca616f407f9",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 8,
+            "right": 32,
+            "bottom": 31
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/02-common/back.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "21001d80b6f9392a8b6ab2cde1a28502b6c4d2f2fea2ce8df3e1c8309956296a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 10,
+            "right": 39,
+            "bottom": 37
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/02-common/back.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "7886788a69b374089282c40df3df15c39b7a39bcd35e4c7eed4579cddae1fc19",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 92,
+            "top": 111,
+            "right": 418,
+            "bottom": 400
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "label": "关闭",
+      "group": "02-common",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/02-common/close.svg",
+      "svg_sha256": "c7c94a5f2e06981ea6bba5b9319256f49ff27806b64f98746ed53dfb2d06e28c",
+      "png": [
+        {
+          "file": "png/32/02-common/close.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "82a2854c4ce04da06d85f75e61547067567085ce359d3476b81529051c74ed18",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 24,
+            "bottom": 24
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/02-common/close.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "3f2d91175fed1828ff1fe8a117386df0c8f7103af18201078ff6de127db6d044",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 9,
+            "right": 30,
+            "bottom": 30
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/02-common/close.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "bf264c02a40f2d8e85f25618a5ce373a010c99f2b920e37ad951b32f26dd00fc",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 11,
+            "top": 11,
+            "right": 37,
+            "bottom": 37
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/02-common/close.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "12a7267453d20aa77490f28137583c914f7d66f975399a10ad1a60052e5a5b5d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 117,
+            "top": 117,
+            "right": 395,
+            "bottom": 395
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "search",
+      "label": "搜索",
+      "group": "02-common",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/02-common/search.svg",
+      "svg_sha256": "72e5709108368e14d9f9b7612b7b12d7bd2a25a4dc471f113fed2c61a92a05b4",
+      "png": [
+        {
+          "file": "png/32/02-common/search.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "97738fbdbd64af68a27a07759f0a4b8df2e3d46a7acd1edb5864384b277969c2",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 6,
+            "right": 27,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/02-common/search.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "fe54a9e7cca48457e62aef8457bd0accb0f0e2d12b82e7b93d341c3f4b804592",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 34,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/02-common/search.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "69b6e1d61b63e137b0cc356b89cab460a9daed1d6c713e88f6174b1e5c4ab434",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 9,
+            "right": 40,
+            "bottom": 40
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/02-common/search.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "1a1c1b10b5c23813a585a6fb2b6c95e1aed579fa39b72187fbfac8e263976045",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 97,
+            "top": 97,
+            "right": 437,
+            "bottom": 433
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "label": "设置",
+      "group": "02-common",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/02-common/settings.svg",
+      "svg_sha256": "d271ae8af95d5f9e4c5adae74ab508fdbf7b126338c03c29dc588682a0470401",
+      "png": [
+        {
+          "file": "png/32/02-common/settings.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "981db62f9126eae9a2279bc32079a33260b907091bcf56f63c0fea3b93c9452d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 5,
+            "right": 26,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/02-common/settings.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "f822b6d316354f7eebc9e3db3080c8cb5cd767a0cc6dc7cf83d5eb341b4ebaa3",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 6,
+            "right": 33,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/02-common/settings.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "92b3547094144f32de3700d06c5502d2a6f6f58599edb1e00aba5424c45eca28",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 8,
+            "right": 39,
+            "bottom": 39
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/02-common/settings.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "614e90a60eac1320c5c08de36e17bd0b2e1c38fcd86b00bf434fe80e890e1318",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 88,
+            "top": 88,
+            "right": 425,
+            "bottom": 425
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "choose-photo",
+      "label": "选择照片",
+      "group": "02-common",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/02-common/choose-photo.svg",
+      "svg_sha256": "97684a317e8d91ab96a3c9cda2ce4bbe1a612859455c3baeeeb54786e4cf5996",
+      "png": [
+        {
+          "file": "png/32/02-common/choose-photo.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "22ae896556d031b42eb5345cb42c60fcea472876bffc6f9bfa2e279884e7b873",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 7,
+            "right": 26,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/02-common/choose-photo.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "754da81b3b9dffbc46ac249414e0aeeb8ad2272a874df03cb94e3c54bd36ba1d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 9,
+            "right": 33,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/02-common/choose-photo.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "ebd5e216e609ce1ff96a9fc735615df9607babe25c069a03a8c65885b7f08213",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 11,
+            "right": 40,
+            "bottom": 39
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/02-common/choose-photo.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "7f2a0680d6917ba8763e8bc5509bf52a7df1c083c6cfc5e7c58c54ef507745a5",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 84,
+            "top": 123,
+            "right": 429,
+            "bottom": 417
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "share-image",
+      "label": "分享图片",
+      "group": "02-common",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/02-common/share-image.svg",
+      "svg_sha256": "a08034ebeaeae8fc725065f89622974e2928fd642f511ba7d58184f6e58dfbbc",
+      "png": [
+        {
+          "file": "png/32/02-common/share-image.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "085f7f7704d5215fb7b1324251567704ac16ea07534f2397f9b24dc11c4c651b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 5,
+            "right": 25,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/02-common/share-image.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "cb2f28dd76f6b845aa12af61e581df752f636fb3bd36b254a25224321c0b765a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 7,
+            "right": 31,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/02-common/share-image.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "dfa918ae1d53cc3218e0c27314b7d4f3b8734bd5d98b3c77cd14eec068ca62dc",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 8,
+            "right": 38,
+            "bottom": 39
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/02-common/share-image.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "7e58824fe1d04e9603a05a772f5ad082ca1519fd2881bdb25d3c32dc4bec5d06",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 104,
+            "top": 94,
+            "right": 408,
+            "bottom": 422
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "flip-card",
+      "label": "翻面看原图",
+      "group": "02-common",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/02-common/flip-card.svg",
+      "svg_sha256": "de41421ef0bc0a9b5a082a150156bf6c6de04cce0b15a47ee54a3f0199f2df0b",
+      "png": [
+        {
+          "file": "png/32/02-common/flip-card.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "7317d6136bd272c82c5b1555e2d48bfe3853d36e3b9b2930f26482d48fd4f23a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 5,
+            "right": 26,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/02-common/flip-card.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "a78596079c27ca14b3b3eca2cc5bd4089ec5505e6100a6b782400289d13914a9",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 6,
+            "right": 33,
+            "bottom": 34
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/02-common/flip-card.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "f8b4e2471fbd15f616d6aa34b57a37a3ce8f931ee78a7b0ecf4c4c11ab102f63",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 40,
+            "bottom": 41
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/02-common/flip-card.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "5254435135cc701218c435e1de3d3b6ecf6607e430a4dafcda9367848f30f6b2",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 80,
+            "top": 84,
+            "right": 429,
+            "bottom": 438
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "information",
+      "label": "信息说明",
+      "group": "02-common",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/02-common/information.svg",
+      "svg_sha256": "26c121f0b909929ca134e7da9617095a85f1d0fc6c08414373fe15acfdeba5fa",
+      "png": [
+        {
+          "file": "png/32/02-common/information.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "2e16faa6bc8796d512418dcb994248d19537f67800ded31b45cec3d0f50f9576",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 5,
+            "right": 24,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/02-common/information.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "8685a374f9311f866858354e744d3eb0890b08368e11afb2d016e2a8d6861ffc",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 7,
+            "right": 30,
+            "bottom": 34
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/02-common/information.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "605cc66854d9850cc26812385648e8cf7a419ea35e72129cd66c21a1ecd08d56",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 10,
+            "top": 8,
+            "right": 36,
+            "bottom": 40
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/02-common/information.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "5c0b7519ec2d2a607622fcb4db9d154f85d37c75eade564a035164fde8324fb6",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 116,
+            "top": 89,
+            "right": 393,
+            "bottom": 436
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "share-image-white",
+      "label": "分享图片白色版",
+      "group": "02-common",
+      "width": 256,
+      "height": 256,
+      "variant": "white",
+      "base": "share-image",
+      "svg": "svg/02-common/share-image-white.svg",
+      "svg_sha256": "ab64108ae7dc80ad94726d9c32327f735ad22f2bf781d3884977d9cf6611fe23",
+      "png": [
+        {
+          "file": "png/32/02-common/share-image-white.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "b01315f172360dc44eb63f3961d06aa9b7974e1a8964a770077089c5462af62d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 5,
+            "right": 25,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/02-common/share-image-white.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "8f2db19f53132e766b676b40fe85eeaa73a813c54683a9970b20f8c86f93a887",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 7,
+            "right": 31,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/02-common/share-image-white.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "c71c104f34b14e647b05cc518e1ce4aa5719aaaede9b759807496a60c2fda5a5",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 8,
+            "right": 38,
+            "bottom": 39
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/02-common/share-image-white.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "075eed983c3ca4cd0fce563afce581cd091484c9f35c08db80c68db7482abe9d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 104,
+            "top": 94,
+            "right": 408,
+            "bottom": 422
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "adjacent-swap",
+      "label": "相邻交换",
+      "group": "03-operations",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/03-operations/adjacent-swap.svg",
+      "svg_sha256": "ed18cd89f91ae26ec1b7d0b2e2cb8b2f3bbb464d57f0a16f6343ea2d42453cfe",
+      "png": [
+        {
+          "file": "png/32/03-operations/adjacent-swap.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "16b875d3081630871ecfdbe48363b6279fbf290471ccdfbc6594e632120f291e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 4,
+            "right": 28,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/03-operations/adjacent-swap.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "86bb77f364730b15263e84e78770eca204ed365527e911084a50cdfbeecadf47",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 5,
+            "right": 35,
+            "bottom": 34
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/03-operations/adjacent-swap.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "36c01a73bc30324974919dae5adfdb4ef1f7fe2cb0b911c9126906c4c35f0712",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 6,
+            "right": 42,
+            "bottom": 41
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/03-operations/adjacent-swap.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "0e0a1c32181b45bdf6877855a1714978f6e05e1705d4e5b3c180e766b66d9405",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 53,
+            "top": 71,
+            "right": 457,
+            "bottom": 441
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "tap-swap",
+      "label": "点选交换",
+      "group": "03-operations",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/03-operations/tap-swap.svg",
+      "svg_sha256": "338dc6804924553c5adba55dd053b381e7e2d39d712ef2f2c5e22461231d52d5",
+      "png": [
+        {
+          "file": "png/32/03-operations/tap-swap.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "05b3ee6d1d4584179cf6cbfb22035bcb5d1a1aa2b6a4d57bc9dda88ac6a801af",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 4,
+            "right": 30,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/03-operations/tap-swap.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "395d10b24da6860a412d854160c97e45153ca1659b321516a3d98c25eadd38ab",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 5,
+            "right": 38,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/03-operations/tap-swap.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "1e9ddcf006ae7fde2b575ac879b75d935a97f70bac8a0ba2630f35dd62042594",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 6,
+            "right": 45,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/03-operations/tap-swap.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "2536907a00643b8bfa6277b7117e945b2e07f855d6318d8e928bfbb95cca426d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 51,
+            "top": 63,
+            "right": 488,
+            "bottom": 465
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "tool-combo",
+      "label": "工具合体",
+      "group": "03-operations",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/03-operations/tool-combo.svg",
+      "svg_sha256": "5445368a3eee806658850360fc0b0c46112de7fa6f863ad79263a7fe36c04724",
+      "png": [
+        {
+          "file": "png/32/03-operations/tool-combo.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "b7b5dbadeb164bfb245594307bb172ab9462001402c9a43eb1fa7358b3cd8bab",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 2,
+            "right": 29,
+            "bottom": 25
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/03-operations/tool-combo.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "43cdcb2449964f8cc54afeb4b26e2f99ed8063b3bffa10ae73eaa732f026367a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 3,
+            "right": 37,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/03-operations/tool-combo.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "1d2ba574e7c7540af222a3bc89f24031be30fe642484221465805257a0a8fa9d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 4,
+            "right": 44,
+            "bottom": 38
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/03-operations/tool-combo.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "5c42fcad12541de7f86f0a8adb6930593334054c99b6f3274b3578c0acc8dcc7",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 64,
+            "top": 43,
+            "right": 479,
+            "bottom": 413
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "automatic-shuffle",
+      "label": "自动洗牌",
+      "group": "03-operations",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/03-operations/automatic-shuffle.svg",
+      "svg_sha256": "2fe580a61e2fe5ee9db47c68f067b143e2987032f29ec4b047e16ff4aa656bc4",
+      "png": [
+        {
+          "file": "png/32/03-operations/automatic-shuffle.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "590733d0dd4836b1516d1d4b3e592dc2953588eaea241b0338c8cfcd57aa4401",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 27,
+            "bottom": 25
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/03-operations/automatic-shuffle.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "50d3eabdfbacc9740c92b074fd90f253d6a93bb202e8bbfc541df6dc80edbbfb",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 7,
+            "right": 34,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/03-operations/automatic-shuffle.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "1866e3f4367a8650baf68dc085780ae831061549f6ed70c54851eb2dd4eb3a12",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 9,
+            "right": 41,
+            "bottom": 38
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/03-operations/automatic-shuffle.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "ca4407f6e61717cd3acfaae1d64df2c9d3b51678572faea225929264d2cff7bd",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 54,
+            "top": 99,
+            "right": 441,
+            "bottom": 413
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "time-left",
+      "label": "本局剩余",
+      "group": "03-operations",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/03-operations/time-left.svg",
+      "svg_sha256": "4791a46e1e6a3b0915307bedd466ec5ff95e288597908e99f8bd764a02a4eb17",
+      "png": [
+        {
+          "file": "png/32/03-operations/time-left.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "0e3e5d02262bd1006e7cbb50ae2d56c26f8afd3f60d0ecda27ae029fef218192",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 5,
+            "right": 26,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/03-operations/time-left.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "1c62732de69b91d87e4a738be811c3c9f3d5b988b5495914690ee8881b8b767c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 33,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/03-operations/time-left.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "a3607b503202219e9226536b83dbee25b9b52e697c7cb3840db6ef008e2b3d37",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 8,
+            "right": 39,
+            "bottom": 39
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/03-operations/time-left.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "93080e34d85f87fbfc63d3add31270853daaa16686f58ae8bc49a62855f51e9a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 89,
+            "top": 89,
+            "right": 423,
+            "bottom": 423
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "score",
+      "label": "分数",
+      "group": "03-operations",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/03-operations/score.svg",
+      "svg_sha256": "6f705cd094be9f0e8d8196f676d82059659557194ff33916833a1f9313940885",
+      "png": [
+        {
+          "file": "png/32/03-operations/score.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "50fd827371c607c113a5358dd227f7efaf70d3eea63d4286e24622ca2ace462e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 5,
+            "right": 26,
+            "bottom": 25
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/03-operations/score.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "5e4c7731a0382d386c60a605f81d76c44a2b26d1762950aea7dd71aa53c06308",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 6,
+            "right": 33,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/03-operations/score.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "83dc53b7060f8e517bbc204adbcff26598a2b41ead3cab8871b104b207d955c4",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 40,
+            "bottom": 38
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/03-operations/score.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "d70cb3e15722bbf872fedebbc1c52394392a1252b325725f96ed88921a0ef0e3",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 83,
+            "top": 79,
+            "right": 428,
+            "bottom": 412
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "comb-horizontal",
+      "label": "横扫梳子",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "mode": "pets",
+      "ability": "row",
+      "ability_axis": "h",
+      "recommended_min_size": 40,
+      "svg": "svg/04-tools/comb-horizontal.svg",
+      "svg_sha256": "daee99f1d485de50e009795fc6b162c96531a6453f75f6717ddc8735a31debdc",
+      "png": [
+        {
+          "file": "png/32/04-tools/comb-horizontal.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "bae3208702c4f80ec47d8f9ae6efa8f24aa0665b44c9794fef534c89a65a46b6",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 9,
+            "right": 29,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/comb-horizontal.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "da5f7d8ed4cbfcac947ed4bbe54a2ae60433e0add8db507caf503bc933aa47a4",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 12,
+            "right": 37,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/comb-horizontal.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "5adfd9878d49af3b1b31701dc8ae53431df0af4057c25fd9c8e30abaf6c5345a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 14,
+            "right": 44,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/comb-horizontal.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "01f56083edf4a464c0f5356755368012d85636af032bf5b98a15dbd2416d437f",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 53,
+            "top": 157,
+            "right": 476,
+            "bottom": 465
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "comb-vertical",
+      "label": "竖扫梳子",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "mode": "pets",
+      "ability": "column",
+      "ability_axis": "v",
+      "recommended_min_size": 40,
+      "svg": "svg/04-tools/comb-vertical.svg",
+      "svg_sha256": "a0034ecb9f5e373e6deb4c9b95c9364a096cd330365be8977cf6e45b60b540a8",
+      "png": [
+        {
+          "file": "png/32/04-tools/comb-vertical.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "2d20c4e4ed5780014b604468bf578cf122f0c13200f8ff48cc859e3aa87317db",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 5,
+            "right": 29,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/comb-vertical.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "51ec3fab7153a706777d1dac7c16e37468a7b33029d68cd3172961119aa4b478",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 7,
+            "right": 37,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/comb-vertical.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "b074a1facaf8d39387301777898c3427fd8d35d83fc0ff82a09cdfd80435f2fa",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 8,
+            "right": 44,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/comb-vertical.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "8d2b55a7e8b2d002a7d9af8d6c05bd1ae195735825599718eb3edcd4bac3dd6a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 66,
+            "top": 92,
+            "right": 476,
+            "bottom": 465
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "scissors",
+      "label": "十字剪刀",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "mode": "pets",
+      "ability": "cross",
+      "ability_axis": "plus",
+      "recommended_min_size": 40,
+      "svg": "svg/04-tools/scissors.svg",
+      "svg_sha256": "ad2adb62521e6841f54375a2549b7be0d05c4cf49f6843981505ff15ce481990",
+      "png": [
+        {
+          "file": "png/32/04-tools/scissors.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "d98f8c2a83da2d93cea59902ecde194a58adf69a31654c4818f5827975835213",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 4,
+            "right": 29,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/scissors.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "79dd104a0f688e1fffe428567100334b1dc18057de7dc7a29f63e7ecaf7906c6",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 5,
+            "right": 37,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/scissors.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "3ed7a8e583676431ff081da3cc00d6cfdbc0824420c18c32acbd0eb1e7e4355b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 6,
+            "right": 44,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/scissors.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "55a7e5d3bbc5ce8bcd0d726fcf97169c1723781129744cf04a3ebdb9abab267d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 77,
+            "top": 73,
+            "right": 476,
+            "bottom": 465
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "hair-dryer",
+      "label": "吹风机",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "mode": "pets",
+      "ability": "full-board-performance-only",
+      "ability_axis": null,
+      "recommended_min_size": 64,
+      "svg": "svg/04-tools/hair-dryer.svg",
+      "svg_sha256": "f54673bb451e28c8189be4e89c96111c86faabef8f745ae0911f6da017904fde",
+      "png": [
+        {
+          "file": "png/32/04-tools/hair-dryer.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "7fed6bda5a48bf0b671088c89398d19bf0a3aa386be1a36dd57d75706fab5f13",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 9,
+            "right": 30,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/hair-dryer.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "25d934e36bd234962250fc8f57e478dde74d0df2f9401986a54ccfc6c19fe918",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 11,
+            "right": 37,
+            "bottom": 37
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/hair-dryer.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "07c919110006d2e820508ffc24b853d09c2c767661b31ccc3907859bad184f1b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 13,
+            "right": 45,
+            "bottom": 45
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/hair-dryer.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "25842a3f50f44586ea7675787ed93aa601780ba91fc1c3f8c885b7e8d227f979",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 78,
+            "top": 147,
+            "right": 480,
+            "bottom": 480
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "conch-horizontal",
+      "label": "横向海螺",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "mode": "fish",
+      "ability": "row",
+      "ability_axis": "h",
+      "recommended_min_size": 40,
+      "svg": "svg/04-tools/conch-horizontal.svg",
+      "svg_sha256": "4f7f8f4a6c85d74e437993bc3607d335c26420d3ff70b5a55f6ee8f62e59e531",
+      "png": [
+        {
+          "file": "png/32/04-tools/conch-horizontal.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "bd82d6b98f95e9ec7b0ff63b26752e8aba60d29175e2bd2fc4b7eaee223be390",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 9,
+            "right": 30,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/conch-horizontal.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "cb9a90c1cf338283c0c47de38142a8a5c26b92e60fca2f510356eb10c3217f6e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 11,
+            "right": 37,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/conch-horizontal.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "bc36caa3316362fa31fa2eb1e3964f8e301624f4ded07a61d0dfe1282ed861e5",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 13,
+            "right": 45,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/conch-horizontal.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "950ebcc29d31330d27bdaf1c63e6b590b319aa6c8e685eb4cf9344f1f2b0b95d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 51,
+            "top": 145,
+            "right": 483,
+            "bottom": 465
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "conch-vertical",
+      "label": "纵向海螺",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "mode": "fish",
+      "ability": "column",
+      "ability_axis": "v",
+      "recommended_min_size": 40,
+      "svg": "svg/04-tools/conch-vertical.svg",
+      "svg_sha256": "a641259b60f2b668f1e26982c0e3a95e3a980536dc35220dbb212ca99102744c",
+      "png": [
+        {
+          "file": "png/32/04-tools/conch-vertical.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "f43402108b546d103fa03a47b7f994421975de296cac3279b22fb52a0c3adfe4",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 4,
+            "right": 29,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/conch-vertical.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "4c8b2214ef31302f4570c5d4eee0533207f6a7caf49980b3ea33243b1fb3175d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 12,
+            "top": 5,
+            "right": 37,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/conch-vertical.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "7467618aba14e39a4a3177779a716534460d8c105f1da188f065e47124b24f8e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 14,
+            "top": 6,
+            "right": 44,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/conch-vertical.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "449ed9728bdcdb948074e3b4870d376ee5d34aee51f18f8604689e2110fac73b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 154,
+            "top": 64,
+            "right": 476,
+            "bottom": 465
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "pearl-shell",
+      "label": "珍珠贝壳",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "mode": "fish",
+      "ability": "cross",
+      "ability_axis": "plus",
+      "recommended_min_size": 40,
+      "svg": "svg/04-tools/pearl-shell.svg",
+      "svg_sha256": "bab36cafe2662f2fe02a1579db0fd594e49262c84fbe3e955e7e635158ee255a",
+      "png": [
+        {
+          "file": "png/32/04-tools/pearl-shell.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "845ba65a0736f5b87f66b8f6e71335347114d6a46708d8a4159333e82c82ea21",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 6,
+            "right": 29,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/pearl-shell.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "fb129db932e7e57bee09214eb38760ef85c2f9804446f5d6618a24a911c77ac5",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 8,
+            "right": 37,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/pearl-shell.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "19c796690c9f357b7a86ac223075ab53f2dcf4939eb96bce638a43e326673d1e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 9,
+            "right": 44,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/pearl-shell.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "7b3c516e4f44e53f5459a71468ead57c9ad7150a2d32b691647e796cbd4ffe52",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 35,
+            "top": 101,
+            "right": 476,
+            "bottom": 465
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "big-wave",
+      "label": "大浪花",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "mode": "fish",
+      "ability": "full-board-performance-only",
+      "ability_axis": null,
+      "recommended_min_size": 64,
+      "svg": "svg/04-tools/big-wave.svg",
+      "svg_sha256": "41ee04ccf74d2e1e66c380f21c74dddff3186a82c7194fae7d56df53efbbc3ec",
+      "png": [
+        {
+          "file": "png/32/04-tools/big-wave.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "07d76829801941a0bf39e6f6b3e3c61439a47e2156f0ce44f534c3edc0919839",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 7,
+            "right": 30,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/big-wave.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "538f1d22b107baea7e99392724841c384ecdcf09dcce7093fabfd5b6411a6e1b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 9,
+            "right": 37,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/big-wave.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "99c99bb816109947b6228a12ca2ac062f3f3f003194e92358fb25743007fa899",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 11,
+            "right": 45,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/big-wave.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "60d5340c10edbd07e69bc471e3c7969d8677e456ad36c53bf65ad13d2b71e3be",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 51,
+            "top": 122,
+            "right": 485,
+            "bottom": 460
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "comb-horizontal-base",
+      "label": "横扫梳子无角标",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "variant": "without-ability-badge",
+      "base": "comb-horizontal",
+      "mode": "pets",
+      "ability": "row",
+      "svg": "svg/04-tools/comb-horizontal-base.svg",
+      "svg_sha256": "325f8b7e1c978ab9b2553af49a61230ed4ed9eb611e97f9fae98bd99686f20f1",
+      "png": [
+        {
+          "file": "png/32/04-tools/comb-horizontal-base.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "c1369462a926e9aa15fd6f58bf1dcaf1bee7898580ab57674eae23619634b023",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 9,
+            "right": 25,
+            "bottom": 24
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/comb-horizontal-base.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "3d0754c2226c9c93785cae39c5a70ef6f3cc5a9fb23a12128e4615bfd371bd0d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 12,
+            "right": 32,
+            "bottom": 31
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/comb-horizontal-base.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "e36374c80bc835bec5cabe93de466a1d8e2eba29629727d2d11d4562031b588a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 14,
+            "right": 38,
+            "bottom": 37
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/comb-horizontal-base.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "a73bef35de0a022a993e7c9813eb7c5ec8112f2f42b18c2be1967b3e6e3e530c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 53,
+            "top": 157,
+            "right": 415,
+            "bottom": 400
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "comb-vertical-base",
+      "label": "竖扫梳子无角标",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "variant": "without-ability-badge",
+      "base": "comb-vertical",
+      "mode": "pets",
+      "ability": "column",
+      "svg": "svg/04-tools/comb-vertical-base.svg",
+      "svg_sha256": "8af86ef70fe7e12b4f8713a03d8fc2eb80fbad3c63b828cbeabe97fcec47e485",
+      "png": [
+        {
+          "file": "png/32/04-tools/comb-vertical-base.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "b5465875a0d3257642764501885cf245e62bec61508e75dc652ba3091f802a08",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 5,
+            "right": 23,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/comb-vertical-base.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "f6401a61ee13b1ec2ddf96ff27514758f8bf23fdfb3a37c7ce6dc6cf2214beb3",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 7,
+            "right": 29,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/comb-vertical-base.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "fd690e93444c35d369c9283c87fdcd758ef15ef494f08ddc32a333a13041a1ed",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 8,
+            "right": 34,
+            "bottom": 42
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/comb-vertical-base.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "d9c4f68395bc9490c1c5d0ff85df9cfcbc2936e1b685fb521a3c8d4e44a7193f",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 66,
+            "top": 92,
+            "right": 371,
+            "bottom": 449
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "scissors-base",
+      "label": "十字剪刀无角标",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "variant": "without-ability-badge",
+      "base": "scissors",
+      "mode": "pets",
+      "ability": "cross",
+      "svg": "svg/04-tools/scissors-base.svg",
+      "svg_sha256": "6957f49266a5d4b0e4b08442880dae393bfa88e75024241ed5d7cf6a93da7601",
+      "png": [
+        {
+          "file": "png/32/04-tools/scissors-base.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "873205e5ff0df64725fafad61c4b9c19c34c980ab7f891483524c8caec9ac644",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 4,
+            "right": 29,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/scissors-base.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "285187c74c0ec969186ac32d0aebf5ef9553eb9e80ec36a618623b698470f39b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 5,
+            "right": 36,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/scissors-base.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "02d78039afba3523fabe760be4977b6f33f7902f72008ef92286558887af4d0f",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 6,
+            "right": 44,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/scissors-base.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "cc0d3b741e5b1e383a8b52d5b3e9c542bfb2453798dc6606898f84870b1806c8",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 77,
+            "top": 73,
+            "right": 473,
+            "bottom": 465
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "conch-horizontal-base",
+      "label": "横向海螺无角标",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "variant": "without-ability-badge",
+      "base": "conch-horizontal",
+      "mode": "fish",
+      "ability": "row",
+      "svg": "svg/04-tools/conch-horizontal-base.svg",
+      "svg_sha256": "ba91dddd40ec3ec11449625c113014ef4163a3654823c98c82e38ec1c9daaecc",
+      "png": [
+        {
+          "file": "png/32/04-tools/conch-horizontal-base.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "07ee318229480e5e8ca9862cb3a0da8964a52ed4dd68f2b300e141ca3cae9394",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 9,
+            "right": 30,
+            "bottom": 24
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/conch-horizontal-base.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "45d85253f2607119932daf9cd295e424cb96188b2242a33a20edc1cf3ae7e0a5",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 11,
+            "right": 37,
+            "bottom": 30
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/conch-horizontal-base.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "8648366052acc04111697087f0df1d0650a67fb8f4f19b6db42969e328278159",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 13,
+            "right": 45,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/conch-horizontal-base.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "e2c418b05a896e84ad11485c5c9a2325970cca472fde432dd11f611d0562476c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 51,
+            "top": 145,
+            "right": 483,
+            "bottom": 386
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "conch-vertical-base",
+      "label": "纵向海螺无角标",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "variant": "without-ability-badge",
+      "base": "conch-vertical",
+      "mode": "fish",
+      "ability": "column",
+      "svg": "svg/04-tools/conch-vertical-base.svg",
+      "svg_sha256": "57fa885079bbbd18bb10ec5cc1151ffc10435d8b7c67ccbc0ca1114723f3fb21",
+      "png": [
+        {
+          "file": "png/32/04-tools/conch-vertical-base.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "7ff825d541f7267316af4c626c36723d4f1b008dd8c370528927dd508569f03c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 4,
+            "right": 25,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/conch-vertical-base.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "20b488f14b160f454e20cb6dafb171488157663e12263aed6315fca5e6f251c6",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 12,
+            "top": 5,
+            "right": 31,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/conch-vertical-base.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "8b1fc3efb3ad37263526f06adbc21acebb8fc8d81cf03d61a5432ebe8ba406b3",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 14,
+            "top": 6,
+            "right": 37,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/conch-vertical-base.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "ce788c379a89e3d34bca33c01372a8d451868155bb1c9616aae6e40dbc76c333",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 154,
+            "top": 64,
+            "right": 405,
+            "bottom": 464
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "pearl-shell-base",
+      "label": "珍珠贝壳无角标",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "variant": "without-ability-badge",
+      "base": "pearl-shell",
+      "mode": "fish",
+      "ability": "cross",
+      "svg": "svg/04-tools/pearl-shell-base.svg",
+      "svg_sha256": "fcbe146738cc47d4644aa7ffc9511639b23ff824626506bdce2fe375e86a9a1d",
+      "png": [
+        {
+          "file": "png/32/04-tools/pearl-shell-base.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "627fb308f240301bcc40c6d90c5477e2bb76947dfa9cf172c75521c282683aaf",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 6,
+            "right": 29,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/pearl-shell-base.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "d3f500babf015fb2ca9ff6cf1780fd0418aeb18a6ac5f3151d7d6bb3d473b7fe",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 8,
+            "right": 36,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/pearl-shell-base.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "e64aaff3e12597c6a3d71f155eec5b76587de444a01ec07e6f243917d559858e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 9,
+            "right": 43,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/pearl-shell-base.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "38a63cafdb9e1318389bdada6db04c8c36caeaebafddc0e5480853f919c00868",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 35,
+            "top": 101,
+            "right": 468,
+            "bottom": 463
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "ability-h",
+      "label": "横扫能力标识",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "variant": "ability-marker",
+      "ability_axis": "h",
+      "svg": "svg/04-tools/ability-h.svg",
+      "svg_sha256": "cd961892846baa776883d47f9300c6ab377a4fbdbe95696780212fd68c4edb78",
+      "png": [
+        {
+          "file": "png/32/04-tools/ability-h.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "b2a3996410411bfa4f2a9c4760ed77c43b6ce327940d36d79ec6c901c07b19da",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 6,
+            "right": 25,
+            "bottom": 25
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/ability-h.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "37144a212728e5c779351a474285549e3e2fbc9f2abf1dc3d722b644d5b6c3a6",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 32,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/ability-h.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "2797f451d0ba577aafcd74646f77ab0933053b9297410c391d0a2aa131a55b6a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 9,
+            "right": 38,
+            "bottom": 38
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/ability-h.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "5bf0aeae1b8936f85f6630e7d96d0d218fc8638e433aaa5993938db1b9da25e9",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 100,
+            "top": 100,
+            "right": 412,
+            "bottom": 412
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "ability-v",
+      "label": "竖扫能力标识",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "variant": "ability-marker",
+      "ability_axis": "v",
+      "svg": "svg/04-tools/ability-v.svg",
+      "svg_sha256": "9773fb33340e7e4339f64c7806a4a61eea3b950f0fb2b134317d6f4a9836c73a",
+      "png": [
+        {
+          "file": "png/32/04-tools/ability-v.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "94ad9c3dca7ab84a068de5737e583756f060a8709179bd62bb67610514c0a182",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 6,
+            "right": 25,
+            "bottom": 25
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/ability-v.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "b3029ccd445fd0a584cfa7dc0d223496c840b919188a2854baa356af70baf68c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 32,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/ability-v.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "93504311b4cbf25e1eadde7ed807549ecf25168fc2f6664b6fd8c0247b12daa8",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 9,
+            "right": 38,
+            "bottom": 38
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/ability-v.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "a49ddc91bf781e5ac6353478b8e72ddf6929bca65d8dde659fe566b1159ce2ed",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 100,
+            "top": 100,
+            "right": 412,
+            "bottom": 412
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "ability-plus",
+      "label": "十字能力标识",
+      "group": "04-tools",
+      "width": 256,
+      "height": 256,
+      "variant": "ability-marker",
+      "ability_axis": "plus",
+      "svg": "svg/04-tools/ability-plus.svg",
+      "svg_sha256": "2880162cfbbf1b06c4afd5ca3144709fcf780a5ea6849ef4dbf36f387449af5f",
+      "png": [
+        {
+          "file": "png/32/04-tools/ability-plus.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "2104ad61b6aee6063079325c91ef3fe2723213fef3ae9d435126063a807daf4a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 6,
+            "right": 25,
+            "bottom": 25
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/04-tools/ability-plus.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "f0691ec93ca7eb33842efe1a8b3914f78c017b5d906f0cbf2507c4bd7e919f09",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 32,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/04-tools/ability-plus.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "e0e78a2e25479030bbbd7654edb53a90dd9d3b3d006dc93e0453e5c6831026b2",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 9,
+            "right": 38,
+            "bottom": 38
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/04-tools/ability-plus.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "57a31e7c2c72e5d693d4c3b00729b9532cf7542f9d5529ece91f7e6ef218441e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 100,
+            "top": 100,
+            "right": 412,
+            "bottom": 412
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "rush-ticket",
+      "label": "加急小票",
+      "group": "05-rush",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/05-rush/rush-ticket.svg",
+      "svg_sha256": "d7d9fc81e5f5ee7e2fb161fbfe1e5c8a0cb6c934e229a94354f866cbf7bde516",
+      "png": [
+        {
+          "file": "png/32/05-rush/rush-ticket.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "5ec4aeef78264290ccc6d5aa5cd46d19c03350413c764530132bba4c7fde2318",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 4,
+            "right": 26,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/05-rush/rush-ticket.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "a9f0cbff9bacba228dd7ae795c4993f3295ff8137a3e7e5480d331acaccef948",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 5,
+            "right": 33,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/05-rush/rush-ticket.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "41db0056374eb4ba8765def0581968f0bb49a092a16d6b9264164c88c7bf1f67",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 40,
+            "bottom": 42
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/05-rush/rush-ticket.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "c269ecfd9e4ee5fbb5c987d5c0083ebc7cc642733bd79f216841b1e800359110",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 36,
+            "top": 72,
+            "right": 428,
+            "bottom": 455
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "completed-mark",
+      "label": "完成印记",
+      "group": "05-rush",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/05-rush/completed-mark.svg",
+      "svg_sha256": "be46be4108c250026243653c5fb99dbeaeb01bc17cfb10146dbcdbe7a928896b",
+      "png": [
+        {
+          "file": "png/32/05-rush/completed-mark.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "a66e4594fa60fbb74ae2ab9eb447f0170b88a228a02c41be8d291929c0903099",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 5,
+            "right": 26,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/05-rush/completed-mark.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "11fa5b0bfec594b7d129afc6aad894f4670d39d06e003ee13f0b2459adb18d92",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 33,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/05-rush/completed-mark.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "b936bdedba3e33a6db9b61c4de9d077da421bce6bfe653382c247cb8944e5b96",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 8,
+            "right": 39,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/05-rush/completed-mark.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "e1f73b416d9f6aa0cc211cfba294049c58e2ffd48aef84a3732d54e58050b99e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 44,
+            "top": 88,
+            "right": 426,
+            "bottom": 459
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "expired-ticket",
+      "label": "收起小票",
+      "group": "05-rush",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/05-rush/expired-ticket.svg",
+      "svg_sha256": "ac54fa2ad8293dbf1ae74f4b410e10271b4f8e19b78ff0acfe4ba296be905240",
+      "png": [
+        {
+          "file": "png/32/05-rush/expired-ticket.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "f16437050d549df310a7b45aaf0bd66a80e2edba324b51d5d9259b3c77e55207",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 4,
+            "right": 26,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/05-rush/expired-ticket.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "e7274cf5021eb6b82d60b3126d52aa8eedaeff7080f59cdae129e7afd9280f1c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 5,
+            "right": 33,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/05-rush/expired-ticket.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "20cc33f9d97c03f2dd1f134b8bd4896e4f55943bc89fd50484a3ecef8a4d8801",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 6,
+            "right": 40,
+            "bottom": 42
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/05-rush/expired-ticket.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "0fc3ea8e5a7f47f5e60ff44cf5756c98164328e1e15582da51acf9716a47e7d4",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 77,
+            "top": 72,
+            "right": 428,
+            "bottom": 455
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "mvp-medal",
+      "label": "MVP 奖章",
+      "group": "06-report",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/06-report/mvp-medal.svg",
+      "svg_sha256": "1fd670030b6285995bb34ddb7be3d5e6fc73fe42390bef98187136dbd0c46001",
+      "png": [
+        {
+          "file": "png/32/06-report/mvp-medal.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "722ece243daf809fe4895da9c518b45f9fa6ffb59d1db46c7abb1f359d92c519",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 3,
+            "right": 29,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/06-report/mvp-medal.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "639c5a08449932fd07c68f4229872be7e9ae63256a29769d2491387662fc185b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 4,
+            "right": 36,
+            "bottom": 37
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/06-report/mvp-medal.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "e66dbe9911d8e4937d9be8bd0aab24d2e24cfa8e44bf345b986b272719f73831",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 5,
+            "right": 43,
+            "bottom": 44
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/06-report/mvp-medal.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "83568192ba4856f79ed81b099e7b1c5b5e97a5a942d555edd57f4f95c2078251",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 79,
+            "top": 53,
+            "right": 469,
+            "bottom": 478
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "new-record-flag",
+      "label": "新纪录小旗",
+      "group": "06-report",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/06-report/new-record-flag.svg",
+      "svg_sha256": "d1024c544e7ad4e7cfc5d827bfc11c89e8ed713954265b94718da804cdfda3b5",
+      "png": [
+        {
+          "file": "png/32/06-report/new-record-flag.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "39f80f40cad42219aebd679a84bb404f8f5934e832240ca568c488789f46e031",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 3,
+            "right": 29,
+            "bottom": 29
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/06-report/new-record-flag.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "bd7e487b14952bb1f7a8bed61e590986289a8a160eacd35c0b82492360a52b1e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 4,
+            "right": 36,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/06-report/new-record-flag.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "bdf89ebd60f4c43eee8edf64dcdc829281f09aac03eb6168da44ed72eb1bfa4e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 11,
+            "top": 5,
+            "right": 43,
+            "bottom": 44
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/06-report/new-record-flag.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "010535fa9346e9a07911b9af02ffff9bfc57d28ee1eff79644d7f155b4147c53",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 117,
+            "top": 63,
+            "right": 469,
+            "bottom": 470
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "title-stamp",
+      "label": "称号印章空框",
+      "group": "06-report",
+      "width": 400,
+      "height": 192,
+      "recommended_min_size": 160,
+      "text_safe_area": {
+        "x": 66,
+        "y": 71,
+        "width": 264,
+        "height": 52,
+        "rotation_degrees": -4
+      },
+      "note": "Blank frame; title text remains dynamic, no circular postmark.",
+      "svg": "svg/06-report/title-stamp.svg",
+      "svg_sha256": "8e1c4ebe2fc9a7b77dfe1e4db0b82086ac2b6f2fe70d5968ae290b97949cb2d5",
+      "png": [
+        {
+          "file": "png/32/06-report/title-stamp.png",
+          "width": 32,
+          "height": 15,
+          "sha256": "7366090e8045d847ad376985080b642f5a5ecf3ee543d3add8b14aa1ce41a8e3",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 2,
+            "right": 30,
+            "bottom": 13
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/06-report/title-stamp.png",
+          "width": 40,
+          "height": 19,
+          "sha256": "d686f6c6b82925f10a6ce53421cb7f0b8bccbbfeeae56fd08898f4fc474d79e2",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 2,
+            "right": 38,
+            "bottom": 16
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/06-report/title-stamp.png",
+          "width": 48,
+          "height": 23,
+          "sha256": "cc2cd4b712241bf14e982c18fdbbfa01fcf30e2f217ecdd566afe46edeabed60",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 3,
+            "right": 46,
+            "bottom": 20
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/06-report/title-stamp.png",
+          "width": 512,
+          "height": 246,
+          "sha256": "334c95e73f3d65cd182ecb9a8f6b9e03daa18cad18057100360c895fed5502ca",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 29,
+            "top": 34,
+            "right": 497,
+            "bottom": 217
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "rank-1",
+      "label": "第 1 名皇冠",
+      "group": "07-rankings",
+      "width": 256,
+      "height": 256,
+      "rank": 1,
+      "svg": "svg/07-rankings/rank-1.svg",
+      "svg_sha256": "bda299f6e5adda74ec2fb7778aa836652003ea404351c2d1873695030ada99ff",
+      "png": [
+        {
+          "file": "png/32/07-rankings/rank-1.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "1c6541f3edb5e17d9b73e17f0aa3e8d4f4c2e2a5218ea2f4ef1d4b79c51a8e0d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 5,
+            "right": 29,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/07-rankings/rank-1.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "fbe1da704a82be94703d5f71816bfcea990c45b5e949f6dee296642d481c3e79",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 6,
+            "right": 36,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/07-rankings/rank-1.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "33fce116df05bf88ff2bc41ac8cc9a7ee8a4538d2ba60781e9f80b260bcc599a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 8,
+            "right": 44,
+            "bottom": 39
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/07-rankings/rank-1.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "6c45bb052869f2ca40308681d41dc77e7e9c92a62a7e1a1de4520cb3ab82854e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 39,
+            "top": 88,
+            "right": 473,
+            "bottom": 424
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "rank-2",
+      "label": "第 2 名盾牌",
+      "group": "07-rankings",
+      "width": 256,
+      "height": 256,
+      "rank": 2,
+      "svg": "svg/07-rankings/rank-2.svg",
+      "svg_sha256": "3233b3f4a805112e16aa1056d570654422384f7e130a053355c3fba9d25e4250",
+      "png": [
+        {
+          "file": "png/32/07-rankings/rank-2.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "c0a96df5ff082b398b1c2be7a33d4629b464e7688d17d54c8481d596c81c1453",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 4,
+            "right": 26,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/07-rankings/rank-2.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "9283d60992ebdcefae65b52aac46cec6b1dc00f5c65c1ea791aa09e0c9b38f11",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 5,
+            "right": 33,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/07-rankings/rank-2.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "147b46811c34e0d0a9f1a9db4b9f40964b2c19456a9bcf5195f7f9b75363ffe5",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 6,
+            "right": 39,
+            "bottom": 42
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/07-rankings/rank-2.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "e015f49f7b4fe24c4c5a8197a578512a6261fb534531ef4e65a7adaadee1a151",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 90,
+            "top": 73,
+            "right": 423,
+            "bottom": 453
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "rank-3",
+      "label": "第 3 名六角章",
+      "group": "07-rankings",
+      "width": 256,
+      "height": 256,
+      "rank": 3,
+      "svg": "svg/07-rankings/rank-3.svg",
+      "svg_sha256": "09dcf51fdff707b270896126b1fc51551a7c229089c05dea6bbf5c94319c1496",
+      "png": [
+        {
+          "file": "png/32/07-rankings/rank-3.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "88752a0f795f4d846f146e00a69dd53b273e6c7fef7f90cadd0a28fb4bbffd0d",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 4,
+            "right": 27,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/07-rankings/rank-3.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "7f468bafeb92f6287ceb6ca5f7295b003be84835ae3c95c629e3ccdcfbb76c37",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 6,
+            "right": 33,
+            "bottom": 36
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/07-rankings/rank-3.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "cafc62a7051733c573df6fc2b60bd095cc61c2ba2e36b5784ceb31b3bf37568f",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 40,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/07-rankings/rank-3.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "7fc745172e2d74980acb50e11decd0a6f007c88423da4b347623379f3daee783",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 78,
+            "top": 78,
+            "right": 434,
+            "bottom": 463
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "collected-bookmark",
+      "label": "已收集印记",
+      "group": "08-collection",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/08-collection/collected-bookmark.svg",
+      "svg_sha256": "51b392a9809b067284d1e0b0f44e3c56c829c481625c62fbbeb1d2bd6a79a568",
+      "png": [
+        {
+          "file": "png/32/08-collection/collected-bookmark.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "cecd8538a93fd854b766a093943a25af7393ec56f5c1a92b9561f232dfa1df17",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 5,
+            "right": 23,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/08-collection/collected-bookmark.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "1da6e4d9dc67daaadef2506b625c9e2cc613f4bd93fa37910980d3981174397a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 11,
+            "top": 7,
+            "right": 28,
+            "bottom": 34
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/08-collection/collected-bookmark.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "8ee572437224dcdc0f9717d0e960b9b7b1d4adf71fb42eefd61215919ec16f90",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 13,
+            "top": 8,
+            "right": 34,
+            "bottom": 41
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/08-collection/collected-bookmark.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "1ec28d97349429dda32d8fef867d68b17496a1c5e35bbe955a74675dba8b6699",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 147,
+            "top": 89,
+            "right": 369,
+            "bottom": 439
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "empty-collection",
+      "label": "尚无收集",
+      "group": "08-collection",
+      "width": 256,
+      "height": 256,
+      "recommended_min_size": 96,
+      "svg": "svg/08-collection/empty-collection.svg",
+      "svg_sha256": "aa961fc5c1edb5887a7762a4dc9328aa18ee1926f2b3e8bead5391eab295b892",
+      "png": [
+        {
+          "file": "png/32/08-collection/empty-collection.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "a73021e0d2a6421a7d394218718b1b4dc582d39884cf9209bfecb3afd24e416b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 2,
+            "top": 8,
+            "right": 29,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/08-collection/empty-collection.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "e5d0fdc3e4dc05508f27659658eb6621720495e95fe8fd8973234ae8d1af3dfd",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 11,
+            "right": 36,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/08-collection/empty-collection.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "15a2807ef5ac7763f95809da31eb4d12e966dc3367001d166d9bd933debd8004",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 3,
+            "top": 13,
+            "right": 44,
+            "bottom": 43
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/08-collection/empty-collection.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "5a01bbb81a4e21069d2432b84d7cde3d366eca632df426036d4acd9849ee2594",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 40,
+            "top": 142,
+            "right": 472,
+            "bottom": 461
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "empty-search",
+      "label": "搜索无结果",
+      "group": "08-collection",
+      "width": 256,
+      "height": 256,
+      "recommended_min_size": 64,
+      "svg": "svg/08-collection/empty-search.svg",
+      "svg_sha256": "6f06053503f6e1ddf4b8fdd06221b064d66df98d63e2bcfdc67b9453d560b164",
+      "png": [
+        {
+          "file": "png/32/08-collection/empty-search.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "87f935b40f5477288159b09e1d366bb3a34e16bf12977fd7127076ec81912c3c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 4,
+            "top": 5,
+            "right": 28,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/08-collection/empty-search.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "e16a310bfa02f3278df58a4ab786f9728c61ba5876ad809de35bf9a4787f3d2c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 7,
+            "right": 36,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/08-collection/empty-search.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "7ef42db20fae9926a87c3897ac99bde731661fed3a05a064419f40726c19b56e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 8,
+            "right": 43,
+            "bottom": 42
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/08-collection/empty-search.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "13951e5e902fa4ab1882ab43254a95d5d0712b3f2bbdc0a32855ae1495827272",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 75,
+            "top": 93,
+            "right": 463,
+            "bottom": 450
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "language",
+      "label": "语言",
+      "group": "09-settings",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/09-settings/language.svg",
+      "svg_sha256": "dd5dbb842b73e9a16c890f45dbbfd523e0b21adde6f728561134b36e78bcfa24",
+      "png": [
+        {
+          "file": "png/32/09-settings/language.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "b47b3971e68beac4619b551799bd9eb18cb9af41dab0e9ffed09d48309637c3b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 6,
+            "right": 25,
+            "bottom": 25
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/09-settings/language.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "513b768a6c81d1d48cb5b9b39a9a989851c6bc026012697f993219a1d17a59c6",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 7,
+            "right": 32,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/09-settings/language.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "978e814531c81b87a773ebd7f824ddb07ea65cfdda15a31b33589b2ab7102826",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 9,
+            "right": 38,
+            "bottom": 38
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/09-settings/language.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "daf95301d0b553dbaf49ff6b473e4bffc33949a77c2708472a063ffaa087da4a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 97,
+            "top": 99,
+            "right": 415,
+            "bottom": 414
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "music",
+      "label": "背景音乐",
+      "group": "09-settings",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/09-settings/music.svg",
+      "svg_sha256": "f3f55a7883bd23880ada84f22acf9f0663476ba1c64570544ed172286324d539",
+      "png": [
+        {
+          "file": "png/32/09-settings/music.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "163f66fe4973159869700914ca11023cb3e606dd7a3f44581afdfe1db0fd5bbf",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 5,
+            "right": 24,
+            "bottom": 25
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/09-settings/music.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "3445915fcb08a9611dc478d1da91654727291f2a441d3b991875d1cdd13f9cdb",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 6,
+            "right": 30,
+            "bottom": 31
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/09-settings/music.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "b1b3737e328cb250955ef521025cc81cfacc1099d1d57ab327e58048cc08098c",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 8,
+            "right": 37,
+            "bottom": 37
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/09-settings/music.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "e1d14b5ee5134dec451c4ccadbf13a429e8efededc66f70f477ff3b533d579f4",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 95,
+            "top": 88,
+            "right": 394,
+            "bottom": 405
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "sound-effects",
+      "label": "消除音效",
+      "group": "09-settings",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/09-settings/sound-effects.svg",
+      "svg_sha256": "11134281d0de963ac4d3535fd89e3e7e89955025835f4955042036bf4c8be946",
+      "png": [
+        {
+          "file": "png/32/09-settings/sound-effects.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "f7d0953d2dcad90888dbb6cddd4b3070f56a274a3674a8d05f94933efb8dabbe",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 7,
+            "right": 27,
+            "bottom": 24
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/09-settings/sound-effects.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "625af2e0c478f517a5f56f4e7b68c036abcf8ac32af1bdbd1c5f878ea8c5ce7b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 9,
+            "right": 33,
+            "bottom": 31
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/09-settings/sound-effects.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "c80903e6007193cb21bd203bcb97697b06c9b7e9df334aea8d51b85bff5f9c2b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 11,
+            "right": 40,
+            "bottom": 37
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/09-settings/sound-effects.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "a02b9cf726fc3579c444e21aa86f43d0aa45d4f9b14387d37f17cca764317608",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 93,
+            "top": 126,
+            "right": 434,
+            "bottom": 401
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "haptics",
+      "label": "轻震",
+      "group": "09-settings",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/09-settings/haptics.svg",
+      "svg_sha256": "09e684767c6f8b07fe30f20969ec015b234e06bcac357109ef89115a2ca68eb6",
+      "png": [
+        {
+          "file": "png/32/09-settings/haptics.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "243f7e84b21f3d237b911e63b393f04ef6d21c31ed09400da26a1a4b5ef3aa18",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 5,
+            "right": 25,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/09-settings/haptics.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "c54f179dff000a54c9d9f6f66880f5075fe41b5ba4503d0174d6be628910b1f8",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 6,
+            "right": 31,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/09-settings/haptics.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "567cafa96bce07d845c96143f064fcf916f3c941181d699eea373a3979894ad0",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 10,
+            "top": 8,
+            "right": 37,
+            "bottom": 40
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/09-settings/haptics.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "58ee6f28ffe1532d4bb84f2c29a2abbe9f66c3d3de8d35a600282a9b0da189d9",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 109,
+            "top": 87,
+            "right": 404,
+            "bottom": 429
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "back-to-shop",
+      "label": "回门店",
+      "group": "10-actions",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/10-actions/back-to-shop.svg",
+      "svg_sha256": "ee5cd618859014cfa4317557e0dfd4c1f682ec73e1cdfc1c0b8c5c754fc871e2",
+      "png": [
+        {
+          "file": "png/32/10-actions/back-to-shop.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "94ba6d70632d52a514caa8c675efa29528322ffd04aa748f4c9994df432e4f04",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 6,
+            "right": 26,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/10-actions/back-to-shop.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "1b6a0aedbca76716f923912c62c6a5d345573a65c642183dcd409eef2be64de6",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 8,
+            "right": 33,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/10-actions/back-to-shop.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "68512e7c0e7609525635ac2c76d6d90a4cc17aebc9f4f5e8616f415eec13200b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 9,
+            "right": 40,
+            "bottom": 42
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/10-actions/back-to-shop.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "fe687eaf58874e89982c1816ffb5ce10b63db3e9fde65915a83f83fe1d8a68f0",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 84,
+            "top": 104,
+            "right": 429,
+            "bottom": 454
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "exit",
+      "label": "退出",
+      "group": "10-actions",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/10-actions/exit.svg",
+      "svg_sha256": "0cc88b099bf99f02444313b36a7697eed9008b5a26596c4d704ce57f431b8017",
+      "png": [
+        {
+          "file": "png/32/10-actions/exit.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "aa210faaca602a57fdf8f01411f90062d40b7ec4214ed26d9661ab9cb54dc7dd",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 5,
+            "right": 28,
+            "bottom": 28
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/10-actions/exit.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "aea908b01b54eeeda7803423182926e646efa599979582d9fe4c8fac25018afa",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 7,
+            "right": 35,
+            "bottom": 35
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/10-actions/exit.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "9c9883a30ab7877acedbc81f5a29dec88e3a201e0507c0d5bd79e5a3a60e9bbb",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 11,
+            "top": 8,
+            "right": 42,
+            "bottom": 42
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/10-actions/exit.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "c8803a45ed9acf6b83fcd1443c1679aae24a900a88686fe5d9e06bfd40485c08",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 123,
+            "top": 89,
+            "right": 456,
+            "bottom": 451
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "change-photo",
+      "label": "换一张照片",
+      "group": "10-actions",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/10-actions/change-photo.svg",
+      "svg_sha256": "f9eb533adc4af6902839230cd66f5b853556304e3497583cbf50030275c6ca8b",
+      "png": [
+        {
+          "file": "png/32/10-actions/change-photo.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "fb39c47f7c0a96dd2268968649c7a46ed5e33331029d04503fbb04be57b115ce",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 6,
+            "right": 27,
+            "bottom": 27
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/10-actions/change-photo.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "4344e3e17abfa33c4f16592d8e89847a33153572a8293078d113a578938a692e",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 7,
+            "right": 34,
+            "bottom": 34
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/10-actions/change-photo.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "b7282cc78d6f394cd280e5c8a4eb5a1d4f03c50f5c4ebbeef44238e22c2ff944",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 7,
+            "top": 9,
+            "right": 41,
+            "bottom": 40
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/10-actions/change-photo.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "5032e9e57c8f9875de186d0a4807316e57120a85441f8a0a0baa202538ef91ce",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 82,
+            "top": 101,
+            "right": 438,
+            "bottom": 436
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "save-image",
+      "label": "保存图片",
+      "group": "10-actions",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/10-actions/save-image.svg",
+      "svg_sha256": "47f3a37c181571142a9a8630ce139c4cb806e60c93adfa3517593c0c2b32d07d",
+      "png": [
+        {
+          "file": "png/32/10-actions/save-image.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "c781a404a776a23c0e075d385956142f056fc5a8dea3f09bdce3162007728e3b",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 5,
+            "right": 25,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/10-actions/save-image.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "fb667cbdbfa532f51248c7c5ee40e104b7d99ab531b702e58ae8d4ba8bbbcfc0",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 7,
+            "right": 31,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/10-actions/save-image.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "c3ac4acd7d36a9c975ea5ff162583a36190d42827ed602d7a46b1eaf6e1b4a0a",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 8,
+            "right": 38,
+            "bottom": 39
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/10-actions/save-image.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "5661ffe1da7ede0f5c7a78c44ee68b84b31aae70e44393753598cfb507c95bbf",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 104,
+            "top": 92,
+            "right": 408,
+            "bottom": 422
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "retry",
+      "label": "重试",
+      "group": "10-actions",
+      "width": 256,
+      "height": 256,
+      "svg": "svg/10-actions/retry.svg",
+      "svg_sha256": "6ef1bb57ea2b4173d39115f6f2d81432563d609d2c934c8c58608275db79cd23",
+      "png": [
+        {
+          "file": "png/32/10-actions/retry.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "85914101f4aadad5df9b54286a067cbf1d2d231a5b943ba6defae135ddfe9004",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 5,
+            "top": 5,
+            "right": 26,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/10-actions/retry.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "d786e39ab56907f5dfa7f21092da6512affb6263b8e3ab573b44b528e50ca7eb",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 7,
+            "right": 32,
+            "bottom": 33
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/10-actions/retry.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "33f2bb65f81e06a6f221cf18eb276cf19cbf40337cfe24a01bda360173720bbf",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 8,
+            "right": 39,
+            "bottom": 39
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/10-actions/retry.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "a005ef1b346e64e5a48deb149224190a184c315fb9dc28e9c0c23abf94bf04d3",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 85,
+            "top": 89,
+            "right": 418,
+            "bottom": 426
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    },
+    {
+      "id": "save-image-white",
+      "label": "保存图片白色版",
+      "group": "10-actions",
+      "width": 256,
+      "height": 256,
+      "variant": "white",
+      "base": "save-image",
+      "svg": "svg/10-actions/save-image-white.svg",
+      "svg_sha256": "4ddd9986b15484ce6cf0b17b80363889957f5487c936c5ed407762c14349181b",
+      "png": [
+        {
+          "file": "png/32/10-actions/save-image-white.png",
+          "width": 32,
+          "height": 32,
+          "sha256": "82eaac35e32d1ec485e2cf0f21061652d5439cd375209495c7fc355f14743158",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 6,
+            "top": 5,
+            "right": 25,
+            "bottom": 26
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/40/10-actions/save-image-white.png",
+          "width": 40,
+          "height": 40,
+          "sha256": "888316702a7252e2d360c94d68bcb6cee3e1d389a26a1c8b875ee28c202a3b97",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 8,
+            "top": 7,
+            "right": 31,
+            "bottom": 32
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/48/10-actions/save-image-white.png",
+          "width": 48,
+          "height": 48,
+          "sha256": "12952a33a091f48f375a5a50072de168ca5e773fae537ebb3fcb035a3aa9c5a9",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 9,
+            "top": 8,
+            "right": 38,
+            "bottom": 39
+          },
+          "edge_visible_pixels": 0
+        },
+        {
+          "file": "png/512/10-actions/save-image-white.png",
+          "width": 512,
+          "height": 512,
+          "sha256": "e63616a6ff4c6ebe37092d7e80bba162841e86e5115508e8c3c84d2cd7befbd7",
+          "alpha": true,
+          "painted_bounds": {
+            "left": 104,
+            "top": 92,
+            "right": 408,
+            "bottom": 422
+          },
+          "edge_visible_pixels": 0
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "native_svg_only": true,
+    "all_pngs_have_alpha": true,
+    "all_png_perimeters_clear": true,
+    "all_white_variants_pure_white": true,
+    "references_copied_without_pixel_changes": true,
+    "game_integration_tested": false
+  },
+  "user_feedback": "不对，你这个素材和之前讨论的样式不一致",
+  "rejection": {
+    "date": "2026-10-23",
+    "reason": "Manual SVG reconstruction flattened the illustration, changed silhouettes/proportions and lost approved material and motion details.",
+    "technical_validation_scope": "File validity and transparency passed; those checks did not establish visual fidelity.",
+    "replacement_work": "assets/icons/library-original-png-v2"
+  },
+  "current_replacement": "assets/icons/library-original-png-v2"
+}

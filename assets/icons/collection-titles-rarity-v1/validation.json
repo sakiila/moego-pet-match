@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "masters": 14,
+  "responsivePngs": 112,
+  "rgba": true,
+  "transparentCorners": true,
+  "opaqueSourceRgbMaximumDifference": 1,
+  "checkedSizes": [
+    32,
+    48,
+    64,
+    96,
+    128,
+    192,
+    256,
+    512
+  ],
+  "note": "Visual inspection of preview.png required in addition to structural validation",
+  "visualReview": "passed: seven motifs, retained ivory faces, clean exterior, blue/purple/rainbow borders, no neighboring label fragments",
+  "avatarPlacementV2": {
+    "status": "passed",
+    "badgeCenterOnAvatarCircle": true,
+    "badgePixelFilesUnchanged": true,
+    "ratio": 0.375
+  }
+}

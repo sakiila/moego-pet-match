@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title"><title id="title">开始营业</title><defs>
+  <linearGradient id="orange" x1="0" y1="0" x2="0.25" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#ff781f"/><stop offset="1" stop-color="#f36313"/>
+  </linearGradient>
+  <linearGradient id="paper" x1="0" y1="0" x2="0.7" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#ffffff"/><stop offset="1" stop-color="#fffaf1"/>
+  </linearGradient>
+  <linearGradient id="blue" x1="0" y1="0" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#69aff4"/><stop offset="1" stop-color="#539de8"/>
+  </linearGradient></defs><g transform="translate(8 8) scale(.94)"><g fill="url(#orange)" stroke="#24282e" stroke-width="7.6" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="45" cy="119" rx="18.8" ry="25.5" transform="rotate(-27 45 119)"/>
+    <ellipse cx="99" cy="78" rx="21.5" ry="29.5" transform="rotate(-12 99 78)"/>
+    <ellipse cx="156" cy="78" rx="21.5" ry="29.5" transform="rotate(13 156 78)"/>
+    <ellipse cx="207" cy="119" rx="18.8" ry="25.5" transform="rotate(27 207 119)"/>
+    <path d="M128 123C111 123 102 137 88 151C74 165 60 179 62 194C64 214 80 222 99 218L118 214C125 212 132 212 140 214L158 218C179 223 197 211 198 193C199 178 183 163 169 149C153 133 145 123 128 123Z"/>
+  </g></g></svg>

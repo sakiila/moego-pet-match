@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MoeGo 首页入口 · 独立图标第 1 批</title>
+  <style>
+    :root { --paper:#faf8f3; --card:#fff; --ink:#24282e; --muted:#696d76; --orange:#ff6b18; --line:#e3dfd7; --dark:#0b2a4d; --radius:18px; --gap:24px; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--paper); color:var(--ink); }
+    main { max-width:1280px; padding:36px 28px; margin:auto; }
+    h1 { font-size:clamp(26px,3vw,34px); line-height:1.25; margin:8px 0 12px; }
+    .eyebrow { color:var(--orange); font-weight:700; letter-spacing:.06em; margin:0; }
+    .intro { color:var(--muted); margin:0 0 28px; }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--gap); }
+    article { min-width:0; }
+    h2 { margin:0 0 12px; font-size:19px; }
+    .art { display:flex; align-items:center; justify-content:center; height:208px; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); }
+    .art img { width:176px; height:176px; }
+    .sizes { display:flex; align-items:flex-end; justify-content:center; gap:20px; min-height:100px; padding:20px 0 12px; }
+    figure { margin:0; text-align:center; }
+    figure img { display:block; margin:auto; }
+    figcaption { font-size:12px; color:var(--muted); margin-top:4px; }
+    .dark { display:flex; justify-content:center; align-items:center; gap:20px; height:78px; border-radius:12px; background:var(--dark); }
+    .dark img { width:48px; height:48px; }
+    .dark span { font-size:12px; color:var(--card); }
+    .links { display:flex; justify-content:center; gap:20px; margin:14px 0 0; font-size:14px; }
+    a { color:var(--ink); text-underline-offset:4px; }
+    :focus-visible { outline:3px solid var(--orange); outline-offset:4px; }
+    .white { display:flex; align-items:center; flex-wrap:wrap; gap:24px; margin:32px 0; padding:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .white h2 { margin:0; font-size:17px; }
+    .white .sample { display:flex; align-items:center; justify-content:center; gap:12px; background:var(--orange); color:var(--card); padding:12px 36px; border-radius:999px; box-shadow:0 5px 0 var(--ink); font-size:24px; font-weight:700; }
+    .white img { display:block; }
+    .white .links { margin:0; }
+    details { margin-top:20px; }
+    summary { cursor:pointer; font-weight:600; padding:12px 0; }
+    details img { display:block; max-width:100%; height:auto; border-radius:var(--radius); border:1px solid var(--line); }
+    footer { margin-top:28px; font-size:14px; color:var(--muted); }
+    @media(max-width:960px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px 20px; } }
+    @media(max-width:420px) { main { padding:28px 14px; } .grid { gap:24px 12px; } .art { height:160px; } .art img { width:140px; height:140px; } .sizes { gap:8px; } .links { gap:12px; } .white { gap:16px; } .white .sample { padding:12px 24px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">MOEGO · 独立图标第 1 批 · 待审阅</p>
+    <h1>旧 SVG 重绘稿 · 样式未通过</h1><p>当前请使用<a href="../library-original-png-v2/preview.html">按原稿拆分的透明 PNG v2</a>。</p>
+    <p class="intro">四枚入口图标与白色爪印。大图展示透明 PNG，下方为 32 / 40 / 48 px 实际导出和深色背景 SVG。</p>
+    <section class="grid" aria-label="首页四枚入口图标">
+      <article>
+        <h2>开始营业</h2>
+        <div class="art"><img src="png/open-shop.png" width="176" height="176" alt="橙色爪印独立图标"></div>
+        <div class="sizes">
+          <figure><img src="png/32/open-shop.png" width="32" height="32" alt="开始营业 32 像素"><figcaption>32 px</figcaption></figure>
+          <figure><img src="png/40/open-shop.png" width="40" height="40" alt="开始营业 40 像素"><figcaption>40 px</figcaption></figure>
+          <figure><img src="png/48/open-shop.png" width="48" height="48" alt="开始营业 48 像素"><figcaption>48 px</figcaption></figure>
+        </div>
+        <div class="dark"><img src="svg/open-shop.svg" width="48" height="48" alt="深色背景上的橙色爪印"><span>SVG · 48 px</span></div>
+        <p class="links"><a href="svg/open-shop.svg" download>SVG</a><a href="png/open-shop.png" download>PNG 512</a></p>
+      </article>
+      <article>
+        <h2>宠物图鉴</h2>
+        <div class="art"><img src="png/pet-collection.png" width="176" height="176" alt="橙色封皮与书签的打开图鉴独立图标"></div>
+        <div class="sizes">
+          <figure><img src="png/32/pet-collection.png" width="32" height="32" alt="宠物图鉴 32 像素"><figcaption>32 px</figcaption></figure>
+          <figure><img src="png/40/pet-collection.png" width="40" height="40" alt="宠物图鉴 40 像素"><figcaption>40 px</figcaption></figure>
+          <figure><img src="png/48/pet-collection.png" width="48" height="48" alt="宠物图鉴 48 像素"><figcaption>48 px</figcaption></figure>
+        </div>
+        <div class="dark"><img src="svg/pet-collection.svg" width="48" height="48" alt="深色背景上的打开图鉴"><span>SVG · 48 px</span></div>
+        <p class="links"><a href="svg/pet-collection.svg" download>SVG</a><a href="png/pet-collection.png" download>PNG 512</a></p>
+      </article>
+      <article>
+        <h2>排行榜</h2>
+        <div class="art"><img src="png/leaderboard.png" width="176" height="176" alt="完整双把手与底座的橙星奖杯独立图标"></div>
+        <div class="sizes">
+          <figure><img src="png/32/leaderboard.png" width="32" height="32" alt="排行榜 32 像素"><figcaption>32 px</figcaption></figure>
+          <figure><img src="png/40/leaderboard.png" width="40" height="40" alt="排行榜 40 像素"><figcaption>40 px</figcaption></figure>
+          <figure><img src="png/48/leaderboard.png" width="48" height="48" alt="排行榜 48 像素"><figcaption>48 px</figcaption></figure>
+        </div>
+        <div class="dark"><img src="svg/leaderboard.svg" width="48" height="48" alt="深色背景上的橙星奖杯，杯柄中空"><span>SVG · 48 px</span></div>
+        <p class="links"><a href="svg/leaderboard.svg" download>SVG</a><a href="png/leaderboard.png" download>PNG 512</a></p>
+      </article>
+      <article>
+        <h2>我的宠物</h2>
+        <div class="art"><img src="png/my-pets.png" width="176" height="176" alt="前景白色垂耳犬与后方蓝猫独立图标"></div>
+        <div class="sizes">
+          <figure><img src="png/32/my-pets.png" width="32" height="32" alt="我的宠物 32 像素"><figcaption>32 px</figcaption></figure>
+          <figure><img src="png/40/my-pets.png" width="40" height="40" alt="我的宠物 40 像素"><figcaption>40 px</figcaption></figure>
+          <figure><img src="png/48/my-pets.png" width="48" height="48" alt="我的宠物 48 像素"><figcaption>48 px</figcaption></figure>
+        </div>
+        <div class="dark"><img src="svg/my-pets.svg" width="48" height="48" alt="深色背景上的猫狗头像"><span>SVG · 48 px</span></div>
+        <p class="links"><a href="svg/my-pets.svg" download>SVG</a><a href="png/my-pets.png" download>PNG 512</a></p>
+      </article>
+    </section>
+    <section class="white" aria-label="橙底白爪应用示意">
+      <h2>主按钮白色版</h2>
+      <div class="sample"><img src="svg/open-shop-white.svg" width="48" height="48" alt="白色爪印">开始营业</div>
+      <p class="links"><a href="svg/open-shop-white.svg" download>SVG</a><a href="png/open-shop-white.png" download>PNG 512</a></p>
+    </section>
+    <details>
+      <summary>对照已确认的首页入口 v3 原稿</summary>
+      <img src="reference/home-entry-icons-v3.png" width="1536" height="1024" alt="已确认的首页入口 v3 原稿，作为视觉参考">
+    </details>
+    <footer>独立素材待审阅，尚未接入游戏。<a href="home-entry-original-v1-rejected.zip" download>退回稿留档</a> · <a href="manifest.json">文件清单</a></footer>
+  </main>
+</body>
+</html>

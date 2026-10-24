@@ -1,0 +1,15 @@
+Create ONE production sprite atlas PNG, transparent background, target 3072 x 2048. This is an asset extraction/adaptation from the two supplied approved reference images, NOT a new design exploration.
+Reference 1 is the newly APPROVED final v5 rarity style: use EXACT coral red for 闪耀, electric purple for 卓越, champagne to rose gold for 非凡, full rainbow for 传奇. Preserve the narrow ivory inner edge, subtle polished enamel highlight and scalloped seal contours. Reference 2 supplies the seven original animal/album compositions at larger resolution. Preserve each motif, pose, face, orange and ivory pet colors, eye shapes and proportions. Change ONLY outer rarity framing and detached accent colors to match reference 1. Never tint the animals themselves.
+The atlas has a STRICT 4-column by 2-row equal-cell grid, no visible grid lines, each cell 768 x 1024 pixels. Each badge centered in its cell, fitting comfortably in an approximately 600 x 600 px area; leave wide transparent gutters. The last cell (bottom right) is completely empty transparent. No icon may cross its cell boundary.
+ROW 1 in exact left-to-right order:
+1 cats: the two expressive cats from reference 2, one orange mischievous cat and one ivory smiling cat, coral-red/peach gradient outer scalloped frame.
+2 dogs: the two smiling orange-and-ivory dogs from reference 2, coral-red/peach gradient outer scalloped frame.
+3 friends: the two raised paw pads from reference 2, coral-red/peach gradient outer scalloped frame.
+4 species: rabbit at top, orange cat at lower left and ivory-orange dog at lower right from reference 2; champagne-gold to rose-gold frame, with the same few detached star accents recolored gold/rose.
+ROW 2 in exact left-to-right order:
+1 neighbors: orange door at left and smiling dog peeking from right, electric lavender-purple outer scalloped frame.
+2 family: orange cat and smiling dog together beneath orange house roof with heart, electric lavender-purple outer scalloped frame.
+3 album: open pet album containing cat and dog, circular orange checkmark at lower right, full-spectrum rainbow outer scalloped frame; keep the few detached rainbow/gold accent stars.
+4 empty transparent.
+Frame palettes: coral #FF985D -> #F24959 for cats/dogs/paws; violet #C6A4FF -> #8B44ED -> #6934BD for neighbors/family; warm gold #F7D27D -> #E9AD35 -> #E898A8 for species; full orange/yellow/green/blue/violet/pink rainbow for album.
+CRITICAL: the badge interiors and ivory faces are OPAQUE, background and scalloped cut-outs are truly alpha transparent. Do not make ivory faces transparent. No background drop shadows, no checkerboard image painted into pixels, no colored cell background, no floor, no text, no labels, no words, no rarity pills, no title chips, no UI cards, no screenshots, no menus. Only the seven faithful isolated original badges arranged in the specified atlas. Keep original orange-white illustration style, no glossy plastic redesign of the animals, no extra character, no alteration of expression. This is ONE consistent sprite atlas, all seven badges equally sharp and similarly scaled.
