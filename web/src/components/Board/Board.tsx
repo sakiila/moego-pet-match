@@ -22,7 +22,7 @@ export interface BoardProps {
   /** 尝试交换；返回是否被受理。 */
   onSwap?: (from: Pos, to: Pos) => boolean;
   onDraggingChange?: (dragging: boolean) => void;
-  /** 鱼关时工具显示为水流喷头 / 气泡机，能力不变。 */
+  /** 鱼关时工具显示为海螺 / 珍珠贝壳，能力不变。 */
   mode?: GameMode;
   /** 陈列页用：固定显示的选中格与预览。 */
   staticSelected?: Pos | null;

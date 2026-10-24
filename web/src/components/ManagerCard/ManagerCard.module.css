@@ -1,14 +1,20 @@
 .shop {
   position: relative;
-  margin: 0;
-  padding: 0 var(--space-2);
+  /*
+   * 插画左右各有约 4% 透明留白：放宽 8%，让遮阳棚与下方「开始营业」按钮差不多宽；
+   * 上下略收进页面间距，抵消放大后多出的高度
+   */
+  width: 108%;
+  margin: calc(-1 * var(--space-2)) -4% calc(-1 * var(--space-3));
+  /* 与店面插画同比例（ui/art/storefront-v2.webp 1080 × 740） */
+  aspect-ratio: 1080 / 740;
 }
 
 /* 整个橱窗可点：透明按钮铺满，打开店长小海报 */
 .open {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   border: 0;
   border-radius: var(--radius-lg);
   background: none;
@@ -20,91 +26,273 @@
   outline-offset: 4px;
 }
 
-/* 橙白条纹遮阳篷，底边做成一排半圆垂边 */
-.awning {
-  position: relative;
-  z-index: 1;
-  display: block;
-  height: 46px;
-  border: var(--stroke) solid var(--color-ink);
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
-  background: repeating-linear-gradient(90deg, var(--color-brand) 0 13%, var(--color-paper) 13% 26%);
-}
-
-.awning::after {
-  content: '';
+.frame {
   position: absolute;
-  left: -2px;
-  right: -2px;
-  bottom: -14px;
-  height: 14px;
-  background: radial-gradient(circle at 25% 0, var(--color-brand) 0 11px, transparent 12px) 0 0 / 26% 14px repeat-x;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
 }
 
+/* 橱窗：插画中两立柱之间、遮阳棚垂边以下到柜台台面以上的留白区域 */
 .window {
-  position: relative;
-  display: grid;
-  justify-items: center;
-  margin: 0 var(--space-3);
-  padding: var(--space-5) var(--space-3) 0;
-  border: var(--stroke) solid var(--color-ink);
-  border-top: 0;
-  background: color-mix(in srgb, var(--color-brand-soft) 35%, var(--color-paper));
-}
-
-.bubble {
   position: absolute;
-  top: 22px;
-  right: 6px;
-  z-index: 1;
-  max-width: 46%;
-  padding: var(--space-2) var(--space-3);
-  border: var(--stroke) solid var(--color-ink);
-  border-radius: var(--radius-md);
-  background: var(--color-paper);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-bold);
-  line-height: 1.4;
+  top: 22.4%;
+  right: 16.1%;
+  bottom: 22.8%;
+  left: 16.3%;
+  overflow: hidden;
 }
 
-.bubble::after {
-  content: '';
-  position: absolute;
-  left: 18px;
-  bottom: -9px;
-  width: 14px;
-  height: 14px;
-  border-right: var(--stroke) solid var(--color-ink);
-  border-bottom: var(--stroke) solid var(--color-ink);
-  background: var(--color-paper);
-  transform: rotate(45deg);
-}
-
+/* 店长头像站在柜台后面：底边贴台面，以底部为轴轻轻左右摇摆 */
 .sticker {
-  position: relative;
+  position: absolute;
+  bottom: -12%;
+  left: 3%;
   display: block;
-  width: min(44vw, 176px);
+  height: 128%;
   aspect-ratio: 1;
-  margin-right: 28%;
   object-fit: contain;
   filter: drop-shadow(0 4px 0 rgb(31 34 39 / 0.12));
+  transform-origin: 50% 100%;
+  animation: sway 3.2s ease-in-out infinite;
 }
 
-.counter {
-  display: grid;
-  place-items: center;
-  justify-self: stretch;
-  height: 48px;
-  margin: -18px calc(-1 * var(--space-3)) 0;
-  border-top: var(--stroke) solid var(--color-ink);
-  background: var(--color-paper);
-  font-size: 22px;
+@keyframes sway {
+  0%,
+  100% {
+    rotate: -3deg;
+  }
+
+  50% {
+    rotate: 3deg;
+  }
 }
 
+/*
+ * 宣言气泡：手绘线椭圆 + 外圈白边的贴纸，加粗居中、略向左倾（mobile-home-v2）；
+ * 轮廓由 SVG 绘制（见 ManagerCard.tsx），下方多留出尾巴的位置。
+ * 中文只在标点处折行（「你负责排班，/ 我负责可爱。」）。进入时弹一下，之后轻轻上下浮动。
+ */
+.bubble {
+  position: absolute;
+  top: 11%;
+  right: 8%;
+  z-index: 2;
+  max-width: 42%;
+  padding: 10px 16px 11px;
+  font-size: var(--text-sm);
+  font-weight: 900;
+  line-height: 1.3;
+  text-align: center;
+  text-wrap: balance;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  rotate: -5deg;
+  transform-origin: 20% 100%;
+  animation:
+    bubble-pop 480ms var(--ease-out) 250ms both,
+    bubble-float 2.8s ease-in-out 800ms infinite;
+}
+
+[data-long].bubble {
+  max-width: 44%;
+  padding: 9px 14px 10px;
+  font-size: var(--text-xs);
+  line-height: 1.25;
+}
+
+.bubbleText {
+  position: relative;
+}
+
+/*
+ * 轮廓比文字盒上下各大 3px、左右各大 4px：路径椭圆身占 viewBox 上 97/120，下方是尾巴，
+ * 所以总高 = 椭圆身高 × 120/97。SVG 有固有比例，必须显式给宽高，否则高度按比例算、椭圆身下移，文字显得偏上。
+ */
+.bubbleShape {
+  position: absolute;
+  top: -3px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc((100% + 6px) * 120 / 97);
+  overflow: visible;
+  filter: drop-shadow(0 2px 1.5px var(--share-shadow));
+}
+
+.bubbleRim {
+  fill: var(--color-paper);
+  stroke: var(--color-paper);
+  stroke-width: 9px;
+  stroke-linejoin: round;
+}
+
+.bubbleFill {
+  fill: var(--color-paper);
+}
+
+.bubbleInk,
+.bubbleGloss {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bubbleInk {
+  stroke-width: 2.5px;
+}
+
+.bubbleGloss {
+  stroke-width: 1.75px;
+  opacity: 0.55;
+}
+
+@keyframes bubble-pop {
+  0% {
+    opacity: 0;
+    scale: 0.4;
+  }
+
+  70% {
+    opacity: 1;
+    scale: 1.08;
+  }
+
+  100% {
+    scale: 1;
+  }
+}
+
+@keyframes bubble-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -3px;
+  }
+}
+
+/* 橙色短线：每组两笔向外散开的圆头短线（::before / ::after），交替闪烁 */
+.spark {
+  position: absolute;
+  z-index: 1;
+  width: 22px;
+  height: 18px;
+  pointer-events: none;
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+
+.spark::before,
+.spark::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--color-brand);
+  transform-origin: 50% 100%;
+}
+
+.spark::before {
+  left: 4px;
+  height: 14px;
+  rotate: -18deg;
+}
+
+.spark::after {
+  left: 14px;
+  height: 10px;
+  rotate: 28deg;
+}
+
+.sparkLeft {
+  top: 26%;
+  left: 21%;
+  rotate: -40deg;
+}
+
+.sparkRight {
+  top: 46%;
+  right: 21%;
+  rotate: 70deg;
+  animation-delay: 0.6s;
+}
+
+.sparkLow {
+  top: 60%;
+  right: 4%;
+  rotate: 80deg;
+  animation-delay: 1.2s;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+    scale: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker,
+  .bubble,
+  .spark {
+    animation: none;
+  }
+}
+
+/* 名牌立在柜台台面右侧，让开店长头像；长名字向左折行展开 */
 .caption {
   position: absolute;
-  right: var(--space-3);
-  bottom: 36px;
+  right: 7%;
+  bottom: 17.5%;
+  z-index: 2;
+  width: max-content;
+  max-width: 56%;
+}
+
+/*
+ * 厚木牌：浅橙牌面 + 炭黑描边；内侧底边一条深橙作木板厚度、顶边一道白色高光，
+ * 外侧一实一虚两层阴影，让牌子落在台面上。文字一行、同一颜色，名字放不下时整块折行。
+ */
+.nameplate {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  column-gap: 5px;
+  padding: 7px 14px 10px;
+  border: var(--stroke) solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  background: var(--color-brand-soft);
+  box-shadow:
+    inset 0 -4px 0 var(--color-brand-soft-edge),
+    inset 0 2px 0 rgb(255 255 255 / 0.7),
+    0 5px 0 -1px rgb(31 34 39 / 0.18),
+    0 8px 10px rgb(31 34 39 / 0.12);
+  font-size: var(--text-sm);
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.role,
+.dot {
+  white-space: nowrap;
+}
+
+.name {
+  max-width: 100%;
+  /* 名字不截断：放不下时折行 */
+  overflow-wrap: anywhere;
 }
 
 .plate {
@@ -115,7 +303,9 @@
   background: var(--color-brand-soft);
   font-size: var(--text-sm);
   font-weight: 900;
-  white-space: nowrap;
+  line-height: 1.3;
+  /* 名字不截断：放不下时整段折行 */
+  overflow-wrap: anywhere;
 }
 
 .signature {
@@ -135,8 +325,9 @@
 }
 
 .avatar .sticker {
+  position: static;
   width: 100%;
-  margin: 0;
+  height: 100%;
 }
 
 .signature figcaption {

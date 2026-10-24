@@ -1,0 +1,32 @@
+/*
+ * 圆润界面字体（自带子集，来源与许可见 assets/fonts/README.md）。
+ * Nunito 只覆盖拉丁字符与数字（引号、破折号、省略号交给中文圆体，中文里是全角样式）；其余字符落到 Resource Han Rounded，未收录的字再回退系统字体。
+ */
+@font-face {
+  font-family: 'MoeGo Rounded';
+  src: url('./fonts/nunito-latin.woff2') format('woff2');
+  font-weight: 200 1000;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200F, U+2030-206F, U+20AC, U+2122, U+2190-2199, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'MoeGo Rounded';
+  src: url('./fonts/rounded-cjk-medium.woff2') format('woff2');
+  font-weight: 100 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MoeGo Rounded';
+  src: url('./fonts/rounded-cjk-bold.woff2') format('woff2');
+  font-weight: 601 850;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MoeGo Rounded';
+  src: url('./fonts/rounded-cjk-heavy.woff2') format('woff2');
+  font-weight: 851 1000;
+  font-display: swap;
+}

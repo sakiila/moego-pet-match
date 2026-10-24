@@ -230,10 +230,10 @@ describe('提示与带教', () => {
     expect(pickTip(none)).toBeNull();
   });
 
-  it('鱼关首次工具带教用水流喷头 / 气泡机文案，合体带教共用', () => {
+  it('鱼关首次工具带教用海螺 / 珍珠贝壳文案，合体带教共用', () => {
     const none = { finishing: false, shuffling: false, tutorial: null, hint: false, lastSeconds: false, mode: 'fish' as const };
-    expect(pickTip({ ...none, tutorial: 'comb' })?.key).toBe('tutorial.water_jet');
-    expect(pickTip({ ...none, tutorial: 'scissors' })?.key).toBe('tutorial.bubble_machine');
+    expect(pickTip({ ...none, tutorial: 'comb' })?.key).toBe('tutorial.conch');
+    expect(pickTip({ ...none, tutorial: 'scissors' })?.key).toBe('tutorial.pearl_shell');
     expect(pickTip({ ...none, tutorial: 'merge' })?.key).toBe('tutorial.big_wave_merge');
     expect(pickTip({ ...none, tutorial: 'dryer' })?.key).toBe('tutorial.big_wave');
     expect(pickTip({ ...none, tutorial: 'dryer', mode: 'normal' })?.key).toBe('tutorial.dryer');
@@ -242,7 +242,7 @@ describe('提示与带教', () => {
     expect(pickTip({ ...none, mode: 'normal', tutorial: 'comb' })?.key).toBe('tutorial.comb');
   });
 
-  it('看过的带教按模式分别记住：普通局看过梳子，鱼关仍提示水流喷头', () => {
+  it('看过的带教按模式分别记住：普通局看过梳子，鱼关仍提示海螺', () => {
     const store = new Map<string, string>();
     (globalThis as { localStorage?: Pick<Storage, 'getItem' | 'setItem'> }).localStorage = {
       getItem: (k) => store.get(k) ?? null,

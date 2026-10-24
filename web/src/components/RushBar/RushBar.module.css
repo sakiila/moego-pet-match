@@ -1,9 +1,14 @@
 /* 固定高度：出现与收起都不推动棋盘 */
 .slot {
+  min-width: 0;
   height: 76px;
 }
 
 .bar {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  gap: var(--space-3);
   height: 100%;
   padding: var(--space-2) var(--space-3);
   border: var(--stroke) solid var(--color-brand);
@@ -20,6 +25,11 @@
   }
 }
 
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
 .head {
   display: flex;
   justify-content: space-between;
@@ -28,12 +38,18 @@
 }
 
 .title {
-  font-size: var(--text-lg);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-md);
   font-weight: var(--weight-bold);
   color: var(--color-brand);
 }
 
 .remaining {
+  flex: none;
+  white-space: nowrap;
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
   font-variant-numeric: tabular-nums;
@@ -42,10 +58,18 @@
 .row {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  white-space: nowrap;
   margin-top: var(--space-2);
   font-size: var(--text-sm);
   color: var(--fg-muted);
+}
+
+/* 窄屏时目标说明先省略，进度条与已服务数保持可见 */
+.row > :last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .served {
@@ -57,6 +81,7 @@
 
 .track {
   flex: 1;
+  min-width: 32px;
   height: 12px;
   border-radius: var(--radius-pill);
   background: var(--line);
@@ -71,9 +96,8 @@
 }
 
 .message {
-  display: grid;
-  place-items: center;
-  height: 100%;
+  flex: 1;
+  min-width: 0;
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
 }

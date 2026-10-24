@@ -49,7 +49,7 @@ export interface TipInputs {
   tutorial: Tutorial | null;
   hint: boolean;
   lastSeconds: boolean;
-  /** 鱼关的梳子 / 剪刀外观是水流喷头 / 气泡机，带教文案随之切换。 */
+  /** 鱼关的梳子 / 剪刀外观是海螺 / 珍珠贝壳，带教文案随之切换。 */
   mode?: GameMode;
 }
 
@@ -62,8 +62,8 @@ export function pickTip(t: TipInputs): TipView | null {
   const fish = t.mode === 'fish';
   if (t.tutorial === 'merge') return { key: fish ? 'tutorial.big_wave_merge' : 'tutorial.dryer_merge' };
   if (t.tutorial === 'dryer') return { key: fish ? 'tutorial.big_wave' : 'tutorial.dryer' };
-  if (t.tutorial === 'comb') return { key: fish ? 'tutorial.water_jet' : 'tutorial.comb' };
-  if (t.tutorial === 'scissors') return { key: fish ? 'tutorial.bubble_machine' : 'tutorial.scissors' };
+  if (t.tutorial === 'comb') return { key: fish ? 'tutorial.conch' : 'tutorial.comb' };
+  if (t.tutorial === 'scissors') return { key: fish ? 'tutorial.pearl_shell' : 'tutorial.scissors' };
   if (t.hint) return { key: 'board.move_hint' };
   if (t.lastSeconds) return { key: 'round.last_seconds' };
   return null;

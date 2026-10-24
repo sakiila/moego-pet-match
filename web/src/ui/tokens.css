@@ -7,6 +7,8 @@
   --color-brand: #f96b1c;
   --color-brand-strong: #e85a0c;
   --color-brand-soft: #ffe7d6;
+  /* 浅橙木牌的底边（厚度），见 ManagerCard 名牌 */
+  --color-brand-soft-edge: #f6c39b;
   --color-ink: #1f2227;
   --color-ink-muted: #5b6270;
   --color-paper: #ffffff;
@@ -30,6 +32,17 @@
   /* 报告小票「打印」动画：开始延迟与出纸时长；小票下方内容在此之后依次出现。减少动态效果时为 0 */
   --print-start: 250ms;
   --print-ms: 1800ms;
+
+  /* 光荣榜领奖台：金、银、铜台阶（顶面浅、正面略深）与名次数字色 */
+  --podium-gold-top: #fff3cf;
+  --podium-gold: #ffe3a1;
+  --podium-gold-ink: #f0a21b;
+  --podium-silver-top: #f6f7fa;
+  --podium-silver: #e4e7ee;
+  --podium-silver-ink: #9aa1ad;
+  --podium-bronze-top: #fff0e3;
+  --podium-bronze: #fbd8bd;
+  --podium-bronze-ink: #c8783e;
 
   /* 状态色 */
   --color-success: #2f9e6b;
@@ -69,8 +82,63 @@
   /* 成绩卡（Canvas）上贴纸的投影色 */
   --share-shadow: rgb(31 34 39 / 0.16);
 
+  /* 图鉴贴纸册：纸、胶带与导出共用的视觉令牌。 */
+  --album-paper: #fcf6ec;
+  --album-fiber: rgb(139 109 69 / 0.025);
+  --album-tape: rgb(249 107 28 / 0.65);
+  --album-tape-fiber: rgb(255 255 255 / 0.16);
+  --album-fiber-step: 3px;
+  --album-fiber-width: 0.4px;
+  --album-paper-shadow: drop-shadow(0 3px 6px rgb(93 70 43 / 0.12));
+  --album-tape-width: 56px;
+  --album-tape-height: 23px;
+  --album-tape-angle: -18deg;
+  --album-title-indent: 36px;
+  --album-slot-line: rgb(91 98 112 / 0.18);
+  --album-slot-stroke: 1px;
+  --album-focus-stroke: 2px;
+  --album-sticker-scale: 1.18;
+  --album-silhouette-opacity: 0.45;
+  --album-sticker-shadow: drop-shadow(0 1px 1.5px rgb(31 34 39 / 0.22));
+  --album-preview-min-height: 180px;
+  --album-preview-max-height: 55dvh;
+  --pet-detail-min-height: 400px;
+
+  /* 收集称号：原稿徽章 + 代码文字签。 */
+  --achievement-chip-bg: #fff5e9;
+  --achievement-chip-stroke: 1px;
+  --achievement-chip-text: 11px;
+  --achievement-locked-opacity: 0.6;
+  --achievement-row-height: 76px;
+  --achievement-progress-height: 4px;
+  --achievement-header-width: 104px;
+  --achievement-avatar-size: 40px;
+  --achievement-avatar-badge-size: 22px;
+  --achievement-avatar-anchor: 85.355339%;
+  --achievement-avatar-keyline: 1px;
+  --leaderboard-title-hit-size: 44px;
+  --achievement-common: #f96b1c;
+  --achievement-common-ink: #a53b05;
+  --achievement-common-bg: #fff5eb;
+  --achievement-common-line: #f6c5a3;
+  --achievement-rare: #3387f2;
+  --achievement-rare-ink: #225baa;
+  --achievement-rare-bg: #edf5ff;
+  --achievement-rare-line: #b3d2fc;
+  --achievement-epic: #9c4ff0;
+  --achievement-epic-ink: #7934b9;
+  --achievement-epic-bg: #f7f0ff;
+  --achievement-epic-line: #d8bcf4;
+  --achievement-rainbow: linear-gradient(120deg, #ff7d16, #ffd33d 20%, #39cc88 40%, #429ff7 60%, #a75cf2 80%, #f85b9e);
+  --achievement-rainbow-bg: #fffbf3;
+  --achievement-equip-width: 68px;
+  --achievement-shelf-icon: 72px;
+  --menu-icon-highlight: #ffb33d;
+  --menu-icon-ivory-edge: #fbe7c4;
+
   /* 字体 */
-  --font-sans: ui-rounded, 'SF Pro Rounded', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+  /* 圆润字体（fonts.css）；未收录的字回退系统圆体与苹方 */
+  --font-sans: 'MoeGo Rounded', ui-rounded, 'SF Pro Rounded', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
   --text-xs: 12px;
   --text-sm: 14px;
   --text-md: 16px;
@@ -80,6 +148,12 @@
   --weight-regular: 500;
   --weight-bold: 800;
 
+  /* 首页与报告页导航：统一基准尺寸，按图案轮廓和面积校准视觉重量。 */
+  --nav-tile-icon-size: 52px;
+  --nav-tile-leaderboard-scale: 0.98;
+  --nav-tile-my-pets-scale: 1.24;
+  --nav-tile-back-to-shop-scale: 0.80;
+
   /* 间距 */
   --space-1: 4px;
   --space-2: 8px;
@@ -87,6 +161,15 @@
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
+
+  /* 普通局准备页的阵容、夹板与操作示意尺寸 */
+  --prep-portrait-size: 104px;
+  --prep-portrait-compact: 64px;
+  --prep-clip-width: 60px;
+  --prep-clip-height: 20px;
+  --prep-rule-width: 100px;
+  --prep-rule-width-compact: 88px;
+  --prep-shadow: 0 var(--space-1) 0 var(--color-brand-soft);
 
   /* 动效 */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);

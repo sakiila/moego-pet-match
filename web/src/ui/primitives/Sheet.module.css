@@ -48,11 +48,6 @@
   cursor: pointer;
 }
 
-.close svg {
-  width: 20px;
-  height: 20px;
-}
-
 .body {
   overflow-y: auto;
   padding: var(--space-2) var(--space-4) max(var(--space-5), env(safe-area-inset-bottom));

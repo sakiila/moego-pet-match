@@ -43,25 +43,25 @@
 .state {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 14px 4px 6px;
+  gap: var(--space-2);
+  min-height: 40px;
+  padding: 0 var(--space-4) 0 var(--space-2);
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--color-success) 16%, var(--color-paper));
+  background: color-mix(in srgb, var(--color-success) 20%, var(--color-paper));
   font-weight: var(--weight-bold);
-  color: var(--color-success);
+  color: color-mix(in srgb, var(--color-success) 55%, var(--color-ink));
 }
 
 .state[data-collected='false'] {
-  background: var(--color-surface-muted);
+  background: color-mix(in srgb, var(--color-ink-muted) 16%, var(--color-paper));
   color: var(--color-ink-muted);
 }
 
-.state svg {
-  width: 22px;
-  height: 22px;
-}
-
 .view {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
   width: 100%;
   min-height: 44px;
   border: 0;

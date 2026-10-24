@@ -79,20 +79,20 @@ export function IdentityScreen({ onConfirm, onInfo, search = api.searchRoster, i
           data-testid="identity-search"
         />
         {state.kind === 'failed' && !searching && (
-          <StatusMessage tone="error" text={t('identity.load_failed')} actionLabel={t('action.retry')} onAction={() => setAttempt((n) => n + 1)} />
+          <StatusMessage tone="error" text={t('identity.load_failed')} actionLabel={t('action.retry')} actionIcon="retry" onAction={() => setAttempt((n) => n + 1)} />
         )}
         {state.kind === 'ok' && results.length === 0 && !searching && <StatusMessage text={t('identity.not_found')} />}
-        <div className={styles.list}>
+        <div className={styles.colleagues}>
           {results.map((c) => (
             <ColleagueCard key={c.userId} userId={c.userId} name={c.name} selected={selected?.userId === c.userId} onSelect={() => setSelected(c)} />
           ))}
         </div>
-        {selected && <p className={styles.selected}>{t('identity.selected', { playerName: selected.name })}</p>}
+        {selected && <SelectedLine name={selected.name} template={t('identity.selected', { playerName: '\u0000' })} />}
       </section>
       <div className={styles.grow} />
       <InfoSummary />
-      <Button size="lg" block disabled={!selected} onClick={() => selected && onConfirm(selected)} data-testid="identity-confirm">
-        🐾 {selected ? t('identity.confirm', { playerName: selected.name }) : t('identity.title')}
+      <Button size="lg" block iconName="open-shop-white" disabled={!selected} onClick={() => selected && onConfirm(selected)} data-testid="identity-confirm">
+        {selected ? t('identity.confirm', { playerName: selected.name }) : t('identity.title')}
       </Button>
       {onInfo && (
         <PageLinks
@@ -104,5 +104,17 @@ export function IdentityScreen({ onConfirm, onInfo, search = api.searchRoster, i
         />
       )}
     </main>
+  );
+}
+
+/** 「当前选择：名字」，名字用品牌色强调（mobile-identity-v2）；名字保留原文。 */
+function SelectedLine({ name, template }: { name: string; template: string }) {
+  const [before, after = ''] = template.split('\u0000');
+  return (
+    <p className={styles.selected}>
+      {before}
+      <em>{name}</em>
+      {after}
+    </p>
   );
 }

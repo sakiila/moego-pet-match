@@ -5,10 +5,26 @@
   min-height: 32px;
 }
 
+.logo {
+  display: block;
+  width: auto;
+  height: 30px;
+}
+
+/* 文字字标只在鱼关深蓝主题显示 */
 .wordmark {
+  display: none;
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   letter-spacing: -0.02em;
+}
+
+[data-theme='fish'] .logo {
+  display: none;
+}
+
+[data-theme='fish'] .wordmark {
+  display: inline;
 }
 
 .wordmark span {
@@ -56,11 +72,29 @@
   color: var(--color-brand);
 }
 
+/* 游戏名：标题字标图片（登录页、门店） */
+.gameTitle {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-4) 0 0;
+}
+
+.gameTitle img {
+  display: block;
+  width: min(86%, 340px);
+  height: auto;
+}
+
 .tagline {
   margin: 4px 0 0;
   text-align: center;
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
+}
+
+.gameTagline {
+  margin-top: var(--space-2);
+  font-size: var(--text-md);
 }
 
 @media (max-height: 740px) {
@@ -71,9 +105,16 @@
   .title {
     font-size: 24px;
   }
+
+  .gameTitle img {
+    width: min(70%, 280px);
+  }
 }
 
 .back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   padding: 4px 0;
   border: 0;
   background: none;
@@ -85,4 +126,49 @@
 
 .heading {
   text-align: left;
+}
+
+/* 普通页标题与一个操作同一行；英文长标题在自己的列里折行，操作不换行 */
+.headingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.headingRow .title {
+  min-width: 0;
+  margin: 0;
+}
+
+.headingRow > :last-child {
+  flex: none;
+}
+
+
+.schedulingTitle {
+  margin: var(--space-2) 0 0;
+  line-height: 0;
+}
+
+.preparation .bar {
+  min-height: var(--text-xl);
+}
+
+.preparation .logo {
+  height: var(--text-xl);
+}
+
+.schedulingTitle img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-height: 740px) {
+  .schedulingTitle {
+    width: 90%;
+    margin: var(--space-2) auto 0;
+  }
 }

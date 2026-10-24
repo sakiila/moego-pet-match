@@ -1,5 +1,6 @@
 import type { GalleryEntry } from '../../dev/gallery/types';
 import { Avatar } from '../../ui/primitives/Avatar';
+import { Button } from '../../ui/primitives/Button';
 import { BrandHeader } from './BrandHeader';
 
 const entry: GalleryEntry = {
@@ -8,8 +9,11 @@ const entry: GalleryEntry = {
   states: {
     'scheduling + tagline (board)': () => <BrandHeader tagline="board.tagline" />,
     'scheduling (prep)': () => <BrandHeader />,
+    'scheduling artwork (prep)': () => <BrandHeader schedulingArt onBack={() => {}} />,
     'game + subtitle (identity)': () => <BrandHeader title="game" tagline="access.subtitle" />,
     'page heading + back (leaderboard)': () => <BrandHeader heading="排行榜" onBack={() => {}} />,
+    'page heading + action (petdex)': () => <BrandHeader heading="宠物图鉴" onBack={() => {}} headingAction={<Button variant="secondary" iconName="open-shop">添加我家毛孩子</Button>} />,
+    'page heading + action, long English': () => <BrandHeader heading="Pet Collection" onBack={() => {}} headingAction={<Button variant="secondary" iconName="open-shop">Add My Pet</Button>} />,
     'accent heading + back (report)': () => <BrandHeader heading="Grooming Report Card" headingAccent tagline="report.subtitle" onBack={() => {}} />,
     'game + avatar (home)': () => <BrandHeader title="game" trailing={<Avatar name="Bob" size={36} />} />,
   },

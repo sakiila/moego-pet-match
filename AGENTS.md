@@ -36,6 +36,8 @@ tools/pet-studio/  已有的独立素材工作台，与游戏代码分开，不�
 
 - **设计图是视觉参考，不是切图来源。** `design/concepts/*.png` 只用于对照布局、层级和风格；不得把整张或局部截图作为页面背景或组件图片。
 - **只有内容素材用图片**：宠物贴纸（`assets/pets/`）、单鱼素材、品牌角色与插画。按钮、卡片、底色、进度条、棋格、图标用 CSS / SVG / Canvas 实现。
+  - 例外（2026-10-24 用户确认）：已确认图标库可用 PNG，待矢量化。来源为 `assets/icons/library-original-png-v2/` 原稿母版，经同目录 `export_web.py` 等比导出到 `web/src/ui/icons/`，界面一律通过 `ui/primitives/Icon` 使用，不在组件里直接引图标文件；以后矢量化只替换 `ui/icons` 与 `Icon` 内部。图标库以外的界面元素仍按上条实现。
+  - 同日用户明确授权收集称号徽章从已确认的 `collection-title-badges-v3.png` 直接切图去底；母版在 `assets/icons/collection-titles-original-v1/`，同步到图标库 `masters/13-collection-titles/`，同样通过 `Icon` 使用。此授权仅适用于七枚已确认徽章，不扩大到其他页面截图。
 - **页面只组合组件。** `screens/` 不写细节样式，不复制粘贴组件内部结构；需要新外观时先在 `components/` 或 `ui/primitives/` 中新增或扩展组件。
 - **组件数据全部来自 props**，不在组件内写死宠物、姓名、分数或文案；文案一律经 i18n key 读取，宠物名与同事名保留原文。
 - **样式只引用 tokens**，不写死颜色、阴影和间距数值；鱼关通过切换主题令牌实现，不另写一套组件。

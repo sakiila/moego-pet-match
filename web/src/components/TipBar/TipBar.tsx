@@ -2,18 +2,24 @@ import type { TipView } from '../../game/tips';
 import type { PetInfo } from '../../game/pets';
 import { useI18n, type MessageKey } from '../../i18n';
 import { PetTile } from '../PetTile/PetTile';
+import { Icon, type IconName } from '../../ui/primitives/Icon';
 import styles from './TipBar.module.css';
 
-const ICON: Partial<Record<MessageKey, string>> = {
-  'tutorial.comb': '🪮',
-  'tutorial.scissors': '✂️',
-  'tutorial.water_jet': '💦',
-  'tutorial.bubble_machine': '🫧',
-  'tutorial.tool_combo': '🤝',
-  'board.move_hint': '👉',
-  'board.shuffle': '🔀',
-  'round.finishing': '⏰',
-  'round.last_seconds': '⏱️',
+/** 提示对应的已确认图标；道具带教用道具缩略图，其余无专属图标的提示用信息说明。 */
+const ICON: Partial<Record<MessageKey, IconName>> = {
+  'tutorial.comb': 'comb-horizontal',
+  'tutorial.scissors': 'scissors',
+  'tutorial.dryer_merge': 'hair-dryer',
+  'tutorial.dryer': 'hair-dryer',
+  'tutorial.conch': 'conch-horizontal',
+  'tutorial.pearl_shell': 'pearl-shell',
+  'tutorial.big_wave_merge': 'big-wave',
+  'tutorial.big_wave': 'big-wave',
+  'tutorial.tool_combo': 'tool-combo',
+  'board.move_hint': 'tap-swap',
+  'board.shuffle': 'automatic-shuffle',
+  'round.finishing': 'time-left',
+  'round.last_seconds': 'time-left',
 };
 
 /**
@@ -38,9 +44,7 @@ export function TipBar({ tip, pets = [] }: { tip: TipView | null; pets?: PetInfo
               )}
             </span>
           ) : (
-            <span className={styles.icon} aria-hidden>
-              {ICON[tip.key] ?? '💡'}
-            </span>
+            <Icon name={ICON[tip.key] ?? 'information'} size={36} />
           )}
           <span>{t(tip.key, tip.vars)}</span>
         </div>

@@ -15,6 +15,7 @@ import type { PetInfo } from '../game/pets';
 import { useGameSession } from '../game/useGameSession';
 import { useI18n } from '../i18n';
 import { MOTION } from '../ui/motion';
+import { Icon } from '../ui/primitives/Icon';
 import styles from './Screen.module.css';
 
 export interface BoardScreenProps {
@@ -78,10 +79,12 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
       <TipBar tip={view.tip} pets={pets} />
       <footer className={styles.footer}>
         <button type="button" onClick={() => setSettingsOpen(true)}>
-          ⚙️ {t('nav.settings')}
+          <Icon name="settings" size={24} />
+          {t('nav.settings')}
         </button>
         <button type="button" onClick={() => setQuitOpen(true)} disabled={view.timeUp} data-testid="exit">
-          {t('board.exit')} ↪
+          {t('board.exit')}
+          <Icon name="exit" size={24} />
         </button>
       </footer>
       <QuitDialog

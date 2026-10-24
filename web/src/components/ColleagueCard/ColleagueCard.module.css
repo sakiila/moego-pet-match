@@ -1,10 +1,17 @@
+.wrap {
+  position: relative;
+  /* 卡片与蓝猫的上下层只在本卡内比较，蓝猫不会被上一张卡片盖住 */
+  isolation: isolate;
+}
+
 .card {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-3);
   width: 100%;
-  min-height: 64px;
-  padding: var(--space-2) var(--space-3);
+  min-height: 76px;
+  padding: var(--space-2) var(--space-4);
   border: var(--stroke) solid var(--color-line);
   border-radius: var(--radius-lg);
   background: var(--color-paper);
@@ -12,6 +19,8 @@
   text-align: left;
   color: var(--color-ink);
   cursor: pointer;
+  /* 盖在蓝猫上面，小猫才是从卡片后方升起 */
+  z-index: 1;
 }
 
 .card[aria-pressed='true'] {
@@ -23,18 +32,67 @@
   flex: 1;
   min-width: 0;
   font-size: var(--text-lg);
-  font-weight: var(--weight-bold);
+  font-weight: 900;
   overflow-wrap: anywhere;
 }
 
-.check {
-  display: grid;
-  flex: none;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--color-brand);
-  color: var(--color-paper);
-  font-weight: var(--weight-bold);
+/*
+ * 蓝猫探头分两层，用同一张图：
+ * - .peek 在卡片下层，裁切框底边藏在卡片后面，小猫从卡片后方升起，停住时下巴搁在边框上；
+ * - .paws 在卡片上层，只露出伸进卡片的那一条，让爪尖压在边框上；停住后才淡入，
+ *   否则升起途中猫头会从卡片前面划过。
+ */
+.peek,
+.paws {
+  /* 下巴离图底约 8px：下沉 8px 让下巴落在卡片边框上 */
+  --sink: 8px;
+  position: absolute;
+  /* 避开搜索框右侧的清除按钮 */
+  right: 68px;
+  bottom: calc(100% - var(--sink));
+  width: 108px;
+  height: 64px;
+  pointer-events: none;
+}
+
+.peek {
+  overflow: hidden;
+}
+
+.paws {
+  z-index: 2;
+  clip-path: inset(calc(100% - var(--sink)) 0 0 0);
+  /* 等小猫停稳（peek 320ms）后再用 120ms 淡入 */
+  animation: land 120ms var(--ease-out) 240ms both;
+}
+
+.cat {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+.peek .cat {
+  animation: peek 320ms var(--ease-out) both;
+}
+
+@keyframes peek {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes land {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peek .cat,
+  .paws {
+    animation: none;
+  }
 }

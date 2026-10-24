@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from 'react';
+import { Icon } from './Icon';
 import styles from './Sheet.module.css';
 
 export interface SheetProps {
@@ -30,9 +31,7 @@ export function Sheet({ open, label, closeLabel, onClose, badge, children, inlin
         <div className={styles.bar}>
           {badge}
           <button type="button" className={styles.close} aria-label={closeLabel} onClick={onClose}>
-            <svg viewBox="0 0 24 24" aria-hidden>
-              <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-            </svg>
+            <Icon name="close" size={20} />
           </button>
         </div>
         <div className={styles.body}>{children}</div>

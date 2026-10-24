@@ -6,7 +6,7 @@ const entry: GalleryEntry = {
   group: 'components',
   states: {
     info: () => <StatusMessage text="正在保存本局结果……" />,
-    'error + retry': () => <StatusMessage tone="error" text="暂时没能读取同事名单，请重试。" actionLabel="重试" onAction={() => {}} />,
+    'error + retry': () => <StatusMessage tone="error" text="暂时没能读取同事名单，请重试。" actionLabel="重试" actionIcon="retry" onAction={() => {}} />,
     'long text': () => <StatusMessage text="We couldn't find your coworker profile. Try another name or contact Bob." />,
   },
 };

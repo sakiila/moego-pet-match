@@ -9,7 +9,7 @@
 
 | 页面 | 当前状态 |
 | --- | --- |
-| 游戏入口 | 名称已确认；副标题明确 90 秒三消，首次直接搜索并选择同事身份 |
+| 游戏入口 | 名称已确认；副标题明确 90 秒消消乐，首次直接搜索并选择同事身份 |
 | 同事身份 | 带名字的确认按钮已确认，其他文案已作校读修订 |
 | 门店首页 | 默认店长宣言已确认，其他文案已作校读修订 |
 | 开局准备 | 「开始这班」按钮已确认，90 秒时长放在计时说明中，其他文案已作校读修订 |
@@ -63,7 +63,7 @@
 | Key | 中文 | English |
 | --- | --- | --- |
 | access.title | MoeGo 毛孩子全明星 | MoeGo Pet All-Stars |
-| access.subtitle | 和同事家的毛孩子，来一局 90 秒三消。 | A 90-second match-3 with your coworkers' pets. |
+| access.subtitle | 和同事家的毛孩子，来一局 90 秒消消乐。 | A 90-second match-3 with your coworkers' pets. |
 | access.internal | 仅供 MoeGo 同事游玩 | For MoeGo Coworkers |
 
 副标题承担玩法说明。游戏入口直接提供下方的同事身份搜索与带名字的确认按钮，确认后进入门店；当前仅为文案与设计方案，尚未接入或验证实际页面排版。
@@ -137,10 +137,13 @@
 | prep.rule | 交换相邻棋子，让 3 个及以上相同宠物连成一线。 | Swap neighbors. Line up 3 or more of the same pet. |
 | prep.controls | 可以拖拽，也可以先点一格、再点相邻格。 | Drag to swap, or tap a tile and then its neighbor. |
 | prep.timer_hint | 本局 90 秒。准备和读说明不计时，点下方按钮后开始。 | This round lasts 90 seconds. The timer starts when you tap the button below. |
+| prep.guests_lead | 本局 | This Round's |
+| prep.guests_accent | 来客 | Guests |
 | prep.start | 开始这班 | Start My Shift |
 | prep.failed | 本局还没准备好，请重试。 | This round isn't ready yet. Please try again. |
 
-只有实际入选自家宠物时显示 `prep.own_pet`。准备、加载和读规则不计时；玩家确认开始后才进入 90 秒。首页不显示鱼缸、鱼关入口或三局预告，`@Bob` 关联已核实的 Slack 身份 `U03FPQWGTN2`（工作区 `T011CF3CMJN`，可指向 `slack://user?team=T011CF3CMJN&id=U03FPQWGTN2` 或 `https://moego.slack.com/team/U03FPQWGTN2`）。
+只有实际入选自家宠物时显示 `prep.own_pet`。最多显示一行，只提示阵容中第一只自家宠物；长名字省略末尾，保留「也来啦」后缀，完整名字保留在悬停提示中。准备、加载和读规则不计时；玩家确认开始后才进入 90 秒。首页不显示鱼缸、鱼关入口或三局预告，`@Bob` 关联已核实的 Slack 身份 `U03FPQWGTN2`（工作区 `T011CF3CMJN`，可指向 `slack://user?team=T011CF3CMJN&id=U03FPQWGTN2` 或 `https://moego.slack.com/team/U03FPQWGTN2`）。
+| prep.timer_duration | 90 秒 | 90 seconds |
 
 准备是棋盘的计时前状态，不新增独立经营页面；素材与对局准备完成后，才允许点击开始。首次只说明三消和交换方式，工具用法继续按首次自然出现时轻提示。按钮已确认使用「开始这班 / Start My Shift」，90 秒时长写在按钮上方的说明里，保持按钮简短；计时规则不变。其他文案为校读修订稿。
 
@@ -329,10 +332,10 @@
 | fish.prep_title | 小鱼也来排班啦 | The Fish Have Appointments Too |
 | fish.board_title | 小鱼也来排班啦 | The Fish Have Appointments Too |
 | fish.prep_rule | 相邻交换，同色小鱼连成一线，3 个及以上即可消除。 | Swap neighbors. Match 3 or more fish of the same color in a line. |
-| fish.water_jet | 水流喷头 | Water Jet |
-| fish.water_jet_hint | 和邻格交换，水流清一行或一列。 | Swap with a neighbor to sweep a row or column. |
-| fish.bubble_machine | 气泡机 | Bubble Machine |
-| fish.bubble_machine_hint | 和邻格交换，泡泡清出一个十字。 | Swap with a neighbor to clear a row and column. |
+| fish.conch | 海螺 | Conch |
+| fish.conch_hint | 和邻格交换，螺口喷出水流，清一行或一列。 | Swap with a neighbor to sweep a row or column. |
+| fish.pearl_shell | 珍珠贝壳 | Pearl Shell |
+| fish.pearl_shell_hint | 和邻格交换，贝壳一开，清出一个十字。 | Swap with a neighbor. It pops open and clears a row and column. |
 | fish.rush_title | Peter 的小鱼加急啦！ | A Rush Order from Peter! |
 | fish.rush_goal | 20 秒内清除 12 格 | Clear 12 tiles in 20s |
 | fish.rush_progress | 已清除 {count}/12 格 · 催单剩余 {seconds} 秒 | {count}/12 tiles cleared · Rush time: {seconds}s |
@@ -343,17 +346,19 @@
 | fish.leaderboard | 鱼关排行榜 | Fish Leaderboard |
 | fish.prep_loading | 小鱼正在入缸…… | The fish are swimming in… |
 | fish.rush_served | 已清除 {count}/12 格 | {count}/12 tiles cleared |
-| tutorial.water_jet | 水流喷头：和邻格交换，水流清一行或一列。 | Water Jet: swap with a neighbor to sweep a row or column. |
-| tutorial.bubble_machine | 气泡机：和邻格交换，泡泡清出一个十字。 | Bubble Machine: swap with a neighbor to clear a row and column. |
+| tutorial.conch | 海螺：和邻格交换，螺口喷出水流，清一行或一列。 | Conch: swap with a neighbor to sweep a row or column. |
+| tutorial.pearl_shell | 珍珠贝壳：和邻格交换，贝壳一开，清出一个十字。 | Pearl Shell: swap with a neighbor to clear a row and column. |
 | review.fish.high_chain | 这波水流，鱼都跟上节奏了。 | Now that's a splashy combo. |
 | review.fish.rush_success | 小鱼加急，水到渠成。 | Rush order, smooth sailing. |
 | review.fish.tool_combo | 这波工具搭档，水花刚刚好。 | Tools teamed up. What a splash. |
 | review.fish.normal | 今天的水下营业，稳稳当当。 | A smooth shift under the surface. |
 | review.fish.no_service | 先熟悉一下水流，下局再露一手。 | Get a feel for the current. Next round, make a splash. |
 
-邀请仅在第三个有效完整普通局成功保存后的报告出现，不用于首页或提前预告。点击只是进入准备页，个人解锁已保存；未点击也可随后从鱼榜重玩。鱼关规则说明保留「连成一线」含义：直线三消与已确认的四消、五连、L / T 形规则并用；`{fishColorName}` 是本局鱼色类别的界面名称，使用相应语言，不是给个体鱼编造姓名。零服务省略 MVP；水流喷头／气泡机沿用梳子／剪刀能力、合体和称号条件，鱼关不使用毛发评语。
+邀请仅在第三个有效完整普通局成功保存后的报告出现，不用于首页或提前预告。点击只是进入准备页，个人解锁已保存；未点击也可随后从鱼榜重玩。鱼关规则说明保留「连成一线」含义：直线三消与已确认的四消、五连、L / T 形规则并用；`{fishColorName}` 是本局鱼色类别的界面名称，使用相应语言，不是给个体鱼编造姓名。零服务省略 MVP；海螺／珍珠贝壳沿用梳子／剪刀能力、合体和称号条件，鱼关不使用毛发评语。
 
-`fish.prep_loading`、`fish.rush_served`、`tutorial.water_jet`、`tutorial.bubble_machine` 于 2026-10-23 确认补入：后三条由已确认的名称、说明与 `fish.rush_progress` 拆分或拼成；鱼关工具合体带教复用通用的 `tutorial.tool_combo`。
+`fish.prep_loading`、`fish.rush_served`、`tutorial.conch`、`tutorial.pearl_shell`（原 `tutorial.water_jet`、`tutorial.bubble_machine`）于 2026-10-23 确认补入：后三条由已确认的名称、说明与 `fish.rush_progress` 拆分或拼成；鱼关工具合体带教复用通用的 `tutorial.tool_combo`。
+
+2026-10-24 按 V1_RULES 已定的海底元素改名并确认文案：`fish.water_jet`／`fish.bubble_machine`（及 `_hint`）改为 `fish.conch`／`fish.pearl_shell`，带教键同步改为 `tutorial.conch`／`tutorial.pearl_shell`；`tutorial.big_wave_merge` 改为珍珠贝壳合成。`fish.big_wave`、`tutorial.big_wave` 与评语中的「水流」「水花」不变。
 
 鱼关深蓝水下方向已确认。局内标题复用已校读的「小鱼也来排班啦」，不把实际游玩误标为加载或准备状态；鱼关催单进度用「已清除」表达格数，不表示独立鱼的数量，倒计时和奖励条件不变。
 
@@ -410,7 +415,7 @@
 | Key | 中文 | English |
 | --- | --- | --- |
 | upload.use_title | 照片展示与处理说明 | Photo Use and Processing |
-| upload.use_body | 1. **内部展示**：上架后，处理后的宠物贴纸头像将用于全公司同事可见的三消棋盘、宠物图鉴、每日店长及主人竞猜；已收集该宠物的同事可在图鉴卡背面查看 Bob 处理后的照片版本（已去除 EXIF 位置信息，不直接公开原始文件），并展示宠物名字与你的同事身份。<br>2. **AI 与人工处理**：提交的原图先私有存储在 Cloudflare R2（亚太），由 Bob（@Bob）人工下载、去除位置信息后通过 AI 图像服务转换统一贴纸画风，经人工核对后再上架；不会自动直接公开原始上传文件。<br>3. **随时申请移除**：上架后如不希望继续展示，可随时在「我的宠物」或图鉴详情页提交删除申请，由 Bob 人工核实后下架并清理游戏持有的文件。 | 1. **Internal Display**: Once listed, the styled pet sticker portrait will appear on the match-3 board, in the Pet Collection, as Manager of the Day, and in the owner quiz for MoeGo coworkers. Coworkers who collect your pet can flip the card to view a processed photo (with EXIF location details removed, never the raw file) alongside the pet's name and your coworker profile.<br>2. **AI & Manual Review**: Uploaded originals are stored privately in Cloudflare R2 (Asia-Pacific). Bob (@Bob) manually reviews each submission, strips location metadata, and uses an AI image service to generate the unified sticker portrait before listing. Raw uploads are never published automatically.<br>3. **Removal Anytime**: If you ever want your pet removed, submit a request from My Pets or the pet's detail card, and Bob will manually verify, unlist, and delete the game's copies. |
+| upload.use_body | 1. **内部展示**：上架后，处理后的宠物贴纸头像将用于全公司同事可见的消消乐棋盘、宠物图鉴、每日店长及主人竞猜；已收集该宠物的同事可在图鉴卡背面查看 Bob 处理后的照片版本（已去除 EXIF 位置信息，不直接公开原始文件），并展示宠物名字与你的同事身份。<br>2. **AI 与人工处理**：提交的原图先私有存储在 Cloudflare R2（亚太），由 Bob（@Bob）人工下载、去除位置信息后通过 AI 图像服务转换统一贴纸画风，经人工核对后再上架；不会自动直接公开原始上传文件。<br>3. **随时申请移除**：上架后如不希望继续展示，可随时在「我的宠物」或图鉴详情页提交删除申请，由 Bob 人工核实后下架并清理游戏持有的文件。 | 1. **Internal Display**: Once listed, the styled pet sticker portrait will appear on the match-3 board, in the Pet Collection, as Manager of the Day, and in the owner quiz for MoeGo coworkers. Coworkers who collect your pet can flip the card to view a processed photo (with EXIF location details removed, never the raw file) alongside the pet's name and your coworker profile.<br>2. **AI & Manual Review**: Uploaded originals are stored privately in Cloudflare R2 (Asia-Pacific). Bob (@Bob) manually reviews each submission, strips location metadata, and uses an AI image service to generate the unified sticker portrait before listing. Raw uploads are never published automatically.<br>3. **Removal Anytime**: If you ever want your pet removed, submit a request from My Pets or the pet's detail card, and Bob will manually verify, unlist, and delete the game's copies. |
 
 ### 9.2 删除申请 · 关键文案已确认
 

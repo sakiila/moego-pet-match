@@ -6,12 +6,6 @@
   text-align: center;
 }
 
-.check {
-  width: 72px;
-  height: 72px;
-  color: var(--color-success);
-}
-
 .pet {
   margin: 0;
   font-size: var(--text-xl);

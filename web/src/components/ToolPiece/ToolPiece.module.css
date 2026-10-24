@@ -14,25 +14,8 @@
   background: var(--pet-tint-0);
 }
 
+/* 图标随棋格缩放；角标在图内右下，留少量内边距避免贴边 */
 .icon {
-  width: 70%;
-  height: 70%;
-}
-
-.badge {
-  position: absolute;
-  right: 6%;
-  bottom: 6%;
-  display: grid;
-  place-items: center;
-  width: 34%;
-  height: 34%;
-  border-radius: 50%;
-  background: var(--color-brand);
-  color: var(--color-paper);
-}
-
-.badge svg {
-  width: 72%;
-  height: 72%;
+  width: 90%;
+  height: 90%;
 }

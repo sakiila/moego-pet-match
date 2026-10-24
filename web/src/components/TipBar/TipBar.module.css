@@ -16,10 +16,6 @@
   animation: tip-in 200ms var(--ease-out) both;
 }
 
-.icon {
-  flex: none;
-  font-size: 22px;
-}
 
 @keyframes tip-in {
   from {

@@ -1,10 +1,10 @@
-/* 一行放得下时以细点分隔；放不下时自然换行，不留孤立的分隔符 */
+/* 一行排开、放不下时自然换行；不加分隔符，换行后不会留下孤立的竖线 */
 .row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  column-gap: var(--space-4);
+  column-gap: var(--space-5);
 }
 
 .link {
@@ -15,13 +15,16 @@
   font: inherit;
   font-size: var(--text-sm);
   color: var(--fg-muted);
-  text-decoration: underline;
-  text-decoration-color: var(--line);
-  text-underline-offset: 4px;
   cursor: pointer;
 }
 
 .link:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+.link:hover:not(:disabled),
+.link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }

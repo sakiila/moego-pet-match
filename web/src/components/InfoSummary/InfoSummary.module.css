@@ -1,5 +1,6 @@
 .box {
   display: flex;
+  align-items: center;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-lg);
@@ -7,11 +8,6 @@
   font-size: var(--text-sm);
   line-height: 1.5;
   color: var(--color-ink-muted);
-}
-
-.icon {
-  flex: none;
-  font-size: 22px;
 }
 
 .box p {

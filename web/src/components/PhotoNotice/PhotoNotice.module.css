@@ -10,8 +10,3 @@
   line-height: 1.5;
   color: var(--color-ink-muted);
 }
-
-.icon {
-  flex: none;
-  font-size: 22px;
-}

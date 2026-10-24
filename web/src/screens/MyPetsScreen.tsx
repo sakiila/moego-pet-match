@@ -50,19 +50,22 @@ export function MyPetsScreen({ player, onBack, onUpload, onOpenShop, load = api.
 
   return (
     <main className={styles.screen}>
-      <BrandHeader heading={t('nav.my_pets')} onBack={onBack} />
-      <div className={styles.titleRow}>
-        <span className={styles.who}>
-          <Avatar name={player.name} seed={player.userId} src={avatarUrl(player.userId)} size={40} />
-          {player.name}
-        </span>
-        <Button onClick={onUpload} data-testid="add-pet">
-          🐾 {t('my_pets.add')}
-        </Button>
-      </div>
+      <BrandHeader
+        heading={t('nav.my_pets')}
+        onBack={onBack}
+        headingAction={
+          <Button variant="secondary" iconName="open-shop" onClick={onUpload} data-testid="add-pet">
+            {t('my_pets.add')}
+          </Button>
+        }
+      />
+      <span className={styles.who}>
+        <Avatar name={player.name} seed={player.userId} src={avatarUrl(player.userId)} size={40} />
+        {player.name}
+      </span>
       <p className={styles.muted}>{t('my_pets.list_scope')}</p>
       {failed && (
-        <Button variant="secondary" onClick={fetchPets}>
+        <Button variant="secondary" iconName="retry" onClick={fetchPets}>
           {t('action.retry')}
         </Button>
       )}

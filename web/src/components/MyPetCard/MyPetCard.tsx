@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { DeletionStatus as Status } from '../../api/types';
 import { useI18n } from '../../i18n';
 import { DeletionStatus } from '../DeletionStatus/DeletionStatus';
+import { Icon } from '../../ui/primitives/Icon';
 import styles from './MyPetCard.module.css';
 
 export interface MyPetCardProps {
@@ -26,14 +27,12 @@ export function MyPetCard({ name, stickerSrc, collected, request, onView, onRequ
         <div className={styles.side}>
           <h3 className={styles.name}>{name}</h3>
           <span className={styles.state} data-collected={collected}>
-            <svg viewBox="0 0 24 24" aria-hidden>
-              <circle cx="12" cy="12" r="11" fill="currentColor" />
-              {collected ? <path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="var(--color-paper)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /> : <path d="M7.5 12h9" stroke="var(--color-paper)" strokeWidth="2.6" strokeLinecap="round" />}
-            </svg>
+            <Icon name={collected ? 'collected-badge' : 'uncollected-badge'} size={24} />
             {t(collected ? 'collection.filter_collected' : 'collection.filter_uncollected')}
           </span>
           <button type="button" className={styles.view} onClick={(e) => onView(e.currentTarget.closest('article') ?? e.currentTarget)} data-testid="my-pet-view">
-            {t('my_pets.view')} ›
+            {t('my_pets.view')}
+            <Icon name="forward-arrow" size={16} />
           </button>
           {request ? (
             <DeletionStatus status={request} />

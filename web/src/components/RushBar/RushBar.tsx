@@ -1,6 +1,7 @@
 import type { GameMode } from '../../api/types';
 import { RULES } from '../../engine';
 import { useI18n } from '../../i18n';
+import { Icon } from '../../ui/primitives/Icon';
 import styles from './RushBar.module.css';
 
 export type RushView =
@@ -17,8 +18,10 @@ export function RushBar({ view, mode = 'normal' }: { view: RushView; mode?: Game
     <div className={styles.slot} data-testid="rush" data-state={view.state}>
       {view.state === 'active' && (
         <div className={styles.bar} role="status">
+          <Icon name="rush-ticket" size={42} />
+          <div className={styles.body}>
           <div className={styles.head}>
-            <span className={styles.title}>🔥 {t(fish ? 'fish.rush_title' : 'rush.title')}</span>
+            <span className={styles.title}>{t(fish ? 'fish.rush_title' : 'rush.title')}</span>
             <span className={styles.remaining}>{t('rush.remaining', { seconds: view.secondsLeft })}</span>
           </div>
           <div className={styles.row}>
@@ -28,15 +31,18 @@ export function RushBar({ view, mode = 'normal' }: { view: RushView; mode?: Game
             </span>
             <span>{t(fish ? 'fish.rush_goal' : 'rush.goal')}</span>
           </div>
+          </div>
         </div>
       )}
       {view.state === 'success' && (
         <div className={`${styles.bar} ${styles.success}`} role="status">
+          <Icon name="completed-mark" size={42} />
           <div className={styles.message}>{t('rush.success')}</div>
         </div>
       )}
       {view.state === 'expired' && (
         <div className={`${styles.bar} ${styles.expired}`} role="status">
+          <Icon name="expired-ticket" size={42} />
           <div className={styles.message}>{t('rush.expired')}</div>
         </div>
       )}

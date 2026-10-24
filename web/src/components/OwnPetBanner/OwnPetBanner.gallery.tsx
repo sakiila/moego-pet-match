@@ -7,6 +7,7 @@ const entry: GalleryEntry = {
   states: {
     'one own pet': () => <OwnPetBanner names={['Maodu']} />,
     'two own pets': () => <OwnPetBanner names={['Doujia', 'Anzai']} />,
+    'long name, one line': () => <OwnPetBanner names={['Sir Fluffington the Magnificent', 'Boluo']} />,
     'none (renders nothing)': () => <OwnPetBanner names={[]} />,
   },
 };

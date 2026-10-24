@@ -1,12 +1,15 @@
 import type { GalleryEntry } from '../../dev/gallery/types';
 import { FishFrame } from '../../dev/gallery/FishFrame';
 import { PLACEHOLDER_PETS, SAMPLE_FISH } from '../../game/pets';
+import { PREVIEW_PREP_PETS } from '../../dev/prepPets';
 import { LineupPanel } from './LineupPanel';
 
 const entry: GalleryEntry = {
   name: 'LineupPanel',
   group: 'components',
   states: {
+    empty: () => <LineupPanel pets={[]} />,
+    'reference lineup': () => <LineupPanel pets={PREVIEW_PREP_PETS} />,
     'six pets': () => <LineupPanel pets={PLACEHOLDER_PETS} />,
     'fish · six colors': () => (
       <FishFrame>

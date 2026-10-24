@@ -17,11 +17,6 @@
   background: var(--score-bg);
 }
 
-.icon {
-  flex: none;
-  width: 34px;
-  height: 34px;
-}
 
 .label {
   display: block;

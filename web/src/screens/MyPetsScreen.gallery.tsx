@@ -17,6 +17,7 @@ const detail = async (petId: string): Promise<PetDetail> => ({
   quote: 'Loves naps.',
   hasPhoto: true,
   listed: true,
+  knownBy: { count: 4, recent: [{ userId: 'U_TEST_ALICE', name: 'Alice Chen' }, { userId: 'U_TEST_ZHANG', name: 'Zhang Wei(张伟)' }, { userId: 'U03FPQWGTN2', name: 'Bob 包博' }, { userId: 'U_TEST_SAM', name: 'Samantha Sullivan' }] },
 });
 
 const entry: GalleryEntry = {

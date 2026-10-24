@@ -16,31 +16,33 @@ export interface ShareSheetProps {
   onRetry: () => void;
   onClose: () => void;
   inline?: boolean;
+  /** 长册页按完整图片比例预览，不压成成绩卡的 4:5。 */
+  imageLayout?: 'card' | 'natural';
 }
 
 /** 分享图片预览（成绩卡、店长海报）：先生成预览，玩家主动保存或调用系统分享；不自动发送。 */
-export function ShareSheet({ open, title, state, canShare, onSave, onShare, onRetry, onClose, inline }: ShareSheetProps) {
+export function ShareSheet({ open, title, state, canShare, onSave, onShare, onRetry, onClose, inline, imageLayout = 'card' }: ShareSheetProps) {
   const { t } = useI18n();
   const heading = title ?? t('share.preview');
   return (
     <Sheet open={open} inline={inline} label={heading} closeLabel={t('action.close')} onClose={onClose} badge={<h2 className={styles.title}>{heading}</h2>}>
       <div className={styles.body} data-testid="share-sheet" data-state={state.kind}>
-        <div className={styles.preview}>
+        <div className={`${styles.preview} ${imageLayout === 'natural' ? styles.natural : ''}`}>
           {state.kind === 'ready' && <img src={state.url} alt={heading} data-testid="share-image" />}
           {state.kind === 'generating' && <span className={styles.loading} aria-busy="true" />}
           {state.kind === 'failed' && <p className={styles.failed}>{t('share.failed')}</p>}
         </div>
         {state.kind === 'failed' ? (
-          <Button size="lg" block onClick={onRetry}>
+          <Button size="lg" variant="secondary" block iconName="retry" onClick={onRetry}>
             {t('action.retry')}
           </Button>
         ) : (
           <div className={styles.actions} data-share={canShare}>
-            <Button size="lg" block onClick={onSave} disabled={state.kind !== 'ready'} data-testid="share-save">
+            <Button size="lg" block iconName="save-image-white" onClick={onSave} disabled={state.kind !== 'ready'} data-testid="share-save">
               {t('share.save')}
             </Button>
             {canShare && (
-              <Button size="lg" variant="secondary" block onClick={onShare} data-testid="share-send">
+              <Button size="lg" variant="secondary" block iconName="share-image" onClick={onShare} data-testid="share-send">
                 {t('share.send')}
               </Button>
             )}

@@ -1,5 +1,6 @@
 import type { GameMode } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
+import { ModeMark } from '../components/ModeMark/ModeMark';
 import { LineupPanel } from '../components/LineupPanel/LineupPanel';
 import { OwnPetBanner } from '../components/OwnPetBanner/OwnPetBanner';
 import { RulesCard } from '../components/RulesCard/RulesCard';
@@ -29,21 +30,21 @@ export function PrepScreen({ mode = 'normal', pets, ownPetNames = [], failed, on
   return (
     <main className={styles.screen} data-theme={fish ? 'fish' : undefined}>
       {fish && <UnderwaterBackdrop />}
-      <BrandHeader title={fish ? 'fish' : 'scheduling'} onBack={onBack} />
+      <BrandHeader title={fish ? 'fish' : 'scheduling'} schedulingArt={!fish} onBack={onBack} />
       {pets ? (
         <>
           <LineupPanel pets={pets} mode={mode} />
           {!fish && <OwnPetBanner names={ownPetNames} />}
         </>
       ) : failed ? (
-        <StatusMessage tone="error" text={t('prep.failed')} actionLabel={t('action.retry')} onAction={onRetry} />
+        <StatusMessage tone="error" text={t('prep.failed')} actionLabel={t('action.retry')} actionIcon="retry" onAction={onRetry} />
       ) : (
         <StatusMessage text={t(fish ? 'fish.prep_loading' : 'prep.loading')} />
       )}
       <RulesCard mode={mode} />
       <div className={styles.grow} />
-      <Button size="lg" block onClick={onStart} disabled={!pets} data-testid="start">
-        {fish ? '🐟' : '🐾'} {t('prep.start')}
+      <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onStart} disabled={!pets} data-testid="start">
+        {t('prep.start')}
       </Button>
     </main>
   );

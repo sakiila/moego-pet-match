@@ -17,6 +17,9 @@
 }
 
 .action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   flex: none;
   padding: 6px 12px;
   border: var(--stroke) solid currentColor;

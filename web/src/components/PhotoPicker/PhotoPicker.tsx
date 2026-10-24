@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../../i18n';
+import { Icon } from '../../ui/primitives/Icon';
 import styles from './PhotoPicker.module.css';
 
 export const PHOTO_ACCEPT = 'image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif';
@@ -51,11 +52,7 @@ export function PhotoPicker({ file, onChange, error, disabled }: PhotoPickerProp
       <div className={styles.wrap}>
         {hidden}
         <button type="button" className={styles.empty} onClick={pick} disabled={disabled} data-invalid={!!error}>
-          <svg viewBox="0 0 48 48" aria-hidden>
-            <rect x="6" y="12" width="36" height="28" rx="6" fill="none" stroke="currentColor" strokeWidth="3" />
-            <circle cx="24" cy="26" r="7" fill="none" stroke="currentColor" strokeWidth="3" />
-            <path d="M17 12l3-5h8l3 5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
-          </svg>
+          <Icon name="choose-photo" size={56} />
           <span className={styles.choose}>{t('upload.choose_photo')}</span>
           <span className={styles.hint}>{t('upload.photo_hint')}</span>
         </button>
@@ -74,9 +71,7 @@ export function PhotoPicker({ file, onChange, error, disabled }: PhotoPickerProp
       <div className={styles.head}>
         <h2 className={styles.title}>{t('upload.preview')}</h2>
         <button type="button" className={styles.change} onClick={pick} disabled={disabled} data-testid="change-photo">
-          <svg viewBox="0 0 24 24" aria-hidden>
-            <path d="M4 10a8 8 0 0 1 14-4l2 2M20 4v4h-4M20 14a8 8 0 0 1-14 4l-2-2M4 20v-4h4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <Icon name="change-photo" size={24} />
           {t('upload.change_photo')}
         </button>
       </div>

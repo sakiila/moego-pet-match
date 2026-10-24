@@ -49,3 +49,41 @@
 .block {
   width: 100%;
 }
+
+/*
+ * 整宽大按钮按自身宽度缩放文字（上限仍为 --text-xl）：并排的两个大按钮带图标时不被挤成三行。
+ * 只用于 block，非整宽按钮的宽度取决于内容，不能做尺寸容器。
+ */
+.large.block {
+  container-type: inline-size;
+  padding: 0 var(--space-4);
+}
+
+.large.block .label {
+  font-size: min(var(--text-xl), 13cqi);
+}
+
+/* 图标跟随缩放后的字号（28 px 时约 32 px） */
+.large.block .icon > * {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.label {
+  min-width: 0;
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+  /* 中文只在空格处折行，避免「身／份」被拆开 */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* 图标放在与首行等高的行内盒里居中：单行时与文字垂直居中，折行时跟在首行前 */
+.icon {
+  display: inline-grid;
+  place-items: center;
+  height: 1lh;
+  margin-inline-end: var(--space-2);
+  vertical-align: top;
+}

@@ -6,6 +6,9 @@
 }
 
 .heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   margin: 0 0 var(--space-3);
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
@@ -40,4 +43,105 @@
   white-space: nowrap;
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
+}
+
+
+.panel[data-mode='normal'] {
+  position: relative;
+  margin-top: var(--space-3);
+  padding-top: var(--space-4);
+  box-shadow: var(--prep-shadow);
+}
+
+.panel[data-mode='normal']::before,
+.panel[data-mode='normal']::after {
+  box-sizing: content-box;
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-brand);
+}
+
+.panel[data-mode='normal']::before {
+  top: calc(-1 * var(--space-2));
+  width: var(--prep-clip-width);
+  height: var(--prep-clip-height);
+  border-radius: var(--radius-sm);
+}
+
+.panel[data-mode='normal']::after {
+  top: calc(-1 * var(--prep-clip-height));
+  width: var(--space-2);
+  height: var(--space-2);
+  border: var(--space-2) solid var(--color-brand);
+  border-radius: 50%;
+  background: var(--card);
+}
+
+.panel[data-mode='normal'] .heading {
+  font-size: var(--text-xl);
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.heading em {
+  color: var(--color-brand);
+  font-style: normal;
+}
+
+.panel[data-mode='normal'][data-locale='en'] .heading {
+  font-size: var(--text-lg);
+}
+
+.panel[data-mode='normal'] .heading::after {
+  content: '';
+  flex: none;
+  width: var(--space-4);
+  height: var(--space-1);
+  margin-left: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--color-brand);
+  box-shadow: 0 var(--space-2) 0 var(--color-brand);
+  transform: rotate(-35deg);
+}
+
+.panel[data-mode='normal'] .card {
+  gap: var(--space-1);
+  padding: var(--space-1);
+  align-content: start;
+  min-width: 0;
+}
+
+.panel[data-mode='normal'] .avatar {
+  width: min(var(--prep-portrait-size), 100%);
+}
+
+.panel[data-mode='normal'] .name {
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+  font-size: var(--text-md);
+  line-height: 1.2;
+}
+
+@media (max-height: 740px) {
+  .panel[data-mode='normal'] {
+    margin-top: var(--space-2);
+    padding: var(--space-3) var(--space-2) var(--space-2);
+  }
+
+  .panel[data-mode='normal'] .heading {
+    margin-bottom: var(--space-1);
+    font-size: var(--text-lg);
+  }
+
+  .panel[data-mode='normal'] .avatar {
+    width: min(var(--prep-portrait-compact), 100%);
+  }
+
+  .panel[data-mode='normal'] .name {
+    font-size: var(--text-sm);
+  }
 }

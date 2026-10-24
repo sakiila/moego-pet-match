@@ -54,29 +54,40 @@
   color: var(--color-ink-muted);
 }
 
+.hint {
+  margin: calc(-1 * var(--space-1)) 0 0;
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  color: var(--color-ink-muted);
+}
+
 .list {
   display: grid;
   gap: var(--space-2);
 }
 
+/* 登录页同事列表：上方留出蓝猫探头的空间，不压住搜索框 */
+.colleagues {
+  display: grid;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+}
+
 .selected {
   margin: 0;
   text-align: center;
+  font-size: var(--text-lg);
   font-weight: var(--weight-bold);
 }
 
-.avatarButton {
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  cursor: pointer;
+.selected em {
+  font-style: normal;
+  color: var(--color-brand);
 }
 
 .navRow {
   display: flex;
   justify-content: center;
-  gap: var(--space-4);
 }
 
 .center {
@@ -165,14 +176,6 @@
 }
 
 /* 标题行：左侧标题或进度，右侧一个次级操作 */
-.titleRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  flex-wrap: wrap;
-}
-
 .who {
   display: inline-flex;
   align-items: center;

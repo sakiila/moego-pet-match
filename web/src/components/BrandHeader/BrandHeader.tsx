@@ -1,10 +1,17 @@
 import type { ReactNode } from 'react';
 import { useI18n, type MessageKey } from '../../i18n';
+import { Icon } from '../../ui/primitives/Icon';
+import logoSrc from '../../ui/art/moego-logo.webp';
+import titleEnSrc from '../../ui/art/title-en.webp';
+import titleZhSrc from '../../ui/art/title-zh.webp';
+import hallEnSrc from '../../ui/art/hall-title-en.webp';
+import hallZhSrc from '../../ui/art/hall-title-zh.webp';
+import schedulingSrc from '../../ui/art/smart-scheduling.webp';
 import styles from './BrandHeader.module.css';
 
 export interface BrandHeaderProps {
-  /** game：游戏名（身份页、门店）；scheduling：Smart Scheduling（准备、棋盘）；fish：鱼关「小鱼也来排班啦」。 */
-  title?: 'game' | 'scheduling' | 'fish';
+  /** game：游戏名（身份页、门店）；scheduling：Smart Scheduling（准备、棋盘）；fish：鱼关「小鱼也来排班啦」；hall：排行榜「毛孩子光荣榜」。 */
+  title?: 'game' | 'scheduling' | 'fish' | 'hall';
   /** 标题下的一句说明。 */
   tagline?: MessageKey;
   /** 右上角额外内容（如当前身份头像）。 */
@@ -15,10 +22,14 @@ export interface BrandHeaderProps {
   onBack?: () => void;
   /** heading 居中，首词深色、其余品牌色（与 Smart Scheduling 一致）。 */
   headingAccent?: boolean;
+  /** 与普通页标题同一行、靠右的一个操作（如图鉴的「添加我家毛孩子」）。 */
+  headingAction?: ReactNode;
+  /** 普通准备页使用已确认的文字素材；棋盘保持原标题。 */
+  schedulingArt?: boolean;
 }
 
 /** 顶部：MoeGo 字标 + 中/EN 切换 + 标题；切换只改界面文字，不影响本局。 */
-export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack, headingAccent }: BrandHeaderProps) {
+export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack, headingAccent, headingAction, schedulingArt = false }: BrandHeaderProps) {
   const { t, locale, setLocale } = useI18n();
   const [lead, accent] =
     title === 'game'
@@ -30,15 +41,18 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
           return [first, rest.join(' ')];
         })();
   return (
-    <header>
+    <header className={schedulingArt ? styles.preparation : undefined}>
       <div className={styles.bar}>
-        <span className={styles.wordmark}>
+        {/* 浅色页面用官方 Logo；鱼关深蓝底上 Logo 看不清，改用白色文字字标（CSS 按主题切换） */}
+        <img className={styles.logo} src={logoSrc} alt="MoeGo" width={120} height={32} />
+        <span className={styles.wordmark} aria-hidden>
           Moe<span>Go</span>
         </span>
         <span className={styles.right}>
           {onBack && (
             <button type="button" className={styles.back} onClick={onBack} data-testid="back">
-              ‹ {t('action.back_to_shop')}
+              <Icon name="back-to-shop" size={22} />
+              {t('action.back_to_shop')}
             </button>
           )}
           <span className={styles.lang}>
@@ -57,8 +71,26 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
         <h1 className={styles.title}>
           {heading.split(' ')[0]} <em>{heading.split(' ').slice(1).join(' ')}</em>
         </h1>
+      ) : heading && headingAction ? (
+        <div className={styles.headingRow}>
+          <h1 className={`${styles.title} ${styles.heading}`}>{heading}</h1>
+          {headingAction}
+        </div>
       ) : heading ? (
         <h1 className={`${styles.title} ${styles.heading}`}>{heading}</h1>
+      ) : title === 'scheduling' && schedulingArt ? (
+        <h1 className={styles.schedulingTitle}>
+          <img src={schedulingSrc} alt={t('board.title')} width={1080} height={200} />
+        </h1>
+      ) : title === 'game' ? (
+        <h1 className={styles.gameTitle}>
+          {/* 标题字标（Codex 出图，已确认）；读屏读原文字 */}
+          <img src={locale === 'en' ? titleEnSrc : titleZhSrc} alt={`${lead}${locale === 'en' ? ' ' : ''}${accent}`} />
+        </h1>
+      ) : title === 'hall' ? (
+        <h1 className={styles.gameTitle}>
+          <img src={locale === 'en' ? hallEnSrc : hallZhSrc} alt={t('leaderboard.hall_of_fame')} />
+        </h1>
       ) : (
         <h1 className={styles.title}>
           {lead}
@@ -66,7 +98,7 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
           {accent && <em>{accent}</em>}
         </h1>
       )}
-      {tagline && <p className={styles.tagline}>{t(tagline)}</p>}
+      {tagline && <p className={`${styles.tagline} ${title === 'game' || title === 'hall' ? styles.gameTagline : ''}`}>{t(tagline)}</p>}
     </header>
   );
 }

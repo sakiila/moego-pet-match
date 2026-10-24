@@ -1,4 +1,5 @@
 import { useI18n } from '../../i18n';
+import { Icon } from '../../ui/primitives/Icon';
 import styles from './StatusPanel.module.css';
 
 export function formatClock(ms: number): string {
@@ -18,10 +19,7 @@ export function StatusPanel({ timeLeftMs, score }: StatusPanelProps) {
   return (
     <div className={styles.panel}>
       <div className={`${styles.card} ${styles.time} ${urgent ? styles.urgent : ''}`} aria-label={t('board.time_left', { seconds: Math.ceil(timeLeftMs / 1000) })}>
-        <svg className={styles.icon} viewBox="0 0 34 34" aria-hidden>
-          <circle cx="17" cy="17" r="13" fill="none" stroke="var(--color-brand)" strokeWidth="4" />
-          <path d="M17 10v8h6" stroke="var(--color-ink)" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-        </svg>
+        <Icon name="time-left" size={36} />
         <span>
           <span className={styles.label}>{t('board.time_label')}</span>
           <span className={styles.value} data-testid="time-left">
@@ -30,9 +28,7 @@ export function StatusPanel({ timeLeftMs, score }: StatusPanelProps) {
         </span>
       </div>
       <div className={`${styles.card} ${styles.score}`}>
-        <svg className={styles.icon} viewBox="0 0 34 34" aria-hidden>
-          <path d="M17 4l3.8 8.3 9 .9-6.8 6 2 8.9L17 23.5 9 28.1l2-8.9-6.8-6 9-.9z" fill="var(--color-paper)" stroke="var(--color-brand)" strokeWidth="3" strokeLinejoin="round" />
-        </svg>
+        <Icon name="score" size={36} />
         <span>
           <span className={styles.label}>{t('board.score_label')}</span>
           <span className={styles.value} data-testid="score">

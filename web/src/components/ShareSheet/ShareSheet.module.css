@@ -27,6 +27,18 @@
   object-fit: contain;
 }
 
+.natural {
+  width: 100%;
+  min-height: var(--album-preview-min-height);
+  aspect-ratio: auto;
+}
+
+.natural img {
+  height: auto;
+  max-height: var(--album-preview-max-height);
+  object-fit: contain;
+}
+
 .loading {
   width: 40%;
   height: 40%;

@@ -19,7 +19,7 @@ export function SaveStatus({ state, onRetry }: { state: SaveState; onRetry: () =
     case 'saving':
       return <StatusMessage text={t('report.saving')} />;
     case 'retryable':
-      return <StatusMessage tone="error" text={t('report.sync_retryable')} actionLabel={t('report.sync_retry')} onAction={onRetry} />;
+      return <StatusMessage tone="error" text={t('report.sync_retryable')} actionLabel={t('report.sync_retry')} actionIcon="retry" onAction={onRetry} />;
     case 'invalid':
       return <StatusMessage tone="error" text={t('report.validation_failed')} />;
     case 'saved':

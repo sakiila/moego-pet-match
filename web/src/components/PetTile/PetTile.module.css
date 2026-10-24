@@ -24,3 +24,15 @@
   pointer-events: none;
   -webkit-user-drag: none;
 }
+
+
+.tile[data-variant='portrait'] {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.tile[data-variant='portrait'] .sticker {
+  width: calc(100% + var(--space-4));
+  height: calc(100% + var(--space-4));
+}
