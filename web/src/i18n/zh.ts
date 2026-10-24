@@ -109,6 +109,12 @@ export const zh = {
   'leaderboard.tied_rank': '同分并列',
   'leaderboard.challenge': '再挑战一次',
   'leaderboard.load_failed': '暂时没能读取排行榜，请重试。',
+  'leaderboard.top_players': '领先玩家',
+  'leaderboard.hall_of_fame': '毛孩子光荣榜',
+  'leaderboard.tagline': '谁把毛孩子安排得最明白？',
+  'leaderboard.points': '{score} 分',
+  'leaderboard.colleague': '同事',
+  'leaderboard.you': '你',
   'fish.invitation': 'Peter 悄悄递来一个鱼缸：这批客人不用吹干。',
   'error.connection': '暂时没连上，请重试。',
   // 游戏名拆成两段以便强调色（即已确认的游戏名「MoeGo 毛孩子全明星 / MoeGo Pet All-Stars」）

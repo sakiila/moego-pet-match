@@ -1,13 +1,14 @@
 .row {
   display: grid;
-  grid-template-columns: 40px 40px 1fr auto;
+  grid-template-columns: 40px 40px minmax(0, 1fr) max-content;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-1) var(--space-3);
   min-height: 60px;
   padding: var(--space-2) var(--space-3);
   border: var(--stroke) solid var(--color-line);
   border-radius: var(--radius-md);
   background: var(--color-paper);
+  color: var(--color-ink);
 }
 
 .me {
@@ -16,20 +17,34 @@
 }
 
 .rank {
-  text-align: center;
-  font-size: var(--text-lg);
-  font-weight: 900;
+  display: grid;
+  place-items: center;
+  grid-column: 1;
+  grid-row: 1;
 }
 
+.avatar { grid-column: 2; grid-row: 1; }
+
 .name {
+  grid-column: 3;
+  grid-row: 1;
   min-width: 0;
   font-weight: var(--weight-bold);
   overflow-wrap: anywhere;
 }
 
+/* 本人行「你」标记 */
+.you {
+  padding: var(--achievement-chip-stroke) var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-brand);
+  font-size: var(--text-xs);
+  color: var(--color-paper);
+  white-space: nowrap;
+}
+
 .tied {
-  margin-left: var(--space-2);
-  padding: 1px 8px;
+  padding: var(--achievement-chip-stroke) var(--space-2);
   border-radius: var(--radius-pill);
   background: var(--color-surface-muted);
   font-size: var(--text-xs);
@@ -38,11 +53,34 @@
 }
 
 .score {
+  grid-column: 4;
+  grid-row: 1;
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   font-variant-numeric: tabular-nums;
 }
 
+.meta { grid-column: 3 / -1; grid-row: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); min-width: 0; }
+
 .me .score {
   color: var(--color-brand);
+}
+
+/* 表头：同一列宽，浅底小字 */
+.header {
+  min-height: 40px;
+  border-color: transparent;
+  background: var(--color-surface-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-muted);
+}
+
+.header .score {
+  font-size: var(--text-sm);
+}
+
+/* 「同事」跨头像与名字两列 */
+.colleague {
+  grid-column: 2 / 4;
 }

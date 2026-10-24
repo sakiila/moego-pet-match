@@ -1,43 +1,278 @@
 .podium {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* minmax(0, …)：长名字不撑宽列，三级台阶宽度固定 */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr) minmax(0, 1fr);
   align-items: end;
-  gap: var(--space-2);
+  gap: 2px;
+  /* 两侧留给宠物贴纸；贴纸再借用页面左右边距（--space-4） */
+  padding: var(--space-5) 40px 0;
 }
 
+/* ---------- 两侧宠物贴纸：切边对齐台阶外侧并藏在台阶后面，像从台阶后探出半身 ---------- */
+
+.pet {
+  position: absolute;
+  bottom: 0;
+  z-index: 0;
+  width: 58px;
+  height: auto;
+  transform-origin: 50% 100%;
+  animation: wave 3.4s ease-in-out infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cat {
+  left: calc(-1 * var(--space-4));
+}
+
+.dog {
+  right: calc(-1 * var(--space-4));
+  animation-delay: -1.7s;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    rotate: -3deg;
+  }
+
+  50% {
+    rotate: 3deg;
+  }
+}
+
+/* ---------- 每个名次 ---------- */
+
 .place {
+  position: relative;
+  z-index: 1;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   justify-items: center;
-  gap: var(--space-1);
-  padding: var(--space-3) var(--space-2);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface-muted);
+  min-width: 0;
+}
+
+/* 皇冠端正戴在头像正上方，底边压住头像外圈白边（参考 hall-of-fame-crown-reference-2） */
+.crown {
+  position: relative;
+  z-index: 2;
+  width: 50px;
+  height: auto;
+  margin-bottom: -10px;
+  /*
+   * 略向右倾，像随手戴上去的；底边压在头像圆框上。
+   */
+  rotate: 12deg;
+  translate: 8px 0;
+}
+
+/* 头像坐在台阶上沿，白色描边把它和台阶分开 */
+.avatar {
+  position: relative;
+  z-index: 1;
+  margin-bottom: -14px;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--color-paper);
+  box-shadow: var(--shadow-soft);
+  line-height: 0;
+}
+
+.previewHeading { margin: 0; font-size: var(--text-lg); overflow-wrap: anywhere; }
+.titlePreview { display: grid; justify-items: center; gap: var(--space-3); padding: var(--space-5) 0; font-size: var(--text-lg); }
+.titlePreview > span:last-child { color: var(--color-ink-muted); font-size: var(--text-sm); }
+
+/* 台阶：浅色顶面（上沿 10px）+ 正面，炭黑细描边 */
+.step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr;
+  justify-items: center;
+  align-items: start;
+  gap: 2px;
+  width: 100%;
+  padding: 22px var(--space-1) var(--space-1);
+  border: var(--stroke) solid var(--color-ink);
+  border-radius: var(--radius-md) var(--radius-md) 4px 4px;
+  background: linear-gradient(var(--step-top) 0 10px, var(--step) 10px);
   text-align: center;
 }
 
-.first {
-  padding-top: var(--space-5);
-  background: #fff4ec;
-  box-shadow: inset 0 0 0 2px var(--color-dog-yellow);
+.center .step {
+  height: 150px;
 }
 
-.crown {
-  font-size: var(--text-lg);
-  font-weight: 900;
+.left .step {
+  height: 126px;
+}
+
+.right .step {
+  height: 110px;
+}
+
+.gold {
+  --step-top: var(--podium-gold-top);
+  --step: var(--podium-gold);
+  --step-ink: var(--podium-gold-ink);
+}
+
+.silver {
+  --step-top: var(--podium-silver-top);
+  --step: var(--podium-silver);
+  --step-ink: var(--podium-silver-ink);
+}
+
+.bronze {
+  --step-top: var(--podium-bronze-top);
+  --step: var(--podium-bronze);
+  --step-ink: var(--podium-bronze-ink);
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  max-width: 100%;
+}
+
+.laurel {
+  flex: none;
+  width: auto;
+  height: 26px;
 }
 
 .name {
-  max-width: 100%;
-  font-weight: var(--weight-bold);
-  overflow-wrap: anywhere;
+  min-width: 0;
+  overflow: hidden;
+  font-size: var(--text-sm);
+  font-weight: 900;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-ink);
 }
 
 .score {
-  font-size: var(--text-lg);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--text-sm);
   font-weight: 900;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--color-brand);
 }
 
-.first .score {
-  color: var(--color-brand);
+.center .score {
+  font-size: var(--text-md);
+}
+
+/* 大号名次：台阶正面下方，用同色系深一档 */
+.rank {
+  align-self: end;
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 0.9;
+  color: var(--step-ink);
+}
+
+.center .rank {
+  font-size: 56px;
+}
+
+/* ---------- 第 1 名点缀：左上两笔橙色圆头短线、右侧一大一小星星，以头像中心定位、贴近头像 ---------- */
+
+.sparkles {
+  position: absolute;
+  z-index: 2;
+  inset: 0 0 auto;
+  height: 110px;
+  pointer-events: none;
+}
+
+/* 两笔粗细均匀的圆头短线，指向头像左上方（参考 hall-of-fame-crown-reference） */
+.dashes {
+  position: absolute;
+  top: 34px;
+  left: calc(50% - 56px);
+  width: 22px;
+  height: 22px;
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+
+.dashes::before,
+.dashes::after {
+  content: '';
+  position: absolute;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-brand);
+}
+
+.dashes::before {
+  top: 4px;
+  left: 6px;
+  width: 14px;
+  rotate: 42deg;
+}
+
+.dashes::after {
+  top: 15px;
+  left: 0;
+  width: 13px;
+  rotate: 12deg;
+}
+
+.star {
+  position: absolute;
+  animation: twinkle 1.6s ease-in-out infinite;
+}
+
+.starBig {
+  top: 26px;
+  left: calc(50% + 30px);
+  width: 22px;
+  height: 22px;
+  animation-delay: 0.4s;
+}
+
+/* 大星用更亮的金黄 */
+.starBig path {
+  fill: var(--color-dog-yellow);
+}
+
+.starSmall {
+  top: 54px;
+  left: calc(50% + 38px);
+  width: 13px;
+  height: 13px;
+  animation-delay: 1s;
+}
+
+.starSmall path {
+  fill: var(--color-brand);
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+
+  50% {
+    opacity: 0.55;
+    scale: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet,
+  .dashes,
+  .star {
+    animation: none;
+  }
 }

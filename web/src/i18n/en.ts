@@ -110,6 +110,12 @@ export const en: Record<MessageKey, string> = {
   'leaderboard.tied_rank': 'Shared Rank',
   'leaderboard.challenge': 'Play Another Round',
   'leaderboard.load_failed': 'We couldn\'t load the leaderboard. Please try again.',
+  'leaderboard.top_players': 'Top Players',
+  'leaderboard.hall_of_fame': 'Pet Hall of Fame',
+  'leaderboard.tagline': 'Who keeps the fur crew in line?',
+  'leaderboard.points': '{score} pts',
+  'leaderboard.colleague': 'Coworker',
+  'leaderboard.you': 'You',
   'fish.invitation': 'Peter slips you a fish tank. These guests can skip the blow-dry.',
   'error.connection': 'Couldn\'t connect. Please try again.',
   // 游戏名拆成两段以便强调色（即已确认的游戏名「MoeGo 毛孩子全明星 / MoeGo Pet All-Stars」）

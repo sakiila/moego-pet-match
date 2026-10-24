@@ -1,0 +1,7 @@
+.number {
+  display: inline-block;
+  text-align: center;
+  font-size: var(--text-lg);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}

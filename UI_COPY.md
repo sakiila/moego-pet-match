@@ -332,10 +332,20 @@
 | leaderboard.load_failed | 暂时没能读取排行榜，请重试。 | We couldn't load the leaderboard. Please try again. |
 
 默认领先玩家＋本人附近，名次使用真实并列结果，未保存的成绩不生成名次。鱼榜标签仅对个人已发现鱼关的玩家显示，不放锁定标签或解锁预告。挑战当前榜单对应模式，不新增挑战邀请或相同棋盘对战。
+| leaderboard.top_players | 领先玩家 | Top Players |
+| leaderboard.hall_of_fame | 毛孩子光荣榜 | Pet Hall of Fame |
+| leaderboard.tagline | 谁把毛孩子安排得最明白？ | Who keeps the fur crew in line? |
+| leaderboard.points | {score} 分 | {score} pts |
+| leaderboard.colleague | 同事 | Coworker |
+| leaderboard.you | 你 | You |
 
 聚焦本人及相邻名次的视图标签已确认使用「我的名次 / My Rank」，保留已定的邻近排名列表，不改成只显示本人；「回到我的名次」回到该视图。全榜标签用「All Rankings」，与棋盘区分。无成绩提示仅在数据读取成功且当前模式确无已保存成绩时显示，读取失败用对应重试提示；真实已保存的 0 分仍是记录。无成绩时先展示全榜，不生成虚构名次。本页展示的关键文案已确认，排名规则与模式入口不变。
 
 ## 8. 已发现后的 Peter 小鱼关 · 关键文案已确认
+
+`leaderboard.top_players`（领先三人小标题）、`leaderboard.colleague`（列表表头，与 `leaderboard.rank`、`leaderboard.best_score` 一起）、`leaderboard.you`（本人行标记）于 2026-10-24 按 mobile-leaderboard-v1 确认补入；并列仍在行内标「同分并列」，不另加页脚说明。
+
+2026-10-24 排行榜页改为「毛孩子光荣榜 / Pet Hall of Fame」标题字标（图片，读屏读 `leaderboard.hall_of_fame`）与副标题 `leaderboard.tagline`；排行记录的是个人最好成绩，副标题不写「今天」。领奖台分数用 `leaderboard.points`。领奖台上方不再显示 `leaderboard.top_players`。鱼关页签仍只对已发现鱼关的玩家显示，不加锁定标签或解锁预告。
 
 | Key | 中文 | English |
 | --- | --- | --- |

@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { api } from '../api/client';
 import type { GameMode, LeaderboardEntry, LeaderboardView, PlayerView } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
-import { LeaderboardRow } from '../components/LeaderboardRow/LeaderboardRow';
+import { LeaderboardHeader, LeaderboardRow } from '../components/LeaderboardRow/LeaderboardRow';
+import { ModeMark } from '../components/ModeMark/ModeMark';
 import { Podium } from '../components/Podium/Podium';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { useI18n } from '../i18n';
@@ -60,14 +61,19 @@ export function LeaderboardScreen({ player, initialMode = 'normal', onBack, onCh
     return counts;
   }, [data]);
 
-  const modes: { value: GameMode; label: string }[] = [{ value: 'normal', label: `🐾 ${t('leaderboard.pets')}` }];
-  if (player.progress.fishUnlocked) modes.push({ value: 'fish', label: `🐟 ${t('leaderboard.fish')}` });
+  const tab = (value: GameMode, label: string) => ({
+    value,
+    label,
+    icon: <ModeMark mode={value} size={26} tone={value === mode ? 'onAccent' : 'default'} />,
+  });
+  const modes = [tab('normal', t('leaderboard.pets'))];
+  if (player.progress.fishUnlocked) modes.push(tab('fish', t('leaderboard.fish')));
 
   return (
-    <main className={styles.screen}>
-      <BrandHeader heading={t('nav.leaderboard')} onBack={onBack} />
+    <main className={`${styles.screen} ${styles.withStickyActions}`}>
+      <BrandHeader title="hall" tagline="leaderboard.tagline" onBack={onBack} />
       <Tabs value={mode} options={modes} onChange={setMode} label={t('nav.leaderboard')} />
-      {failed && <StatusMessage tone="error" text={t('leaderboard.load_failed')} actionLabel={t('action.retry')} onAction={fetchBoard} />}
+      {failed && <StatusMessage tone="error" text={t('leaderboard.load_failed')} actionLabel={t('action.retry')} actionIcon="retry" onAction={fetchBoard} />}
       {data && (
         <>
           <Podium entries={data.entries} />
@@ -85,16 +91,18 @@ export function LeaderboardScreen({ player, initialMode = 'normal', onBack, onCh
             />
           )}
           <div className={styles.list} data-testid="leaderboard-rows">
+            {rows.length > 0 && <LeaderboardHeader />}
             {rows.map((e) => (
               <LeaderboardRow key={e.userId} entry={e} isMe={e.userId === player.userId} tied={(tiedRanks.get(e.rank) ?? 0) > 1} />
             ))}
           </div>
         </>
       )}
-      <div className={styles.grow} />
-      <Button size="lg" block onClick={() => onChallenge(mode)} data-testid="challenge">
-        {mode === 'fish' ? '🐟' : '🐾'} {t('leaderboard.challenge')}
-      </Button>
+      <div className={styles.stickyActions}>
+        <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={() => onChallenge(mode)} data-testid="challenge">
+          {t('leaderboard.challenge')}
+        </Button>
+      </div>
     </main>
   );
 }
