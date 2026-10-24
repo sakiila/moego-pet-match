@@ -24,7 +24,7 @@
 | 猜主人 | 展示的关键文案已确认 |
 | 设置、退出与访问异常 | 展示的关键文案已确认 |
 
-已确认保留游戏名，用入口副标题解释玩法。首次直接搜索并选择同事身份，按钮使用「以 {playerName} 身份继续 / Continue as {playerName}」，直观核对当前将使用哪个同事身份。
+已确认保留游戏名，用入口副标题解释玩法。首次直接搜索并选择同事身份，按钮使用「以 {playerName} 身份 Clock In / Clock In as {playerName}」，直观核对当前将使用哪个同事身份。
 
 ## 使用约定
 
@@ -78,7 +78,9 @@
 | identity.search | 搜索你的 Slack 名字 | Search your Slack name |
 | identity.hint | 选择自己的身份，成绩和图鉴会记在这里。 | Choose your own profile. Your scores and collection will be saved to it. |
 | identity.selected | 当前选择：{playerName} | Selected: {playerName} |
-| identity.confirm | 以 {playerName} 身份继续 | Continue as {playerName} |
+| identity.confirm | 以 {playerName} 身份 Clock In | Clock In as {playerName} |
+| identity.menu | {playerName} 的身份菜单 | Profile menu for {playerName} |
+| action.clock_out | Clock Out | Clock Out |
 | identity.not_found | 没找到你的同事身份。换个名字试试，或联系 Bob 更新资料。 | We couldn't find your coworker profile. Try another name or contact Bob. |
 | identity.load_failed | 暂时没能读取同事名单，请重试。 | We couldn't load the team directory. Please try again. |
 | info.use_link | 信息使用说明 | How Your Information Is Used |
@@ -87,7 +89,7 @@
 
 身份来自现有 Supabase 可参与名单；选择名字不写成「已验证 Slack 本人」。查询失败与未找到身份使用不同提示，头像缺失使用默认头像，不阻止有效同事游戏。完整说明见下方 2.3。
 
-`info.entry_summary` 放在身份确认按钮附近，并保留完整说明入口；点击「以 {playerName} 身份继续」即表示同意，不增加勾选框或第二次确认弹窗。
+`info.entry_summary` 放在身份确认按钮附近，并保留完整说明入口；点击「以 {playerName} 身份 Clock In」即表示同意，不增加勾选框或第二次确认弹窗。
 
 ### 2.3 完整信息使用说明 · 要点已确认，正文为草稿
 
@@ -102,7 +104,7 @@
 | info.full.ai | **AI 处理**：宠物照片会提交给 AI 图像服务，生成统一画风的头像贴纸，再由 Bob 人工核对后上架；交给 AI 前会先去掉拍摄位置等信息。已收集的同事可以在图鉴卡背面看到 Bob 处理过的照片版本，不会看到原文件。 | **AI processing**: pet photos are sent to an AI image service to create matching-style head stickers, which Bob reviews by hand before they go live. Location details are removed before anything is sent to AI. Coworkers who have collected a pet can see a processed version of the photo on the back of its card, never the original file. |
 | info.full.storage | **存在哪里**：数据库在美国（Supabase），图片存储在亚太区域（Cloudflare R2），只用于这个内部游戏活动。 | **Where it's stored**: the database is in the United States (Supabase); images are stored in the Asia-Pacific region (Cloudflare R2). Used only for this internal game. |
 | info.full.removal | **想删除怎么办**：在「我的宠物」或本页提交删除申请，Bob 人工核实后会下架并清理游戏里的资料。已有成绩会保留，但不再显示该宠物的资料。飞书原文档、AI 服务和托管备份中的副本不在游戏控制范围内，处理结果里会如实说明。 | **Want something removed?** Send a request from My Pets or this page. Bob will verify it, take the pet down, and clean up the game's copies. Existing scores stay, but the pet's details are no longer shown. Copies in the original Feishu doc, the AI service, or hosted backups are outside the game's control; the result will say so honestly. |
-| info.full.consent | **同意方式**：点击「以 {playerName} 身份继续」即表示你同意以上使用方式。 | **Consent**: tapping "Continue as {playerName}" means you agree to the above. |
+| info.full.consent | **同意方式**：点击「以 {playerName} 身份 Clock In」即表示你同意以上使用方式。 | **Consent**: tapping "Clock In as {playerName}" means you agree to the above. |
 
 
 选中卡片展示姓名与头像，确认后只进入门店，不开始 90 秒计时、不增加第二次确认弹窗。带姓名的按钮已确认，名字须与当前选中卡片一致；较长姓名允许换行并保证可读，不把名字截成无法核对的内容。其他身份页文字为校读修订稿。
@@ -122,6 +124,8 @@
 | home.photo_notice | 宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob | Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack. |
 
 首页主按钮共用「开始营业 / Open Shop」，进入普通宠物局准备，不直接开始计时；次级入口沿用图鉴、排行榜、我的宠物。个人最好只展示普通宠物局记录，不将鱼关成绩混入首页字段。人工处理提示保留用户指定原句，首页没有鱼关入口或解锁预告。
+
+点击右上角头像，在头像下方展开下拉框，显示「Clock Out」（中英文一致）；再次点击头像、点击外部或按 Escape 收起。点击「Clock Out」清除浏览器记住的身份并返回身份选择页。
 
 店长小海报已确认（2026-10-23，图稿 manager-poster-v1）：点门店的今日店长打开预览，海报含店长贴纸、「今日店长 · 名字」、既定宣言与北京日期；不自动弹出。保存与分享沿用成绩卡的 `share.save`、`share.send`、`share.failed`。
 
