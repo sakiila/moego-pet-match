@@ -1,0 +1,72 @@
+Use case: ui-mockup
+Asset type: ONE high-fidelity two-state flow board for the new PLAYER PROFILE CARD in MoeGo Pet All-Stars.
+Primary request: Continue the agreed product direction and show ONE resolved design: tap a coworker on the leaderboard -> a bottom-sheet player profile opens. Two coordinated states of this same flow, not alternative design options. This is a design preview only, no implementation.
+
+Input references:
+Image 1 / leaderboard-badges-fixed.png: current implemented leaderboard. Ground the layout, podium, mode tabs, today/all-time switch, rows, rank icons, type, colors, and fixed orange challenge button in this exact existing product. Important: titles have ALREADY been fixed so the podium uses only a tiny badge on the avatar corner and list rows put a small title chip UNDER the name. Preserve this. Never insert a full title label into the cramped podium steps.
+Image 2 / collection-title-badges-v3.png: latest APPROVED badge character artwork. Use its two-cat seal, two-dog seal, high-five-paws seal and the expressive orange/ivory/charcoal style faithfully. The three badges shown in the new profile must be these exact selected motifs, not generic paws or newly invented medals.
+Image 3 / achievements-drawer-zh.png: actual app's existing white bottom drawer, title hierarchy, close button, rounded top corners, row density and backdrop. Use as the interaction and surface-style grounding. Do not copy the title-management list or equip buttons into someone else's profile.
+
+Output target: one 1800 x 2000 px portrait-ish design board with TWO equally sized side-by-side mobile app-content panels, each corresponding to 390 x 844 CSS px at about 2x density. Small equal gutters and natural whitespace. Small outside-panel labels "排行榜 · 点击同事" and "玩家名片". No phone bezels, hardware, OS status bar, clock, batteries, browser UI or decorative device shadows. Not a Figma screenshot. ONE coherent design flow, not a style comparison.
+Date anchor: 2026-10-24, Beijing date. Any visible dates must follow this anchor.
+Create realistic, production-quality UI with clear hierarchy, strong typography, intentional imagery and purposeful spacing.
+
+Design language: MoeGo orange #f96b1c, dark ink #1f2227, almost-white #fbfbfc, white sheet, pale-orange #fff5e9, light-gray #e3e6eb. Existing friendly rounded Chinese and Latin typography. Large name, quiet section headings, legible dates. Body around 14–16 CSS px, small captions 11–12 CSS px. No new colors for rarity, metallic medals, dark dashboard, gradients, charts or social-feed styling. Preserve the existing warm playful sticker feel.
+
+Shared illustrative scenario — ALL VALUES ARE DESIGN MOCK DATA:
+Viewed player Alice Chen, amber circle avatar with white letter A. Current worn title "毛孩子熟人" with the HIGH-FIVE PAWS seal.
+Normal pet mode best score 13,770; collected 18 / 80; completed valid games 12.
+Only three achievements unlocked: "猫猫亲友团", "汪汪好朋友", "毛孩子熟人". Mark the last one as currently worn. Other achievements are not shown in this public card.
+The viewer is Bob, who is a different player; therefore there is NO change-title / wear / remove action on Alice's card.
+No fish mode or hidden fish progression is exposed in this design.
+
+LEFT PANEL — existing leaderboard, relevant SCROLLED state:
+Show the existing leaderboard scrolled down sufficiently to show the podium and all three nearby rows. This is an ordinary scroll state: the large top brand heading and logo can be ABOVE the viewport, not redesigned smaller. Near the top show current mode "宠物店" selected / "鱼关卡" inactive and the "今日榜" selected / "总榜" inactive switch, then date text "10 月 24 日 · 今天全公司同一盘棋".
+Preserve the 2–1–3 podium with crown and original friendly cat/dog side illustrations. Entries remain coherent:
+rank 1 Bob 包博 — 19,000
+rank 2 Bob — 17,580
+rank 3 Alice Chen — 13,770
+Keep Alice's tiny high-five achievement seal attached to her avatar corner, leaving her name, score and rank unobstructed in the podium step. Bob and Bob 包博 have no achievement chips in this example.
+Below podium: "我的名次" selected, "全榜" inactive. Show all 3 list rows with rank emblem, avatar, name and score. Bob's own row has the original pale-peach highlight and small "你" tag on its secondary line. Alice's row has her name and score on the primary line and the small "毛孩子熟人" title chip on its own second line. Do not squeeze the chip beside the name or score.
+Keep bottom fixed orange "再挑战一次" button with existing dark offset shadow. Names, ranks and scores must never overlap.
+A subtle thin orange tap ring around Alice's avatar may indicate the target, but do not change Alice into the current viewer or add a second "你" tag. Do not add fake in-app arrows, tutorials or new controls.
+
+RIGHT PANEL — Alice's PLAYER PROFILE bottom sheet, open:
+Dim the SAME scrolled leaderboard as in the left panel behind the sheet. A white bottom sheet occupies about 85–87% of the 844px viewport. Generous rounded top corners, tiny gray drag handle, small title "玩家名片" at upper left and circular X close button at upper right. Sheet anchors to the bottom with comfortable padding. It is not a standalone full page or giant nested card.
+
+Inside sheet, top to bottom:
+1. IDENTITY:
+Amber circle A avatar about 56 CSS px on left; to its right large bold name "Alice Chen". Immediately below name the small high-five title chip "毛孩子熟人". It should read like a person's compact identity block, not an achievement-store hero. No duplicate enormous badge above the name, no invented biography, job title, department or contact details.
+
+2. COMPACT THREE-COLUMN SUMMARY, one quiet light-neutral strip with no heavy outline or chunky shadow:
+number "13,770" / caption "最高分"
+number "18 / 80" / caption "已收集"
+number "12" / caption "已营业 · 局"
+Use equal columns and readable figures. The score is an ordinary game value, not a huge finance dashboard KPI. No progress ring or chart. These three values must fit easily without truncation.
+
+3. UNLOCKED BADGES:
+section heading "已解锁徽章" left, small count "3 / 7" right.
+ONE airy row of THREE actual approved seals, about 48 CSS px each:
+two cat friends with exact caption "猫猫亲友团";
+two dog friends with exact caption "汪汪好朋友";
+the high-five paws with exact caption "毛孩子熟人".
+Use the expressive approved artwork from reference 2, with the same orange/ivory/charcoal character details. Captions beneath are small but readable. The third badge has a subtle pale-peach highlight or tiny "佩戴中" state tag. The other two have no action button. Do not show the four locked badges, no gray placeholders, no list of unknown owners, no additional unlock thresholds.
+
+4. RECENT GAME RECORDS:
+section heading "最近 5 局" with a small quiet "宠物店" mode label on the right.
+One clean grouped list with a subtle column header "日期" / "得分" / "新收集". No separate card per row, no chart, no large table borders. Five rows exactly, newest first:
+"10 月 24 日" | "13,770" | "+3"
+"10 月 24 日" | "12,480" | "+1"
+"10 月 23 日" | "11,960" | "0"
+"10 月 23 日" | "10,840" | "+2"
+"10 月 22 日" | "9,620"  | "0"
+Scores neatly right-aligned and set in tabular-looking rounded digits. Positive new collection counts can be quiet orange; zeros neutral gray. Keep dates only, no exact clock times. The first score matches the best and the leaderboard; all other values are below the best. No fake rank changes or chart trend.
+Five rows must be readable inside the sheet. Use comfortable but compact row heights around 36–40 CSS px with very light separators. Do not shrink type or clip the last row.
+
+No big bottom primary button is required. Only a modest breathing margin below the final record. Viewing a colleague is read-only. Do not add follow, like, message, friend request, online status, share, battle, report-detail buttons, pagination, achievement points, currencies or new gameplay.
+
+All supplied Chinese text must be crisp and exact. The name, title, best score, avatar and selected badge must remain CONSISTENT across both panels.
+Work like a senior product designer: identity should lead, key facts come second, the fun badge collection is visible, recent records are readable and subordinate. Fit this using spacing and typography rather than cards inside cards.
+Deliver only the finished two-state player-profile design board.
+
+Generation record: Built-in image_gen on 2026-10-24. Actual output 1190 x 1322 px, saved as player-profile-card-v1.png. The screen references have been archived at sources/player-profile-card-v1/reference-leaderboard.png and reference-drawer.png. Data in the profile and recent history are illustrative, not verified player records. Superseded by the local-polish candidate player-profile-card-v2.png. No application code changed.

@@ -1,0 +1,28 @@
+Use case: precise-object-edit / ui-mockup
+Asset type: ONE targeted Batch 6 revision, 1536 x 1024, restoring the FIRST version with small requested edits.
+
+User feedback verbatim: "不太好，新纪录小旗还是最开始的，但是去掉最下方的横线。称号印章还是最开始的，但是加一些花纹或者戳".
+
+The SINGLE input image, report-marks-original-v1.png, is the FIRST VERSION and the EDIT TARGET. Use THIS image as the base. The user rejected the simplified triangular flag and the thin cut-corner ink frame from v2; neither of those designs should appear. Restore and preserve the original first-version silhouettes, proportions, materials, layout and most details. This is a restrained refinement of v1, not a new direction.
+
+INVARIANTS:
+Keep the MVP medal completely unchanged, including the full ribbon tails, MVP lettering, orange gesture marks, warm shadow, label, caption and smaller MVP application example. Keep the pure white page, all major headings, all sample names, score 2,480, labels, dividers, subtitle, footer and overall arrangement unchanged. Keep orange/ivory/charcoal matte drawing and very restrained soft edge shading; do not add glossy spots, plastic, chrome, gold, dark navy or 3D emboss. All silhouettes remain complete and unclipped. No code or new game rules.
+
+EDIT 1 — RESTORE THE ORIGINAL FLAG, REMOVE ONLY THE BOTTOM BASELINE/SHADOW:
+The top-middle flag must remain EXACTLY the v1 orange waving SWALLOWTAIL flag: same wavy cloth contour, two right-pointing tails and V notch, small ivory underside/fold, full charcoal outlined pole with the original small orange round finial, same lean and original two short orange gesture strokes above-right. Do not simplify it to a plain triangle, change the pole design, flatten away the ivory fold or remove the original upper accents.
+Remove ONLY the lowermost horizontal BASELINE / pale-beige oval ground shadow directly underneath the flag pole. Replace it with clean white page background. This is the bottom line the user wants removed, NOT the flag's lower contour or ivory underside line. Keep the pole's complete lower end. Do the SAME for the small flag beside "个人新纪录！": restore the v1 swallowtail flag with finial, fold and upper accents; remove only its lowermost ground line/oval shadow. Leave the nearby text and score intact.
+Keep the main flag label "新纪录小旗" and the v1 caption "轻扬旗面，记录突破".
+
+EDIT 2 — RESTORE THE ORIGINAL ROUNDED TITLE FRAME, ADD CORNER PATTERN + SMALL STAMP DETAIL:
+Preserve the v1 WIDE ROUNDED RECTANGULAR frame: same thick orange rim, thin charcoal inner/outer contour, ivory center, approximately 3:1 horizontal proportions, slight playful tilt, complete rounded corners, subtle shallow shade and original two orange gesture strokes above-right. The large top-right title base remains EMPTY in the central text area, exactly like v1. Do NOT substitute the v2 thin vermilion cut-corner frame, polygon, plain text-only imprint, circle, medal or new container shape.
+Add a few deliberate ornamental details to this original frame so it feels more like a playful title stamp:
+- Two SMALL fine-line corner ornaments on the ORANGE RIM, one near upper-left and one near lower-left. Each is a minimal nested L/curved corner or short diamond-line flourish, in darker orange/charcoal ink, clearly subordinate to the frame. No repetitive dense pattern, whole-border filigree or extra animals.
+- One SMALL round cancellation-style STAMP impression touching the OUTSIDE LOWER-RIGHT corner, diameter about one quarter of the frame's height. Use thin warm-orange ink circles, with two short diagonal/curved hatch lines inside. It looks like a decorative little postmark, NOT an extra award badge or plastic button. Keep its full ring visible and slightly overlap only the orange rim/outside, never the ivory text area. No letters, dates, fake seals of verification, paw, check, star, trophy, crown or face. Do not write "认证", "通过", "APPROVED" or introduce any new reward meaning.
+The frame and decorative round stamp should both have complete contours. Use enough whitespace at right and below so neither mark clips or collides with labels, divider or other columns. Do not hide any title text behind the ornament. The large central blank region remains generous and reusable for different localized titles.
+
+Apply the SAME restored rounded frame and small ornamental corner/postmark details to BOTH lower title application examples:
+- Chinese example remains exact "全店大扫除负责人", one readable line, with ample padding; gray label "中文示意" unchanged.
+- English example remains exact "Whole-Shop Cleanup Chief", with "Whole-Shop" then "Cleanup Chief" on two readable lines if needed; gray label "English example" unchanged.
+Retain v1's orange lettering, ivory center and charcoal-framed orange rim in these examples. The little round stamp stays outside the text area and must not cover the final Chinese character or English line endings. These language examples are alternatives, not multiple titles per round.
+
+Keep title label "称号印章" and caption "承载本局一个称号". All other Chinese wording, especially footer "普通局 / 鱼关共用 · 单局一个称号 · 新纪录需保存成功并严格刷新已有最好", remains exactly as in v1. No added legend, controls, pets, awards, points or full-report redesign. One polished static review sheet: original flag minus ONLY bottom baseline/shadow; original title frame plus restrained corner ornament and small postmark; MVP unchanged.

@@ -1,0 +1,13 @@
+用途：MoeGo 毛孩子全明星排行榜英文标题字标，内置 image_gen 生成。
+
+用户原始请求：
+用内置 image_gen 生成排行榜英文标题字标「Pet Hall of Fame」v2。上一版（IMAGE2）的问题：字母粗细不一、P 和 F 变形、e 上多了类似重音的笔画，整体比「Pet All-Stars」（IMAGE1）松散。要求：字形、粗细、圆角与 IMAGE1 完全一致，像同一套字体；「Pet」深炭黑 #1f2227，「Hall of Fame」MoeGo 橙 #f96b1c；拼写完全是 Pet Hall of Fame，字母上不要任何多余符号；右上角三笔橙色短放射线。单行，宽高比约 4.5:1。背景用完全平整的纯白 #FFFFFF，不要纹理、渐变、投影或边框，四周留足空白，便于本地去底。不要任何其他文字或水印。如果 image_gen 报连接错误，等待几十秒后重试，最多 6 次。生成后逐字检查，有任何笔画错误或字母变形就重新生成，最多 3 轮，只保留最好的一张。完成后复制到 design/concepts/hall-of-fame-title-en-v2.png，完整请求写入 design/concepts/hall-of-fame-title-en-v2-prompt.txt。
+
+参考图：
+IMAGE1: design/concepts/title-wordmark-en-v1.png（字形、色彩和放射线参考）
+IMAGE2: design/concepts/hall-of-fame-title-en-v1.png（旧稿问题参考）
+
+最终一轮提交给内置 image_gen 的完整英文提示词：
+Use case: logo-brand. Final production pass for a bitmap wordmark. Image 1 contains the desired compact typography and layout but has an incorrect BLACK background. Change the canvas background to completely opaque, perfectly flat PURE WHITE #FFFFFF across every background pixel. Do not use transparency, black, off-white, gradients, texture, shadows or vignettes. Preserve clean solid-color letters and three orange rays. Exact visible text in one line: Pet Hall of Fame. Spell out P e t, H a l l, o f, F a m e. 'Pet' solid #1f2227; 'Hall of Fame' solid #f96b1c. Letter style must match Image 2 Pet All-Stars: chunky, rounded, consistent heavy weight, compact, clean readable P and F. No accent on e, no added marks on letters. Exactly three short thick orange rays in upper right near final e, and no other decoration. Generous white margins all around. Canvas aspect about 4.5:1. No border, watermark or other text.
+
+该轮输入图：上一轮生成结果；design/concepts/title-wordmark-en-v1.png。

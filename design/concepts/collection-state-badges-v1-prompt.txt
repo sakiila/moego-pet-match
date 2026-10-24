@@ -1,0 +1,15 @@
+初次生成请求（参考图只作为视觉参考）
+
+生成一张横向图标效果图。参考图 IMAGE1（design/concepts/my-pets-state-reference-v1.png）是用户截图：其中“已收集”药丸里有一枚绿色圆形白勾图标，“未收集”药丸里有一枚灰色圆形白色横杠图标。参考图 IMAGE2（design/concepts/supplement-marks-original-v1.png）是本项目已有补充图标的线条与质感参考；两张图均只作参考，不复制其卡片、药丸或其他元素。
+
+整张画布为不透明纯白 #FFFFFF，无纹理、渐变、暗角、阴影或边框。只画两枚独立图标，水平一行、左右两栏等距、各自居中并留足白色间距；每枚图标正下方一个小号炭黑中文标签，从左到右依次为“已收集”“未收集”，除此之外没有其他文字。
+
+左图标：实心圆盘，鲜亮但柔和的绿色，接近 #3CC35F；中央一枚粗、圆头圆角的纯白对勾，与 IMAGE1 已收集图标一致。扁平哑光，无高光、无描边（或仅极细同色深一点的边），缩至 32 px 仍清晰。
+右图标：实心圆盘，中性冷灰，接近 #9A9EA8；中央一条粗、圆头的纯白横杠，与 IMAGE1 未收集图标一致。和左图标同尺寸、同笔画粗细、同圆角语言。
+
+两枚图标不得出现方形、书签、药丸底或文字以外的装饰。横向画幅，干净、精准的图标展示，不加水印。
+
+针对生成结果的修订请求
+
+Edit the provided generated image only to make its colors mathematically flat and clean. Preserve the exact two-icon horizontal layout, same icon sizes, shapes, spacing, checkmark, minus bar, and the Chinese labels “已收集” and “未收集” in their current positions. Replace every background pixel outside the icons and labels with opaque pure white #FFFFFF; remove all background texture, off-white tint, gradients, vignette and shadows. Make the left circular disk a single uniform matte #3CC35F green and the right circular disk a single uniform matte #9A9EA8 cool gray, with antialiasing only at shape edges. Keep the central checkmark and minus bar solid pure white #FFFFFF. Keep both labels small charcoal black. No other elements, borders, embellishment, watermark, or text.
+

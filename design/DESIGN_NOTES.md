@@ -5,7 +5,7 @@
 
 ## 视觉方向
 
-2026-10-23 独立素材修正：2026-10-23：用户反馈「不对，你这个素材和之前讨论的样式不一致」。本套手工 SVG 重绘稿样式未通过，已撤回作为当前交付的推荐。文件格式、透明通道和压缩包校验通过，不代表视觉一致性通过。以已确认原稿为基准的修正进行中。 此前 59 枚 SVG／236 张 PNG 的重绘交付已退回，不能作为已确认样式的最终素材。原始 10 批选定图稿仍是视觉基准，修正稿另存版本；游戏代码未改动。
+2026-10-23 独立素材修正已完成：手工 SVG 重绘稿因样式不符被用户退回；用户明确选择「按原图拆分透明 PNG（推荐）」。现以选定原稿直接拆分、去底，完成 47 枚主图标及原稿内 2 枚白色版本，共 49 枚原尺寸透明母版、196 份尺寸导出，见[原稿对照预览](../assets/icons/library-original-png-v2/preview.html)、[下载](../assets/icons/library-original-png-v2/moego-original-png-v2.zip)与[校验](../assets/icons/library-original-png-v2/manifest.json)。原始图稿未改，主体不透明区域 RGB 保留，未改游戏代码或接入页面。
 
 2026-10-23 图标方向更新：第 1–10 批已确认，见下方选定展示文件及[可放大设计总览](reviews/2026-10-23-icon-library-v1/index.html)；图标以原稿炭黑圆角描边、橙白主色与轻量层次为基准。第 10 批[通用动作 v3](concepts/common-actions-original-v3.png)补齐回门店、退出、换一张、保存图片和重试；按标注收圆重试箭头的右上转折，保持大小图一致。旧高光系列及其原始图、导出和留档已按用户明确要求删除；原始页面、宠物素材及新方向图稿保留。当前范围、批次与清理记录见 [ICON_REDESIGN_PLAN.md](ICON_REDESIGN_PLAN.md)。本轮未修改游戏代码。
 
@@ -25,24 +25,36 @@
 
 真实宠物素材现已选定 B 类 AI 插画贴纸，并要求只保留头部与完整耳朵、去掉颈部；后续替换示意角色时遵循 [宠物素材画风规范](PET_ASSET_STYLE.md)。
 
+2026-10-24 图标接入：用户确认把第 1–10 批图标以原稿 PNG 接入游戏（待矢量化），替换系统 emoji 与手画 SVG；鱼关道具名改为海螺、珍珠贝壳，鱼关图标用天蓝色单鱼贴纸，称号框整图不拉伸。决定与阶段见 [ICON_REDESIGN_PLAN.md](ICON_REDESIGN_PLAN.md)「接入游戏」。
+
 ## 选定展示文件
 
 | 页面 | 文件 | 设计重点 |
 | --- | --- | --- |
-| 首页入口图标 | [home-entry-icons-v3.png](concepts/home-entry-icons-v3.png) | 2026-10-23 效果图已确认；开始营业爪印、图鉴书本、杯形奖杯、猫狗头像；炭黑描边与橙白配色；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
-| 通用功能图标 | [common-function-icons-v1.png](concepts/common-function-icons-v1.png) | 2026-10-23 已确认；返回、关闭、搜索、设置、选择照片、分享、翻面、信息说明；与首页 v3 同风格；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
-| 局内操作与状态图标 | [round-operation-icons-v1.png](concepts/round-operation-icons-v1.png) | 2026-10-23 已确认；相邻交换、两步点选、拼图合体、系统洗牌、时钟、计分星形；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
-| 普通／鱼关道具图标 | [tool-family-original-v6.png](concepts/tool-family-original-v6.png) | 2026-10-23 已确认动感版；弧形扫梳、斜向剪刀、海螺与贝壳、风势与浪花；橙色能力标识；吹风机与大浪花仅全盘演出；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
-| 催单反馈图标 | [rush-feedback-original-v1.png](concepts/rush-feedback-original-v1.png) | 2026-10-23 已确认；完整横夹小票、闭合绿色勾印记、灰夹收起小票；普通／鱼关共用；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
-| 结算标记 | [report-marks-original-v4.png](concepts/report-marks-original-v4.png) | 2026-10-23 已确认；MVP 奖章、去回折线并恢复投影的燕尾小旗、保留左侧角花的圆角称号框；圆戳移除；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
-| 排行榜名次徽记 | [leaderboard-marks-original-v1.png](concepts/leaderboard-marks-original-v1.png) | 2026-10-23 已确认；数字 1 皇冠、2 盾牌、3 六角章；并列使用实际名次，本人行橙色高亮；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
-| 图鉴收集与空态 | [collection-marks-original-v1.png](concepts/collection-marks-original-v1.png) | 2026-10-23 已确认；入册书签、零收集空册、搜索无结果索引卡；保留未收集名字＋剪影列表；宠物源素材未改，尚未导出独立素材或接入代码 ；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
-| 设置与声音触感图标 | [settings-feedback-original-v1.png](concepts/settings-feedback-original-v1.png) | 2026-10-23 已确认；语言、背景音乐、消除音效、轻震；门店默认、局内开启与设备不可用样例；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
-| 通用动作图标 | [common-actions-original-v3.png](concepts/common-actions-original-v3.png) | 2026-10-23 已确认；回门店、退出、换照片、保存图片、重试；重试为连续回环，右上转折收圆，大小图一致；[独立重绘稿样式未通过](../assets/icons/library-original-v1/preview.html)，未接入代码 |
+| 准备页操作示意 | [相邻交换](concepts/prep-adjacent-swap-preview-v1.png)、[依次点选](concepts/prep-sequential-tap-preview-v1.png) | 2026-10-24 已确认并接入；原图裁切透明 PNG，橙框灰猫、双向箭头与 1→2 手指点选；说明为灰色圆润粗体；「也来啦」仅首只自家宠物，最多一行，长名字省略 |
+| 英文文字标题：排班与报告 | [feature-wordmarks-scheduling-report-v1.png](concepts/feature-wordmarks-scheduling-report-v1.png) | 2026-10-24 已确认；Smart Scheduling 与 Grooming Report Card，粗圆字形、错落基线、黑橙分色和短线；[独立透明 PNG](../assets/illustrations/feature-wordmarks-original-v1/README.md) 已按原图裁切，未接入页面 |
+| 英文文字标题：图鉴与我的宠物 | [feature-wordmarks-collection-pets-v1.png](concepts/feature-wordmarks-collection-pets-v1.png) | 2026-10-24 已确认；Pet Collection 与 My Pets；同套文字风格，独立透明 PNG 已裁切，未接入页面 |
+| 英文文字标题：排行榜与鱼关报告 | [feature-wordmarks-ranking-fish-v1.png](concepts/feature-wordmarks-ranking-fish-v1.png) | 2026-10-24 已确认；Leaderboard 与 Fish Report Card；保留原稿黑橙配色，独立透明 PNG 已裁切，未接入页面 |
+| 首页入口图标 | [home-entry-icons-v3.png](concepts/home-entry-icons-v3.png) | 2026-10-23 效果图已确认；开始营业爪印（2026-10-24 起首页按钮不再使用）、图鉴书本、杯形奖杯、猫狗头像；炭黑描边与橙白配色；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 通用功能图标 | [common-function-icons-v1.png](concepts/common-function-icons-v1.png) | 2026-10-23 已确认；返回、关闭、搜索、设置、选择照片、分享、翻面、信息说明；与首页 v3 同风格；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 详情卡翻面图标 | [flip-card-vertical-v3.png](concepts/flip-card-vertical-v3.png) | 2026-10-24 按用户要求试用大箭头版；沿用 [v2](concepts/flip-card-vertical-v2.png) 的单竖卡，增大橙色弧带与箭头尖；正反面右下角固定 28px、透明无圆底，经图标库等比导出并通过 `Icon` 使用 |
+| 局内操作与状态图标 | [round-operation-icons-v1.png](concepts/round-operation-icons-v1.png) | 2026-10-23 已确认；相邻交换、两步点选、拼图合体、系统洗牌、时钟、计分星形；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 普通／鱼关道具图标 | [tool-family-original-v6.png](concepts/tool-family-original-v6.png) | 2026-10-23 已确认动感版；弧形扫梳、斜向剪刀、海螺与贝壳、风势与浪花；橙色能力标识；吹风机与大浪花仅全盘演出；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 催单反馈图标 | [rush-feedback-original-v1.png](concepts/rush-feedback-original-v1.png) | 2026-10-23 已确认；完整横夹小票、闭合绿色勾印记、灰夹收起小票；普通／鱼关共用；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 结算标记 | [report-marks-original-v4.png](concepts/report-marks-original-v4.png) | 2026-10-23 已确认；MVP 奖章、去回折线并恢复投影的燕尾小旗、保留左侧角花的圆角称号框；圆戳移除；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 排行榜名次徽记 | [leaderboard-marks-original-v1.png](concepts/leaderboard-marks-original-v1.png) | 2026-10-23 已确认；数字 1 皇冠、2 盾牌、3 六角章；并列使用实际名次，本人行橙色高亮；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 图鉴收集与空态 | [collection-marks-original-v1.png](concepts/collection-marks-original-v1.png) | 2026-10-23 已确认；入册书签、零收集空册、搜索无结果索引卡；保留未收集名字＋剪影列表；宠物源素材未改；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 我的宠物收集状态徽标 | [collection-state-badges-v1.png](concepts/collection-state-badges-v1.png) | 2026-10-24 按用户截图（[参考](concepts/my-pets-state-reference-v1.png)）生成；绿底白勾「已收集」、灰底白横杠「未收集」，扁平无描边；由 `split_supplement.py` 拆为 `collected-badge` / `uncollected-badge`，已接入我的宠物卡（PNG，待矢量化） |
+| 设置与声音触感图标 | [settings-feedback-original-v1.png](concepts/settings-feedback-original-v1.png) | 2026-10-23 已确认；语言、背景音乐、消除音效、轻震；门店默认、局内开启与设备不可用样例；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 通用动作图标 | [common-actions-original-v3.png](concepts/common-actions-original-v3.png) | 2026-10-23 已确认；回门店、退出、换照片、保存图片、重试；重试为连续回环，右上转折收圆，大小图一致；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 趣味称号章 | [report-title-stamps-bilingual-v1.png](concepts/report-title-stamps-bilingual-v1.png) | 2026-10-24 接入游戏；6 款红色小花印章各有中英两版，对应 6 个称号的触发条件；透明素材见 `assets/icons/report-title-stamps-original-v1/transparent`；报告页与分享卡共用，替换原圆角称号框 |
+| 毛孩子光荣榜 | [hall-of-fame-title-zh-v2.png](concepts/hall-of-fame-title-zh-v2.png)、[hall-of-fame-title-en-v6.png](concepts/hall-of-fame-title-en-v6.png) | 2026-10-24 已确认并接入排行榜；中英标题字标、麦穗、两侧蓝猫与黑白狗贴纸（`hall-of-fame-laurel-v1`、`-cat-v1`、`-dog-v1`）；阶梯领奖台用 CSS；布局参考 `references/hall-of-fame-reference.webp`，不采用其中的鱼缸解锁提示 |
+| 补充图标 | [supplement-marks-original-v1.png](concepts/supplement-marks-original-v1.png) | 2026-10-24 已确认；选中小勾、向前箭头、未收集书签，补齐图标库缺口；已拆图接入游戏 |
 | 手机首次入口与身份确认 | [mobile-identity-v2.png](concepts/mobile-identity-v2.png) | 已确认；游戏名与 90 秒介绍、直接搜索与选中 Bob、默认头像、带名字的按钮与信息摘要，同页完成 |
 | 门店首页 | [home-v2.png](concepts/home-v2.png) | 开始营业按钮、今日店长、个人纪录、上传与图鉴入口；图中鱼缸区已取消，后续加入人工处理提示 |
 | 手机门店首页 | [mobile-home-v2.png](concepts/mobile-home-v2.png) | 已确认；Deedee 店长与既定宣言、唯一主动作开始营业、普通局个人最好、三个次级入口和完整人工处理提示 |
-| 手机开局准备 | [mobile-prep-v1.png](concepts/mobile-prep-v1.png) | 已确认；六宠头像／底色／名字、交换方式、90 秒未计时说明与开始这班 |
+| 首页店面框插画 | [home-storefront-v2.png](concepts/home-storefront-v2.png) | 2026-10-24 选定；在 v1 基础上只去掉花盆正面的爪印，柜台正面爪印保留为全页唯一爪印（开始营业按钮同时去掉爪印图标）；画布与构图逐像素不变，导出为 `web/src/ui/art/storefront-v2.webp`，橱窗中间留空由代码叠加店长、气泡与名牌 |
+| 手机开局准备 | [page-prep-polish-v1.png](concepts/page-prep-polish-v1.png) | 2026-10-24 用户确认按候选稿调整按钮以外的页面；文字标题、夹板阵容、大头像、规则区与自家宠物提示已实现，底部「开始这班」沿用现有按钮；六色与游戏规则保持一致；原始参考 [mobile-prep-v1](concepts/mobile-prep-v1.png) |
 | 三消棋盘 | [board-v1.png](concepts/board-v1.png) | 7 × 7 棋盘，Smart Scheduling 拖拽反馈，计时与分数，棋盘外的催单提醒 |
 | 手机竖屏棋盘（催单中） | [mobile-board-v3.png](concepts/mobile-board-v3.png) | 布局与密度已确认；7 × 7 一屏、六宠固定辅助底色、主时钟与催单区分、梳子横向预览及剪刀十字标识 |
 | Report Card | [report-v2.png](concepts/report-v2.png) | 纸质报告、MVP、称号、宠物评语、新图鉴与可跳过的主人竞猜；图中鱼缸贡献区已取消 |
@@ -57,7 +69,10 @@
 | 洗护动效分镜草稿 | [motion-storyboard-v3.png](concepts/motion-storyboard-v3.png) | 材质与起势→清除→补落示意；存在格数偏差，准确范围见动效章节，不作为规则验收图 |
 | 宠物图鉴 | [petdex-v1.png](concepts/petdex-v1.png) | 入职卡收集、已解锁与未遇见状态、主人关系、选中卡片详情和翻面入口 |
 | 手机宠物图鉴 | [mobile-petdex-v1.png](concepts/mobile-petdex-v1.png) | 已确认；两列卡片、已收集与新收集优先、名字＋剪影、轻量搜索与新增入口 |
+| 手机图鉴贴纸册 | [petdex-sticker-sheet-v3.png](concepts/petdex-sticker-sheet-v3.png) | 2026-10-24 确认下半部：撕边橙色胶带、米白毛边纸、玩家署名与收集数、纸外分享按钮；「列表 / 贴纸册」及以上保留当前实现。全部上架宠物固定 8 列，格位按主人英文名、再宠物英文名；已收集用贴纸、未收集用实际剪影，点击复用详情。分享先预览，再保存完整册页 PNG；不导出页面导航、切换与按钮 |
 | 手机已收集宠物详情 | [mobile-pet-detail-v2.png](concepts/mobile-pet-detail-v2.png) | 已确认；Maodu 详情弹层、主人 Bob、原图翻面与删除申请入口 |
+| 收集称号展示方案 | [collection-titles-system-v1.png](concepts/collection-titles-system-v1.png) | 2026-10-24 已确认视觉方向与解锁后自主选择佩戴；头像旁小称号、排行榜姓名下方称号、「我的称号」抽屉。徽章风格以已确认的[跨物种合照 v3](concepts/collection-title-cross-species-v3.png)为准：大表情、橙白色块与花边轮廓。[整套预览 v3](concepts/collection-title-badges-v3.png)七枚均已确认，并授权直接切图去底；[PNG 母版与提取记录](../assets/icons/collection-titles-original-v1/README.md)已接入 Icon，头像、排行榜、称号抽屉与小票下方新解锁展示已在本地实现；七项门槛以 GAME_FLOW 为准，未部署 |
+| 称号稀有度 PNG 组件 | [collection-title-rarity-v1.png](concepts/collection-title-rarity-v1.png) | 2026-10-24 已确认普通橙色、稀有蓝色、史诗紫色与传说彩虹边框；最高档为全员点名成功。[详细 PNG 组件](../assets/icons/collection-titles-rarity-v1/README.md)已从原稿提取，含完整展示版与头像版、多尺寸、透明检查与清单。头像选定 [C 档尺寸对照](../assets/icons/collection-titles-rarity-v1/avatar-badge-sizes-v1.png)：40px 头像 / 22px 徽章，中心贴右下 45° 圆周；已在本地右上角身份头像、排行榜列表与领奖台实现，并去掉姓名下的重复称号签。「我的称号」抽屉已换成完整稀有度 PNG、彩色标签与边框，传说使用彩虹边框；佩戴状态与按钮同列。菜单图标选定第 2 稿[奖章与收工牌](concepts/menu-icons-medal-closing-sign-v1.png)：星星奖章用于我的称号，月亮挂牌用于 Clock Out；已通过统一 Icon 以原生 SVG 实现，菜单和抽屉标题均 24px。初版与 Lucide 单色 v2 不再采用；[图稿顺序与请求留档](concepts/menu-icons-redesign-v3-options.json)。组件陈列页已核对中文 390px 与英文 320px；真实首页身份确认被自动审批拦截，未验证身份切换后的首页。报告素材、解锁条件保持不变，未部署 |
 | 手机我的宠物 | [mobile-my-pets-v1.png](concepts/mobile-my-pets-v1.png) | 已确认；仅列自家已上架宠物，完整头像、两种收集状态、查看资料／添加／删除申请 |
 | 手机删除申请 | [mobile-delete-request-v1.png](concepts/mobile-delete-request-v1.png) | 已确认；我的宠物页上的提交前弹层，关联 Maodu、人工处理说明、选填补充及提交申请 |
 | 手机局外设置 | [mobile-settings-v1.png](concepts/mobile-settings-v1.png) | 已确认；门店上的设置弹层，中文选中、音乐与音效关、支持设备轻震开 |
@@ -72,7 +87,7 @@
 
 用户重新指定原始 `outputs/` 目录作为视觉基准，已确认[首页入口 v3](concepts/home-entry-icons-v3.png)。新图标采用炭黑圆角描边、橙白主色与轻量层次，首页保留一个主动作和三个次级入口；开始营业用单个爪印，图鉴用打开的书本，排行榜用中央橙星的杯形奖杯，我的宠物用白犬与蓝猫头像组合。完整请求见[v3 提示词](concepts/home-entry-icons-v3-prompt.txt)。
 
-用户随后要求继续下一批，并删除之前的高光类型。旧首页、道具、奖励、催单、鱼缸、名次徽记和操作提示的高光图稿、独立素材、预览、下载包、提示词及原始输出已清理，不再提供或选用旧文件。原始页面设计、宠物／单鱼内容素材及 v3 保留；清理范围与核验见[记录](reviews/2026-10-23-icon-style-cleanup/manifest.json)。新方向第 1–10 批已确认，文件见上方选定展示表及[设计总览](reviews/2026-10-23-icon-library-v1/index.html)；第 10 批选定[通用动作 v3](concepts/common-actions-original-v3.png)，v1／v2 作为重试箭头的过程稿留档。全套独立重绘稿因样式不符已退回，留档见[退回稿](../assets/icons/library-original-v1/preview.html)；尚未接入页面，原宠物 PNG 和卡片实现未改动。
+用户随后要求继续下一批，并删除之前的高光类型。旧首页、道具、奖励、催单、鱼缸、名次徽记和操作提示的高光图稿、独立素材、预览、下载包、提示词及原始输出已清理，不再提供或选用旧文件。原始页面设计、宠物／单鱼内容素材及 v3 保留；清理范围与核验见[记录](reviews/2026-10-23-icon-style-cleanup/manifest.json)。新方向第 1–10 批已确认，文件见上方选定展示表及[设计总览](reviews/2026-10-23-icon-library-v1/index.html)；第 10 批选定[通用动作 v3](concepts/common-actions-original-v3.png)，v1／v2 作为重试箭头的过程稿留档。独立 SVG 重绘稿因样式不符已退回，当前按用户明确授权完成[原稿透明 PNG](../assets/icons/library-original-png-v2/preview.html)；尚未接入页面，原宠物 PNG 和卡片实现未改动。
 
 ### 2026-10-23 更新：鱼关道具统一为海底元素
 
@@ -443,3 +458,6 @@ Asset type: finished desktop web UI mockup, exactly 1536 × 1024.
 Input image 1 is the EDIT TARGET, the already approved MoeGo upload-my-pet page. Preserve the entire page exactly: layout, all Chinese text, logo, header, white/orange/charcoal/cobalt style, photo crop editor, photorealistic dog identity, its same-photo crop previews, crop handles and grid, form, consent, workflow, pending-not-submitted state, buttons, spacing and all illustrations.
 Change ONLY the two existing instances of the pet name “Mochi” to “Oreo”: (1) the text inside the “宠物名字 *” form field near upper right, (2) the name label beneath the “图鉴卡片” photo preview. Both must now read exactly “Oreo”. Owner is still “Bob”, with orange B avatar. This is a newly uploaded pet distinct from existing store manager Mochi.
 Do not change any other words or content. Do not introduce success/approval/published messages. Do not change the photo into cartoon. Keep one coherent UI page, no cropping and no browser frame.
+
+
+2026-10-24 排行榜称号布局修订：用户反馈完整称号签挤压领奖台文字，领奖台改为头像右下的小徽章，点击展开大徽章与完整称号；台阶内只保留名字、分数、名次。列表称号与本人/并列标记移入独立的姓名下方区域，分数使用独立列。徽章素材及佩戴规则保持。

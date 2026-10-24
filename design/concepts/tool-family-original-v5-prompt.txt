@@ -1,0 +1,6 @@
+Use case: text-localization / precise-object-edit.
+Edit the supplied 1536 x 1024 dynamic tool review sheet. Change ONLY the TWO small gray headings immediately above the bottom row of miniature board cells.
+LEFT heading exact text: "普通局棋格示意"
+RIGHT heading exact text: "鱼关棋格示意"
+Replace the current corrupted headings in their original positions, keeping the same gray font style and size. Left text consists of 普 通 局 棋 格 示 意; right consists of 鱼 关 棋 格 示 意. Every Chinese glyph must be correct and legible.
+Keep absolutely every other element unchanged: all eight lively tool silhouettes, poses, matte orange/ivory/blue surfaces with no shiny glints, motion arcs, orange direction and plus badges, two open scissor rings, shell openings, label names, capability captions, existing header/subtitle/footer, board-cell examples, spacing and pure white background. Do not redraw or alter the tools, add any gloss, change color, change pose, introduce new text, crop content or change image dimensions. This is ONLY a two-caption repair. Return one corrected review sheet.

@@ -1,0 +1,33 @@
+Use case: ui-mockup
+Asset type: ONE homepage-entry icon review sheet for MoeGo Pet All-Stars, returning to the original product design language supplied by the user.
+
+Primary request: The user has reset the art direction and requests ALL icons be redesigned against the ORIGINAL designs in /Users/bob/Documents/Codex/2026-10-21/build-web-apps-plugin-build-web-2/outputs/. This first review sheet contains ONLY the four actual home-entry icons and their action/navigation application. This is one coherent style proposal for review, not three options. Do not implement or export final icon files yet.
+
+Input images and roles:
+Image 1: moego-mobile-home-v2.png from the user-specified ORIGINAL outputs directory. PRIMARY art-direction and UI hierarchy reference. Closely inspect its existing entry icons at the bottom and the white paw inside the main orange button. Adopt that clear, light, friendly outline-icon language.
+Image 2: moego-home-v2.png from the same ORIGINAL directory. Supporting visual style reference for charcoal contours, orange-white brand palette, soft illustration shading, and small rounded orange motion strokes. Its older fish tank, public progress and desktop content are obsolete and MUST NOT be reintroduced.
+Image 3: moego-mobile-identity-v2.png from the same ORIGINAL directory. Supporting style reference for rounded charcoal linework, pure white space, orange accents and compact icon typography balance. Do not reproduce the identity page.
+Use only these ORIGINAL source images to establish this new direction. Recent glossy navy-outline icon sheets are not the target.
+
+Canvas and visual system:
+1536 x 1024 landscape, pure white base, crisp clean presentation with generous margins. No device frame, screenshots, reference montage, paper texture, checkerboard or gradient page background. The utility artwork should match the ORIGINAL source entry symbols: mainly WHITE or warm ivory fills, very dark CHARCOAL rounded outlines (approximately #24282e), flat MoeGo orange (#ff6b18), occasional restrained blue accent. Simple readable silhouettes, consistent stroke thickness, rounded joins/caps, only one subtle warm shade plane if needed. The overall visual weight is calm and light. The source's orange two-stroke accents can appear on the three secondary entry icons, kept short and unobtrusive. Black/charcoal has to look neutral, not navy.
+Rendering constraints: no glass, glossy plastic, jelly, chrome, gold bevels, bright specular highlight blobs, heavy dimensional embossing, broad navy borders or thick white die-cut sticker halos. No dramatic drop shadows on icons. Source-like light dimensionality is permitted only as tiny soft warm edge shading; do not revert to the recent toy-like sticker set. Make these icons feel native to the original homepage.
+
+Layout:
+Header exact text: "首页入口图标 · 回归原稿风格"
+Smaller subtitle: "炭黑描边 · 橙白主色 · 轻量层次"
+
+Upper half: four equally spaced large icon examples, each about 170–200 pixels tall with optically consistent weight, aligned baseline and complete silhouettes. No separate cards or containers around the examples. Label each one underneath, in the following order:
+
+1. "开始营业": one simple orange paw silhouette with FOUR oval toe pads and a broad single central pad. Round, friendly, with no claws or extra pads. Keep its form clean and graphic; no glossy bubbles or 3D shading. This is the only paw symbol in the entire four-icon family. The orange example on white may be a solid mark with a very subtle charcoal contour if needed, while the same contour/shape becomes a solid WHITE paw in the actual orange button below.
+2. "宠物图鉴": an open small collection book, white/ivory pages, orange cover visible along bottom/outer edges, clear charcoal rounded outline and center spine, one small orange page bookmark. A subtle soft page fold is sufficient. Do not fill pages with black animal silhouettes, text, mini symbols or paws; keep the source's readable open-book contour. Two small orange rounded accent strokes above-right, as in the original homepage.
+3. "排行榜": a conventional small rounded CUP TROPHY, white/very pale warm-gray body and handles, charcoal outline, a single flat orange five-point star centered on the cup. Small modest base with consistent charcoal linework. The BODY must be a cup with a centered star, not a gigantic star-shaped body or metallic gold statue. Keep both handles, base and all five star points intact. Two small orange rounded accent strokes above-right.
+4. "我的宠物": a friendly compact pair of pet head silhouettes: a white/ivory floppy-eared dog in the foreground with a charcoal nose and tiny orange tongue, and a smaller muted medium-blue pointy-eared cat peeking from behind at the upper-right. Rounded black eyes, minimal facial details, consistent charcoal contour. The dog is dominant and both complete heads/ears remain readable. Faces are generic pictograms rather than real pet portraits or player avatars. No bodies, paws, collars with writing, home/house container, ownership badge or added background. Two small orange accent strokes to the upper-right are sufficient. This gives My Pets its own recognizable silhouette while keeping the original light cartoon character language.
+
+Below the icon row add a thin very pale gray divider, then heading "首页组合示意" in a smaller, subdued style. The application area contains ONLY the existing main action and the three existing secondary entries, not a full homepage redesign:
+- One centered wide ORANGE pill primary button, with the SAME solid WHITE paw and exact WHITE text "开始营业". Charcoal narrow outline and a short restrained dark downward offset shadow matching the original home button. Do not add a crown, glitter, color gradient gloss or extra game controls.
+- Under it, a spacious horizontal row of three smaller versions of the NEW book, cup trophy and pet-pair icons, with exact labels underneath: "宠物图鉴", "排行榜", "我的宠物". Use two thin light-gray vertical separators between the three entries, following the original homepage. No tile cards, filled circles, badges or extra actions.
+- Preserve generous whitespace between the main action and secondary navigation, with comfortable safe space below all labels. All four icons must stay recognizable at these reduced application sizes.
+
+Footer exact text: "图标效果审阅稿 · 保留原有入口与页面结构"
+Text must be naturally typeset and fully readable Chinese. No extra headings/captions, mode entry, fish tank, progress bar, score/reward, real pet portrait, brand logo recreation, app header, settings, back-to-shop icon or other utility icons. All artwork complete inside the canvas. One new coherent four-icon direction matching the supplied ORIGINAL reference, with no implementation work.

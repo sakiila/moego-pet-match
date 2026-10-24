@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MoeGo 图标 · 已确认总览</title>
+  <style>
+    :root { --paper: #faf8f3; --card: #fff; --ink: #24282e; --muted: #676a73; --orange: #ff6b18; --line: #dfddd7; --radius: 18px; --space: 24px; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+    main { max-width: 1400px; margin: auto; padding: 48px 32px; }
+    header { margin-bottom: 36px; }
+    .eyebrow { color: var(--orange); font-weight: 700; letter-spacing: .06em; margin: 0 0 8px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.25; margin: 0 0 12px; letter-spacing: -.03em; }
+    header p { margin: 0; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px var(--space); }
+    figure { min-width: 0; margin: 0; }
+    figcaption { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+    .number { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 14px; }
+    h2 { font-size: 19px; margin: 0; }
+    .version { margin-left: auto; color: var(--muted); font-size: 14px; }
+    .preview { display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+    .preview:hover { border-color: var(--orange); }
+    .preview img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; }
+    .note { font-size: 14px; color: var(--muted); margin: 10px 0 0; }
+    footer { border-top: 1px solid var(--line); padding-top: 20px; margin-top: 40px; color: var(--muted); font-size: 14px; }
+    footer a { color: var(--ink); text-underline-offset: 4px; }
+    dialog { width: min(1600px, calc(100vw - 32px)); max-width: none; height: calc(100dvh - 32px); max-height: none; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: var(--ink); }
+    dialog::backdrop { background: rgb(36 40 46 / .65); }
+    .viewer { height: 100%; display: flex; flex-direction: column; }
+    .toolbar { display: flex; align-items: center; gap: 10px; padding: 14px 20px; flex-shrink: 0; }
+    .toolbar h2 { flex: 1; font-size: 17px; }
+    .toolbar button { min-height: 40px; min-width: 40px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+    .toolbar button:disabled { opacity: .35; cursor: default; }
+    .canvas { flex: 1; min-height: 0; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 0 20px 16px; }
+    .canvas img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+    .canvas.actual { display: block; }
+    .canvas.actual img { max-width: none; max-height: none; }
+    .viewer-note { margin: 0; padding: 0 20px 14px; color: var(--muted); font-size: 14px; }
+    @media (max-width: 700px) {
+      main { padding: 28px 16px; }
+      header { margin-bottom: 28px; }
+      .grid { grid-template-columns: 1fr; gap: 28px; }
+      .toolbar { flex-wrap: wrap; padding: 12px; gap: 8px; }
+      .toolbar h2 { flex: 0 0 calc(100% - 52px); order: -2; }
+      #close { order: -1; }
+      .canvas { padding: 0 10px 12px; }
+      dialog { width: calc(100vw - 16px); height: calc(100dvh - 16px); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">MOEGO · 2026.10.23</p>
+      <h1>图标设计 · 已确认总览</h1>
+      <p>10 批已确认原稿。点击任一图稿可放大，使用左右键切换。</p>
+    </header>
+    <div class="grid" id="gallery"></div>
+    <footer>已确认效果图总览。独立素材的制作与审阅进度见项目素材库说明，尚未接入游戏。<a href="manifest.json">原稿文件清单</a></footer>
+  </main>
+  <dialog id="viewer" aria-labelledby="viewer-title">
+    <div class="viewer">
+      <div class="toolbar">
+        <h2 id="viewer-title"></h2>
+        <button type="button" id="prev" aria-label="上一批">上一批</button>
+        <button type="button" id="next" aria-label="下一批">下一批</button>
+        <button type="button" id="zoom" aria-pressed="false">原尺寸</button>
+        <button type="button" id="close" aria-label="关闭放大预览">×</button>
+      </div>
+      <div class="canvas" id="canvas"><img id="full-image" alt=""></div>
+      <p class="viewer-note" id="viewer-note"></p>
+    </div>
+  </dialog>
+  <script>
+    const sheets = [
+      { title: '首页入口', version: 'v3', file: 'home-entry-icons-v3', note: '开始营业、宠物图鉴、排行榜、我的宠物。' },
+      { title: '通用功能', version: 'v1', file: 'common-function-icons-v1', note: '返回、关闭、搜索、设置、选照片、分享、翻面、信息。' },
+      { title: '局内操作与状态', version: 'v1', file: 'round-operation-icons-v1', note: '相邻交换、点选交换、合体、自动洗牌、时间、分数。' },
+      { title: '普通局／鱼关道具', version: 'v6', file: 'tool-family-original-v6', note: '动感姿态；橙色能力标识；吹风机与大浪花仅全盘演出。' },
+      { title: '催单反馈', version: 'v1', file: 'rush-feedback-original-v1', note: '加急小票、完成印记、未赶上；普通局与鱼关共用。' },
+      { title: '结算标记', version: 'v4', file: 'report-marks-original-v4', note: 'MVP、小旗去回折线并恢复投影、称号框保留角花。' },
+      { title: '排行榜名次', version: 'v1', file: 'leaderboard-marks-original-v1', note: '皇冠、盾牌、六角章；并列使用实际名次。' },
+      { title: '图鉴收集与空态', version: 'v1', file: 'collection-marks-original-v1', note: '入册书签、空图鉴、搜索无结果；宠物源素材沿用。' },
+      { title: '设置与声音触感', version: 'v1', file: 'settings-feedback-original-v1', note: '语言、音乐、消除音效、轻震；含既有开关与禁用状态。' },
+      { title: '通用动作补齐', version: 'v3', file: 'common-actions-original-v3', note: '回门店、退出、换照片、保存、重试；重试转折已收圆。' }
+    ];
+    const gallery = document.getElementById('gallery');
+    const viewer = document.getElementById('viewer');
+    const title = document.getElementById('viewer-title');
+    const fullImage = document.getElementById('full-image');
+    const note = document.getElementById('viewer-note');
+    const canvas = document.getElementById('canvas');
+    const previous = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const zoom = document.getElementById('zoom');
+    let selected = 0;
+    let actualSize = false;
+    const imageUrl = sheet => '../../concepts/' + sheet.file + '.png';
+    function show(index) {
+      selected = index;
+      const sheet = sheets[index];
+      title.textContent = '第 ' + (index + 1) + ' 批 · ' + sheet.title + ' ' + sheet.version;
+      fullImage.src = imageUrl(sheet);
+      fullImage.alt = sheet.title + '已确认完整图稿';
+      note.textContent = sheet.note;
+      previous.disabled = index === 0;
+      next.disabled = index === sheets.length - 1;
+      actualSize = false;
+      canvas.classList.remove('actual');
+      zoom.setAttribute('aria-pressed', 'false');
+      zoom.textContent = '原尺寸';
+      canvas.scrollTo(0, 0);
+    }
+    sheets.forEach((sheet, index) => {
+      const figure = document.createElement('figure');
+      const caption = document.createElement('figcaption');
+      const number = document.createElement('span');
+      number.className = 'number';
+      number.textContent = String(index + 1).padStart(2, '0');
+      const heading = document.createElement('h2');
+      heading.textContent = sheet.title;
+      const version = document.createElement('span');
+      version.className = 'version';
+      version.textContent = sheet.version + ' · 已确认';
+      caption.append(number, heading, version);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'preview';
+      button.setAttribute('aria-label', '放大第 ' + (index + 1) + ' 批 ' + sheet.title);
+      button.setAttribute('aria-haspopup', 'dialog');
+      const image = document.createElement('img');
+      image.src = imageUrl(sheet);
+      image.alt = sheet.title + '完整效果图';
+      image.width = 1536;
+      image.height = 1024;
+      button.append(image);
+      button.addEventListener('click', () => { show(index); viewer.showModal(); });
+      const detail = document.createElement('p');
+      detail.className = 'note';
+      detail.textContent = sheet.note;
+      figure.append(caption, button, detail);
+      gallery.append(figure);
+    });
+    previous.addEventListener('click', () => { if (selected > 0) show(selected - 1); });
+    next.addEventListener('click', () => { if (selected < sheets.length - 1) show(selected + 1); });
+    document.getElementById('close').addEventListener('click', () => viewer.close());
+    zoom.addEventListener('click', () => {
+      actualSize = !actualSize;
+      canvas.classList.toggle('actual', actualSize);
+      zoom.setAttribute('aria-pressed', String(actualSize));
+      zoom.textContent = actualSize ? '适合窗口' : '原尺寸';
+    });
+    viewer.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft' && selected > 0) { event.preventDefault(); show(selected - 1); }
+      if (event.key === 'ArrowRight' && selected < sheets.length - 1) { event.preventDefault(); show(selected + 1); }
+    });
+  </script>
+</body>
+</html>

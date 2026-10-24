@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-23",
+  "status": "approved",
+  "tool": "built-in image_gen",
+  "concept": "design/concepts/home-entry-icons-v3.png",
+  "original": "original.png",
+  "full_prompt": "../../home-entry-icons-v3-prompt.txt",
+  "request": "View the user-specified original outputs, redesign all icons to match that original style, and show home-entry icons first.",
+  "sha256": "d18dc7ae5ba7f5c6a02529cd3fe4f4f21b7be3f6cad7dada38595fcbfbdb5be8",
+  "reference_images": [
+    {
+      "original": "/Users/bob/Documents/Codex/2026-10-21/build-web-apps-plugin-build-web-2/outputs/moego-mobile-home-v2.png",
+      "archived": "reference-moego-mobile-home-v2.png",
+      "sha256": "b5a4d95edd202d148f6a22a791b7abab16cfae4fca992f391ffaa8711ac89761"
+    },
+    {
+      "original": "/Users/bob/Documents/Codex/2026-10-21/build-web-apps-plugin-build-web-2/outputs/moego-home-v2.png",
+      "archived": "reference-moego-home-v2.png",
+      "sha256": "a5fafb2182830981a76571b3aefd5c55a82b6aea72cde18998a62ee040a55b74"
+    },
+    {
+      "original": "/Users/bob/Documents/Codex/2026-10-21/build-web-apps-plugin-build-web-2/outputs/moego-mobile-identity-v2.png",
+      "archived": "reference-moego-mobile-identity-v2.png",
+      "sha256": "810be1fedee68a926882f3d344bd4a37e8220ab5a9abe35119341a2d01a00b07"
+    }
+  ],
+  "icons": [
+    "open-shop paw",
+    "pet-collection book",
+    "leaderboard cup trophy",
+    "my-pets dog and cat"
+  ],
+  "review_checks": [
+    "Only the four actual current home entries are shown",
+    "Original charcoal outline and orange-white palette used",
+    "Complete book, cup handles/base and animal heads/ears",
+    "Solid white paw on main orange action, three secondary entries separated by lightweight dividers",
+    "No hidden fish entry, extra reward or new game action"
+  ],
+  "scope": "Approved visual reference; final transparent asset export and application implementation are not performed in this turn.",
+  "approval": {
+    "date": "2026-10-23",
+    "user_feedback": "可以，继续设计下一批，然后把之前设计的高光类型都删掉"
+  }
+}

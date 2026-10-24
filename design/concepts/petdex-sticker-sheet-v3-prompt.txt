@@ -1,0 +1,40 @@
+Use case: ui-mockup
+Asset type: ONE high-fidelity mobile UI design concept for the MoeGo pet collection sticker album, version 3, for visual review only.
+Create realistic, production-quality UI designs with clear hierarchy, strong typography, intentional imagery, and purposeful spacing.
+
+Reference input 1: petdex-sticker-sheet-v2.png is the existing sticker-album design. Use its pet art, brand language, collection concept, and 8-column by 10-row sheet as the primary visual grounding.
+Reference input 2: petdex-zh.png is the actual existing collection-list UI, used for brand typography, orange accents, and playful tactile outlined buttons only. Do NOT copy its list cards or search UI.
+
+Primary request: Redesign one complete mobile sticker-album screen so it feels like a precious paper sticker collection, with real torn washi tape at the upper-left of the sheet and a prominent button to share the album as an image. Keep it minimal, polished, playful, and feasible to implement. This is ONE coherent concept, not a comparison board or multiple screens.
+
+Target dimensions: mobile viewport 390 x 844 CSS pixels, rendered at 1170 x 2532 pixels (3x), portrait. Screen content only, edge to edge; no phone frame, bezel, OS status bar, browser chrome, notch, or device shadow. Fit the full album and share button comfortably with no cropped controls.
+Current date anchor: 2026-10-24, no visible date needed.
+Palette: background very pale warm white; dark ink #1f2227; brand orange #f96b1c; paper light ivory; subtle gray dotted placeholders. Retain the playful heavy rounded Chinese type and existing brand character. Avoid new colors and busy decorative elements.
+
+Layout and exact text:
+1. Compact top brand header: real MoeGo wordmark as in reference at left; small store icon and "回门店" at right, then modest "中 / EN". Use reference branding faithfully.
+2. Main heading row: bold "宠物图鉴" at left, smaller secondary outline button with paw icon "添加毛孩子" at right. Hierarchy should feel balanced, not crammed.
+3. Compact progress row "已收集 38 / 80 位毛同事", with 38 highlighted orange and a thin orange progress line filled 47.5%.
+4. A simple two-segment view switch "列表" and "贴纸册", with 贴纸册 selected. Preserve clear active state with orange fill and white text; inactive light neutral.
+5. The focal object is a single light ivory paper sticker sheet, nearly full viewport width with generous safe side margins, gentle irregular paper edge, very subtle fibers and a soft contact shadow. It is a functional album sheet, not a giant outer UI card. At its UPPER LEFT a noticeably hand-torn strip of orange translucent washi tape overlaps the paper edge. The tape MUST have visibly irregular ripped jagged ends and little torn fibers, not a plain rectangular bar and not a scalloped badge. Wide enough to read as genuine tape, tilted about -12 degrees, with subtle translucency and overlap shadow. Do not obscure the pet grid.
+Inside the paper above the grid: a tiny tasteful label "Bob 的贴纸册" in dark rounded lettering, and a small "38 / 80" at right. Keep this single line quiet; no extra slogans, medals, dates, ribbons, or badges.
+6. Paper grid: exactly 8 columns x 10 rows = 80 slots. Exactly 38 full-color animal head stickers and 42 pale-gray head silhouettes. Full-color heads use the same charming cats, dogs, rabbits, hamsters and birds as the reference, with clean thick white die-cut edges, individual small tilts between -6 and +6 degrees, and very soft sticker-contact shadow. Keep them separate and fully inside their slots. Empty slots have extremely faint dashed rounded die-cut guide outlines and varied pale-gray faceless head shapes. No name text, owner names, locks, question marks or numbers inside the grid.
+Preserve this occupied-cell map, C = colorful collected head, S = pale silhouette:
+row 1 C C S S C C S C
+row 2 C S C C S C S S
+row 3 S S S C S S C S
+row 4 C S C S C S C C
+row 5 C S S C C S C S
+row 6 C S C S C C S S
+row 7 C S S S C S C C
+row 8 C S C S S S C S
+row 9 S C S C S S S C
+row 10 C S S S C C S C
+7. Below paper, small muted helper "按主人英文名排序 · 点贴纸看详情". This replaces the outdated reference caption.
+8. At the bottom OUTSIDE the paper: one full-width orange rounded share button, simple white export/share icon, exact label "分享贴纸册图片", subtle dark offset bottom shadow consistent with existing product buttons. It is the clearest action for the selected album view. One modest explanatory line below it: "把这一页毛孩子，存成你的收藏". Keep bottom padding comfortable. The sheet itself is the clean exportable composition; navigation, tabs and button are outside it.
+
+Typography: rounded friendly Chinese display heading, readable rounded UI body; no more than two fonts; no handwritten illegible Chinese. At CSS size body about 14-16px, caption about 11-12px. All supplied Chinese text must be crisp and accurate.
+Composition: show the full screen, one page only, no surrounding moodboard, no annotations. Strong whitespace and spacing; no card nesting beyond the actual paper sheet. Do not make each pet a card. Keep every sticker visible, preserve the collection totals, do not add extra pets or game mechanics. No QR code, no confetti, no bottom navigation, no floating widgets, no new gameplay or rewards.
+Deliver only the polished image.
+
+Generation record: Generated with the built-in image_gen tool on 2026-10-24. Actual output is 853 x 1844 pixels, retaining the requested mobile aspect ratio rather than the requested 3x raster dimensions. Saved as petdex-sticker-sheet-v3.png. This is an unselected design concept; no application code or selected-design documentation was changed.

@@ -1,0 +1,31 @@
+Round 1 — reference images: design/concepts/title-wordmark-en-v1.png (style), design/concepts/hall-of-fame-title-en-v2.png (edit target)
+
+Use case: logo-brand
+Asset type: English leaderboard title wordmark PNG for the MoeGo Pet All-Stars game.
+Input images: Image 1 (title-wordmark-en-v1.png) is the reference for the same playful, extremely bold, rounded cartoon font and black/orange brand treatment. Image 2 (hall-of-fame-title-en-v2.png) is the edit target and main visual reference. Preserve Image 2's letter shapes, visual weight, colors, single-line layout and overall style. Change only these two problems: (1) Insert clearly visible spaces between ALL four words: "Pet Hall of Fame", with a gap around half a letter's width at Pet|Hall, Hall|of, and of|Fame. The words must read separately; NEVER "HallofFame". (2) Move the three short orange rounded radiating strokes completely off the letters, into the blank white space above and to the right of the final "e" in "Fame". Keep at least one stroke-width of clear white separation from every letter. The strokes must not look like an accent mark above e.
+Text (verbatim): "Pet Hall of Fame". Spelling exactly P-e-t [space] H-a-l-l [space] o-f [space] F-a-m-e. No other letters or symbols on any letter.
+Colors: "Pet" deep charcoal black #1f2227. "Hall of Fame" MoeGo orange #f96b1c. The three detached strokes use the same orange.
+Composition: one horizontal line, canvas width:height about 4.5:1. Leave generous white padding on all four sides, especially enough room after the last e for detached strokes.
+Background: perfectly flat, uniform pure white #FFFFFF from edge to edge. No paper texture, gradient, shadow, border, watermark, or any other text.
+
+==========
+
+Round 2 — edit target: generated round 1
+
+Edit the supplied Image 1, which is the first generated draft of the "Pet Hall of Fame" leaderboard wordmark. Preserve exactly its rounded heavy cartoon letterforms, the exact spelling and the three already-clear word spaces, charcoal "Pet" and orange "Hall of Fame", and one-line layout.
+
+Make only two corrections:
+1. Move the three orange radiating rounded strokes as a group farther to the RIGHT of the final lowercase "e", into separate blank white space. The ENTIRE nearest stroke must be separated from the outermost edge of e by at least ONE FULL STROKE THICKNESS of unbroken white. All three strokes must be visibly detached from all letters and must read as rays to the right of the word, never as an accent over e. If necessary, shrink the full wordmark slightly to reserve enough space on the right.
+2. Make every background pixel uniformly pure white #FFFFFF, including the corners and the interior spaces. No off-white shading or texture.
+
+Exact text: "Pet Hall of Fame" with clear gaps after Pet, Hall, and of. Keep #1f2227 for Pet and #f96b1c for Hall of Fame and rays. Wide single-line image with generous clean white margins. No extra text, no watermark, no borders, no drop shadows, no gradient.
+
+==========
+
+Round 3 — selected image; edit target: generated round 2
+
+Precise correction of Image 1, a one-line English wordmark. Keep the lettering, spelling, word spaces, rounded cartoon font, and colors unchanged: "Pet Hall of Fame" exactly, Pet charcoal #1f2227; Hall of Fame orange #f96b1c.
+
+The ONLY issue left is the THREE detached orange ray strokes on the far right. Relocate their group still FARTHER RIGHT from the final e. The LEFTMOST EDGE of every ray must be at least 90 pixels to the RIGHT of the RIGHTMOST EDGE of the final e. There must be an obvious white vertical corridor between the letter e and all rays; the gap should be wider than each ray's thickness. Keep the rays in the upper-right, arranged like three radiating short rounded marks. Never put a ray above or touching any letter; they must not resemble punctuation or an accent on e. Shrink the wordmark a little if required to leave room.
+
+Background must be absolutely solid pure white RGB 255,255,255 everywhere outside the letters/rays, no illumination effects, paper grain, gray or cream shading, texture, gradient, shadow, border, additional text, or watermark. Single line, generous padding, wide rectangular composition, target visual aspect ratio about 4.5:1.

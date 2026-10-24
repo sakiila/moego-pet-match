@@ -1,0 +1,48 @@
+Use case: ui-mockup
+Asset type: ONE Batch 5 review sheet, rush-order feedback icons and fixed-height status strip, MoeGo Pet All-Stars.
+
+Primary request: Continue the approved original-page charcoal-outline, orange-white MATTE direction, with the lively but readable pose language just approved for tools. Create the three existing rush states: active, success, expired. Keep complete silhouettes, especially the paper clip, paper corners and completion frame/check. The user previously required complete urgent-ticket and completion icons, disliked repeated paws, and explicitly deleted the glossy icon family. Generate one coherent review sheet for this batch, not three options. No final asset export, game code or new mechanics.
+
+Target: 1536 x 1024 landscape, pure white review page, spacious and well typeset. Top: heading and three large complete icon examples. Lower: ordinary/fish side-by-side application, each showing the same three status states in identically sized fixed-height strips. No whole board, app page, device frame, browser chrome or screenshots as artwork.
+
+Input images:
+Image 1 common-function-icons-v1.png is the APPROVED primary STYLE reference: neutral charcoal rounded contour, white/ivory fills, flat MoeGo orange, restrained soft edge shade, clean typography. Do not reproduce its utility subjects.
+Image 2 tool-family-original-v6.png is the APPROVED supporting POSE reference: a little tilt, spring and purposeful gesture marks, complete silhouettes and legible small symbols. Match its matte style, not plastic shine. Do not reproduce tool or sea subjects in rush icons.
+Image 3 is the existing rushbar gallery screenshot, CONTENT/STATE context only: fixed region height, independent rush countdown, target 12, success +100, neutral expired feedback. Do not reproduce gallery UI, emoji flame, pets or the whole page.
+
+Visual system:
+Neutral charcoal around #24282e for rounded contours, flat orange #ff6b18, white/warm ivory paper. Success can use existing muted green #2f9e6b for its check and success text/border; quiet expired icon uses subdued blue-gray/charcoal. Only one restrained shallow warm shade plane per surface. NO shiny white glints, jelly, glass, metallic bevel, chrome, glossy gradients, dark navy outlines, 3D embossed plastic or thick white sticker halos. White paper is a flat fill, not a reflective highlight. NO paw, star, trophy, animal face, extra reward, confetti explosion or new status.
+
+Header exact text: "第 5 批 · 催单反馈"
+Subtitle exact text: "加急入场 · 完成落章 · 未赶上轻轻收起"
+
+THREE large icons across the upper half, equally prominent, about 190–220 pixels tall, full shapes with generous margins. Labels underneath, one short gray posture caption each. Do not bake words, scores, labels or actual order data into the icon artwork.
+
+1. Label "加急小票", caption "轻斜入场，完整夹单".
+A full warm-ivory order ticket with a single BROAD HORIZONTAL ORANGE CLIP across the top. Clip is one closed rounded horizontal rectangle with a small central rivet/round hole, no M-shaped ears, two tall prongs or open ends. Paper has three short charcoal lines, all inside it, and one small curved lower-right paper corner. Show a lively approximately 10–12 degree tilt and gentle paper curve like a ticket just slid in; exactly two short rounded orange urgency strokes near upper-left, not a flame or huge burst. Full clip, full upper edge, paper lower edge and curled corner remain visible. Richness comes from the active silhouette and clear stroke, not gloss. No scissors, paw, clock, giant number or extra badge.
+
+2. Label "完成印记", caption "轻快落定，完整闭合".
+A complete orange rounded-SQUARE completion stamp mark, with a thin charcoal outer contour, ivory center and ONE large muted GREEN CHECK wholly INSIDE its frame. Frame must be a fully CLOSED continuous shape on all four sides with smooth rounded corners. Check is complete with rounded stroke ends, enough inner margin on all sides, no part crossing/cutting the frame or reaching the canvas edge. Tilt the whole mark about 8 degrees like a cheerful finished stamp landing; one or two short low orange landing arcs can suggest the motion. No stamp handle, trophy, ribbon, coins, score text, paw, detached mark or shine. Do not crop either check arm or frame.
+
+3. Label "收起小票", caption "安静收起，继续营业".
+The SAME paper/clip family as the first icon, but the broad complete horizontal clip is subdued blue-gray, the paper is quiet ivory with two short gray lines, its lower corner gently tucked/folded inward. A small 4–6 degree sideways lean and compact resting pose conveys the order being put away. Keep the entire sheet and closed clip visible, no large urgency strokes. Friendly neutral tone: no angry face, tears, red X, red warning, broken ticket, crossed-out text, penalty, flame or blame. No giant envelope or unrelated object. This is expired/missed, not cancellation of a saved result.
+
+Below a thin pale gray divider around y=490, show two equally sized application columns, heading "普通局" at left and "鱼关" at right. The fish column has one contained dark-blue swatch behind its three states, with pale/transparent-toned inner surfaces and readable white text. The ordinary column uses clean white/light ivory surfaces. This is contrast/theme adaptation only, not a new fish page. Each column has THREE state strips, each EXACTLY the same visual HEIGHT and WIDTH in that column. Arrange rows active, success, expired. Empty space stays reserved in use; do not push a board or add controls. All text is natural Chinese and readable.
+
+ORDINARY ACTIVE strip:
+Small new urgent-ticket icon at left. First text line: orange "加急来啦！" with separate right-aligned label "催单剩余 8 秒". Second line has "已服务 7/12 格", a slim progress bar filled about 7/12 (58%), and "20 秒内服务 12 格". Keep the independent countdown and target legible, not packed into the ticket. Orange thin strip border and a little pale warm tint. Do not add a main-round countdown or service count elsewhere.
+ORDINARY SUCCESS strip:
+Small new completion mark at left, exact text "安排得明明白白！+100 分". Muted green status text/border, light pale surface, same strip dimensions as active. No progress/countdown or separate reward button.
+ORDINARY EXPIRED strip:
+Small new quiet-ticket icon at left, exact text "这单没赶上，继续营业！". Quiet gray status text/border, same dimensions; no deduction or red failure treatment.
+
+FISH ACTIVE strip:
+The SAME small urgent-ticket artwork, not a fish/flame replacement. First text line: orange "Peter 的小鱼加急啦！" with separate right-aligned "催单剩余 8 秒". Second line: "已清除 6/12 格", a slim progress bar filled exactly HALF, and "20 秒内清除 12 格". White/ivory body text and orange emphasis against the contained navy context. Do not say served pets or count independent fish.
+FISH SUCCESS strip:
+The SAME completion mark, exact text "安排得明明白白！+100 分". Legible green/ivory success treatment within the dark swatch. Same fixed height and width as fish active.
+FISH EXPIRED strip:
+The SAME quiet-ticket mark, exact text "这单没赶上，继续营业！". Legible subdued pale text within the dark swatch. Same dimensions. No score loss, locked icon or angry fish.
+
+Footer exact text: "普通局 / 鱼关共用图标 · 仅成功 +100 分 · 提示区域保持固定高度"
+
+Critical constraints: three icons total, complete clip/paper/frame/check silhouettes; all six example strips have consistent height; success reward stays fixed +100; missed order has no penalty. Countdown is rush time only. Same icons for normal/fish; state copy and progress terminology follow the exact examples. All UI text, countdown, score, progress bar and container belong outside icon artwork. Do not introduce a claim/collect button, extra round, new reward, manual activation, pause, mode entry, new rules or game implementation. Preserve visual lightness and matte material from the approved references. One polished static review image.

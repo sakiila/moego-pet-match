@@ -1,0 +1,30 @@
+Use case: precise-object-edit / ui-mockup
+Asset type: ONE targeted revision of Batch 6 report marks, 1536 x 1024 landscape.
+
+User feedback, verbatim: "新纪录小旗 干净一点，称号印章 重新设计".
+
+Input images:
+Image 1, report-marks-original-v1.png, is the EDIT TARGET. Preserve the whole layout, pure white page, header/subtitle, lower application arrangement, all unrelated text and MVP medal artwork. Change ONLY the personal-best flag and title-stamp family, in both their large examples and small/context examples.
+Image 2, common-function-icons-v1.png, is the APPROVED linework and matte-surface style reference, especially clean silhouettes with restrained orange accents.
+Image 3, original moego-mobile-report-top-v2.png from the user's ORIGINAL outputs directory, is supporting WHITE REPORT SURFACE and BRAND-COLOR context only. Its historical paw-and-ribbon title badge is NOT the target for this redesign; do not reproduce that badge, paw or ribbons. The NEW title mark must instead be the lightweight cut-corner ink impression specified below. Do not copy the full report, pet portrait, score, names or original screenshot into this review.
+
+Keep the MVP medal, its two ribbon tails, MVP lettering, gesture marks, caption and lower MVP example UNCHANGED. The user did not ask to redesign MVP.
+
+CHANGE 1 — A MUCH CLEANER PERSONAL-BEST FLAG:
+Replace the current decorated swallowtail flag with a minimal flat orange right-pointing SINGLE PENNANT, on one SLIM charcoal pole. One broad simple triangular flag silhouette, with a very slight graceful curve allowed at the top/bottom; only one tip, no split swallowtail notch, no ivory underside/fold flap. Flag fill is ONE SOLID matte MoeGo orange, no gradients, glint, stripes, inner marks, writing or extra symbol. The pole is a simple slim charcoal stroke, rounded ends, no silver/chrome inner stripe or large orange ball finial. Full pole and whole flag tip visible. Remove the two floating orange accent ticks and ellipse ground shadow belonging to the flag. No speed marks, confetti, secondary triangles or extra edges. Keep a mild raised/forward attitude through the silhouette itself, not decorations. The icon should look noticeably simpler, quieter and cleaner than before.
+Apply this exact new clean flag to BOTH the large top-middle example and the small flag next to "个人新纪录！" below. Preserve the existing "本局得分", "2,480" and "个人新纪录！" text outside the flag; no wording goes on the flag.
+Keep the label "新纪录小旗". Replace its short gray caption with exact text: "简洁单色，轻扬旗面".
+
+CHANGE 2 — REDESIGN THE TITLE STAMP AS A REAL FLAT INK IMPRESSION:
+Completely replace the thick orange/black rounded-rectangle slab with a LIGHT, SINGLE-COLOR VERMILION-ORANGE STAMP IMPRESSION on the white paper. No physical plaque, raised edge, ivory filled button surface, black outer outline, glossy rim, extrusion or ground shadow. The stamp looks printed by ink, not like an orange UI button or text field.
+Use a horizontal CUT-CORNER rectangle: four corners have small neat diagonal cuts instead of round pill corners, a clean thin orange outer border and a still thinner orange inner border with clear spacing. All corners/edges are complete CLOSED contours; no big gaps, tears or grunge. The center is the same white/transparent paper surface. Slightly hand-drawn warm character with a small 4–6 degree tilt, but lettering remains readable. A very tiny natural ink variation is allowed, not fuzzy noisy texture or distress. NO paw, check, star, ribbon, stamp handle, motion ticks, orange accent rays or icon attached to the title.
+The large TOP-RIGHT stamp should now contain the exact existing title "精准排班大师" in bold vermilion-orange, centered with generous white inner padding. This text is an EXAMPLE of localized UI title content; the reusable frame can still be blank when exported later. Choose a low, balanced horizontal outline about 3:1 width:height, with thin orange print strokes; no heavy container. This visible title shows the actual new stamp design instead of an empty rounded input box.
+Keep the large label "称号印章". Change its gray caption to exact text: "轻薄盖印，称号示例".
+
+Update BOTH lower title application examples to use the SAME new single-color orange cut-corner DOUBLE-LINE INK FRAME, with no black outline or filled slab:
+- Keep the small gray label "中文示意" outside. Inside the Chinese stamp, exact text "全店大扫除负责人", on one comfortable line with generous padding.
+- Keep "English example" outside. Inside the English stamp, exact text "Whole-Shop Cleanup Chief", wrapped as "Whole-Shop" then "Cleanup Chief" on TWO readable lines if needed. Keep the full wording and good margins, do not shorten or shrink it to tiny type. This example frame can be a little taller for the two lines while keeping the same cut-corner ink family.
+Text is the same orange ink as the border, no black lettering. These are alternative language/layout examples, NOT multiple titles awarded in one round. No title-rule changes or new title names.
+
+Preserve Image 1's existing footer exactly: "普通局 / 鱼关共用 · 单局一个称号 · 新纪录需保存成功并严格刷新已有最好".
+Keep existing main heading, subtitle, lower heading "小尺寸与文字应用示意", dividers, MVP contents, score and overall placement. Full clean silhouettes, accurate readable Chinese and English, no clipped edges, no reintroduced gloss. No new icons, pets, modes, bonus points, controls, award rules or application code. Produce ONE revised review sheet, showing a cleaner flag and a genuinely redesigned lightweight ink stamp.

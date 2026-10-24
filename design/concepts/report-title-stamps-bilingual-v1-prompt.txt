@@ -1,0 +1,31 @@
+Use case: ui-mockup / illustration-story.
+Create ONE finished bilingual design review sheet containing ALL SIX new MoeGo humorous title stamps, EACH in TWO separate language versions: Chinese and English, TWELVE STAMPS total. User requests a full review draft. Do not generate report cards or cats this time: show the actual stamp designs large and legible for reviewing the text, shape and character.
+Input reference is the approved casual doodled flower stamp aesthetic. Preserve the loose tomato/orange-red hand-inked linework, bouncy expressive flower faces, cream paper negative space, approximate round silhouettes and typography following circular arcs. No formal seal design, no glossy medal, no geometric concentric circles, no lavender bands, no tidy corporate-vector look.
+Layout: approximately 2400x2100, wide near-square sheet. Six groups arranged TWO COLUMNS by THREE ROWS, each group has TWO LARGE side-by-side stamps: Chinese left, English right. The Chinese and English stamps within one group share IDENTICAL illustration and outer outline; only lettering differs. All six groups must be visually complete, evenly spaced, with generous gutters. No cut-off art. One small overall heading "摸鱼有理，开花有奖" and subtitle "趣味称号章 · 中英双版审查稿". Each group has a clear dark charcoal caption ABOVE its two stamps naming the behavior with ID: "01 连锁不停", "02 全盘清除", "03 催单成功", "04 道具活跃", "05 最后冲刺", "06 完整收工". Small "中文" and "EN" markers below respective stamps, outside the art. No extra explanatory copy.
+CRITICAL ALL TEXT: Stamp wording must be EXACTLY as listed below, never use the old title 连锁反应负责人. Each Chinese title is on a circular path split into upper and lower arcs. Each English counterpart is natural playful copy, uppercase rounded hand-lettered type, also following upper and lower circular arcs. Individual glyphs rotate tangentially along the path. Do NOT place the title in horizontal lines, a banner, or rectangular label. Slight bouncing and asymmetry feel casual, but maintain correct legible characters. Fit longer English text using moderate font size and broad arcs, no squeezed letterforms.
+Color: single warm tomato-orange-red ink, cream paper background. Some solid red petals, some airy open pen lines, a little marker texture. No heavy distress. Each design must have a DIFFERENT illustration, outline strategy and expressive attitude while belonging to the same funny little-flower family.
+Group 01:
+Chinese exact upper "我手都", lower "松开了".
+English exact upper "I LET GO.", lower "IT KEPT GOING."
+Illustration: one goofy five-petal red flower with a wide surprised smile and two little raised line-drawn hands held away from the action, two tiny smaller flower heads trailing diagonally like an unstoppable chain reaction. Mostly open circular silhouette formed by type, with one quick incomplete hand-scribbled arc and short motion ticks. The joke is it keeps going by itself.
+Group 02:
+Chinese upper "这下真", lower "没了".
+English upper "POOF.", lower "ALL GONE."
+Illustration: a mischievous tilted flower grinning with one petal comically floating off to the side, plus two tiny dots and a little puff indicating a magic vanishing act. Loose five/six big unequal petal-shaped outer contour, partly broken, bold red filled center flower. Charming delight, not a sad dying flower. Very sparse composition and lots of cream space.
+Group 03:
+Chinese upper "急什么", lower "我会消".
+English upper "RELAX.", lower "I GOT THIS."
+Illustration: a smug relaxed small red flower with half-closed confident eyes, crooked smile and one tiny hand gesturing OK. Loose wobbly brush circle with a single expressive flick at one side, no double ring. A tiny stress scribble OUTSIDE the circle contrasts with the unbothered flower inside. Calm cheeky personality.
+Group 04:
+Chinese upper "道具比我", lower "还忙".
+English upper "MY TOOLS", lower "WORK HARDER."
+Illustration: a little flower reclining at a gentle angle with a pleased lazy smile, flanked by one simple red-outline grooming comb and one small scissors doodle with short motion ticks, as though the tools are doing the work. Keep comb/scissors simple, no blade danger. Double-loop casual scribble with uneven spacing; type remains safely inside. Airier outline flower with minimal solid ink, no clutter.
+Group 05:
+Chinese upper "差点准时", lower "下班".
+English upper "ALMOST", lower "CLOCKED OUT."
+Illustration: one lopsided smiling flower leaning energetically right with one tiny hand reaching towards a miniature simple clock on its upper-right, two quick skid-like lines at bottom, amusing caught-in-one-more-move feeling. One loose irregular scalloped contour which opens where the motion ticks break it. No text inside the clock. Bouncy and impulsive, no distressed or sad expression.
+Group 06:
+Chinese upper "这班", lower "没白上".
+English upper "THAT COUNTS", lower "AS WORK."
+Illustration: a contented cheeky flower with a slightly lopsided closed-eye grin proudly holding ONE miniature little flower reward on a short stem, like giving itself a small award. A few loosely drawn red check-like approval ticks (not another badge) to one side. Outer border is only a casual one-and-a-half brush swoop circling the ring text, no perfect enclosing medal. Warm satisfied "job done" personality.
+Production-quality design exploration, keep title words dominant and illustrations simple enough to work on small report stamps. Mark actual main motifs and variations clearly; no duplicate generic flower face pasted into six circles. Ensure exactly six groups, exactly twelve stamps, correct reading order and exact bilingual text. One image only.

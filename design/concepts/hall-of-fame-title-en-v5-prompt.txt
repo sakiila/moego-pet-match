@@ -1,0 +1,3 @@
+v5 不是新生成图：由 v4（hall-of-fame-title-en-v4.png）本地处理得到，用户要求「在 v4 基础上本地把三处单词间距拉宽，不重画字形」。
+脚本：assets/illustrations/tools/space_wordmark_en_v5.py。按列切出 Pet / Hall / of / Fame / 右上短线五块，整块平移，
+三处单词间距由 36 / 36 / 25 px 统一为 64 px（约半个字母宽），短线与 Fame 的距离保持原样。像素原样搬移，不缩放、不重绘。

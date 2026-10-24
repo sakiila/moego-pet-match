@@ -1,0 +1,51 @@
+Use case: ui-mockup
+Asset type: ONE Batch 10 review sheet completing five existing common action icons, MoeGo Pet All-Stars.
+
+Primary request: Continue the APPROVED original charcoal-outline/orange-white MATTE family. Design Back to the Shop, Exit, Choose Another Photo, Save Image, Retry. Make their meanings and silhouettes distinct, and show small-size button/header examples. These are existing actions, not new controls, mechanics, pages, persistence or navigation rules. One coherent proposal, not three alternatives. Static review only, no game code or final independent export.
+
+Target: 1536 x 1024 landscape. Pure white page, generous margins. Header, FIVE evenly spaced large complete action icons in one row, short labels/captions, pale thin divider, then three small application fragments. No full-page redesign, photo placeholders, fake pet content, phone/browser frame or screenshot collage.
+
+Input images and roles:
+Image 1 common-function-icons-v1.png: APPROVED primary STYLE reference for neutral charcoal rounded outlines, simple orange/ivory utility subjects, gentle shallow shade, typography and small button applications. Its upward share icon is already approved and should be reused only in the lower share/save comparison, not redesigned.
+Image 2 settings-feedback-original-v1.png: APPROVED supporting STYLE reference for compact line weight, flat accents and readable small controls. Do not add its settings categories to this batch.
+Image 3 ORIGINAL moego-mobile-home-v2.png from the user's original outputs: storefront FORM reference only, especially orange-white awning and friendly charcoal contour. Create a compact icon from the storefront idea, not a crop of its large illustration. Do not reproduce Deedee, the wordmark, scenery, plants, paw decorations, shop counter props or the full homepage.
+Image 4 ORIGINAL moego-mobile-upload-v1.png: CONTENT context for the existing "原图预览" header and "换一张" action. No pet photo, owner, form or whole page should be reproduced.
+
+Style:
+Neutral charcoal #24282e, consistent rounded contours/caps/joins, white/warm ivory fills, flat MoeGo orange #ff6b18. At most one very restrained shallow warm shade plane. Clear recognizability at small sizes. No glossy white highlight blobs/stripes, plastic, jelly, chrome, metallic bevel, dark navy outlines, thick white sticker halos, decorative paws, faces, stars, glitter or particle clutter. Avoid ornamental ticks on these utility symbols. All door edges, arrowheads, roofs, canopy scallops, photo corners and loop endpoints are complete, visible and separated from labels.
+
+Header exact text: "第 10 批 · 通用动作补齐"
+Subtitle exact text: "回门店 · 退出 · 换照片 · 保存图片 · 重试"
+
+Five equal optical columns. Icons roughly 140–180 px tall; storefront may be wider but stays compact. Labels and short muted-gray captions below, in this order:
+
+1. Label "回门店", caption "返回现有门店页面".
+One compact friendly STOREFRONT pictogram: a small orange-white striped awning with three broad complete scallops, ivory shop facade with charcoal outline, ONE small pale gray-blue window, ONE orange/ivory half-open door and full thin base. Rounded geometry, clear canopy/door/window silhouette, no tiny props. No OPEN text, signboard, letters, pet portrait, paw, arrow, plants, figures or extra icons. It represents the same existing Back to the Shop action; larger entry rows may use this pictogram while small header chevrons remain available.
+
+2. Label "退出", caption "沿用原有退出确认".
+A simple OPEN DOOR/DOORFRAME symbol, charcoal upright rounded frame, ivory panel or orange door edge, plus a clear ORANGE ARROW pointing RIGHT and OUT beyond the doorway. Arrow shaft starts inside the doorway, passes to the right, and its full triangular head is outside the frame on the RIGHT. Keep the whole doorframe and arrowhead inside the icon area. Do not point the arrow inward, draw a left/back arrow, reset circle, red warning, lost score or house/canopy. The actual early-exit confirmation and timing behavior remain unchanged; the icon is not a bypass action.
+
+3. Label "换一张", caption "重新打开照片选择器".
+A small simple ivory PHOTO CARD with complete charcoal rounded corners, a minimal generic two-line landscape/dot pictogram inside, surrounded by TWO short curved opposing circular arrows (one orange, one charcoal), showing replacement of a selected photo. Both arrowheads and both curved paths visible, with generous space around the central card. No actual photo or pet, no duplicate card pile, no crossed shuffle arrows, no extra NEW/plus badge. This two-arrow-plus-image silhouette must be visibly different from the single Retry loop at the far right and the already designed card-flip icon.
+
+4. Label "保存图片", caption "下载当前预览 PNG".
+A clear DOWNWARD ORANGE ARROW entering a shallow open CHARCOAL TRAY, same visual family as the approved upward share icon in Image 1, but arrow points DOWN. Complete arrowhead, stem and full tray corners/base. Keep a useful open gap between arrow and tray; no crossing into a file cloud, upload direction, diskette, check, paper plane or new storage service. The existing Save Image button downloads the generated PNG; do not imply uploading the original pet photo or saving a new draft state.
+
+5. Label "重试", caption "重新尝试当前操作".
+ONE simple broad OPEN CIRCULAR RETURN/RETRY ARROW: a single charcoal/flat-orange curved path making about three quarters of a circle and ending in one obvious orange arrowhead. White open center, clear gap between head and tail, rounded contour, no two-arrow loop, photo card, timer, clock hands, backward-undo hook or crossed shuffle. Keep its ONE arrowhead and complete curved tail inside the area. It visually supports an existing retry label, not restarting a game or resetting data.
+
+Lower area after a pale gray divider around y=510. Three focused application groups on the same white surface, separated by whitespace or thin short vertical dividers. Do not add full app panels or fake images.
+
+LEFT GROUP, heading "导航动作示意":
+Two compact white outlined action buttons with clear small new icons and existing labels, one above the other: storefront + "回门店", then open-door/right-arrow + "退出". Use charcoal/brand-orange label styling and existing rounded button character. A small muted-gray annotation below may read exactly "退出仍使用原有确认". No new exit dialog, confirmation button or destructive red treatment. The original unsaved-upload leave confirmation also remains part of the existing flow, not bypassed by a new return icon.
+
+MIDDLE GROUP, heading "图片操作示意":
+First, ONLY an existing photo-preview HEADER FRAGMENT: exact heading "原图预览" at left, a small new two-arrow/photo symbol + exact action "换一张" at right. No photo, blank image placeholder or full upload form below it.
+Below with comfortable separation, exact small heading "成绩卡预览" followed by the existing preview action buttons: primary orange button with a WHITE version of the new down-arrow/tray and exact text "保存图片"; secondary white outlined button with the ALREADY APPROVED up-arrow/share icon from Image 1 and exact text "分享图片". These are two different context fragments with their own headings, not new buttons on the original-photo upload form. The support-dependent share behavior stays unchanged and is merely illustrated here. Save arrow down, share arrow up, text and arrows agree.
+
+RIGHT GROUP, heading "重试示意":
+Existing neutral error message exactly "暂时没连上，请重试。" with a modest white outlined button below it containing the new SINGLE retry-loop icon and exact text "重试". Simple clear hierarchy, no warning mascot, countdown, penalty, auto-retry promise, lost data or new persistence. The operation retried remains the current existing request. No reset/restart game action.
+
+Page footer exact text: "仅补齐现有动作 · 退出沿用原有确认 · 保存图片始终下载 PNG"
+
+Keep readable Chinese, all five subjects distinct, complete compact silhouettes and matte original-page style. No new setting, pet, mode entry, score, award, UI route or implementation. One polished static icon/component review sheet only.

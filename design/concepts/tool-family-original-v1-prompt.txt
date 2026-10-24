@@ -1,0 +1,57 @@
+Use case: ui-mockup
+Asset type: ONE review sheet for Batch 4, the ordinary-round and fish-round tool family in MoeGo Pet All-Stars.
+
+Primary request: Continue the approved ORIGINAL charcoal-outline and orange-white style of home v3, common-function v1 and round-operation v1. Redesign the existing tools without changing their abilities. Show ordinary and fish counterparts side by side, preserving directional readability and complete shapes. The earlier glossy tool assets were deliberately deleted; do not recreate that material. This is one coherent review image, no game implementation or final transparent export.
+
+Canvas: 1536 x 1024 landscape, pure white review page. Clear compact header, four aligned comparison columns, ordinary-round row above fish-round row, a small reduced-size board-cell comparison strip at bottom. Generous safe margins, all tools and marks complete, no cropping. No whole game screen, pet portraits, fish characters, device frame or browser chrome.
+
+Input images and roles:
+Image 1: APPROVED common-function-icons-v1.png, PRIMARY STYLE source: neutral charcoal rounded outlines, orange accents, white/ivory main fills, very restrained warm edge shading. No plastic specular gloss.
+Image 2: APPROVED round-operation-icons-v1.png, supporting STYLE source: same contour weight, flat orange, simple complete silhouettes and clean typography. Do not repeat those six pictograms.
+Image 3: ORIGINAL moego-mobile-board-v3.png, CONTENT/SCALE context only: ordinary board tools occupy existing small rounded cells and use directional/cross marks. Do not copy the whole board, pets, scores, page or old tool render style.
+Image 4: ORIGINAL moego-mobile-fish-board-v1.png, THEME/CELL context only: fish uses pale ice-blue cells against a dark blue environment. Its water-jet and bubble-machine equipment is obsolete and MUST NOT be drawn. Use conch, pearl shell and wave as specified below. Do not copy its glossy fish or underwater page.
+
+Visual style:
+Consistent dark NEUTRAL CHARCOAL contours (#24282e), rounded joins/caps; white, warm ivory and flat MoeGo orange (#ff6b18) for ordinary tools. Fish tools use ivory, pale ice-blue and a little muted medium blue, with the SAME charcoal outlines and ORANGE ability marks. At most one soft muted shade plane along an edge. Simple, friendly and readable at board-cell size. No shiny plastic, jelly, metallic bevels, chrome, white specular blobs, dark navy outlines, thick white die-cut halos, sparkling particles, paw decorations, faces, prize ribbons or badges resembling rewards.
+
+Header exact text: "第 4 批 · 普通局 / 鱼关道具"
+Subtitle: "炭黑描边 · 橙色能力标识 · 全盘效果仅作演出"
+
+Arrange FOUR aligned columns, with small column headings in this order: "横扫", "竖扫", "十字", "全盘演出". The fourth heading can be orange. A subtle dotted divider before the fourth column may distinguish the spectacle illustrations from the first three board tools; do not put the entire review into a table of bordered cards.
+Row labels at left: "普通局" and "鱼关". Eight total subjects, four per row, roughly 150–180 px tall each, optically balanced. Each has a bold name and short gray capability caption below.
+
+ORDINARY ROW:
+Column 1, label "横扫梳子", caption "清整行".
+A small orange-and-ivory COMB with a long HORIZONTAL rounded spine and five or six thick, evenly spaced full teeth pointing DOWN. Dark charcoal contour and simple flat color, one soft edge shade. All teeth intact and separated. Attach a small white/ivory capsule with a thin charcoal contour near the lower-right, containing an ORANGE HORIZONTAL DOUBLE-HEADED ARROW. Both arrowheads fully visible. The direction mark should be immediately readable and not cover the comb teeth.
+
+Column 2, label "竖扫梳子", caption "清整列".
+The same comb family rotated 90 degrees: long VERTICAL spine, full thick teeth point RIGHT. Same proportions, material and colors as the horizontal comb. A small white/ivory capsule with thin charcoal contour and an ORANGE VERTICAL DOUBLE-HEADED ARROW near its lower-right, positioned to preserve the full teeth and spine. Both vertical arrowheads complete. Distinguish orientation through BOTH the comb silhouette and direction mark.
+
+Column 3, label "十字剪刀", caption "清所在行与列".
+A complete pair of simple rounded grooming SCISSORS, two ivory/pale-gray blades opened in a modest V, charcoal contour, a small dark central pivot, TWO full orange finger loops below. Both loops have open ivory centers and are fully enclosed; both blade tips intact, slightly rounded. Clear coherent scissor anatomy, no detached blade, missing ring or extra handle. Attach a small white/ivory mark with thin charcoal edge and an ORANGE PLUS for the row-and-column cross ability, offset to the lower-right without hiding a loop. This plus is an ability symbol, not a score bonus.
+
+Column 4, label "吹风机", caption "仅全盘合体演出".
+A recognizable simple compact grooming HAIR DRYER, ivory/white barrel outlined in charcoal, orange nozzle collar and orange downward handle, complete rear air inlet and handle. The nozzle faces RIGHT; one or two short clean airflow curves may extend from it. No electrical cord, giant attachment, sparkle burst, score, direction/cross badge or tile frame. This is the full-board performance motif used for the existing scissors+scissors combination, NOT an independent board tool.
+
+FISH ROW:
+Column 1, label "横向海螺", caption "清整行".
+A recognizable ivory/pale-blue spiral CONCH SHELL, broad rounded shell body and a single clearly visible open flared mouth facing RIGHT. Simple charcoal spiral and contour, three broad ridges maximum, no living snail, eyes, fish or water-jet device. Attach the SAME white/ivory capsule with thin charcoal edge and ORANGE HORIZONTAL DOUBLE-HEADED ARROW used for the ordinary counterpart. Both arrow tips intact and unmistakably orange.
+
+Column 2, label "纵向海螺", caption "清整列".
+The SAME conch family with the whole form oriented so the flared mouth points UP. Keep the opening visible, not hidden behind the body or direction badge. Same ivory and muted blue palette. Attach the SAME ORANGE VERTICAL DOUBLE-HEADED ARROW in a small ivory capsule, with full arrowheads. Both shell opening orientation and mark communicate the column sweep. Do not draw the same sideways shell with a changed label.
+
+Column 3, label "珍珠贝壳", caption "清所在行与列".
+One OPEN CLAM SHELL with a complete fan-shaped upper valve, shallow lower cup, a single large ivory PEARL visible at the center. Broad pale-blue shell contours, ivory inner surfaces, charcoal linework and only a little muted blue edge shade. Three simple radiating fan ribs maximum, no glitter, jewel-like gloss or multiple pearls. The pearl is softly matte and round. Attach a small ivory ability mark with charcoal edge and an ORANGE PLUS at lower-right, leaving the pearl and both valves clearly visible. Both ordinary scissors and this shell use matching plus marks.
+
+Column 4, label "大浪花", caption "仅全盘合体演出".
+A single broad breaking OCEAN WAVE silhouette, muted light-blue body, big curled crest and simple ivory-white foam, complete neutral-charcoal outer contour and one or two broad flow lines. Friendly flat drawing, no chrome, glitter, particles, fish, whirlpool machine or vortex pump. Complete base and whole curl inside the allotted area. No direction/cross badge or board-cell frame. Used only for the existing pearl-shell+pearl-shell full-board performance, never a separate board piece.
+
+Critical semantics: only the first THREE columns are board pieces. Both versions of the first column show orange horizontal double arrows; both versions of the second show orange vertical double arrows; both versions of the third show orange plus marks. No blue, black or white arrow replacing the requested orange arrow. The fourth column has NO ability badge and NO board tile.
+
+Bottom reduced-size application strip, after a pale gray divider around y=800:
+Left small heading "普通局棋格示意" above three adjacent small pale-warm rounded square cells containing smaller versions of ONLY the NEW horizontal comb, vertical comb and scissors. Keep each subject and its ORANGE mark readable and inside the cell.
+Right small heading "鱼关棋格示意" above one shallow contained dark-blue swatch holding three small pale ice-blue cells with ONLY the NEW horizontal conch, vertical conch and pearl shell, also with the same orange marks. This swatch is just contrast/cell context, not a whole fish page and not a different icon style.
+Do NOT put the dryer or wave into any of these small cells. No sample 7x7 grid, numbers, arrows connecting cells or new controls. Keep the review sheet spacious and labels fully visible.
+
+Footer exact text: "工具与邻格交换发动 · 橙色标识对应清除范围 · 全盘演出不是独立棋子"
+Natural, readable Chinese text and complete unclipped shapes. Only these eight existing subjects, no new abilities or changed game rules. Output one polished static comparison sheet for user review.

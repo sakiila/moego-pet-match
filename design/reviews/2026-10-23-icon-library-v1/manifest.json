@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-23",
+  "status": "all_10_batches_approved",
+  "scope": "Design-reference review gallery only. Original full sheets retained byte-for-byte. No independent icon export, screenshot cutouts, game-code changes, implementation or deployment.",
+  "entries": [
+    {
+      "batch": 1,
+      "title": "首页入口",
+      "status": "approved",
+      "concept": "design/concepts/home-entry-icons-v3.png",
+      "sha256": "d18dc7ae5ba7f5c6a02529cd3fe4f4f21b7be3f6cad7dada38595fcbfbdb5be8",
+      "prompt": "design/concepts/home-entry-icons-v3-prompt.txt",
+      "prompt_sha256": "adf6752fba6941aab316d522eaa61608690224e8ee5e2a11c483a53ae5bb8074",
+      "generation_record": "design/concepts/sources/home-entry-icons-v3/generation-record.json"
+    },
+    {
+      "batch": 2,
+      "title": "通用功能",
+      "status": "approved",
+      "concept": "design/concepts/common-function-icons-v1.png",
+      "sha256": "f705bbaa1a10bf729a08b683a619188baa38a981aa6d71487f4334b316e69bbb",
+      "prompt": "design/concepts/common-function-icons-v1-prompt.txt",
+      "prompt_sha256": "45e1100c8238133689b09f8960014f63d4aaa6d1ccb0beb2f65ce2a5dacac709",
+      "generation_record": "design/concepts/sources/common-function-icons-v1/generation-record.json"
+    },
+    {
+      "batch": 3,
+      "title": "局内操作与状态",
+      "status": "approved",
+      "concept": "design/concepts/round-operation-icons-v1.png",
+      "sha256": "7a80c905bc48a94540fd4b201f21848af7378de9af0b0eb59e756d73116791fb",
+      "prompt": "design/concepts/round-operation-icons-v1-prompt.txt",
+      "prompt_sha256": "df83fc02db55a5119ca013883ae763ed2c10a9c8d17419e5022a84426d693acd",
+      "generation_record": "design/concepts/sources/round-operation-icons-v1/generation-record.json"
+    },
+    {
+      "batch": 4,
+      "title": "普通／鱼关道具",
+      "status": "approved",
+      "concept": "design/concepts/tool-family-original-v6.png",
+      "sha256": "952dc693e1819701e139e1d0a97994a1add9b563a3aa777c25b95faf130860e1",
+      "prompt": "design/concepts/tool-family-original-v6-prompt.txt",
+      "prompt_sha256": "cf6ac3765a312357fb2ea82738547c7407cf404ab506d20b65bc0addd7736f39",
+      "generation_record": "design/concepts/sources/tool-family-original-v6/generation-record.json"
+    },
+    {
+      "batch": 5,
+      "title": "催单反馈",
+      "status": "approved",
+      "concept": "design/concepts/rush-feedback-original-v1.png",
+      "sha256": "6cb1aa7e6c82fd6479c1efc512b2a10afc9979638daaf6d7d95c35468e390df9",
+      "prompt": "design/concepts/rush-feedback-original-v1-prompt.txt",
+      "prompt_sha256": "a46cefc66388028f9e7d01cec8c5a521a7e7bc5e4fd64055cba96c2566b53c0d",
+      "generation_record": "design/concepts/sources/rush-feedback-original-v1/generation-record.json"
+    },
+    {
+      "batch": 6,
+      "title": "结算标记",
+      "status": "approved",
+      "concept": "design/concepts/report-marks-original-v4.png",
+      "sha256": "0a62c5da8f57422b3158777e98eb566af7ddb22e39180ee3bc7bcfa05ceb5443",
+      "prompt": "design/concepts/report-marks-original-v4-prompt.txt",
+      "prompt_sha256": "e9bf3d5adf5178e1df0dadab72cf82f60606d820be78cbe187f9333a3dc89fb9",
+      "generation_record": "design/concepts/sources/report-marks-original-v4/generation-record.json"
+    },
+    {
+      "batch": 7,
+      "title": "排行榜名次",
+      "status": "approved",
+      "concept": "design/concepts/leaderboard-marks-original-v1.png",
+      "sha256": "a9aa5d1d3b3a6e51d1e22017f0777bb188ed05a09d72c5703d9cb1ff662e3add",
+      "prompt": "design/concepts/leaderboard-marks-original-v1-prompt.txt",
+      "prompt_sha256": "db079965cf46ad8b9048a86636a3f84a9fcb9f1be7bc0e103afa83770b6cf3b5",
+      "generation_record": "design/concepts/sources/leaderboard-marks-original-v1/generation-record.json"
+    },
+    {
+      "batch": 8,
+      "title": "图鉴收集与空态",
+      "status": "approved",
+      "concept": "design/concepts/collection-marks-original-v1.png",
+      "sha256": "b3557f80361a9e2f51ba3190e5903423335d671993748477ba810707d1408d8a",
+      "prompt": "design/concepts/collection-marks-original-v1-prompt.txt",
+      "prompt_sha256": "f67dcfb0a629c7901002c345342a525300128aa4842b46c7e7925d53353182e1",
+      "generation_record": "design/concepts/sources/collection-marks-original-v1/generation-record.json"
+    },
+    {
+      "batch": 9,
+      "title": "设置与声音触感",
+      "status": "approved",
+      "concept": "design/concepts/settings-feedback-original-v1.png",
+      "sha256": "f230513bd052e0357fe2160062dba9d20b8d041f074a8140b719d43b8bebe387",
+      "prompt": "design/concepts/settings-feedback-original-v1-prompt.txt",
+      "prompt_sha256": "d6a23f1670342ee671edfdc5b46dcb7a0ad99f2aeab90dc0402b5a19ab6e4249",
+      "generation_record": "design/concepts/sources/settings-feedback-original-v1/generation-record.json"
+    },
+    {
+      "batch": 10,
+      "title": "通用动作补齐",
+      "status": "approved",
+      "concept": "design/concepts/common-actions-original-v3.png",
+      "sha256": "3122ef03f044f26f4b3e0fc1e12e23c0a7be0c58fb32d9672c08747e06430169",
+      "prompt": "design/concepts/common-actions-original-v3-prompt.txt",
+      "prompt_sha256": "49977aa3aca2512c27a8126cbeeae621ccf11cb22f8cdacd39414fb9a8cd2355",
+      "generation_record": "design/concepts/sources/common-actions-original-v3/generation-record.json"
+    }
+  ]
+}

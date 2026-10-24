@@ -1,0 +1,46 @@
+# Hall of Fame Cat v1 — ImageGen request
+
+## User request
+
+用内置 image_gen 生成一张卡通贴纸：MoeGo 品牌蓝猫（造型和配色严格参考 IMAGE1：钴蓝扁平身体、白底黑瞳圆眼、尖耳、胡须、小粉鼻）从画面右侧边缘探出半个身子，一只前爪高举挥手、另一只前爪搭在画面右侧的竖直边缘上，开心地打招呼；旁边两三笔橙色短线；脚下一小丛绿色叶子。参考 IMAGE2 左下角那只蓝猫的姿态。只画猫和叶子，右侧是竖直切边（会贴在领奖台左侧外缘）。扁平插画、圆润，与品牌插画一致。背景用完全平整的纯白 #FFFFFF，不要纹理、渐变、投影或边框，四周留足空白，便于本地去底。不要任何其他文字或水印。
+
+## Reference images
+
+- IMAGE1: `design/references/moego-blue-cat.jpg` — strict character and color reference.
+- IMAGE2: `design/references/hall-of-fame-reference.webp` — lower-left waving-cat pose and placement reference only.
+
+## Initial generation prompt
+
+Use case: logo-brand
+Asset type: single isolated cartoon sticker artwork to place on the outside left edge of a winners' podium.
+Input images: Image 1 (design/references/moego-blue-cat.jpg) is the strict character and color reference; Image 2 (design/references/hall-of-fame-reference.webp) is a pose and placement reference ONLY, specifically the waving blue cat in its lower-left corner. Do not reproduce the podium, lettering, badges, or rest of Image 2.
+Primary request: Draw MoeGo's blue cat peeking out from behind an invisible straight vertical boundary at the RIGHT edge of the image. Roughly half of its body is visible to the LEFT of that boundary. The cat cheerfully greets the viewer: one front paw is raised high in a clear wave with visible simple paw pads, while the other front paw rests on or curls around the invisible right-side vertical edge. A tiny clump of simple green leaves grows at its feet, and two or three short orange hand-drawn excitement strokes float beside the raised paw.
+Character fidelity: match Image 1 closely: flat cobalt-blue body, pointed triangular ears, large perfectly round white eyes with black round pupils, small pink nose, thin whiskers, simple friendly mouth, and the same minimal flat illustration language. Keep the body blue rather than adding white face markings or clothing.
+Composition: one cat only; the rightmost portion is deliberately cropped by a perfectly straight vertical canvas edge so the art can attach to a podium's left outside edge. Leave generous empty white space above, to the left, and below the visible artwork. Do not draw the podium, a wall, an outline of the boundary, or any other scenery.
+Style and color: clean, rounded, playful, flat 2D brand illustration with solid fills and crisp edges. Background must be absolutely uniform pure #FFFFFF, with no texture, gradients, shadows, vignette, border, or transparency. No letters, numbers, logos, or watermark.
+
+## First edit prompt
+
+Edit target: Image 1, the generated blue-cat sticker. Supporting character reference: Image 2, MoeGo blue-cat reference sheet.
+Make only these precise corrections to Image 1:
+1. The cat, its gripping right paw, and the little green leaves must extend all the way to the RIGHTMOST PIXEL COLUMN of the canvas and be cropped by that canvas edge. There must be ZERO white margin to the right of the cat. Treat the right side like an invisible vertical podium edge. Keep the face and raised waving paw visible to the left.
+2. Make the background a completely uniform solid RGB #FFFFFF across all empty area, including corners; no off-white, paper texture, vignette, gradient, or shadow.
+3. Flatten the cat and leaves into crisp solid-color shapes, matching the minimal cobalt-blue brand character from Image 2. No airbrushed shading, gradients, 3D effects, or texture.
+Preserve the same single cheerful blue cat, pointed ears, white round eyes with black pupils, pink nose, whiskers, raised waving paw, paw gripping the right edge, two or three orange exclamation strokes, small green leaves, large empty area on the left, and no other content. No podium, wall, border, text, or watermark.
+
+## Second edit prompt
+
+Edit target: Image 1 is the nearly finished MoeGo blue-cat sticker. Preserve its character, colors, expression, waving paw, gripping paw, orange strokes, green leaves, scale and general position.
+Precisely finish it for background removal and edge placement:
+- Every empty/background pixel must be perfectly uniform, literal RGB (255,255,255) / #FFFFFF white. No off-white, gray or blue-tinted white, no paper effect, noise, gradient, or vignette.
+- Move or crop the whole sticker composition so the cat's blue torso and the green leaves meet the exact RIGHT edge of the image canvas with no white column or margin beyond them. The animal appears to peek out from behind that invisible vertical cut. Keep large blank white space on the left and above.
+- Flat vector-like illustration with solid fills, no shading or texture.
+Do not add an actual wall, border, podium, text, extra objects, or watermark.
+
+## Final edit prompt
+
+Edit Image 1 as a finished PNG illustration. Add a SOLID OPAQUE WHITE #FFFFFF RECTANGLE BEHIND the existing cat and leaves, covering the entire canvas from corner to corner. This is a background layer; the result must have NO TRANSPARENT PIXELS and must appear white in any image viewer. Preserve all of the current blue cat, expression, paw poses, orange greeting marks, green leaves, left-side negative space, and cropping at the right edge. Do not redraw or change the artwork. Do not add a border, podium, wall, text or watermark.
+
+## Output finishing
+
+Selected the final built-in ImageGen result. For an exact #FFFFFF background, normalized near-white RGB pixels (all three channels >= 250) to (255,255,255) without changing the blue, orange, or green artwork. Saved the resulting opaque PNG as `design/concepts/hall-of-fame-cat-v1.png`.

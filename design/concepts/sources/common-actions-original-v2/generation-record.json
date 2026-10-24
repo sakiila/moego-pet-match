@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-23",
+  "batch": 10,
+  "version": 2,
+  "status": "revision_requested",
+  "tool": "built-in image_gen",
+  "concept": "design/concepts/common-actions-original-v2.png",
+  "original": "original.png",
+  "generated_source": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-560537b3-c221-416d-892d-c4a927cde8a6.png",
+  "full_prompt": "../../common-actions-original-v2-prompt.txt",
+  "sha256": "959a28bbc62aaa332b479f0753832804b18a6eea754b144c04a71ed05cab8235",
+  "user_feedback": "重试 这个图标不是很清晰，箭头有些不协调",
+  "direction": "Approved original charcoal-outline/orange-white matte family; five existing action meanings kept distinct",
+  "reference_images": [
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/common-actions-original-v1.png",
+      "role": "edit target",
+      "archived": "edit-target-common-actions-original-v1.png",
+      "sha256": "aff358ccb9f36c96309a99aadf82cb9cb37ad1dec4d0c0a76db117fbbaa82865"
+    }
+  ],
+  "changes": [
+    "Connected the retry arrowhead and circular shaft with a flush neck",
+    "Aligned the head with the clockwise curve; retained orange end and charcoal shaft",
+    "Updated both the large retry symbol and the miniature retry button symbol"
+  ],
+  "review_checks": [
+    "Retry now reads as one continuous clockwise arrow with an open gap and a clear center",
+    "Large and small retry examples share the corrected geometry",
+    "Other four action illustrations, share symbol, labels and layout visually retained",
+    "Current-request retry meaning retained"
+  ],
+  "scope": "Static design review only; no final independent asset export, app behavior/preference change, game code, animation, browser testing or deployment.",
+  "revision_feedback": {
+    "text": "这里再圆滑一点",
+    "annotation": {
+      "x_percent": 95.2,
+      "y_percent": 19.8
+    },
+    "subject": "Upper-right orange bend of retry icon"
+  },
+  "latest_review": "design/concepts/common-actions-original-v3.png"
+}

@@ -1,0 +1,50 @@
+Use case: ui-mockup
+Asset type: ONE Batch 8 review sheet for collection status and necessary empty states, MoeGo Pet All-Stars.
+
+Primary request: Continue the APPROVED original charcoal-outline/orange-white MATTE family. Design one collected-status bookmark and two friendly empty-state illustrations, with usage examples that preserve existing pet content, card structure and collection rules. This is one coherent proposal, not three options. No game code, actual collection-state changes or final independent assets.
+
+Target dimensions: 1536 x 1024 landscape, pure white review page, generous whitespace. Header, three large subjects across the top, a light divider, then three focused application fragments across the bottom. No whole Petdex redesign, app navigation, browser chrome, phone frame, rarity dashboard, locked-paywall page or grid of unrelated new features.
+
+Input images and roles:
+Image 1 home-entry-icons-v3.png: APPROVED primary STYLE source, rounded neutral-charcoal outlines, orange/ivory fills, minimal soft warm shade, simple readable silhouettes. The open collection book can inform the empty album family.
+Image 2 common-function-icons-v1.png: APPROVED supporting STYLE source, especially the simple magnifier, clean line weight and restrained orange accents. Reuse that same magnifier language in the search-empty composition.
+Image 3 ORIGINAL moego-mobile-petdex-v1.png from the user's original outputs directory: existing card/collection LAYOUT context, Deedee collected-card structure and Momo/Marley uncollected silhouette examples. Preserve the two-column pet-card language, names, silhouette-only unknown state and owner chip ONLY on collected cards. Its old count 81 is historical: use the illustrative count 80 specified below, not 81. Do not reproduce the full page, add-pet action or tabs.
+Image 4 is the EXISTING actual Deedee transparent head sticker (pet_b05057985e11). CONTENT INSERT reference for the one collected-card example only. Preserve this real sticker's face, fur, ears, proportions and illustration quality faithfully; do not stylize it into the utility-icon linework, invent a new dog, add a body or crop ears. The actual owner is Emma, verified from the current local asset manifest. No new pet art is being designed.
+
+Visual style:
+Neutral charcoal #24282e rounded outlines, flat MoeGo orange #ff6b18, white/warm ivory and muted gray for supporting lines. One restrained shallow warm shade plane maximum. Simple friendly complete shapes, no white specular blobs, shiny plastic, jelly, metallic bevel, chrome, dark navy contour, embossed 3D or thick white sticker halos. No repeated paw motifs, crown, prize medal, starburst, mystery chest, gem, locks, red X, sad faces or angry pets. Preserve the existing pet content and full card architecture; changes are status/empty-state art only.
+
+Header exact text: "第 8 批 · 图鉴收集与空态"
+Subtitle exact text: "入册标记 · 尚无收集 · 搜索无结果"
+
+THREE large complete subjects in the upper half, roughly 180–210 px high, optically balanced, aligned labels and safe margins:
+
+1. Label "已收集印记", gray caption "入册书签，状态清楚".
+One compact VERTICAL BOOKMARK tab, flat orange body, rounded upper corners and a single complete V-shaped notch at bottom, charcoal contour. One simple WHITE CHECK centered in the bookmark, with full rounded ends and generous inner margin. A small ivory fold at the top may suggest paper, but keep it minimal and complete. No text, unread dot, NEW label, reward star or extra ribbon tails. This is a small status sign showing a saved collected pet, NOT a claim/collect button or achievement. It must read at a small card-corner size.
+
+2. Label "尚无收集", gray caption "空白图鉴册，等待相遇".
+One friendly OPEN ALBUM in the same family as the approved collection-book icon: ivory pages and orange cover with a clean rounded charcoal contour, center spine and gentle page curvature. Each open page has one faint muted-gray EMPTY sticker/photo slot outline, with no face, name, owner or mystery symbol. Keep both pages, cover and a modest bookmark complete. A small natural page tilt gives life; do not add rewards, sparkles, money, crying pets or locks. This is a SMALL supportive illustration for someone with zero collected pets; it must never replace the existing uncollected-name/silhouette list.
+
+3. Label "搜索无结果", gray caption "索引卡与放大镜".
+Two simple slightly offset blank ivory INDEX CARDS with charcoal outline and a small orange header tab, plus the SAME charcoal-circle magnifier and orange handle family as approved common-function icons. Magnifier is angled down-right over the front card, full lens and handle visible; cards have no real pet/owner data and no fake search results. No red cross, sad face, missing-pet poster, empty pet bowl, lock or message implying that an owner has no pets. Clean compact search illustration, a different silhouette from the open album.
+
+Below a thin pale-gray divider around y=492, THREE application groups across the page with whitespace or short light separators, not nested app panels. Keep enough room for legible cards/copy and footer.
+
+LEFT GROUP, heading "已收集卡片示意":
+ONE existing-style collected pet card centered within the left third, about 200–220 px wide and 310–330 px tall. Same rounded pale warm card structure as the original Petdex, with the actual Deedee HEAD sticker from Image 4, fully visible ears, pet name "Deedee", and a small owner chip with a simple E initial avatar and exact text "主人 Emma". Put a SMALL version of the new collected bookmark near the upper-right card corner in reserved padding, NEVER covering fur, eyes, ears, pet name or owner chip. Do not rebuild the card as a collectible rarity card, add rankings, new owner fields or multiple marks. All content is an illustrative existing-pet example; source sticker files are unchanged.
+
+MIDDLE GROUP, heading "尚无收集示意":
+Small progress line exact text "已收集 0 / 80 位毛同事". This count is an illustrative current-catalog example, not a hardcoded implementation. Under it, use the new open-album illustration at SMALL size next to or above exact helper text "第一位毛同事，等你开门服务。"; keep the helper compact.
+IMPORTANT: directly BELOW this helper, show TWO existing-style muted uncollected cards side by side, with the gray head SILHOUETTES and names "Momo" (cat silhouette) and "Marley" (floppy-ear dog silhouette) as in Image 3, each with the existing "未收集" chip. NO owner name or avatar on these uncollected cards. The cards remain clearly visible and are not covered by the album or helper. No pet face/detail revealed and no question-mark replacement. The helper augments the list instead of turning the whole collection into an empty page.
+
+RIGHT GROUP, heading "搜索无结果示意":
+A compact existing-style rounded search input, new/approved small magnifier at left, example query exactly "zzz" and a small gray X clear icon at right. The nonempty query makes this a SEARCH-empty state, distinct from zero collected pets. Under it, a modest smaller version of the NEW index-card/magnifier illustration, followed by exact text on two comfortable lines:
+"当前范围里没找到。"
+"试试宠物名，或换个筛选。"
+Do not show fake pet results, say the owner has no pets, or add a new upload/claim/reset button. Existing filters/actions remain outside this fragment. No unrelated data or duplicated full card grid.
+
+Readability/layout guidance: header within top 120px; main art around y=170–375, labels/captions to y=460; lower section starts around y=530, cards and text end by y=930; footer around y=985 with good safe margin. The collected Deedee card should preserve its portrait/name/owner arrangement. Middle zero-collected section must retain two genuine name+silhouette cards. Right no-results copy wraps naturally without truncation.
+
+Footer exact text: "完整收工并保存后自动收集 · 未收集保留名字＋剪影 · 数量与搜索内容为示例"
+
+Critical semantics: seeing, clicking, uploading or merely entering the board does not collect a pet. Collection requires actual service, full round completion and successful save. No owner disclosure for uncollected pets, no fake all-collected badge, no new reward/rarity, manual claim, unread state, additional step, fish collection or new achievement. This batch contains exactly THREE new subject designs; the pet sticker, standard search icon and card structures are retained sources. One polished static review image, no implementation.

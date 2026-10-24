@@ -1,0 +1,18 @@
+Built-in ImageGen. Final image was generated in two calls. The first call created the three-icon sheet; the second edited that output. The three user-supplied images were visual style references: common-function-icons-v1.png, collection-marks-original-v1.png, and home-entry-icons-v3.png.
+
+Generation prompt:
+
+Generate a single original horizontal concept sheet for three supplementary MoeGo UI icons. Match the three images visible in this conversation (IMAGE1 common-function-icons-v1, IMAGE2 collection-marks-original-v1, IMAGE3 home-entry-icons-v3) in line style, proportions and colour: thick yet smooth rounded charcoal-black outlines, MoeGo orange #f96b1c, warm cream-white, slight soft dimensional layering, matte and no strong highlights.
+CRITICAL CANVAS REQUIREMENT: the entire rectangular image, including all four corners and every gap between icons, is an OPAQUE solid pure white #FFFFFF canvas. NO transparency, no black background, no dark canvas. Small Chinese labels must appear as readable charcoal text on this white canvas.
+Composition: exactly three independent icons in one level horizontal row, equally spaced in three columns, each centered in its own generous blank white region. Exactly one small Chinese label directly under each, reading in left-to-right order: “选中小勾”, “向前箭头”, “未收集”. No other text, headings, watermark, frame, UI component or page furniture.
+Left icon: a simple solid circular disk in #f96b1c with thin charcoal outline, and a thick, high-contrast white checkmark in the middle. Clear at 32 px. Absolutely no square or bookmark shape.
+Middle icon: compact right-pointing chevron › or short right arrow. Use the same soft rounded arrow design language as IMAGE1's orange left-arrow icon, with charcoal outline and orange fill or orange stroke. Clear at 20 px and appropriate after a text button.
+Right icon: uncollected bookmark, an exact stylistic partner to IMAGE2's orange collected bookmark: same familiar folded-corner/ribbon outer silhouette and proportions, pale gray-white fill, charcoal outline, with a single pale gray horizontal dash or hollow dot at center. It should be quiet. No checkmark or orange fill.
+Only add the tiny two orange accent strokes near an icon's upper right if truly needed. Do not add texture, gradient, vignetting, shadows on the backdrop or borders.
+
+Edit prompt (input: the generated image from the preceding call):
+
+Edit the provided concept sheet. Preserve the three-icon horizontal layout, all three icon designs, sizes, positions, and the exact Chinese labels “选中小勾”, “向前箭头”, “未收集”. Make exactly two changes:
+1. Replace the ENTIRE background, including all corners and every white gap around and between icons, with a perfectly uniform, fully opaque, flat RGB #FFFFFF. No off-white pixels, texture, gradient, noise, vignette, transparency, or shadows on the backdrop. Keep clean icon edges and readable dark labels.
+2. On the third pale-gray uncollected bookmark icon, add the small folded top-right corner visible on the orange collected bookmark in IMAGE2 from the original user references. Match that outer silhouette while preserving pale gray-white fill, charcoal outline, centered pale gray horizontal dash, and subdued mood. Do not add orange to this icon.
+Do not add any other text or elements. Preserve the rounded charcoal outline and matte orange-and-white style of the three original user reference images.

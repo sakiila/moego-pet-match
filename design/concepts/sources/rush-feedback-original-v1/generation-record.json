@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-23",
+  "batch": 5,
+  "status": "approved",
+  "tool": "built-in image_gen",
+  "direction": "Approved charcoal-outline/orange-white matte family; light active poses",
+  "concept": "design/concepts/rush-feedback-original-v1.png",
+  "original": "original.png",
+  "full_prompt": "../../rush-feedback-original-v1-prompt.txt",
+  "sha256": "6cb1aa7e6c82fd6479c1efc512b2a10afc9979638daaf6d7d95c35468e390df9",
+  "reference_images": [
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/common-function-icons-v1.png",
+      "archived": "reference-common-function-icons-v1.png",
+      "sha256": "f705bbaa1a10bf729a08b683a619188baa38a981aa6d71487f4334b316e69bbb"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-family-original-v6.png",
+      "archived": "reference-tool-family-original-v6.png",
+      "sha256": "952dc693e1819701e139e1d0a97994a1add9b563a3aa777c25b95faf130860e1"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/reviews/2026-10-23-components/03-rushbar.png",
+      "archived": "reference-03-rushbar.png",
+      "sha256": "11105edb9cb0072aacc20d06f4c25e5c86e93cf098a1f75ed4deb3dba91c5987"
+    }
+  ],
+  "icons": [
+    "urgent order ticket with full horizontal clip",
+    "complete rounded-square success mark with enclosed green check",
+    "quiet expired ticket"
+  ],
+  "review_checks": [
+    "All clip, paper corners, complete success frame and check arms inside the canvas",
+    "Charcoal/orange/ivory light material and three distinct state treatments",
+    "Normal and fish use the same three artworks",
+    "Active examples correctly separate rush remaining 8 seconds from target/progress",
+    "Normal 7/12 progress about 58%; fish 6/12 about 50%",
+    "Success shows fixed +100; expired has no deduction, penalty or action button",
+    "Active, success and expired strip footprints visually consistent; not integrated UI or exact implementation dimensions",
+    "No new rules, mode entries, extra collection or reward"
+  ],
+  "scope": "Static design review only; no final transparent asset export, game implementation, animation implementation or deployment.",
+  "approval": {
+    "date": "2026-10-23",
+    "user_feedback": "可以"
+  }
+}

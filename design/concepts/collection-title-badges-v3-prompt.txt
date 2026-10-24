@@ -1,0 +1,58 @@
+Use case: ui-mockup
+Asset type: Full collectible title badge family preview, version 3, for the MoeGo Pet All-Stars game.
+Primary request: The user APPROVED the lively cat/dog/rabbit group-selfie style in reference image 1 and wants the OTHER SIX badges redesigned to match it. Deliver ONE coordinated preview board of all SEVEN badges, including the already approved cross-species badge for comparison. No application implementation.
+
+Reference image 1: collection-title-cross-species-v3.png is the AUTHORITATIVE style and character model. Follow its mischievous cat, joyful dog, large clear faces, dynamic tilts, ivory negative-space separations, thick orange scalloped seal, sparing charcoal facial features, warm ivory fill and flat sticker-art craft. Preserve that exact approved cat/dog/rabbit group and its expressions in the cross-species badge; do not revert it to generic little heads.
+Reference image 2: collection-title-badges-v2.png supplies ONLY the seven exact title names, 4+3 collection-board layout, title-chip format and state samples. Its stiff monochrome pictograms are obsolete. Substantially redesign its OTHER SIX emblem interiors using the characterful style of image 1.
+
+Output: one landscape 2400 x 1800 px preview board (4:3), airy warm-white background. Exactly seven badge designs in a 4 + 3 grid with second row centered, all at equal visual scale. Small heading "收集称号 · 徽章预览". Beneath each large badge put its exact title, then the corresponding miniature horizontal wearable title chip. No phone frames, no whole app screenshots, no photos, no decorative cards enclosing every item. Save space for a slim bottom usage strip.
+
+Shared family design:
+- Identical broad eight-lobed ORANGE scalloped seal shape for all seven, warm ivory inside. Clean, substantial outline, similar stroke weight, consistent badge diameter.
+- Bright orange #f96b1c, ivory #fff5e9, charcoal #1f2227 used mainly in expressive eyes, nose and mouth. Clean white keylines and gaps between subjects.
+- Bold near-vector flat sticker illustration, slightly avant-garde, fun, confident, a little cheeky; not generic interface pictograms. No glossy 3D, metallic materials, gradients, neon, esports shields, crown rankings or extra rarity tiers.
+- Large readable subjects fill approximately 70–85% of the seal. Let ears, paws or a prop playfully interact with the inner border while preserving one cohesive silhouette.
+- Heads and props can overlap naturally, but retain clear ivory separation so no animal becomes an orange blob.
+- Distinctive head angles and expressions like independent character sticker art; dynamic without an explosion of small ornaments.
+- Clear silhouettes and simple expression shapes come first. Keep the title-chip versions recognizable when small. Do not simply squeeze all illustration detail into a tiny stamp.
+- Reuse the approved CAT character (orange, pointed ears, half-lidded cheeky eyes) and DOG character (ivory face, orange floppy ears, happy tongue-out mouth) wherever those characters occur. Rabbits have very long unmistakable ears.
+- Horizontal title chip = small seal at left joined to slim rounded ivory label with fine orange border and dark rounded Chinese lettering. Titles should remain secondary to a player name in UI.
+
+Seven designs, in reading order:
+
+TOP LEFT — "猫猫亲友团":
+A pair of CAT FRIENDS squeezing into a selfie. Front cat is the approved orange half-lidded mischievous cat with a tiny confident smile, head tilted. Its companion is an ivory cat with orange ears, rounded laughing closed eyes, leaning cheek-to-cheek from behind. Both have pointed cat ears, clearly two cats, distinct faces and coat blocks. Friendly, irreverent cat-club energy. No dog, rabbit or bird. No plain single generic cat pictogram.
+
+TOP SECOND — "汪汪好朋友":
+Two DOG BUDDIES leaning happily together. Foreground is the approved ivory dog with big orange floppy ears and tongue-out smile; companion is a warm-orange dog with ivory muzzle and one ear flopped at a different angle. One can be slightly winking. Big readable round muzzles and droopy ears, different playful head tilts, ivory gap between them. No cat or rabbit. Keep anatomy clean, no extra eyes or tongues.
+
+TOP THIRD — "毛孩子熟人":
+A lively HELLO / HIGH-FIVE PAW greeting. Two chunky animal paws coming from opposite lower corners to meet in a friendly high five at the center, one ivory paw with bold orange pads and one orange paw with ivory pads, with a single energetic little flash at contact. Prominent simple paw-pad silhouettes, slightly tilted dynamic composition, round friendly limb shapes. No human hand or handshake, no tiny repeated paw-print pattern. It should convey familiar friends greeting each other rather than a static generic paw icon.
+
+TOP RIGHT — "跨物种交友家":
+Keep the APPROVED three-character group selfie from reference 1: orange cheeky cat at lower left, ivory joyful floppy-eared dog at lower right, curious long-eared rabbit peeking between them at center/back. Preserve their shapes, expressions and color balance faithfully. This is the style anchor, not a new variant. Three species, three separate clearly readable heads, a small greeting spark at top right.
+
+BOTTOM LEFT — "串门小能手":
+The approved cheeky DOG is VISITING, peeking around a jaunty half-open ORANGE DOOR, lifting one oversized paw to knock hello. Show a clear open doorframe and the dog's expressive face; dog leans sideways with floppy ear and tongue-out smile. One tiny knock motion accent. Friendly silly visiting moment. Doorway is the core silhouette, no roof or family group, no three-dot trail that dominates the icon. Keep the door and face big enough for a small badge.
+
+BOTTOM CENTER — "一家都熟":
+A cozy FAMILY GROUP, the approved cat and dog pressing cheeks together under a simple thick orange HOUSE ROOF, with a small orange heart between/above their faces. Both look content, cat can have softened half-lidded eyes, dog smiling eyes. The roof is unmistakable and big, not an entire detailed house facade. No rabbit, no open doorway; family warmth distinguishes it from visiting and cross-species. Keep faces large and ivory-separated.
+
+BOTTOM RIGHT — "全员点名成功":
+A chunky OPEN STICKER ALBUM tilted playfully, pages slightly curling, orange cover/outline, ivory pages. On its pages two large finished animal sticker portraits, cat on one side and dog on the other, plus one small bold completion-check stamp at the lower corner. A curious cat ear/head can peek over the top edge only if this stays uncluttered; omit if crowded. The ALBUM must remain the dominant instantly readable shape. A single tiny celebratory flash. No numbers, rank crown, medal, tiny text or spreadsheet-like grid. It feels like proudly finishing a treasured sticker book.
+
+Bottom usage strip:
+Separate with one light divider. Show the redesigned CAT-FRIENDS badge as a horizontal title chip in THREE states, with small labels:
+"已解锁" = orange/ivory.
+"未解锁" = exact same geometry in calm gray/light-gray, legible dark-gray title.
+"佩戴中" = normal orange/ivory plus a SMALL external orange circle-check state marker, not a different internal design.
+At far right one modest name example: "Bob" above a small "猫猫亲友团" title chip. Do not add 32px/48px measurement claims; these are conceptual usage samples only.
+No progress bars, unlock conditions, new title names, new rewards, animation, code or whole-screen UI.
+
+Typography: match the product's rounded Chinese headline and body style. All seven title strings must be crisp and exact, especially "猫猫亲友团", "跨物种交友家", "一家都熟", "全员点名成功".
+Inspect composition for clear cat/dog species, legible props, clean paws, readable small chips, balanced internal visual weight and consistent seal family. Deliver only the final complete preview image.
+
+Retry history: Two identical built-in image_gen requests using both references failed with connection errors before producing an image. For the next attempt, use only collection-title-cross-species-v3.png as the visual reference and replace the reference-2 paragraph above with:
+Use ONLY the attached approved group-selfie image as visual reference. The other six badge subjects, exact title names, overview layout and state examples are fully specified below. Redesign those six from scratch to share the approved characterful style.
+
+Generation record: The single-reference built-in image_gen attempt succeeded on 2026-10-24. Actual output 1448 x 1086 px, saved as collection-title-badges-v3.png. Six redesigned badges are shown together with the approved cross-species group-selfie motif; miniature title chips and three conceptual wear states are included. This is a preview awaiting per-badge review, not a production asset export or browser size test. No application code changed.

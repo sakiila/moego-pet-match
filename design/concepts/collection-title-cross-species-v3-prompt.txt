@@ -1,0 +1,29 @@
+Use case: ui-mockup
+Asset type: Focused redesigned badge preview for ONE MoeGo collection title, "跨物种交友家", third visual revision.
+Primary request: The last two versions were too generic and hard to read. Create a moderately avant-garde, FUN, distinctive collectible badge with real character, while remaining part of the approved orange/cream scalloped badge family. This is a substantial redesign of this ONE badge, not another tiny adjustment to the three-head row.
+
+Reference image collection-title-badges-v2.png: preserve the family relationship (warm orange, ivory, playful scallop outline, rounded lettering), but intentionally replace its TOP-RIGHT cross-species icon. Do not copy that rejected three-tiny-heads arrangement. Do not reproduce the entire seven-badge board or redesign the other six.
+Output one polished landscape 1600 x 1200 px focused design presentation on warm white, no phone, no whole app UI, no stock mockup, no watermark.
+
+Creative concept: THREE PET FRIENDS CRASHING A PHOTO BOOTH SELFIE — bold, witty, slightly mischievous collectible sticker art. They lean into the same frame with exaggerated recognizable faces and playful asymmetry, like a modern independent character sticker collection. NOT minimalist generic pictograms, NOT a rigid row of heads. Fill most of the seal with the animal group; do not leave an enormous empty flower border.
+Use a CAT, DOG and RABBIT rather than a bird: their ear silhouettes should make the three species instantly distinct, even when small.
+- Lower LEFT: sharp triangular-eared CAT, angular cheek, confident half-lidded expressive eyes, cheeky little smile; bright orange face with ivory facial cutouts.
+- Lower RIGHT: floppy-eared DOG, big rounded muzzle, a joyful tongue-out grin; mostly ivory face, bold rounded orange contours, orange tongue.
+- Taller at CENTER/BACK: long-eared RABBIT, two VERY LONG unmistakable upright ears, wide curious eyes, slightly tilted head peeking between cat and dog. Orange ear tips or orange/ivory blocks, small simple nose. The rabbit is a real readable animal, not a fourth abstract shape.
+The animals can touch or slightly overlap like friends squeezing into a selfie, but each face must have its OWN uninterrupted readable silhouette. Give ivory/white negative-space gutters or clean die-cut keylines between the faces so they NEVER merge into an orange blob.
+Exactly three animals, each with two eyes and clear ear structure. Avoid unnecessary small whisker lines, fur textures, extra paws, props, feathers or secondary symbols. Expressions and silhouettes carry the fun.
+Composition is a dynamic triangular group, with heads tilted by small different angles. Animal heads should be 2–3 times larger relative to the border than in the rejected tiny-row badge.
+A tiny single orange flash/spark near one top corner is acceptable. No scattering confetti or multiple decorative rays.
+Keep the familiar broad 8-lobed flower/scallop seal outline and warm ivory fill. Allow the rabbit's ear tips or the cat's ear to playfully break slightly across the seal's upper inner border for a contemporary die-cut sticker feeling, while keeping one clean overall emblem silhouette.
+Use mainly #f96b1c orange, warm ivory #fff5e9, with SPARING dark charcoal #1f2227 in eye pupils or tiny expression accents only. Strong flat color blocks, bold rounded edges, smooth curves, minimal contact shadow, tasteful near-vector character illustration. The design should be lively and slightly art-toy / indie-sticker inspired without turning into 3D, chrome, neon, cyberpunk, gradients, luxury medals, rank shields or a professional esports logo.
+
+Presentation:
+- One LARGE finished emblem on the left taking about 55% of the board width, large enough to judge the new cat/dog/rabbit expressions.
+- On the right, exact rounded Chinese title "跨物种交友家", then a real wearable horizontal title chip: a miniature version of this same emblem attached to a slim ivory rounded pill with orange border and dark title text "跨物种交友家".
+- Underneath show the SAME emblem at 48 px and 32 px typical interface sizes, each with small quiet labels "48 px" and "32 px". At small sizes simplify eye and mouth details, retain the three distinct ear silhouettes and the ivory separation.
+- At bottom right a tiny name/leaderboard usage example with name "Bob" and the miniature "跨物种交友家" title chip on the line beneath. Use that to show it remains subordinate to a person's name.
+- Do not add explanatory marketing paragraphs, new achievement names, unlock thresholds, new currencies or states. No side-by-side alternatives; this is one strong resolved new concept.
+Text must be accurate, especially "跨物种交友家". Be playful and genuinely visually distinctive; prioritize immediately legible CAT + DOG + RABBIT and lively expressions over tiny pictogram detailing.
+Deliver only the complete focused preview image.
+
+Generation record: Built-in image_gen, 2026-10-24. Actual output 1448 x 1086 px, saved as collection-title-cross-species-v3.png. A focused cat/dog/rabbit group-selfie redesign; the other six badge artwork files were not changed. The 48 px / 32 px labels are conceptual usage illustrations, not measured browser-rendered QA. No application code changed. Awaiting user review.

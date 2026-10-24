@@ -1,0 +1,74 @@
+Selected output: revision 2 (third generated image). Revision 3 was inspected and rejected because it changed the fixed C/S occupancy map; it is retained below as part of the complete request history.
+
+【Initial image request — selected output lineage】
+Use case: precise-object-edit
+Asset type: MoeGo Petdex sticker-sheet mobile UI concept, version 2
+Input image: the attached petdex-sticker-sheet-v1.png is the exact edit source. This is a targeted revision, not a redesign. Output one complete image at exactly 853 × 1844 pixels, same framing and canvas.
+
+Edit ONLY the contents of the 8-column × 10-row grid on the cream paper, and only in these ways:
+1. Every one of the existing 38 full-color collected pet-head stickers gets a conspicuous clean, smooth die-cut WHITE border, about 6–8% of sticker diameter; scale the pet head down slightly within its existing cell as needed. Rotate each sticker by a small unique angle between −6° and +6°, with adjacent stickers avoiding the same direction, and add a very subtle realistic paper-contact shadow. Preserve each existing pet's exact face, fur, color, breed, identity, and cell position. Never let a sticker cross its dashed cell border.
+2. Replace the shapes of the existing 42 light-gray uncollected head silhouettes with a varied random mix of animal-head outlines: pointed-ear cats, round-face short-haired cats, floppy-ear beagles or cockers, upright-ear corgis or Shiba Inus, long-ear rabbits, hamsters, parrots or cockatiels with crest feathers, curly-haired small dogs. Mix these across the sheet. Keep every silhouette pale gray, solid flat fill, with no facial features, no outline, no rotation, and retain each cell's very faint rounded dashed placeholder frame.
+
+The occupied-cell map is LOCKED. C = original colorful sticker, S = pale-gray silhouette; columns 1–8 left to right, rows 1–10 top to bottom:
+row 1: C C S S C C S C
+row 2: C S C C S C S S
+row 3: S S S C S S C S
+row 4: C S C S C S C C
+row 5: C S S C C S C S
+row 6: C S C S C C S S
+row 7: C S S S C S C C
+row 8: C S C S S S C S
+row 9: S C S C S S S C
+row 10: C S S S C C S C
+This is exactly 38 C and 42 S. Do not change a cell's status or content identity, add or remove any row/column, change any cell's size or position, or shift the grid.
+
+Preserve as closely as possible every other pixel of v1: the 853 × 1844 canvas, white background, MoeGo logo, top bar with 回门店 and 中 / EN, black title 宠物图鉴 and orange accent strokes, outlined button 添加我家毛孩子 +, progress line 已收集 38 / 80 位毛同事, two tabs 列表 / 贴纸册 with 贴纸册 selected, cream paper with rounded corners, paper texture and orange tape at upper left, and the footer 按宠物名排序 · 点贴纸看详情. Keep all Chinese glyphs crisp and exact. Do not introduce any other changes, words, numbers, badges, stars, medals, portraits, fish, or extra decoration.
+
+【Revision 1 — selected output lineage】
+Use case: precise-object-edit
+This is a LOCAL REVISION of the attached first v2 candidate, not a new page. Keep the entire 853 × 1844 image visually unchanged except the HEAD SHAPES inside the existing 42 light-gray silhouette cells. Keep every colorful pet sticker exactly as it appears now, including its white die-cut border, tilt and shadow. Keep the row and column grid, every dashed placeholder frame, paper, tape, and all interface text/pixels outside silhouettes unchanged.
+
+Improve the 42 existing gray silhouette heads: they currently repeat the same generic cat, floppy dog and rabbit several times. Give EACH silhouette its own visibly distinct pet-head contour while retaining a coherent set and all in identical very pale-gray solid flat fill, no facial features, no stroke, no rotation, no shading. Use varied ear, cheek, head, muzzle and crest outlines so neighboring silhouettes are unmistakably different. Include clear head-only examples of cockatiel with tall crown feathers and small hooked beak, parrot with rounded crown and hooked beak, curly-coated small dog with scalloped outer contour, cocker spaniel with very long soft floppy ears, beagle, corgi, Shiba Inu, pointed-ear cat, round short-haired cat, long-ear rabbit, hamster. Keep the gray shape inside each existing cell and preserve all 42 silhouette positions. Do not add any colorful sticker, text, number, badge, star, medal, person or fish.
+
+Check this locked 8 × 10 status map (C = existing colorful sticker, S = existing gray silhouette):
+1 C C S S C C S C
+2 C S C C S C S S
+3 S S S C S S C S
+4 C S C S C S C C
+5 C S S C C S C S
+6 C S C S C C S S
+7 C S S S C S C C
+8 C S C S S S C S
+9 S C S C S S S C
+10 C S S S C C S C
+Exactly 38 C, 42 S. All Chinese text must remain crisp and exactly as already shown.
+
+【Revision 2 — selected output lineage; selected result】
+Precise-object edit of the attached complete MoeGo Petdex sheet (the CLEANER first v2 candidate). Keep its 853×1844 canvas, all UI text, paper, dashed frames, and all 38 colorful white-bordered tilted pet stickers exactly as shown. Change ONLY the pale gray filled head silhouette INSIDE each of the 42 existing S cells. Keep them flat, soft light gray, faceless, outline-free, unrotated, and inside their own dashed cell.
+
+The first v2 candidate repeats cat/dog/rabbit gray heads. Make a visibly diverse COLLECTION of head silhouettes across the 42 existing gray cells. Keep all existing C/S statuses. Explicit placements (row,column, species contour) for selected empty cells:
+(1,3) pointed-ear cat; (1,4) cocker spaniel with long floppy ears; (1,7) long-ear rabbit;
+(2,2) upright-ear corgi; (2,5) ROUND hamster head with small round ears; (2,7) curly-coated poodle head with scalloped fur; (2,8) cockatiel head with narrow crest feathers and curved beak;
+(3,1) foxlike Shiba head; (3,2) rabbit; (3,3) beagle with short drooping ears; (3,5) PARROT head with hooked beak; (3,6) shaggy terrier; (3,8) rabbit;
+(4,2) short-haired cat; (4,4) long-haired cat with furry cheek edges; (4,6) cockatiel crest head;
+(5,2) spaniel; (5,3) hamster; (5,6) curly poodle; (5,8) corgi;
+(6,2) beagle; (6,4) pointed cat; (6,7) parrot head and hooked beak; (6,8) hamster;
+(7,2) Shiba; (7,3) long-eared dog; (7,4) round-faced cat; (7,6) rabbit;
+(8,2) cocker; (8,4) short-haired cat; (8,5) cockatiel with crest; (8,6) fluffy small dog; (8,8) corgi;
+(9,1) hamster; (9,3) poodle; (9,5) beagle; (9,6) rabbit; (9,7) parrot;
+(10,2) cat; (10,3) rabbit; (10,4) spaniel; (10,7) Shiba.
+Give repeated species subtly different contour proportions (ear angle, head width, cheek fullness, crest length) so no two are identical. Do NOT introduce facial features or extra detail. Nothing else in the picture should change; text must remain crisp, accurate Chinese. Grid remains exactly 8 columns and 10 rows, with 38 colorful stickers and 42 gray silhouettes, all at their original positions.
+
+【Revision 3 — attempted, rejected; not reflected in selected result】
+Precise local edit of the attached Petdex sheet. This is a final refinement. Keep ALL colored stickers, their clean thick die-cut white edges, their pet faces and tilts, every dashed cell frame, all UI text, paper, tape and outer page unchanged. Keep exact 853×1844 framing and the exact 8×10 grid; 38 colorful collected stickers, 42 pale-gray uncollected silhouettes at their current cells. Edit only these currently repetitive light-gray silhouettes, keeping the same pale solid flat fill with no face, stroke, tilt, or shadow:
+- Row 2 column 5: round HAMSTER head with two small circular ears, fuller cheeks, no pointed cat ears.
+- Row 5 column 3: another round HAMSTER head, broader cheeks and smaller ear separation.
+- Row 6 column 8: plump round-faced HAMSTER head with ears set wide.
+- Row 9 column 1: small round HAMSTER head with plump cheeks.
+- Row 1 column 3: distinctive slender pointed-ear cat head, narrower than the other gray cat heads.
+- Row 5 column 8: wide upright-ear CORGI head with angular cheek outline.
+- Row 7 column 4: broad round-face short-haired cat, tiny rounded ears.
+- Row 8 column 8: Shiba Inu head with broad triangular ears and fuller jaw.
+- Row 10 column 7: smaller pointed-ear cat with outward cheek tufts.
+These shapes should be clearly distinguishable from each other and from their immediate neighbors; keep each fully inside its own existing cell. Leave every other silhouette exactly as is, including bird crests, rabbits, floppy-eared dogs and curly-coated dogs. Preserve exact Chinese text. No new text, numbers, badges, stars, medals, humans, or fish.
+

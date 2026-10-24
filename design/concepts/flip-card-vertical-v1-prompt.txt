@@ -1,0 +1,12 @@
+User request: 这个翻转图标我希望是竖向的，而不是现在这种横向的，重新设计一版
+Tool: Codex built-in image_gen; transparent_background=true
+Reference: assets/icons/library-original-png-v2/masters/02-common/flip-card.png
+Status: New design preview; not yet selected or integrated into the game.
+
+Use case: precise-object-edit.
+Asset type: one transparent PNG UI icon, a redesigned vertical portrait-card flip affordance for the bottom-right corner of a collectible pet card, rendered at only 28 px in a web app.
+Input image: the attached image is the current horizontal flip-card icon and is the style/edit reference.
+Primary request: redesign this as TWO VERTICAL PORTRAIT CARDS. Keep the existing visual identity: warm off-white front card, saturated MoeGo orange back card, thick rounded charcoal-black hand-drawn outlines, gentle asymmetric hand-drawn character, very restrained shading. The two card faces must clearly be taller than wide (each card width:height about 0.66:1). Front card in the lower-left foreground, orange back card peeking from behind at the upper-right. Retain ONE clear, compact orange curved flip arrow ABOVE the cards, with a visible transparent gap between arrow and card outlines. Match the original arrow's simple curved sideways flip meaning. The overall icon should have a portrait/tall silhouette, approximately width:height 0.72:1.
+Composition: exactly one isolated icon centered on a square transparent canvas. The icon including arrow occupies approximately 75% of canvas height. Clean generous outer transparent margins. Preserve a genuinely transparent alpha background. The only white/off-white area should be the front card surface itself.
+Small-size legibility: bold simple silhouettes and strong smooth charcoal strokes that remain about 1.5–2px at final 28px icon size, orange arrow stroke about 2px at final size. Smooth rounded corners and a compact clearly readable arrowhead. Subtle irregularity consistent with the reference. Keep card faces blank.
+Constraints: no outer circle, no white circular backing, no badge, no text, no letters, no watermark, no additional decoration, no hands, no pet, no literal 90-degree rotation of the original horizontal icon, no photorealistic rendering, no glow. Deliver one polished icon, not a contact sheet or UI mockup.

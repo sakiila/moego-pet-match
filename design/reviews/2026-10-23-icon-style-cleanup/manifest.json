@@ -1,0 +1,1535 @@
+{
+  "date": "2026-10-23",
+  "status": "deleted_and_absence_verified",
+  "authorization": "User: 可以，继续设计下一批，然后把之前设计的高光类型都删掉",
+  "scope": "Obsolete glossy icon/tool/reward/feedback/illustration batches and their derived previews/prompts/source files. Original page designs, pet content and approved home v3 are retained.",
+  "targets": [
+    "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2",
+    "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1",
+    "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/operation-status-v1",
+    "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1",
+    "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1",
+    "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1",
+    "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1",
+    "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2",
+    "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/rush-feedback-v2",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/leaderboard-marks-v1",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/operation-status-icons-v1",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v1.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v1-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v2.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v2-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-comparison-v1.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-comparison-v1-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-comparison-v2.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-comparison-v2-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/fish-ocean-tools-v1.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/fish-ocean-tools-v1-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/report-reward-marks-v1.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/report-reward-marks-v1-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/peter-fish-invitation-v1.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/peter-fish-invitation-v1-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-feedback-v1.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-feedback-v1-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-feedback-v2.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-feedback-v2-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-urgent-ticket-v2.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-urgent-ticket-v2-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-completion-mark-v2.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-completion-mark-v2-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/leaderboard-marks-v1.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/leaderboard-marks-v1-prompt.txt",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/operation-status-icons-v1.png",
+    "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/operation-status-icons-v1-prompt.txt"
+  ],
+  "project_files": [
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/1024/collection-book.png",
+      "bytes": 725564,
+      "sha256": "83a481e8e0f06f1fe162581f6d56c305e27bc4328254395cf2bc618b77a4c764"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/1024/paw.png",
+      "bytes": 697895,
+      "sha256": "1070006fc733f1f02210f70d46a6c908c1ea022f773e0880410636e6f37ebc46"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/1024/pet-shop.png",
+      "bytes": 796519,
+      "sha256": "e372402bafa677bd946d0359398d718a86135234db015c303b52548f2cce3d41"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/1024/star-trophy.png",
+      "bytes": 751325,
+      "sha256": "7c11ea6f2ff1feb1015c1137b1fb0c7c6f857b0a792f8ef2e17b0faf1351948d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/128/collection-book.png",
+      "bytes": 18979,
+      "sha256": "238afeeaf88c27be7f0dfba42deaa2aee546156d0dc213708e6d01878b9fceca"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/128/paw.png",
+      "bytes": 18732,
+      "sha256": "f2d2625e1bece729a1df77c5dd27ff0c19ed2a53fa24c8d5a956e17e6461805c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/128/pet-shop.png",
+      "bytes": 20312,
+      "sha256": "fd6b16dacb92f70d7b95f7b4ef67edbe820a205ff6bff156f856be058ae2e3bb"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/128/star-trophy.png",
+      "bytes": 19410,
+      "sha256": "d567cceb65294450817be44bcfe68644c4dca71c761d34473f3f22edb6ee6ea7"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/512/collection-book.png",
+      "bytes": 209921,
+      "sha256": "a7c8ad1c10f28593e788f2e30ed713167ab889d6ca9e9816c9f8c1637094333d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/512/paw.png",
+      "bytes": 204313,
+      "sha256": "8ec4e7f38cdde4ed42894ab367c69f46dcb865c8880c2fa5108eb4086f5e6252"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/512/pet-shop.png",
+      "bytes": 234516,
+      "sha256": "ca3e1c8301a38557665dcf46fedabb4fe555345fe1e0c1bef7414bd7dd24823b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/512/star-trophy.png",
+      "bytes": 219913,
+      "sha256": "8841c712f7bc69b29df96052c081272cdb9617d26da28dc54a3cd1d3ac4abe5c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/README.md",
+      "bytes": 1560,
+      "sha256": "08e5439daf5de10e632b2ae4d15140c562dcda19186bd96b7c2879b82cf868dc"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/comparison.png",
+      "bytes": 1243641,
+      "sha256": "7ddbb139e8797f230e60f2c2227f9cf61f87bcc5c887bd9d41f7443d5f6b3dc8"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/home-entry-icons-v2-transparent.zip",
+      "bytes": 2926620,
+      "sha256": "e16af2926677a41b95f3821694245fd273750900b775c45f55b3b7a209d9cccd"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/manifest.json",
+      "bytes": 7656,
+      "sha256": "65a96b648d75226fca8b56b504082dd9ce104529c4dd472426b6270fc1ab4839"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/processing.json",
+      "bytes": 2737,
+      "sha256": "6e281da322ecede9f35b4f1a6b30e3d9ddaa98698af52017ce1a41d482529218"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/source/collection-book-prompt.txt",
+      "bytes": 2630,
+      "sha256": "1efd4997ce8f846ed62818d2e8eb5cde4de7ede53731fa59e8f6e9ce7c3bc230"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/source/collection-book.png",
+      "bytes": 968917,
+      "sha256": "ad12862d8cdbf9d8e13c0f528b1cd34a87af34a465bbfec7927f5509706b5db7"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/source/generation-record.json",
+      "bytes": 13610,
+      "sha256": "45ca0efb80b331aca397f119ca0615cc5fc78fe472aa0ab012a9ec84aec35497"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/source/paw-prompt.txt",
+      "bytes": 2517,
+      "sha256": "d69f6ade7cc259950c6eee87b1ea40fa123a57988ec0e3784c873a73762fd460"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/source/paw.png",
+      "bytes": 1021169,
+      "sha256": "7decb6496e4a0ba755b8019978fbdd536354980a89e13038da265644e80883a3"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/source/pet-shop-prompt.txt",
+      "bytes": 2655,
+      "sha256": "22a53dd730c7a596c903152f36de80620578989533ea2fdf2015ded0df917ee4"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/source/pet-shop.png",
+      "bytes": 950758,
+      "sha256": "0103227cdcf6d38e376e3100e40cb7545203854d325ceaa0383f670278b3b63b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/source/star-trophy-prompt.txt",
+      "bytes": 2549,
+      "sha256": "ad8a3a7882965d20a39ae04b3efaa6dcb6124b6d5a9bbd421a2c0da1b9a0fe3c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/source/star-trophy.png",
+      "bytes": 876374,
+      "sha256": "7eec28d1e1cd07a301d082615cdf4ea8b8f4215d4484757f1e06081fb95f0f1f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-png-v2/transparent-sheet.png",
+      "bytes": 931661,
+      "sha256": "4777a5d83a3443f517dd8f166eadcca80640a7ea1dd4ac903707ab7a800ac5a2"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/README.md",
+      "bytes": 2988,
+      "sha256": "e4bfd8a0d653c2a0e07a5175bf606baebcae93a27b1d5919229ba1b5dc3f8e00"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/browser-preview.png",
+      "bytes": 89345,
+      "sha256": "93a1afd1293aa8143b4c20c3eb08a1340aeaeb9ee73d068c8e1f28d1d34b179a"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/manifest.json",
+      "bytes": 3977,
+      "sha256": "798b4288a9560d834b2323eb5f4d2eee69a96b19ef2012c2082d6a179cdc8744"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/preview.html",
+      "bytes": 4667,
+      "sha256": "24f9d597faace4852914c8e6880fb7fb4616df10ff294feeb75ce07859776b8e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/128/collection-book.png",
+      "bytes": 11029,
+      "sha256": "acf0524da67c17ae006b26bcfac39816e1f4b0104007bc8cc0717eb1818fb30a"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/128/paw-white.png",
+      "bytes": 2020,
+      "sha256": "0a0aec2d2b4c241a3a0d78ad410311807c38e430bffd55216b36d2e72adbeeef"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/128/paw.png",
+      "bytes": 8653,
+      "sha256": "5e5e94c163b8e139ce6b52326dc26d13da5c0923b715622f552527fab48f4a5c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/128/pet-shop-compact.png",
+      "bytes": 6257,
+      "sha256": "cfde5b9cfa520b8b8539a71963a3b28ec0db13f8bc093b0c99efdee153121409"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/128/pet-shop.png",
+      "bytes": 6856,
+      "sha256": "8acd6b4b3dc563f11edc2c4b7681ca6ca4baa18d9822b51a8abb20e9011b9271"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/128/star-trophy.png",
+      "bytes": 8732,
+      "sha256": "e78d9b9286670c145b2f4139092905f0ad042148e43a1b202cd6bd9bc462f57f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/256/collection-book.png",
+      "bytes": 23128,
+      "sha256": "fbea1db6f8acc081ae488f26fb9b0e93726c55497fe014a705c11e08a4348715"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/256/paw-white.png",
+      "bytes": 4269,
+      "sha256": "e59b5e63fe0f00359feacaa0111b48c7ec8e8d58d15176972f45890da59bd179"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/256/paw.png",
+      "bytes": 17745,
+      "sha256": "a7411b8aff2d0ac4b244544864abd31ee83ae8232537aa4ef0a4d00d1085b4af"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/256/pet-shop-compact.png",
+      "bytes": 12666,
+      "sha256": "9e4f3df67954a7bb841705f3b76c63865d453157675b58dcfc797ce1571f899b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/256/pet-shop.png",
+      "bytes": 13982,
+      "sha256": "66a9d2b8ba5ac45a3f618540c4673236748bcb95088f92b2de659dcdf06d8a78"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/256/star-trophy.png",
+      "bytes": 18358,
+      "sha256": "bf2e4dbf6cfdef1f71cb922a8fd4dceba820cbe369be0d8718844ba7a53f1b49"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/32/collection-book.png",
+      "bytes": 2155,
+      "sha256": "af42ab16848052d313b4f46ad6c080f4cfbc025438de4ddc8fb24282f2d050a3"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/32/paw-white.png",
+      "bytes": 561,
+      "sha256": "92abdab77d0b171fc13e9275d8cd396a175b7d31a7c457c7e2d0e89c19465989"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/32/paw.png",
+      "bytes": 1782,
+      "sha256": "d00cb1296d9737cc30cdd64fa4a3b3dcde463a9906c2fd4142bac6e8a497e54f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/32/pet-shop-compact.png",
+      "bytes": 1658,
+      "sha256": "11d4a4c2f1d881ce0eb56c431406de54ce39fe0947f57491c8a79236cb72dbfa"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/32/pet-shop.png",
+      "bytes": 1719,
+      "sha256": "f0b604339d3b1f2770cb4ba3c6d18a608dc91d15a9f3217c1072f7eab3efd4fa"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/32/star-trophy.png",
+      "bytes": 1716,
+      "sha256": "286ea1072174506823b7de5cb52e25514361a4b7baeafa48c3fbecd8ac22c756"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/40/collection-book.png",
+      "bytes": 2978,
+      "sha256": "01aed5164727fffa2e3ef3cf39da88a813270538b63f3e0aaf1dc99e51627a54"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/40/paw-white.png",
+      "bytes": 687,
+      "sha256": "e364c6af4f4fc60bf4a925e89c8537a69d5ff1d96aab9a24e837399c1ca14b14"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/40/paw.png",
+      "bytes": 2388,
+      "sha256": "8d5dafb49a69a16535885a9a3f14ab8ae64bb675883b2afc6ee247965eb4a108"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/40/pet-shop-compact.png",
+      "bytes": 2153,
+      "sha256": "dcb608bfe5efaa721933e402f2a3424fd730a7ecf4a623329cdbf7ab36a7ce17"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/40/pet-shop.png",
+      "bytes": 2246,
+      "sha256": "ff4d8c02d47eb19f99e2b8c409221f8b2d8d6a2b70ad3b8a4a22f95783227106"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/40/star-trophy.png",
+      "bytes": 2310,
+      "sha256": "451affa31f2dbfc680dd54bb46fd7fd7ba7223b3b0f9ec1b5b14dc5b5ffc8eb8"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/48/collection-book.png",
+      "bytes": 3639,
+      "sha256": "2f7fd433d708f1b92a3b0fe983c977048d1954bb02e68c1be53279509e102ea5"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/48/paw-white.png",
+      "bytes": 781,
+      "sha256": "b2011548ffd93170d026b8198f7ee04fe93984545973d5719c13aba81ff66f07"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/48/paw.png",
+      "bytes": 3023,
+      "sha256": "928fa36e9063e9cee04db1ede307fa3659f7eb0ae23ed1496c94877e48d91397"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/48/pet-shop-compact.png",
+      "bytes": 2681,
+      "sha256": "a8d199c984fea9aaaaa391e67c448dc473c67079b5c519cdb0ba80a78d3241c8"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/48/pet-shop.png",
+      "bytes": 2862,
+      "sha256": "569274d7bc30370c62c027fd9d42a09a41dc625bd18b2e87fd563d6c8a403997"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/previews/48/star-trophy.png",
+      "bytes": 2975,
+      "sha256": "70deb2ae5344a91acd3c7635c52185d62b276b65a4156e2999de281d21bf9aad"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/source-record.json",
+      "bytes": 1096,
+      "sha256": "9e40273f39c4c245d625d37db447707a34181c5b283f50f94cac868c52848e0a"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/svg/collection-book.svg",
+      "bytes": 2521,
+      "sha256": "6f1856311f6e6a877b5da165d12b718ed4b7d10d3350f1dbb1dd8454847098da"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/svg/paw-white.svg",
+      "bytes": 619,
+      "sha256": "77f74f9ee4119aaa0457ae4323a897929ab172eae295e7368335d75ee4c8bb38"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/svg/paw.svg",
+      "bytes": 1392,
+      "sha256": "9ed8eb7b98ab669b8b80345ad71c2e1907848c650089379717ffde3032450104"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/svg/pet-shop-compact.svg",
+      "bytes": 2329,
+      "sha256": "2b9ee14afb0ce686e60f0b70dbc570e6b7d01dbdc59c54bdb9bc2639de027c1b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/svg/pet-shop.svg",
+      "bytes": 2503,
+      "sha256": "2f9c9026605340f79370cdc23e09a51ac1bd1a2efeb85405acb19fbda0f462c0"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/home-entry-v1/svg/star-trophy.svg",
+      "bytes": 2187,
+      "sha256": "41ed0a920739aeb2fe4d63dd431d20d7b00511359b024aeb9696818a063b7cd1"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/operation-status-v1/source/auto-shuffle-prompt.txt",
+      "bytes": 1457,
+      "sha256": "683dfa1c8985f9dbf151893a6360fab84df9fd3457c09ea61a6423661fdc73f0"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/operation-status-v1/source/back-arrow-prompt.txt",
+      "bytes": 1348,
+      "sha256": "4e843e4fd5095be71c46c6a61d5a427c8e014596cd6aa1d704d339cf89810197"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/operation-status-v1/source/settings-gear-prompt.txt",
+      "bytes": 1310,
+      "sha256": "23d1410831aa097d4159e5342dbce3790e7e84c6a0ee9c1e0b4fc830de8de75f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/operation-status-v1/source/swap-adjacent-prompt.txt",
+      "bytes": 1450,
+      "sha256": "11bd69423947752c6411077c96abdf4c66de637317ab29645cd12920ed798177"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/operation-status-v1/source/tap-adjacent-prompt.txt",
+      "bytes": 1526,
+      "sha256": "af02b80945f3403b53887e5de54a41096a664f459b56a6e661f7e6756c75a30e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/icons/operation-status-v1/source/tool-combo-prompt.txt",
+      "bytes": 1368,
+      "sha256": "bd43fbf44852341bf1518642b97259c0c9bdcf2e6594c40e405bc20a1204b148"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/1024/fish-bubble-machine.png",
+      "bytes": 850416,
+      "sha256": "7c7d297a8dfd7b10fc9c075788d97b8842ccfb8a8851b9c1feb67338fede0f82"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/1024/fish-vortex-pump.png",
+      "bytes": 876463,
+      "sha256": "9259f70ba4184a306c37587f375561a7db5bb4c2bd1346bb73f7af89704aa172"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/1024/fish-water-jet-h.png",
+      "bytes": 590500,
+      "sha256": "4db41dec31b80f6aab1ecfd40ca34e3f8173b685fc3d8c4c4d84cbf2568624ce"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/1024/fish-water-jet-v.png",
+      "bytes": 553443,
+      "sha256": "1a247736ee296633cceecf30e483a83752f6a17dcf84659bfea839174f4f1d9c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/1024/normal-comb-h.png",
+      "bytes": 610081,
+      "sha256": "7461b10c43fb90bd4c932c64edd7bd9f5c750429f54fc2641b80cb8ede5670cc"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/1024/normal-comb-v.png",
+      "bytes": 681522,
+      "sha256": "bcdb390ee807b256fb37f5442b928de02a1c228fc33a35510b9f2fdd51cbbe67"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/1024/normal-hair-dryer.png",
+      "bytes": 553201,
+      "sha256": "d9aec2bc8f609022e7a91d03f69f310ebf4b8436e318ab8e2472eba07df937ae"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/1024/normal-scissors.png",
+      "bytes": 737625,
+      "sha256": "071ac6a63e10f6176a268026263f25c91d5dc069bb18498694b7e780cf914678"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/128/fish-bubble-machine.png",
+      "bytes": 21080,
+      "sha256": "0f0acba022d256172e26db57b28a3d9e1a4773fc71708f971c81f40ab4855937"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/128/fish-vortex-pump.png",
+      "bytes": 20511,
+      "sha256": "ae9ed66a51bc3dec44a77bedd77951a484d11f308eae5b44b82663d8870890f2"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/128/fish-water-jet-h.png",
+      "bytes": 15211,
+      "sha256": "b268a7d833e96152946c92e5c9f7060feb0efc7a6da2f7806acd98c2fb2df009"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/128/fish-water-jet-v.png",
+      "bytes": 14051,
+      "sha256": "b1f67c5deef75633cc4e286df89a3015ee279da7e33f7fcef0f08a38ec17edf4"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/128/normal-comb-h.png",
+      "bytes": 15881,
+      "sha256": "4cd8d1b7b5839c7a7f4ecb44f0701954c8b0cc6353fa1c15b85036414f83d518"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/128/normal-comb-v.png",
+      "bytes": 17436,
+      "sha256": "61e6f44449279a7e36608a2e611a134df38302423835185880f24888e50b8ede"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/128/normal-hair-dryer.png",
+      "bytes": 15005,
+      "sha256": "d0123fa7143440e29e82f4ca957efa18fdc9ac85cc88b7961f3750fa3f854f94"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/128/normal-scissors.png",
+      "bytes": 18931,
+      "sha256": "25cff751e16e169809a9c61b613ae7684634e5c7bca9bf89c9883502666a0809"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/512/fish-bubble-machine.png",
+      "bytes": 246107,
+      "sha256": "6f72b63fd7a7b4543f31e1c621ab1299a638270e8df01fceb6bf44aedc10e199"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/512/fish-vortex-pump.png",
+      "bytes": 248616,
+      "sha256": "548cc49580e04a02ffdd04c807fe6d767f4a54f3dd1577aee7f9074aaf899142"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/512/fish-water-jet-h.png",
+      "bytes": 171267,
+      "sha256": "3a3f19d0019122ed851136739b5f81e17d32394d0a1fc722062eb6c102a8c611"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/512/fish-water-jet-v.png",
+      "bytes": 160128,
+      "sha256": "be78f182892f2194adb20be00852969520eea64aaeb6b3299fac07cfda200856"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/512/normal-comb-h.png",
+      "bytes": 175967,
+      "sha256": "e6e69e3d44d1dfe1a7a8a52b604ef371ed3d5ee2df84b9044024ba673bb1c54d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/512/normal-comb-v.png",
+      "bytes": 199769,
+      "sha256": "199c68e23c8e4728ad639346804d707ec1e8a186b17eea52d2f50899de62ca34"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/512/normal-hair-dryer.png",
+      "bytes": 162155,
+      "sha256": "4a07d56874bd2a165851710295779aba35999eef747c25b46574e48b2cc1ec19"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/512/normal-scissors.png",
+      "bytes": 212854,
+      "sha256": "019c0b63f9dd0e5de1d5c9243a0c72fe19bd6faa88792d22c9e09581f6aa8d9d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/README.md",
+      "bytes": 2775,
+      "sha256": "f3f9acaa712656d5c72017ef1fcad56b20bb005448c62e95102b09293f74ecb4"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/contact-sheet.png",
+      "bytes": 609249,
+      "sha256": "b60e2bbefda4876a4c6ae7554361cd9b963d113fa4308a06c7305b7bf5dc185e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/manifest.json",
+      "bytes": 17128,
+      "sha256": "e6287db83e8e0b473a33578fb244b9e0c2e06953f6221c2868111a2f2b01772d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/processing.json",
+      "bytes": 6562,
+      "sha256": "820ebe688fa971c8b3ba5772336488fc31f359c59ce1f0cd777c3509f4c28e01"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/fish-bubble-machine-prompt.txt",
+      "bytes": 2340,
+      "sha256": "446be50e5c85f42861f9d1938774252b51074cb3f7292e4b328001fe5bb70c59"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/fish-bubble-machine.png",
+      "bytes": 1116687,
+      "sha256": "978e0c41f1f9233cfaac8de149b71c581214d7009f6f8be98dec64abae59386b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/fish-vortex-pump-prompt.txt",
+      "bytes": 2451,
+      "sha256": "5ddbb02bb5298de6d350e73c2f958d693f5488de5e9eed1e566a6db1cd9be52c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/fish-vortex-pump.png",
+      "bytes": 1173314,
+      "sha256": "9d9d3d459f710027d0f2f05c90846922f19f2b35e2c12c9d3dd5d7e7d195aac9"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/fish-water-jet-h-prompt.txt",
+      "bytes": 2546,
+      "sha256": "6be04819d1fca089b560c2355be1be213fef506243d20da75746df2088c17525"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/fish-water-jet-h.png",
+      "bytes": 894685,
+      "sha256": "b306d86beaea49a2d3a8b612cb0d619d39bcd03b5e650b12c366fac6f239d4ea"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/fish-water-jet-v-prompt.txt",
+      "bytes": 2156,
+      "sha256": "eda246bf20b87421892fb39525829c5853a4301150b32f6eeb09f3bf182dc7a5"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/fish-water-jet-v.png",
+      "bytes": 678646,
+      "sha256": "c9556fab110bc89ece35df5f2a27467939f8d11051f63d1dc148e69547b3ecd7"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/generation-record.json",
+      "bytes": 24347,
+      "sha256": "5185a9d7ce80e99ae221a1a8354b73f642bf7338dfe3217c1511eb3434c9b170"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/normal-comb-h-prompt.txt",
+      "bytes": 2053,
+      "sha256": "6790691ce16e20149bdf9d781602f6caf5adf8c4cda603d716f521407e154e48"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/normal-comb-h.png",
+      "bytes": 844696,
+      "sha256": "49905ff2bb62f62e563784344b238a2b4fdbf579fd6d34fe4cbc76c5c0ac95be"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/normal-comb-v-prompt.txt",
+      "bytes": 2123,
+      "sha256": "b7b18185b1d46cf381c8ef917c3e6891f04d22fc22184f27f3c1b973924a3d9e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/normal-comb-v.png",
+      "bytes": 844796,
+      "sha256": "fa41be5c5dd733d4813596281fcd75122c7f4a5943f6ae6a347ab16829e286fa"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/normal-hair-dryer-prompt.txt",
+      "bytes": 2283,
+      "sha256": "98d7a7400badeea1e0cde54aac516c4491c86bd18ba27fc481c35f366e918b50"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/normal-hair-dryer.png",
+      "bytes": 760506,
+      "sha256": "6c33f8d1558ddbe443ce39731c493f47677d0fa20cd4d609a59ed57a27f4e0e0"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/normal-scissors-prompt.txt",
+      "bytes": 2195,
+      "sha256": "f74c071e27c89fe1f22e17eb00121ac962021f4213097931f5d905c98089ed59"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/stickers-v1/source/normal-scissors.png",
+      "bytes": 959545,
+      "sha256": "df0c748148caf03dcfe533d45ef4093edfb994bc10f17d089959af7a27eabe88"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/1024/fish-big-wave.png",
+      "bytes": 759181,
+      "sha256": "f0198004b46648e034a0c0f8b83007ce14b82aa91f5c6d188484623c26f83499"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/1024/fish-conch-h.png",
+      "bytes": 680757,
+      "sha256": "9bae3474101f26ebb475bacdf91c4b380d094c595ea97a977427f4a115095901"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/1024/fish-conch-v.png",
+      "bytes": 677864,
+      "sha256": "6d22f93575a7a993726c8a753538f4be64e2cc1f9104330f0c1927a96b21076b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/1024/fish-pearl-shell.png",
+      "bytes": 1017316,
+      "sha256": "f041f9d4961500565ffc84840bd256f4db35ab2212d7e3383e06a42ea6294d17"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/128/fish-big-wave.png",
+      "bytes": 19181,
+      "sha256": "8e98e5120b7fec2fd37573e69be17c7dd3bfd7ed0fe1151e6c7e757e86949bb5"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/128/fish-conch-h.png",
+      "bytes": 17274,
+      "sha256": "cf2db18154c15c0fc2a9134e8cea453249d34815d1bc559144218a7111750184"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/128/fish-conch-v.png",
+      "bytes": 16494,
+      "sha256": "5729d8d02eb23fb0af5e924d17801f60705fa11735c364e29b45d0ee11fa76be"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/128/fish-pearl-shell.png",
+      "bytes": 24476,
+      "sha256": "07bdd0d7a8607bc7bb25ed414a11808536e0289d4dd52aa624fd070bedbf7957"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/512/fish-big-wave.png",
+      "bytes": 221921,
+      "sha256": "9954f14e293e97c444df493a30a2ec14aa242e874b14bcdffe64dc23def82f18"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/512/fish-conch-h.png",
+      "bytes": 201512,
+      "sha256": "bf8253b0dd8376c4c19b111699815bb89be5f7788c90b2c21b2c2f756d1476a8"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/512/fish-conch-v.png",
+      "bytes": 197480,
+      "sha256": "77fd8490dfc346f36b70ac9faad5b2642a14488edd5a2cf82929153e2b638e92"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/512/fish-pearl-shell.png",
+      "bytes": 302294,
+      "sha256": "04b272521eab2da35a35e83bb9c6d9300dc5e83f02514c4cf7288c4a0d802ec9"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/README.md",
+      "bytes": 2357,
+      "sha256": "3cecd7ab72fb88c023f2ff0dd41c7df55f5f447cecfd3a71998cb7a24ed0234b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/contact-sheet.png",
+      "bytes": 573232,
+      "sha256": "8010061ff85378fb1804b2513278f9c0c91343d4f553b7a5c907b97a99563b1d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/manifest.json",
+      "bytes": 9012,
+      "sha256": "ba7ae0ba278010c187f309d2cd916b839710906bfc04fa1bc3b003ea997ce6a3"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/processing.json",
+      "bytes": 3755,
+      "sha256": "503980f11ea0341accc5def9c907f003adf1c36aa8c654721d6a1d4a0b076ee9"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/source/fish-big-wave-prompt.txt",
+      "bytes": 2192,
+      "sha256": "01c022afaf403decc23d3c148db63559e7e9b8822bee857d0372c5f8ff1c8b63"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/source/fish-big-wave.png",
+      "bytes": 1106092,
+      "sha256": "0076c632ab99cc2f379dbad5f903152f99eb7c8b5c9b5e0a60e5fc943c7fd6fd"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/source/fish-conch-h-prompt.txt",
+      "bytes": 2171,
+      "sha256": "83882f368f8164b2d13bd9e97a3eff083b7ad939c1de32966e9311a7c325661e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/source/fish-conch-h.png",
+      "bytes": 930574,
+      "sha256": "34283b82f36f59d2b8ff1d42a2e04168a133efe419f1a7bfdea201ee5e22ff4d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/source/fish-conch-v-prompt.txt",
+      "bytes": 2127,
+      "sha256": "03229fa0c11c71212e1c6d6ac5d15ea1e35ef3a42b79e934feb2a62a1db2d390"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/source/fish-conch-v.png",
+      "bytes": 864635,
+      "sha256": "0dc9059a4d6a2b439bb12f768290bc1165423386c59c713b753951a374d31e5f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/source/fish-pearl-shell-prompt.txt",
+      "bytes": 2124,
+      "sha256": "82c76f31f4d97fd6d0888558fb6900460d4a104b58fc29ec6987139a804d439c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/source/fish-pearl-shell.png",
+      "bytes": 1152052,
+      "sha256": "07aac522bd1936aab79c516580c280e56a5862c985e3f1f64e8ad71bc9d1fe2c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/tools/fish-ocean-v1/source/generation-record.json",
+      "bytes": 12548,
+      "sha256": "d8f38080cd85e5d306d120adef4af2397f0961a36d07686fce3c30d41fd47962"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/1024/mvp-medal.png",
+      "bytes": 938252,
+      "sha256": "21778a592c6652a747cea0a11638088f8f7bbfe4c984cce46710a02ccee68785"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/1024/personal-best-flag.png",
+      "bytes": 820481,
+      "sha256": "b5cc8ff3483fef670a285cc76e978300e3becbfa01f7c767cd00c29dee1a4fe2"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/1024/title-stamp-blank.png",
+      "bytes": 407307,
+      "sha256": "8d8db073fa9daba5ccaecd0b85a3917b543ac2da15e3728cfedd1e824ce7a0ce"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/128/mvp-medal.png",
+      "bytes": 24130,
+      "sha256": "2d5d79350104970d986c367dbf5b997fbb61dd914800c1258b31c15c6dd4790f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/128/personal-best-flag.png",
+      "bytes": 21408,
+      "sha256": "63ea01c40f407b46cb62a39514796b604cc60f74af4053eedc612bc8b5505dd3"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/128/title-stamp-blank.png",
+      "bytes": 9716,
+      "sha256": "6354424fee80dcb5e248fb9a8ce776a7b250c96472d7d42720515b9ca1ea5f79"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/512/mvp-medal.png",
+      "bytes": 270541,
+      "sha256": "e4e76b35784919437efb44da17ad7926be6b9b73030e450419177b3fae0f370c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/512/personal-best-flag.png",
+      "bytes": 242597,
+      "sha256": "1a79c0533aae4ae60611675f4d6b78cb47b8a92e01f79166a3b0293a1cc66188"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/512/title-stamp-blank.png",
+      "bytes": 113132,
+      "sha256": "6a8983172637c90ebff92043ae5ddf9446a9929e9505b38daa9d5203c5c10a36"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/README.md",
+      "bytes": 1763,
+      "sha256": "110eca78346d4f464e9541a6fd32edc682b6a858f3ced180d73e8b8753cf85ee"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/contact-sheet.png",
+      "bytes": 540978,
+      "sha256": "8e703da5b726fa4329ab845cca2bc0d00e9ac692e9632504b8e2e68fec6500e0"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/manifest.json",
+      "bytes": 6346,
+      "sha256": "1995a3a9e14b1a0f65e57b7a60f397ba88d34ded0f5e954efac09688155e9c56"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/processing.json",
+      "bytes": 1707,
+      "sha256": "c543c85669d47f638d1d0c64deb96f719f4ab5464e8a69de5c02eb69b4d56858"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/report-reward-marks-v1-transparent.zip",
+      "bytes": 2134552,
+      "sha256": "d30b34f7148c7637c05c4a5a0c97871872883abdf1e4bba0b9a61026705d5ad7"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/source/generation-record.json",
+      "bytes": 8990,
+      "sha256": "5f036b1010e45b972230d28174ffd09dd602d5dba815aef37fb2136dde759062"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/source/mvp-medal-prompt.txt",
+      "bytes": 1998,
+      "sha256": "7f2a9409d86bd94e2622598f6711da5e18129e1340d14f35805676fc6f134b53"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/source/mvp-medal.png",
+      "bytes": 1303533,
+      "sha256": "ab920fc408923386be1b90a6cb523d1ee7362779e3c9272d04a564353a590bce"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/source/personal-best-flag-prompt.txt",
+      "bytes": 2010,
+      "sha256": "3172ce0bb63356452a17bd3124f4023877d1d9396ab3d1dd6f22e48623db43d9"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/source/personal-best-flag.png",
+      "bytes": 1021440,
+      "sha256": "f98946cccd544b2309da0f3293721711e108bd333c278cca894433f37fd61bf7"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/source/title-stamp-blank-prompt.txt",
+      "bytes": 2344,
+      "sha256": "acfb9cd65eae61c490da70845716feca4a5575e09e6befe7b737f4b40d99e9fc"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/source/title-stamp-blank.png",
+      "bytes": 1424885,
+      "sha256": "c2196b2258231145ca791ce87aed912f03e57b77f08e677e83a2d8e21d940238"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/report-v1/transparent-sheet.png",
+      "bytes": 661269,
+      "sha256": "93e8bed33cddb32f1f8e1b8686ae8d98759def3ef78703dc6867185ca5428bca"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/1024/rank-1-crown.png",
+      "bytes": 591022,
+      "sha256": "be4b4fb6a1e14489cf41c1bf7cdccc4b209ca3484ddb2ccd3dc2a5556ea4ded2"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/1024/rank-2-shield.png",
+      "bytes": 736768,
+      "sha256": "b43d658cbb9004da08b6e3aab6e2de7ddb865512611e46425a28ae53eddca8f0"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/1024/rank-3-medallion.png",
+      "bytes": 859721,
+      "sha256": "08180b250060db684bde4ff0bb31511862c03d92e51f4f8647c9387df066b8a2"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/128/rank-1-crown.png",
+      "bytes": 15542,
+      "sha256": "9884741b926e4fc78eca895937cd2dfd0308a8e921c0e61369f218b1a59317ff"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/128/rank-2-shield.png",
+      "bytes": 19718,
+      "sha256": "b91d971073d310e5f8a83d69c27cd80051efe7510a90f165e7cd6ed5af062a39"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/128/rank-3-medallion.png",
+      "bytes": 22734,
+      "sha256": "b7a0f46fb6b9097a1e3a3952b28764ef6cc858d12d3d21920689262d553c6369"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/512/rank-1-crown.png",
+      "bytes": 172700,
+      "sha256": "429b6f45b9367f5b6468ac684a66f27aeb7bf74860e45695bbbeb9121f443b17"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/512/rank-2-shield.png",
+      "bytes": 215740,
+      "sha256": "52056aa09be98f1125c0d024524c7076b95ea83f2f7781490aa8c9b56f3f8171"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/512/rank-3-medallion.png",
+      "bytes": 252791,
+      "sha256": "268f0bf50330c91a3ff563f92e7f37306679dde68932bc19825abc5ee73c79f9"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/README.md",
+      "bytes": 1879,
+      "sha256": "654840f158059f8503b390a1775f6653561f6138aba8c661fde2dcee3aca1b0e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/contact-sheet.png",
+      "bytes": 413500,
+      "sha256": "7804e64f49e11f14ec8e3b245c21d82db5a8042a4935496481ac55837eb5c8bb"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/leaderboard-marks-v1-transparent.zip",
+      "bytes": 2145769,
+      "sha256": "d146643a56709b0f4e027efa2c9b1676ec4795caa0c88134182fd63ac7d68495"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/manifest.json",
+      "bytes": 6102,
+      "sha256": "56f32c628e9b0a56636a439371f6e4e3b5d4dff7785f874e5c33b3962286e28e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/processing.json",
+      "bytes": 1846,
+      "sha256": "164953fb7bff9351b63a96f4c0bf1ac2a6fe390ef320c1f0bb894d3a6b292337"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/source/generation-record.json",
+      "bytes": 985,
+      "sha256": "201f4a0de7d09307aec7f1671ae308580b17ed460674a9b87271e0b88a10ba24"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/source/rank-1-crown-prompt.txt",
+      "bytes": 1353,
+      "sha256": "ba5c2e9e6196a155e55057d1ab06d36c3a08f9d3a12983e743e68f09f6b76f23"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/source/rank-1-crown.png",
+      "bytes": 1003512,
+      "sha256": "5e7e706b0e1e28c0777720694e7232c0805bd1ceb35b274bce628a99abdc3a1a"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/source/rank-2-shield-prompt.txt",
+      "bytes": 1326,
+      "sha256": "5ad060606160d52d7e40dca429a350f1ee78557ad647d5eba1f561804d8b7d01"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/source/rank-2-shield.png",
+      "bytes": 1171066,
+      "sha256": "76cea504f4fa1688ba2ce2a686d47589581ed08067b62572549b1999792f8b07"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/source/rank-3-medallion-prompt.txt",
+      "bytes": 1352,
+      "sha256": "4b92e37d0afccef33c3b743b73b9a2d21dd0190d28c22f6988794deaee55059d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/source/rank-3-medallion.png",
+      "bytes": 1062116,
+      "sha256": "3c943e5aceb16445629066615c1658ab5e200bc8897966b130d47365832c04c1"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/rewards/leaderboard-v1/transparent-sheet.png",
+      "bytes": 674425,
+      "sha256": "05bad3c2be20f1afa517d0d6d8ff9fe7df74b474f2acd6a8b3038a826e88a5f1"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/1024/rush-completion-mark.png",
+      "bytes": 834966,
+      "sha256": "61694f97ec3857c51520f195526f925a00147aa9c5e587ca9e4bff66d226fb5c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/1024/rush-expired-ticket.png",
+      "bytes": 680827,
+      "sha256": "558467aeb792656dab0ff6efedfc5d82d05ceda3d87e6270c8610b452255ab83"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/1024/rush-urgent-ticket.png",
+      "bytes": 729665,
+      "sha256": "ab59e5a0a0bb24f2f02892db8bce6c2a313444ddd4e7d162967a741e5a2f5a3b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/128/rush-completion-mark.png",
+      "bytes": 20521,
+      "sha256": "a2c6ce9911de049683a9402a189fe236fe3235b082eb6c8f08c3ed99f1800475"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/128/rush-expired-ticket.png",
+      "bytes": 18917,
+      "sha256": "2d403b3932fc4b8b008a39e9843e22f2d51755e4863f29229028b4672a19033e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/128/rush-urgent-ticket.png",
+      "bytes": 18195,
+      "sha256": "7bb1cb2cc06e539edbbc6db7d1245dbc5de87e86a262bc3ab31818daf3eabb07"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/512/rush-completion-mark.png",
+      "bytes": 252601,
+      "sha256": "bbace19836fc396d79cc7ea7c56546879f229ea9100850bcb76352b6c9491320"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/512/rush-expired-ticket.png",
+      "bytes": 199409,
+      "sha256": "83f806826eb9f931a90e442353a9309af27413c88d958aed80f3d86fd8767e43"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/512/rush-urgent-ticket.png",
+      "bytes": 211259,
+      "sha256": "59097686fadcd25c82a1d3154e11d5c90feb7e71703242020c38f01eb7f19955"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/README.md",
+      "bytes": 1744,
+      "sha256": "179901c336a7f2ac71d9c1b40a6883dbe835e88f4fa6cc01fabb7d1da01bcacd"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/contact-sheet.png",
+      "bytes": 507921,
+      "sha256": "999ee6b0c535a44fb795aea6e5d2ce2edd5d9791c4b8158637dcaa4250b1a2c4"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/manifest.json",
+      "bytes": 6502,
+      "sha256": "97652f1b7c54df1892f0acf6a18610b766041851999a2f486fba0e6eca2ece20"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/processing.json",
+      "bytes": 1224,
+      "sha256": "7767948f11a66314d4b950b8a4d34ff3e69a98e0b758377bc1c39d9c8ea807b7"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/rush-feedback-v2-transparent.zip",
+      "bytes": 2208091,
+      "sha256": "c8ef389e71a309ef5d3215a4cd675fbda252de82a44efaeca3a93bd4636c037b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/source/generation-record.json",
+      "bytes": 2481,
+      "sha256": "5d7d121300e420f87ab1fb10550642717bc88dbd85e00b7e1c700d62314eba29"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/source/rush-completion-mark-prompt.txt",
+      "bytes": 3618,
+      "sha256": "9e30c1e340233e8dde1bb1bd74e7772e79a9d377350f998144a38425492d1584"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/source/rush-completion-mark-raw.png",
+      "bytes": 804681,
+      "sha256": "6feda3e9525ff22b9fe379d515f4930f7a248fddac26b4637e9517601d36825d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/source/rush-expired-ticket-prompt.txt",
+      "bytes": 1367,
+      "sha256": "32fda4dab61883f733a63a9a206a00eec232528561fad862894f49cfcb944077"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/source/rush-expired-ticket-raw.png",
+      "bytes": 942502,
+      "sha256": "269ad33676ddf41c0b1883dc3468ae56e1799ee97584073b62e16764888acf36"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/source/rush-urgent-ticket-prompt.txt",
+      "bytes": 3813,
+      "sha256": "55fab714e13d23d7fa2eb6821bb2245361ae933a27c2eb2eb49b40ace141109f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/feedback/rush-v2/source/rush-urgent-ticket-raw.png",
+      "bytes": 781568,
+      "sha256": "744b13dbd2cb12d3e5e85483e6b6502570cf3ee1646dbad6b11badf6a9558552"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1/1024/peter-fishbowl.png",
+      "bytes": 1169232,
+      "sha256": "2f7b5e01eb69dd9486c02621d5a4e75c8cf73e44882dcade8936d6da42687ab4"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1/128/peter-fishbowl.png",
+      "bytes": 27856,
+      "sha256": "741cdbae2d3086654016b635b1b98ff8f7d0e060ad7c2a5a79e134a186bf4ca2"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1/512/peter-fishbowl.png",
+      "bytes": 333683,
+      "sha256": "5c325e5cfb88072990175b9eeae3ff04ded6e8b5749ac832683b7c5615e1a3ce"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1/README.md",
+      "bytes": 1451,
+      "sha256": "073b907c8e12d0eed8414cfb4b468ba45aa255d0fd245d0f14bdde1742d9575f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1/manifest.json",
+      "bytes": 2148,
+      "sha256": "35f760ddb8a5825d3c369553dcc70bd9810a50a467209cabe415e8bbd7dbaef1"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1/processing.json",
+      "bytes": 1110,
+      "sha256": "4154a62ab6098518bad73d056668e964f95f3c97c13f0a3512962c0715fff427"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1/source/generation-record.json",
+      "bytes": 2330,
+      "sha256": "c866363e533b23616b32f90a3978efc1cf5c64646f416e014268596844947f15"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1/source/peter-fishbowl-prompt.txt",
+      "bytes": 1752,
+      "sha256": "9c3325ceae92f4cc2675fd3901799a2cdd72996b4f90f60bf1cff96140a1912a"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/peter-fish-invitation-v1/source/peter-fishbowl.png",
+      "bytes": 1329031,
+      "sha256": "01219477e3dec4720549a9a70ae6f6dab66b5c33756548788a92f4473b950d28"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/rush-feedback-v2/review-record.json",
+      "bytes": 2820,
+      "sha256": "c83d30d4433df265eb117401c778cc2236e3d42905af00a4e87b2b6b54fcc7fb"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/rush-feedback-v2/rush-completion-mark-raw.png",
+      "bytes": 804681,
+      "sha256": "6feda3e9525ff22b9fe379d515f4930f7a248fddac26b4637e9517601d36825d"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/rush-feedback-v2/rush-urgent-ticket-raw.png",
+      "bytes": 781568,
+      "sha256": "744b13dbd2cb12d3e5e85483e6b6502570cf3ee1646dbad6b11badf6a9558552"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/leaderboard-marks-v1/generation-record.json",
+      "bytes": 1123,
+      "sha256": "4198df4e7821dbbf946cda00da97a7cbc4e162dd632c9417b4e55c8814c8bbbf"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/leaderboard-marks-v1/original.png",
+      "bytes": 1505614,
+      "sha256": "7640211ab0c767c71cdc54e92228df95d2b3acff99f30a0bfd142d378fcb797b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/operation-status-icons-v1/generation-record.json",
+      "bytes": 1526,
+      "sha256": "0943c740ac2c91d0e422137fd0f1b7dff98c1929e5121bbf23a81c330bdb2970"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/sources/operation-status-icons-v1/original.png",
+      "bytes": 1586354,
+      "sha256": "e6c867ef52b109e55c9b929048c967eddc00503b42641382a7eb92aa54285efc"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v1.png",
+      "bytes": 1441578,
+      "sha256": "070896b77634ca359333d892d0c8a5f962112923009991ad3ad8964d942d6c0a"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v1-prompt.txt",
+      "bytes": 7805,
+      "sha256": "341e7abd76c2f01a7f93f5979717811f0b1aa7eade2fd80b329f1911853bdb5e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v2.png",
+      "bytes": 1664693,
+      "sha256": "a9a7d816d4da14c72d1f28ac149faa70d8d39dc7dbdbf9781e303ddc04d364b3"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v2-prompt.txt",
+      "bytes": 6295,
+      "sha256": "35372192e2be7cd711c2eb602b8448d1b957ac4199dd97829ce108c1b329e8d9"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-comparison-v1.png",
+      "bytes": 1860116,
+      "sha256": "a31ff3dee8794a2a1e92fa9c987428cf39d2facea7f63aee1e40b97958e99ad7"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-comparison-v1-prompt.txt",
+      "bytes": 8623,
+      "sha256": "495f5efabea550e0c62fa35740c842c2086521679c26bba2e7fc71cacf5754ee"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-comparison-v2.png",
+      "bytes": 609249,
+      "sha256": "b60e2bbefda4876a4c6ae7554361cd9b963d113fa4308a06c7305b7bf5dc185e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-comparison-v2-prompt.txt",
+      "bytes": 1496,
+      "sha256": "3b391388e00348cd6f2af3c948f27a375f4b0b05080c327e6ffb37e78ede022e"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/fish-ocean-tools-v1.png",
+      "bytes": 1865243,
+      "sha256": "4adfba0a12cc23536120a180201a9b682200820e338042f6ea058371ff1b80a3"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/fish-ocean-tools-v1-prompt.txt",
+      "bytes": 6600,
+      "sha256": "3a1aae4fa627e149cf6220550a44d644c147541d880bef118b5ad3911bb6854b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/report-reward-marks-v1.png",
+      "bytes": 1633767,
+      "sha256": "41f46ff8a5f709f8436ef980e19ed0f9e7b56c49c3b9d7755a6ff72d842cd134"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/report-reward-marks-v1-prompt.txt",
+      "bytes": 7954,
+      "sha256": "7899ece69f14a8db782c9d42f68ed03050caa0c5a7479bc9f8c79b0443dd22cc"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/peter-fish-invitation-v1.png",
+      "bytes": 1560874,
+      "sha256": "5c6a1cc9e6c24a2e90633c452dbb6a47fdfd1eb91f99829ddf652c3f69925190"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/peter-fish-invitation-v1-prompt.txt",
+      "bytes": 6968,
+      "sha256": "b163d5739015c79ea8811f0ddc586ed50a0e34695ecb5b2b0a944f1ab79a9672"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-feedback-v1.png",
+      "bytes": 1597514,
+      "sha256": "97881f3598aba9f1367d942ea99e02c21deceda5b66e8b8e2e705efd7556ec45"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-feedback-v1-prompt.txt",
+      "bytes": 8166,
+      "sha256": "a66731ee401d9c6becd83e7dc0f16e814f2e036849a90ecc9310cf702cf02c9f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-feedback-v2.png",
+      "bytes": 469974,
+      "sha256": "8caeff29a256f908cee766c826bb4e5a821fd2836fe4f5014f4e01a4f89d3cca"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-feedback-v2-prompt.txt",
+      "bytes": 1696,
+      "sha256": "ed9ca9ac748a6599a745493a13beb1820488396851702da29c821e51ac24c246"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-urgent-ticket-v2.png",
+      "bytes": 729665,
+      "sha256": "ab59e5a0a0bb24f2f02892db8bce6c2a313444ddd4e7d162967a741e5a2f5a3b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-urgent-ticket-v2-prompt.txt",
+      "bytes": 3813,
+      "sha256": "55fab714e13d23d7fa2eb6821bb2245361ae933a27c2eb2eb49b40ace141109f"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-completion-mark-v2.png",
+      "bytes": 834966,
+      "sha256": "61694f97ec3857c51520f195526f925a00147aa9c5e587ca9e4bff66d226fb5c"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-completion-mark-v2-prompt.txt",
+      "bytes": 3618,
+      "sha256": "9e30c1e340233e8dde1bb1bd74e7772e79a9d377350f998144a38425492d1584"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/leaderboard-marks-v1.png",
+      "bytes": 1505614,
+      "sha256": "7640211ab0c767c71cdc54e92228df95d2b3acff99f30a0bfd142d378fcb797b"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/leaderboard-marks-v1-prompt.txt",
+      "bytes": 4695,
+      "sha256": "a1db04e5e5ea4b99c1af98efec4b20f4a5c600c766f500d443cbbef430efdd91"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/operation-status-icons-v1.png",
+      "bytes": 1586354,
+      "sha256": "e6c867ef52b109e55c9b929048c967eddc00503b42641382a7eb92aa54285efc"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/operation-status-icons-v1-prompt.txt",
+      "bytes": 6827,
+      "sha256": "ec4ca2d6c29c17ab479343d36b215278808b64bda44e401670b657b1ceb6ea71"
+    }
+  ],
+  "generated_exact_copies_or_known_partial_extractions": [
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-0b55a5ec-ebd0-4058-a94f-ed807604838f.png",
+      "bytes": 1860116,
+      "sha256": "a31ff3dee8794a2a1e92fa9c987428cf39d2facea7f63aee1e40b97958e99ad7"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-0e974426-8e99-48a9-84d3-fd318289dc99.png",
+      "bytes": 1633767,
+      "sha256": "41f46ff8a5f709f8436ef980e19ed0f9e7b56c49c3b9d7755a6ff72d842cd134"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-10f20124-45fc-4826-82fa-c73521a07c8a.png",
+      "bytes": 1586354,
+      "sha256": "e6c867ef52b109e55c9b929048c967eddc00503b42641382a7eb92aa54285efc"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-125d123e-4aee-48fb-b9ce-ceda199ff8c7.png",
+      "bytes": 844696,
+      "sha256": "49905ff2bb62f62e563784344b238a2b4fdbf579fd6d34fe4cbc76c5c0ac95be"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-12a835d9-2a09-4e59-b96c-26de133ce018.png",
+      "bytes": 1003512,
+      "sha256": "5e7e706b0e1e28c0777720694e7232c0805bd1ceb35b274bce628a99abdc3a1a"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-1c6f9bca-92ee-4406-bc5a-15683d088989.png",
+      "bytes": 1116687,
+      "sha256": "978e0c41f1f9233cfaac8de149b71c581214d7009f6f8be98dec64abae59386b"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-1e218367-6751-4e16-9496-f493dbd6bfeb.png",
+      "bytes": 942590,
+      "sha256": "d09d564a2ba9e761d710bc6581ed8a704575f721a3464edd36f127eb28ba0540"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-25006a3e-2d8c-4a22-aa7c-1b894e8936e8.png",
+      "bytes": 878507,
+      "sha256": "254a4b7b3c43cc483414085bcffb6067d478c97fd9763fc1e6f4e95caa94d239"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-3518d919-fe2f-4200-bb6e-72002fa98323.png",
+      "bytes": 1021440,
+      "sha256": "f98946cccd544b2309da0f3293721711e108bd333c278cca894433f37fd61bf7"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-4042b5d2-b7f9-4568-8b3b-d64264f5db93.png",
+      "bytes": 844796,
+      "sha256": "fa41be5c5dd733d4813596281fcd75122c7f4a5943f6ae6a347ab16829e286fa"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-428f2eaf-b939-4df7-9e7e-42779e85d21a.png",
+      "bytes": 1597514,
+      "sha256": "97881f3598aba9f1367d942ea99e02c21deceda5b66e8b8e2e705efd7556ec45"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-43bf45b7-4c15-4066-b240-f6ec13424426.png",
+      "bytes": 1173314,
+      "sha256": "9d9d3d459f710027d0f2f05c90846922f19f2b35e2c12c9d3dd5d7e7d195aac9"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-4a50e75a-a7fc-4e8a-92a4-f11d13f3287b.png",
+      "bytes": 864635,
+      "sha256": "0dc9059a4d6a2b439bb12f768290bc1165423386c59c713b753951a374d31e5f"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-5ffdf485-73e7-4dd6-b5dd-1af3c34a6848.png",
+      "bytes": 781568,
+      "sha256": "744b13dbd2cb12d3e5e85483e6b6502570cf3ee1646dbad6b11badf6a9558552"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-606d16ed-1198-44b5-8482-4b923f9b339f.png",
+      "bytes": 848705,
+      "sha256": "8f9c0c2494b1d1fa1b78019fe89efe2e816a048ff82a223987985febae07320c"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-612abe12-173c-4a67-ba32-e71bba0e4aef.png",
+      "bytes": 678646,
+      "sha256": "c9556fab110bc89ece35df5f2a27467939f8d11051f63d1dc148e69547b3ecd7"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-633ba153-9cef-4e55-bea2-8a85868e02cc.png",
+      "bytes": 959545,
+      "sha256": "df0c748148caf03dcfe533d45ef4093edfb994bc10f17d089959af7a27eabe88"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-6991ad54-2727-49b3-b2f9-e08e94e73d48.png",
+      "bytes": 1424885,
+      "sha256": "c2196b2258231145ca791ce87aed912f03e57b77f08e677e83a2d8e21d940238"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-69e90769-924b-4351-b155-7dd74b1c161b.png",
+      "bytes": 895405,
+      "sha256": "b30685317ba756a04fff7e6a22b17666ce263b03598819dfeb39c02d0e27c762"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-6ea1c0bc-dc60-4679-a582-a1200401cec8.png",
+      "bytes": 1441578,
+      "sha256": "070896b77634ca359333d892d0c8a5f962112923009991ad3ad8964d942d6c0a"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-798b3fce-e678-45ae-8b14-de4b26c9b37c.png",
+      "bytes": 1505614,
+      "sha256": "7640211ab0c767c71cdc54e92228df95d2b3acff99f30a0bfd142d378fcb797b"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-84fd0c4e-1713-4238-9ff9-f5687a6b5ea0.png",
+      "bytes": 876374,
+      "sha256": "7eec28d1e1cd07a301d082615cdf4ea8b8f4215d4484757f1e06081fb95f0f1f"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-8de06b2d-8375-486a-9cda-416c46aa2693.png",
+      "bytes": 1664693,
+      "sha256": "a9a7d816d4da14c72d1f28ac149faa70d8d39dc7dbdbf9781e303ddc04d364b3"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-9b31bdf1-9a34-435d-9d02-5804f03df34c.png",
+      "bytes": 942502,
+      "sha256": "269ad33676ddf41c0b1883dc3468ae56e1799ee97584073b62e16764888acf36"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-9c5a641d-7a79-4591-a9ef-39b02663905a.png",
+      "bytes": 930574,
+      "sha256": "34283b82f36f59d2b8ff1d42a2e04168a133efe419f1a7bfdea201ee5e22ff4d"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-a1bed4e4-4781-4c33-a88b-e62ffb9aa59b.png",
+      "bytes": 1560874,
+      "sha256": "5c6a1cc9e6c24a2e90633c452dbb6a47fdfd1eb91f99829ddf652c3f69925190"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-b4f316b4-7f29-43d6-a551-089ca7e076db.png",
+      "bytes": 1171066,
+      "sha256": "76cea504f4fa1688ba2ce2a686d47589581ed08067b62572549b1999792f8b07"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-b7c70084-44c6-45b1-ace8-931cc936efb2.png",
+      "bytes": 1329031,
+      "sha256": "01219477e3dec4720549a9a70ae6f6dab66b5c33756548788a92f4473b950d28"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-b9e003ec-e66f-4be7-a742-10213e71ce50.png",
+      "bytes": 804681,
+      "sha256": "6feda3e9525ff22b9fe379d515f4930f7a248fddac26b4637e9517601d36825d"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-c7149fd8-070f-4840-b5fd-45ebb03b43e8.png",
+      "bytes": 1106092,
+      "sha256": "0076c632ab99cc2f379dbad5f903152f99eb7c8b5c9b5e0a60e5fc943c7fd6fd"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-c894e6e3-7a2e-424a-9dfe-441d96685a85.png",
+      "bytes": 1152052,
+      "sha256": "07aac522bd1936aab79c516580c280e56a5862c985e3f1f64e8ad71bc9d1fe2c"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-d6affc13-ee75-4583-a210-5612bbc1d9c0.png",
+      "bytes": 760506,
+      "sha256": "6c33f8d1558ddbe443ce39731c493f47677d0fa20cd4d609a59ed57a27f4e0e0"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-d6fe5092-a84f-4993-a62c-33fd127b5b94.png",
+      "bytes": 894685,
+      "sha256": "b306d86beaea49a2d3a8b612cb0d619d39bcd03b5e650b12c366fac6f239d4ea"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-e2e12149-5f42-43ed-8711-ee95e5a569dc.png",
+      "bytes": 950758,
+      "sha256": "0103227cdcf6d38e376e3100e40cb7545203854d325ceaa0383f670278b3b63b"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-ea85ff6a-612f-4926-a1b3-546b67331d43.png",
+      "bytes": 1062116,
+      "sha256": "3c943e5aceb16445629066615c1658ab5e200bc8897966b130d47365832c04c1"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-eb35ceb0-641a-4b06-ad41-5c61349a03dd.png",
+      "bytes": 1865243,
+      "sha256": "4adfba0a12cc23536120a180201a9b682200820e338042f6ea058371ff1b80a3"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-f4b8c0d3-8826-47ca-8c67-0e2eadc0e33f.png",
+      "bytes": 968917,
+      "sha256": "ad12862d8cdbf9d8e13c0f528b1cd34a87af34a465bbfec7927f5509706b5db7"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-fbf52f95-4229-420b-9531-7377f6f8a1f2.png",
+      "bytes": 1303533,
+      "sha256": "ab920fc408923386be1b90a6cb523d1ee7362779e3c9272d04a564353a590bce"
+    },
+    {
+      "path": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-fd931dcb-cf37-44b8-9560-c5056266b7d4.png",
+      "bytes": 1021169,
+      "sha256": "7decb6496e4a0ba755b8019978fbdd536354980a89e13038da265644e80883a3"
+    }
+  ],
+  "counts": {
+    "project_targets": 38,
+    "project_files": 251,
+    "generated_files": 39,
+    "total_bytes": 133902869
+  },
+  "protected_reference_hashes": [
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+      "sha256": "d18dc7ae5ba7f5c6a02529cd3fe4f4f21b7be3f6cad7dada38595fcbfbdb5be8"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3-prompt.txt",
+      "sha256": "adf6752fba6941aab316d522eaa61608690224e8ee5e2a11c483a53ae5bb8074"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-home-v2.png",
+      "sha256": "b5a4d95edd202d148f6a22a791b7abab16cfae4fca992f391ffaa8711ac89761"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-identity-v2.png",
+      "sha256": "810be1fedee68a926882f3d344bd4a37e8220ab5a9abe35119341a2d01a00b07"
+    },
+    {
+      "path": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-petdex-v1.png",
+      "sha256": "72631c2ab1864b2f019b4e922f85ee87ce41e165e453b8bb66564d7a0c2fc80f"
+    }
+  ],
+  "verification": {
+    "targets_absent": true,
+    "generated_copies_absent": true,
+    "protected_references_unchanged": true,
+    "project_files_removed": 251,
+    "generated_files_removed": 39
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-23",
+  "batch": 6,
+  "status": "revision_base",
+  "tool": "built-in image_gen",
+  "direction": "Approved original charcoal-outline/orange-white matte family; lively paper/cloth poses",
+  "concept": "design/concepts/report-marks-original-v1.png",
+  "original": "original.png",
+  "full_prompt": "../../report-marks-original-v1-prompt.txt",
+  "sha256": "c940ac0b2b0df901debd089d5885abc0f80ec6273515f799487a43681f3da091",
+  "reference_images": [
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/rush-feedback-original-v1.png",
+      "archived": "reference-rush-feedback-original-v1.png",
+      "sha256": "6cb1aa7e6c82fd6479c1efc512b2a10afc9979638daaf6d7d95c35468e390df9"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+      "archived": "reference-home-entry-icons-v3.png",
+      "sha256": "d18dc7ae5ba7f5c6a02529cd3fe4f4f21b7be3f6cad7dada38595fcbfbdb5be8"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/reviews/2026-10-23-components/02-scorecard.png",
+      "archived": "reference-02-scorecard.png",
+      "sha256": "a68f377e1c05c717a2c91a3a2936c237285d6f5603b4306f0966cfc118c6fc1b"
+    }
+  ],
+  "subjects": [
+    "MVP ribbon medal with universal MVP text",
+    "personal-best orange swallowtail flag",
+    "blank long rounded title stamp base"
+  ],
+  "review_checks": [
+    "Full medal ring, both complete ribbon tails, readable MVP letters",
+    "Complete flag pole, raised cloth and swallowtail tips; no embedded variable text",
+    "Title stamp base has complete closed frame and empty center",
+    "MVP sample identifies Maodu only as example text; no pet artwork recreated",
+    "Personal-best example shows dynamic text 2,480 and existing label, no extra score reward",
+    "Same existing title illustrated as Chinese 全店大扫除负责人 and English Whole-Shop Cleanup Chief, English uses two readable lines",
+    "Language examples are alternatives, not two simultaneous titles",
+    "Shared normal/fish report-paper use, first-score/tie exclusion and saved strict-improvement rule retained in specification"
+  ],
+  "scope": "Static visual review only. No final independent assets, animation implementation, game code or deployment.",
+  "user_feedback": "新纪录小旗 干净一点，称号印章 重新设计",
+  "latest_review": "design/concepts/report-marks-original-v3.png",
+  "latest_user_feedback": "不太好，新纪录小旗还是最开始的，但是去掉最下方的横线。称号印章还是最开始的，但是加一些花纹或者戳"
+}

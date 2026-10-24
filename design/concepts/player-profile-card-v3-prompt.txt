@@ -1,0 +1,16 @@
+Use case: precise-object-edit
+Asset type: One very small local UI alignment correction to the supplied player-profile design board.
+The attached player-profile-card-v2.png is the EXACT edit target. Preserve the exact 1189 x 1323 canvas and every part of the two-panel design except the narrow unlocked-badges section in the right profile drawer.
+
+Change ONLY the third badge presentation in the RIGHT panel's "已解锁徽章" row:
+1. REMOVE the little orange "佩戴中" pill under the high-five-paws badge.
+2. REMOVE the pale-peach rectangular highlight behind that third badge, returning that background to the same plain white as the other two badges.
+3. Align the third caption "毛孩子熟人" to the EXACT SAME horizontal baseline as the first two captions "猫猫亲友团" and "汪汪好朋友".
+4. Keep all THREE badge emblems centered over their captions at the same perceived size and top alignment, with identical icon-to-caption spacing. Preserve their exact approved cat/dog/high-five artwork and colors. If needed move ONLY the third emblem a few pixels to match the row; do not redraw it.
+5. There is no additional selected/worn label, dot, checkmark, border, background tint or emphasis anywhere in this badge row. It is a clean uniformly aligned collection display. Current worn title is ALREADY clearly displayed below Alice Chen's name at the top of the profile.
+
+Keep everything else unchanged: the left leaderboard, its active-row tint, names, scores, ranks, the profile title and X, Alice Chen identity, her top "毛孩子熟人" title chip, the three statistics including "12 局 / 已营业", the 3 / 7 counter, all five recent-game rows, column headings, divider position, spacing, fonts, sizes, backdrop and paper surface.
+Do not change, delete or reword any other text. In particular retain the TOP worn-title chip below Alice Chen; only the duplicate "佩戴中" tag inside the unlocked-badges ROW is removed.
+Deliver only the complete corrected design board.
+
+Generation record: Built-in image_gen local revision on 2026-10-24. Saved as player-profile-card-v3.png. Removed the redundant worn-state pill and peach highlight from the unlocked-badges row, aligning all three captions. Current title remains in the identity block. All player stats remain illustrative; application code unchanged.

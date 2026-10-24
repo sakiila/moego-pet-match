@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-23",
+  "batch": 4,
+  "direction": "Approved original-page charcoal outline and orange-white family; cool ivory-blue fish accents",
+  "status": "revision_requested",
+  "tool": "built-in image_gen",
+  "concept": "design/concepts/tool-family-original-v2.png",
+  "original": "original.png",
+  "full_prompt_set": [
+    "../../tool-family-original-v1-prompt.txt",
+    "../../tool-family-original-v2-prompt.txt"
+  ],
+  "sha256": "26d8f812fb4ddb72cd5b04f351efcabd7490ca6a816dc3f5a577919fd832c1c4",
+  "reference_images": [
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/common-function-icons-v1.png",
+      "archived": "reference-common-function-icons-v1.png",
+      "sha256": "f705bbaa1a10bf729a08b683a619188baa38a981aa6d71487f4334b316e69bbb"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/round-operation-icons-v1.png",
+      "archived": "reference-round-operation-icons-v1.png",
+      "sha256": "7a80c905bc48a94540fd4b201f21848af7378de9af0b0eb59e756d73116791fb"
+    },
+    {
+      "original": "/Users/bob/Documents/Codex/2026-10-21/build-web-apps-plugin-build-web-2/outputs/moego-mobile-board-v3.png",
+      "archived": "reference-moego-mobile-board-v3.png",
+      "sha256": "457da7a2b7b9d5d04b6347c4175b02b7ea2fa65da6eb979c6127fba144fee500"
+    },
+    {
+      "original": "/Users/bob/Documents/Codex/2026-10-21/build-web-apps-plugin-build-web-2/outputs/moego-mobile-fish-board-v1.png",
+      "archived": "reference-moego-mobile-fish-board-v1.png",
+      "sha256": "7f31d0fb5b9ad9228d7c360819d9627c8657170bf9b2cf8ea3974e446881b778"
+    }
+  ],
+  "iterations": [
+    {
+      "stage": "initial",
+      "status": "discarded_and_deleted",
+      "sha256": "69249c9e4088924bb04d4bf1509a923a3624d1d023df222785f2c5630baded69",
+      "reason": "Fish highlights too strong and scissor ability badge obscured a finger ring; not retained as a usable asset."
+    },
+    {
+      "stage": "v2",
+      "status": "selected_for_review",
+      "corrections": [
+        "Removed specular pearl spot and shiny tool stripes; reduced glossy layers",
+        "Moved scissors plus badge to expose both finger-ring centers in large and reduced previews"
+      ]
+    }
+  ],
+  "subjects": {
+    "ordinary": [
+      "horizontal comb",
+      "vertical comb",
+      "cross scissors",
+      "hair dryer full-board performance"
+    ],
+    "fish": [
+      "horizontal conch",
+      "vertical conch",
+      "pearl shell cross",
+      "wave full-board performance"
+    ]
+  },
+  "review_checks": [
+    "Eight subjects complete, with charcoal contours and readable Chinese labels",
+    "Horizontal and vertical arrows orange in both modes; plus marks orange",
+    "Conch mouths face right and up respectively",
+    "Both scissor ring centers, pearl, shell opening and nozzle remain visible",
+    "Only first three subjects of each mode appear in the reduced board cells",
+    "Dryer and wave appear only in the performance column, without board frames or ability badges"
+  ],
+  "scope": "Static design review only; no final transparent assets, game code or deployment.",
+  "user_feedback": "普通局／鱼关道具 我需要动感一些，现在看上去太死板了",
+  "latest_review": "design/concepts/tool-family-original-v6.png"
+}

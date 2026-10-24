@@ -1,0 +1,46 @@
+{
+  "generator": "built-in image_gen",
+  "date": "2026-10-24",
+  "referenceLibrary": "assets/icons/library-original-png-v2/overview.png",
+  "rejectedMenuReference": "/Users/bob/.codex/visualizations/2026/10/24/01a16d49-e183-7603-a649-8f1e592e3408/menu-icons-v2-qa/menu-390.png",
+  "options": [
+    {
+      "displayOrder": 1,
+      "concept": "收藏与打卡",
+      "source": "/Users/bob/.codex/generated_images/01a16d49-e183-7603-a649-8f1e592e3408/exec-11df9cfa-d004-4ad5-8dbe-bd11b23e502e.png",
+      "saved": "design/concepts/menu-icons-collection-punchcard-v1.png",
+      "prompt": "design/concepts/menu-icons-collection-punchcard-v1-prompt.txt",
+      "status": "not selected",
+      "applicationCodeChanged": false
+    },
+    {
+      "displayOrder": 2,
+      "concept": "奖章与收工牌",
+      "source": "/Users/bob/.codex/generated_images/01a16d49-e183-7603-a649-8f1e592e3408/exec-7e82d7d1-6c62-4e1e-a88d-1527a3267907.png",
+      "saved": "design/concepts/menu-icons-medal-closing-sign-v1.png",
+      "prompt": "design/concepts/menu-icons-medal-closing-sign-v1-prompt.txt",
+      "status": "selected and implemented",
+      "applicationCodeChanged": true
+    },
+    {
+      "displayOrder": 3,
+      "concept": "徽章与下班钟",
+      "source": "/Users/bob/.codex/generated_images/01a16d49-e183-7603-a649-8f1e592e3408/exec-53d9644e-205d-4428-9b9c-123636fe1aa6.png",
+      "saved": "design/concepts/menu-icons-pin-clock-exit-v1.png",
+      "prompt": "design/concepts/menu-icons-pin-clock-exit-v1-prompt.txt",
+      "status": "not selected",
+      "applicationCodeChanged": false
+    }
+  ],
+  "selectedDisplayOrder": 2,
+  "implementation": {
+    "component": "web/src/ui/icons/MenuGlyph.tsx",
+    "format": "native SVG per AGENTS.md UI rules",
+    "menuSize": 24,
+    "headerSize": 24,
+    "previewRoute": "/dev/gallery?c=PlayerMenu",
+    "scope": "icons only; existing menu actions unchanged",
+    "committed": false,
+    "deployed": false
+  }
+}

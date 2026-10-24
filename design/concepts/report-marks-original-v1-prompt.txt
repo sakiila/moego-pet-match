@@ -1,0 +1,47 @@
+Use case: ui-mockup
+Asset type: ONE Batch 6 review sheet for the three existing report/result marks in MoeGo Pet All-Stars: MVP, personal best, title stamp.
+
+Primary request: Continue the APPROVED original-page charcoal-outline, orange-white MATTE family, with light lively poses. Create three distinct reusable report marks, show their use at small size, and stop for user review. Earlier glossy rewards were deleted; do not restore that style. This is a single coherent proposal, not three options. No independent asset export, game code, new titles, points or reward mechanics.
+
+Target: 1536 x 1024 landscape, pure white review page with spacious hierarchy. Heading, one row of THREE large complete marks, a thin pale-gray divider, then three clean application examples. No full report redesign, device frame, app navigation, gallery UI, pet illustration recreation or nested catalogue cards.
+
+Input images and roles:
+Image 1, rush-feedback-original-v1.png: newly APPROVED primary STYLE reference, neutral charcoal rounded contour, matte orange and warm ivory, restrained shallow shading, lively small tilt with short purposeful accents. Do not reuse its ticket or completion check subjects.
+Image 2, home-entry-icons-v3.png: APPROVED supporting STYLE reference for orange-white/charcoal drawing, visual lightness, typography and modest layering. Do not repeat its paw, cup trophy, book or dog/cat subjects.
+Image 3, current scorecard gallery screenshot: LAYOUT/CONTENT context only. Existing score, new-personal-best text, MVP label, variable title and white report surface. Do NOT copy its mismatched pet photo/name examples, actual pet artwork, full report card, UI screenshot or gallery layout. Only use the existing meanings and placement relationships.
+
+Style:
+Neutral dark charcoal #24282e rounded outlines; flat MoeGo orange #ff6b18; white/ivory main fills; ONE very restrained muted warm shadow plane maximum. Energetic but complete silhouettes with a modest tilt or cloth curve, no heavy rendering. These reward marks should feel like friendly PAPER/CLOTH illustrations rather than metal collectibles. No white highlight spots/stripes, shiny plastic, jelly, gold metallic bevel, chrome, navy contour, 3D emboss, thick white die-cut halos, glitter or confetti explosion. No paw, animal face, star-shaped trophy, ranking numbers, currency or claim/collect button. Keep every loop, ribbon tail, flag tip, pole, frame and shadow inside the canvas with generous margins.
+
+Header exact text: "第 6 批 · 结算标记"
+Subtitle exact text: "本局 MVP · 个人新纪录 · 本局称号"
+
+UPPER ROW, three aligned columns with generous white space and consistent optical prominence:
+
+1. Label "MVP 奖章", short gray caption "标记本局真实 MVP".
+One compact circular ribbon medal, with a warm ivory center and a SIMPLE flat-orange outer ring, charcoal contour, TWO short broad orange cloth ribbon tails extending below. Tails curve gently and asymmetrically like the medal has just bounced into place; both full tails and their blunt V cuts remain visible. A readable dark-charcoal uppercase "MVP" is centered in the ivory circle. MVP is a fixed universal label, the only text baked into this mark. Keep the ring light and flat; NO gold coin sheen, star, paw, crown, ranking numeral or layered rosette scallops. One or two small orange celebratory gesture strokes near upper-right are sufficient, with no detached tiny particles. It should be readable next to a pet's existing MVP label and not obscure the pet portrait.
+
+2. Label "新纪录小旗", caption "轻扬旗面，记录突破".
+One small flag on a complete charcoal pole, flat orange swallowtail pennant with a clean broad right-pointing split end, warm ivory underside/fold. Give the cloth a buoyant upward bow and mild forward lean, a single clear flowing silhouette that feels freshly raised. The pole, top attachment, whole flag cloth and bottom end are all complete and inside the area. NO wording, numbers, star, check, arrow, prize, ribbon medal or paw on the flag; its meaning comes from the personal-best UI label alongside it. One or two tiny simple orange gesture ticks are allowed. Keep shading matte and minimal, no glints. It denotes a saved result STRICTLY beating an already existing personal best for the current mode; not first score, equal score or extra points.
+
+3. Label "称号印章", caption "承载本局一个称号".
+A wide low horizontal stamp impression, about 3:1 aspect, warm ivory center with complete rounded ORANGE outer frame and a thin inner contour. Slightly hand-drawn warm character, modest approximately 6-degree tilt like a playful stamp just landed; closed smooth edges and corners, not torn/grungy or incomplete. The inside is BLANK in this large asset example, leaving generous space for localized variable title text. No paw, check, star, award ribbon, tiny words, badge handle or fake signature. It must be optically distinct from the square success check in the previous batch: this is a long, empty text-bearing title seal. Keep an uninterrupted central text region large enough for a long Chinese title or two English lines. This blank base is intentional; show actual text only in the examples below, not in the reusable base artwork.
+
+Below a pale gray divider around y=500, heading "小尺寸与文字应用示意". Three application groups on the SAME page surface, separated by whitespace or simple short gray vertical dividers, not nested cards:
+
+LEFT GROUP:
+A smaller version of the new MVP medal next to the exact label "本局 MVP：Maodu". Underneath, a subtle gray annotation "示例名字" so this is clearly a display sample, not a live result. No pet portrait, owner, extra stat or score reward. Use a readable label and a compact symbol, showing the mark should support existing MVP content rather than dominate it.
+
+MIDDLE GROUP:
+Small gray label "本局得分" above a large orange "2,480". Beside or just below it, the NEW small flag followed by the exact orange text "个人新纪录！". Do not put numbers or these words on the flag itself. Keep this fragment simple with no save/retry buttons or whole report frame. It is an illustrative saved new-record state, not a claim that this user has achieved it.
+
+RIGHT GROUP:
+Show the SAME new long stamp base in TWO clearly separated language-format examples, one above the other. These are alternative LOCALIZATIONS, not two simultaneous awards. Small gray labels "中文示意" and "English example" outside each stamp.
+Chinese stamp text exactly: "全店大扫除负责人" on one comfortable line, in charcoal/orange, within all frame edges.
+English stamp text exactly: "Whole-Shop Cleanup Chief", wrapped as "Whole-Shop" on the first line and "Cleanup Chief" on the second if needed, comfortable font size and padding. Do not abbreviate, change wording, overflow, clip, or make the text tiny. Allow the title stamp example height to accommodate English's two lines while keeping the same visual family. Each example represents the SAME existing title in a different UI language; do not add a new title or language-switch UI.
+
+Keep lower application examples complete and readable with ample safe space before the footer. No fish leaderboard dark redesign: both ordinary and fish reports use a white paper content surface, and the SAME marks apply. No new MVP for zero-service cases and no changed selection/award rules.
+
+Footer exact text: "普通局 / 鱼关共用 · 单局一个称号 · 新纪录需保存成功并严格刷新已有最好"
+
+Critical checks: exactly three mark subjects; all ribbon tails/pole/flag/frame complete; MVP text readable; personal-best icon distinct from MVP and title; main title base intentionally empty, variable titles illustrated below in Chinese/English; no added score or reward, claim button, new achievement category or multi-award round. Accurate Chinese and English text, fully visible margins, matte original-page drawing. One polished static review sheet only.

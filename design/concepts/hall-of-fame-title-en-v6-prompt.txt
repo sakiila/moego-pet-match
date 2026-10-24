@@ -1,0 +1,1 @@
+v6：由 v4 本地处理（脚本 assets/illustrations/tools/space_wordmark_en_v5.py v6）。用户反馈 v5「太长、最右边距离太远」：三处单词间距从 v5 的 64 px 收到 46 px，右上短线与 Fame 的距离从 118 px 收到 30 px。像素原样平移，不缩放、不重绘。

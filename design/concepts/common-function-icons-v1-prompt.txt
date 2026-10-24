@@ -1,0 +1,41 @@
+Use case: ui-mockup
+Asset type: ONE review sheet, second batch in the newly approved ORIGINAL MoeGo icon direction: common navigation and function icons.
+
+Primary request: Continue the APPROVED home-entry-icons-v3 style, which returns to the user's original product designs. Create eight clear, consistent utility icons and a small application-size demonstration. The user has also requested removal of all earlier glossy icon designs; those are obsolete and must not inform this new artwork. This is a single coherent proposal for review, not three alternatives, and no application code.
+
+Target dimensions: 1536 x 1024 landscape. Pure white canvas, generous spacing. Header, two rows of four icons, a thin divider, then a small unobtrusive usage preview row. No full page mockup, device frame, app header, browser chrome or boxed catalogue cards.
+
+Input images and roles:
+Image 1: APPROVED home-entry-icons-v3.png. Primary STYLE reference. Match its very dark neutral charcoal rounded outlines, white/ivory main fills, MoeGo orange accents and slight soft warm edge shading. The icons look clear, light and friendly. Do not reproduce its four subjects in this batch.
+Image 2: ORIGINAL moego-mobile-settings-v1.png from the user's original outputs folder. Supporting typography, dark-outline controls, orange accent and white page/sheet context. Do not add new settings or render the settings screen.
+Image 3: ORIGINAL moego-mobile-upload-v1.png. Supporting original visual language and practical photo-selection context. Use the outline, typography and orange-white treatment only; do not reproduce the pet photo, example identity, the form or the full page. The current action is Choose a Photo, not force open a camera.
+
+Style:
+Simple, complete, legible silhouettes with consistent neutral CHARCOAL stroke around #24282e, rounded joins/caps, white or very light warm-gray interiors, flat orange #ff6b18 used only where helpful. Restrained shallow shading on paper/gear/camera is allowed, matching approved v3. Most visual weight comes from clear contour rather than rendering effects. Utility icons may be mostly outline; do not force orange onto every stroke. No paws or pet faces. No sparkle, motion strokes, extra corner accents, big white sticker halos, thick navy contour, gold metal bevel, glossy plastic, glass, jelly, specular highlight blobs, rainbow effects or dark-blue swatches. Black must be neutral charcoal. These icons should remain easy to interpret in small controls.
+
+Header exact text: "第 2 批 · 通用功能图标"
+Subtitle exact text: "炭黑描边 · 橙白主色 · 与首页 v3 同一套风格"
+
+Eight icons arranged left-to-right in the first row, then the second. All roughly 120–150 pixels high, consistent optical weight and common baseline in each row. Give each icon enough space for complete contours, handles and arrowheads. Labels below, with concise usage captions in muted gray. Do not bake words into the icon art.
+
+TOP ROW:
+1. Label "返回", caption "配合原有回门店文字". A clean left-pointing arrow, charcoal rounded shaft and point, conventional clear direction. Straight arrow only, no U-turn, undo, circular loop, house container or button frame.
+2. Label "关闭", caption "关闭弹层或清空搜索". Two simple neutral-charcoal diagonal strokes forming a balanced X, rounded caps, full endpoints, no enclosing circle, red warning badge or decorations. This is dismiss/clear, not deletion of a pet.
+3. Label "搜索", caption "配合原有搜索框". A round charcoal-outline magnifying glass with white open center and a short flat orange handle angled down-right. Full lens circle and handle, no pet, tiny letters, search results, decorative sparkle or extra ring.
+4. Label "设置", caption "配合原有设置文字". A simple white/light-ivory gear with eight broad rounded teeth, charcoal outline, orange central circular hub. No other machinery, screws or expressive face. Keep the contour lighter and less dimensional than a toy sticker.
+
+BOTTOM ROW:
+5. Label "选择照片", caption "打开设备照片选择器". A compact rounded white camera pictogram with charcoal outline, complete short top viewfinder hump, an orange lens ring and a small dark neutral center. Minimal front details. Camera denotes choosing an existing pet photo, so no shutter animation, live camera screen, plus badge, arrow, paw or new action.
+6. Label "分享图片", caption "由玩家主动调起分享". A conventional share icon: a charcoal shallow open tray with complete rounded corners and a flat orange vertical arrow pointing UP out of it. Intact arrowhead; the stem clearly rises from the center of the tray. No download/down arrow, paper plane, network dots, automatic sending, app logos or image thumbnail.
+7. Label "翻面看原图", caption "仅已可查看的卡片使用". Two slightly offset rounded rectangular cards, a white front card and a pale-orange rear card edge, with one short charcoal curved arrow above them pointing from front toward back. One small orange arrowhead may accent the turn. Clean, readable card-flip metaphor. No actual pet photo, pet name, paw, lock, reward or tiny embedded landscape. Do not confuse it with the automatic shuffle or refresh icons.
+8. Label "信息说明", caption "对应现有信息使用说明". A compact rounded white document sheet with charcoal outline, one small orange folded upper-right corner, and exactly three short charcoal horizontal reading lines, generous spacing. Complete folded corner and whole paper contour. No clipboard, checkbox, signature, user name, legal stamp, exclamation triangle or extra approval flow.
+
+Application-size preview, below a subtle light-gray separator at around y=760:
+Small gray heading "小尺寸应用示意". Across one horizontal row, show ONLY three compact usage examples grounded in current controls, without nesting them in large cards:
+- A single rounded white search field with light-gray border, new magnifier at left, muted placeholder "搜宠物名或主人名", new small X at right.
+- A simple orange-outline white button with the new camera at left and exact text "选择照片".
+- A simple orange-outline white button with the new share-up icon at left and exact text "分享图片".
+Keep these controls moderately sized with readable labels and large space between examples. They are examples, not new screens, actual state transitions or promises that sharing is supported everywhere. Do not add explanatory tooltips, new buttons or an entire form.
+
+Footer exact text: "功能含义沿用现有页面 · 图标配合原有文字使用 · 仅设计审阅稿"
+Ensure all Chinese text is readable, all eight symbols are complete, and visual line weight/palette matches the APPROVED v3 icons. No clipped content, extra symbols or decorative artwork. No game mechanics, fish entry, score, currency, prize, identity data, new settings or product features. One static review sheet only.

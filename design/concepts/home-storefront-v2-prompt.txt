@@ -1,0 +1,15 @@
+Input image: IMAGE1, /private/tmp/claude-501/-Users-bob-WebstormProjects-moego-pet-match/ea05c45d-a73a-452b-a9e5-212aa09dbf76/scratchpad/storefront-current.png (1080 × 740 RGBA PNG)
+
+User request (verbatim):
+参考图 IMAGE1 是首页当前使用的店面框插画（1080 × 740，透明背景）。请用内置 image_gen 对 IMAGE1 做局部编辑，生成 storefront-v2：
+
+唯一改动：去掉左侧白色花盆正面的橙色爪印，花盆正面改为与花盆本身一致的干净平涂白色（保留花盆原有炭黑圆角描边与明暗）。
+
+其余一切必须与 IMAGE1 完全一致：画布尺寸与宽高比、构图、每个元素的位置和大小、线条粗细、配色都不变——橙白条纹遮阳棚、两侧浅木色立柱、绿植叶子、右侧挂的剪刀小招牌、白色柜台及其正面中央的橙色爪印（必须保留）、地面浅米色椭圆投影。橱窗中间区域继续保持完全留空的浅暖白平涂墙面，不添加任何物体、文字或装饰。背景保持真正透明；若 image_gen 不支持透明，则用完全平整的纯白 #FFFFFF。
+
+完成后检查结果：确认花盆上已无爪印、柜台爪印仍在、整体没有位移。把选定结果复制到 design/concepts/home-storefront-v2.png，并把本次完整请求写入 design/concepts/home-storefront-v2-prompt.txt。不要覆盖其他文件，不要改动 web/ 下任何文件。
+
+Built-in image_gen prompt (verbatim):
+Edit IMAGE 1 as a precise local inpainting edit for a transparent PNG storefront illustration. The ONLY change: remove the orange paw print from the FRONT FACE OF THE SMALL WHITE FLOWER POT at the lower left (approximately x=95–170, y=524–585 on the 1080x740 reference). Replace those orange pixels with the pot's clean, flat off-white fill matching the surrounding pot face, retaining its existing subtle light and shade, carbon-black rounded outline, exact geometry and placement. Do not alter anything outside the flower pot face. In particular, KEEP the orange paw print centered on the wide white COUNTER FRONT at lower center (approximately x=495–585, y=620–690). Preserve absolutely every other pixel/feature and original 1080x740 canvas and aspect ratio: orange and white striped awning, pale wooden posts, all green leaves, hanging scissors sign, counter, shadow, line thickness, palette and element positions. The central window is a completely empty flat warm white wall, with no objects, text, or decoration. Preserve genuine transparency outside the illustration, including transparent cutouts and margins; if transparency truly cannot be generated, use perfectly flat pure white #FFFFFF only for the external background. No crop, rescale, reposition, redraw, added elements, texture, text or watermark.
+
+Selection note: The raw image_gen result removed the flower-pot paw print but redrew other parts and changed the canvas to 1515 × 1038. To honor the exact-preservation requirement, the selected PNG uses the original image and applies the clean flower-pot-face correction only within the paw-print region. No pixels outside that region were intentionally changed.

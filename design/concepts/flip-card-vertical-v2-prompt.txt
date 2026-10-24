@@ -1,0 +1,19 @@
+User request: 感觉还是不够意图清晰，请搜索网络，给出更合理的设计
+Tool: Codex built-in image_gen; transparent_background=true
+Status: Selected by the user on 2026-10-24 (可以，替换为这个); integrated through Icon name="flip-card-vertical-v2" at 28px.
+Visual references: current local flip-card master and a captured official rotate-3d-variant page. Both references were inspected and attached using the two most recent conversation images.
+Local style reference: assets/icons/library-original-png-v2/masters/02-common/flip-card.png
+Public spatial reference: https://pictogrammers.com/library/mdi/icon/rotate-3d-variant/
+Research: https://lucide.dev/icons/rotate-cw ; https://lucide.dev/icons/triangles-centerline-dashed-horizontal ; https://www.nngroup.com/articles/icon-usability/ ; https://www.nngroup.com/articles/how-to-test-digital-icons/ ; https://help.quizlet.com/hc/en-ca/articles/360030988091-Studying-with-Flashcards
+Design judgment: one upright card with an arrow visibly wrapping around it; remove stacked-card and floating-arrow ambiguity. A visible short text label remains the clearest recommended treatment if the icon-only constraint can be relaxed.
+
+Use case: stylized-concept.
+Asset type: one redesigned transparent PNG icon for the lower-right corner of a collectible pet card in a web game. Final display height is 28px. Generate one single icon on a 1024x1024 transparent canvas.
+Reference image 1 is the current MoeGo flip-card artwork: use ONLY its visual style, thick charcoal rounded hand-drawn outlines, warm white and vivid orange palette. Reference image 2 is a screenshot of the official Pictogrammers rotate-3d-variant page: use ONLY its spatial idea of an elliptical orbit turning around a VERTICAL axis. Do not copy the web page, its text, checkerboard, logo, code, or color scheme.
+Primary goal: make the meaning "turn THIS upright card over to see its reverse" more direct.
+Draw EXACTLY ONE UPRIGHT PORTRAIT CARD, approximately width:height 0.58:1. Warm off-white blank face, bold rounded charcoal outline, slight perspective around its vertical axis, with only a very narrow orange side edge implying its reverse surface. Do not draw a second overlapping card.
+Draw ONE ORANGE WRAP-AROUND ARROW at the card's WAIST. It should form a flattened horizontal elliptical trajectory around the card body, with visible spatial occlusion: the rear part passes behind the card, and the foreground part curves across in front of the card. A clear arrowhead at the front-right indicates the turn. The arrow visibly belongs to this card's physical turning motion. Keep the ellipse wide enough to read but compact enough for the overall icon to remain taller than wide (overall bounding width:height about 0.8:1).
+Use one arrowhead, not a full circular refresh symbol. No detached arrow floating above. No dashed center line, mirror-image triangles, 3D axis gizmos, page-curl corner, or copy/layers symbol. No extra linework inside the card.
+Style: simple bold hand-drawn flat UI pictogram with slightly imperfect friendly edges; nearly flat warm white/orange fills, no glossy gradient, minimal soft texture. Match the supplied local icon's charcoal outline weight. Strong silhouette legible at 28px. Keep a generous transparent gap around the outside.
+Background: true transparent alpha. No outer white disk or badge. The off-white fill belongs only to the card face.
+No text, no letters, no labels, no watermark, no contact sheet, no interface mockup. Output only the single icon.

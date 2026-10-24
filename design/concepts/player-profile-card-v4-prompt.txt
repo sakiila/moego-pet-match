@@ -1,0 +1,15 @@
+Use case: precise-object-edit
+Asset type: Small local revision of the existing MoeGo player profile flow design board.
+Input player-profile-card-v3.png is the exact edit target. Preserve its 1189 x 1323 canvas, left leaderboard and right profile sheet composition.
+
+Change ONLY the Alice Chen LIST ROW near the bottom of the LEFT leaderboard:
+- REMOVE the entire horizontal title chip "毛孩子熟人" under Alice Chen's name, including its little seal attached to that capsule.
+- KEEP the separate small high-five-paws badge attached to Alice's AVATAR corner. This avatar badge is the sole title indicator in this leaderboard row.
+- Align Alice Chen's name and 13,770 score naturally with the avatar as a clean single-line primary identity. Keep the current selected-row pale tint and orange outline. A small local vertical alignment adjustment is allowed after removing the redundant chip.
+- Do not add a text caption below the name, do not replace the removed chip with any other word or status.
+
+Keep all OTHER pixels as closely as possible: the podium and its avatar-corner badge, the other two list rows, Bob's "你" tag, all scores, date labels, tabs, challenge button, AND the entire RIGHT player profile drawer including the name's current-title chip, three aligned unlocked badges without "佩戴中", all statistics and five recent games.
+This edit is only about removing duplicate title text from the LEFT leaderboard row. The RIGHT profile identity title chip stays, because that is the detail view.
+No rarity colors yet in this flow mock. Deliver only the full revised board.
+
+Generation record: Built-in image_gen local edit on 2026-10-24, saved as player-profile-card-v4.png. Removed the duplicate title chip beneath Alice Chen in the left leaderboard row and kept its avatar-corner emblem. Right profile identity retains the detailed title chip. Mock player data only; no application code changed.

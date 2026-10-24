@@ -1,0 +1,6 @@
+Reference image: design/concepts/title-wordmark-en-v1.png
+
+Final selected ImageGen request (verbatim):
+Create a new leaderboard game title wordmark using the attached approved 'Pet All-Stars' logo as a strict visual reference for the exact chunky rounded bouncy cartoon style, palette, and upper-right three orange marks. Exact single-line text: 'Pet Hall of Fame' (Pet / Hall / of / Fame, case and spelling exact). 'Pet' deep charcoal #1f2227; 'Hall of Fame' MoeGo orange #f96b1c. Make the letters taller and more tightly spaced than a normal title so that the CONTENT bounding box INCLUDING the three short orange radiating strokes is approximately 4.5:1 width to height, while all words remain clearly legible and no letters overlap. Center this compact wordmark on a landscape canvas with generous margins. Exactly three orange radiating strokes at the upper right. Plain perfectly flat uniform opaque #FFFFFF white background. No noise, texture, gradient, shadow, border, watermark, extra words, icon, or UI.
+
+Export: Removed the slight off-white generated background using a near-white color key, composited the wordmark over opaque white, and normalized near-white export pixels to #FFFFFF. Cropped one unused right-edge pixel to remove an export artifact. The final PNG is 1880 x 836 and has no alpha channel.

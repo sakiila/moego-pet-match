@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-23",
+  "batch": 4,
+  "status": "approved",
+  "tool": "built-in image_gen",
+  "concept": "design/concepts/tool-family-original-v6.png",
+  "original": "original.png",
+  "user_feedback": "普通局／鱼关道具 我需要动感一些，现在看上去太死板了",
+  "direction": "Lively active key poses within approved original charcoal-outline, orange-white and matte blue family",
+  "full_prompt_set": [
+    "../../tool-family-original-v3-prompt.txt",
+    "../../tool-family-original-v4-prompt.txt",
+    "../../tool-family-original-v5-prompt.txt",
+    "../../tool-family-original-v6-prompt.txt"
+  ],
+  "reference_images": [
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/tool-family-original-v2.png",
+      "archived": "reference-tool-family-original-v2.png",
+      "sha256": "26d8f812fb4ddb72cd5b04f351efcabd7490ca6a816dc3f5a577919fd832c1c4"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+      "archived": "reference-home-entry-icons-v3.png",
+      "sha256": "d18dc7ae5ba7f5c6a02529cd3fe4f4f21b7be3f6cad7dada38595fcbfbdb5be8"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/round-operation-icons-v1.png",
+      "archived": "reference-round-operation-icons-v1.png",
+      "sha256": "7a80c905bc48a94540fd4b201f21848af7378de9af0b0eb59e756d73116791fb"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/common-function-icons-v1.png",
+      "archived": "reference-common-function-icons-v1.png",
+      "sha256": "f705bbaa1a10bf729a08b683a619188baa38a981aa6d71487f4334b316e69bbb"
+    }
+  ],
+  "sha256": "952dc693e1819701e139e1d0a97994a1add9b563a3aa777c25b95faf130860e1",
+  "discarded_drafts": [
+    {
+      "stage": "dynamic v3",
+      "sha256": "5591ba3187438d7be50b0e401470f1414947534e051929d657a4c76528cee23e",
+      "status": "discarded_and_deleted"
+    },
+    {
+      "stage": "matte cleanup v4",
+      "sha256": "552bb91f75f22742ce5c66eac6ce733f33e01b7863e7a615e3636192ad22c873",
+      "status": "discarded_and_deleted"
+    },
+    {
+      "stage": "caption repair v5",
+      "sha256": "a7cfc27765b952317bda1d92357c10d11e497cfded71239b8940c2a88704d489",
+      "status": "discarded_and_deleted"
+    }
+  ],
+  "changes": [
+    "Bowed and leaning combs with sweep gestures",
+    "Diagonal mid-snip scissors with complete finger rings",
+    "Forward conch openings with direction-aligned flow strokes",
+    "Open pearl shell with short spring-open accents",
+    "Dryer with broad air swooshes; wave with stronger forward curl and spray",
+    "Orange ability symbols retain horizontal, vertical and cross axes independent of active poses",
+    "Removed specular glints and simplified lower preview captions"
+  ],
+  "review_checks": [
+    "All eight subjects and Chinese names/capability captions complete",
+    "Both scissors finger loops readable at large and reduced sizes",
+    "Horizontal/vertical conches remain identifiable through openings, poses and orange double arrows",
+    "Pearl remains a single matte ivory pearl; wave foam is flat-colored",
+    "Only first three tools of each mode appear in the six board previews",
+    "Dryer and wave remain performance-only and outside board cells",
+    "Main layout, ability marks, labels and footer visually checked; duplicate lower headings removed"
+  ],
+  "scope": "Static dynamic-pose review only; no animation implementation, independent PNG exports, game code or deployment.",
+  "approval": {
+    "date": "2026-10-23",
+    "user_feedback": "可以"
+  }
+}

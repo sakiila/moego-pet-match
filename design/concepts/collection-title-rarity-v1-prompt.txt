@@ -1,0 +1,40 @@
+Use case: ui-mockup
+Asset type: ONE cohesive rarity-design preview board for the seven approved MoeGo collection-title badges.
+Primary request: Add a tasteful rarity system to the existing badge designs. The most difficult full-collection title must have a striking RAINBOW BORDER. Preserve the seven approved character illustrations and the playful rounded scalloped badge family. This is a visual proposal only, not a change to game rules or code.
+
+Reference 1 collection-title-badges-v3.png = the exact approved seven-badge family and the 4+3 overview layout. Preserve each illustration's animals, poses, expressive faces, colors, internal props, and exact Chinese title. Keep all interiors orange / ivory / charcoal, only redesign the OUTER RIMS and the slim title-chip borders to encode rarity.
+Reference 2 player-profile-card-v3.png = current app language and small avatar badges. Use only as grounding for a compact avatar-corner usage example. Do not recreate its full screens or repeat title text beneath a leaderboard name.
+
+Output ONE landscape 2400 x 1800 px preview sheet, a single resolved concept, warm-white background, generous whitespace and sharp rounded Chinese typography. Heading "收集称号 · 稀有度设计". No phone frames, OS chrome, stock photos, dark fantasy UI, finance dashboard or additional variants.
+
+Rarity is a proposed display of unlock difficulty, NOT ownership percentages, a paid reward, an experience level or a change to thresholds. Four rarity tiers only:
+- 普通: existing brand ORANGE #f96b1c. Clean single scalloped outline, warm ivory interior, modest and friendly.
+- 稀有: fresh clear BLUE #4a8fe0 outer scalloped rim, a very thin ivory inner separation line. Flat enamel/sticker feeling, no chrome or metallic bevel. Character art remains orange/ivory.
+- 史诗: confident VIOLET #8a62d5 scalloped rim with a restrained two-line edge. A couple of tiny violet four-point glints are permissible near the rim, but no glow cloud, wings or medals.
+- 传说: a continuous clearly visible RAINBOW SPECTRUM following the scalloped outer rim, red -> orange -> yellow -> green -> cyan -> blue -> violet around the perimeter. Smooth color transitions, substantial enough to survive as a small avatar-corner badge. Add a slim ivory keyline separating the colorful rim from the unchanged orange/ivory album illustration. Very restrained 1–2 four-point sparkle accents may sit near the outside. Keep it clean and celebratory, not neon, oil-slick chrome, glitter, glass, glossy 3D or a multicolored filled blob.
+Crucial: RAINBOW is reserved exclusively for "全员点名成功". It must clearly read as a colorful BORDER, not rainbow animal art, rainbow page fills, colored text or a big aura. Keep the emblem's scallop silhouette and interior art unchanged.
+
+Main board: same airy FOUR top items + THREE centered bottom items as the approved set. All main emblems have equal overall visible size and balanced optical weight. Under each emblem show exact title, a SMALL rarity label, then one miniature wearable horizontal title chip. All captions and chip baselines align within a row. The chip has a small seal joined to a slim ivory capsule with dark text; its thin border follows the same rarity color, including a restrained rainbow outline only for the legendary chip. No large heavy cards around individual items.
+
+Exact mapping, matching the established seven badge positions:
+TOP LEFT: "猫猫亲友团" / 普通 — approved two cheeky CAT friends; orange rim.
+TOP SECOND: "汪汪好朋友" / 普通 — approved two joyful DOG buddies; orange rim.
+TOP THIRD: "毛孩子熟人" / 普通 — approved HIGH-FIVE PAWS; orange rim.
+TOP RIGHT: "跨物种交友家" / 史诗 — approved cat/dog/rabbit group selfie; violet rim, animal silhouettes preserved.
+BOTTOM LEFT: "串门小能手" / 稀有 — approved dog peeking around an open door with raised paw; blue rim.
+BOTTOM CENTER: "一家都熟" / 稀有 — approved cat and dog cheek-to-cheek beneath a house roof and heart; blue rim.
+BOTTOM RIGHT: "全员点名成功" / 传说 — approved OPEN STICKER ALBUM with cat and dog stickers and a completion check; beautiful rainbow scalloped rim.
+
+Preserve all original subjects; do not swap the cat/dog/rabbit for different animals, omit the album, or turn ordinary badges gray. The ordinary orange badge is a fully earned badge, not a locked state. Rarity and locked/unlocked are separate concepts.
+
+Slim bottom strip, separated by a light hairline:
+- A compact legend "普通 · 稀有 · 史诗 · 传说", with four tiny corresponding orange/blue/violet/rainbow rim samples.
+- An actual-use miniature leaderboard identity: a purple B avatar with a small RAINBOW ALBUM badge attached at the lower-right corner; beside it just "Bob" and a right-aligned score "19,000". NO title text below Bob's name. Do not put the rainbow around the whole avatar — it belongs only to the small badge.
+- Beside that, one standalone legendary horizontal title chip "全员点名成功", to make the rainbow-outline treatment easy to inspect at small size.
+No fake numerical pixel-size claims; these are conceptual use previews, not browser QA.
+No stats about rarity distribution, unlock probabilities, points, altered thresholds, extra title names, rank crowns, new currencies, follow/like controls, progress bars or game screens.
+
+Typography and clarity: match existing rounded Chinese. All titles exact, especially "跨物种交友家" and "全员点名成功". Border color, the visible tier word, and simple border construction should communicate tiers, without reducing legibility of the badge interiors or title text.
+Deliver only the complete rarity-preview image.
+
+Generation record: Built-in image_gen on 2026-10-24, saved as collection-title-rarity-v1.png. Four proposed rarity tiers encode unlock difficulty: ordinary cats/dogs/friends; rare neighbors/family; epic species; legendary album. Rainbow scalloped border reserved for full-catalog completion. This is a visual proposal awaiting approval; no unlock thresholds, badge masters, application code or database data changed.

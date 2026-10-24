@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-23",
+  "batch": 7,
+  "status": "approved",
+  "tool": "built-in image_gen",
+  "concept": "design/concepts/leaderboard-marks-original-v1.png",
+  "original": "original.png",
+  "full_prompt": "../../leaderboard-marks-original-v1-prompt.txt",
+  "direction": "Approved charcoal-outline, orange-white original-page family; large rank digits and distinct crown/shield/hexagonal silhouettes",
+  "sha256": "a9aa5d1d3b3a6e51d1e22017f0777bb188ed05a09d72c5703d9cb1ff662e3add",
+  "reference_images": [
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+      "archived": "reference-home-entry-icons-v3.png",
+      "sha256": "d18dc7ae5ba7f5c6a02529cd3fe4f4f21b7be3f6cad7dada38595fcbfbdb5be8"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/common-function-icons-v1.png",
+      "archived": "reference-common-function-icons-v1.png",
+      "sha256": "f705bbaa1a10bf729a08b683a619188baa38a981aa6d71487f4334b316e69bbb"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/reviews/2026-10-23-components/05-leaderboard.png",
+      "archived": "reference-05-leaderboard.png",
+      "sha256": "5b032058a56244af30e0b777e06537bd34b473e7f9b5f438405f6038f8837076"
+    },
+    {
+      "original": "/Users/bob/Documents/Codex/2026-10-21/build-web-apps-plugin-build-web-2/outputs/moego-mobile-leaderboard-v1.png",
+      "archived": "reference-moego-mobile-leaderboard-v1.png",
+      "sha256": "70232596753a02bccfcdd75c49c069b44ad021f98426f6e436b2dfc7f6189388"
+    }
+  ],
+  "subjects": [
+    "rank 1 orange-gold crown",
+    "rank 2 silver-gray shield",
+    "rank 3 warm-copper hexagonal plaque"
+  ],
+  "examples": {
+    "standard": [
+      {
+        "rank": 1,
+        "name": "Emma",
+        "score": 4980
+      },
+      {
+        "rank": 2,
+        "name": "Sam",
+        "score": 4260
+      },
+      {
+        "rank": 3,
+        "name": "Yoo",
+        "score": 3920
+      },
+      {
+        "rank": 4,
+        "name": "Bob",
+        "score": 2480,
+        "isMe": true
+      }
+    ],
+    "tied": [
+      {
+        "rank": 1,
+        "name": "Emma",
+        "score": 4980
+      },
+      {
+        "rank": 2,
+        "name": "Sam",
+        "score": 4260
+      },
+      {
+        "rank": 2,
+        "name": "Yoo",
+        "score": 4260
+      },
+      {
+        "rank": 4,
+        "name": "Bob",
+        "score": 2480,
+        "isMe": true
+      }
+    ],
+    "data_note": "Illustrative component samples, not actual company standings."
+  },
+  "review_checks": [
+    "All three complete silhouettes with large readable numerals",
+    "Standard rows correctly use 1, 2, 3, 4 and corresponding marks",
+    "Tied rows correctly use 1, 2, 2, 4 with both tied players showing the second-place shield",
+    "No third-place mark assigned by visual row position",
+    "Rank 4 uses plain numeral without award mark",
+    "Current-player rows keep orange border, pale orange fill and orange score",
+    "Same badge set for both modes; light leaderboard surfaces retained",
+    "No new reward, score, title or ranking rule"
+  ],
+  "scope": "Static design review only; no final independent asset export, game code, animation or deployment.",
+  "approval": {
+    "date": "2026-10-23",
+    "user_feedback": "可以，继续"
+  }
+}

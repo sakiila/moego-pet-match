@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-23",
+  "batch": 6,
+  "status": "revision_requested",
+  "tool": "built-in image_gen",
+  "concept": "design/concepts/report-marks-original-v3.png",
+  "original": "original.png",
+  "full_prompt": "../../report-marks-original-v3-prompt.txt",
+  "user_feedback": "不太好，新纪录小旗还是最开始的，但是去掉最下方的横线。称号印章还是最开始的，但是加一些花纹或者戳",
+  "base": "report-marks-original-v1.png; v2 simplified flag and cut-corner ink stamp are rejected",
+  "interpretation_of_flag_bottom_line": "Only the lowermost pale-beige ground line/oval shadow beneath the pole; original cloth lower contour and ivory folded flap are retained.",
+  "sha256": "bbdc3a56bc56979d8d88016252502b4c6b6ab156ecf75ddc2ce4e3305a0d19b8",
+  "reference_images": [
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/report-marks-original-v1.png",
+      "archived": "reference-report-marks-original-v1.png",
+      "sha256": "c940ac0b2b0df901debd089d5885abc0f80ec6273515f799487a43681f3da091"
+    }
+  ],
+  "changes": [
+    "Restored v1 swallowtail flag, orange finial, ivory underside, original pole and upper gesture strokes",
+    "Removed only ground baseline/shadow from both large and small personal-best flags",
+    "Restored v1 rounded charcoal/orange/ivory title frame and blank main text area",
+    "Added restrained left corner ornaments and a small decorative round cancellation mark at outside lower-right of each stamp",
+    "Retained full existing Chinese and English title samples and MVP design"
+  ],
+  "review_checks": [
+    "Main and small flags match original family without bottom ground line",
+    "All frame corners and circular postmarks fit inside the canvas",
+    "No ornament overlaps Chinese or English title content",
+    "Existing score, MVP text, title samples, names and footer remain readable",
+    "No new score, award, title or game rule"
+  ],
+  "scope": "Static review only; no final independent assets, game code, animation or deployment.",
+  "latest_user_annotations": [
+    {
+      "x_percent": 51.3,
+      "y_percent": 29.6,
+      "instruction": "这个线去掉，投影加回来"
+    },
+    {
+      "x_percent": 95.6,
+      "y_percent": 30.4,
+      "instruction": "这个图标去掉"
+    }
+  ],
+  "interpretation_correction": "User annotations clarify that the extra flag return fold line must be removed and the ground shadow restored; circular postmark icons must be removed.",
+  "latest_review": "design/concepts/report-marks-original-v4.png"
+}

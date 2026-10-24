@@ -1,0 +1,20 @@
+Use case: precise-object-edit
+Asset type: ONE exact annotation-based correction of the Batch 6 review sheet, 1536 x 1024.
+
+User instructions on Image 1:
+1. At approximately x=51.3%, y=29.6%: "这个线去掉，投影加回来".
+2. At approximately x=95.6%, y=30.4%: "这个图标去掉".
+
+Image 1, report-marks-original-v3.png, is the EDIT TARGET. Image 2, report-marks-original-v1.png, is a reference ONLY for the original pale-beige flag ground shadow and the complete rounded title-frame contour underneath the added circles. Do not revert Image 1's corner ornaments or copy Image 2's unwanted flag fold line.
+
+Make ONLY the following precise corrections, consistently in both the large art and smaller usage examples. Preserve every other element, subject, color, pose, material, text, caption, size and placement from Image 1. This is a small local edit, not a redesign.
+
+EDIT A — FLAG LOWER RETURN LINE OUT, GROUND SHADOW BACK:
+The indicated line is the EXTRA curved dark RETURN LINE / ivory folded underside sticking out below the main orange flag cloth, NOT its ground shadow and NOT the true lower outline of the orange cloth. In the large flag this unwanted ivory under-flap/return contour is approximately within x=698–793, y=313–363 of the 1536x1024 canvas. Remove the dangling lower return line AND the extra ivory underside flap it encloses. Replace that extra flap area with the clean white page background. Keep the main orange waving SWALLOWTAIL cloth, its complete charcoal outline including its actual lower edge, V notch, both orange tail points, original rounded pole and orange finial, and upper two orange gesture strokes intact. The cloth should now be one clean orange flag silhouette, with no secondary white fold or black underline underneath it. Do not turn it into a triangular pennant or a flat rectangle.
+Restore the original soft pale-beige OVAL GROUND SHADOW beneath the flag pole, matching Image 2's placement, color, softness and scale: wide shallow ellipse centered under the large flag around x=760,y=412, not a black baseline. Keep the pole's full lower end visible. Apply the SAME changes to the small flag next to "个人新纪录！": remove its extra ivory return flap/dark underline while preserving the main orange swallowtail silhouette and upper accents, and restore its small soft beige oval ground shadow underneath. Do not remove or alter shadows of any other subject.
+
+EDIT B — REMOVE ALL THREE ADDED ROUND POSTMARK ICONS:
+The indicated extra icon is the small orange circular stamp/postmark with diagonal lines attached to the lower-right of the large title frame. Remove that entire circular icon, including its orange ring, diagonal inner strokes and white circular backing, with clean white page background where it protrudes. Reconstruct the original continuous rounded orange/charcoal frame edge underneath it, matching the v1 contour in Image 2. Do NOT remove any part of the title frame itself.
+Apply the SAME circular-icon removal to BOTH smaller title usage examples below: Chinese and English. These three circle icons must be completely absent. Preserve the existing small LEFT CORNER ORNAMENTS/diamond-line flourishes on all three frames. Do not replace the removed circle with any other icon, paw, dot, seal, pattern or badge. Keep the full Chinese "全店大扫除负责人" and the two English lines "Whole-Shop" / "Cleanup Chief" readable and unchanged. The large title frame center stays blank, as in Image 1. Preserve its original rounded thick orange rim, charcoal contour, ivory center, slight tilt, shadow and upper orange accents.
+
+MVP medal and smaller MVP example remain unchanged, as do all headings, all Chinese text/captions, English example label, score 2,480, name Maodu, dividers, footer and pure white page. No glossy material, extra decorations, new rule or code. Return ONE final corrected review image with (a) clean original swallowtail flag minus return fold line, original ground shadow restored, and (b) original ornamented title frame with NO circular postmarks.

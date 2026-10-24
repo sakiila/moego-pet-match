@@ -1,0 +1,12 @@
+Create one finished, standalone bitmap UI icon: a tiny crown that sits just above the first-place avatar on a leaderboard.
+
+Reference image 1 (the user's hall-of-fame crown example): follow ONLY the crown above the blue M avatar very closely for silhouette and placement feeling. It is a compact golden crown with exactly three rising pointed tips, one round ball at the end of each tip, a broad gently curved body, and a single rounded horizontal band along the base. The complete crown leans about 8 degrees clockwise, as if perched playfully atop an avatar. Do not include the avatar or anything else from that reference.
+
+Reference image 2 (the approved leaderboard marks artwork): match its friendly, rounded flat illustration language and restrained soft color layering, but DO NOT copy the thick dark charcoal outlines or the number inside its larger first-place crown icon.
+
+Palette: golden yellow / amber, approximately #f7b733 through #f5a623. Matte flat color, subtle warm tonal separation between crown body and base band, no shiny highlights. If an outline is needed, make it hairline-thin deep gold, never black or charcoal. Clean, simple silhouette readable when reduced to 28–40 px.
+
+Composition: ONLY the crown centered on a perfectly flat, solid #FFFFFF square background, with ample blank white margins on all four sides. Crisp, smooth edges. No texture, gradient, shadow, border, frame, avatar, sparkles, motion marks, stars, numbers, letters, logos, or other objects.
+
+Final export preparation: selected the first generated crown; normalized the near-white background to solid #FFFFFF and cropped to a 920 x 920 square with clear margins. The crown artwork itself was preserved.
+

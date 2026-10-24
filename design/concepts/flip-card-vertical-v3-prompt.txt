@@ -1,0 +1,11 @@
+User request: 这个图标还是不太清晰，箭头大一点试试
+Tool: Codex built-in image_gen; transparent_background=true
+Edit target: assets/icons/library-original-png-v2/masters/11-supplement/flip-card-vertical-v2.png
+Status: Local larger-arrow trial requested by the user; v2 retained.
+
+Use case: precise-object-edit.
+Edit target: the attached transparent MoeGo portrait-card flip icon currently used at 28px.
+Primary request: make ONLY the orange wrap-around arrow substantially larger and clearer at tiny display size.
+Preserve the upright card's exact shape, pose, perspective, proportions, scale, rounded corners, off-white face, narrow orange side edge, charcoal outline, and position. Keep the same overall tall icon footprint and the same transparent background. Do not scale down the card to make room.
+Changes: increase the foreground orange arc's colored band thickness by about 40%; increase the arrowhead's height and length by about 40%. Make the arrowhead a very clear broad pointed triangle at the front-right, easy to recognize at 28px. Grow the arrow mainly INWARD across the existing blank card face, preserving the outer left/right silhouette bounds and the card size. The orange filled area must become noticeably more prominent. Keep the arrow's charcoal outline approximately the current thickness, slightly thinner if necessary to preserve the orange interior; do not bulk up the black outline. The arrow still wraps horizontally around the waist of this one vertical card, with the rear section passing behind it. The rear arc may be about 10% thicker but remain visually secondary.
+Maintain the original orange shade, charcoal shade, flat friendly hand-drawn style, and subtle material texture. No extra arrows, no second card, no refresh circle, no motion lines, no labels, no text, no white circular backing, no badge, no new shadow or glow. Return exactly one icon, not a comparison sheet. Preserve actual transparent alpha.

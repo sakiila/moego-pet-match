@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-23",
+  "batch": 6,
+  "status": "rejected_by_user",
+  "tool": "built-in image_gen",
+  "concept": "design/concepts/report-marks-original-v2.png",
+  "original": "original.png",
+  "full_prompt": "../../report-marks-original-v2-prompt.txt",
+  "user_feedback": "新纪录小旗 干净一点，称号印章 重新设计",
+  "direction": "Cleaner single-pennant personal-best flag; lightweight orange cut-corner ink stamp; existing MVP retained",
+  "sha256": "367316b7225f99244b7707775ac2f4d023ceffc54830afee87f8824b701ee5cd",
+  "reference_images": [
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/report-marks-original-v1.png",
+      "archived": "reference-report-marks-original-v1.png",
+      "sha256": "c940ac0b2b0df901debd089d5885abc0f80ec6273515f799487a43681f3da091"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/common-function-icons-v1.png",
+      "archived": "reference-common-function-icons-v1.png",
+      "sha256": "f705bbaa1a10bf729a08b683a619188baa38a981aa6d71487f4334b316e69bbb"
+    },
+    {
+      "original": "/Users/bob/Documents/Codex/2026-10-21/build-web-apps-plugin-build-web-2/outputs/moego-mobile-report-top-v2.png",
+      "archived": "reference-moego-mobile-report-top-v2.png",
+      "sha256": "3fba38732d0a4988567f51d5066a73aee08ce836edb5580342c5f10669322acd"
+    }
+  ],
+  "changes": [
+    "Simplified flag to single orange pennant and slim charcoal pole; removed decorative ticks, underside flap, ball finial and ground shadow",
+    "Replaced heavy raised title frame with closed thin orange cut-corner double-line ink impression",
+    "Main stamp uses existing 精准排班大师 as example; lower variants retain full Chinese 全店大扫除负责人 and two-line English Whole-Shop Cleanup Chief",
+    "MVP medal design, labels, score and usage relationship retained"
+  ],
+  "review_checks": [
+    "Flag pole, tip and simple silhouette complete at large and small sizes",
+    "Ink stamp corners and double-line borders closed and unclipped",
+    "Main and lower Chinese title text complete, English full wording fits two lines",
+    "Orange title imprint has no black slab border, button fill or ground shadow",
+    "No new title, score or award rule; localization examples remain alternative samples"
+  ],
+  "scope": "Static review only; independent localized text/base preparation, game code, animation and deployment not performed.",
+  "latest_user_feedback": "不太好，新纪录小旗还是最开始的，但是去掉最下方的横线。称号印章还是最开始的，但是加一些花纹或者戳",
+  "latest_review": "design/concepts/report-marks-original-v3.png"
+}

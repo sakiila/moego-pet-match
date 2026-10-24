@@ -1,0 +1,48 @@
+Use case: ui-mockup
+Asset type: ONE review sheet for Batch 3, in-round operation and status icons for MoeGo Pet All-Stars.
+
+Primary request: Continue the APPROVED charcoal-outline, orange-white icon direction of home-entry-icons-v3 and common-function-icons-v1. Design six distinct operation/status pictograms, show a small in-context application, and stop for user review. The user rejected and deleted the earlier glossy material; create only the new original-page direction. One coherent proposal, not three alternatives, no game code or final transparent export.
+
+Target dimensions: 1536 x 1024 landscape, pure white canvas, spacious margins. Header, two rows of three icons, a restrained thin divider, then one compact usage preview. No whole game page, device frame, dark backdrop, reference montage, boxed catalogue cards or browser chrome.
+
+Input images and roles:
+Image 1: common-function-icons-v1.png, APPROVED primary STYLE reference. Match its rounded neutral-charcoal outlines, flat orange accents, white/ivory interiors, gentle warm edge shading and clear silhouette. Avoid turning the pictograms into glossy toys. Do not repeat its utility icon subjects.
+Image 2: home-entry-icons-v3.png, APPROVED supporting STYLE reference. Same palette, stroke character, rounded friendly geometry, typography, and spacious white presentation. Do not add its paw/book/trophy/pet faces to this batch.
+Image 3: existing status-panel gallery screenshot, LAYOUT/CONTENT context only. Time and total score are dynamic text beside small icons in fixed areas. Do not reproduce the gallery UI or use its screenshot as the final artwork.
+Image 4: existing rules gallery screenshot, CONTENT context only. Players swap adjacent tiles by dragging, or first select one and then tap a neighbor. Normal/fish use the same interaction rules. Do not reproduce the old emoji, gallery, underwater environment or whole rules panel.
+
+Style system:
+Deep neutral charcoal around #24282e, rounded consistent outlines and joins; white/light ivory main fills, flat MoeGo orange #ff6b18 as accent, at most a subtle warm-gray shaded plane. No dark navy contour, blue jelly shapes, white specular glints, metallic bevel, chrome, bulky 3D extrusion, thick white die-cut halos, decorative starbursts or heavy icon shadows. Make instructional pictograms a little wider if needed, and keep status symbols compact. All subjects must have complete contours and generous breathing room. No badges, coins, reward numerals, extra game tools or repeated paw symbols.
+
+Header exact text: "第 3 批 · 局内操作与状态"
+Subtitle exact text: "相邻交换 · 自动洗牌 · 计时计分 · 沿用炭黑橙白风格"
+
+SIX subjects in a 3-column, 2-row grid. Large icons about 160–190 pixels tall, centered with consistent optical weight. Each has a bold Chinese label and one concise muted-gray caption below. Keep arrows and fingers completely inside their icon area. No words or numbers baked inside these six icons.
+
+TOP LEFT — label "相邻交换", caption "拖向相邻格，交换位置".
+Two adjacent rounded square tiles, left a flat orange/cream tile, right white/ivory, both with charcoal contours. Above them one short orange arrow pointing right; below them one charcoal arrow pointing left. This pair of opposing arrows shows TWO neighboring tiles changing places. The arrows must remain in separate upper/lower lanes, never crossed. Keep both tiles complete and equally sized, no paw, pet portrait, number, plus, refresh circle or colored gem. Simple flat teaching pictogram.
+
+TOP CENTER — label "点选交换", caption "先选一格，再点相邻格".
+Two adjacent rounded square tiles. Left is already selected with an orange double contour; right is white/ivory with a charcoal border. A complete simple cream cartoon hand with orange cuff enters from lower right, its one extended index finger touches the RIGHT neighbor. Full index, thumb/folded fingers and cuff; coherent hand anatomy, no clipped wrist or extra fingers. Keep the left selected tile clearly visible. One or two short orange touch marks are allowed to identify the right target. This symbol MUST show both tiles; do not turn it into a single-tap activation icon or a tool exploding. The caption communicates the two-step selection.
+
+TOP RIGHT — label "工具合体", caption "相邻工具交换，搭档开工".
+Two simple interlocking jigsaw pieces, one white/ivory and one flat orange, joined at one large readable rounded knob-and-socket. Form one compact diagonal partnership symbol with a continuous clear charcoal outer contour and a readable internal join. The two pieces must fit together coherently without a gap, floating fragment or broken contour. This is a generic TEAMWORK indicator for an existing tip, never a new board piece or ability. No plus sign, lightning, explosion, bonus numeral, chain-link URL symbol, paw or star. Match the light flat drawing of the approved references.
+
+BOTTOM LEFT — label "自动洗牌", caption "没有可用步时自动整理".
+Classic shuffle symbol with TWO smooth crossed paths, both with full arrowheads pointing RIGHT. One path orange with charcoal border, the other white/ivory with charcoal border, clean over-under crossing. Both tails and both arrowheads complete. Make it unmistakably different from the two separate opposing arrows and tiles above. No tiles, circular refresh loop, undo loop, stopwatch, button frame or hand. This is an automatic status notice, never a player-controlled button.
+
+BOTTOM CENTER — label "本局剩余", caption "图标配动态倒计时".
+One small round analog CLOCK symbol, white/ivory face, neutral-charcoal outer contour, one orange hand and one charcoal hand meeting at a small central dot. No dial numerals, timing text or labels inside the clock. A complete simple circle and rounded hands; no alarm horns, start/pause button, extra side knob, circular arrow or decorative urgency strokes. It represents the EXISTING game timer; the UI's digital value remains outside it and is the main information.
+
+BOTTOM RIGHT — label "分数", caption "图标配动态总分".
+One simple flat ORANGE FIVE-POINT STAR with a slim charcoal rounded contour. All five points complete, balanced silhouette and modest warm edge shading only. No white glint, 3D gold bevel, trophy, metallic coin, badge ring, ribbon, number, face or extra sparkles. This is the existing score symbol beside the numeric total, not a separate collectible/reward.
+
+Lower usage preview, below a very pale gray divider around y=750:
+Small muted heading "小尺寸应用示意". Across one horizontal area show three grounded component fragments, with generous space between them and no full board:
+1. A small pale warm timer surface with the NEW clock on the left, muted text "本局剩余" and a large value "00:48" to its right.
+2. A small pale warm-gray score surface with the NEW flat orange star on the left, muted text "分数" and a large charcoal value "2,480" to its right.
+3. One wide, light-neutral fixed-height hint strip, with the NEW shuffle symbol at left and exact text "换个站位，继续营业。". It should look like a status message, without a button border, hover state or action arrow. Do not introduce a manual Shuffle control.
+Do not add a sample full board, progress bar, extra numerical scores, timer resets, pause controls, new actions or tooltip stack. This is only size/context review, not a mock playable game.
+
+Footer exact text: "点选需再点邻格 · 洗牌为系统状态 · 图标不改变原有玩法"
+Keep all Chinese labels and example values accurate and readable, every subject complete, charcoal/white/orange palette consistent with approved references. One static review image only, no implementation.

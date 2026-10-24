@@ -1,0 +1,48 @@
+Use case: ui-mockup
+Asset type: ONE Batch 7 leaderboard rank-mark review sheet for MoeGo Pet All-Stars, with standard/tied-rank examples and current-player row highlight.
+
+Primary request: Continue the approved ORIGINAL charcoal-outline and orange-white MATTE icon family. Design the rank-1, rank-2, rank-3 badges, and show them at small size in both standard and shared-rank lists. These are visual marks for existing ranks, no prizes or new ranking rules. One coherent proposal for review, not three alternatives, no game code or independent export.
+
+Target: 1536 x 1024 landscape, pure white review page, comfortable margins. Header, three large rank marks with labels, a thin pale-gray divider, then two compact four-row leaderboard fragments. No whole leaderboard page, mode tabs, podium remake, app navigation, browser chrome, phone frame or extra statistics.
+
+Input images:
+Image 1 home-entry-icons-v3.png: APPROVED primary STYLE reference, dark neutral charcoal rounded outlines, orange/ivory main palette, small soft edge shading, friendly simple complete silhouettes. The existing cup trophy is a leaderboard ENTRY symbol, not a rank badge; do not copy it into all three badges or add paw prints.
+Image 2 common-function-icons-v1.png: APPROVED supporting STYLE reference for clear small-control silhouettes and restraint.
+Image 3 current leaderboard gallery screenshot: CONTENT/LAYOUT context only. Both ordinary and fish leaderboards use light surfaces; actual entry.rank is shown and the current-player row has orange outline and tinted background. Do not reproduce the gallery, old repeated crown emoji, app page or data as real standings.
+Image 4 original moego-mobile-leaderboard-v1.png from the user-specified original outputs directory: ORIGINAL white/orange report/navigation language and leaderboard context only. Do not rebuild the full page, invent rewards, preserve outdated mini emoji crowns or copy its screenshot.
+
+Visual style:
+Neutral charcoal around #24282e, rounded stroke joins/caps, white/warm ivory interiors. Flat warm orange-gold for rank 1, light neutral gray for rank 2, muted warm copper-peach for rank 3; these are simple flat colors, NOT reflective metals. At most one very shallow warm/gray shade plane per shape. No white glint blobs, glossy bevels, plastic, jelly, chrome, gold coin texture, 3D extrusion, dark navy outline or thick white sticker halo. No paw, animal face, prize ribbon, extra star, tiny decoration or flying confetti. The DIGITS provide rank meaning independently of color. Every shape, point, numeral and small preview is complete and inside its margins.
+
+Header exact text: "第 7 批 · 排行榜名次徽记"
+Subtitle exact text: "普通局 / 鱼关共用 · 大号数字 · 按实际名次显示"
+
+Upper row: three large optically equal badges, about 200–230 px in their long dimension, with spacious gaps and complete silhouettes. Large dark-charcoal numerals, immediately readable. Small friendly 3–5 degree pose tilt is acceptable, no motion clutter. Labels below each:
+
+1. "第 1 名 · 橙金皇冠".
+One LOW BROAD THREE-POINT CROWN, front view, gentle round peaks instead of tiny balls or fragile spikes. Flat warm orange main crown and a broad ivory inset front band with the single bold charcoal numeral "1". Thin consistent charcoal outer contour, one restrained darker-orange edge shade only. Complete three peaks and full rounded base, no handles, star, paw, jewel or medal ribbon.
+
+2. "第 2 名 · 银灰盾牌".
+One softly rounded SHIELD with broad curved shoulders and a gentle complete lower point, light silver-GRAY border, white/ivory center with the single bold charcoal numeral "2". Simple closed charcoal contour and shallow neutral shade, no metal gloss, cross, crown, letter, stripes or ribbon. Distinct shield silhouette at reduced size.
+
+3. "第 3 名 · 暖铜六角章".
+One compact softly rounded SIX-SIDED PLAQUE, muted warm copper-peach rim, ivory center with the single bold charcoal numeral "3". All six sides/corners complete, light charcoal contour, flat matte fill, no metallic glint, circular coin, star, rosette or ribbon. This hexagonal shape is distinct from both the crown/shield and the already designed round MVP ribbon medal.
+
+Lower half: after a thin pale-gray divider around y=500, TWO equally sized light application groups with headings "常规名次示意" on left and "同分并列示意" on right. Both remain WHITE/light ivory surfaces, as actual normal/fish leaderboard rows do; do not turn fish rankings into a full navy theme. Four uniform-height rows per group, lightweight pale-gray row border/separation. Avatar circles with simple initials only, no real photos. New badges at a small size, names legible, scores right aligned. No duplicated standalone rank number outside a badge. Rank 4 is a plain number, no award badge.
+
+LEFT standard example, EXACT order:
+Row 1: new crown badge with numeral 1; avatar E; name "Emma"; score "4,980".
+Row 2: new shield badge with numeral 2; avatar S; name "Sam"; score "4,260".
+Row 3: new hexagonal badge with numeral 3; avatar Y; name "Yoo"; score "3,920".
+Row 4: plain charcoal numeral "4" (NO badge); avatar B; name "Bob（你）"; score "2,480". Current-player row has thin orange outline, very pale orange fill and orange score. No separate crown, star, flag or reward added to identify the current player.
+
+RIGHT shared-rank example, EXACT order:
+Row 1: new crown badge with numeral 1; avatar E; name "Emma"; score "4,980".
+Row 2: new shield badge with numeral 2; avatar S; name "Sam"; small gray label "同分并列"; score "4,260".
+Row 3: the IDENTICAL new shield badge with numeral 2, NOT the bronze 3; avatar Y; name "Yoo"; same gray label "同分并列"; score "4,260".
+Row 4: plain charcoal numeral "4" (NO badge); avatar B; name "Bob（你）"; score "2,480". Identical orange current-player row emphasis as left.
+
+Critical ranking rule: the right list MUST show actual competition ranks 1, 2, 2, 4. The third visual row still receives the SECOND-PLACE SHIELD with digit 2. Never assign the rank-3 plaque just because this is the third row. Rank-3 plaque appears only in the standard sample and the large standalone asset above. No fake rank 3 or extra rank on the tied list.
+
+Footer exact text: "同分按 1、2、2、4 展示 · 本人行保持橙色高亮 · 示例数据"
+All sample values are illustrative, not actual company standings. Keep complete closed badge contours, large readable numerals, simple palette and consistent outline weight, with generous whitespace. No new mode entrance, locked tab, prize, score bonus, action button, side chart or sorting rule. One polished static icon/component review sheet only.

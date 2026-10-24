@@ -1,0 +1,24 @@
+Use case: precise-object-edit
+Asset type: local revision of the approved MoeGo collectible title badge preview sheet.
+Input image collection-title-badges-v1.png is the EXACT edit target. Output the SAME 1448 x 1086 landscape sheet, same framing, layout, typography, scale, colors and background.
+
+Change ONLY the animal pictogram INSIDE the "跨物种交友家" badge in the TOP RIGHT of the sheet, and its corresponding miniature pictogram inside the small horizontal title chip immediately below it. This is a precise local correction; all six other badge designs and every other element of the board must stay unchanged.
+
+Problem to fix: the existing cross-species glyph is a confusing overlapping cluster. Its bird looks like an abstract orange flourish and the animal heads merge together.
+
+Replacement:
+- THREE simple heads in a SINGLE HORIZONTAL ROW, clearly separate with generous ivory gaps, all vertically aligned around the same eye line. No overlapping heads and no stacked animals.
+- LEFT: front-facing CAT, unmistakable two pointed triangular ears and a short round face; two tiny white eyes and tiny nose, with only one short whisker on each side.
+- CENTER: front-facing DOG, unmistakable long DROOPING ears on BOTH sides of a taller round head, white rounded muzzle and dark/orange nose. Reuse the simple dog shape language already visible in "汪汪好朋友", simplified to fit.
+- RIGHT: SMALL BIRD in SIDE PROFILE facing right, clearly round head with ONE visible white eye and a prominent pointed triangular beak sticking out to the right. The beak must clearly connect to the head. No rooster comb, crest fan, hair tufts, neck ornament or abstract swooshes. No wing or feather details needed.
+- Exactly one CAT, one DOG, one BIRD; no fourth animal or other object. Use the same brand orange for their solid shapes with tiny ivory facial cutouts.
+- Each head has its OWN silhouette and does NOT touch any neighbor; the ivory negative space must remain visible at the small-chip size.
+- Keep the three simplified heads comfortably inside the existing scalloped seal, balanced as one symbol. Remove all old decorative action lines inside this cross-species emblem to give the animals more breathing room.
+- The miniature cross-species seal in the title chip must use the SAME three-head side-by-side motif with fewer facial details, so cat ears / dog floppy ears / bird beak are the main readable features.
+
+Approximate edit areas on the 1448 x 1086 source: large top-right seal centered near (1225,220), changing only its interior, leaving the orange scalloped OUTLINE untouched; and small chip seal centered near (1144,436), changing only its interior.
+Retain the exact title text "跨物种交友家". Do not edit its caption, chip border, scale, location or font.
+Preserve all other source pixels as closely as possible: cat badge, dog badge, paw badge, visiting-house badge, family badge, complete-album badge, all title labels and chips, header, white background, lower usage examples and gray/worn states. No new content, no new colors, no app code.
+Deliver only the revised complete sheet.
+
+Generation record: Built-in image_gen local edit, 2026-10-24. First call failed with a connection error; the identical built-in request was retried successfully. Output 1448 x 1086 pixels, saved as collection-title-badges-v2.png. Cross-species large and miniature motifs revised to separate cat/dog/bird heads; the other six badge designs retained. Preview awaiting review; no application code changed.

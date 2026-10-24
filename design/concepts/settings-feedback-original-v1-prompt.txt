@@ -1,0 +1,55 @@
+Use case: ui-mockup
+Asset type: ONE Batch 9 review sheet, settings category icons and sound/haptic states, MoeGo Pet All-Stars.
+
+Primary request: Continue the approved original charcoal-outline and orange-white MATTE family. This is a coverage-completion batch for four existing settings icons: language, background music, sound effects, haptics. Show their small-size use in the existing shop and board settings variants, including an unsupported-haptics example. No new settings, behavior, actual preference changes or game code. One coherent static proposal, not three options.
+
+Target: 1536 x 1024 landscape, pure white review page, generous safe margins. Top heading and FOUR equally spaced large category icons, then a pale thin divider and two settings-fragment variants below. No whole app page, backdrop with a pet, browser chrome, phone mockup or device frame. The phone-shaped haptics pictogram is an icon, not a surrounding device frame.
+
+Input images:
+Image 1 common-function-icons-v1.png: APPROVED primary STYLE source, neutral charcoal rounded contours, flat orange accents, white/ivory fills, restrained soft edge shading. The gear and X can be reused in the settings fragment headers; do not redesign those already reviewed utilities.
+Image 2 home-entry-icons-v3.png: APPROVED supporting STYLE reference for simple clean original-page linework, palette and typography. Do not add its paw, pet heads, cup or book here.
+Image 3 ORIGINAL moego-mobile-settings-v1.png from the user's original outputs directory: SETTINGS LAYOUT/CONTENT context. Keep its language control, the three existing preference rows, orange/gray toggles, neutral close control, and white sheet character. Do not copy the dimmed homepage, pet illustration or entire original mobile page.
+
+Style:
+Neutral dark charcoal around #24282e, rounded consistent strokes/joins/caps. White/ivory main fills, flat MoeGo orange #ff6b18 only on meaningful accents, ONE shallow soft warm-gray shade plane maximum. Clear compact silhouettes rather than toy objects. No glossy white glints, plastic/jelly, chrome, metal bevel, dark navy contour, thick white die-cut halos, paws, faces, stars, confetti or decorative urgency ticks. These are utility category icons, not rewards or new controls. Every globe line, musical-note head, speaker edge, wave end and device contour must be complete, including at small size.
+
+Header exact text: "第 9 批 · 设置与声音触感"
+Subtitle exact text: "语言 · 背景音乐 · 消除音效 · 轻震"
+
+FOUR large icon subjects across the upper part, roughly 150–180 pixels tall, matched optical weight, complete contours and no cards around them. Labels/captions below:
+
+1. Label "语言", gray caption "切换界面语言".
+A simple globe pictogram: full round charcoal outline, one clear vertical elliptical meridian and a horizontal equator, white/ivory open areas. A single orange latitude/equator segment may be the restrained accent. Keep the line count low and clear at small size. No letters, country flags, map contours, satellite, speech bubbles or additional language choices.
+
+2. Label "背景音乐", caption "棋盘计时期间播放".
+Two joined musical notes, charcoal stems and connecting beam, two full flat ORANGE note heads. Familiar clear music-note anatomy, a tiny natural lean allowed, no sparkle or extra wavy staff lines. Both stems and both note heads are intact. No play/pause triangle, mute slash, headphones, instrument or new audio action. This fixed icon identifies the preference CATEGORY even when the setting is off.
+
+3. Label "消除音效", caption "消除与工具音效".
+A simple white/ivory loudspeaker with charcoal closed outline, short left box and clear cone pointing right, plus TWO short flat orange sound-wave arcs to its right. Full speaker contour and complete round-ended waves. No playing badge, red slash, exclamation, animal or fireworks. Fixed category pictogram; on/off is expressed by the existing toggle and text, not by inventing alternate icon behavior.
+
+4. Label "轻震", caption "支持设备的轻震反馈".
+A compact upright rounded phone-like rectangle, charcoal outline with white/ivory center, and one or two short rounded orange vibration curves on EACH SIDE. Simple complete device contour, no brand/model details, screen content, buttons, hand, test-shake action or motion-copy silhouettes. Minimal inner detail so it reads at small size. The category icon stays the same family; unavailable presentation is shown separately below.
+
+After a thin pale-gray divider around y=475, show a spacious TWO-COLUMN application area. Left heading "门店设置 · 默认示意". Right heading "局内设置 · 开启示意". These are separate illustrative settings states, not before/after activation and not a preference reset. Match the existing white settings-sheet style with rounded thin dark/light border, small header gear and close X, subtle simple row separators. No cards inside cards and no per-row filled tile boxes.
+
+LEFT SHOP SETTINGS fragment, about 650 px wide and 390 px high:
+Header reuses the existing small gear and exact text "设置", small neutral close X on right.
+Language section: new SMALL globe next to "语言", then the existing segmented language control with exactly "中文" and "English". Chinese selected in orange; English neutral gray. Keep labels readable, no new language options.
+Row 1: new SMALL notes icon + "背景音乐"; state "关"; GRAY toggle track with WHITE KNOB AT THE LEFT.
+Row 2: new SMALL speaker icon + "消除音效"; state "关"; GRAY track with WHITE KNOB AT THE LEFT.
+Row 3: new SMALL haptics icon + "轻震"; state "开" in orange; ORANGE track with WHITE KNOB AT THE RIGHT.
+Footer inside fragment exact text: "会记住你的选择。"
+This is the documented first-visit state: music/sfx off, haptics on when available. The category icons remain recognizable and use the same restrained accent colors; do not put a giant cross through them when off.
+
+RIGHT BOARD SETTINGS fragment, above the unsupported example, about 650 px wide and 245 px high:
+Header "设置" with reused small gear and close X.
+EXACTLY THREE rows: "背景音乐", "消除音效", "轻震", each with its new SMALL category icon, orange "开" state, ORANGE track and WHITE KNOB AT THE RIGHT.
+This separate example shows stored enabled preferences. Do not add a language row or segmented language control to the board fragment, and do not imply that merely opening settings turns anything on or pauses the clock. No confirm/apply button.
+
+Below the right board fragment, a small separate area with heading "轻震不可用示意". Show ONE subdued haptics row, faded charcoal/gray haptics icon and "轻震", gray "关" state and a visibly FADED DISABLED GRAY TOGGLE with knob at LEFT, as in the existing gallery's unavailable example. Below it, exact helper text "此设备暂不支持轻震，可正常游玩。" in muted gray, wrapping comfortably if needed. No red warning, blocking modal, retry button or test vibration. It is a disabled-control sample, not a new option or automatic preference change.
+
+Readability: upper icon labels finish before y=445; lower headings around y=505; left settings panel roughly y=535 to y=945; board panel y=535 to y=800 and unavailable area y=825 to y=945. Footer around y=985 with safe space. Maintain natural readable text and control spacing. Ensure every toggle's knob position agrees with the "开/关" word. No overlaps or clipped helpers.
+
+Page footer exact text: "音乐与音效首次关闭 · 偏好沿用既有规则 · 局内设置不暂停计时"
+
+Normal/fish modes share the same icons and white settings sheet; no new deep-blue settings page is needed. Only existing UI and states, no new setting, reset, confirmation step, score, award, timer action, autoplay, test vibration or code implementation. One polished static review sheet.

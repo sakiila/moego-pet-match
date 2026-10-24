@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-23",
+  "batch": 9,
+  "status": "approved",
+  "tool": "built-in image_gen",
+  "concept": "design/concepts/settings-feedback-original-v1.png",
+  "original": "original.png",
+  "full_prompt": "../../settings-feedback-original-v1-prompt.txt",
+  "direction": "Approved charcoal-outline/orange-white matte utility family; settings categories and existing preference states",
+  "sha256": "f230513bd052e0357fe2160062dba9d20b8d041f074a8140b719d43b8bebe387",
+  "reference_images": [
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/common-function-icons-v1.png",
+      "archived": "reference-common-function-icons-v1.png",
+      "sha256": "f705bbaa1a10bf729a08b683a619188baa38a981aa6d71487f4334b316e69bbb"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+      "archived": "reference-home-entry-icons-v3.png",
+      "sha256": "d18dc7ae5ba7f5c6a02529cd3fe4f4f21b7be3f6cad7dada38595fcbfbdb5be8"
+    },
+    {
+      "original": "/Users/bob/Documents/Codex/2026-10-21/build-web-apps-plugin-build-web-2/outputs/moego-mobile-settings-v1.png",
+      "archived": "reference-moego-mobile-settings-v1.png",
+      "sha256": "effd4ed51d4b041dd76f8dba4b1b1a4e57eb4b3bce0f7e78898ad12b2c51dc1e"
+    }
+  ],
+  "subjects": [
+    "language globe",
+    "background music notes",
+    "sound-effects speaker",
+    "haptics device"
+  ],
+  "source_checks": [
+    "web/src/components/SettingsDialog/SettingsDialog.tsx",
+    "web/src/components/SettingsDialog/SettingsDialog.gallery.tsx",
+    "web/src/ui/primitives/Toggle.tsx",
+    "UI_COPY.md section 10"
+  ],
+  "examples": {
+    "shop": {
+      "language": "zh as illustrative locale only; browser-language policy unchanged",
+      "music": false,
+      "sfx": false,
+      "haptics": true,
+      "hapticsAvailable": true
+    },
+    "board": {
+      "music": true,
+      "sfx": true,
+      "haptics": true,
+      "hapticsAvailable": true,
+      "language_control": false
+    },
+    "unavailable": {
+      "haptics": false,
+      "hapticsAvailable": false,
+      "note": "Illustrative unavailable preference as in current gallery, no actual preference reset."
+    }
+  },
+  "review_checks": [
+    "Four complete compact category silhouettes match approved palette/linework",
+    "Category icons remain fixed; on/off is expressed by existing words and knob position",
+    "Shop music/sfx off have gray left-position knobs; haptics on has orange right-position knob",
+    "Board shows exactly three enabled preference rows, no language row",
+    "Unavailable haptics row is faded/disabled with off/left knob and existing helper text",
+    "No autoplay, test-shake, new setting, confirmation or timer-pause action",
+    "Existing gear and close symbols reused in context"
+  ],
+  "scope": "Static design review only; no actual preference changes, final independent assets, game code, browser testing or deployment.",
+  "approval": {
+    "date": "2026-10-23",
+    "user_feedback": "可以，继续"
+  }
+}

@@ -1,0 +1,12 @@
+Use case: illustration-story
+Asset type: standalone cartoon sticker for the right outer edge of a Hall of Fame podium.
+Input images: IMAGE1 is the authoritative reference for the MoeGo dog's identity and markings; IMAGE2 is the pose and placement reference, specifically the dog in its lower-right corner. Do not reproduce the rest of IMAGE2.
+Primary request: Draw one MoeGo black-and-white floppy-eared dog with the recognizable IMAGE1 black-and-white patches, long drooping black ears, round eyes, and small pink tongue. Add a mustard-yellow neckerchief. The dog peeks out from behind a straight vertical cutoff at the LEFT side of this standalone image: only about half its body is visible to the right of that edge. One front paw is raised in a cheerful wave; the other front paw rests on the left vertical edge, as if holding the edge of a podium that will be composited later. Keep the dog's face and raised paw fully visible. Add just two or three short orange hand-drawn excitement strokes beside the dog and a tiny clump of green leaves at its feet.
+Style/medium: flat, rounded, friendly cartoon sticker illustration, matching the simple bold shapes of the lower-right dog in IMAGE2 while retaining IMAGE1's distinctive dog design.
+Composition/framing: isolated single dog and leaves only; clear straight left-side cut edge implied by the dog's partial body; ample white margin on the other sides for local background removal. Do not draw the podium itself, any rectangle, panel, border, or background scene.
+Scene/backdrop: perfectly flat, uniform pure white #FFFFFF.
+Constraints: no texture, gradient, shadow, glow, background marks, text, logo, or watermark. Only the dog, its yellow neckerchief, two or three orange strokes, and the small green leaves.
+
+Reference files:
+IMAGE1: design/references/moego-black-dog.jpg
+IMAGE2: design/references/hall-of-fame-reference.webp

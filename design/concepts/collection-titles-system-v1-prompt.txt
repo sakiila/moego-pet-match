@@ -1,0 +1,61 @@
+Use case: ui-mockup
+Asset type: One coordinated high-fidelity UI design board for a collectible title / achievement system in the existing MoeGo Pet All-Stars mobile web game.
+Primary request: Create ONE design direction showing the THREE user-requested surfaces side by side: title beside top-right avatar; titles on the existing leaderboard; and the "我的称号" bottom drawer for choosing which unlocked title to wear. This is one coherent product flow in three states, NOT three alternatives. The user explicitly requests all three surfaces on this one design board, so the multi-screen presentation is intentional.
+
+Target dimensions: landscape board 2560 x 1920 pixels. Three equal portrait app-content panels, each representing a 390 x 844 CSS-pixel mobile viewport at approximately 2x density. Small even gutters, neutral off-white presentation board, small labels above each panel "头像旁", "排行榜", "我的称号". No phone hardware, no bezels, no OS status bars, no fake battery or clock, no browser chrome. No huge decorative board title or explanatory arrows. The app content should fill its panel and remain crisp and legible.
+Current date anchor: 2026-10-24; no dates need to be displayed.
+Create realistic, production-quality UI designs with clear hierarchy, strong typography, intentional imagery, and purposeful spacing. These are precise additive changes to an existing game. Preserve its existing product identity and screen composition.
+
+References:
+Image 1 = existing MoeGo HOME screenshot. It grounds the logo, rounded type, orange/black/white palette, pet-shop illustration, dog manager, primary action and home navigation. The home screenshot is older: REMOVE the paw mark on the front of the flowerpot and REMOVE the paw icon from the Start button, while retaining the counter's single paw mark, to reflect current source. Do not otherwise redesign the home body.
+Image 2 = existing MoeGo LEADERBOARD screenshot. Preserve its large playful "毛孩子光荣榜" heading, podium, orange/gray mode switch, black outlines and existing rank badges. This screenshot is a composition/style reference, not a slicing asset.
+Image 3 = approved scalloped collection-mark artwork on pet cards. It grounds the tiny, playful, warm-orange stamp treatment ONLY. Titles should use their own small cat/paw/house motifs, not a checkmark that could be confused with collection status. Do not reproduce the big pet cards or green status tags.
+
+Design language:
+- Existing palette: #f96b1c brand orange, #1f2227 charcoal, #ffffff and #fbfbfc backgrounds, #ffe7d6 pale orange, #e3e6eb neutral dividers.
+- Friendly heavyweight rounded Chinese headings, existing rounded body typography. Body 14–16 CSS px, small captions no smaller than 11 CSS px.
+- Title chip: a tiny softly scalloped orange-outline seal with a simple cat-head / paw / animal silhouette next to a short pale-orange paper label. Flat, clean, tactile, restrained. It should look like part of a playful sticker collection. NO elaborate medals, crowns for titles, neon glow, metallic gaming ranks, gem currency, purple rarity tiers, heavy gradients or fireworks.
+- The exact same "猫猫亲友团" title chip appears consistently in avatar header, Bob's leaderboard row, and selected drawer row.
+- Names and scores stay visually primary. Titles are secondary, never replace names or competitive rank icons.
+- Preserve the score ranking. Achievement titles are a separate visible identity.
+
+COHERENT ILLUSTRATIVE STATE (design mock data, not real account data):
+Player name Bob, worn title "猫猫亲友团"; 18 of 80 pets collected; 3 of 7 first-level titles unlocked; 2 animal species, 6 different owners, 0 fully collected multi-pet families. Exactly one title is worn at a time, chosen by player. No auto-equip or "highest tier automatically chosen" framing.
+
+LEFT PANEL — home with avatar title:
+Use the composition of reference home. At the top retain MoeGo logo left, "中 / EN", and right-aligned purple circular B avatar. Integrate a small readable "猫猫亲友团" chip IMMEDIATELY BESIDE the avatar. Make the avatar trigger a compact two-line cluster: "Bob" on its first line, title chip on its second line, circle B to the right; both lines together should be about avatar-height. Carefully fit the header into 390 CSS px without clipping, overlapping the logo/language or squashing type. Keep the title legible rather than using a wordless badge.
+Below, preserve the existing "毛孩子全明星" heading, "和同事家的毛孩子，来一局 90 秒消消乐。", pet shop awning/manager illustration and orange "开始营业" primary button with NO paw icon. Under it retain three navigation items "宠物图鉴", "排行榜", "我的宠物" and the existing quiet footer treatment. Do not add a big achievement card to the homepage.
+To show the entry point, show a SMALL avatar dropdown open below the avatar, overlaying only a little of the header area: two simple menu items "我的称号" with small seal icon and "Clock Out". No full-screen menu or large profile card. Clearly anchor this tiny dropdown to the avatar. It must not hide the main home illustration.
+
+CENTER PANEL — leaderboard with worn titles:
+Preserve reference leaderboard visual structure. Header with MoeGo, "回门店", language; existing big black-and-orange "毛孩子光荣榜", subtitle "谁把毛孩子安排得最明白？". Mode pills "宠物店" selected orange and "鱼关卡" inactive.
+Existing podium still in 2–1–3 arrangement. Illustrative ranking: first Alice 3,860; second Emma 3,420; third Sam 3,180. One restrained short title chip below each podium name: Alice "全店都认识我", Emma "汪汪好朋友", Sam "串门小能手". Keep rank numbers and score text visible.
+Below podium keep "我的名次" active and "全榜" inactive. Fit three clear nearby rows with rank badge, avatar, name, small title line UNDER name, score aligned at right:
+rank 6 | Taylor | "汪汪好朋友" | 2,620
+rank 7 | Bob, small "你" tag | "猫猫亲友团" | 2,480
+rank 8 | Mia | no title chip at all | 2,310
+Bob's row is pale peach with orange outline as in the reference. All scores descending; no duplicate identity or fake ties. The no-title row simply shows the name, not a gray empty badge or "未佩戴" label. Preserve existing rank emblems separately from title seals.
+Bottom fixed action "再挑战一次" with the usual orange pill and black offset shadow. Do not change ranking rules or add collection-ranking tabs. Make the page fit naturally; sensible compact podium sizing is acceptable to show the title rows clearly.
+
+RIGHT PANEL — My Titles drawer:
+Show the same home softly dimmed in the background. Over it, a bottom drawer occupying approximately 82–86% of the panel height, white surface, generous rounded top corners, matching existing bottom-sheet styling. Drawer full width within its mobile panel, NOT a new standalone page and not a floating card.
+At drawer top: small drag handle, heading "我的称号", circular X close at right.
+One concise subtitle "解锁后，挑一个喜欢的挂上。"
+Compact summary row "已解锁 3 / 7" on left, low-emphasis "不佩戴" action on right.
+A clean single-column list, subtle dividers rather than cards nested inside cards. There are exactly SEVEN rows with category icon/seal at left, title and condition in middle, status/action at right. All conditions must be readable. First 3 are unlocked, remaining 4 subdued but not illegible:
+
+1. "猫猫亲友团" — "认识 5 位猫猫" — clearly SELECTED; subtle pale-orange row tint, same cat title seal, orange check with exact state "佩戴中". This is Bob's currently worn title.
+2. "汪汪好朋友" — "认识 5 位狗狗" — unlocked orange/cream dog seal; a small outlined "佩戴" button.
+3. "毛孩子熟人" — "累计收集 10 位毛孩子" — unlocked paw seal; a small outlined "佩戴" button.
+A light "继续收集" section label separates the following 4 unfinished rows:
+4. "跨物种交友家" — "2 / 3 种动物" — neutral small animal seal, discreet 2/3 progress rail, "未解锁".
+5. "串门小能手" — "6 / 10 位主人" — neutral tiny house/paw seal, discreet 6/10 progress rail, "未解锁".
+6. "一家都熟" — "0 / 1 个多宠家庭" — neutral family/paw seal, empty small progress rail, "未解锁". Do not reveal any unknown owners or family-member pet names.
+7. "全员点名成功" — "18 / 80 位毛孩子" — neutral open-album seal, discreet 18/80 progress rail, "未解锁".
+
+No bottom "保存", no "确认佩戴", no primary CTA demanding extra confirmation. Tapping "佩戴" directly switches the single worn title; selected row reads "佩戴中". At the very bottom a quiet one-line note "只改变展示，不影响分数". Do not add currency, achievement points, competitive bonuses, daily streaks, seasons, notifications, QR codes, unlock animations or rewards not requested.
+
+Ensure the right panel's seven rows, close button and summary fit with comfortable spacing inside the natural drawer. No clipped text, illegible glyphs, duplicated rows or inconsistent selected title. Preserve the source's visual taste; produce a polished design suitable for the user to review before ANY code implementation.
+
+Generation record: Built-in image_gen, 2026-10-24. Actual output is 1448 x 1086 pixels, retaining the requested landscape 4:3 board ratio rather than the requested raster dimensions. Saved as collection-titles-system-v1.png. One coordinated concept with three requested surfaces. All collection/title counts are illustrative mock data. No application code, achievement rules or selected-design documentation was changed. Awaiting user review.
+

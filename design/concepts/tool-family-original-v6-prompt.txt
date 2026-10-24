@@ -1,0 +1,6 @@
+Use case: precise-object-edit.
+Input is the supplied 1536 x 1024 dynamic ordinary/fish tool review sheet.
+REMOVE ONLY the two small gray caption headings just above the bottom miniature-cell previews: the text line at about x55 to x290, y770 to y798, and the text line at about x790 to x1040, y770 to y798. These two tiny headings are redundant and should be replaced by clean white background. Do not replace them with any new wording.
+Keep the thin divider at y757, all six miniature board cells below y802, the vertical mini-preview divider, footer, main header, subtitle, column labels, left-side mode labels, tool names and capability captions EXACTLY UNCHANGED.
+Keep all eight dynamic tool poses and motion arcs exactly unchanged, including the matte orange combs/scissors/dryer, matte ivory-blue conches and pearl shell, breaking wave, and all orange ability badges. No gloss, white glint spots, new highlights, added decorations, shape changes, cropping or canvas resizing.
+This is a two-line TEXT REMOVAL only. Do not change or regenerate any other content. Return ONE final clean review image.

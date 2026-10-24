@@ -1,0 +1,19 @@
+Round 1 — source images:
+- design/concepts/hall-of-fame-crown-v1.png
+- design/references/hall-of-fame-crown-reference-2.png
+
++Use case: precise raster asset edit. Asset: one small sticker crown to sit upright above the first-place avatar on a leaderboard.
+Input image 1 (design/concepts/hall-of-fame-crown-v1.png) is the authoritative crown design. Preserve its flat warm golden-yellow/orange palette, softly rounded vector-like shapes, three pointed tips with one round ball on each, and rounded bottom band. Do not add or remove any crown feature. Input image 2 (design/references/hall-of-fame-crown-reference-2.png) is only a reference for upright placement and a white sticker outline; do not copy the avatar, orange decorations, or its crown design.
+Change exactly two things from image 1: (1) rotate/redraw the whole crown so it is straight and symmetrical, with a truly horizontal bottom band, the center tip vertically above the band center, and left/right balls at equal height, as though centered and worn upright over an avatar; (2) add an even pure-white external sticker outline around the entire gold silhouette, including every ball, point, side, and bottom band. The white outline should be about 6–8% of crown height, smooth, continuous, rounded, and clearly distinct from the gold.
+Only one crown, centered on a square canvas, with generous empty margin on all four sides. Behind it use a perfectly uniform solid opaque #FF00FF pure magenta fill across the entire canvas, including every corner. No gradients, texture, glow, shadow, background border, or antialias fringe outside the white outline. Absolutely no numbers, letters, words, symbols, avatar, or additional objects. Clean crisp sticker art.
+
+Round 2 — selected output; source image: Round 1 generated PNG
+
+Edit the provided crown image into a final production raster sticker. The provided current crown is the shape reference: preserve its upright centered shape, three round balls, horizontal rounded band, golden-yellow flat fill, and continuous white external outline. Do not redesign it. Remove every stray white or black speck and jagged fringe around the silhouette; outer edge must be smooth.
+CRITICAL BACKGROUND CHANGE: fill the entire square canvas behind the crown with an OPAQUE, perfectly uniform pure magenta #FF00FF (RGB 255,0,255). Every corner and all empty space must be this exact flat color. No transparency / alpha, no black or white background. The white sticker border remains separate from and fully visible against magenta. Keep generous magenta margins around all sides.
+One crown only. No number, text, avatar, sparkles, shadows, glow, gradient, texture, or frame. Export as opaque PNG with solid magenta background.
+
+Round 3 — rejected (transparent output with stray edge specks); source image: Round 2 generated PNG
+
+Produce the final one-crown sticker from the attached image, preserving the upright symmetric golden crown exactly: three round balls, centered taller tip, perfectly horizontal rounded band, clean unbroken pure-white outline around its entire outer silhouette. No text or number. The only necessary correction is the canvas background.
+Treat the background as a FLAT DIGITAL COLOR MATTE, not an illustration or colored paper. EVERY background pixel, including all four corners and all margins, must have exact integer RGB (255, 0, 255), hexadecimal #FF00FF, alpha 255. Zero variation in the background. No gradient, noise, lighting, vignetting, compression, near-magenta colors, or texture. Keep the crown centered with generous flat-magenta empty space and sharply distinct white sticker edge. No shadow, glow, border, other objects or artifacts. One square opaque PNG.

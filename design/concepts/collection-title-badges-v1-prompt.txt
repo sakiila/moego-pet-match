@@ -1,0 +1,47 @@
+Use case: ui-mockup
+Asset type: One cohesive asset-preview sheet for SEVEN collectible title badges in MoeGo Pet All-Stars. These are preview artwork, not application code, not a new screen redesign, and not production sliced assets yet.
+Primary request: Design a complete first set of seven title badges following the exact warm-orange scalloped stamp + small title-label style approved in the reference. Show them large enough to judge their craft and at realistic small UI scale.
+
+Input image: collection-titles-system-v1.png is the APPROVED VISUAL REFERENCE. Inspect the seven seals in the right-hand "我的称号" drawer and the little title chips beside avatars / leaderboard names. Continue that design language very faithfully. Do NOT reproduce the three phone screens, pet-shop scene, podium, UI rows, avatar photos, or sample progress values.
+Output: ONE landscape 2400 x 1800 px presentation sheet, white / very subtly warm background, roomy outer margins, generous spacing. No device frames, no app screenshot backgrounds, no moodboard photos. Precise, clean, friendly, polished icon-family artwork.
+Current date anchor: 2026-10-24; no date shown.
+
+Visual system:
+- Every emblem is the SAME simple round flower/scallop seal, eight broad soft lobes, identical silhouette, same thickness of orange outline, faint warm ivory fill, with a very subtle restrained contact shadow or no shadow. No petals layered behind it, no ribbons, no laurel wreaths, no medal hanging loops.
+- Orange #f96b1c, warm ivory #fff5e9, dark ink #1f2227, gray #a5a9b2, pale-gray #f1f2f5. Palette is shared across ALL seven badges. Keep outlines and glyphs rounded, smooth, balanced and consistent.
+- The internal motif is a friendly orange pictogram, not a rendered animal portrait. Bold simple shapes and minimal facial features that still read when the seal is only 28–40 CSS px.
+- Match the reference's flat, playful die-cut stamp aesthetic. No metallic gold, glossy 3D bevels, photorealism, gradients, glow, glitter, game currencies, rarity colors, crowns, tier stars, shields or military prestige.
+- Each large emblem below has its exact Chinese title in a separate readable rounded type label underneath; don't engrave paragraphs or tiny lettering inside the seal. Use the same existing rounded Chinese product font character.
+- A matching WEARABLE TITLE CHIP consists of a SMALL emblem attached to the left of a slim rounded cream label with a fine orange border and dark Chinese title text, as in the avatar/leaderboard reference. Emblem and capsule are one coherent horizontal unit.
+
+Main composition:
+Small, understated top heading "收集称号 · 徽章预览".
+Arrange seven large badge presentations in an airy 4 + 3 grid, with the second row's three centered beneath the first. The top row has four equally spaced columns; second row has three equally spaced items centered, leaving deliberate breathing room. Do not invent an eighth title.
+Each item includes: one large 170–190px scalloped emblem, exact title beneath, then one matching small horizontal wearable title chip underneath to demonstrate how the icon joins its label. Keep item contents aligned and sized consistently. The small chips must not be huge buttons.
+Use tiny quiet category captions only if needed to explain the motif; avoid writing unlock thresholds or new mechanics.
+
+Seven titles and their distinctive motifs (these exact names, in this order):
+1. "猫猫亲友团": friendly pointed-ear cat head, round cheeks, tiny nose and simple whisker marks. Same orange cat identity as the approved drawer.
+2. "汪汪好朋友": friendly floppy-ear dog head with a clear rounded muzzle. Make it unmistakably different from the cat at small sizes.
+3. "毛孩子熟人": one bold orange paw print with just two short little greeting strokes. No overlapping hands or human characters.
+4. "跨物种交友家": a compact friendly group of THREE distinct heads: pointed-ear cat, floppy-ear dog, and a crested bird with curved beak. No house or globe; keep silhouettes distinguishable and avoid tiny detail.
+5. "串门小能手": one little house doorway with a paw at its entrance and a short curved three-dot visiting trail beside it. Mostly open door silhouette, not a closed square with tiny unreadable symbols.
+6. "一家都熟": a simple house roof sheltering TWO pet heads together, one cat and one dog. The roof must visually distinguish this family motif from both the cross-species group and the visiting-door badge.
+7. "全员点名成功": a little open sticker album, its two pages containing FOUR simple paw sticker spots, all filled orange. No checkmark replacing the album, no letters, no rank crown.
+
+Bottom strip: compact real UI usage and state comparisons, separated from main badge grid by a light hairline only. Do not make this a huge card.
+Use the same CAT title to make the state differences unambiguous:
+- label "已解锁" with the regular orange/ivory cat title chip "猫猫亲友团".
+- label "未解锁" with the EXACT SAME silhouette and cat motif in calm gray and light-gray fill; keep its title legible. No padlock covering the motif.
+- label "佩戴中" with the SAME orange cat chip; add a tiny orange circular check as a separate UI status marker outside the emblem, not a different badge illustration.
+At far right or on a small separate line, include a compact real-scale leaderboard name example: dark rounded "Bob" with the small "猫猫亲友团" chip below it. Make the chip visibly subordinate to the name, like the approved reference.
+Do not put tiny extra annotations like 24px/32px everywhere; the usage itself should demonstrate scale.
+
+Quality requirements:
+- Exactly seven distinct designs in the main collection, all matching as one family.
+- All Chinese glyphs must be crisp, accurate and readable. Particularly "猫猫亲友团", "跨物种交友家" and "全员点名成功" must be copied exactly.
+- Keep every emblem the same outside shape and line weight; balance internal visual weight rather than making complex badges heavier.
+- No unrelated new badges, no achievements for game performance, no extra reward tiers, no rarity system, no sample scores, no progress bars or buttons.
+- Focus on clean icon craft and actual small-scale usefulness. Deliver only the finished preview image.
+
+Generation record: Generated with the built-in image_gen tool on 2026-10-24. Actual output is 1448 x 1086 pixels (same 4:3 aspect ratio as requested). Saved as collection-title-badges-v1.png. Seven badge concepts plus compact title chips and unlocked/locked/worn-state examples. This is a visual preview awaiting review, not a production asset sheet; no application code or unlock rules changed.

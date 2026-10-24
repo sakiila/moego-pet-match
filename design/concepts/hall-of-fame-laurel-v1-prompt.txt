@@ -1,0 +1,9 @@
+参考图：design/concepts/report-marks-original-v4.png（仅用于风格参考）
+
+生成请求：
+Use case: game leaderboard icon concept.
+Input image: the attached report-marks-original-v4.png is the approved STYLE REFERENCE ONLY. Create a NEW standalone asset; do not copy its medal, flag, stamp, page layout or text.
+On a perfectly flat, uniform pure white #FFFFFF background, draw exactly two separate golden wheat ears, one on the left and one on the right, mirrored symmetrically like laurel leaves flanking a first-place winner's name. The wheat stalks may lean gently toward the outer sides, and the golden grain heads should frame a generous completely empty central gap intended for a name. No connector between them. Overall visible composition about 3:1 width:height, with ample clean white margin on every side for later background removal.
+Match reference icon style: dark charcoal rounded thin outlines; main gold #f7b733 with light orange infill; a small amount of soft tonal layering; matte finish with no strong specular highlights. Simple, bold individual grain silhouettes and clear contour so each wheat ear stays legible at 24–40 px. Keep strokes and grain details consistent and symmetrical. No texture, gradients, ground or cast shadows, frame, border, extra text, lettering, watermark, decorative rays, other objects, or interface elements.
+
+处理记录：选用首次生成的透明底双麦穗图稿，合成在完全不透明的纯白 #FFFFFF 底色上，以保证背景像素精确一致；没有改变麦穗形状。

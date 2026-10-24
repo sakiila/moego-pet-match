@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-23",
+  "batch": 6,
+  "status": "approved",
+  "tool": "built-in image_gen",
+  "concept": "design/concepts/report-marks-original-v4.png",
+  "original": "original.png",
+  "full_prompt": "../../report-marks-original-v4-prompt.txt",
+  "user_annotations": [
+    {
+      "x_percent": 51.3,
+      "y_percent": 29.6,
+      "instruction": "这个线去掉，投影加回来"
+    },
+    {
+      "x_percent": 95.6,
+      "y_percent": 30.4,
+      "instruction": "这个图标去掉"
+    }
+  ],
+  "sha256": "0a62c5da8f57422b3158777e98eb566af7ddb22e39180ee3bc7bcfa05ceb5443",
+  "reference_images": [
+    {
+      "original": "/Users/bob/.codex/generated_images/01a166cb-49bd-7180-94f1-1f22dce613cc/exec-e3b6a441-8ac4-47fa-91f3-9352dd9da703.png",
+      "archived": "reference-user-annotated-v3.png",
+      "role": "User-supplied annotated edit target",
+      "sha256": "bbdc3a56bc56979d8d88016252502b4c6b6ab156ecf75ddc2ce4e3305a0d19b8"
+    },
+    {
+      "original": "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/report-marks-original-v1.png",
+      "archived": "reference-report-marks-original-v1.png",
+      "role": "Original flag ground shadow and frame-contour reference",
+      "sha256": "c940ac0b2b0df901debd089d5885abc0f80ec6273515f799487a43681f3da091"
+    }
+  ],
+  "changes": [
+    "Removed extra dark lower return contour and enclosed ivory underside flap from both flags; preserved orange swallowtail cloth lower silhouette",
+    "Restored original pale-beige oval ground shadow under large and small flags",
+    "Removed all three circular postmarks and their white backings; restored continuous title-frame contours",
+    "Retained title-frame left corner ornaments, MVP design and complete existing text"
+  ],
+  "review_checks": [
+    "Main and small flags have one clean orange cloth contour, no hanging return fold, and visible restored ground shadow",
+    "All three title frames have no circular postmark, complete rounded right corners, and retained left corner ornaments",
+    "All Chinese/English title examples and MVP contents remain readable",
+    "No new icon, award rule, score, code or interaction"
+  ],
+  "scope": "Static annotation-based review only; no independent asset export, application code, animation implementation or deployment.",
+  "approval": {
+    "date": "2026-10-23",
+    "user_feedback": "可以，继续"
+  }
+}
