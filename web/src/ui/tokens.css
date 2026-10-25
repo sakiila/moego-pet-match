@@ -147,7 +147,11 @@
   --achievement-mythic-bg: #f3efff;
   --achievement-mythic-line: #8c87f4;
   --achievement-mythic-gradient: linear-gradient(125deg, #a34df4, #5145df 45%, #3379ed 75%, #41e0f0);
-  --achievement-mythic-tag: linear-gradient(125deg, #e9ddff, #d8f7ff);
+  --achievement-mythic-tag: linear-gradient(100deg, #8525e7, #4936d6 35%, #214dca 70%, #087b9c);
+  --achievement-mythic-tag-stroke: 1px;
+  --achievement-mythic-tag-sheen: linear-gradient(180deg, rgb(255 255 255 / 0.42), rgb(186 246 255 / 0.1) 22%, transparent 45%);
+  --achievement-mythic-tag-rim: linear-gradient(100deg, #d47cff, #b5beff 45%, #35efff);
+  --achievement-mythic-tag-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), inset 0 -1px 0 rgb(36 108 209 / 0.55), 0 0 7px rgb(141 82 255 / 0.3), 2px 0 8px rgb(39 198 249 / 0.24);
   /* 未解锁隐藏称号的灰蒙层 */
   --achievement-hidden-mask: rgba(90, 84, 80, 0.55);
   --achievement-equip-width: 68px;
