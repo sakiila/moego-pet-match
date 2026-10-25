@@ -24,7 +24,7 @@ export default function Gallery() {
     history.replaceState(null, '', `?c=${encodeURIComponent(name)}`);
   };
 
-  // 以真实视口单独查看一个状态，便于与确认稿对照；仍属于仅开发环境的陈列页。
+  // 以真实视口单独查看一个状态，便于与确认稿对照。
   if (isolatedState && entry && Object.hasOwn(entry.states, isolatedState)) {
     return <>{entry.states[isolatedState]()}</>;
   }

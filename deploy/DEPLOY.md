@@ -89,6 +89,8 @@ docker buildx build --platform linux/amd64 \
 
 ## 检查与回滚
 
+组件与素材陈列页：`https://star.baobo.me/dev/gallery`，无需选择游戏身份。左侧选择组件，顶部切换语言、主题和预览宽度；`?c=Icon` 可直接打开图标库，`?c=组件名&state=状态名` 可单独预览指定状态。陈列页按需加载，使用各组件的示例数据，游戏 API 调用会在客户端阻止；图片仍经 `/img/` 读取。游戏首页的 `?report=`、`?preset=` 等验收功能仍仅在开发环境生效。
+
 ```sh
 cd /app/moego-pet-match
 docker compose --env-file release.env ps

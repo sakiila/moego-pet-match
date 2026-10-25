@@ -27,7 +27,7 @@ web/src/
   components/      领域组件：PetSticker、Board、BoardCell、GameClock、RushOrderBar、ScorePopup、LineupPanel、
                    ReportCard 各分区、PetCard、LeaderboardRow、UploadForm…
   screens/         页面：Identity、Home、Prep、Board、Report、Petdex、Leaderboard、MyPets、Upload、Fish*
-  dev/gallery/     组件陈列页（仅开发环境的 /dev/gallery 路由）
+  dev/gallery/     组件陈列页（开发与生产均可访问 /dev/gallery，使用示例数据，不调用游戏 API）
 server/            Node 服务：名册、结算事务、排行、图鉴、上传、删除申请、图片代理
 tools/pet-studio/  已有的独立素材工作台，与游戏代码分开，不在游戏任务中改动
 ```
