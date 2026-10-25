@@ -1,0 +1,33 @@
+Slack 分享图 · 方案 A 左字右店
+
+参考图
+- Image 1: design/concepts/home-v2.png
+- Image 2: design/concepts/share-card-pets-v1.png
+
+用户原始请求
+用内置 image_gen 生成「Slack 分享图 · 方案 A 左字右店」。
+用途：网址 https://star.baobo.me 在 Slack 粘贴后展开卡片使用的 Open Graph 分享图。最终画布 1200 × 630（1.91:1 横幅；若 image_gen 只能出其他尺寸，请生成最接近的横幅比例，之后等比缩放并居中裁切为精确 1200 × 630 PNG）。Slack 只把图片缩到约 360–400px 宽显示，所以：主标题必须特别大、粗、清晰；信息不超过三层；四周至少 60px 安全边距；不要细小文字。
+风格严格参考输入图：MoeGo 品牌——干净暖白底、MoeGo 橙 (#F26B1D 左右)、炭黑粗圆角描边、贴纸感角色（白色贴纸描边＋轻偏移阴影）、圆润粗黑体中文、橙色放射短线、小星星与爪印点缀。左上角使用 MoeGo 标志（狗耳＋勾的图形＋ MoeGo 字样，照参考图画准）。
+固定文案（必须逐字准确，不得添加其他文字）：主标题「毛孩子全明星」，其中「毛孩子」炭黑、「全明星」MoeGo 橙；副标题英文「MoeGo Pet All-Stars」；网址胶囊「star.baobo.me」。
+不要水印、不要多余的界面截图、不要假按钮小字。
+构图 A：把输入图 1（首页桌面稿）压缩成横幅。左侧约 55%：MoeGo 标志 → 超大两行或一行主标题「毛孩子全明星」（标题旁保留首页那种橙色小放射线）→ 英文副标题「MoeGo Pet All-Stars」→ 橙色圆角胶囊「star.baobo.me」，胶囊带炭黑描边和偏移阴影，像首页「开始营业」按钮的缩小版。右侧约 45%：首页的小店插画——橙白条纹遮阳棚、浅木色立柱、柜台，黑白狗店长戴橙色领巾举爪打招呼，蓝猫在左、黄犬戴红领巾在右，下方浅米色地面投影；可去掉对话气泡里的字，保留整体轮廓。
+完成后把选定结果复制到 design/concepts/slack-og-a-v1.png，并把完整请求（含你实际给 image_gen 的英文提示词）写入 design/concepts/slack-og-a-v1-prompt.txt。不要覆盖其他文件，不要改动 web/ 和 server/。
+
+实际发送给内置 image_gen 的英文提示词
+Use case: ads-marketing
+Asset type: Open Graph image for Slack link preview, website star.baobo.me.
+Input images: Image 1 is the primary reference for the MoeGo homepage's exact warm hand-drawn brand language and storefront composition; Image 2 is a supporting reference for the exact MoeGo dog-ear/checkmark logo, thick rounded lettering, orange accents, paw prints, and sticker outlines. Transform these visual references into a NEW ultra-wide 1.91:1 landscape banner, not a screenshot.
+Canvas: target 1200 x 630 pixels; generate the closest possible wide aspect ratio. Keep all meaningful content at least 60 px inside the edges.
+Composition: Clean warm white background. Left about 55%: at top the faithful MoeGo logo (black dog-ear/checkmark pictogram and MoeGo wordmark with black Moe and orange Go), below it a huge, bold, exceptionally legible Chinese title across one or two lines, with 毛孩子 charcoal black and 全明星 MoeGo orange; a few orange radiating strokes by the title. Below, the English subtitle MoeGo Pet All-Stars. Below that, an orange rounded URL capsule with charcoal outline and slightly offset black shadow, like the homepage's main orange button, containing star.baobo.me. Strong clear spacing and only these three levels of copy. Right about 45%: a compact welcoming storefront from Image 1, orange-and-white striped awning, pale wood posts and counter, black-and-white dog manager in orange neckerchief waving from the center, blue cat on the left, yellow dog in red neckerchief on the right. White sticker outlines and subtle offset shadows on the characters. Light beige floor shadow beneath the shop. Remove every piece of text, sign, bubble, label, or number inside the illustration.
+Style: closely match the references: cheerful premium MoeGo cartoon, slightly dimensional hand-painted details, charcoal thick rounded outlines, warm white #FFFDF8, MoeGo orange about #F26B1D. Small orange radial dashes, one or two stars and paw prints as unobtrusive decoration. Extremely readable after downscaling to 360-400 px wide in Slack.
+Exact visible text, character for character, with no other text anywhere:
+"毛孩子全明星"
+"MoeGo Pet All-Stars"
+"star.baobo.me"
+For the Chinese title, the characters in order are 毛 孩 子 全 明 星. The logo must read exactly "MoeGo". The URL must read exactly "star.baobo.me".
+Avoid: any additional Chinese copy, speech bubble text, fake buttons, interface screenshot, watermark, cramped type, tiny text, clipped objects, misspelled words.
+
+输出处理
+- image_gen 返回 1732 × 908 PNG。
+- 为保留至少 60 px 安全边距，等比缩放图像到 1080 × 566，居中放入暖白色 1200 × 630 画布。
+- 最终文件：design/concepts/slack-og-a-v1.png

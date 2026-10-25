@@ -1,0 +1,49 @@
+Slack 分享图 · 方案 B 全明星贴纸阵
+
+输入参考图
+- design/concepts/home-v2.png：MoeGo 品牌、色彩、圆角描边和点缀。
+- design/concepts/share-card-pets-v1.png：宠物头像贴纸风格和 MoeGo 标志。
+
+用户完整请求
+用内置 image_gen 生成「Slack 分享图 · 方案 B 全明星贴纸阵」。
+用途：网址 https://star.baobo.me 在 Slack 粘贴后展开卡片使用的 Open Graph 分享图。最终画布 1200 × 630（1.91:1 横幅；若 image_gen 只能出其他尺寸，请生成最接近的横幅比例，之后等比缩放并居中裁切为精确 1200 × 630 PNG）。Slack 只把图片缩到约 360–400px 宽显示，所以：主标题必须特别大、粗、清晰；信息不超过三层；四周至少 60px 安全边距；不要细小文字。
+风格严格参考输入图：MoeGo 品牌——干净暖白底、MoeGo 橙 (#F26B1D 左右)、炭黑粗圆角描边、贴纸感角色（白色贴纸描边＋轻偏移阴影）、圆润粗黑体中文、橙色放射短线、小星星与爪印点缀。左上角使用 MoeGo 标志（狗耳＋勾的图形＋ MoeGo 字样，照参考图画准）。
+固定文案（必须逐字准确，不得添加其他文字）：主标题「毛孩子全明星」，其中「毛孩子」炭黑、「全明星」MoeGo 橙；副标题英文「MoeGo Pet All-Stars」；网址胶囊「star.baobo.me」。
+不要水印、不要多余的界面截图、不要假按钮小字。
+构图 B：居中排版。中央是超大主标题「毛孩子全明星」，其下英文「MoeGo Pet All-Stars」，再下方橙色圆角胶囊「star.baobo.me」。MoeGo 标志放左上角小一点。标题四周围成一圈 6–8 只贴纸风宠物头像（只保留头部与完整耳朵、去掉颈部，白色贴纸描边，像输入图 2 分享卡里的猫头那样的 AI 插画贴纸风；猫狗混合、品种花色各异、表情俏皮：眨眼、吐舌、歪头），大小错落、略有倾斜，像明星合影；之间点缀橙色放射短线、橙黄小星星、橙色爪印。整体热闹但标题区干净留白，缩小后标题依然最醒目。
+完成后把选定结果复制到 design/concepts/slack-og-b-v1.png，并把完整请求（含你实际给 image_gen 的英文提示词）写入 design/concepts/slack-og-b-v1-prompt.txt。不要覆盖其他文件，不要改动 web/ 和 server/。
+
+生成方式
+Codex 内置 image_gen，共三次：初稿、暖白背景与安全区修正、整体缩小修正。选定第三次结果。工具输出为 1731 × 909 PNG；用 ffmpeg 等比放大至覆盖 1200 × 630，再居中裁切并转 RGB，得到最终 PNG。未使用 CLI 图片生成。
+
+English prompt 1 (actual image_gen request)
+Use case: ads-marketing
+Asset type: Open Graph image for Slack link preview of https://star.baobo.me
+Primary request: Create a polished, finished landscape promotional illustration for “MoeGo Pet All-Stars”, concept B: a centered all-star pet sticker ensemble. Final intended canvas is 1200 × 630 pixels, 1.91:1. If the generation canvas differs, compose with ample safe space to allow a centered crop to exactly 1.91:1; keep every essential element at least 8% from the final edges.
+
+Reference images: Use the two supplied images only as visual/brand references. Image 1 establishes the MoeGo identity, warm white ground, charcoal rounded outlines, orange headline, playful line and paw accents. Image 2 establishes the head-only white-edged pet sticker illustration style and the precise dog-ear/check-mark MoeGo logo. Do not copy a webpage screenshot or the tall share-card layout.
+
+Scene and style: Clean warm off-white background. MoeGo orange around #F26B1D, charcoal-black thick rounded outlines, subtle offset sticker shadows. Cheerful premium illustrated sticker art. Six to eight distinct cat and dog HEADS form an informal loose ring around the centered headline, with complete ears and no neck or body. Different breeds and coat patterns; playful faces, including one wink, one tongue out, one tilted head. White die-cut sticker borders and soft offset shadows. Varied sizes and small rotations. Add a restrained scattering of short orange radial strokes, orange-yellow tiny stars, and orange paw prints between heads. No decorations may intrude into the central copy.
+
+Composition: Very large, bold, crisp Chinese title centered and dominant. The first three characters “毛孩子” in charcoal, the final three “全明星” in MoeGo orange, all on one line if possible. Below it, a clearly readable English subtitle. Below that, one orange pill with the website in high-contrast white. Small, accurate MoeGo logo in upper-left: the distinctive dog-ear plus check-mark mark and word “MoeGo” from the references. All typography should be thick, rounded and clean. The image must read at only 360–400 pixels wide in Slack. At most three content layers below the small logo. Keep the title zone spacious and unobstructed.
+
+Exact visible text, with no other visible words or letters anywhere:
+1. Logo wordmark: “MoeGo”
+2. Main Chinese title: “毛孩子全明星” (verbatim, correct Chinese glyphs; 毛孩子 charcoal and 全明星 orange)
+3. English subtitle: “MoeGo Pet All-Stars”
+4. URL in orange rounded capsule: “star.baobo.me”
+
+Text accuracy is mandatory. Do not invent or duplicate characters. No watermark, UI screenshots, small labels, buttons, interface elements, photo frames or extra copy.
+
+English prompt 2 (actual image_gen edit request; input: generated image 1)
+Use case: precise-object-edit
+Edit target: the attached generated MoeGo Pet All-Stars Open Graph banner.
+Primary request: Make this a finished 1.91:1 Slack preview graphic, keeping the same charming seven pet head stickers, same visual arrangement, and the exact same four text strings. Fill the entire background with SOLID warm off-white (#FFFDF9); there must be no transparency, checkerboard, dark holes, or black around the stickers. Recompose the group slightly smaller so all pet heads, ears, sticker borders, logo, text and decorations have a generous clear margin: at least 5% on every side of the 1.91:1 image, equivalent to 60 pixels on a 1200 × 630 final image. Do not let any pet sticker or logo touch or cross a canvas edge. The central title remains the dominant large element with clear pale background behind it.
+
+Fix the upper-left logo to match the brand reference from the earlier images: distinctive dog-ear/check-mark symbol and clean “MoeGo” wordmark; small and fully legible. Preserve the existing correct Chinese title: “毛孩子全明星”, with “毛孩子” charcoal and “全明星” orange. Preserve the exact English subtitle “MoeGo Pet All-Stars” and exact white text “star.baobo.me” on the orange capsule. Do not add any other letters, words or text.
+
+Keep charcoal thick rounded outlines, warm white sticker borders and soft offset shadows, orange paws, radial dashes and tiny gold stars. Preserve head-only cats and dogs, complete ears, no necks or bodies. No watermark, UI elements, buttons, other copy.
+
+English prompt 3 (actual image_gen edit request; input: generated image 2; selected)
+Use case: precise-object-edit
+Edit the attached finished landscape MoeGo banner with ONE layout correction: scale the ENTIRE existing content group (logo, 7 pet head stickers, all text, and orange decorations) uniformly down to about 84% of its current size and center it on the same solid warm off-white background. Extend that same warm off-white background to fill the canvas. Leave a visibly clear blank safe margin of at least 9% of canvas width on both left and right, and at least 10% of canvas height top and bottom, so the artwork can become a 1200 × 630 Slack Open Graph card with 60+ pixel safe margins. Keep the landscape aspect ratio near 1.91:1. Preserve the existing visual composition, colors, drawings and thick rounded typography. Keep the same seven complete pet heads with ears and white sticker edges; do not add or remove subjects. Preserve every visible text exactly: logo “MoeGo”; main Chinese title “毛孩子全明星” with 毛孩子 charcoal and 全明星 orange; English line “MoeGo Pet All-Stars”; website “star.baobo.me” in its orange capsule. No extra text, watermark, UI or buttons. Do not crop any content.

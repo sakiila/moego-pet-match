@@ -1,0 +1,49 @@
+Slack OG · 方案 C 棋盘游戏感
+用途：https://star.baobo.me 在 Slack 中展开的 Open Graph 横幅。
+最终文件：design/concepts/slack-og-c-v1.png，1200 × 630 PNG。
+生成方式：Codex 内置 image_gen。第一次生成，后续三次以生成结果为参考修订版式。选定第四次结果；为确保文字安全边距，将其等比缩放为 1140 × 599，居中置于 1200 × 630 暖白画布。输入接近目标横幅比例，无须裁切。
+
+第一次调用
+输入参考图：
+- design/concepts/home-v2.png
+- design/concepts/share-card-pets-v1.png
+- design/concepts/mobile-board-frontdesk-v2.png
+
+实际英文提示词：
+Use case: ads-marketing
+Asset type: polished Open Graph preview image for a Slack link to https://star.baobo.me
+Input images: Image 1 (home-v2.png) is the primary reference for the exact MoeGo dog-ear-and-check logo, Chinese display typography, warm white background, orange and charcoal palette, and joyful sticker illustration style. Image 2 (share-card-pets-v1.png) is a secondary reference for the pet sticker outline, playful orange sparkles, and brand styling. Image 3 (mobile-board-frontdesk-v2.png) is the primary reference for the pet match game board, pastel rounded cells, pet-head stickers, comb, scissors, and hairdryer pieces. These are style and content references, not screenshots to paste into the banner.
+Primary request: Create a single finished panoramic landscape OG image, target aspect ratio 1200:630 (1.91:1). It must read clearly when shrunk to about 360–400 pixels wide in Slack.
+Composition: Clean warm-white canvas. Keep every essential element within a 60 px inset on all four sides of the final 1200x630 framing. Left roughly 50%: accurate MoeGo brand mark at upper left (dog-ear/check symbol plus MoeGo wordmark faithfully based on reference 1); below it a HUGE, bold, crisp, rounded Chinese title, arranged in two lines if necessary: “毛孩子” in charcoal black and “全明星” in MoeGo orange. Below, the medium-sized English subtitle “MoeGo Pet All-Stars”; then the optional medium-sized short line “一局 90 秒”; then an orange rounded capsule containing only “star.baobo.me” in bold white lettering. No tiny text. Clear visual hierarchy with at most three reading levels.
+Right roughly 50%: a dynamic elimination-game board tilted clockwise about 6 degrees, resembling reference 3. Warm pale board, thick charcoal rounded outline and slightly offset shadow, rounded white and soft pastel game cells. Each cell contains playful high-quality die-cut pet-head stickers: varied cats and dogs matching the source art direction, with white sticker outlines and soft offset shadows. Include a few recognizable tool pieces: orange hairdryer, scissors, comb. A row of three identical pet stickers is visibly being matched and cleared with orange starbursts and short radiating strokes. A small orange score pop-up reading exactly “+120”. The board may run off the right and bottom edges naturally, while the important title and logo remain entirely inside the safe area.
+Art direction: Faithfully match the supplied MoeGo references: warm clean white, MoeGo orange approximately #F26B1D, charcoal black thick rounded hand-drawn outlines, tactile pet stickers, bright polished editorial illustration. Add only a restrained few orange rays, tiny stars and paw-print accents. Spacious, crisp, playful but uncluttered. Strong large-type readability at thumbnail scale.
+Text must be verbatim, with no mistakes, character substitutions or extra writing. The ONLY visible writing is the logo wordmark “MoeGo”, the title “毛孩子全明星”, the subtitle “MoeGo Pet All-Stars”, the short line “一局 90 秒”, the URL “star.baobo.me”, and the game score “+120”. Do not create interface screenshots, fake buttons, extra labels, small print, watermarks, or additional copy.
+
+第二次调用
+输入参考图：
+- 第一次 image_gen 输出（exec-ac876781-c19e-4f94-abd3-add886a0b53a.png）
+
+实际英文提示词：
+Use case: precise-object-edit
+Asset type: final 1.91:1 panoramic Open Graph image for a Slack preview.
+Input image: edit the supplied generated MoeGo game-board banner. Preserve its exact design, brand mark, colors, pets, game board, matched row, and ALL six pieces of writing. Make only a careful layout correction.
+Primary request: increase the safe whitespace around the entire left copy block. At the 1200x630 final crop, the MoeGo logo must begin at least 60px from both top and left, the orange URL capsule must end at least 60px from bottom, and all other copy must be at least 60px from the canvas edges. Slightly reduce and reposition the left copy group as a whole if necessary, retaining its oversized bold hierarchy and thumbnail readability. Keep the game board large, tilted, and naturally cropped by the right and bottom canvas edges. The essential game score +120 remains legible.
+Text invariants: The ONLY visible writing must remain exactly: logo “MoeGo”; title “毛孩子全明星” (毛孩子 charcoal, 全明星 orange); subtitle “MoeGo Pet All-Stars”; short line “一局 90 秒”; URL “star.baobo.me”; score “+120”. Preserve these exact characters and spelling. No other text, no watermark, no additional labels, no new design elements.
+Maintain warm white background, MoeGo orange #F26B1D, charcoal rounded outlines, white die-cut pet stickers, stars and short orange rays. Output polished wide landscape 1200:630 proportions.
+
+第三次调用（未采用）
+输入参考图：
+- 第二次 image_gen 输出（exec-ba4161cf-f4ef-4ad5-b8ec-19cf0130ec52.png）
+
+实际英文提示词：
+Use case: precise-object-edit
+Edit the supplied MoeGo OG banner, preserving the successful existing illustration and its exact text. Make one small layout refinement for a 1200x630 final crop: the entire left text and logo block, especially the bottom orange star.baobo.me URL capsule, needs at least 60px clear warm-white margin from EVERY outside edge. The previous image's orange capsule is too close to the bottom edge. Move or slightly compact the left block vertically so the capsule ends at least 60px above the bottom, while the logo remains at least 60px below the top, and keep the title very large and bold. Maintain the game board at the same large size and clockwise tilt, still naturally running off the right/bottom canvas edges. Preserve every pet, matched row, orange glow, +120 score, comb, hairdryer, scissors, orange decorative rays, and faithful MoeGo brand mark. Keep all typography clean, bold, crisp, and identical in wording. The ONLY visible writing is exactly “MoeGo”, “毛孩子全明星” with 毛孩子 charcoal and 全明星 orange, “MoeGo Pet All-Stars”, “一局 90 秒”, “star.baobo.me”, and “+120”. No other text or watermark. Warm white canvas, MoeGo orange #F26B1D, thick rounded charcoal strokes and white sticker outlines. Panoramic 1.91:1 composition.
+
+第四次调用（选定）
+输入参考图：
+- 第二次 image_gen 输出（exec-ba4161cf-f4ef-4ad5-b8ec-19cf0130ec52.png）
+
+实际英文提示词：
+Use case: ads-marketing
+Create a refined alternate version of the supplied MoeGo Open Graph banner at the same 1.91:1 panoramic ratio. Recompose the LEFT HALF only to create a clearly visible EMPTY WARM-WHITE bottom margin of at least 10% of the canvas height BELOW the orange URL capsule. The capsule must be entirely above the 90%-height line. There must also be at least a 10%-height warm-white top margin ABOVE the logo. Reduce the left title block a little if needed; it should still look huge and be easy to read at a 400px-wide Slack thumbnail. Keep the logo accurate and within a 60px left inset. Give the left text a compact but uncluttered vertical stack: MoeGo logo, two-line Chinese headline, English subtitle, short Chinese line, orange URL capsule. On the RIGHT HALF retain the pet match board from the reference: large, clockwise 6-degree tilt, cropped at the right and bottom edges, pastel round cells, die-cut pet faces, orange hairdryer and comb, scissors, three identical white dogs matching with orange glow and the +120 pop-up. Preserve the exact existing MoeGo brand style, warm white, charcoal rounded strokes, orange #F26B1D, sticker shadows, stars, short orange rays. All writing must be perfectly spelled; the ONLY writing is: “MoeGo”; “毛孩子全明星” (毛孩子 charcoal, 全明星 orange); “MoeGo Pet All-Stars”; “一局 90 秒”; “star.baobo.me”; “+120”. No other writing, no watermarks, no extra labels, no small print.
+
