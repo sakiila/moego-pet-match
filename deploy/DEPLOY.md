@@ -144,3 +144,5 @@ npx tsx --env-file-if-exists=../.env scripts/database.ts migrate --prod
 ```
 
 以上迁移命令用于维护已初始化的独立库；空库从经过核验的独立库备份恢复，不运行旧 Supabase 人员表初始化流程。数据迁移、校验和恢复依据见 [DATABASE_MIGRATION.md](DATABASE_MIGRATION.md)。
+
+数据库每日备份已安装为 `moego-pet-match-db-backup.timer`，北京时间 04:10 运行、保留约 14 天；脚本与单元文件见 `deploy/backup-database.sh`、`deploy/systemd/`，安装和恢复步骤见 DATABASE_MIGRATION。应用发布不重置备份或数据库。

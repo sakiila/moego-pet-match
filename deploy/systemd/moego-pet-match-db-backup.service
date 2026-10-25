@@ -1,0 +1,10 @@
+[Unit]
+Description=Backup MoeGo pet-match PostgreSQL database
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+UMask=0077
+ExecStart=/app/moego-pet-match/backup-database.sh
+TimeoutStartSec=180
