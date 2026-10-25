@@ -21,6 +21,18 @@ describe('Slack 目录过滤', () => {
 describe('Slack 目录缓存', () => {
   const page = (members: unknown[], next = '') => ({ json: async () => ({ ok: true, members, response_metadata: { next_cursor: next } }), status: 200 });
 
+  it('独立生产名册沿用原名单资格，包含有效工作区访客，仍排除停用及外部账号', async () => {
+    const dir = slackDirectory('xoxb-test', {
+      allowGuests: true,
+      fetchImpl: (async () => page([
+        raw({ id: 'GUEST', is_restricted: true, is_ultra_restricted: true }),
+        raw({ id: 'GONE', deleted: true }),
+        raw({ id: 'OUTSIDE', team_id: 'T_OTHER', profile: { real_name_normalized: 'Outside', email: 'a@partner.com' } }),
+      ])) as unknown as typeof fetch,
+    })!;
+    expect((await dir.all()).map(m => m.userId)).toEqual(['GUEST']);
+  });
+
   it('分页读取、缓存期内不重复请求、过期后刷新、刷新失败沿用旧缓存', async () => {
     let t = 0;
     const fetchImpl = vi

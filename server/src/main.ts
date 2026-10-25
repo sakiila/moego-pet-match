@@ -12,7 +12,8 @@ import { slackAvatarFetcher } from './storage/slackAvatar.ts';
 import { syncSlackMembers } from './services/syncSlackMembers.ts';
 
 const pool = createPool(config.databaseUrl);
-const directory = slackDirectory(process.env.SLACK_BOT_TOKEN);
+// 与原同事视图一致：有效工作区账号（含访客）或 MoeGo 邮箱，不因迁库收紧资格。
+const directory = slackDirectory(process.env.SLACK_BOT_TOKEN, { allowGuests: true });
 // 默认本地目录对象存储（与 R2 相同的键布局）；OBJECT_STORE=r2 时使用 R2
 const r2 = process.env.OBJECT_STORE === 'r2' ? r2FromEnv() : null;
 const store = r2 ? r2Store(r2) : localDirStore(process.env.OBJECT_STORE_DIR ?? fileURLToPath(new URL('../.store/', import.meta.url)));
@@ -38,12 +39,15 @@ const refreshDirectory = () => {
     .catch(error => { app.log.warn(error, 'Slack directory sync failed; keeping saved directory'); })
     .finally(() => { refresh = undefined; });
 };
-refreshDirectory();
-const directoryTimer = setInterval(refreshDirectory, 5 * 60_000);
-directoryTimer.unref();
+// 开发库使用本地样例身份；正式环境才以完整 Slack 名单覆盖名册。
+const directoryTimer = process.env.NODE_ENV === 'production' ? setInterval(refreshDirectory, 5 * 60_000) : undefined;
+if (directoryTimer) {
+  refreshDirectory();
+  directoryTimer.unref();
+}
 
 const shutdown = async () => {
-  clearInterval(directoryTimer);
+  if (directoryTimer) clearInterval(directoryTimer);
   await app.close();
   await refresh;
   await pool.end();

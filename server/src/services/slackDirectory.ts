@@ -1,7 +1,7 @@
 /**
  * Slack 实时目录：独立同事名册的来源，也用于搜索补缺。
  * users.list 分页读取后在内存缓存，搜索与按 ID 取人都只查缓存；缓存过期后下一次请求才重新拉取。
- * 过滤条件与 pet_match.colleagues 一致，并排除访客、Slackbot。
+ * 默认补缺搜索排除访客；独立生产名册通过 allowGuests 沿用原名单的工作区资格。
  */
 export interface SlackMember {
   userId: string;
@@ -33,8 +33,8 @@ interface RawUser {
   profile?: { email?: string; real_name?: string; real_name_normalized?: string; display_name?: string };
 }
 
-export function toMember(u: RawUser): SlackMember | null {
-  if (u.deleted || u.is_bot || u.is_restricted || u.is_ultra_restricted || u.id === 'USLACKBOT') return null;
+export function toMember(u: RawUser, allowGuests = false): SlackMember | null {
+  if (u.deleted || u.is_bot || (!allowGuests && (u.is_restricted || u.is_ultra_restricted)) || u.id === 'USLACKBOT') return null;
   const email = u.profile?.email ?? null;
   if (u.team_id !== WORKSPACE_ID && !email?.toLowerCase().endsWith('@moego.pet')) return null;
   const name = u.profile?.real_name_normalized || u.profile?.real_name || u.profile?.display_name || u.name;
@@ -45,7 +45,7 @@ type Fetch = typeof fetch;
 
 export function slackDirectory(
   token: string | undefined,
-  options: { ttlMs?: number; fetchImpl?: Fetch; now?: () => number } = {},
+  options: { ttlMs?: number; fetchImpl?: Fetch; now?: () => number; allowGuests?: boolean } = {},
 ): FullSlackDirectory | null {
   if (!token) return null;
   const ttl = options.ttlMs ?? 5 * 60_000;
@@ -64,7 +64,7 @@ export function slackDirectory(
       if (!json.ok) throw new Error(`slack users.list: ${json.error ?? res.status}`);
       if (!Array.isArray(json.members)) throw new Error('Slack directory response is missing members');
       for (const u of json.members ?? []) {
-        const m = toMember(u);
+        const m = toMember(u, options.allowGuests);
         if (m) members.push(m);
       }
       cursor = json.response_metadata?.next_cursor ?? '';
