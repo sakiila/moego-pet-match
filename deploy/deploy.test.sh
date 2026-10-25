@@ -38,8 +38,8 @@ new_image=registry.example.test/moego-pet-match:new
 passed=0
 
 fail() { printf 'FAIL: %s\n' "$*" >&2; exit 1; }
-assert_contains() { rg -q -- "$2" "$1" || fail "$1 must contain $2"; }
-assert_absent() { if rg -q -- "$2" "$1"; then fail "$1 must not contain $2"; fi; }
+assert_contains() { grep -Eq -- "$2" "$1" || fail "$1 must contain $2"; }
+assert_absent() { if grep -Eq -- "$2" "$1"; then fail "$1 must not contain $2"; fi; }
 setup_case() {
   case_dir="$test_root/$1"
   mkdir -p "$case_dir/active"
