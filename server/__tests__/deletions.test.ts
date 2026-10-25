@@ -1,4 +1,8 @@
+import pg from 'pg';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { buildApp } from '../src/app.ts';
+import { LOCAL_TEST_URL } from '../src/config.ts';
+import { appRoleGrants } from '../src/db/appGrants.ts';
 import { freshDatabase } from './helpers.ts';
 
 let ctx: Awaited<ReturnType<typeof freshDatabase>>;
@@ -81,5 +85,33 @@ describe('删除申请', () => {
       ['Mochi', 'processed'],
     ]);
     expect((await get('/api/deletion-requests?playerId=U_TEST_ALICE')).json().requests).toEqual([]);
+  });
+});
+
+describe('生产最小权限角色', () => {
+  const ROLE = 'pet_match_app_test';
+  let pool: pg.Pool;
+  let app: ReturnType<typeof buildApp>;
+
+  beforeAll(async () => {
+    await ctx.pool.query(`DO $$ BEGIN CREATE ROLE ${ROLE} NOLOGIN; EXCEPTION WHEN duplicate_object THEN NULL; END $$`);
+    for (const g of appRoleGrants(ROLE)) await ctx.pool.query(g);
+    pool = new pg.Pool({ connectionString: LOCAL_TEST_URL, max: 2, options: `-c role=${ROLE}` });
+    app = buildApp({ pool });
+  });
+  afterAll(async () => {
+    await app.close();
+    await pool.end();
+  });
+
+  it('只读 pets 的应用角色也能提交宠物申请与一般申请', async () => {
+    expect((await pool.query('SELECT current_user AS u')).rows[0].u).toBe(ROLE);
+    const send = (payload: object) => app.inject({ method: 'POST', url: '/api/deletion-requests', payload });
+    const pet = await send({ playerId: 'U_TEST_BOB', petId: 'mochi' });
+    expect(pet.statusCode).toBe(200);
+    expect((await send({ playerId: 'U_TEST_BOB', petId: 'mochi' })).json().requestId).toBe(pet.json().requestId);
+    expect((await send({ playerId: 'U_TEST_BOB', petId: 'kiwi' })).statusCode).toBe(403);
+    expect((await send({ playerId: 'U_TEST_ZHANG' })).statusCode).toBe(200);
+    expect((await ctx.pool.query('SELECT count(*)::int n FROM pet_match.deletion_requests')).rows[0].n).toBe(2);
   });
 });

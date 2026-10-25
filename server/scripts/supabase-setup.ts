@@ -8,19 +8,12 @@ import { appendFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import pg from 'pg';
 import { readSupabaseAdminConfig } from '../src/db/adminUrl.ts';
+import { appRoleGrants } from '../src/db/appGrants.ts';
 import { listMigrations, migrate } from '../src/db/migrate.ts';
 
 const APPLY = process.argv.includes('--apply');
 const ROLE = 'pet_match_app';
-const RW_TABLES = ['games', 'game_results', 'best_scores', 'collections', 'player_progress', 'submissions', 'quizzes', 'daily_managers', 'deletion_requests', 'slack_members', 'achievement_awards', 'player_titles'];
-const RO_EXTRA = ['fish_colors'];
-const RO_OBJECTS = ['colleagues', 'pets', ...RO_EXTRA];
-
-const grants = [
-  `GRANT USAGE ON SCHEMA pet_match TO ${ROLE}`,
-  `GRANT SELECT ON ${RO_OBJECTS.map((t) => `pet_match.${t}`).join(', ')} TO ${ROLE}`,
-  `GRANT SELECT, INSERT, UPDATE ON ${RW_TABLES.map((t) => `pet_match.${t}`).join(', ')} TO ${ROLE}`,
-];
+const grants = appRoleGrants(ROLE);
 
 const admin = readSupabaseAdminConfig();
 const client = new pg.Client(admin);

@@ -30,7 +30,8 @@ export async function listMyPets(pool: Pool, playerId: string): Promise<MyPet[]>
 export async function createDeletionRequest(pool: Pool, input: { playerId: string; petId: string | null; note: string | null }) {
   return inTransaction(pool, async (client) => {
     if (input.petId) {
-      const pet = (await client.query('SELECT owner_user_id, status FROM pet_match.pets WHERE pet_id = $1 FOR SHARE', [input.petId])).rows[0];
+      // 不加 FOR SHARE：应用角色对 pets 只有 SELECT，行锁需要 UPDATE 权限；插入时外键检查会锁住该宠物行
+      const pet = (await client.query('SELECT owner_user_id, status FROM pet_match.pets WHERE pet_id = $1', [input.petId])).rows[0];
       if (!pet || pet.status !== 'published') throw new DeletionError('not_found');
       if (pet.owner_user_id !== input.playerId) throw new DeletionError('forbidden');
       await client.query("SELECT pg_advisory_xact_lock(hashtext('deletion:' || $1))", [input.petId]);
