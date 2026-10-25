@@ -3,7 +3,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { buildApp } from '../src/app.ts';
-import { formatAdminEvent, slackAdminNotifier, type AdminEvent } from '../src/services/adminNotify.ts';
+import sharp from 'sharp';
+import { formatAdminEvent, photoPreview, slackAdminNotifier, type AdminEvent } from '../src/services/adminNotify.ts';
 import { DiskCache } from '../src/storage/diskCache.ts';
 import { memoryStore } from '../src/storage/objectStore.ts';
 import { freshDatabase } from './helpers.ts';
@@ -57,6 +58,78 @@ describe('Slack 发送', () => {
 
     fetchImpl.mockResolvedValueOnce(new Response(JSON.stringify({ ok: false, error: 'missing_scope' })));
     await expect(notify(event)).rejects.toThrow('missing_scope');
+  });
+});
+
+describe('上传通知附照片', () => {
+  const jpegWithExif = () =>
+    sharp({ create: { width: 2400, height: 1200, channels: 3, background: { r: 200, g: 120, b: 60 } } })
+      .jpeg()
+      .withExif({ IFD0: { Copyright: 'secret-place' } })
+      .toBuffer();
+  const submission = (file: Buffer): AdminEvent => ({ kind: 'submission', submissionId: 's9', playerId: 'U1', playerName: 'Bob', petName: 'Oreo', ownerQuote: null, contentType: 'image/jpeg', sizeBytes: file.length, at: AT, file });
+
+  /** 模拟 Slack：记录每个调用，可让某一步失败。 */
+  function fakeSlack(fail?: string) {
+    const calls: { url: string; body: unknown }[] = [];
+    const fetchImpl = vi.fn(async (url: string, init: RequestInit) => {
+      const body = init.body instanceof URLSearchParams ? Object.fromEntries(init.body) : typeof init.body === 'string' ? JSON.parse(init.body) : init.body;
+      calls.push({ url, body });
+      const method = url.replace('https://slack.com/api/', '');
+      if (method === fail) return new Response(JSON.stringify({ ok: false, error: 'missing_scope' }));
+      if (url === 'https://files.example/upload') return new Response('OK');
+      if (method === 'conversations.open') return new Response(JSON.stringify({ ok: true, channel: { id: 'D_BOB' } }));
+      if (method === 'files.getUploadURLExternal') return new Response(JSON.stringify({ ok: true, upload_url: 'https://files.example/upload', file_id: 'F1' }));
+      return new Response(JSON.stringify({ ok: true }));
+    });
+    return { calls, fetchImpl: fetchImpl as unknown as typeof fetch, methods: () => calls.map((c) => c.url.replace('https://slack.com/api/', '')) };
+  }
+
+  it('预览照片摆正缩小为 JPEG，并去掉 EXIF', async () => {
+    const preview = (await photoPreview(await jpegWithExif()))!;
+    const meta = await sharp(preview).metadata();
+    expect(meta.format).toBe('jpeg');
+    expect(Math.max(meta.width!, meta.height!)).toBe(1600);
+    expect(meta.exif).toBeUndefined();
+    expect(preview.includes(Buffer.from('secret-place'))).toBe(false);
+  });
+
+  it('解不了的格式返回 null', async () => {
+    expect(await photoPreview(Buffer.concat([Buffer.from('0000ftypheic'), Buffer.alloc(64, 3)]))).toBeNull();
+  });
+
+  it('发给用户：打开私信、上传预览照片，文字作为照片说明', async () => {
+    const slack = fakeSlack();
+    const event = submission(await jpegWithExif());
+    await slackAdminNotifier('xoxb', 'U_BOB', { fetchImpl: slack.fetchImpl })!(event);
+    expect(slack.methods()).toEqual(['conversations.open', 'files.getUploadURLExternal', 'https://files.example/upload', 'files.completeUploadExternal']);
+    expect(slack.calls[0].body).toEqual({ users: 'U_BOB' });
+    const uploaded = Buffer.from(slack.calls[2].body as Uint8Array);
+    expect(slack.calls[1].body).toEqual({ filename: 's9.jpg', length: String(uploaded.length) });
+    expect((await sharp(uploaded).metadata()).exif).toBeUndefined();
+    expect(slack.calls[3].body).toEqual({ files: [{ id: 'F1', title: 's9.jpg' }], channel_id: 'D_BOB', initial_comment: formatAdminEvent(event) });
+  });
+
+  it('发到频道 ID 时直接上传，不打开私信', async () => {
+    const slack = fakeSlack();
+    await slackAdminNotifier('xoxb', 'C_ADMIN', { fetchImpl: slack.fetchImpl })!(submission(await jpegWithExif()));
+    expect(slack.methods()[0]).toBe('files.getUploadURLExternal');
+    expect(slack.calls.at(-1)!.body).toMatchObject({ channel_id: 'C_ADMIN' });
+  });
+
+  it('照片上传失败时改发文字并注明原因', async () => {
+    const slack = fakeSlack('files.getUploadURLExternal');
+    await slackAdminNotifier('xoxb', 'U_BOB', { fetchImpl: slack.fetchImpl })!(submission(await jpegWithExif()));
+    const last = slack.calls.at(-1)!;
+    expect(last.url).toBe('https://slack.com/api/chat.postMessage');
+    expect((last.body as { text: string }).text).toContain('照片没能附上（slack files.getUploadURLExternal: missing_scope）');
+  });
+
+  it('HEIC 只发文字，说明需用命令取走', async () => {
+    const slack = fakeSlack();
+    await slackAdminNotifier('xoxb', 'U_BOB', { fetchImpl: slack.fetchImpl })!(submission(Buffer.concat([Buffer.from('0000ftypheic'), Buffer.alloc(64, 3)])));
+    expect(slack.methods()).toEqual(['chat.postMessage']);
+    expect((slack.calls[0].body as { text: string }).text).toContain('无法生成预览');
   });
 });
 

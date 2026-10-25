@@ -36,7 +36,7 @@ export const submissionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool,
       const at = now();
       const saved = await createSubmission(pool, store, { playerId, petName, ownerQuote: ownerQuote || null, file }, at, submissionHooks);
       // 保存成功后才通知；不等待发送，失败只记日志
-      notify?.({ kind: 'submission', ...saved, playerId, playerName: colleague.name, petName, ownerQuote: ownerQuote || null, at })
+      notify?.({ kind: 'submission', ...saved, playerId, playerName: colleague.name, petName, ownerQuote: ownerQuote || null, at, file })
         .catch((error) => request.log.warn({ err: error }, 'submission notify failed'));
       return { submissionId: saved.submissionId };
     } catch (error) {
