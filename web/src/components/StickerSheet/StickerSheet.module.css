@@ -1,5 +1,6 @@
 .root {
   display: grid;
+  min-width: 0;
   gap: var(--space-5);
   margin-top: var(--space-4);
   padding-bottom: var(--space-3);
@@ -7,6 +8,7 @@
 
 .album {
   display: grid;
+  min-width: 0;
   gap: var(--space-3);
   margin: 0;
 }
@@ -21,6 +23,7 @@
 
 .sheet {
   position: relative;
+  min-width: 0;
   isolation: isolate;
   padding: var(--space-3) var(--space-3) var(--space-4);
   filter: var(--album-paper-shadow);

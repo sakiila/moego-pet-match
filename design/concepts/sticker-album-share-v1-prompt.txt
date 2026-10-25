@@ -1,0 +1,37 @@
+Use case: ui-mockup / ads-marketing
+Asset type: ONE high fidelity standalone portrait share image for an existing pet sticker album. This is an exported PNG poster design, NOT an app screen or phone mockup.
+Primary request (Chinese original): “贴纸册的分享图片做一下新的设计，加上 毛孩子全明星 图标等等，可以先出一个设计稿我看看”.
+Concept: A warmly designed collectible MoeGo Pet All-Stars sticker album poster, with a confident brand masthead and an almost full-page collection of pet-head stickers. It should feel carefully art directed and shareable in a coworker chat.
+
+Target dimensions: 1200 x 1800 pixels portrait, 2:3 ratio. Full bleed white/off-white exported image, all poster contents visible, no cropping. This is a design preview; Bob and 38/80 are fictional display data taken from the existing approved concept, not a live player record. Current date anchor 2026-10-25; do not add dates.
+
+Input images and their roles, in the same order as the attached local paths:
+1. petdex-sticker-sheet-v3.png — REFERENCE ONLY for the current cream paper, orange torn tape, fixed 8-column 10-row grid and collected-versus-silhouette language. Redesign the standalone SHARE image. Do not reproduce the app navigation, buttons, tabs, top Pet Collection title or UI screenshot.
+2. title-wordmark-zh.png — BRAND INSERT: use the actual approved game wordmark “毛孩子全明星”, keep its playful rounded Chinese lettering, charcoal “毛孩子” and orange “全明星” and three orange emphasis rays. Make it the main brand heading; preserve identity and proportions. Transparent pixels are not a black background.
+3. moego-logo.png — BRAND INSERT: exact official MoeGo logo, preserve spelling, dog-outline mark, paw and charcoal/orange colors. Use modestly above the game wordmark. Do not redesign the logo. Transparent pixels are not a black background.
+4. pet_c7ad902c2024.png — supporting real project sticker style and identity reference, black-and-white border collie head with one blue eye and one brown eye, white die-cut outline.
+5. pet_2f55c03f6968.png — supporting real project sticker style and identity reference, large-eared orange cat head, white die-cut outline.
+
+Create a realistic, production-quality graphic with clear hierarchy, strong typography, intentional imagery and purposeful spacing. Focus on one core use case: showing a player's COMPLETE sticker collection. Do not add feature inventories, app controls, novelty metrics or badges to fill space. Use spacing, alignment and type hierarchy first; light separators next; borders and shadows sparingly. No nested cards.
+
+Composition:
+- A clean warm-white poster. At the top, a modest centered official MoeGo logo. Below it, the supplied “毛孩子全明星” wordmark, confidently wide, centered and sharp. Let the logo and the wordmark feel like a single composed masthead, with breathing room. No giant new mascot.
+- Below the masthead, ONE large warm cream deckle-edged sticker paper, almost the full poster width, with a very subtle tactile paper grain, gentle imperfect torn edges, softly lifted paper shadow, no heavy outline. One short torn piece of translucent orange washi tape at its upper left, angled naturally. Keep the scrapbooking detail restrained and modern, not vintage brown.
+- In the top strip of this paper, left aligned bold charcoal text “Bob 的贴纸册”. Right aligned metadata “已收集 38 / 80”, with 38 in orange and visually stronger; all secondary to the game wordmark. A faint divider or intentional whitespace beneath the strip.
+- The main paper area is dominated by exactly EIGHT equal columns and TEN rows of pet slots: 80 positions. This grid must remain intact with equal spacing and no large hero sticker taking away collection space. Pet stickers should be as large as the grid allows and stay inside the paper edges. Use the grid density of input 1.
+- Show a mix of 38 colorful COLLECTED head-only pet stickers and 42 low-contrast grey UNCOLLECTED real animal-head silhouettes, scattered in fixed positions, never grouped into separate collected/uncollected sections. Include cats and dogs in diverse realistic fur patterns, a few rabbit/bird/small pet heads as seen in input 1. Avoid repetition of the same colored sticker. Maintain the actual project style from inputs 4 and 5: realistic hand-painted pet HEADS, thick clean white die-cut edge and tiny shadow, slight natural +/- 5 degree rotations for collected stickers. Do not generate full bodies, human characters, emojis or generic flat cartoon animal icons.
+- Each slot has a very faint light taupe dashed rounded-square guide, much less visually prominent than the pet. Uncollected pets are uniform matte warm grey silhouettes without eyes, facial features, hidden pet names, owner names or identifiers. No captions or numbers anywhere INSIDE the slots. Keep silhouettes quieter and collected stickers crisp.
+- At the bottom, beneath the paper, one small quiet charcoal/grey sentence: “把这一页毛孩子，存成你的收藏”. Add only two or three tiny orange paw/star/short-ray accents at the outer margins, a restrained echo of the game wordmark. No scattered confetti, oversized paws or decorative props.
+
+Exact visible copy (single-language Chinese except official logo and Bob):
+“MoeGo” (use supplied official logo)
+“毛孩子全明星” (use supplied wordmark)
+“Bob 的贴纸册”
+“已收集 38 / 80”
+“把这一页毛孩子，存成你的收藏”
+Do not add English subtitles, copy about live sharing, game scores, achievements, rarity labels, dates, timestamps, URLs, QR codes, signatures or watermarks.
+
+Design system grounding:
+brand orange #f96b1c, charcoal #1f2227, white #ffffff, warm album paper #fcf6ec, secondary grey #5b6270; paper fibers extremely subtle, taupe slot guides low contrast. Natural white paper background, crisp content, no orange gradient background. Type rounded Chinese sans-serif, at most 2 type styles; large legible masthead, comfortably readable player title, calm footer. Keep the supplied brand imagery proportions. Professional and playful rather than overloaded or childish.
+
+Hard constraints: Output exactly ONE design image, not a collage or comparison. No device bezel, status bar, browser chrome, navigation, tabs, search fields, filter chips, progress bar, save/share/close buttons or instructional tap affordances. No QR code. Do not crop or hide the last row. Do not put the poster on a photo of a tabletop. This is only a visual proposal; do not change game code or claim the poster is implemented.

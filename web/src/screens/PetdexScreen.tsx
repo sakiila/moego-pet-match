@@ -119,7 +119,7 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
         data && (
           <StickerSheet
             playerName={player.name}
-            pets={sheetCollection(data.pets, data.sheetOrder).map((p) => ({ ...p, imageSrc: p.collected ? stickerUrl(p.petId, 128) : silhouetteUrl(p.petId, 128) }))}
+            pets={sheetCollection(data.pets, data.sheetOrder).map((p) => ({ ...p, imageSrc: p.collected ? stickerUrl(p.petId, 128) : silhouetteUrl(p.petId, 128), exportSrc: p.collected ? stickerUrl(p.petId, 512) : silhouetteUrl(p.petId, 512) }))}
             onOpen={(p, el) => void detail.show(p.petId, p.name, el)}
             onPreload={(p) => preloadImage(p.collected ? stickerUrl(p.petId, 512) : silhouetteUrl(p.petId, 512))}
             caption={t('collection.sheet_hint')}

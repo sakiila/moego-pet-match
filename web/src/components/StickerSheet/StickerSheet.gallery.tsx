@@ -29,6 +29,7 @@ const entry: GalleryEntry = {
     'some collected': () => frame(<StickerSheet playerName="Bob" pets={sheet((i) => [0, 3, 4, 7, 9, 12, 15, 16, 20].includes(i))} onOpen={noop} caption="按主人和宠物名排序 · 点贴纸看详情" />),
     'caption · en': () => frame(<StickerSheet playerName="Bob" pets={sheet((i) => i % 3 === 0)} onOpen={noop} caption="Sorted by owner, then pet name · Tap a sticker for details" />),
     'full album · 80 slots': () => frame(<StickerSheet playerName="Bob" pets={Array.from({ length: 80 }, (_, i) => ({ ...sheet((n) => n % 3 === 0)[i % pets.length], petId: `fixture-${i}` }))} onOpen={noop} />),
+    'full album · 81 slots': () => frame(<StickerSheet playerName="Bob" pets={Array.from({ length: 81 }, (_, i) => ({ ...sheet((n) => n % 3 === 0)[i % pets.length], petId: `fixture-${i}` }))} onOpen={noop} />),
     'long player name': () => frame(<StickerSheet playerName="Alexandria Montgomery-Smith" pets={sheet((i) => i % 3 === 0)} onOpen={noop} />),
     'none collected': () => frame(<StickerSheet playerName="Bob" pets={sheet(() => false)} onOpen={noop} />),
     'all collected': () => frame(<StickerSheet playerName="Bob" pets={sheet(() => true)} onOpen={noop} />),

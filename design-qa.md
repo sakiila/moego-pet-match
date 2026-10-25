@@ -1,3 +1,43 @@
+# 贴纸册分享图接入验收 · 2026-10-25
+
+final result: passed
+
+## 视觉基准与证据
+
+- 选定图稿：`design/concepts/sticker-album-share-v1.png`，1024 × 1536；用户要求接入真实宠物与数量，并替换底部文案。
+- 浏览器：bsk Agent Window，真实本地站点 `http://localhost:5180/`，API 与图片走本地 Node 服务；手机 390 × 844，DPR 1；桌面陈列页 1512 × 772，截图 3024 × 1544（DPR 2）。未使用 Playwright fallback。
+- 实际导出：`/tmp/moego-sticker-album-real-zh-v2.png`（1200 × 2016）及 `/tmp/moego-sticker-album-real-en.png`；来自本地开发库当前玩家 Bob 包博的 79 / 80 图鉴，不代表生产数据。手机预览截图：`/tmp/moego-sticker-share-mobile-zh-v2.png`、`/tmp/moego-sticker-share-mobile-en.png`。
+- 同框整体对比：`/tmp/moego-sticker-share-comparison.png`；两张图都等比缩至 600px 宽，不拉伸高度。页头和计数的局部同框对比：`/tmp/moego-sticker-share-header-comparison.png`。
+
+## 对比与修复
+
+1. 首轮：`/tmp/moego-sticker-album-real-zh.png` 出现字标下缘被纸张挡住（P1），计数文案重叠（P2），待贴位虚线过重（P2）。原因分别是未为字标及胶带留足高度、Canvas 字体不能直接复用包含行高的 CSS font 简写、纸面放大时描边也被放大。
+2. 修复：品牌区与字标尺寸纳入 tokens 并重新留出间距；字体改为明确的字重／字号／字体族；虚线线宽和段长按缩放系数补偿。重新下载中英文 PNG，再做同框整体与局部核对，无遮挡、重叠或末行裁切。
+3. 长英文名陈列状态发现原有 grid 最小内容宽度撑至 408px（P2）；为 StickerSheet 的 root、album 和 sheet 设置 min-width: 0 后，重新打开并导出，页面 scrollWidth / clientWidth 均为 390，完整署名仍在导出中显示。证据：`/tmp/moego-sticker-album-long-en-final.png`、`/tmp/moego-sticker-share-long-en-final.png`。
+
+## 五项视觉核验
+
+| 项目 | 结论 |
+| --- | --- |
+| 字体与层级 | 官方 Logo、已确认的中文／英文游戏字标复用；署名与计数使用现有 MoeGo Rounded，计数橙色强调，长名字完整缩放到可用空间，无重叠。 |
+| 布局与节奏 | 品牌、册页、底部文案层次与选定稿一致，保留 8 列；实际格子保持现有正方形比例，因此 80 格导出高于生成稿，81 格完整增加一行，未为固定比例裁掉内容。 |
+| 颜色与 tokens | 白底、米白纸、橙色胶带／计数／爪印、灰色剪影沿用 tokens；新增导出尺寸与间距亦在 tokens。 |
+| 图片与素材 | 宠物为当前册页的高清原素材，未收集仍用真实剪影；没有把生成稿的示意宠物或整页截图用于产品。品牌素材保持比例。纸边、胶带、细纹理与点缀由现有轮廓和 Canvas 绘制，细节与生成稿的手工纸纹理有所不同，遵循项目组件化约定。 |
+| 文案与内容 | 中文「我的毛孩子朋友，都在这里啦」，英文「All my furry friends, right here.」；数量从本次导出的格子统计，署名来自当前玩家；名字保持原文。图稿 38 / 80 不进入代码。 |
+
+## 功能核验
+
+- 主路径：首页 → 宠物图鉴 → 贴纸册 → 分享预览 → 保存 PNG，中英文均实际下载成功；导出 1200px 宽，全部 80 格完整，79 张贴纸和 1 个剪影与页面状态一致。
+- 手机预览：页面身份正确、非空、无框架覆盖层，预览与保存／分享按钮完整；生成中保存禁用，成功后可保存。
+- 陈列页：9 个状态均已登记和查看；部分收集 9 / 21、英文说明 7 / 21、零收集 0 / 21、全收集 21 / 21、空目录 0 / 0、长英文名 7 / 21 均成功生成。81 格 27 / 81 成功下载为 1200 × 2150，最后一行只有一格且完整保留。
+- 故障：image error 状态导出失败，显示失败文案与重试，不显示可保存的残缺图片；重试后仍如实显示失败。截图 `/tmp/moego-sticker-share-error-en.png`。
+- 控制台：正常生成、切换语言与保存路径无新增 error/warn。i18n 修改期间开发 HMR 曾短暂出现 provider 错误，完整导航后恢复；错误素材状态有预期的 404，不视为正常路径错误。
+- 类型、构建与测试：typecheck 通过；build 通过（沿用大 chunk 警告）；22 个 Vitest 文件共 245 项通过，版本脚本 8 项通过；git diff --check 通过。
+
+未做 Safari／真机、系统分享面板发送或生产验收；没有提交、推送或部署。无待修复 P0/P1/P2。
+
+---
+
 # 普通准备页候选稿实现验收 · 2026-10-24
 
 final result: passed
@@ -235,3 +275,13 @@ final result: passed
 final result: passed
 
 规则版本5：任一横纵直线五连及以上优先生成一枚吹风机，鱼关对应大浪花；其余交叉形仍出剪刀、四消仍出梳子，双剪合成保留。新增道具不因生成自动发动。236项web测试、8项版号测试、15项服务端登记结算测试、前后端typecheck及web构建通过；本地实际登记返回版本5。IAB验证手动500分留盘、补落1300分生成、再交换清全盘并出现Wow，鱼关五连留大浪花。完整记录见 [QA.md](design/reviews/2026-10-25-five-match-dryer/QA.md)。未提交、推送或部署。
+
+
+## 镇店之宝极光标签 · 2026-10-25
+
+final result: passed
+
+- 按用户确认的 `design/concepts/mythic-aurora-label-v1.png` 替换原浅紫等级标签。通过 tokens 与 AchievementShelf 标签样式实现蓝紫—青蓝渐变底、白字、紫青亮边、顶部高光和柔和辉光；补偿描边占用的 padding，保留标签原尺寸和位置，不使用设计截图作为界面素材。
+- Codex 内置浏览器实测 `/dev/gallery?c=AchievementShelf`：390 × 844 中文标签为 64 × 26px，320 × 568 英文 House Special 为约 98.9 × 25.5px；文字完整、无横向溢出，切到全图鉴称号再切回火锅搭子后，佩戴状态正确。未解锁时仅显示 Hidden Title、问号、保密条件提示与稀有度；图片 alt 不暴露称号名。未出现相关 console error/warn。
+- 对照选定稿：实现极光胶囊、白字、亮边和高光，辉光保持柔和以适配小尺寸标签；其他徽章、传奇标签、按钮与页面布局沿用原组件。实际截图：`/Users/bob/.codex/visualizations/2026/10/25/01a17154-fd7b-77d1-ab58-96a28b1af4e9/mythic-aurora-label-zh-390.png` 与同目录 `mythic-aurora-label-en-320.png`。
+- `npm --prefix web run typecheck`、`npm --prefix web run build` 通过，构建保留大包提示。本轮为 CSS 展示调整，未新增或运行单元测试，未做真机、跨浏览器或真实保存验证；未提交、推送或部署。

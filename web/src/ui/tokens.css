@@ -102,6 +102,19 @@
   --album-sticker-shadow: drop-shadow(0 1px 1.5px rgb(31 34 39 / 0.22));
   --album-preview-min-height: 180px;
   --album-preview-max-height: 55dvh;
+  /* 独立分享海报：固定导出宽度，册页与画布高度按完整宠物阵列增长。 */
+  --album-share-width: 1200px;
+  --album-share-margin: 32px;
+  --album-share-header: 384px;
+  --album-share-logo-width: 310px;
+  --album-share-logo-top: 38px;
+  --album-share-title-width: 960px;
+  --album-share-title-top: 80px;
+  --album-share-footer: 100px;
+  --album-share-footer-size: 32px;
+  --album-share-footer-gap: 24px;
+  --album-share-paw-size: 34px;
+  --album-share-count-scale: 1.6;
   --pet-detail-min-height: 400px;
 
   /* 收集称号：原稿徽章 + 代码文字签。 */

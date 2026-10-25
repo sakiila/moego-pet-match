@@ -1,3 +1,7 @@
+import type { Locale } from '../../i18n';
+import logoSrc from '../art/moego-logo.webp';
+import titleZhSrc from '../art/title-zh.webp';
+import titleEnSrc from '../art/title-en.webp';
 import { PAPER_EDGE, TAPE_EDGE } from './stickerSheetShape';
 
 type Point = readonly [number, number];
@@ -27,23 +31,45 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   });
 }
 
+function paw(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, angle: number) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+  ctx.beginPath();
+  ctx.ellipse(0, size * 0.35, size * 0.55, size * 0.45, 0, 0, Math.PI * 2);
+  ctx.fill();
+  for (const [dx, dy] of [[-0.62, -0.25], [-0.22, -0.62], [0.22, -0.62], [0.62, -0.25]]) {
+    ctx.beginPath();
+    ctx.ellipse(dx * size, dy * size, size * 0.2, size * 0.26, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+interface StickerSheetCopy {
+  locale: Locale;
+  collectedLabel: string;
+  footer: string;
+}
+
 /**
- * 读取整张册页的布局，而非截取视口；只画册页内的内容。高分辨率贴纸全部就绪后才生成 PNG，
+ * 读取整张真实册页，加入品牌页头与文案，不导出页面导航和按钮。高分辨率贴纸全部就绪后才生成 PNG，
  * 任一素材失败都交给预览重试，避免把缺图保存为成功。DOM 位置在等待图片前冻结。
  */
-export async function drawStickerSheet(sheet: HTMLElement, onProgress?: (loaded: number, total: number) => void): Promise<Blob> {
+export async function drawStickerSheet(sheet: HTMLElement, copy: StickerSheetCopy, onProgress?: (loaded: number, total: number) => void): Promise<Blob> {
   await document.fonts.ready;
   const bounds = sheet.getBoundingClientRect();
   if (!bounds.width || !bounds.height) throw new Error('Sticker sheet is not visible');
   const css = getComputedStyle(sheet);
   const token = (key: string) => css.getPropertyValue(key).trim();
+  const number = (key: string) => parseFloat(token(key));
   const relative = (el: Element) => {
     const box = el.getBoundingClientRect();
     return { x: box.x - bounds.x, y: box.y - bounds.y, width: box.width, height: box.height };
   };
   const labels = [...sheet.querySelectorAll<HTMLElement>('[data-album-text]')].map((el) => {
     const style = getComputedStyle(el);
-    return { ...relative(el), text: el.textContent ?? '', font: style.font, color: style.color };
+    return { ...relative(el), text: el.textContent ?? '', font: `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`, color: style.color };
   });
   const slots = [...sheet.querySelectorAll<HTMLElement>('[data-album-slot]')].map((el) => {
     const style = getComputedStyle(el);
@@ -56,31 +82,47 @@ export async function drawStickerSheet(sheet: HTMLElement, onProgress?: (loaded:
   const tapeCss = getComputedStyle(tape);
   const tapeBox = { x: tape.offsetLeft, y: tape.offsetTop, width: tape.offsetWidth, height: tape.offsetHeight };
   const tapeTransform = new DOMMatrix(tapeCss.transform);
-  // 透明外边距包含胶带、纸边与阴影；输出宽度固定 1200px，纵向随整张纸增长。
-  const margin = parseFloat(token('--space-5'));
-  const scale = 1200 / (bounds.width + margin * 2);
+  // 品牌区固定比例，整张纸按宽度等比放大；末行不满或目录增长也完整保留。
+  const width = number('--album-share-width');
+  const margin = number('--album-share-margin');
+  const header = number('--album-share-header');
+  const footer = number('--album-share-footer');
+  const scale = (width - margin * 2) / bounds.width;
+  const paperBottom = header + bounds.height * scale;
   const canvas = document.createElement('canvas');
-  canvas.width = 1200;
-  canvas.height = Math.ceil((bounds.height + margin * 2) * scale);
+  canvas.width = width;
+  canvas.height = Math.ceil(paperBottom + footer);
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('Canvas unavailable');
   ctx.fillStyle = token('--color-paper');
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.scale(scale, scale);
-  ctx.translate(margin, margin);
 
   // 限制并发；即使格子在屏幕外、尚未触发懒加载，也独立加载完整册页的高清素材。
   const images: HTMLImageElement[] = new Array(slots.length);
   let next = 0;
   let loaded = 0;
   onProgress?.(0, slots.length);
-  await Promise.all(Array.from({ length: Math.min(8, slots.length) }, async () => {
+  const petsReady = Promise.all(Array.from({ length: Math.min(8, slots.length) }, async () => {
     while (next < slots.length) {
       const i = next++;
       images[i] = await loadImage(slots[i].src);
       onProgress?.(++loaded, slots.length);
     }
   }));
+  const [logo, title] = await Promise.all([
+    loadImage(logoSrc),
+    loadImage(copy.locale === 'zh' ? titleZhSrc : titleEnSrc),
+    petsReady,
+  ]);
+
+  const logoWidth = number('--album-share-logo-width');
+  ctx.drawImage(logo, (width - logoWidth) / 2, number('--album-share-logo-top'), logoWidth, logoWidth * logo.naturalHeight / logo.naturalWidth);
+  const titleWidth = number('--album-share-title-width');
+  ctx.drawImage(title, (width - titleWidth) / 2, number('--album-share-title-top'), titleWidth, titleWidth * title.naturalHeight / title.naturalWidth);
+
+  ctx.save();
+  ctx.translate(margin, header);
+  ctx.scale(scale, scale);
 
   ctx.save();
   ctx.shadowColor = token('--share-shadow');
@@ -96,24 +138,39 @@ export async function drawStickerSheet(sheet: HTMLElement, onProgress?: (loaded:
   ctx.clip();
   ctx.fillStyle = token('--album-fiber');
   for (let y = 0; y < bounds.height; y += 3) ctx.fillRect(0, y, bounds.width, 0.35);
-  for (const label of labels) {
-    ctx.font = label.font;
-    ctx.fillStyle = label.color;
-    ctx.textBaseline = 'middle';
-    // 页面长名字单行省略；导出保留完整署名，缩到同一行可用宽度内。
-    const textWidth = ctx.measureText(label.text).width;
-    ctx.save();
-    ctx.translate(label.x, label.y + label.height / 2);
-    const fit = Math.min(1, label.width / Math.max(1, textWidth));
-    ctx.scale(fit, fit);
-    ctx.fillText(label.text, 0, 0);
-    ctx.restore();
+  const [player, count] = labels;
+  const collected = slots.filter((slot) => slot.collected).length;
+  const countParts = [
+    { text: `${copy.collectedLabel} `, font: count.font, color: token('--color-ink') },
+    { text: String(collected), font: `${token('--weight-display')} ${number('--text-xs') * number('--album-share-count-scale')}px ${token('--font-sans')}`, color: token('--color-brand') },
+    { text: ` / ${slots.length}`, font: count.font, color: count.color },
+  ].map((part) => {
+    ctx.font = part.font;
+    return { ...part, width: ctx.measureText(part.text).width };
+  });
+  let countX = bounds.width - number('--space-3') - countParts.reduce((sum, part) => sum + part.width, 0);
+  ctx.textBaseline = 'middle';
+  ctx.font = player.font;
+  ctx.fillStyle = player.color;
+  // 缩放完整署名以容纳长名字，为右侧真实收集数留出空间。
+  const playerWidth = Math.max(1, countX - player.x - number('--space-3'));
+  const fit = Math.min(1, playerWidth / Math.max(1, ctx.measureText(player.text).width));
+  ctx.save();
+  ctx.translate(player.x, player.y + player.height / 2);
+  ctx.scale(fit, fit);
+  ctx.fillText(player.text, 0, 0);
+  ctx.restore();
+  for (const part of countParts) {
+    ctx.font = part.font;
+    ctx.fillStyle = part.color;
+    ctx.fillText(part.text, countX, count.y + count.height / 2);
+    countX += part.width;
   }
   slots.forEach((slot, i) => {
     ctx.save();
     ctx.strokeStyle = slot.color;
-    ctx.lineWidth = 1;
-    ctx.setLineDash([3, 3]);
+    ctx.lineWidth = number('--album-slot-stroke') / scale;
+    ctx.setLineDash([3 / scale, 3 / scale]);
     ctx.beginPath();
     ctx.roundRect(slot.x, slot.y, slot.width, slot.height, slot.radius);
     ctx.stroke();
@@ -145,6 +202,24 @@ export async function drawStickerSheet(sheet: HTMLElement, onProgress?: (loaded:
   ctx.fillStyle = token('--album-tape-fiber');
   for (let x = 0; x < tapeBox.width; x += 3) ctx.fillRect(x, 0, 0.4, tapeBox.height);
   ctx.restore();
+  ctx.restore();
+
+  const pawSize = number('--album-share-paw-size');
+  const gap = number('--album-share-footer-gap');
+  const footerY = paperBottom + footer / 2;
+  const footerFont = (size: number) => `${token('--weight-bold')} ${size}px ${token('--font-sans')}`;
+  const fontSize = number('--album-share-footer-size');
+  ctx.font = footerFont(fontSize);
+  const footerWidth = width - margin * 2 - (pawSize * 2 + gap) * 2;
+  ctx.font = footerFont(fontSize * Math.min(1, footerWidth / Math.max(1, ctx.measureText(copy.footer).width)));
+  const textWidth = ctx.measureText(copy.footer).width;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = token('--color-ink-muted');
+  ctx.fillText(copy.footer, width / 2, footerY);
+  ctx.fillStyle = token('--color-brand');
+  paw(ctx, (width - textWidth) / 2 - gap - pawSize, footerY, pawSize, -0.3);
+  paw(ctx, (width + textWidth) / 2 + gap + pawSize, footerY, pawSize, 0.3);
 
   return new Promise((resolve, reject) => canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error('PNG export failed')), 'image/png'));
 }

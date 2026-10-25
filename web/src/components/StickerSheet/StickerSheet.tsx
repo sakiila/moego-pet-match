@@ -15,10 +15,7 @@ export interface StickerSheetPet {
   collected: boolean;
   /** 已收集为贴纸，未收集为剪影；格子约 40px，传 128 尺寸即可。 */
   imageSrc: string;
-  /**
-   * 导出用素材，默认同 imageSrc；仍须按收集状态传入贴纸或剪影。
-   * 导出图宽 1200px，每张贴纸约占 130px，128 尺寸已够用，且多半已在浏览器缓存里。
-   */
+  /** 导出用高清素材；仍须按收集状态传入贴纸或剪影。 */
   exportSrc?: string;
 }
 
@@ -36,14 +33,18 @@ export interface StickerSheetProps {
 
 /** 图鉴贴纸册：一张纸上排出全部宠物，已收集为倾斜贴纸、未收集为淡剪影加虚线待贴位；格内不写字。 */
 export function StickerSheet({ playerName, pets, onOpen, caption, onPreload }: StickerSheetProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const sheetRef = useRef<HTMLDivElement>(null);
   const [preview, setPreview] = useState(false);
   const closePreview = useCallback(() => setPreview(false), []);
   const draw = useCallback((onProgress?: (loaded: number, total: number) => void) => {
     if (!sheetRef.current) return Promise.reject(new Error('Sticker sheet unavailable'));
-    return drawStickerSheet(sheetRef.current, onProgress);
-  }, []);
+    return drawStickerSheet(sheetRef.current, {
+      locale,
+      collectedLabel: t('collection.filter_collected'),
+      footer: t('collection.sheet_share_hint'),
+    }, onProgress);
+  }, [locale, t]);
   const title = t('collection.sheet_title', { playerName });
   const collected = pets.filter((p) => p.collected).length;
   return (
