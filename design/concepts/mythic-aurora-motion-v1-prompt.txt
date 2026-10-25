@@ -1,0 +1,25 @@
+Use case: product-mockup / motion-design storyboard.
+Create ONE refined motion-design concept sheet for an existing playful pet-game achievement, continuing the exact approved artwork and colors. This is one coherent animation direction, not a page redesign or multiple alternatives.
+Target canvas: 1536 x 1024 landscape, warm-white background, strong typographic hierarchy, generous spacing, crisp Chinese rounded sans serif, professional editorial presentation.
+
+INPUTS: IMAGE 1 is the canonical transparent badge master (two cats over a split hotpot, blue-violet-cyan scalloped rim, wheat/laurel leaves and five cyan four-point stars). IMAGE 2 is the approved product context showing the achievement row and the small pill "镇店之宝".
+Preserve IMAGE 1's exact shapes, characters, faces, proportions, hotpot, decorative leaves, charcoal outlines, and full silhouette. Do not redraw the character, invent motifs, add a crown, alter its base colors, or replace it with a generic medal. Use the approved blue-violet-cyan holographic/aurora finish. All new effects are light layered over the existing art. Keep cat faces and orange/red food readable.
+
+Headline verbatim: "镇店之宝 · 极光流转"
+Subheadline: "动效设计稿 · 6 秒循环"
+
+Composition:
+Upper left 60%: an enlarged badge at the most beautiful luminous keyframe, around 310 px tall; below it the existing capsule with verbatim white text "镇店之宝", and a simple dark title "火锅搭子". Use a restrained halo around the badge, high-quality opalescent violet-cyan edge highlights and a narrow diagonal soft-white specular streak crossing only the rim, leaves and pot. The cats retain their original coloring. Rich glowing color that still feels beautiful on a white product UI. Leave breathing space.
+Upper right 40%: one natural-size product row matching IMAGE 2: miniature original badge, title "火锅搭子", the aurora pill "镇店之宝", and outlined button "佩戴中". Keep the row white/pale lavender and rounded with a thin violet-to-cyan outline. Under the row, show an avatar with a tiny faithful badge at its lower-right as a scale-use example; show only a calm tiny glint there, no firework particles. Caption "列表与头像中的效果". This is a focused component context crop, no phone body or new app chrome.
+Bottom third: a tidy four-keyframe storyboard, SAME badge and pill each time at a consistent size. Each panel is one moment of the SAME 6-second loop. Accurate timestamp and short caption:
+"0.0s  静息" (original balanced aurora colors, soft halo)
+"1.5s  流光掠过" (a narrow diagonal white/cyan ribbon traverses pill and selected badge metallic surfaces; type remains white and readable)
+"3.0s  星芒点亮" (existing top and side four-point stars reach a delicate offset peak; a violet/cyan glint travels along rim and leaves)
+"4.5s  柔和收光" (glints fade to original while remaining subtly iridescent; calm rest before loop).
+Use small arrows or a subtle timeline to communicate progression. No movement of cats, no wobble, rotation or bounce of the badge. No spinning whole badge, no lasers, no huge bloom, no blank areas blown out, no drifting particle cloud, no sound controls. Keep all lettering crisp.
+Footer sentence: "标签缓慢游彩，徽章轻掠流光，星芒错峰亮起。"
+Keep title text and important artwork inside safe margins. Make the hero and the four stages legible. Render a polished realistic UI design sheet with all parts visible and no clipped contents.
+
+Generation record: Built-in image_gen, 2026-10-25. Input references were the canonical transparent title-hotpot-showcase badge master and the approved mythic-aurora-label-v1 concept. Output: mythic-aurora-motion-v1.png, 1536 x 1024. This is a still motion storyboard for review, not a playable GIF or an implemented product animation. Existing application code and selected-design records were not changed. Awaiting user review.
+
+Acceptance record: The user selected this direction and authorized implementation and push. Implemented on 2026-10-26 as a 6-second CSS light cycle over the unchanged original PNG; see design/reviews/2026-10-25-mythic-aurora-motion/README.md for verification.

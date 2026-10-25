@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { ICON_CATALOG, type IconName as PngIconName } from '../icons/catalog';
 import { MenuGlyph, type MenuGlyphName } from '../icons/MenuGlyph';
 import styles from './Icon.module.css';
@@ -28,13 +29,15 @@ export interface IconProps {
   /** 只有图标、没有文字时必须提供，作为读屏名称；旁边已有文字时省略，读屏跳过图标。 */
   label?: string;
   className?: string;
+  /** 保留原 PNG，按其透明轮廓叠加流光；小尺寸仅轻闪。 */
+  effect?: 'aurora' | 'glint';
 }
 
 /**
  * 已确认原稿 PNG 与代码 SVG 菜单图标。调用处只认 name，素材替换只改本组件与 ui/icons。
  * 按显示尺寸用 srcset 选 1x / 2x / 3x。
  */
-export function Icon({ name, size = 24, label, className }: IconProps) {
+export function Icon({ name, size = 24, label, className, effect }: IconProps) {
   if (name === 'my-titles' || name === 'clock-out') {
     return <svg className={`${styles.icon} ${className ?? ''}`} width={size} height={size} viewBox="0 0 32 32"
       role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : true} focusable="false">
@@ -43,10 +46,11 @@ export function Icon({ name, size = 24, label, className }: IconProps) {
   }
   const { widths, aspect } = ICON_CATALOG[name];
   const width = Math.round(size * aspect);
-  return (
+  const src = URLS[`../icons/png/${name}@${widths[widths.length - 1]}.png`];
+  const art = (
     <img
-      className={`${styles.icon} ${className ?? ''}`}
-      src={URLS[`../icons/png/${name}@${widths[widths.length - 1]}.png`]}
+      className={`${styles.icon} ${effect ? styles.art : className ?? ''}`}
+      src={src}
       srcSet={srcSet(name)}
       sizes={`${width}px`}
       width={width}
@@ -57,4 +61,14 @@ export function Icon({ name, size = 24, label, className }: IconProps) {
       draggable={false}
     />
   );
+  if (!effect) return art;
+  return <span className={`${styles.effect} ${className ?? ''}`} data-icon-effect={effect}
+    style={{ width, height: size, '--icon-effect-mask': `url("${src}")` } as CSSProperties}>
+    {art}
+    {effect === 'aurora' && <span className={styles.light} aria-hidden>
+      <span className={styles.sheen} />
+      <span className={styles.starTop} />
+      <span className={styles.starSides} />
+    </span>}
+  </span>;
 }

@@ -6,3 +6,61 @@
   user-select: none;
   -webkit-user-drag: none;
 }
+
+.effect {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  vertical-align: middle;
+  line-height: 0;
+  isolation: isolate;
+}
+
+.art { filter: var(--achievement-mythic-icon-halo); }
+.light {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: var(--icon-effect-mask);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+.sheen, .starTop, .starSides { position: absolute; inset: 0; opacity: 0; }
+.sheen {
+  background: var(--achievement-mythic-sweep);
+  animation: auroraSweep var(--achievement-mythic-cycle) ease-in-out infinite;
+}
+.starTop {
+  background: var(--achievement-mythic-star-top);
+  animation: auroraStars var(--achievement-mythic-cycle) ease-in-out infinite;
+}
+.starSides {
+  background: var(--achievement-mythic-star-sides);
+  animation: auroraStars var(--achievement-mythic-cycle) var(--achievement-mythic-star-delay) ease-in-out infinite;
+}
+.effect[data-icon-effect='glint'] .art {
+  animation: auroraGlint var(--achievement-mythic-cycle) ease-in-out infinite;
+}
+
+@keyframes auroraSweep {
+  0%, 12% { transform: translateX(-100%); opacity: 0; }
+  18% { opacity: var(--achievement-mythic-sweep-opacity); }
+  40% { transform: translateX(100%); opacity: var(--achievement-mythic-sweep-opacity); }
+  45%, 100% { transform: translateX(100%); opacity: 0; }
+}
+@keyframes auroraStars {
+  0%, 35%, 72%, 100% { opacity: 0; }
+  48% { opacity: var(--achievement-mythic-star-opacity); }
+}
+@keyframes auroraGlint {
+  0%, 35%, 70%, 100% { opacity: 1; }
+  45% { opacity: var(--achievement-mythic-glint-opacity); }
+  53% { opacity: 1; }
+  60% { opacity: var(--achievement-mythic-glint-opacity); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .effect[data-icon-effect='glint'] .art { animation: none; }
+  .light { display: none; }
+  .sheen, .starTop, .starSides { animation: none; }
+}

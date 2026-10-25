@@ -7,6 +7,7 @@ const entry: GalleryEntry = { name: 'AchievementAvatar', group: 'components', st
   'all seven · 40px / 22px': () => <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>{ACHIEVEMENT_DISPLAY_ORDER.map(id => <AchievementAvatar key={id} name="Bob" equippedTitle={id} />)}</div>,
   'legendary': () => <AchievementAvatar name="Bob" equippedTitle="album" />,
   'hotpot · unified showcase at 22px': () => <AchievementAvatar name="Bob" equippedTitle="hotpot" />,
+  'hotpot · unrevealed name': () => <AchievementAvatar name="Bob" equippedTitle="hotpot" revealed={false} onTitleClick={() => {}} />,
   'missing photo': () => <AchievementAvatar name="小明" src="/missing-avatar.png" equippedTitle="cats" />,
   'long English name': () => <AchievementAvatar name="Alexandria Catherine Montgomery-Wellington" equippedTitle="species" />,
   'interactive': () => <AchievementAvatar name="Bob" equippedTitle="neighbors" onTitleClick={() => {}} />,

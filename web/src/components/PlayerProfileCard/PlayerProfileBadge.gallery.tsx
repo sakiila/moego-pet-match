@@ -11,6 +11,7 @@ const entry: GalleryEntry = {
     'equipped title': () => <PlayerProfileBadge id="friends" chip />,
     'long condition': () => <PlayerProfileBadge id="family" />,
     'hidden title · viewer not unlocked (meow)': () => <PlayerProfileBadge id="hotpot" revealed={false} />,
+    'hidden title chip · viewer not unlocked': () => <PlayerProfileBadge id="hotpot" chip revealed={false} />,
     'hidden title · viewer unlocked (real condition)': () => <PlayerProfileBadge id="hotpot" />,
   },
 };

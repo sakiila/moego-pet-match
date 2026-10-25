@@ -8,21 +8,23 @@ import styles from './AchievementAvatar.module.css';
 export interface AchievementAvatarProps extends Omit<AvatarProps, 'size'> {
   equippedTitle?: AchievementId | null;
   onTitleClick?: () => void;
+  revealed?: boolean;
 }
 
 /** C 档：40px 头像，22px 徽章中心贴住右下 45° 圆周。 */
-export function AchievementAvatar({ equippedTitle, onTitleClick, ...avatar }: AchievementAvatarProps) {
+export function AchievementAvatar({ equippedTitle, onTitleClick, revealed = true, ...avatar }: AchievementAvatarProps) {
   const { t } = useI18n();
-  const badge = equippedTitle ? <Icon name={equippedTitle === 'hotpot' ? 'title-hotpot-showcase' : `title-${equippedTitle}-avatar`} size={22} label={onTitleClick ? undefined : t(achievementName(equippedTitle))} /> : null;
+  const title = equippedTitle ? t(achievementName(equippedTitle, revealed)) : '';
+  const badge = equippedTitle ? <Icon name={equippedTitle === 'hotpot' ? 'title-hotpot-showcase' : `title-${equippedTitle}-avatar`} size={22} label={onTitleClick ? undefined : title} effect={equippedTitle === 'hotpot' ? 'glint' : undefined} /> : null;
   return (
     <span className={styles.root}>
       <Avatar {...avatar} size={40} />
       {equippedTitle && (onTitleClick ? (
         <button type="button" className={`${styles.marker} ${styles.interactive}`} onClick={onTitleClick}
-          aria-label={t('achievement.view_worn', { playerName: avatar.name, title: t(achievementName(equippedTitle)) })}>
+          aria-label={t('achievement.view_worn', { playerName: avatar.name, title })}>
           {badge}
         </button>
-      ) : <span className={styles.marker} title={t(achievementName(equippedTitle))}>{badge}</span>)}
+      ) : <span className={styles.marker} title={title}>{badge}</span>)}
     </span>
   );
 }

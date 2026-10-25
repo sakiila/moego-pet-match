@@ -9,16 +9,17 @@ export interface LeaderboardRowProps {
   isMe: boolean;
   tied: boolean;
   onSelect?: (entry: LeaderboardEntry) => void;
+  titleRevealed?: boolean;
 }
 
 /** 一行名次：自己高亮；同分时标出「同分并列」。 */
-export function LeaderboardRow({ entry, isMe, tied, onSelect }: LeaderboardRowProps) {
+export function LeaderboardRow({ entry, isMe, tied, onSelect, titleRevealed = false }: LeaderboardRowProps) {
   const { t, locale } = useI18n();
   const content = <>
       <span className={styles.rank}>
         <RankMark rank={entry.rank} size={40} />
       </span>
-      <span className={styles.avatar}><AchievementAvatar name={entry.name} seed={entry.userId} src={`/img/avatars/${encodeURIComponent(entry.userId)}`} equippedTitle={entry.equippedTitle} /></span>
+      <span className={styles.avatar}><AchievementAvatar name={entry.name} seed={entry.userId} src={`/img/avatars/${encodeURIComponent(entry.userId)}`} equippedTitle={entry.equippedTitle} revealed={titleRevealed || isMe} /></span>
       <span className={styles.name}>
         {entry.name}
       </span>

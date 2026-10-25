@@ -7,7 +7,7 @@ import styles from './PlayerProfileBadge.module.css';
 
 /**
  * 名片里的只读徽章：悬浮、键盘聚焦或轻点查看条件。
- * revealed 为 false 时（隐藏称号，看的人自己还没解锁）条件换成喵喵喵占位。
+ * revealed 为 false 时（隐藏称号，看的人自己还没解锁）名称与条件均使用隐藏文案。
  */
 export function PlayerProfileBadge({ id, chip = false, revealed = true }: { id: AchievementId; chip?: boolean; revealed?: boolean }) {
   const { t, locale } = useI18n();
@@ -16,7 +16,7 @@ export function PlayerProfileBadge({ id, chip = false, revealed = true }: { id: 
   const tooltip = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<number | undefined>(undefined);
   const [open, setOpen] = useState(false);
-  const name = t(achievementName(id));
+  const name = t(achievementName(id, revealed));
   // 隐藏成就（火锅搭子）不在按图鉴计数的 ACHIEVEMENTS 表里，解锁条件文案不带数字，目标按 1 处理
   const target = ACHIEVEMENTS.find(achievement => achievement.id === id)?.target ?? 1;
 
@@ -87,7 +87,7 @@ export function PlayerProfileBadge({ id, chip = false, revealed = true }: { id: 
     <button ref={trigger} type="button" className={styles.trigger} popoverTarget={tooltipId}
       aria-label={t('achievement.view_condition', { title: name })} aria-expanded={open} aria-describedby={tooltipId}
       onFocus={event => { if (event.currentTarget.matches(':focus-visible')) show(); }} onBlur={hide}>
-      <AchievementBadge id={id} chip={chip} size={chip ? undefined : 56} title="" />
+      <AchievementBadge id={id} chip={chip} size={chip ? undefined : 56} revealed={revealed} title="" />
       {!chip && <span>{name}</span>}
     </button>
     <div ref={tooltip} id={tooltipId} role="tooltip" popover="auto" className={styles.tooltip}

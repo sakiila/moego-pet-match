@@ -18,7 +18,7 @@ export interface PlayerProfileCardProps {
   onRetry: () => void;
   onClose: () => void;
   inline?: boolean;
-  /** 正在看名片的玩家自己已解锁的称号；隐藏称号的解锁条件只对其中的显示真实文字。 */
+  /** 正在看名片的玩家自己已解锁的称号；隐藏称号的名称与条件只对其中的显示真实文字。 */
   viewerTitles?: readonly AchievementId[];
 }
 

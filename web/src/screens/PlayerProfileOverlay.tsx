@@ -7,7 +7,7 @@ export type ProfileLoader = (playerId: string, mode: GameMode, signal?: AbortSig
 /** 读取正在看名片的玩家自己已解锁的称号。 */
 export type ViewerTitlesLoader = (playerId: string) => Promise<AchievementId[]>;
 
-const loadUnlockedTitles: ViewerTitlesLoader = (playerId) =>
+export const loadUnlockedTitles: ViewerTitlesLoader = (playerId) =>
   api.getAchievements(playerId).then((v) => v.achievements.filter((a) => a.unlockedAt).map((a) => a.id));
 
 export function PlayerProfileOverlay({ player, viewerId, mode, onClose, load = api.getPlayerProfile, loadViewerTitles = loadUnlockedTitles }: {
@@ -28,7 +28,7 @@ export function PlayerProfileOverlay({ player, viewerId, mode, onClose, load = a
     });
     return () => controller.abort();
   },[player.userId,mode,load,attempt]);
-  // 看别人的名片：读自己已解锁的称号，没读到前或读取失败时隐藏条件一律保持喵喵喵
+  // 看别人的名片：按自己已解锁的称号揭晓名称与条件，未读到或读取失败时保持隐藏文案
   useEffect(() => {
     if (own) return;
     let active = true;

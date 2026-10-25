@@ -10,6 +10,7 @@ import { AchievementAvatar } from '../AchievementAvatar/AchievementAvatar';
 import { Sheet } from '../../ui/primitives/Sheet';
 import styles from './Podium.module.css';
 import { AchievementBadge, achievementName } from '../AchievementBadge/AchievementBadge';
+import { conditionRevealed } from '../../game/achievementRules';
 
 /** 台阶高度按位置（2 · 1 · 3）：中间最高、左侧次之、右侧最矮；颜色按真实名次（并列时两个第 2 名都是银色）。 */
 const STEP = [styles.left, styles.center, styles.right];
@@ -20,7 +21,7 @@ const METAL: Record<number, string> = { 1: styles.gold, 2: styles.silver, 3: sty
  * 头像坐在台阶上沿，第 1 名戴端正带白边的小皇冠（hall-of-fame-crown-v2）、名字两侧麦穗；台阶正面写名字、分数与大号名次。
  * 两侧品牌蓝猫与黑白狗扶着台阶打招呼（轻微摇摆，减少动态效果时静止）。
  */
-export function Podium({ entries, onPlayerSelect }: { entries: LeaderboardEntry[]; onPlayerSelect?: (entry: LeaderboardEntry) => void }) {
+export function Podium({ entries, onPlayerSelect, viewerTitles = [] }: { entries: LeaderboardEntry[]; onPlayerSelect?: (entry: LeaderboardEntry) => void; viewerTitles?: readonly AchievementId[] }) {
   const { t, locale } = useI18n();
   const [titlePreview, setTitlePreview] = useState<{ playerName: string; id: AchievementId } | null>(null);
   const top = entries.slice(0, 3);
@@ -39,6 +40,7 @@ export function Podium({ entries, onPlayerSelect }: { entries: LeaderboardEntry[
             {e.rank === 1 && <Sparkles />}
             <span className={styles.avatar}>
               <AchievementAvatar name={e.name} seed={e.userId} src={`/img/avatars/${encodeURIComponent(e.userId)}`} equippedTitle={e.equippedTitle}
+                revealed={!e.equippedTitle || conditionRevealed(e.equippedTitle, viewerTitles)}
                 onTitleClick={!onPlayerSelect && e.equippedTitle ? () => e.equippedTitle && setTitlePreview({ playerName: e.name, id: e.equippedTitle }) : undefined} />
             </span>
             <div className={styles.step}>
@@ -65,8 +67,8 @@ export function Podium({ entries, onPlayerSelect }: { entries: LeaderboardEntry[
       <Sheet open label={t('achievement.worn_by', { playerName: titlePreview.playerName })} closeLabel={t('action.close')} onClose={() => setTitlePreview(null)}
         badge={<h2 className={styles.previewHeading}>{t('achievement.worn_by', { playerName: titlePreview.playerName })}</h2>}>
         <div className={styles.titlePreview}>
-          <AchievementBadge id={titlePreview.id} large />
-          <strong>{t(achievementName(titlePreview.id))}</strong>
+          <AchievementBadge id={titlePreview.id} large revealed={conditionRevealed(titlePreview.id, viewerTitles)} />
+          <strong>{t(achievementName(titlePreview.id, conditionRevealed(titlePreview.id, viewerTitles)))}</strong>
           <span>{t('achievement.wearing')}</span>
         </div>
       </Sheet>
