@@ -117,7 +117,7 @@
 | --- | --- | --- |
 | home.manager | 今日店长 | Today's Shop Manager |
 | home.manager_line | 你负责排班，我负责可爱。 | You handle the schedule. I'll bring the cuteness. |
-| home.manager_line_maodu | 键盘我踩过了，今天 bug 归店长。 | I walked the keyboard. Today's bugs are on me. |
+| home.manager_line_maodu | 键盘我踩过了，bug 归店长。 | I walked the keyboard. Today's bugs are on me. |
 | home.manager_line_boluo | 我是店长，不是水果，别切。 | Manager, not a fruit. No slicing. |
 | manager.poster_title | 店长小海报 | Manager Poster |
 | manager.poster_date | {year} 年 {month} 月 {day} 日 · 北京时间 | {monthName} {day}, {year} · Beijing Time |

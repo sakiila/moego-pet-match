@@ -295,7 +295,7 @@ export const zh = {
   'pet.known_by_more': '还有 {count} 位同事',
   'home.manager': '今日店长',
   'home.manager_line': '你负责排班，我负责可爱。',
-  'home.manager_line_maodu': '键盘我踩过了，今天 bug 归店长。',
+  'home.manager_line_maodu': '键盘我踩过了，bug 归店长。',
   'home.manager_line_boluo': '我是店长，不是水果，别切。',
   'manager.poster_title': '店长小海报',
   'manager.poster_date': '{year} 年 {month} 月 {day} 日 · 北京时间',

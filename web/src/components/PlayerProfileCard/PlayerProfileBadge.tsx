@@ -14,7 +14,8 @@ export function PlayerProfileBadge({ id, chip = false }: { id: AchievementId; ch
   const closeTimer = useRef<number | undefined>(undefined);
   const [open, setOpen] = useState(false);
   const name = t(achievementName(id));
-  const target = ACHIEVEMENTS.find(achievement => achievement.id === id)!.target;
+  // 隐藏成就（火锅搭子）不在按图鉴计数的 ACHIEVEMENTS 表里，解锁条件文案不带数字，目标按 1 处理
+  const target = ACHIEVEMENTS.find(achievement => achievement.id === id)?.target ?? 1;
 
   const cancelClose = () => window.clearTimeout(closeTimer.current);
   const hide = () => {
