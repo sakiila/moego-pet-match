@@ -1,4 +1,5 @@
 import type { Locale } from '../../i18n';
+import { SHARE_URL } from '../../game/shareUrl';
 import logoSrc from '../art/moego-logo.webp';
 import titleZhSrc from '../art/title-zh.webp';
 import titleEnSrc from '../art/title-en.webp';
@@ -206,7 +207,7 @@ export async function drawStickerSheet(sheet: HTMLElement, copy: StickerSheetCop
 
   const pawSize = number('--album-share-paw-size');
   const gap = number('--album-share-footer-gap');
-  const footerY = paperBottom + footer / 2;
+  const footerY = paperBottom + footer / 3;
   const footerFont = (size: number) => `${token('--weight-bold')} ${size}px ${token('--font-sans')}`;
   const fontSize = number('--album-share-footer-size');
   ctx.font = footerFont(fontSize);
@@ -220,6 +221,10 @@ export async function drawStickerSheet(sheet: HTMLElement, copy: StickerSheetCop
   ctx.fillStyle = token('--color-brand');
   paw(ctx, (width - textWidth) / 2 - gap - pawSize, footerY, pawSize, -0.3);
   paw(ctx, (width + textWidth) / 2 + gap + pawSize, footerY, pawSize, 0.3);
+
+  ctx.font = `${token('--weight-regular')} ${number('--share-url-size')}px ${token('--font-sans')}`;
+  ctx.fillStyle = token('--fg-muted');
+  ctx.fillText(SHARE_URL, width / 2, paperBottom + footer * 2 / 3);
 
   return new Promise((resolve, reject) => canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error('PNG export failed')), 'image/png'));
 }

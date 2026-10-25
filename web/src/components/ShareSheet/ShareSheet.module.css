@@ -9,12 +9,12 @@
   gap: var(--space-4);
 }
 
-/* 预览按导出比例 4:5 占位，生成前后高度不变 */
+/* 预览按导出比例 3:4 占位，生成前后高度不变。 */
 .preview {
   display: grid;
   place-items: center;
-  width: min(100%, 58dvh * 0.8);
-  aspect-ratio: 4 / 5;
+  width: min(100%, 58dvh * var(--share-card-ratio));
+  aspect-ratio: var(--share-card-ratio);
   justify-self: center;
   border-radius: var(--radius-md);
   background: var(--color-surface-muted);

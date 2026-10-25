@@ -81,6 +81,8 @@
   --receipt-paper: #fffdf8;
   /* 成绩卡（Canvas）上贴纸的投影色 */
   --share-shadow: rgb(31 34 39 / 0.16);
+  --share-url-size: 32px;
+  --share-card-ratio: 0.75;
 
   /* 图鉴贴纸册：纸、胶带与导出共用的视觉令牌。 */
   --album-paper: #fcf6ec;
@@ -110,7 +112,7 @@
   --album-share-logo-top: 38px;
   --album-share-title-width: 960px;
   --album-share-title-top: 80px;
-  --album-share-footer: 100px;
+  --album-share-footer: 192px;
   --album-share-footer-size: 32px;
   --album-share-footer-gap: 24px;
   --album-share-paw-size: 34px;

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { SHARE_URL } from './shareUrl';
 
 export type ShareCardState = { kind: 'generating' } | { kind: 'ready'; url: string; file: File } | { kind: 'failed' };
 
@@ -36,7 +37,7 @@ export function useShareCard(draw: (() => Promise<Blob>) | null, fileName: strin
     };
   }, [generate]);
 
-  const canShare = state.kind === 'ready' && typeof navigator.canShare === 'function' && navigator.canShare({ files: [state.file] });
+  const canShare = state.kind === 'ready' && typeof navigator.canShare === 'function' && navigator.canShare({ files: [state.file], text: SHARE_URL });
 
   const save = useCallback(() => {
     if (state.kind !== 'ready') return;
@@ -49,7 +50,7 @@ export function useShareCard(draw: (() => Promise<Blob>) | null, fileName: strin
   const share = useCallback(async () => {
     if (state.kind !== 'ready') return;
     try {
-      await navigator.share({ files: [state.file] });
+      await navigator.share({ files: [state.file], text: SHARE_URL });
     } catch (error) {
       if ((error as { name?: string }).name !== 'AbortError') setState({ kind: 'failed' });
     }

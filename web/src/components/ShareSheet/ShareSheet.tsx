@@ -18,7 +18,7 @@ export interface ShareSheetProps {
   inline?: boolean;
   /** 生成中的进度 0–1（贴纸册逐张加载贴纸）；不传只显示转圈。 */
   progress?: number;
-  /** 长册页按完整图片比例预览，不压成成绩卡的 4:5。 */
+  /** 长册页按完整图片比例预览，不压成成绩卡的 3:4。 */
   imageLayout?: 'card' | 'natural';
 }
 

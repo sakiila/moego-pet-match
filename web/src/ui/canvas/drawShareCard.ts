@@ -1,8 +1,9 @@
 import type { GameMode } from '../../api/types';
 import type { ManagerPosterModel, ShareCardModel } from '../../game/shareCard';
+import { SHARE_URL } from '../../game/shareUrl';
 
-/** 导出尺寸：约 4:5 竖幅，与两张已确认的分享卡图稿比例一致。 */
-export const SHARE_CARD = { width: 1080, height: 1350 } as const;
+/** 3:4 竖幅：小票内留足署名空间，网址单独放在小票外的页脚。 */
+export const SHARE_CARD = { width: 1080, height: 1440 } as const;
 
 const IMAGE_TIMEOUT_MS = 10_000;
 type Ctx = CanvasRenderingContext2D;
@@ -20,12 +21,15 @@ function readTokens(mode: GameMode) {
     brand: v('--color-brand'),
     brandSoft: v('--color-brand-soft'),
     ink: v('--color-ink'),
+    urlColor: v('--fg-muted'),
     paper: v('--color-paper'),
     line: v('--color-line'),
     yellow: v('--color-dog-yellow'),
     blue: v('--color-cat-blue'),
     shadow: v('--share-shadow'),
     font: v('--font-sans'),
+    urlSize: parseFloat(v('--share-url-size')),
+    urlWeight: v('--weight-regular'),
     bg: v('--bg'),
     waterTop: v('--water-top'),
     waterDeep: v('--water-deep'),
@@ -332,9 +336,19 @@ function stamp(ctx: Ctx, cx: number, cy: number, text: string, k: Tokens) {
 
 /** 两种模式的纵向位置；普通局对照 share-card-pets-v1，鱼关对照 share-card-fish-v2。 */
 const LAYOUT = {
-  normal: { paper: [40, 60, 1000, 1250], header: 140, hero: [540, 410, 500, 370], stamp: [870, 440], developer: [210, 505], plate: 642, bubble: [700, 962], scoreLabel: 1004, score: 1176, rule: 1206, player: 1246 },
-  fish: { paper: [60, 235, 960, 1060], header: 132, hero: [520, 430, 780, 290], stamp: [860, 310], developer: [210, 505], plate: 626, bubble: [688, 952], scoreLabel: 994, score: 1160, rule: 1196, player: 1236 },
+  normal: { paper: [40, 60, 1000, 1280], header: 140, hero: [540, 410, 500, 370], stamp: [870, 440], developer: [210, 505], plate: 642, bubble: [700, 962], scoreLabel: 1004, score: 1176, rule: 1230, player: 1272 },
+  fish: { paper: [60, 235, 960, 1105], header: 132, hero: [520, 430, 780, 290], stamp: [860, 310], developer: [210, 505], plate: 626, bubble: [688, 952], scoreLabel: 994, score: 1160, rule: 1230, player: 1272 },
 } as const;
+
+function shareUrl(ctx: Ctx, k: Tokens) {
+  ctx.save();
+  ctx.font = `${k.urlWeight} ${k.urlSize}px ${k.font}`;
+  ctx.fillStyle = k.urlColor;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(SHARE_URL, SHARE_CARD.width / 2, 1400);
+  ctx.restore();
+}
 
 function background(ctx: Ctx, mode: GameMode, k: Tokens) {
   const { width: W, height: H } = SHARE_CARD;
@@ -582,6 +596,7 @@ export async function drawShareCard(model: ShareCardModel, mode: GameMode): Prom
   else stamp(ctx, sx, sy, model.title, k);
   if (img && devImg) developerStamp(ctx, LAYOUT[mode].developer[0], LAYOUT[mode].developer[1], devImg);
   score(ctx, model, mode, k);
+  shareUrl(ctx, k);
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('export failed'))), 'image/png'));
 }
 
@@ -702,6 +717,7 @@ export async function drawManagerPoster(model: ManagerPosterModel): Promise<Blob
   ctx.setLineDash([]);
   fit(ctx, (s) => `800 ${s}px ${k.font}`, model.date, 860, 1, 40, 26);
   ctx.fillStyle = k.ink;
-  ctx.fillText(model.date, 540, 1196);
+  ctx.fillText(model.date, 540, 1226);
+  shareUrl(ctx, k);
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('export failed'))), 'image/png'));
 }
