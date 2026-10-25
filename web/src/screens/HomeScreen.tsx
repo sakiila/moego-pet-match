@@ -23,6 +23,8 @@ export interface HomeScreenProps {
   player: PlayerView;
   version: string;
   repositoryUrl: string;
+  /** 页脚版权方与制作人（原文）。 */
+  copyright: { holder: string; author: string };
   /** 今日店长；读取失败或尚未读取时为 null，门店照常可开局。 */
   manager: DailyManager | null;
   /** 服务端已部署新版本（或规则版本不一致）：在「开始营业」上方提示刷新，不拦截其他操作。 */
@@ -42,7 +44,7 @@ export interface HomeScreenProps {
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, version, repositoryUrl, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles, loadLikes, loadProfile }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles, loadLikes, loadProfile }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
@@ -74,6 +76,7 @@ export function HomeScreen({ player, version, repositoryUrl, manager, updateAvai
       <HomeFooter
         version={version}
         repositoryUrl={repositoryUrl}
+        copyright={copyright}
         links={[
           { label: t('info.use_link'), onClick: () => onInfo(false), testId: 'link-info' },
           { label: t('info.removal_link'), onClick: () => onInfo(true), testId: 'link-removal' },

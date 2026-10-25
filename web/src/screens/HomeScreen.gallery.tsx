@@ -1,4 +1,4 @@
-import { GITHUB_REPOSITORY_URL } from '../app/project';
+import { COPYRIGHT, GITHUB_REPOSITORY_URL } from '../app/project';
 import { GAME_VERSION } from '../app/version';
 import type { GalleryEntry } from '../dev/gallery/types';
 import { HomeScreen, type HomeScreenProps } from './HomeScreen';
@@ -9,8 +9,8 @@ const loadProfile = async (userId: string, mode: 'normal' | 'fish') => ({
   userId, name: 'Bob', mode, bestScore: 24800, completedGames: 12,
   collection: { collected: 18, total: 80 }, equippedTitle: null, unlockedTitles: [], recentGames: [],
 });
-function HomePreview(props: HomeScreenProps) {
-  return <HomeScreen {...props} loadLikes={loadLikes} loadProfile={loadProfile} />;
+function HomePreview(props: Omit<HomeScreenProps, 'copyright'>) {
+  return <HomeScreen {...props} copyright={COPYRIGHT} loadLikes={loadLikes} loadProfile={loadProfile} />;
 }
 const player = (best: number | null) => ({
   userId: 'U_TEST_BOB',

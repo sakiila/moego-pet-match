@@ -128,6 +128,7 @@
 | home.streak_none | 今天开一局，打卡从今天算起 | Play a round today to start your streak |
 | home.photo_notice | 宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob（毛肚和菠萝的铲屎官） | Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack (Maodu and Boluo's human). |
 | home.version | 版本 {version} | Version {version} |
+| home.copyright | © {year} {holder} · 由 {author} 制作 | © {year} {holder} · Made by {author} |
 | home.update_available | 游戏更新了，刷新后再开工。 | The game was updated. Refresh before your next shift. |
 | home.github_link | GitHub：{repository}（在新标签页打开） | GitHub: {repository} (opens in a new tab) |
 

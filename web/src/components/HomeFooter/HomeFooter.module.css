@@ -12,6 +12,11 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 版权整段不拆行；窄屏放不下时整段换到下一行 */
+.copyright {
+  display: inline-block;
+}
+
 .repository {
   justify-self: center;
   min-width: 0;

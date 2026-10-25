@@ -22,7 +22,7 @@ import { PrepScreen } from '../screens/PrepScreen';
 import screen from '../screens/Screen.module.css';
 import { loadSavedPlayerId, savePlayerId } from './identity';
 import { GAME_VERSION } from './version';
-import { GITHUB_REPOSITORY_URL } from './project';
+import { COPYRIGHT, GITHUB_REPOSITORY_URL } from './project';
 
 interface Session {
   registered: RegisteredGame;
@@ -229,6 +229,7 @@ export function App() {
             player={player}
             version={GAME_VERSION}
             repositoryUrl={GITHUB_REPOSITORY_URL}
+            copyright={COPYRIGHT}
             manager={manager}
             updateAvailable={updateAvailable}
             onRefresh={() => window.location.reload()}
