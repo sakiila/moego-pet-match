@@ -23,6 +23,7 @@ const app = buildApp({
   gameVersion: config.gameVersion,
   directory,
   notify: slackAdminNotifier(process.env.SLACK_BOT_TOKEN, process.env.SLACK_NOTIFY_CHANNEL),
+  slack: process.env.SLACK_SIGNING_SECRET && process.env.SLACK_BOT_TOKEN ? { signingSecret: process.env.SLACK_SIGNING_SECRET, token: process.env.SLACK_BOT_TOKEN } : null,
   images: {
     cache: new DiskCache(process.env.IMAGE_CACHE_DIR ?? fileURLToPath(new URL('../.cache/img', import.meta.url)), 1.5 * 1024 ** 3),
     store,

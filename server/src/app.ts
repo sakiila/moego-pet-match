@@ -12,6 +12,7 @@ import { playerRoutes } from './routes/players.ts';
 import { rosterRoutes } from './routes/roster.ts';
 import { deletionRoutes } from './routes/deletions.ts';
 import { submissionRoutes } from './routes/submissions.ts';
+import { slackEventRoutes } from './routes/slackEvents.ts';
 import { webRoutes } from './routes/web.ts';
 import type { AdminNotifier } from './services/adminNotify.ts';
 import type { SlackDirectory } from './services/slackDirectory.ts';
@@ -33,6 +34,8 @@ export interface AppDeps {
   directory?: SlackDirectory | null;
   /** 新上传与删除申请保存后通知 Bob（Slack 私信）；未配置时不通知。 */
   notify?: AdminNotifier | null;
+  /** Slack App 链接预览：签名密钥与 Bot 令牌；未配置时不开放事件入口。 */
+  slack?: { signingSecret: string; token: string; fetchImpl?: typeof fetch } | null;
   images?: {
     cache: DiskCache;
     /** R2 私有桶；未配置时宠物图返回 503。 */
@@ -59,6 +62,7 @@ export function buildApp(deps: AppDeps) {
   app.register(imageRoutes, deps);
   app.register(submissionRoutes, deps);
   app.register(deletionRoutes, deps);
+  app.register(slackEventRoutes, deps);
   app.register(webRoutes, deps);
   return app;
 }

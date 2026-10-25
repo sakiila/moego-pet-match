@@ -23,6 +23,7 @@ export function previewMetadata(html: string) {
   return {
     title: meta.get('og:title') ?? 'MoeGo Pet All-Stars',
     alt: meta.get('og:image:alt') ?? meta.get('og:title') ?? 'MoeGo Pet All-Stars',
+    description: meta.get('og:description'),
   };
 }
 

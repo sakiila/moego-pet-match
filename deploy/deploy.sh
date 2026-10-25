@@ -63,7 +63,8 @@ try:
     runtime = json.load(open(sys.argv[1]))['services']['pet-match'].get('environment', {})
     allowed = {'PET_MATCH_DATABASE_URL', 'R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID',
                'R2_SECRET_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_BUCKET_NAME',
-               'R2_JURISDICTION', 'SLACK_BOT_TOKEN', 'SLACK_NOTIFY_CHANNEL'}
+               'R2_JURISDICTION', 'SLACK_BOT_TOKEN', 'SLACK_NOTIFY_CHANNEL',
+               'SLACK_SIGNING_SECRET'}
     unknown = sorted(set(runtime) - allowed)
     required = ['PET_MATCH_DATABASE_URL', 'R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID', 'R2_BUCKET_NAME']
     missing = [key for key in required if not str(runtime.get(key) or '').strip()]
