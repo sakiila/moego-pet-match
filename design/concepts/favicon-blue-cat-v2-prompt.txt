@@ -1,0 +1,13 @@
+Use case: logo-brand.
+Asset type: an adorable refined favicon concept for MoeGo 毛孩子全明星, SINGLE ICON ONLY, square canvas 1024 x 1024.
+Edit target/reference: the supplied favicon-directions-v1.png concept board. The user selected ONLY the CENTER concept B 蓝猫探头 and requests "B，再可爱一点" (B, make it even cuter). Isolate and refine B. Do not reproduce the board, A, C, any labels, browser tabs, typography, presentation headings, or other concepts.
+Preserve B's identity: a bright blue cat peeking from the lower edge of an orange rounded-square tile, very bold soft charcoal outlines, large white circular eyes with dark pupils, tiny charcoal nose, simple friendly mouth, little tilted head. Keep orange #F96B1C, blue #4A8FE0, charcoal #1F2227, warm white.
+Make it noticeably cuter through proportion and expression rather than decorative clutter:
+- a wider rounder baby-cat head with plush round cheeks, a shorter forehead, ears a little shorter with soft rounded pointed tips; keep an unmistakably feline silhouette.
+- slight curious head tilt around 7 degrees, eyes looking directly toward the viewer, large warm dark round pupils with one tiny restrained white highlight in each; affectionate, curious and innocent, no intense stare or crossed eyes.
+- a very small nose and tiny soft w-shaped smile; no open shouting mouth.
+- two little rounded BLUE front paws resting over the bottom inside rim of the orange tile, like the kitten is shyly peeking up to say hello. Paws use simple large shapes, no individual toe lines, no claws, no extra limbs. Both paws and ears fully visible.
+- if useful, extremely small flat peach cheek ovals for warmth, subordinate to the facial expression.
+Composition: centered icon occupying about 88 percent of the square canvas with equal transparent outer margins, no clipping. Orange tile is a clearly defined rounded square, charcoal outline about 3 percent of tile width, corner radius around 24 percent of the side. All character parts stay within the tile's outer silhouette so the favicon is a compact easy-to-recognize unit.
+Visual style: crisp flat 2D cartoon, friendly sticker-like bold smooth rounded contours, minimal broad color regions, clean edges. Match the established game family from B, not a new style. No gloss, gradients, bevel, clay, photoreal fur, paper texture, 3D, floating hearts, stars, sparkles, crown, accessories, letters, text or watermark. Keep small-size silhouette clarity in mind.
+Background: genuine transparent alpha OUTSIDE the rounded-square icon; orange tile and cat are fully opaque. Do not draw a checkerboard. The result is a clean standalone refined B favicon concept, not an installed favicon or browser-verified export.

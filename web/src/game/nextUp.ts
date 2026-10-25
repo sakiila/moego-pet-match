@@ -1,7 +1,7 @@
 import type { AchievementStatus } from '../api/types';
 import { ACHIEVEMENTS, type AchievementId } from './achievementRules';
 
-const TOOL_TIPS = ['comb', 'scissors', 'dryer', 'comb_comb', 'comb_scissors', 'scissors_scissors'] as const;
+const TOOL_TIPS = ['comb', 'scissors', 'dryer', 'comb_comb', 'comb_scissors'] as const;
 
 /** 报告尾声「店长说」：每局一句玩法提示或进度预告。 */
 export type NextUp =

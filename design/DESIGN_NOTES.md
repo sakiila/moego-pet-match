@@ -1,7 +1,7 @@
 # MoeGo 宠物消消乐视觉效果图
 
 日期：2026-10-22  
-状态：当前选定的手机页面、弹层及普通／鱼关成绩分享卡均已确认。活动口令及相关功能已取消。洗护动效时长已确认为可调试玩初值，分镜图仍为讨论草稿。仅效果图，未编写游戏代码；正式信息说明仍待完善。
+状态：当前选定的手机页面、弹层及普通／鱼关成绩分享卡均已确认，界面已按组件接入游戏。活动口令及相关功能已取消。洗护动效时长为可调试玩初值，分镜图仍为讨论草稿。本文保留旧图稿的原始说明与数值，当前玩法以 V1_RULES、GAME_FLOW 为准，界面文案以 UI_COPY 与 i18n 为准；实际验收见 design-qa.md。
 
 ## 视觉方向
 
@@ -43,7 +43,8 @@
 
 | 页面 | 文件 | 设计重点 |
 | --- | --- | --- |
-| Slack 链接分享图 | [slack-og-c-v1.png](concepts/slack-og-c-v1.png) | 2026-10-25 用户从 A 左字右店、B 贴纸阵、C 棋盘三稿中选定 C；1200×630，中英标题、「一局 90 秒」与 star.baobo.me 胶囊，右侧消除棋盘（三连 +120、吹风机、梳子、剪刀）；导出为 `web/public/og.jpg`，由 `web/index.html` 的 og / twitter meta 引用；未选的 [A](concepts/slack-og-a-v1.png)、[B](concepts/slack-og-b-v1.png) 留档 |
+| 网站 Favicon | [蓝猫 v3](concepts/favicon-blue-cat-v3.png) | 2026-10-25 用户选定并授权接入；橙底蓝猫、大眼睛、腮红与歪头，无小爪，下巴藏在下边框后；原稿等比导出 16 / 32px PNG、多尺寸 ICO 与 180px Apple Touch Icon，由 `web/index.html` 引用；[来源与导出](../assets/icons/favicon-blue-cat-v3/README.md)，早期对比稿及 v2 保留 |
+| Slack 链接分享图 | [slack-og-c-v2.png](concepts/slack-og-c-v2.png) | 2026-10-25 用户确认 v2 并授权发布：「90 秒消消乐」和「游戏入口：star.baobo.me」；保留 C 棋盘方向、中英标题与右侧消除棋盘（三连 +120、吹风机、梳子、剪刀）。1200×630，导出为 `web/public/og.jpg`，供 OG/Twitter 与 `/share.jpg` 使用。完整请求与导出记录见 [v2 提示词](concepts/slack-og-c-v2-prompt.txt)；[v1](concepts/slack-og-c-v1.png) 和未选的 [A](concepts/slack-og-a-v1.png)、[B](concepts/slack-og-b-v1.png) 留档 |
 | 收工挂牌 · 高清中文 | [高清 PNG](../assets/icons/library-original-png-v2/masters/16-board-frontdesk/closing-sign-zh-hd-v2.png) | 2026-10-25 用户确认并选用高清 v2；通过 Icon 接入中文收工牌及开局预载，网页提供最高960px宽导出，保留原有造型、文案与动效；[制作记录](../assets/icons/closing-sign-zh-hd-v2/README.md) |
 | 游戏页前台加单与收工 | [游戏页 v2](concepts/mobile-board-frontdesk-v2.png)、[加单状态 v2](concepts/rush-frontdesk-states-v2.png)、[收工分镜 v2](concepts/shift-finish-storyboard-v2.png) | 2026-10-25 已确认；最新 Smart Scheduling 字标、粗数据、原稿钟/星、前台加单小票（已删右侧目标句）、1.2 秒收工挂牌与真实服务头像；[独立素材与像素来源](../assets/icons/board-frontdesk-original-v1/preview.html)，通过独立组件接入 |
 | 准备页操作示意 | [相邻交换](concepts/prep-adjacent-swap-preview-v1.png)、[依次点选](concepts/prep-sequential-tap-preview-v1.png) | 2026-10-24 已确认并接入；原图裁切透明 PNG，橙框灰猫、双向箭头与 1→2 手指点选；说明为灰色圆润粗体；「也来啦」仅首只自家宠物，最多一行，长名字省略 |

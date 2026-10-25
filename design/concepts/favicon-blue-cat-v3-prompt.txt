@@ -1,0 +1,11 @@
+Use case: precise-object-edit.
+Asset type: a revised standalone blue-cat favicon concept for MoeGo 毛孩子全明星.
+Edit target: supplied favicon-blue-cat-v2.png, a square transparent-background orange rounded-square tile with a cute blue cat peeking out.
+User request (verbatim): "去掉小爪，然后下巴隐藏在框外".
+Make ONLY these two changes:
+1. Completely remove BOTH blue front paws at the bottom, including the rounded paw silhouettes and every paw outline. Restore the underlying continuous blue face where the paws were.
+2. Crop the lower part of the cat's head at the tile's BOTTOM INNER EDGE, as if the chin continues downward out of the frame and is hidden behind the bottom rim. There must be NO visible chin curve, NO outline enclosing the bottom of the cat face, NO neck, NO body, NO paws. The lower blue face should flow directly into and be occluded by the straight charcoal bottom border. The cat is PEEKING into the frame from below. If needed move the whole cat head DOWN only a very small amount, at most 3% of the tile height, to achieve the hidden chin; keep both eyes, nose, smile and blush fully visible.
+Preserve everything else as closely as possible: the same baby-blue cat, same broad round cheeks, exact same tilted head attitude, rounded triangular ears, large round white eyes, dark pupils and white eye highlights, tiny nose, w-shaped smile, peach blush, orange background, thick charcoal contour style, original orange-tile silhouette, corner radius, proportions, framing and transparent margins.
+The bottom charcoal edge of the orange rounded-square tile must now be one uninterrupted smooth border without ANY paw bumps or cutouts. Keep the cat and all blue fill INSIDE the tile silhouette; do not draw anything in the transparent margins. Do not make the chin hang visibly outside the orange tile.
+Canvas: square, preserve original aspect ratio and composition. Genuine alpha transparency outside the tile; cat and orange tile fully opaque. No checkerboard, white backing, new shadow, text, labels, browser tabs, extra characters, decorative elements, added accessories, or style changes. Keep a single isolated icon.
+This is a targeted revision to the selected B design, not a fresh redesign.

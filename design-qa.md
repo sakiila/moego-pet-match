@@ -285,3 +285,23 @@ final result: passed
 - Codex 内置浏览器实测 `/dev/gallery?c=AchievementShelf`：390 × 844 中文标签为 64 × 26px，320 × 568 英文 House Special 为约 98.9 × 25.5px；文字完整、无横向溢出，切到全图鉴称号再切回火锅搭子后，佩戴状态正确。未解锁时仅显示 Hidden Title、问号、保密条件提示与稀有度；图片 alt 不暴露称号名。未出现相关 console error/warn。
 - 对照选定稿：实现极光胶囊、白字、亮边和高光，辉光保持柔和以适配小尺寸标签；其他徽章、传奇标签、按钮与页面布局沿用原组件。实际截图：`/Users/bob/.codex/visualizations/2026/10/25/01a17154-fd7b-77d1-ab58-96a28b1af4e9/mythic-aurora-label-zh-390.png` 与同目录 `mythic-aurora-label-en-320.png`。
 - `npm --prefix web run typecheck`、`npm --prefix web run build` 通过，构建保留大包提示。本轮为 CSS 展示调整，未新增或运行单元测试，未做真机、跨浏览器或真实保存验证；未提交、推送或部署。
+
+
+## 玩法文案与跨文档复核 · 2026-10-25
+
+本轮按当前引擎、结算与报告代码复核 V1_RULES、GAME_FLOW、TECH_PLAN、IMPLEMENTATION_PLAN、README、UI_COPY 及设计说明。报告「店长说」提示池为五条：梳子、剪刀、吹风机、梳＋梳、梳＋剪；已移除双剪刀报告提示。局内双剪刀／双珍珠贝壳合成与对应带教仍保留，未改引擎规则。
+
+修正遗漏：每格及道具格均为 100 分，催单与猜主人答对各加 1000 分；直线五连及以上优先生成吹风机，无五连直线的 L／T／＋ 形才生成剪刀；鱼关对应海螺、珍珠贝壳、大浪花。剪刀中英文提示补上五连优先条件，文案表补齐吹风机／大浪花带教；同步五条提示数量、自家宠物主人搜索、收集保存条件、评语变体及部分已接入功能的旧状态说明。早期图稿与阶段 1 验收保留历史内容，并注明不能作为现行规则。
+
+验证：
+- 对照中英文全部 417 个 i18n key；UI_COPY 中登记的 393 个表格 key 均存在且中英文与代码一致，无遗留草稿 key。中英文占位参数一致；日期的 month／monthName 为有意本地化，分享生成代码同时提供两者。
+- `npx vitest run src/game/__tests__/nextUp.test.ts src/game/__tests__/collection.test.ts src/engine/__tests__/match.test.ts src/engine/__tests__/tools.test.ts`：41 项通过；`npm run build`（含 TypeScript 检查）通过，保留现有的大包体积提示。
+- 浏览器 `http://localhost:5180/dev/gallery?c=NextUp`：中文与英文 14 个陈列状态均渲染，切换语言生效，无框架错误页或相关控制台报错；390 × 844 下单独检查剪刀提示，中文两行、英文四行，无横向裁切。对照 mobile-report-slim-v1 的尾声气泡，头像、边框、布局与原组件一致，文案按长度自然换行。
+
+本轮未验证生产环境、完整真实对局或真机；未提交、推送或部署。
+
+## 本地修改统一发布前验证 · 2026-10-25
+
+用户确认 Slack 海报 v2（「90 秒消消乐」「游戏入口：star.baobo.me」），并授权提交、推送和部署本地全部修改。本次同时整合既有蓝猫 favicon、报告玩法提示精简与跨文档校读，保留最新远端的分享预览提交；Cloudflare 两条专用防护按用户决定保持禁用，本次未修改。
+
+合并后前端 277 项、版本脚本 8 项、服务端 198 项和部署脚本 9 项测试通过；前后端类型检查、前端构建、服务端打包通过。1200×630 海报与 favicon 均已进入构建产物，独立复核未发现阻断问题。此为发布前本地验证记录，生产部署与线上实际响应需另行确认。

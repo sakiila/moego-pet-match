@@ -1,0 +1,22 @@
+# Slack OG C v2：文案修订
+
+日期：2026-10-25
+方式：Codex 内置 image_gen（text-localization）；不使用 CLI 或图片 API。
+编辑目标：design/concepts/slack-og-c-v1.png。
+用户要求：修改「一局 90 秒」的生硬表达，并明确裸网址是游戏入口。
+修改：一局 90 秒 → 90 秒消消乐；star.baobo.me → 游戏入口：star.baobo.me。
+原始输出：/Users/bob/.codex/generated_images/01a17274-dc41-7112-8a45-ad1d8dc46f71/exec-d2af4aa0-f866-44b2-bb66-03cab1180a58.png
+留档：slack-og-c-v2-original.png；等比导出为 slack-og-c-v2.png（1200×630），再导出 web/public/og.jpg（JPEG quality 92）。原稿 v1 保留。
+状态：2026-10-25 用户确认新版并授权提交、推送及部署。保留原有版式与插画方向；图像模型对局部细节有轻微重绘，不声明像素不变。
+
+## 完整提示词
+
+Use case: text-localization
+Asset type: existing MoeGo Pet All-Stars Slack landscape sharing poster.
+Input image 1 is the EDIT TARGET, not a loose style reference. Its exact finished composition must be preserved.
+Primary request: Make only TWO localized text corrections to the attached finished 1200x630 poster:
+1. Replace the small dark Chinese line currently reading “一局 90 秒” below “MoeGo Pet All-Stars” with the exact text “90 秒消消乐”. Keep the same dark rounded bold font, approximate font size, centered alignment and location. It should explain the match-3 game naturally.
+2. Inside the existing orange rounded capsule at bottom left, replace the bare domain “star.baobo.me” with the exact text “游戏入口：star.baobo.me”. This is a label identifying the game website, not a promise that clicking the picture is interactive. Keep the capsule's position, orange color and charcoal offset shadow. Use one centered line, bold white rounded letters, reducing only this line's font size enough to fit comfortably with generous left/right padding. All characters must be complete, crisp and legible. The domain must be spelled exactly star.baobo.me.
+Invariants: Preserve the exact existing MoeGo logo, huge two-line 毛孩子全明星 Chinese title in charcoal and orange, English subtitle “MoeGo Pet All-Stars”, all pet faces, white sticker outlines, pastel game cells, tilted game board, three glowing matching white dogs, +120 score, orange hairdryer, comb, scissors, paws, sparkles, rays, warm white background, margins, and all layout. Do not redraw or reinterpret the poster or move the board. Do not add new artwork, arrows, URL protocols, button symbols, duplicate labels, or other words.
+Output: Same wide landscape 1200x630 canvas and original aspect ratio, opaque background. Only the two specified text areas change. Exact visible text remains “MoeGo”, “毛孩子全明星”, “MoeGo Pet All-Stars”, “90 秒消消乐”, “游戏入口：star.baobo.me”, “+120”.
+

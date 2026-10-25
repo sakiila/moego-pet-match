@@ -12,7 +12,6 @@ const entry: GalleryEntry = {
     'tip: dryer': () => <NextUp nextUp={{ kind: 'tip', id: 'dryer' }} speaker={manager} />,
     'tip: comb + comb': () => <NextUp nextUp={{ kind: 'tip', id: 'comb_comb' }} speaker={manager} />,
     'tip: comb + scissors': () => <NextUp nextUp={{ kind: 'tip', id: 'comb_scissors' }} speaker={manager} />,
-    'tip: scissors + scissors': () => <NextUp nextUp={{ kind: 'tip', id: 'scissors_scissors' }} speaker={manager} />,
     'achievement: cats, 2 to go (with speaker)': () => <NextUp nextUp={{ kind: 'achievement', id: 'cats', remaining: 2 }} speaker={manager} />,
     'achievement: neighbors, 1 to go': () => <NextUp nextUp={{ kind: 'achievement', id: 'neighbors', remaining: 1 }} speaker={manager} />,
     'achievement: album, last 3': () => <NextUp nextUp={{ kind: 'achievement', id: 'album', remaining: 3 }} speaker={manager} />,

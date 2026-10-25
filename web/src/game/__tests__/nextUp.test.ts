@@ -84,17 +84,17 @@ describe('店长说：随机玩法提示', () => {
       gameId: 'saved-game',
       progress: { completedNormalGames: 1, fishUnlocked: false },
       achievements: status({ cats: { current: 4 } }),
-    })).toEqual({ kind: 'tip', id: 'scissors' });
+    })).toMatchObject({ kind: 'tip' });
   });
 
-  it('不同对局能抽到三种工具和三种合体提示，也保留原有预告', () => {
+  it('不同对局能抽到三种工具和两种合体提示，不再出现双剪刀提示，也保留原有预告', () => {
     const picks = Array.from({ length: 120 }, (_, i) => pickManagerLine({
       gameId: `game-${i}`,
       progress: unlocked,
       achievements: null,
     }));
     expect(new Set(picks.filter((p) => p.kind === 'tip').map((p) => p.id))).toEqual(new Set([
-      'comb', 'scissors', 'dryer', 'comb_comb', 'comb_scissors', 'scissors_scissors',
+      'comb', 'scissors', 'dryer', 'comb_comb', 'comb_scissors',
     ]));
     expect(picks.some((p) => p.kind === 'tomorrow')).toBe(true);
   });

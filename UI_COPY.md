@@ -1,7 +1,8 @@
 # MoeGo 毛孩子全明星 · 首版中英文案草稿
 
 日期：2026-10-22  
-状态：友好、俏皮、轻吐槽的方向已确认，已完成首轮逐页关键文案校读；本表保留其他校读修订，尚未接入游戏或重绘界面。
+文案复核：2026-10-25
+状态：文案已接入游戏，与 web/src/i18n/zh.ts、en.ts 同步维护；采用已确认的友好、俏皮、轻吐槽方向。本轮复核玩法提示、数值与当前规则的一致性。
 
 规则依据：[第一版规则总表](V1_RULES.md)、[游戏流程](GAME_FLOW.md)。游戏名称已确认：「MoeGo 毛孩子全明星 / MoeGo Pet All-Stars」。各页已确认的关键文案与其他修订范围见下表；正式信息说明、处理边界与实际页面排版仍需后续核对。
 
@@ -48,10 +49,8 @@
 | action.play_again | 再开一局 | Play Again |
 | action.keep_playing | 继续游玩 | Keep Playing |
 | action.back_to_shop | 回门店 | Back to the Shop |
-| action.view_details | 查看详情 | View Details |
 | action.retry | 重试 | Try Again |
 | action.refresh | 刷新 | Refresh |
-| action.got_it | 知道啦 | Got It |
 | action.cancel | 取消 | Cancel |
 | action.close | 关闭 | Close |
 
@@ -67,7 +66,7 @@
 | access.subtitle | 和同事家的毛孩子，来一局 90 秒消消乐。 | A 90-second match-3 with your coworkers' pets. |
 | access.internal | 仅供 MoeGo 同事游玩 | For MoeGo Coworkers |
 
-副标题承担玩法说明。游戏入口直接提供下方的同事身份搜索与带名字的确认按钮，确认后进入门店；当前仅为文案与设计方案，尚未接入或验证实际页面排版。
+副标题承担玩法说明。游戏入口直接提供下方的同事身份搜索与带名字的确认按钮，确认后进入门店；文案已接入身份页；页面状态与排版验收记录见 design-qa.md。
 
 手机合并入口 v2 在同一页依次放置游戏名与副标题、较小的身份区标题、搜索与选中卡、信息摘要及确认按钮，页面视觉已确认；信息摘要仍待随正式说明核对。姓名、查询结果与带名字的按钮保持一致，不增加独立欢迎步骤。
 
@@ -183,6 +182,8 @@
 | tutorial.comb | 梳子到位！和邻格交换，梳开一整行或列。 | Comb's ready! Swap with a neighbor to sweep a row or column. |
 | tutorial.scissors | 剪刀登场！和邻格交换，清出一个十字。 | Scissors are here! Swap with a neighbor for a cross-shaped clear. |
 | tutorial.tool_combo | 相邻工具交换，搭档开工！ | Swap neighboring tools. Teamwork time! |
+| tutorial.dryer_merge | 两把剪刀相邻交换，合成吹风机！ | Swap two neighboring scissors to merge them into a hair dryer! |
+| tutorial.dryer | 吹风机到位！和任意邻格交换，吹走整个棋盘。 | Hair dryer ready! Swap it with any neighbor to blow the whole board clear. |
 | board.move_hint | 卡住啦？试试这一步。 | Stuck? Try This Move. |
 | board.shuffle | 换个站位，继续营业。 | A quick reshuffle, then back to work. |
 | rush.title | 临时加单！ | Rush Order! |
@@ -206,7 +207,7 @@
 
 催单在游戏时钟第 30 秒触发，目标和倒计时区分主时钟，成功才显示 +1000。`board.chain` 的链数与计分倍率分别计算，不因为显示第六轮就变成六倍。新宠提示是局内暂记，正式收集等结算保存；同次连锁合并一条，家庭团聚按同家每局一次。提示、收集和团聚不叠满棋盘。`round.finishing` 只在最后有效连锁仍待结算时显示，`round.last_seconds` 不新增奖励。
 
-加分飘字已确认每个逻辑清除批次合并一条。`{waveScore}` 为本批次去重后、按当前连锁倍率计算的清除分，不是累计总分，也不含催单 +100；同批工具命中不拆成多条，补落形成下一批消除时再显示下一条。任务奖励继续用 `rush.success` 原位反馈，固定总分按实际结算实时更新，两种模式一致。
+加分飘字已确认每个逻辑清除批次合并一条。`{waveScore}` 为本批次去重后、按当前连锁倍率计算的清除分，不是累计总分，也不含催单 +1000；同批工具命中不拆成多条，补落形成下一批消除时再显示下一条。任务奖励继续用 `rush.success` 原位反馈，固定总分按实际结算实时更新，两种模式一致。
 
 到时收尾句已确认：「时间到，收完这波就下班。 / Time's up. Clocking out after this chain.」只表达正在完成已生效的最后连锁，不开放新操作、不自动引爆闲置工具或额外加分；没有待完成连锁时直接进入正常结算，不为台词增加停留。
 
@@ -391,7 +392,7 @@
 
 题目、答对、答错与跳过四处文案已确认。答题后在原卡片揭晓真实主人头像与名字，错误反馈不责备玩家；可跳过，不增加确认步骤，也不影响本局成绩与下一局。文案不承诺答题奖励。
 
-排序保持已收集优先、新收集靠前；未收集始终是名字与剪影，搜索不揭晓主人。`collection.empty` 仅在没有任何已收集宠物时显示；搜索空结果不表示目录缺资料或该同事没有宠物。`my_pets.collection_hint` 仅用于尚未收集的自家宠物。主人名言只在真实、自愿提供时显示，缺少时省略。竞猜沿用既定频率及资格，不编造候选主人；答对总分 +100，答错不扣分。2026-10-24 已加入永久收集成就，按本节新增文案展示称号与本局新解锁徽章，成就不加竞技分。贴纸册视图格内不放文字，读屏按「宠物名 · 未收集」朗读未收集格（复用 `collection.filter_uncollected`），已收集格只读宠物名。
+排序保持已收集优先、新收集靠前；未收集始终是名字与剪影，搜索不揭晓主人。`collection.empty` 仅在没有任何已收集宠物时显示；搜索空结果不表示目录缺资料或该同事没有宠物。`my_pets.collection_hint` 仅用于尚未收集的自家宠物。主人名言只在真实、自愿提供时显示，缺少时省略。竞猜沿用既定频率及资格，不编造候选主人；答对总分 +1000，答错不扣分。2026-10-24 已加入永久收集成就，按本节新增文案展示称号与本局新解锁徽章，成就不加竞技分。贴纸册视图格内不放文字，读屏按「宠物名 · 未收集」朗读未收集格（复用 `collection.filter_uncollected`），已收集格只读宠物名。
 
 ## 7. 排行榜 · 关键文案已确认
 
@@ -433,17 +434,16 @@
 | report.next_up_milestone | 再认识 {n} 只毛孩子，图鉴就到 {percent}%。 | Meet {n} more pet(s) and your collection hits {percent}%. |
 | report.next_up_tomorrow | 明天换一盘新棋，今日榜重新排。 | New board tomorrow. Today’s ranks reset. |
 | report.tip_comb | 四只相同毛孩子连成直线，会生成梳子；和邻格交换，清一整行或列。 | Match 4 identical pets in a line to make a comb. Swap it with a neighbor to clear a row or column. |
-| report.tip_scissors | 五只相同毛孩子连成 L、T 或＋形，会生成剪刀；交换邻格清十字。 | Match 5 identical pets in an L, T or + to make scissors. Swap with a neighbor to clear a cross. |
+| report.tip_scissors | 相同毛孩子连成 L、T 或＋形（没有五连直线），生成剪刀；和邻格交换清十字。 | Match identical pets in an L, T or + with no line of 5 or more to make scissors. Swap the scissors with a neighbor to clear a cross. |
 | report.tip_dryer | 五只及以上相同毛孩子连成直线，会生成吹风机；和任意邻格交换，清空全盘！ | Match 5 or more identical pets in a line to make a hair dryer. Swap it with any neighbor to clear the whole board! |
 | report.tip_comb_comb | 两把相邻的梳子交换，合体清十字，试试看！ | Swap two neighboring combs to clear a cross. Give it a try! |
 | report.tip_comb_scissors | 相邻的梳子和剪刀交换，能清除落点附近三行三列。 | Swap a comb with neighboring scissors to clear three rows and three columns around the landing spot. |
-| report.tip_scissors_scissors | 两把相邻剪刀交换，先合成吹风机；再交换任意邻格，清空全盘！ | Swap two neighboring scissors to make a hair dryer. Then swap it with any neighbor to clear the whole board! |
 | report.harvest | 本局收获 | This Round's Haul |
 | report.new_title_tag | 新称号 | New title |
 | leaderboard.challenge | 再挑战一次 | Play Another Round |
 | leaderboard.load_failed | 暂时没能读取排行榜，请重试。 | We couldn't load the leaderboard. Please try again. |
 
-2026-10-25「店长说」加入玩法提示：普通局保存后，每局只显示一句，约一半对局从六条道具提示中随机抽一条，另一半保留原有进度预告；按对局 ID 固定抽签，猜主人、分享或切换语言不重新抽取。鱼关解锁邀请仍优先，鱼关报告不显示这些宠物工具提示。
+2026-10-25「店长说」加入玩法提示：普通局保存后，每局只显示一句，约一半对局从五条道具提示（梳子、剪刀、吹风机、梳＋梳、梳＋剪）中随机抽一条，另一半保留原有进度预告；按对局 ID 固定抽签，猜主人、分享或切换语言不重新抽取。鱼关解锁邀请仍优先，鱼关报告不显示这些宠物工具提示。报告不再轮播双剪刀合成提示；局内双剪刀／双珍珠贝壳合成与相应带教仍保留，详见 V1_RULES「道具合体与吹风机」。
 
 默认领先玩家＋本人附近，名次使用真实并列结果，未保存的成绩不生成名次。鱼榜标签仅对个人已发现鱼关的玩家显示，不放锁定标签或解锁预告。挑战当前榜单对应模式，不新增挑战邀请或相同棋盘对战。
 
@@ -462,6 +462,7 @@
 | fish.prep_title | 小鱼也来排班啦 | The Fish Have Appointments Too |
 | fish.board_title | 小鱼也来排班啦 | The Fish Have Appointments Too |
 | fish.prep_rule | 相邻交换，同色小鱼连成一线，3 个及以上即可消除。 | Swap neighbors. Match 3 or more fish of the same color in a line. |
+| fish.big_wave | 大浪花 | Big Wave |
 | fish.conch | 海螺 | Conch |
 | fish.conch_hint | 和邻格交换，螺口喷出水流，清一行或一列。 | Swap with a neighbor to sweep a row or column. |
 | fish.pearl_shell | 珍珠贝壳 | Pearl Shell |
@@ -476,6 +477,8 @@
 | fish.leaderboard | 鱼关排行榜 | Fish Leaderboard |
 | fish.prep_loading | 小鱼正在入缸…… | The fish are swimming in… |
 | fish.rush_served | 已清除 {count}/12 格 | {count}/12 tiles cleared |
+| tutorial.big_wave_merge | 两个珍珠贝壳相邻交换，合成大浪花！ | Swap two neighboring pearl shells to merge them into a big wave! |
+| tutorial.big_wave | 大浪花到位！和任意邻格交换，卷走整片海底。 | Big wave ready! Swap it with any neighbor to sweep the whole seabed. |
 | tutorial.conch | 海螺：和邻格交换，螺口喷出水流，清一行或一列。 | Conch: swap with a neighbor to sweep a row or column. |
 | tutorial.pearl_shell | 珍珠贝壳：和邻格交换，贝壳一开，清出一个十字。 | Pearl Shell: swap with a neighbor to clear a row and column. |
 | review.fish.high_chain | 谁开的派对？没通知我？ | A party? Where's my invite? |
