@@ -1,0 +1,52 @@
+{
+  "source": "design/concepts/title-hotpot-badge-v1.png",
+  "sourceSha256": "bf7e7f86cc3e504855ab230a6dfa24ea682f1bc0ed318bffae3c72ace04c4e15",
+  "method": "Original pixel crop, connected exterior white-background removal, no redraw",
+  "items": [
+    {
+      "id": "title-hotpot",
+      "group": "13-collection-titles",
+      "sourceBox": [
+        3,
+        224,
+        549,
+        762
+      ],
+      "size": [
+        534,
+        526
+      ],
+      "sha256": "e973fa7375a1e010808903770f549403b6135f1708092e5abd5c980488534e27"
+    },
+    {
+      "id": "title-hotpot-avatar",
+      "group": "14-collection-title-avatars",
+      "sourceBox": [
+        562,
+        327,
+        926,
+        694
+      ],
+      "size": [
+        352,
+        355
+      ],
+      "sha256": "31f3744f0d912d27e83f5d4fc18fe259a52a8809998e613ea3db1010dbe268ed"
+    },
+    {
+      "id": "title-hotpot-showcase",
+      "group": "15-collection-title-showcase",
+      "sourceBox": [
+        936,
+        194,
+        1515,
+        772
+      ],
+      "size": [
+        567,
+        566
+      ],
+      "sha256": "45e05719de6ff6a436583ae1a899230cc42c4b59a48d6729a796e3473bcb3042"
+    }
+  ]
+}

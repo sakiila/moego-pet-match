@@ -31,6 +31,10 @@ ITEMS = {
 STAMPS = HERE.parent / 'icons/report-title-stamps-original-v1/transparent'
 for _f in sorted(STAMPS.glob('*.png')):
     ITEMS[f'../icons/report-title-stamps-original-v1/transparent/{_f.name}'] = (f'stamps/{_f.stem}', 300)
+# 开发者认证章（assets/icons/report-developer-stamp-original-v1/transparent，中英各 1 款，2026-10-25 彩蛋）
+DEV_STAMPS = HERE.parent / 'icons/report-developer-stamp-original-v1/transparent'
+for _f in sorted(DEV_STAMPS.glob('*.png')):
+    ITEMS[f'../icons/report-developer-stamp-original-v1/transparent/{_f.name}'] = (f'stamps/{_f.stem}', 300)
 
 
 def main() -> None:

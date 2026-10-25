@@ -55,6 +55,8 @@ const entry: GalleryEntry = {
   group: 'components',
   states: {
     'normal · MVP (rush success)': () => <Live s={summary([40, 10, 8, 5, 3, 1])} />,
+    'normal · developer egg: MVP Maodu + certified stamp': () => <Live pets={PETS.map((p, i) => (i === 0 ? { ...p, id: 'pet_644053d683e0', name: 'Maodu 毛肚' } : p))} s={summary([40, 10, 8, 5, 3, 1], { pets: summary([40, 10, 8, 5, 3, 1]).pets.map((p, i) => (i === 0 ? { ...p, id: 'pet_644053d683e0' } : p)) })} />,
+    'manager poster · developer egg: Boluo line': () => <Poster name="Boluo 菠萝" petId="pet_2f55c03f6968" />,
     'normal · zero service (manager host)': () => <Live s={ZERO} />,
     'normal · zero service, no manager': () => <Live s={ZERO} noManager />,
     'fish · MVP (chain 5)': () => <Live mode="fish" pets={[SAMPLE_FISH[3], ...SAMPLE_FISH.filter((_, i) => i !== 3)]} s={summary([50, 10, 8, 5, 3, 1], { score: 3260, maxChain: 5, rushSucceeded: true })} />,

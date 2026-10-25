@@ -117,6 +117,8 @@
 | --- | --- | --- |
 | home.manager | 今日店长 | Today's Shop Manager |
 | home.manager_line | 你负责排班，我负责可爱。 | You handle the schedule. I'll bring the cuteness. |
+| home.manager_line_maodu | 键盘我踩过了，今天 bug 归店长。 | I walked the keyboard. Today's bugs are on me. |
+| home.manager_line_boluo | 我是店长，不是水果，别切。 | Manager, not a fruit. No slicing. |
 | manager.poster_title | 店长小海报 | Manager Poster |
 | manager.poster_date | {year} 年 {month} 月 {day} 日 · 北京时间 | {monthName} {day}, {year} · Beijing Time |
 | home.personal_best | 宠物店个人最好 | Pet Shop Personal Best |
@@ -165,6 +167,7 @@
 | board.wave_score | +{waveScore} | +{waveScore} |
 | board.new_pets | 新认识了 {count} 位毛孩子 | Met {count} New Pets |
 | board.reunion | 终于一起下班了！ | Clocking Out Together! |
+| board.reunion_hotpot | 毛肚菠萝到齐，开锅！ | Maodu & Boluo are in. Fire up the pot! |
 | tutorial.comb | 梳子到位！和邻格交换，梳开一整行或列。 | Comb's ready! Swap with a neighbor to sweep a row or column. |
 | tutorial.scissors | 剪刀登场！和邻格交换，清出一个十字。 | Scissors are here! Swap with a neighbor for a cross-shaped clear. |
 | tutorial.tool_combo | 相邻工具交换，搭档开工！ | Swap neighboring tools. Teamwork time! |
@@ -208,6 +211,7 @@
 | report.tools_used | 工具发动次数 | Tools Activated |
 | report.new_collection | 本局新收集 | New to Your Collection |
 | report.personal_best | 个人新纪录！ | New Personal Best! |
+| report.developer_certified | 开发者家的认证 | Developer's pets, certified |
 | report.quiz_bonus | 含猜家长 +{points} | Incl. owner quiz +{points} |
 | report.saving | 正在保存本局结果…… | Saving Your Results… |
 | report.saved | 本局结果已保存 | Results Saved |
@@ -527,6 +531,8 @@
 
 ### 永久收集成就与称号（2026-10-24）
 
+2026-10-25 开发者彩蛋：`achievement.hotpot*` 为隐藏称号「火锅搭子」，解锁前不展示；`rarity_mythic`「镇店」是新增的最高一档。`home.manager_line_maodu` / `_boluo`、`board.reunion_hotpot` 与 `report.developer_certified`（认证章的读屏文字）只在 Maodu 毛肚、Boluo 菠萝出现时使用，宠物名保留中英混写原文。
+
 | Key | 中文 | English |
 | --- | --- | --- |
 | achievement.cats | 猫猫亲友团 | Cat Circle |
@@ -536,6 +542,7 @@
 | achievement.neighbors | 串门小能手 | Neighborhood Pal |
 | achievement.family | 一家都熟 | Family Friend |
 | achievement.album | 全员点名成功 | Full Album Club |
+| achievement.hotpot | 火锅搭子 | Hotpot Buddies |
 | achievement.cats_condition | 猫猫 · {current} / {target} 只 | Cats · {current} / {target} |
 | achievement.dogs_condition | 狗狗 · {current} / {target} 只 | Dogs · {current} / {target} |
 | achievement.friends_condition | 毛孩子 · {current} / {target} 只 | Pets · {current} / {target} |
@@ -543,6 +550,7 @@
 | achievement.neighbors_condition | 主人 · {current} / {target} 位 | Owners · {current} / {target} |
 | achievement.family_condition | 多宠家庭 · {current} / {target} 个 | Pet families · {current} / {target} |
 | achievement.album_condition | 当期名册 · {current} / {target} 只 | Catalog · {current} / {target} |
+| achievement.hotpot_condition | 同一局服务到毛肚和菠萝 | Served Maodu and Boluo in one game |
 | achievement.unlock_condition | 解锁条件 | Unlock Condition |
 | achievement.view_condition | 查看「{title}」的解锁条件 | View the unlock condition for {title} |
 | achievement.cats_unlock | 收集 {target} 只不同的猫。 | Collect {target} different cats. |
@@ -552,11 +560,13 @@
 | achievement.neighbors_unlock | 收集来自 {target} 位不同主人的宠物。 | Collect pets from {target} different owners. |
 | achievement.family_unlock | 收齐 {target} 个多宠家庭的全部上架宠物，每家至少 2 只。 | Collect every listed pet from {target} multi-pet family with at least 2 listed pets. |
 | achievement.album_unlock | 收齐当期名册中全部上架的普通宠物。 | Collect every listed regular pet in the catalog at the time of unlocking. |
+| achievement.hotpot_unlock | 隐藏称号：同一局里把毛肚和菠萝都服务到。 | Hidden title: serve both Maodu and Boluo in the same game. |
 | achievement.my_titles | 我的称号 | My Titles |
 | achievement.rarity_common | 闪耀 | Radiant |
 | achievement.rarity_rare | 卓越 | Outstanding |
 | achievement.rarity_epic | 非凡 | Extraordinary |
 | achievement.rarity_legendary | 传奇 | Legendary |
+| achievement.rarity_mythic | 镇店 | House Special |
 | achievement.wearing_named | 正在佩戴「{title}」 | Wearing {title} |
 | achievement.pick_hint | 解锁后，挑一个喜欢的挂上。 | Unlock a title, then pick your favorite to wear. |
 | achievement.unlocked_count | 已解锁 {count} / {total} | Unlocked {count} / {total} |

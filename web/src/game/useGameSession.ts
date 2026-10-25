@@ -21,6 +21,7 @@ import { createGameClock, type GameClock } from './clock';
 import { frameAt, type Frame, type PlaybackBase, type Popup } from './playback';
 import { chainStickers } from './stickers';
 import { hintDue, loadSeenTutorials, nextTutorial, pickTip, saveSeenTutorials, type StickerEvent, type TipView, type Tutorial } from './tips';
+import { reunionKey } from './easterEggs';
 
 /** 系统洗牌的演示时长（墙钟）；期间两个计时器同时暂停。 */
 const SHUFFLE_PAUSE_MS = 700;
@@ -228,7 +229,7 @@ export function useGameSession(
       const at = result.timeline.batches[result.timeline.batches.length - 1].settleAt;
       if (found.reunion) {
         cur.shownFamilies.add(found.reunion.familyId);
-        cur.stickers.push({ key: 'board.reunion', petIds: found.reunion.pets, at });
+        cur.stickers.push({ key: reunionKey(found.reunion.pets), petIds: found.reunion.pets, at });
       }
       if (found.newPets.length) {
         found.newPets.forEach((id) => cur.notedNew.add(id));

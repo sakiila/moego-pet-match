@@ -1,0 +1,8 @@
+Use case: icon / badge set, transparent PNG, same style family as the existing collection-title badges.
+Make ONE image, EXACT CANVAS 1536 x 1024 pixels, white background, showing THREE variants of a brand-new hidden collection title badge for the MoeGo "毛孩子全明星" pet-shop match-3 game, laid out left to right with generous spacing and small gray captions under each: "title-hotpot" (full badge), "title-hotpot-avatar" (small round avatar version), "title-hotpot-showcase" (large showcase version with a decorative frame).
+
+References: IMAGE1 is the existing full badge "title-album", IMAGE2 its avatar variant, IMAGE3 its showcase variant. Match their exact style family: flat sticker illustration, thick charcoal #25262A rounded outlines, MoeGo orange #F47721 and warm cream, soft offset shadow, no gradients as the main style, no text inside the badge art.
+
+The badge concept, title "火锅搭子 / Hotpot Buddies": a small round hotpot (Chinese hot pot, split yin-yang style red and clear broth, steam curls) with TWO cat heads peeking over the rim side by side: left a brown-tabby-and-white cat with big ears and one eye winking, right a pale orange cat with big ears. Both cats wear tiny party hats or chopsticks tucked behind an ear (pick one). This is the highest rarity tier in the game ("镇店 / Signature"): add a subtle gold-and-orange laurel or sparkle accent in the showcase variant only, consistent with how IMAGE3 frames the album badge.
+
+Keep every variant crisp and readable at small sizes (the avatar one must read at 24px). No gradient backgrounds, no photo textures, no extra text.

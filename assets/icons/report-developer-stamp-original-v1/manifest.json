@@ -1,0 +1,37 @@
+{
+  "source": "design/concepts/report-developer-stamp-v1.png",
+  "source_sha256": "8070689b939f29aa6713e4b99ca3a955d7fadaad9e06eadd96b232ba5706c7c6",
+  "method": "Original pixel crop; transparent version changes alpha only (red chroma), RGB untouched",
+  "items": [
+    {
+      "id": "developer-zh",
+      "text": "开发者家的 · 认证",
+      "source_box": [
+        34,
+        115,
+        746,
+        834
+      ],
+      "size": [
+        712,
+        719
+      ],
+      "transparent_sha256": "a98993439e6b810964b27dc3d2e679f4ac815fa7e119314b9845ca3fe4c7d0e1"
+    },
+    {
+      "id": "developer-en",
+      "text": "DEVELOPER'S PETS · CERTIFIED",
+      "source_box": [
+        780,
+        115,
+        1499,
+        834
+      ],
+      "size": [
+        719,
+        719
+      ],
+      "transparent_sha256": "65b223aa441fe2d89c750aa591ad19457feafc6c0a20f1ebcb655c077d0c9d56"
+    }
+  ]
+}

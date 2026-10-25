@@ -1,6 +1,6 @@
 import type pg from 'pg';
 import type { AchievementView } from '../../../web/src/api/types.ts';
-import { ACHIEVEMENTS, type AchievementId, type AchievementMetric } from '../../../web/src/game/achievementRules.ts';
+import { ACHIEVEMENTS, HIDDEN_ACHIEVEMENT_IDS, servedHotpot, type AchievementId, type AchievementMetric } from '../../../web/src/game/achievementRules.ts';
 
 /** 所有授予与佩戴操作按玩家串行，避免两个不同对局或补发请求同时越过同一门槛。 */
 export async function lockAchievements(client: pg.PoolClient, playerId: string) {
@@ -31,33 +31,51 @@ async function metrics(client: pg.PoolClient, playerId: string): Promise<Record<
   return Object.fromEntries(Object.entries(rows[0]).map(([key, value]) => [key, Number(value)])) as Record<AchievementMetric | 'total', number>;
 }
 
-/** 在调用方事务中授予。sourceGameId 为空表示老玩家补发，不作为某局新解锁展示。 */
-export async function syncAchievements(client: pg.PoolClient, playerId: string, sourceGameId: string | null = null): Promise<AchievementId[]> {
+/**
+ * 在调用方事务中授予。sourceGameId 为空表示老玩家补发，不作为某局新解锁展示。
+ * servedPetIds 为本局实际服务到的上架宠物（只在结算时传入）：隐藏称号「火锅搭子」按单局判定，补发与回访不会授予。
+ */
+export async function syncAchievements(client: pg.PoolClient, playerId: string, sourceGameId: string | null = null, servedPetIds: readonly string[] = []): Promise<AchievementId[]> {
   await lockAchievements(client, playerId);
   const values = await metrics(client, playerId);
   const unlocked: AchievementId[] = [];
+  const award = async (id: AchievementId, target: number) => {
+    const result = await client.query(`INSERT INTO pet_match.achievement_awards(player_id,achievement_id,target_value,source_game_id)
+      VALUES($1,$2,$3,$4) ON CONFLICT DO NOTHING RETURNING achievement_id`, [playerId, id, target, sourceGameId]);
+    if (result.rowCount) unlocked.push(id);
+  };
   for (const rule of ACHIEVEMENTS) {
     const target = rule.target === 'catalog' ? values.total : rule.target;
     if (target <= 0 || values[rule.metric] < target) continue;
-    const result = await client.query(`INSERT INTO pet_match.achievement_awards(player_id,achievement_id,target_value,source_game_id)
-      VALUES($1,$2,$3,$4) ON CONFLICT DO NOTHING RETURNING achievement_id`, [playerId, rule.id, target, sourceGameId]);
-    if (result.rowCount) unlocked.push(rule.id);
+    await award(rule.id, target);
   }
+  if (sourceGameId && servedHotpot(servedPetIds)) await award('hotpot', 1);
   return unlocked;
 }
 
-/** 返回汇总进度，不返回未认识的宠物及主人关系。已获得的徽章保留当时目标与完成状态。 */
+/**
+ * 返回汇总进度，不返回未认识的宠物及主人关系。已获得的徽章保留当时目标与完成状态。
+ * 隐藏成就解锁前不出现在列表里（也不计入总数），解锁后以已完成状态排在最后。
+ */
 export async function readAchievements(client: pg.PoolClient, playerId: string): Promise<AchievementView> {
   await syncAchievements(client, playerId);
   const values = await metrics(client, playerId);
   const awards = await client.query('SELECT achievement_id,target_value,unlocked_at FROM pet_match.achievement_awards WHERE player_id=$1', [playerId]);
   const title = await client.query('SELECT equipped_title FROM pet_match.player_titles WHERE player_id=$1', [playerId]);
+  const at = (award: { unlocked_at: Date }) => new Date(award.unlocked_at).toISOString();
+  const hidden = HIDDEN_ACHIEVEMENT_IDS.flatMap(id => {
+    const award = awards.rows.find(a => a.achievement_id === id);
+    return award ? [{ id, current: award.target_value, target: award.target_value, unlockedAt: at(award) }] : [];
+  });
   return {
-    achievements: ACHIEVEMENTS.map(rule => {
-      const award = awards.rows.find(a => a.achievement_id === rule.id);
-      const target = award?.target_value ?? (rule.target === 'catalog' ? values.total : rule.target);
-      return { id:rule.id, current:award ? target : Math.min(values[rule.metric],target), target, unlockedAt:award ? new Date(award.unlocked_at).toISOString() : null };
-    }),
+    achievements: [
+      ...ACHIEVEMENTS.map(rule => {
+        const award = awards.rows.find(a => a.achievement_id === rule.id);
+        const target = award?.target_value ?? (rule.target === 'catalog' ? values.total : rule.target);
+        return { id:rule.id, current:award ? target : Math.min(values[rule.metric],target), target, unlockedAt:award ? at(award) : null };
+      }),
+      ...hidden,
+    ],
     equippedTitle: title.rows[0]?.equipped_title ?? null,
   };
 }

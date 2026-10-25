@@ -12,6 +12,7 @@ import { ScoreCard } from '../components/ScoreCard/ScoreCard';
 import type { GameSummary } from '../engine';
 import { pickNextUp } from '../game/nextUp';
 import { petImage, stickerUrl, type PetInfo } from '../game/pets';
+import { isDeveloperPet } from '../game/easterEggs';
 import { judgeMvp, judgeReview, judgeTitle } from '../game/report';
 import type { Standing } from '../game/standing';
 import { useI18n } from '../i18n';
@@ -120,6 +121,7 @@ export function ReportScreen(props: ReportScreenProps) {
         host={mode === 'normal' && manager ? { name: manager.pet.name, stickerSrc: stickerUrl(manager.pet.petId, 512) } : null}
         standing={standing}
         streak={saved?.streak ?? null}
+        certified={mode === 'normal' && mvpKind !== null && !removed.has(pets[mvpKind].id) && isDeveloperPet(pets[mvpKind].id)}
         onStanding={onLeaderboard}
       />
       <SaveStatus state={save} onRetry={onRetry} />

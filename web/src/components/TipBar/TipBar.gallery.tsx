@@ -24,6 +24,7 @@ const entry: GalleryEntry = {
     ),
     'new pets · single': () => <TipBar tip={{ key: 'board.new_pets', vars: { count: 1 }, petIds: ['luna'] }} pets={PLACEHOLDER_PETS} />,
     reunion: () => <TipBar tip={{ key: 'board.reunion', petIds: ['peanut', 'pepper'] }} pets={PLACEHOLDER_PETS} />,
+    'reunion · developer egg (Maodu + Boluo)': () => <TipBar tip={{ key: 'board.reunion_hotpot', petIds: ['tofu', 'kiwi'] }} pets={PLACEHOLDER_PETS} />,
     shuffle: () => <TipBar tip={{ key: 'board.shuffle' }} />,
     'last 10 s': () => <TipBar tip={{ key: 'round.last_seconds' }} />,
     finishing: () => <TipBar tip={{ key: 'round.finishing' }} />,

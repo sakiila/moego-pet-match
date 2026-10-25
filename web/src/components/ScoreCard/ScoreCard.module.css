@@ -167,9 +167,20 @@
 }
 
 .side {
+  position: relative;
   display: grid;
   gap: var(--space-2);
   min-width: 0;
+}
+
+/* 开发者认证章：骑在评语框右下角与下方留白之间（不压评语文字），向左略倾，像称号章之后补盖的一枚 */
+.certified {
+  position: absolute;
+  right: -12px;
+  bottom: -42px;
+  z-index: 1;
+  rotate: -8deg;
+  animation: stamp 600ms var(--ease-out) calc(var(--print-start) + var(--print-ms) + 150ms + 220ms) both;
 }
 
 .sticker {

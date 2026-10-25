@@ -5,6 +5,8 @@ import { readAchievements, syncAchievements } from '../src/services/achievements
 import { registerGame, settleGame } from '../src/services/games.ts';
 import { buildApp } from '../src/app.ts';
 import type { ResultPayload } from '../../web/src/api/types.ts';
+import { HOTPOT_PETS } from '../../web/src/game/achievementRules.ts';
+import { RULES } from '../../web/src/engine/config.ts';
 
 let ctx: Awaited<ReturnType<typeof freshDatabase>>;
 let sourceGame: string;
@@ -99,5 +101,51 @@ describe('永久收集成就与佩戴', () => {
     expect((await failing.inject({method:'POST',url:`/api/games/${game.gameId}/result`,payload:{playerId:'U_TEST_LONG',result:payload}})).statusCode).toBe(503);
     expect((await profile('U_TEST_LONG')).achievements.find(a=>a.id==='friends')?.unlockedAt).toBeNull();
     await failing.close();
+  });
+});
+
+describe('隐藏称号「火锅搭子」（开发者彩蛋）', () => {
+  const [maodu, boluo] = HOTPOT_PETS;
+  const others = ['a2', 'a3', 'a4', 'a5'];
+  const payloadFor = (game: { rulesVersion: number }, served: Record<string, number>): ResultPayload => {
+    const ids = [maodu, boluo, ...others];
+    const cells = Object.values(served).reduce((a, b) => a + b, 0);
+    return { rulesVersion: game.rulesVersion, completed: true, score: cells * RULES.baseScore, clearedCells: cells, clearedByMultiplier: [cells, 0, 0, 0, 0], rushSucceeded: false, maxChain: 1, toolsFired: 0, validMoves: 1, actedInLastSeconds: false,
+      pets: ids.map((id, i) => ({ id, served: served[id] ?? 0, firstServedSeq: served[id] ? i + 1 : null })) };
+  };
+  async function play(player: string, served: Record<string, number>) {
+    const game = await registerGame(ctx.pool, player, 'normal');
+    await ctx.pool.query('UPDATE pet_match.games SET lineup=$2 WHERE game_id=$1', [game.gameId, [maodu, boluo, ...others]]);
+    return settleGame(ctx.pool, game.gameId, player, payloadFor(game, served));
+  }
+  beforeAll(async () => {
+    for (const [id, name] of [[maodu, 'Maodu 毛肚'], [boluo, 'Boluo 菠萝']]) await ctx.pool.query(
+      `INSERT INTO pet_match.pets(pet_id,name,status,species,owner_user_id,family_id) VALUES($1,$2,'published','猫','U_DEV','U_DEV') ON CONFLICT (pet_id) DO NOTHING`, [id, name]);
+  });
+  it('解锁前列表里没有它，也不计入总数；只服务到一只不授予', async () => {
+    const before = await profile('U_TEST_ALICE');
+    expect(before.achievements.map((a) => a.id)).not.toContain('hotpot');
+    expect(JSON.stringify(before)).not.toContain('hotpot');
+    const one = await play('U_TEST_ALICE', { [maodu]: 3 });
+    expect(one.newAchievements).not.toContain('hotpot');
+    expect((await profile('U_TEST_ALICE')).achievements.some((a) => a.id === 'hotpot')).toBe(false);
+  });
+  it('同一局两只都服务到才授予；之后出现在列表末尾并可佩戴；再来一局不重复', async () => {
+    const both = await play('U_TEST_ALICE', { [maodu]: 2, [boluo]: 1 });
+    expect(both.newAchievements).toContain('hotpot');
+    const view = await profile('U_TEST_ALICE');
+    const hotpot = view.achievements.at(-1)!;
+    expect(hotpot).toMatchObject({ id: 'hotpot', current: 1, target: 1 });
+    expect(hotpot.unlockedAt).not.toBeNull();
+    const wearing = await ctx.app.inject({ method: 'PATCH', url: '/api/players/U_TEST_ALICE/title', payload: { title: 'hotpot' } });
+    expect(wearing.statusCode).toBe(200);
+    expect(wearing.json().equippedTitle).toBe('hotpot');
+    expect((await play('U_TEST_ALICE', { [maodu]: 1, [boluo]: 1 })).newAchievements).not.toContain('hotpot');
+  });
+  it('分两局各服务一只不算；补发（无来源对局）不授予', async () => {
+    await play('U_TEST_BOB', { [maodu]: 2 });
+    await play('U_TEST_BOB', { [boluo]: 2 });
+    expect((await profile('U_TEST_BOB')).achievements.some((a) => a.id === 'hotpot')).toBe(false);
+    expect(await inTransaction(ctx.pool, (c) => syncAchievements(c, 'U_TEST_BOB', null, [maodu, boluo]))).toEqual([]);
   });
 });

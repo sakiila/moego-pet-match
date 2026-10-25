@@ -178,12 +178,15 @@ export async function settleGame(
     }
 
     let newCollected: LineupPet[] = [];
+    // 本局实际服务到且仍上架的宠物：既记入图鉴，也用于按单局判定的隐藏称号
+    let servedListed: string[] = [];
     if (mode === 'normal') {
       // 已下架的宠物不再记入图鉴（合法成绩与局数照常保留）
       const listed = new Set<string>(
         (await client.query(`SELECT pet_id FROM pet_match.pets WHERE pet_id = ANY($1) AND status = 'published'`, [payload.pets.map((p) => p.id)])).rows.map((r) => r.pet_id),
       );
       const served = payload.pets.filter((p) => p.served > 0 && listed.has(p.id)).map((p) => p.id);
+      servedListed = served;
       if (served.length) {
         const inserted = await client.query(
           `INSERT INTO pet_match.collections (player_id, pet_id, first_game_id)
@@ -223,7 +226,7 @@ export async function settleGame(
       );
     }
 
-    const newAchievements = await syncAchievements(client, playerId, gameId);
+    const newAchievements = await syncAchievements(client, playerId, gameId, servedListed);
     // 连续开工：本局有有效操作就算今天打卡（结果还没写入，手动把登记日加进去）
     const boardDate: string = (await client.query('SELECT board_date::text AS d FROM pet_match.games WHERE game_id = $1', [gameId])).rows[0].d;
     const before = await playedDates(client, playerId);

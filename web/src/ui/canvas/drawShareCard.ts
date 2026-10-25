@@ -294,6 +294,17 @@ function stampImage(ctx: Ctx, cx: number, cy: number, img: HTMLImageElement) {
   ctx.restore();
 }
 
+/** 开发者认证章：盖在主角图左下，向左略倾，像在称号章之后又补盖的一枚。 */
+function developerStamp(ctx: Ctx, cx: number, cy: number, img: HTMLImageElement) {
+  const size = 230;
+  const h = (size * img.height) / img.width;
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(-0.12);
+  ctx.drawImage(img, -size / 2, -h / 2, size, h);
+  ctx.restore();
+}
+
 /** 称号章图片读取失败时的文字小章：略微倾斜的橙色徽章。 */
 function stamp(ctx: Ctx, cx: number, cy: number, text: string, k: Tokens) {
   ctx.save();
@@ -321,8 +332,8 @@ function stamp(ctx: Ctx, cx: number, cy: number, text: string, k: Tokens) {
 
 /** 两种模式的纵向位置；普通局对照 share-card-pets-v1，鱼关对照 share-card-fish-v2。 */
 const LAYOUT = {
-  normal: { paper: [40, 60, 1000, 1250], header: 140, hero: [540, 410, 500, 370], stamp: [870, 440], plate: 642, bubble: [700, 962], scoreLabel: 1004, score: 1176, rule: 1206, player: 1246 },
-  fish: { paper: [60, 235, 960, 1060], header: 132, hero: [520, 430, 780, 290], stamp: [860, 310], plate: 626, bubble: [688, 952], scoreLabel: 994, score: 1160, rule: 1196, player: 1236 },
+  normal: { paper: [40, 60, 1000, 1250], header: 140, hero: [540, 410, 500, 370], stamp: [870, 440], developer: [210, 505], plate: 642, bubble: [700, 962], scoreLabel: 1004, score: 1176, rule: 1206, player: 1246 },
+  fish: { paper: [60, 235, 960, 1060], header: 132, hero: [520, 430, 780, 290], stamp: [860, 310], developer: [210, 505], plate: 626, bubble: [688, 952], scoreLabel: 994, score: 1160, rule: 1196, player: 1236 },
 } as const;
 
 function background(ctx: Ctx, mode: GameMode, k: Tokens) {
@@ -554,6 +565,8 @@ export async function drawShareCard(model: ShareCardModel, mode: GameMode): Prom
   const img = !model.hero ? null : model.hero.src ? trimmed(await loadImage(model.hero.src)) : genericMark(k);
   // 称号章读取失败不影响出图，退回文字小章
   const stampImg = model.titleStamp ? await loadImage(model.titleStamp).catch(() => null) : null;
+  // 开发者认证章读取失败只是不盖，不影响出图
+  const devImg = model.developerStamp ? await loadImage(model.developerStamp).catch(() => null) : null;
   const canvas = document.createElement('canvas');
   canvas.width = SHARE_CARD.width;
   canvas.height = SHARE_CARD.height;
@@ -567,6 +580,7 @@ export async function drawShareCard(model: ShareCardModel, mode: GameMode): Prom
   const [sx, sy] = img ? LAYOUT[mode].stamp : [800, mode === 'fish' ? LAYOUT.fish.paper[1] + 110 : LAYOUT.normal.header + 150];
   if (stampImg) stampImage(ctx, sx, sy, stampImg);
   else stamp(ctx, sx, sy, model.title, k);
+  if (img && devImg) developerStamp(ctx, LAYOUT[mode].developer[0], LAYOUT[mode].developer[1], devImg);
   score(ctx, model, mode, k);
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('export failed'))), 'image/png'));
 }

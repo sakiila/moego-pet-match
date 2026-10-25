@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { DailyManager, PlayerView } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { ManagerCard } from '../components/ManagerCard/ManagerCard';
+import { managerLineKey } from '../game/easterEggs';
 import { NavTile } from '../components/NavTile/NavTile';
 import { PageLinks } from '../components/PageLinks/PageLinks';
 import { PlayerMenu } from '../components/PlayerMenu/PlayerMenu';
@@ -43,7 +44,7 @@ export function HomeScreen({ player, manager, onOpenShop, onCollection, onLeader
         }
       />
       <div className={styles.grow} />
-      {manager && <ManagerCard name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} onOpen={() => setPoster(true)} />}
+      {manager && <ManagerCard name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} line={t(managerLineKey(manager.pet.petId))} onOpen={() => setPoster(true)} />}
       <div className={styles.grow} />
       <Button size="lg" block onClick={onOpenShop} data-testid="open-shop">
         {t('action.open_shop')}

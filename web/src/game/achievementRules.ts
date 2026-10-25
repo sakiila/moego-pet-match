@@ -1,7 +1,8 @@
 /** 收集成就由服务端按已保存图鉴判定；此处的稳定 id 同时用于图片、文案与佩戴选择。 */
-export const ACHIEVEMENT_IDS = ['cats', 'dogs', 'friends', 'species', 'neighbors', 'family', 'album'] as const;
+export const ACHIEVEMENT_IDS = ['cats', 'dogs', 'friends', 'species', 'neighbors', 'family', 'album', 'hotpot'] as const;
 export type AchievementId = (typeof ACHIEVEMENT_IDS)[number];
 export type AchievementMetric = 'cats' | 'dogs' | 'collected' | 'species' | 'owners' | 'families';
+/** 按累计图鉴判定的七项收集成就；隐藏成就不在此表（见下）。 */
 export const ACHIEVEMENTS: readonly { id: AchievementId; metric: AchievementMetric; target: number | 'catalog' }[] = [
   { id: 'cats', metric: 'cats', target: 5 },
   { id: 'dogs', metric: 'dogs', target: 5 },
@@ -11,3 +12,12 @@ export const ACHIEVEMENTS: readonly { id: AchievementId; metric: AchievementMetr
   { id: 'family', metric: 'families', target: 1 },
   { id: 'album', metric: 'collected', target: 'catalog' },
 ];
+
+/**
+ * 隐藏成就「火锅搭子」（2026-10-25 开发者彩蛋）：同一局里毛肚与菠萝都至少服务一次，结算时授予。
+ * 解锁前不出现在任何列表、进度或预告里；两只的名录 id 固定，改名不影响。
+ */
+export const HOTPOT_PETS = ['pet_644053d683e0', 'pet_2f55c03f6968'] as const;
+export const HIDDEN_ACHIEVEMENT_IDS: readonly AchievementId[] = ['hotpot'];
+/** 本局服务到的宠物 id 是否满足「火锅搭子」。 */
+export const servedHotpot = (servedPetIds: readonly string[]) => HOTPOT_PETS.every((id) => servedPetIds.includes(id));

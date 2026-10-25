@@ -10,6 +10,8 @@ export interface ManagerCardProps {
   variant?: 'shop' | 'signature';
   /** 门店：点店长打开店长小海报（不自动弹出）。 */
   onOpen?: () => void;
+  /** 店长宣言；缺省为通用模板台词，毛肚、菠萝当店长时由页面传入店长梗（game/easterEggs）。 */
+  line?: string;
 }
 
 /*
@@ -41,8 +43,9 @@ function BubbleOutline() {
 }
 
 /** 今日店长：全公司同一只；宣言为游戏模板台词，不冒充主人原话。 */
-export function ManagerCard({ name, stickerSrc, variant = 'shop', onOpen }: ManagerCardProps) {
+export function ManagerCard({ name, stickerSrc, variant = 'shop', onOpen, line }: ManagerCardProps) {
   const { t } = useI18n();
+  const quote = line ?? t('home.manager_line');
   const [failed, setFailed] = useState(false);
   // 贴纸读取失败时保留同尺寸空位，橱窗布局不塌
   const sticker = failed ? (
@@ -62,7 +65,7 @@ export function ManagerCard({ name, stickerSrc, variant = 'shop', onOpen }: Mana
         <span className={styles.avatar}>{sticker}</span>
         <figcaption>
           {plate}
-          <q>{t('home.manager_line')}</q>
+          <q>{quote}</q>
         </figcaption>
       </figure>
     );
@@ -79,9 +82,9 @@ export function ManagerCard({ name, stickerSrc, variant = 'shop', onOpen }: Mana
       <span className={`${styles.spark} ${styles.sparkRight}`} aria-hidden />
       <span className={`${styles.spark} ${styles.sparkLow}`} aria-hidden />
       {/* 英文宣言较长时缩一档字号，气泡不压住右侧招牌 */}
-      <span className={styles.bubble} data-long={t('home.manager_line').length > 16 || undefined}>
+      <span className={styles.bubble} data-long={quote.length > 16 || undefined}>
         <BubbleOutline />
-        <span className={styles.bubbleText}>{t('home.manager_line')}</span>
+        <span className={styles.bubbleText}>{quote}</span>
       </span>
       {/* 门店名牌：一行「今日店长 · 名字」，像立在柜台上的一块厚木牌 */}
       <figcaption className={styles.caption}>

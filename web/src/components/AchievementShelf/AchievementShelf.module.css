@@ -46,6 +46,14 @@
   --rarity-gradient: var(--achievement-rainbow);
   --rarity-tag: var(--achievement-legendary-tag);
 }
+.row[data-rarity='mythic'] {
+  --rarity-accent: var(--achievement-mythic);
+  --rarity-ink: var(--achievement-mythic-ink);
+  --rarity-bg: var(--achievement-mythic-bg);
+  --rarity-line: var(--achievement-mythic-line);
+  --rarity-gradient: var(--achievement-mythic-gradient);
+  --rarity-tag: var(--achievement-mythic-tag);
+}
 .row[data-wearing] { --rarity-surface: var(--rarity-bg); }
 .row[data-locked] { --rarity-line: var(--color-line); --rarity-gradient: linear-gradient(var(--color-line), var(--color-line)); }
 .details { display: grid; min-width: 0; gap: var(--space-1); font-size: var(--text-sm); overflow-wrap: anywhere; }

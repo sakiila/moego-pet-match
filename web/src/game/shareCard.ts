@@ -3,7 +3,8 @@ import type { GameSummary } from '../engine';
 import type { Locale, MessageKey } from '../i18n';
 import { petDisplayName, petImage, stickerUrl, type PetInfo } from './pets';
 import { judgeMvp, judgeReview, judgeTitle } from './report';
-import { titleStampUrl } from './titleStamps';
+import { developerStampUrl, titleStampUrl } from './titleStamps';
+import { isDeveloperPet, managerLineKey } from './easterEggs';
 
 /** 成绩卡上的全部文字与主角图，来自本局冻结结果；分享不重新判定 MVP、称号或评语。 */
 export interface ShareCardModel {
@@ -17,6 +18,8 @@ export interface ShareCardModel {
   title: string;
   /** 称号章图片（当前语言版本）；为 null 时画文字小章。 */
   titleStamp: string | null;
+  /** 开发者认证章（当前语言版本）：普通局 MVP 是毛肚或菠萝且仍上架时盖在主角图左下；否则 null。 */
+  developerStamp: string | null;
   review: string;
   scoreLabel: string;
   score: string;
@@ -58,6 +61,7 @@ export function shareCardModel({ summary, pets, mode, playerName, manager, local
     hero,
     title: t(judgeTitle(summary)),
     titleStamp: titleStampUrl(judgeTitle(summary), locale),
+    developerStamp: hero?.kind === 'mvp' && mode === 'normal' && mvp && isDeveloperPet(mvp.id) ? developerStampUrl(locale) : null,
     review: t(judgeReview(summary, mode)),
     scoreLabel: t('report.final_score'),
     score: score.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US'),
@@ -82,7 +86,7 @@ export function managerPosterModel({ manager, locale, t }: { manager: DailyManag
     mode: t('home.manager'),
     brand: { lead: t('brand.title_lead'), accent: t('brand.title_accent') },
     hero: { src: stickerUrl(manager.pet.petId, 1024), label: `${t('home.manager')} · ${manager.pet.name}`, kind: 'manager' },
-    line: t('home.manager_line'),
+    line: t(managerLineKey(manager.pet.petId)),
     date: t('manager.poster_date', { year, month, day, monthName: locale === 'en' ? MONTHS[month - 1] : '' }),
   };
 }

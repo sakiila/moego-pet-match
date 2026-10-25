@@ -20,3 +20,8 @@ const URLS = import.meta.glob<string>('../ui/art/stamps/*.webp', { eager: true, 
 export function titleStampUrl(title: TitleKey, locale: Locale): string | null {
   return URLS[`../ui/art/stamps/${TITLE_STAMP[title]}-${locale}.webp`] ?? null;
 }
+
+/** 开发者认证章（report-developer-stamp-original-v1）：MVP 是毛肚或菠萝时盖在小票与分享卡上；找不到图片时返回 null（不盖）。 */
+export function developerStampUrl(locale: Locale): string | null {
+  return URLS[`../ui/art/stamps/developer-${locale}.webp`] ?? null;
+}

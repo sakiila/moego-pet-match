@@ -7,6 +7,7 @@ import { Icon } from '../../ui/primitives/Icon';
 import type { SettleResponse } from '../../api/types';
 import type { Standing } from '../../game/standing';
 import { TitleStamp } from '../TitleStamp/TitleStamp';
+import { developerStampUrl } from '../../game/titleStamps';
 import { TodayStanding } from '../TodayStanding/TodayStanding';
 import styles from './ScoreCard.module.css';
 
@@ -31,6 +32,8 @@ export interface ScoreCardProps {
   standing?: Standing | null;
   /** 结算返回的连续开工天数；只在本局是今天第一次打卡时显示「打卡第 N 天」标签。 */
   streak?: SettleResponse['streak'] | null;
+  /** 开发者彩蛋：MVP 是毛肚或菠萝时在评语右下补盖一枚「开发者家的认证」章（game/easterEggs）。 */
+  certified?: boolean;
   /** 点今日名次标签打开今日榜。 */
   onStanding?: () => void;
 }
@@ -44,7 +47,7 @@ const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
 /** 读 :root 上的毫秒令牌（--print-start / --print-ms），与 CSS 动画同一时间线。 */
 const cssMs = (name: string) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
 
-export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null, streak = null, onStanding }: ScoreCardProps) {
+export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null, streak = null, onStanding, certified = false }: ScoreCardProps) {
   const { t, locale } = useI18n();
   // 声音与轻震跟着打印动画的节拍：纸送到位的瞬间「叮」，印章拍下的瞬间「咚」
   const feedback = useFeedback();
@@ -72,6 +75,10 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
     </span>
   );
   const showTags = newRecord || !!standing || !!streak?.firstToday;
+  const devStamp = certified ? developerStampUrl(locale) : null;
+  const certification = devStamp && (
+    <img className={styles.certified} src={devStamp} alt={t('report.developer_certified')} width={76} height={76} draggable={false} data-testid="developer-stamp" />
+  );
   return (
     <div className={styles.printer} data-print>
       <span className={styles.slot} aria-hidden />
@@ -158,6 +165,7 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
                   {mvpLabel}
                 </span>
                 <p className={styles.review}>“{t(review)}”</p>
+                {certification}
               </div>
             </div>
           ) : host ? (

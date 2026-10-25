@@ -9,6 +9,7 @@ function Live({ count=3, equipped }: { count?:number; equipped?:AchievementId })
 const entry: GalleryEntry = {name:'AchievementShelf', group:'components', states:{
   'v5 · phone preview':()=> <div style={{ margin: '-24px -16px' }}><Live count={7} equipped="album" /></div>,
   'legendary equipped · rainbow':()=> <Live count={7} equipped="album" />,
+  'hidden hotpot unlocked · mythic (镇店) equipped':()=> { const [view,setView]=useState<AchievementView>(()=>({ equippedTitle:'hotpot', achievements:[...sample(7).achievements,{ id:'hotpot', target:1, current:1, unlockedAt:'2026-10-25T00:00:00Z' }] })); return <AchievementShelf inline view={view} failed={false} saving={false} saveFailed={false} onRetry={noop} onClose={noop} onSelect={(id:AchievementId|null)=>setView(v=>({...v,equippedTitle:id}))} />; },
   'some unlocked · choose title':()=> <Live />,
   'all unlocked':()=> <Live count={7} />,
   'none unlocked':()=> <Live count={0} />,

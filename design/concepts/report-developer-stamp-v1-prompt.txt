@@ -1,0 +1,6 @@
+Use case: stamp graphic set, transparent-friendly on white, same style family as the existing report title stamps.
+Make ONE image, EXACT CANVAS 1536 x 1024 pixels, white background, showing TWO versions of a new small circular ink stamp for the MoeGo "毛孩子全明星" game report card, side by side with gray captions: left the Chinese version "developer-zh", right the English version "developer-en".
+
+Reference: IMAGE1 is the existing Chinese title stamp "我手都松开了" (red ink, hand-drawn circular border, a playful flower face in the middle, text arranged on the circle). Match its ink color, line weight, slightly rough rubber-stamp texture, and overall composition exactly.
+
+Content of the new stamp: a circular rubber stamp in the same red ink. In the center a tiny flat sticker-style icon of two cat heads side by side (one brown tabby, one pale orange) above a small laptop or a paw pressing a keyboard key. Text on the circle: Chinese version reads "开发者家的" on the top arc and "认证" on the bottom arc; English version reads "DEVELOPER'S" on the top arc and "PETS · CERTIFIED" on the bottom arc. Small sparkle marks like IMAGE1. Keep text legible, nothing else in the image.

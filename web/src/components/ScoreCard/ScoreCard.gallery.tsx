@@ -58,6 +58,9 @@ const entry: GalleryEntry = {
     'today standing: alone today': () => (
       <ScoreCard mode="normal" score={2480} saveState="saved" newRecord={false} mvp={{ pet: maodu, kind: 2 }} review="review.pet.normal" title="title.pet_officer" stats={stats} standing={{ rank: 1, score: 2480, leaderScore: 2480, participants: 1 }} />
     ),
+    'developer certified (MVP is Maodu / Boluo) · zh/en': () => (
+      <ScoreCard mode="normal" score={48200} saveState="saved" newRecord={false} mvp={{ pet: { ...maodu, id: 'pet_644053d683e0', name: 'Maodu 毛肚' }, kind: 1 }} review="review.pet.high_chain" title="title.chain_lead" stats={stats} certified />
+    ),
     'owner quiz bonus (+100 included)': () => (
       <ScoreCard mode="normal" score={2580} quizBonus={100} saveState="saved" newRecord mvp={{ pet: maodu, kind: 1 }} review="review.pet.normal" title="title.pet_officer" stats={stats} />
     ),

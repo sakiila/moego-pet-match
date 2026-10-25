@@ -3,6 +3,7 @@ import type { GameSummary } from '../../engine';
 import { translate } from '../../i18n';
 import type { PetInfo } from '../pets';
 import { managerPosterModel, shareCardModel } from '../shareCard';
+import { HOTPOT_PETS } from '../achievementRules';
 
 const pets: PetInfo[] = [0, 1, 2, 3, 4, 5].map((i) => ({ id: `pet_${i}`, name: `Pet${i}`, imageBase: `/img/pets/pet_${i}`, emoji: '🐾' }));
 const fish: PetInfo[] = [
@@ -39,6 +40,20 @@ describe('成绩卡内容', () => {
     expect(m.scoreLabel).toBe('本局得分');
     expect(m.player).toBe('本局玩家：Bob 包博');
     expect(m.brand).toEqual({ lead: '毛孩子', accent: '全明星' });
+  });
+
+  it('开发者彩蛋：MVP 是毛肚或菠萝时带开发者认证章，店长是它们时换店长梗；其他情况为 null / 通用宣言', () => {
+    const plain = shareCardModel({ summary: summary(), pets, mode: 'normal', playerName: 'Bob', manager, locale: 'zh', t: zh });
+    expect(plain.developerStamp).toBeNull();
+    const [maodu, boluo] = HOTPOT_PETS;
+    const devPets = pets.map((p, i) => (i === 2 ? { ...p, id: maodu, name: 'Maodu 毛肚' } : p));
+    const s = summary({ pets: summary().pets.map((p, i) => (i === 2 ? { ...p, id: maodu } : p)) });
+    expect(shareCardModel({ summary: s, pets: devPets, mode: 'normal', playerName: 'Bob', manager, locale: 'zh', t: zh }).developerStamp).toMatch(/developer-zh/);
+    expect(shareCardModel({ summary: s, pets: devPets, mode: 'normal', playerName: 'Bob', manager, locale: 'en', t: en }).developerStamp).toMatch(/developer-en/);
+    // 已下架：主角是通用图案，不盖章
+    expect(shareCardModel({ summary: s, pets: devPets, mode: 'normal', playerName: 'Bob', manager, locale: 'zh', t: zh, removed: new Set([maodu]) }).developerStamp).toBeNull();
+    expect(managerPosterModel({ manager: { date: '2026-10-25', pet: { petId: boluo, name: 'Boluo 菠萝' } }, locale: 'zh', t: zh }).line).toBe('我是店长，不是水果，别切。');
+    expect(managerPosterModel({ manager, locale: 'zh', t: zh }).line).toBe('你负责排班，我负责可爱。');
   });
 
   it('鱼关：MVP 用鱼色类别名并跟随语言，模式牌为鱼关卡', () => {
