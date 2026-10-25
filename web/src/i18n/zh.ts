@@ -369,7 +369,7 @@ export const zh = {
   "achievement.neighbors_condition": "主人 · {current} / {target} 位",
   "achievement.family_condition": "多宠家庭 · {current} / {target} 个",
   "achievement.album_condition": "当期名册 · {current} / {target} 只",
-  "achievement.hotpot_condition": "同一局服务到开发者家的毛肚和菠萝",
+  "achievement.hotpot_condition": "同一局里，开发者家的毛肚和菠萝都服务过",
   "achievement.unlock_condition": "解锁条件",
   "achievement.view_condition": "查看「{title}」的解锁条件",
   "achievement.cats_unlock": "收集 {target} 只不同的猫。",
