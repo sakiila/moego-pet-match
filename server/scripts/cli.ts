@@ -1,8 +1,7 @@
-/** 命令行脚本共用：数据库连接（默认本地开发库，--prod 用 Supabase 管理员连接）与对象存储（OBJECT_STORE=r2 切到 R2）。 */
+/** 命令行脚本共用：默认本地开发库，--prod 使用显式管理员连接；OBJECT_STORE=r2 切到 R2。 */
 import { fileURLToPath } from 'node:url';
 import pg from 'pg';
-import { LOCAL_DEV_URL } from '../src/config.ts';
-import { readSupabaseAdminConfig } from '../src/db/adminUrl.ts';
+import { LOCAL_DEV_URL, useDatabaseSsl } from '../src/config.ts';
 import { localDirStore } from '../src/storage/localDirStore.ts';
 import { r2Store, type ObjectStore } from '../src/storage/objectStore.ts';
 import { r2FromEnv } from '../src/storage/r2.ts';
@@ -17,10 +16,12 @@ export function storeFromEnv(): ObjectStore {
 }
 
 export async function connect(prod: boolean): Promise<pg.Client> {
-  const client = new pg.Client(prod ? readSupabaseAdminConfig() : { connectionString: process.env.DATABASE_URL ?? LOCAL_DEV_URL });
+  const connectionString = prod ? process.env.PET_MATCH_ADMIN_DATABASE_URL : process.env.DATABASE_URL ?? LOCAL_DEV_URL;
+  if (!connectionString) throw new Error('PET_MATCH_ADMIN_DATABASE_URL is required for --prod');
+  const client = new pg.Client({ connectionString, ssl: useDatabaseSsl(connectionString) ? { rejectUnauthorized: false } : false });
   await client.connect();
   return client;
 }
 
 export const describeTarget = (prod: boolean, yes: boolean) =>
-  `target: ${prod ? 'Supabase (prod)' : 'local dev'} · store: ${process.env.OBJECT_STORE === 'r2' ? 'R2' : 'local dir'}${yes ? '' : ' · DRY RUN'}`;
+  `target: ${prod ? 'production PostgreSQL' : 'local dev'} · store: ${process.env.OBJECT_STORE === 'r2' ? 'R2' : 'local dir'}${yes ? '' : ' · DRY RUN'}`;

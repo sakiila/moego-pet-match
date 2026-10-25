@@ -38,6 +38,28 @@ describe('Slack 目录缓存', () => {
     expect((await dir.get('U1'))?.name).toBe('New Hire');
   });
 
+  it('提供完整有效名单；分页超过上限时拒绝返回不完整名单', async () => {
+    const complete = slackDirectory('xoxb-test', { fetchImpl: (async () => page([raw({}), raw({ id: 'BOT', is_bot: true })])) as unknown as typeof fetch })!;
+    expect((await complete.all()).map(m => m.userId)).toEqual(['U1']);
+    const incomplete = slackDirectory('xoxb-test', { fetchImpl: (async () => page([raw({})], 'more')) as unknown as typeof fetch })!;
+    await expect(incomplete.all()).rejects.toThrow('pagination incomplete');
+  });
+
+  it('定时完整同步绕过搜索缓存；失败和缺页保留搜索缓存但不作为完整同步成功', async () => {
+    const fetchImpl = vi.fn()
+      .mockResolvedValueOnce(page([raw({})]))
+      .mockResolvedValueOnce(page([raw({ id: 'U2' })]))
+      .mockRejectedValueOnce(new Error('offline'))
+      .mockResolvedValueOnce({ status: 200, json: async () => ({ ok: true }) });
+    const dir = slackDirectory('xoxb-test', { fetchImpl: fetchImpl as unknown as typeof fetch })!;
+    expect((await dir.search('new')).map(m => m.userId)).toEqual(['U1']);
+    expect((await dir.all()).map(m => m.userId)).toEqual(['U2']);
+    await expect(dir.all()).rejects.toThrow('offline');
+    expect((await dir.search('new')).map(m => m.userId)).toEqual(['U2']);
+    await expect(dir.all()).rejects.toThrow('missing members');
+    expect((await dir.search('new')).map(m => m.userId)).toEqual(['U2']);
+  });
+
   it('未配置令牌时没有目录；没有缓存时失败向上抛', async () => {
     expect(slackDirectory(undefined)).toBeNull();
     const dir = slackDirectory('xoxb-test', { fetchImpl: (async () => ({ json: async () => ({ ok: false, error: 'invalid_auth' }), status: 200 })) as unknown as typeof fetch })!;

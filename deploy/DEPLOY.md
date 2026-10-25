@@ -1,14 +1,14 @@
 # GitHub Actions → GHCR → RackNerd → 1Panel
 
-一个容器同时提供前端、API 和图片代理。游戏数据在 Supabase `pet_match` schema，图片在 R2 私有桶，RackNerd 只保留配置和可重建的图片缓存。
+一个容器同时提供前端、API 和图片代理。游戏数据在 RackNerd PostgreSQL 的 `pet_match` 数据库、`pet_match` schema，图片在 R2 私有桶。应用和 PostgreSQL 通过现有 `1panel-network` 通信。
 
-仓库：`sakiila/moego-pet-match`（公开）。镜像：`ghcr.io/sakiila/moego-pet-match`。`main` push 自动测试、构建和发布镜像；仓库变量 `DEPLOY_ENABLED=true` 时继续自动部署，也可在 Actions 手动运行 **Deploy to RackNerd**。准备期该变量为 false，服务器不启动应用。部署 job 串行执行，不中断进行中的部署。
+仓库：`sakiila/moego-pet-match`（公开）。镜像：`ghcr.io/sakiila/moego-pet-match`。`main` push 自动测试、构建和发布镜像；仓库变量 `DEPLOY_ENABLED=true` 时继续自动部署，也可在 Actions 手动运行 **Deploy to RackNerd**。首次准备期该变量为 false；线上迁移时临时关闭自动部署，完成切换后恢复。部署 job 串行执行，不中断进行中的部署。
 
 ## 首次发布前
 
 - 用户已确认公开完整 Git 历史与项目文件，包括设计稿、验收截图、开发示例中的真实姓名、账号头像、宠物资料和归属。不做历史重写或脱敏替换。凭据、私钥、`data/`、`assets/pets/`、缓存和本地依赖继续按忽略规则排除。
 - 在服务器准备 `/app/moego-pet-match/production.env`，只包含 `production.env.example` 的运行变量，权限 `600`，目录权限 `700`。禁止复制本地完整 `.env`。
-- 核验 Supabase 最新迁移、应用角色权限及 R2 素材。仍使用 `server/scripts/supabase-setup.ts` 预览，核对后才 `--apply`，用 `supabase-verify.ts` 核验。Actions 和容器不自动迁移数据库。
+- 核验 PostgreSQL 最新迁移、应用角色权限及 R2 素材。生产维护用 `server/scripts/database.ts migrate|verify --prod`；迁移默认预览，`--apply` 执行。Actions 和容器不自动迁移数据库。
 - 游戏域名为 `star.baobo.me`，完成解析、1Panel 独立站点和 HTTPS。
 
 准备时只读核查的目标机为 Debian x86_64、Docker 27.3.1、Compose 2.29.7，已安装 `python3`、`flock`。OpenResty 使用 host 网络，8787 当时空闲；首次发布前再核对变化。
@@ -28,13 +28,13 @@ SSH 默认端口为 22，可通过 Repository Variable `HOST_PORT` 修改。非�
 
 首次上线前先完成 `HOST_SSHKEY`、生产数据库迁移与 1Panel HTTPS/反代，再把 Repository Variable `DEPLOY_ENABLED` 设为 `true`。之后每次 main 更新都会自动部署；需要部署已经构建的当前 main 时，手动运行一次 workflow。
 
-GHCR 使用 Actions 自带的短期 `GITHUB_TOKEN`：构建 job 为 `contents:read`、`packages:write`，部署 job 为 `contents:read`、`packages:read`。服务器通过 SSH stdin 临时登录 GHCR，登录文件随本次上传目录清除，不需要旧 registry 密码或长期 PAT。Supabase、R2、Slack 凭据只在服务器，不进入 Secrets 或构建。
+GHCR 使用 Actions 自带的短期 `GITHUB_TOKEN`：构建 job 为 `contents:read`、`packages:write`，部署 job 为 `contents:read`、`packages:read`。服务器通过 SSH stdin 临时登录 GHCR，登录文件随本次上传目录清除，不需要旧 registry 密码或长期 PAT。PostgreSQL、R2、Slack 凭据只在服务器，不进入 Secrets 或构建。
 
 GHCR 新包默认可能是 private，与代码仓库公开与否分开管理。source label 将镜像关联到本仓库，使 workflow token 能拉取它；需要匿名拉取时，可在首次创建镜像后把对应 Package 的 Visibility 改为 public。依据见 [GHCR 官方说明](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)。
 
 ## 服务器运行配置
 
-按 `production.env.example` 填入专用 `pet_match_app` 角色连接、R2 桶读写凭据和可选 Slack token。值使用单引号，防止密码中的 `$` 被 Compose 插值。不要添加 `DATABASE_URL`、`DATABASE_SSL`、`OBJECT_STORE`、`HOST`、`PORT` 等覆盖镜像默认行为的变量；脚本会拒绝未知键或缺失的必填值。
+按 `production.env.example` 填入RackNerd `pet_match` 库的专用 `pet_match_app` 角色连接、R2 桶读写凭据和可选 Slack token。值使用单引号，防止密码中的 `$` 被 Compose 插值。不要添加 `DATABASE_URL`、`DATABASE_SSL`、`OBJECT_STORE`、`HOST`、`PORT` 等覆盖镜像默认行为的变量；脚本会拒绝未知键或缺失的必填值。
 
 ```sh
 install -d -m 700 /app/moego-pet-match
@@ -122,3 +122,25 @@ docker compose --env-file release.env logs --tail 100 pet-match
 需重新拉取 private 镜像时应先登录 GHCR，或把 Package 设为 public。镜像回滚不撤销数据库迁移；破坏性迁移需单独设计兼容与恢复步骤。
 
 本地验证：`bash deploy/deploy.test.sh`、actionlint、shellcheck、Compose config 和完整 amd64 构建。真实 SSH/GHCR/1Panel 链路在首发时验证。
+
+## 独立数据库与本地运维
+
+生产连接：`postgresql://pet_match_app:<密码>@postgresql:5432/pet_match?sslmode=disable`。`sslmode=disable` 仅用于同机 Docker 内网；远程管理通过 SSH 隧道，不开放额外公网端口。数据库所有者为 `pet_match_owner`，应用角色只有运行需要的查询、插入与更新权限。不要向应用容器提供管理员连接。
+
+同事信息直接从 Slack `users.list` 按现有工作区规则过滤，启动时和每五分钟刷新 `pet_match.slack_members`；一次同步在单个事务完成，空目录、分页不完整或请求失败不会清空已保存名单。`pet_match.colleagues` 仅展示有效账号。`public."user"` 不迁移，也不再用于运行时查询。
+
+本机 `.env` 的 `PET_MATCH_ADMIN_DATABASE_URL` 指向 SSH 隧道，不能再通过旧 JDBC/Supabase 配置维护生产。先保持隧道运行：
+
+```sh
+ssh -N -L 15432:127.0.0.1:5432 racknerd
+```
+
+另一个终端在 `server/` 下执行：
+
+```sh
+npx tsx --env-file-if-exists=../.env scripts/database.ts verify --prod
+npx tsx --env-file-if-exists=../.env scripts/database.ts migrate --prod
+# 核对预览后执行同一命令并加 --apply
+```
+
+以上迁移命令用于维护已初始化的独立库；空库从经过核验的独立库备份恢复，不运行旧 Supabase 人员表初始化流程。数据迁移、校验和恢复依据见 [DATABASE_MIGRATION.md](DATABASE_MIGRATION.md)。

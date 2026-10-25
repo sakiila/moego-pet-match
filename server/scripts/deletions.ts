@@ -57,7 +57,7 @@ try {
       console.log('applied.');
     }
   } else {
-    console.log('usage: deletions.ts list [--all] | resolve <request_id> --note "…" [--keep-pet] [--yes]   (add --prod for Supabase)');
+    console.log('usage: deletions.ts list [--all] | resolve <request_id> --note "…" [--keep-pet] [--yes]   (add --prod for production PostgreSQL)');
   }
 } finally {
   await client.end();

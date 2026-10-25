@@ -1,4 +1,4 @@
-/** 运行配置。本地默认连 docker-compose 的开发库；正式环境用 Supabase 专用角色。 */
+/** 运行配置。本地默认连 docker-compose 的开发库；正式环境用 RackNerd PostgreSQL 专用角色。 */
 export const LOCAL_DEV_URL = 'postgres://postgres:postgres@localhost:54329/pet_match_dev';
 export const LOCAL_TEST_URL = 'postgres://postgres:postgres@localhost:54329/pet_match_test';
 

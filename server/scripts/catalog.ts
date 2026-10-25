@@ -3,7 +3,7 @@
  *   tsx scripts/catalog.ts publish [pet_id...] [--yes] [--prod]   上架全部或指定宠物与鱼色（只增不减；墓碑宠物一律跳过，指定墓碑 pet_id 时拒绝）
  *   tsx scripts/catalog.ts unpublish <pet_id> [--yes] [--prod]   核实删除申请后下架：记录清成墓碑，删除贴纸与卡背照片对象，
  *                                                               共用原图的宠物去掉卡背照片，只剩一只的家庭解散
- * 默认写本地开发库与本地对象存储（server/.store）；--prod 写 Supabase（管理员连接），对象存储由 OBJECT_STORE 决定。
+ * 默认写本地开发库与本地对象存储（server/.store）；--prod 写 生产 PostgreSQL（管理员连接），对象存储由 OBJECT_STORE 决定。
  * 不加 --yes 只列出变更，不写入。
  */
 import { readFile } from 'node:fs/promises';

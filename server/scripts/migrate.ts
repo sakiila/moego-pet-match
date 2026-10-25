@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import pg from 'pg';
 import { config, isLocalDatabase } from '../src/config.ts';
 import { migrate } from '../src/db/migrate.ts';
-import { seedLocal, seedPlaceholderPets } from '../src/db/localSeed.ts';
+import { seedLocal, seedLocalMembers, seedPlaceholderPets } from '../src/db/localSeed.ts';
 
 if (!isLocalDatabase(config.databaseUrl)) throw new Error('migrate.ts only runs against a local database');
 const client = new pg.Client({ connectionString: config.databaseUrl });
@@ -23,6 +23,16 @@ try {
     }
   }
   const applied = await migrate(client);
+  await seedLocalMembers(client);
+  if (existsSync(mapPath)) {
+    const map = JSON.parse(readFileSync(mapPath, 'utf8'));
+    for (const o of map.owners.filter((x: { slack_user_id: string | null }) => x.slack_user_id)) {
+      await client.query(
+        `INSERT INTO pet_match.slack_members (user_id, name) VALUES ($1, $2) ON CONFLICT (user_id) DO NOTHING`,
+        [o.slack_user_id, o.matched_name],
+      );
+    }
+  }
   await seedPlaceholderPets(client);
   console.log(applied.length ? `applied: ${applied.join(', ')}` : 'up to date');
 } finally {

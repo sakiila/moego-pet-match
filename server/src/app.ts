@@ -27,7 +27,7 @@ export interface AppDeps {
   now?: () => Date;
   /** 生产：前端构建产物目录，由同一服务提供页面；开发时为空（页面由 Vite 提供）。 */
   staticDir?: string;
-  /** 实时 Slack 目录：补充人员表里没有的同事；未配置时只用人员表。 */
+  /** 实时 Slack 目录：补充保存名册外的同事；未配置时使用上次保存的名单。 */
   directory?: SlackDirectory | null;
   /** 新上传与删除申请保存后通知 Bob（Slack 私信）；未配置时不通知。 */
   notify?: AdminNotifier | null;

@@ -57,7 +57,7 @@ try {
       console.log('applied.');
     }
   } else {
-    console.log('usage: submissions.ts list | pull [--yes] | done <submission_id> [--yes]   (add --prod for Supabase)');
+    console.log('usage: submissions.ts list | pull [--yes] | done <submission_id> [--yes]   (add --prod for production PostgreSQL)');
   }
 } finally {
   await client.end();

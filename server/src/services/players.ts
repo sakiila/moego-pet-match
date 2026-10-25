@@ -14,9 +14,9 @@ export async function findColleague(db: Queryable, userId: string): Promise<{ us
   return rows[0] ? { userId: rows[0].user_id, name: rows[0].name } : null;
 }
 
-/** user_id 是否在人员表里出现过（含被其过滤掉的人）：这类人不由 Slack 补登记。 */
+/** 已登记但停用的账号不由搜索或身份选择重新启用；交给完整 Slack 同步。 */
 export async function isListed(db: Queryable, userId: string): Promise<boolean> {
-  const { rowCount } = await db.query('SELECT 1 FROM public."user" WHERE user_id = $1', [userId]);
+  const { rowCount } = await db.query('SELECT 1 FROM pet_match.slack_members WHERE user_id = $1', [userId]);
   return (rowCount ?? 0) > 0;
 }
 

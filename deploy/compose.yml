@@ -6,6 +6,9 @@ services:
     platform: linux/amd64
     restart: unless-stopped
     env_file: production.env
+    networks:
+      - default
+      - database
     ports:
       - "127.0.0.1:${PET_MATCH_PORT:-8787}:8787"
     mem_limit: ${PET_MATCH_MEMORY:-512m}
@@ -23,3 +26,8 @@ services:
 
 volumes:
   pet-match-img-cache:
+
+networks:
+  database:
+    external: true
+    name: 1panel-network

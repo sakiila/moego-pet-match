@@ -1,5 +1,5 @@
 /**
- * Slack 实时目录：补充 public."user" 里没有的同事。
+ * Slack 实时目录：独立同事名册的来源，也用于搜索补缺。
  * users.list 分页读取后在内存缓存，搜索与按 ID 取人都只查缓存；缓存过期后下一次请求才重新拉取。
  * 过滤条件与 pet_match.colleagues 一致，并排除访客、Slackbot。
  */
@@ -12,6 +12,10 @@ export interface SlackMember {
 export interface SlackDirectory {
   search(q: string): Promise<SlackMember[]>;
   get(userId: string): Promise<SlackMember | null>;
+}
+
+export interface FullSlackDirectory extends SlackDirectory {
+  all(): Promise<SlackMember[]>;
 }
 
 const WORKSPACE_ID = 'T011CF3CMJN';
@@ -42,7 +46,7 @@ type Fetch = typeof fetch;
 export function slackDirectory(
   token: string | undefined,
   options: { ttlMs?: number; fetchImpl?: Fetch; now?: () => number } = {},
-): SlackDirectory | null {
+): FullSlackDirectory | null {
   if (!token) return null;
   const ttl = options.ttlMs ?? 5 * 60_000;
   const doFetch = options.fetchImpl ?? fetch;
@@ -55,9 +59,10 @@ export function slackDirectory(
     let cursor = '';
     for (let page = 0; page < MAX_PAGES; page++) {
       const url = `https://slack.com/api/users.list?limit=${PAGE_SIZE}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`;
-      const res = await doFetch(url, { headers: { authorization: `Bearer ${token}` } });
+      const res = await doFetch(url, { headers: { authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(15_000) });
       const json = (await res.json()) as { ok?: boolean; error?: string; members?: RawUser[]; response_metadata?: { next_cursor?: string } };
       if (!json.ok) throw new Error(`slack users.list: ${json.error ?? res.status}`);
+      if (!Array.isArray(json.members)) throw new Error('Slack directory response is missing members');
       for (const u of json.members ?? []) {
         const m = toMember(u);
         if (m) members.push(m);
@@ -65,11 +70,12 @@ export function slackDirectory(
       cursor = json.response_metadata?.next_cursor ?? '';
       if (!cursor) break;
     }
+    if (cursor) throw new Error('Slack directory pagination incomplete');
     return members;
   }
 
-  async function members(): Promise<SlackMember[]> {
-    if (cache && now() - cache.at < ttl) return cache.members;
+  async function members(force = false): Promise<SlackMember[]> {
+    if (!force && cache && now() - cache.at < ttl) return cache.members;
     inflight ??= load()
       .then((list) => {
         cache = { at: now(), members: list };
@@ -82,12 +88,13 @@ export function slackDirectory(
       return await inflight;
     } catch (error) {
       // 刷新失败时继续用旧缓存，没有旧缓存才向上抛
-      if (cache) return cache.members;
+      if (!force && cache) return cache.members;
       throw error;
     }
   }
 
   return {
+    all: () => members(true),
     async search(q) {
       const needle = q.trim().toLowerCase();
       if (!needle) return [];

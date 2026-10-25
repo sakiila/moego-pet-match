@@ -65,7 +65,7 @@ describe('宠物详情', () => {
 
 describe('认识人数', () => {
   it('计已保存收集且仍在名单内的同事，头像取最近收集的 5 位', async () => {
-    await ctx.pool.query(`INSERT INTO public."user" (user_id, email, real_name_normalized, team_id) VALUES ('U_TEST_NEW', 'new@moego.pet', 'New Hire', 'T011CF3CMJN')`);
+    await ctx.pool.query(`INSERT INTO pet_match.slack_members (user_id, email, name) VALUES ('U_TEST_NEW', 'new@moego.pet', 'New Hire')`);
     const g = await ctx.pool.query(`SELECT game_id FROM pet_match.games LIMIT 1`);
     const order = ['U_TEST_BOB', 'U_TEST_ALICE', 'U_TEST_ZHANG', 'U_TEST_SAM', 'U_TEST_LONG', 'U_TEST_NEW', 'U_TEST_GONE'];
     for (const [i, id] of order.entries()) {

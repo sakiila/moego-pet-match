@@ -2,7 +2,7 @@
 
 面向手机竖屏的宠物消消乐游戏。React + Vite + TypeScript 前端，一个 Node.js 服务同时提供网页、API 与图片代理；游戏规则引擎不依赖 DOM。
 
-运行数据保存在 Supabase 的独立 `pet_match` schema，图片保存在 R2 私有桶。数据库、Slack 和对象存储凭据仅在服务端使用。公开代码不包含人员名录、宠物原图、数据库备份或运行凭据。
+运行数据保存在 RackNerd PostgreSQL 的独立 `pet_match` 数据库与 schema，图片保存在 R2 私有桶。数据库、Slack 和对象存储凭据仅在服务端使用。公开代码不包含人员名录、宠物原图、数据库备份或运行凭据。
 
 ## 本地开发
 

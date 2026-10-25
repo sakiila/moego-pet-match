@@ -1,5 +1,7 @@
 # MoeGo 毛孩子全明星技术方案逐步讨论
 
+> 2026-10-25 数据库方案更新：生产游戏迁至 RackNerd 自建 PostgreSQL 18.4，数据库与 schema 均名为 `pet_match`。`public."user"` 不迁移；同事名单改从 Slack 初始化和每五分钟同步至 `pet_match.slack_members`，`colleagues` 视图只读有效条目。图片仍存 R2。下文关于 Supabase、原人员表和 DMIT 的部署描述为历史设计，以本段及 [数据库迁移记录](deploy/DATABASE_MIGRATION.md)、[当前部署说明](deploy/DEPLOY.md) 为准。
+
 日期：2026-10-22  
 更新：2026-10-22  
 状态：已确认直接搜索并选择同事身份，不设活动口令及相关访问功能；现有 Supabase `public."user"` 表的字段结构与有效同事过滤条件（155 人）已核验确认，游戏只读该来源，Slack 头像由 DMIT 后端通过 `SLACK_BOT_TOKEN` 按 `user_id` 拉取并本地缓存代理返回。Peter 小鱼关按每位玩家累计三局有效完整普通局触发，取消首页鱼缸入口与公共活动进度，采用水流喷头和气泡机道具外观。首版部署目标为自有 DMIT 洛杉矶服务器，中国优化线路、1 核 CPU、2 GB 内存；域名稍后决定。存储方案已调整：DMIT 只运行 Node 应用；全部游戏数据存入现有 Supabase 项目中独立的 `pet_match` schema，由专用数据库角色经 Postgres 直连读写；图片存 Cloudflare R2 私有桶，由 DMIT 代理并本地缓存；素材上下架与申请处理由本地命令行工具完成。下架后旧报告移除宠物资料并保留真实成绩的呈现已确认；下架前已开局及待同步的合法对局按原规则结算，也按原资格累计有效局。删除申请的清理范围已确认采用墓碑记录方案。本轮只整理文档。

@@ -54,6 +54,17 @@ export async function seedPlaceholderPets(client: pg.Client | pg.PoolClient) {
   }
 }
 
+/** 独立名册的本地样例；不从外部人员表导入。 */
+export async function seedLocalMembers(client: pg.Client | pg.PoolClient) {
+  for (const c of [...TEST_COLLEAGUES.map(c => ({ ...c, active: true })), ...EXCLUDED.map(c => ({ ...c, active: false }))]) {
+    await client.query(
+      `INSERT INTO pet_match.slack_members (user_id, name, email, active) VALUES ($1, $2, $3, $4)
+       ON CONFLICT (user_id) DO UPDATE SET name=EXCLUDED.name, email=EXCLUDED.email, active=EXCLUDED.active`,
+      [c.user_id, c.name, c.email, c.active],
+    );
+  }
+}
+
 /** 仅测试：六种占位鱼色（开发库用 catalog publish 导入真实鱼色）。 */
 export async function seedTestFishColors(client: pg.Client | pg.PoolClient) {
   const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];

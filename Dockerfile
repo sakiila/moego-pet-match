@@ -1,6 +1,6 @@
 # MoeGo 毛孩子全明星：一个容器同时提供前端页面、API 与图片代理。
 # 构建时传入 --build-arg GAME_VERSION="$(node web/scripts/game-version.mjs)"；见 deploy/DEPLOY.md。
-# 持久数据不在容器里：数据在 Supabase，图片在 R2；容器内只有可随时重建的图片缓存。
+# 持久数据不在应用容器里：数据在 RackNerd PostgreSQL，图片在 R2；应用容器只有可随时重建的图片缓存。
 
 # ---------- 前端 ----------
 FROM node:22-slim AS web
