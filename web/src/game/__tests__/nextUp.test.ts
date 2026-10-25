@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { AchievementStatus } from '../../api/types';
-import { pickNextUp } from '../nextUp';
+import { pickNextUp as pickManagerLine, type NextUpInput } from '../nextUp';
+
+// 这份对局抽中进度提醒，用于核对原有预告的内部优先级。
+const pickNextUp = (input: Omit<NextUpInput, 'gameId'>) => pickManagerLine({ ...input, gameId: 'saved-game-1' });
 
 const status = (over: Partial<Record<AchievementStatus['id'], Partial<AchievementStatus>>> = {}, total = 80): AchievementStatus[] => {
   const base: AchievementStatus[] = [
@@ -72,5 +75,35 @@ describe('下一件事：优先级', () => {
 
   it('成就读取失败只剩鱼关与兜底', () => {
     expect(pickNextUp({ progress: unlocked, achievements: null })).toEqual({ kind: 'tomorrow' });
+  });
+});
+
+describe('店长说：随机玩法提示', () => {
+  it('道具提示能在鱼关解锁前出现，不被进度提醒始终占用', () => {
+    expect(pickManagerLine({
+      gameId: 'saved-game',
+      progress: { completedNormalGames: 1, fishUnlocked: false },
+      achievements: status({ cats: { current: 4 } }),
+    })).toEqual({ kind: 'tip', id: 'scissors' });
+  });
+
+  it('不同对局能抽到三种工具和三种合体提示，也保留原有预告', () => {
+    const picks = Array.from({ length: 120 }, (_, i) => pickManagerLine({
+      gameId: `game-${i}`,
+      progress: unlocked,
+      achievements: null,
+    }));
+    expect(new Set(picks.filter((p) => p.kind === 'tip').map((p) => p.id))).toEqual(new Set([
+      'comb', 'scissors', 'dryer', 'comb_comb', 'comb_scissors', 'scissors_scissors',
+    ]));
+    expect(picks.some((p) => p.kind === 'tomorrow')).toBe(true);
+  });
+
+  it('同一份报告重复读取或更新进度时，道具提示保持固定', () => {
+    const input = { gameId: 'saved-game', progress: unlocked, achievements: null };
+    const first = pickManagerLine(input);
+    expect(first.kind).toBe('tip');
+    expect(pickManagerLine(input)).toEqual(first);
+    expect(pickManagerLine({ ...input, achievements: status({ cats: { current: 4 } }) })).toEqual(first);
   });
 });

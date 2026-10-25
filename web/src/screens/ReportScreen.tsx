@@ -41,7 +41,7 @@ export interface ReportScreenProps {
   onShare: () => void;
   /** 读取今日榜上的名次：保存成功后调用一次，猜主人加分后再调一次；失败或不提供时不显示。 */
   loadStanding?: () => Promise<Standing | null>;
-  /** 读取成就进度，用于尾声「店长说」预告：保存成功后调用一次；失败时仍按鱼关与兜底预告。 */
+  /** 读取成就进度，用于尾声「店长说」预告：保存成功后调用一次；失败时仍有玩法提示、鱼关与兜底。 */
   loadAchievements?: () => Promise<AchievementStatus[]>;
   equippedTitle?: AchievementId | null;
   onEquipTitle?: (id: AchievementId) => Promise<void>;
@@ -91,7 +91,7 @@ export function ReportScreen(props: ReportScreenProps) {
       live = false;
     };
   }, [savedGameId, loadAchievements]);
-  const nextUp = saved && achievements !== undefined && !saved.progress.unlockedNow ? pickNextUp({ progress: saved.progress, achievements }) : null;
+  const nextUp = saved && achievements !== undefined && !saved.progress.unlockedNow ? pickNextUp({ gameId: saved.gameId, progress: saved.progress, achievements }) : null;
   // 「店长说」：预告固定由今日店长开口；店长读取失败时气泡不带头像
   const speaker = manager ? { name: manager.pet.name, src: stickerUrl(manager.pet.petId, 512) } : null;
   const served = summary.clearedCells > 0;

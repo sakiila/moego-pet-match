@@ -19,13 +19,16 @@ const ACHIEVEMENT_KEY: Record<string, MessageKey> = {
 };
 
 /**
- * 报告尾声「店长说」（mobile-report-slim-v1）：一句话直说「再做什么 → 得到什么」，
- * 由今日店长的气泡说出；只报离玩家最近的一件事。文案在 i18n，按预告种类选 key。
+ * 报告尾声「店长说」（mobile-report-slim-v1）：今日店长用一句气泡分享玩法提示或进度预告。
+ * 文案在 i18n，按种类选 key。
  */
 export function NextUp({ nextUp, speaker = null }: NextUpProps) {
   const { t } = useI18n();
   let text: string;
   switch (nextUp.kind) {
+    case 'tip':
+      text = t(`report.tip_${nextUp.id}`);
+      break;
     case 'fish':
       text = t('report.next_up_fish', { n: nextUp.rounds });
       break;
