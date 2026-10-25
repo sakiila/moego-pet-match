@@ -10,7 +10,7 @@ permissions:
 
 concurrency:
   group: moego-pet-match-production
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   verify:

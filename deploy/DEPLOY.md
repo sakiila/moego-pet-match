@@ -2,7 +2,7 @@
 
 一个容器同时提供前端、API 和图片代理。游戏数据在 Supabase `pet_match` schema，图片在 R2 私有桶，RackNerd 只保留配置和可重建的图片缓存。
 
-仓库：`sakiila/moego-pet-match`（公开）。镜像：`ghcr.io/sakiila/moego-pet-match`。`main` push 自动测试、构建和发布镜像；仓库变量 `DEPLOY_ENABLED=true` 时继续自动部署，也可在 Actions 手动运行 **Deploy to RackNerd**。准备期该变量为 false，服务器不启动应用。部署 job 串行执行，不中断进行中的部署。
+仓库：`sakiila/moego-pet-match`（公开）。镜像：`ghcr.io/sakiila/moego-pet-match`。`main` push 自动测试、构建和发布镜像；仓库变量 `DEPLOY_ENABLED=true` 时继续自动部署，也可在 Actions 手动运行 **Deploy to RackNerd**。准备期该变量为 false，服务器不启动应用。新的部署流程触发时，自动取消同组中正在运行或等待的旧流程；CI 按工作流和分支分组，同组只保留最新一次运行。
 
 ## 首次发布前
 
