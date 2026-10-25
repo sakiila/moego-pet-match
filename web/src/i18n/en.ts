@@ -362,7 +362,7 @@ export const en: Record<MessageKey, string> = {
   'home.manager_line_maodu': 'I walked the keyboard. Today\'s bugs are on me.',
   'home.manager_line_boluo': 'Manager, not a fruit. No slicing.',
   'manager.poster_title': 'Manager Poster',
-  'manager.poster_date': '{monthName} {day}, {year} · Beijing Time',
+  'manager.poster_date': '{monthName} {day}, {year} · Shenzhen Time',
   'my_pets.view': 'View Profile',
   'my_pets.empty': "No listed pets are linked to you yet.",
   'my_pets.list_scope': "New submissions can be viewed here after they're prepared, reviewed, and listed.",

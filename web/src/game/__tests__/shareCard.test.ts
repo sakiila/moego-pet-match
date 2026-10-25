@@ -125,12 +125,12 @@ describe('店长小海报内容', () => {
     expect(m.hero).toEqual({ src: '/img/pets/pet_mgr/1024?format=webp', label: '今日店长 · Sanxian', kind: 'manager' });
     expect(m.mode).toBe('今日店长');
     expect(m.line).toBe('你负责排班，我负责可爱。');
-    expect(m.date).toBe('2026 年 10 月 23 日 · 北京时间');
+    expect(m.date).toBe('2026 年 10 月 23 日 · 深圳时间');
   });
 
   it('英文日期用月份名，日期按服务端的北京日期，不受本机时区影响', () => {
     const m = managerPosterModel({ manager: { ...manager, date: '2026-01-05' }, t: en, locale: 'en' });
-    expect(m.date).toBe('January 5, 2026 · Beijing Time');
+    expect(m.date).toBe('January 5, 2026 · Shenzhen Time');
     expect(m.line).toBe("You handle the schedule. I'll bring the cuteness.");
   });
 });

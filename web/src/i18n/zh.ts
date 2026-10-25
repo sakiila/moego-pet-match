@@ -361,7 +361,7 @@ export const zh = {
   'home.manager_line_maodu': '键盘我踩过了，bug 归店长。',
   'home.manager_line_boluo': '我是店长，不是水果，别切。',
   'manager.poster_title': '店长小海报',
-  'manager.poster_date': '{year} 年 {month} 月 {day} 日 · 北京时间',
+  'manager.poster_date': '{year} 年 {month} 月 {day} 日 · 深圳时间',
   'my_pets.view': '查看资料',
   'my_pets.empty': "暂时没有与你关联的已上架宠物。",
   'my_pets.list_scope': "新提交的宠物，人工处理并上架后可在这里查看。",

@@ -120,7 +120,7 @@
 | home.manager_line_maodu | 键盘我踩过了，bug 归店长。 | I walked the keyboard. Today's bugs are on me. |
 | home.manager_line_boluo | 我是店长，不是水果，别切。 | Manager, not a fruit. No slicing. |
 | manager.poster_title | 店长小海报 | Manager Poster |
-| manager.poster_date | {year} 年 {month} 月 {day} 日 · 北京时间 | {monthName} {day}, {year} · Beijing Time |
+| manager.poster_date | {year} 年 {month} 月 {day} 日 · 深圳时间 | {monthName} {day}, {year} · Shenzhen Time |
 | home.personal_best | 宠物店个人最好 | Pet Shop Personal Best |
 | home.no_record | 第一份营业纪录，等你来写。 | Your first shop record starts here. |
 | home.streak_active | 连续 {days} 天开工 · 今天已打卡 | {days}-day streak · clocked in today |
