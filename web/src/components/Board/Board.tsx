@@ -5,10 +5,12 @@ import { particlesPerCell } from '../../game/feedback';
 import { INPUT, resolveDrag, resolveTap } from '../../game/input';
 import type { PetInfo } from '../../game/pets';
 import type { Frame, Popup, Sweep } from '../../game/playback';
+import type { CheerEvent } from '../../game/cheers';
 import { useI18n } from '../../i18n';
 import { ParticleLayer, type Burst } from '../ParticleLayer/ParticleLayer';
 import { PetTile } from '../PetTile/PetTile';
 import { ToolPiece } from '../ToolPiece/ToolPiece';
+import { CheerCallout } from '../CheerCallout/CheerCallout';
 import styles from './Board.module.css';
 
 export interface BoardProps {
@@ -18,6 +20,7 @@ export interface BoardProps {
   interactive: boolean;
   hint?: Move | null;
   popups?: Popup[];
+  cheer?: CheerEvent | null;
   /** 手势指向相邻目标但未触发时的直接范围预览。 */
   getPreview?: (from: Pos, to: Pos) => Pos[] | null;
   /** 尝试交换；返回是否被受理。 */
@@ -67,6 +70,7 @@ export function Board({
   interactive,
   hint,
   popups = [],
+  cheer = null,
   getPreview,
   onSwap,
   onDraggingChange,
@@ -289,6 +293,7 @@ export function Board({
           </div>
         ))}
       </div>
+      {cheer && <CheerCallout key={cheer.key} kind={cheer.kind} mode={mode} />}
     </div>
   );
 }

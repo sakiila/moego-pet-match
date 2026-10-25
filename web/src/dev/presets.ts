@@ -1,8 +1,13 @@
 /**
  * 开发验收用的固定棋盘（仅开发环境，?preset=<name>）。生产构建不会引用。
- * A–F 对应本局 kind 0–5，h / v / x 为横梳 / 竖梳 / 剪刀。
+ * A–F 对应本局 kind 0–5，h / v / x / d 为横梳 / 竖梳 / 剪刀 / 吹风机。
  */
 export const PRESETS: Record<string, { board: string[]; refill?: number[] }> = {
+  /** 拖 (5,3) ↓ (6,3)：底行直五，500 分并生成吹风机，之后与邻格交换发动。 */
+  five: {
+    board: ['ABCDEFA', 'CDEFABC', 'EFABCDE', 'ABCDEFA', 'CDEFABC', 'EFAACDE', 'BAACAAD'],
+    refill: [1, 2, 3, 4],
+  },
   /** 拖 (4,4) → (4,3)：三消 → 三消 → 四消 = 210 分并留下横梳。 */
   cascade: {
     board: ['EFEFDFD', 'DEDEFEF', 'FDFCEDE', 'EFEBDFD', 'DEDFAEF', 'EDFACDE', 'DEBABCC'],

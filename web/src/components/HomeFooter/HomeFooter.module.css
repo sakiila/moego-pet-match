@@ -1,0 +1,26 @@
+.footer {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.version {
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.repository {
+  justify-self: center;
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-1) var(--space-2);
+  overflow-wrap: anywhere;
+  text-underline-offset: var(--space-1);
+}
+
+.repository:hover {
+  color: var(--fg);
+}

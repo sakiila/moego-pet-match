@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { GameSummary } from '../../engine';
 import { translate } from '../../i18n';
 import type { PetInfo } from '../pets';
+import { pickReview } from '../report';
 import { managerPosterModel, shareCardModel } from '../shareCard';
 import { HOTPOT_PETS } from '../achievementRules';
 
@@ -32,7 +33,7 @@ describe('成绩卡内容', () => {
   it('普通局：MVP 贴纸与名牌、评语、称号、分数与原对局玩家署名，均复用本局判定', () => {
     const m = shareCardModel({ summary: summary(), pets, mode: 'normal', playerName: 'Bob 包博', manager, locale: 'zh', t: zh });
     expect(m.hero).toEqual({ src: '/img/pets/pet_2/1024', label: '本局 MVP：Pet2', kind: 'mvp' });
-    expect(m.review).toBe('临时加单？安排得明明白白。');
+    expect(m.review).toBe('催你的事，替我保密。');
     expect(m.title).toBe('急什么我会消');
     expect(m.titleStamp).toMatch(/03-got-this-zh/);
     expect(m.mode).toBe('宠物店');
@@ -61,7 +62,7 @@ describe('成绩卡内容', () => {
     const zhCard = shareCardModel({ summary: s, pets: fish, mode: 'fish', playerName: 'Bob', manager, locale: 'zh', t: zh });
     expect(zhCard.hero).toEqual({ src: '/img/fish/fish_color_blue/1024', label: '本局 MVP：天蓝色', kind: 'mvp' });
     expect(zhCard.mode).toBe('鱼关卡');
-    expect(zhCard.review).toBe('小鱼加急，水到渠成。');
+    expect(zhCard.review).toBe('催完就跑，有点不好意思。');
     const enCard = shareCardModel({ summary: s, pets: fish, mode: 'fish', playerName: 'Bob', manager, locale: 'en', t: en });
     expect(enCard.hero?.label).toBe("This Round's MVP: Sky Blue");
     expect(enCard.score).toBe('2,480');
@@ -70,20 +71,35 @@ describe('成绩卡内容', () => {
   it('普通局零服务：不编造 MVP，由今日店长承接', () => {
     const m = shareCardModel({ summary: zero(summary()), pets, mode: 'normal', playerName: 'Bob', manager, locale: 'zh', t: zh });
     expect(m.hero).toEqual({ src: '/img/pets/pet_mgr/1024', label: '今日店长 · Sanxian', kind: 'manager' });
-    expect(m.review).toBe('没关系，店长陪你热个身。');
+    expect(m.review).toBe('我先可爱，你慢慢来。');
     expect(m.score).toBe('0');
   });
 
   it('零服务且店长读取失败：只留评语，不放主角图', () => {
     const m = shareCardModel({ summary: zero(summary()), pets, mode: 'normal', playerName: 'Bob', manager: null, locale: 'zh', t: zh });
     expect(m.hero).toBeNull();
-    expect(m.review).toBe('没关系，店长陪你热个身。');
+    expect(m.review).toBe('我先可爱，你慢慢来。');
   });
 
   it('鱼关零服务：不用店长，只留评语', () => {
     const m = shareCardModel({ summary: zero(summary()), pets: fish, mode: 'fish', playerName: 'Bob', manager, locale: 'zh', t: zh });
     expect(m.hero).toBeNull();
-    expect(m.review).toBe('先熟悉一下水流，下局再露一手。');
+    expect(m.review).toBe('我没摸鱼，我就是鱼。');
+  });
+
+  it('分享、切换语言、猜主人加分及下架处理，仍复用报告的同一句变体', () => {
+    const s = summary();
+    const key = pickReview(s, 'normal');
+    for (const locale of ['zh', 'en'] as const) {
+      for (const bonus of [0, 1000]) {
+        const m = shareCardModel({
+          summary: structuredClone(s), pets, mode: 'normal', playerName: 'Bob', manager,
+          locale, t: (k, vars) => translate(locale, k, vars), score: s.score + bonus, removed: new Set(['pet_2']),
+        });
+        expect(m.review).toBe(translate(locale, key));
+        expect(m.score).toBe((s.score + bonus).toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US'));
+      }
+    }
   });
 });
 
@@ -92,7 +108,7 @@ describe('原 MVP 已下架', () => {
     const m = shareCardModel({ summary: summary(), pets, mode: 'normal', playerName: 'Bob', manager, locale: 'zh', t: zh, removed: new Set(['pet_2']) });
     expect(m.hero).toEqual({ src: null, label: '本局成绩', kind: 'generic' });
     expect(m.title).toBe('急什么我会消');
-    expect(m.review).toBe('临时加单？安排得明明白白。');
+    expect(m.review).toBe('催你的事，替我保密。');
     expect(m.score).toBe('2,480');
     expect(m.player).toBe('本局玩家：Bob');
   });

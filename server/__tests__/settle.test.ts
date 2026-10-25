@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { RegisteredGame, ResultPayload } from '../../web/src/api/types.ts';
 import { buildApp } from '../src/app.ts';
 import { freshDatabase } from './helpers.ts';
-import { RULES_VERSION } from '../../web/src/engine/config.ts';
+import { RULES, RULES_VERSION } from '../../web/src/engine/config.ts';
 
 let ctx: Awaited<ReturnType<typeof freshDatabase>>;
 beforeAll(async () => {
@@ -27,7 +27,7 @@ function result(game: RegisteredGame, opts: { bym?: number[]; rush?: boolean; va
   return {
     rulesVersion: game.rulesVersion,
     completed: true,
-    score: bym.reduce((s, n, i) => s + n * (i + 1) * 10, 0) + (opts.rush ? 100 : 0),
+    score: bym.reduce((s, n, i) => s + n * (i + 1) * RULES.baseScore, 0) + (opts.rush ? RULES.rush.bonus : 0),
     clearedCells: cleared,
     clearedByMultiplier: bym,
     rushSucceeded: !!opts.rush,
@@ -66,8 +66,8 @@ describe('统一结算', () => {
     const res = await submit(ctx.app, game, 'U_TEST_ALICE', result(game));
     expect(res.statusCode).toBe(200);
     const body = res.json();
-    expect(body.score).toBe(210);
-    expect(body.personalBest).toEqual({ previous: null, current: 210, isNew: true });
+    expect(body.score).toBe(2100);
+    expect(body.personalBest).toEqual({ previous: null, current: 2100, isNew: true });
     expect(body.newCollected.map((p: { petId: string }) => p.petId)).toEqual(game.lineup.slice(0, 3).map((p) => p.petId));
     expect(body.progress).toEqual({ completedNormalGames: 1, fishUnlocked: false, unlockedNow: false, counted: true });
   });
@@ -102,7 +102,7 @@ describe('统一结算', () => {
     await submit(ctx.app, game, 'U_TEST_SAM', result(game));
     const other = await submit(ctx.app, game, 'U_TEST_SAM', result(game, { bym: [9, 0, 0, 0, 0], served: [9, 0, 0, 0, 0, 0] }));
     expect(other.statusCode).toBe(409);
-    expect((await ctx.pool.query('SELECT score FROM pet_match.game_results WHERE game_id = $1', [game.gameId])).rows[0].score).toBe(210);
+    expect((await ctx.pool.query('SELECT score FROM pet_match.game_results WHERE game_id = $1', [game.gameId])).rows[0].score).toBe(2100);
   });
 
   it('重试不能改写原局归属：换身份提交返回 409', async () => {
@@ -168,10 +168,10 @@ describe('统一结算', () => {
   it('个人最好只在更高时更新；鱼局成绩不进普通榜且不计三局进度', async () => {
     const low = await register('U_TEST_BOB');
     const r = (await submit(ctx.app, low, 'U_TEST_BOB', result(low, { bym: [3, 0, 0, 0, 0], served: [3, 0, 0, 0, 0, 0] }))).json();
-    expect(r.personalBest).toEqual({ previous: 210, current: 210, isNew: false });
+    expect(r.personalBest).toEqual({ previous: 2100, current: 2100, isNew: false });
     const fish = await register('U_TEST_BOB', 'fish');
     const f = (await submit(ctx.app, fish, 'U_TEST_BOB', result(fish))).json();
-    expect(f.personalBest).toEqual({ previous: null, current: 210, isNew: true });
+    expect(f.personalBest).toEqual({ previous: null, current: 2100, isNew: true });
     expect(f.progress.counted).toBe(false);
     expect(f.newCollected).toEqual([]);
   });
@@ -180,7 +180,7 @@ describe('统一结算', () => {
 describe('玩家记录读取', () => {
   it('刷新后读取已保存的个人最好与进度', async () => {
     const res = (await ctx.app.inject({ method: 'GET', url: '/api/players/U_TEST_BOB' })).json();
-    expect(res.best).toEqual({ normal: 210, fish: 210 });
+    expect(res.best).toEqual({ normal: 2100, fish: 2100 });
     expect(res.progress).toEqual({ completedNormalGames: 5, fishUnlocked: true });
   });
 });

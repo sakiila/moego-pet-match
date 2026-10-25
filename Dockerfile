@@ -1,5 +1,5 @@
 # MoeGo 毛孩子全明星：一个容器同时提供前端页面、API 与图片代理。
-# 构建：docker buildx build --platform linux/amd64 -t moego-pet-match:<版本> .
+# 构建时传入 --build-arg GAME_VERSION="$(node web/scripts/game-version.mjs)"；见 deploy/DEPLOY.md。
 # 持久数据不在容器里：数据在 Supabase，图片在 R2；容器内只有可随时重建的图片缓存。
 
 # ---------- 前端 ----------
@@ -8,7 +8,8 @@ WORKDIR /app/web
 COPY web/package.json web/package-lock.json ./
 RUN npm ci --no-audit --no-fund
 COPY web/ ./
-RUN npm run build
+ARG GAME_VERSION
+RUN GAME_VERSION="$GAME_VERSION" npm run build
 
 # ---------- 服务端打包（含 web/src/engine 等源码引用） ----------
 FROM node:22-slim AS server-build

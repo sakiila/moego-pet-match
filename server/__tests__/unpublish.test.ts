@@ -47,7 +47,7 @@ function result(game: RegisteredGame): ResultPayload {
   return {
     rulesVersion: game.rulesVersion,
     completed: true,
-    score: 100,
+    score: 1000,
     clearedCells: 10,
     clearedByMultiplier: [10, 0, 0, 0, 0],
     rushSucceeded: false,
@@ -126,7 +126,7 @@ describe('下架墓碑', () => {
     const res = await app.inject({ method: 'POST', url: `/api/games/${lineupGame.gameId}/result`, payload: { playerId: 'U_TEST_BOB', result: result(lineupGame) } });
     expect(res.statusCode).toBe(200);
     const body = res.json();
-    expect(body.score).toBe(100);
+    expect(body.score).toBe(1000);
     expect(body.removedPetIds).toEqual(['mochi']);
     expect(body.newCollected.map((p: { petId: string }) => p.petId)).not.toContain('mochi');
     // 重试拿到同一份结果，已下架标记按当前目录计算

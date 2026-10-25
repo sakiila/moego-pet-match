@@ -18,7 +18,7 @@ WIDTHS = [32, 48, 72, 96, 144, 192, 288]
 PLAN = json.loads((HERE / 'extraction-plan.json').read_text())
 EXTRA_GROUPS = ['11-supplement', '12-prep-gestures', '13-collection-titles', '14-collection-title-avatars', '15-collection-title-showcase', '16-board-frontdesk']
 WIDE_GROUPS = {'12-prep-gestures'}
-WIDE_ASSETS = {'rush-clip', 'closing-sign-zh', 'closing-sign-en'}
+WIDE_ASSETS = {'rush-clip', 'closing-sign-zh', 'closing-sign-en', 'closing-sign-zh-hd-v2'}
 
 
 def fit(art: Image.Image, width: int, wide: bool) -> Image.Image:
@@ -42,10 +42,15 @@ def main() -> None:
     for group_id, assets in groups:
         for asset in assets:
             master = Image.open(HERE / 'masters' / group_id / f"{asset['id']}.png").convert('RGBA')
-            art = master.crop(master.getbbox())
+            bbox = master.getbbox()
+            if asset['id'] in {'closing-sign-zh-hd-v2', 'title-hotpot-showcase'}:
+                # 透明生成稿只忽略轮廓外极淡的孤立噪点，保留抗锯齿边缘。
+                bbox = master.getchannel('A').point(lambda a: 255 if a > 8 else 0).getbbox()
+                bbox = (max(0, bbox[0] - 2), max(0, bbox[1] - 2), min(master.width, bbox[2] + 2), min(master.height, bbox[3] + 2))
+            art = master.crop(bbox)
             wide = asset.get('wide', False)
             limit = art.width if wide else max(art.size)
-            requested_widths = WIDTHS + [576, 960] if asset['id'] == 'closing-sign-en' else WIDTHS
+            requested_widths = WIDTHS + [576, 960] if asset['id'] in {'closing-sign-en', 'closing-sign-zh-hd-v2'} else WIDTHS
             widths = [w for w in requested_widths if w <= limit]
             if not widths or (widths[-1] < limit and widths[-1] < WIDTHS[-1]):
                 widths.append(min(limit, WIDTHS[-1]))

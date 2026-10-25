@@ -14,7 +14,9 @@ const entry: GalleryEntry = {
     'page heading + back (leaderboard)': () => <BrandHeader heading="排行榜" onBack={() => {}} />,
     'page heading + action (petdex)': () => <BrandHeader heading="宠物图鉴" onBack={() => {}} headingAction={<Button variant="secondary" iconName="open-shop">添加我家毛孩子</Button>} />,
     'page heading + action, long English': () => <BrandHeader heading="Pet Collection" onBack={() => {}} headingAction={<Button variant="secondary" iconName="open-shop">Add My Pet</Button>} />,
-    'accent heading + back (report)': () => <BrandHeader heading="Grooming Report Card" headingAccent tagline="report.subtitle" onBack={() => {}} />,
+    'report artwork + subtitle': () => <BrandHeader title="report" tagline="report.subtitle" onBack={() => {}} />,
+    'report artwork + zero service': () => <BrandHeader title="report" tagline="report.generic_caption" onBack={() => {}} />,
+    'fish report artwork': () => <BrandHeader title="fish-report" tagline="fish.report_subtitle" onBack={() => {}} />,
     'game + avatar (home)': () => <BrandHeader title="game" trailing={<Avatar name="Bob" size={36} />} />,
   },
 };

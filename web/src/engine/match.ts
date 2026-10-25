@@ -75,11 +75,12 @@ export function findGroups(board: Board): Group[] {
   return [...byRoot.values()].sort((a, b) => posKey(a.cells[0], size) - posKey(b.cells[0], size));
 }
 
-/** 直线五连及以上、或横纵交叉且至少五个独立格（L / T / ＋）出剪刀；直线四消出对应方向的梳子。 */
+/** 直线五连及以上优先出吹风机；其余横纵交叉至少五格（L / T / ＋）出剪刀；直线四消出对应方向的梳子。 */
 export function toolForGroup(group: Group): ToolType | null {
   const longest = Math.max(...group.lines.map((l) => l.cells.length));
   const crossed = group.lines.some((l) => l.dir === 'h') && group.lines.some((l) => l.dir === 'v');
-  if (longest >= 5 || (crossed && group.cells.length >= 5)) return 'scissors';
+  if (longest >= 5) return 'dryer';
+  if (crossed && group.cells.length >= 5) return 'scissors';
   if (longest === 4) return group.lines.find((l) => l.cells.length === 4)!.dir === 'h' ? 'combH' : 'combV';
   return null;
 }

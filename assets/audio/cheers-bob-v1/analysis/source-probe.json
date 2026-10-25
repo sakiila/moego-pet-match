@@ -1,0 +1,77 @@
+{
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "codec_tag_string": "mp4a",
+            "codec_tag": "0x6134706d",
+            "mime_codec_string": "mp4a.40.2",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "id": "0x1",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/48000",
+            "start_pts": 2112,
+            "start_time": "0.044000",
+            "duration_ts": 482304,
+            "duration": "10.048000",
+            "bit_rate": "109406",
+            "nb_frames": "471",
+            "extradata_size": 2,
+            "disposition": {
+                "default": 1,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "non_diegetic": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0,
+                "multilayer": 0
+            },
+            "tags": {
+                "creation_time": "2026-10-25T02:13:04.000000Z",
+                "language": "und",
+                "handler_name": "Core Media Audio"
+            }
+        }
+    ],
+    "format": {
+        "filename": "/Users/bob/Downloads/sound.m4a",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.044000",
+        "duration": "10.048000",
+        "size": "143357",
+        "bit_rate": "114137",
+        "probe_score": 100,
+        "tags": {
+            "major_brand": "M4A ",
+            "minor_version": "0",
+            "compatible_brands": "M4A isommp42",
+            "creation_time": "2026-10-25T02:13:04.000000Z",
+            "iTunSMPB": " 00000000 00000840 000003C0 0000000000075000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000"
+        }
+    }
+}

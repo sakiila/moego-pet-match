@@ -237,7 +237,8 @@
   position: relative;
   align-self: stretch;
   margin: var(--space-4) 0 0;
-  padding: var(--space-5) var(--space-4) var(--space-4);
+  /* 没有头像时单独留出称号章的位置，避免挡住鼓励文案。 */
+  padding: calc(var(--space-6) * 2 + var(--space-3)) var(--space-4) var(--space-4);
   border-radius: var(--radius-lg);
   background: var(--color-surface-muted);
   text-align: center;

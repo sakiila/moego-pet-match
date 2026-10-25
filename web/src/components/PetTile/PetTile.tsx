@@ -15,7 +15,8 @@ export interface PetTileProps {
 export function PetTile({ pet, tint, size, variant = 'tile' }: PetTileProps) {
   const [failed, setFailed] = useState(false);
   const style = { '--tint': `var(--pet-tint-${tint % 6})`, '--size': size ? `${size}px` : undefined } as CSSProperties;
-  const src = petImage(pet, size && size > 96 ? 512 : 128);
+  // 放大棋盘按至少2倍像素密度选图，避免大棋格继续使用128px缩略图。
+  const src = petImage(pet, size && size * 2 > 128 ? 512 : 128);
   return (
     <div className={styles.tile} data-variant={variant} style={style} role="img" aria-label={pet.name}>
       {src && !failed ? (

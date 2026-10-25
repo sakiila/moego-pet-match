@@ -45,3 +45,18 @@ export function judgeReview(summary: GameSummary, mode: GameMode): MessageKey {
             : 'normal';
   return `${prefix}.${which}` as MessageKey;
 }
+
+/** 同一局在报告、分享和切换语言时使用同一句变体。 */
+export function pickReview(summary: GameSummary, mode: GameMode): MessageKey {
+  const scene = judgeReview(summary, mode);
+  const signature = JSON.stringify([
+    summary.score, summary.clearedCells, summary.maxChain, summary.toolsFired, summary.validMoves,
+    summary.pets.map((pet) => [pet.id, pet.served, pet.firstServedSeq]),
+  ]);
+  let hash = 2166136261;
+  for (let i = 0; i < signature.length; i++) {
+    hash = Math.imul(hash ^ signature.charCodeAt(i), 16777619);
+  }
+  const variant = (hash >>> 0) % 5 + 1;
+  return variant === 1 ? scene : `${scene}.${variant}` as MessageKey;
+}

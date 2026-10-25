@@ -1,6 +1,7 @@
 .frame {
+  position: relative;
   width: 100%;
-  padding: var(--space-2);
+  padding: var(--board-frame-padding);
   border: var(--stroke) solid var(--board-border);
   border-radius: var(--radius-lg);
   background: var(--board-bg);

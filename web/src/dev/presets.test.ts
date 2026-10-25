@@ -8,9 +8,9 @@ const game = (name: string) => createGame({ seed: 1, lineup: LINEUP, ...PRESETS[
 const chain = (t: Timeline) => (t.kind === 'chain' ? t : null)!;
 
 describe('开发验收预设', () => {
-  it('cascade：拖 (4,4)→(4,3) 得 210 分', () => {
+  it('cascade：拖 (4,4)→(4,3) 得 2100 分', () => {
     const r = trySwap(game('cascade'), { r: 4, c: 4 }, { r: 4, c: 3 }, 0);
-    expect(r.ok && r.state.score).toBe(210);
+    expect(r.ok && r.state.score).toBe(2100);
   });
 
   it('shuffle：一步之后成死局，系统洗牌且洗牌不产生收益', () => {
@@ -20,7 +20,7 @@ describe('开发验收预设', () => {
     expect(t.batches).toHaveLength(1);
     expect(t.shuffled).not.toBeNull();
     expect(isPlayable(t.shuffled!)).toBe(true);
-    expect(r.state.score).toBe(30);
+    expect(r.state.score).toBe(300);
     expect(r.state.board).toBe(t.shuffled);
   });
 });

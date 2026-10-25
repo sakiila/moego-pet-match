@@ -7,17 +7,17 @@ const noop = () => {};
 const player = (fishUnlocked: boolean) => ({
   userId: 'bob',
   name: 'Bob',
-  best: { normal: 2480, fish: null },
+  best: { normal: 24800, fish: null },
   progress: { completedNormalGames: 3, fishUnlocked }, streak: { days: 0, today: false },
 });
 const names = ['Emma', 'Sam Pineda', 'Yoo', 'Kai', 'Mia', 'Fiona', 'Bob', 'Luz', 'Rachel Shaw', 'Theo'];
-const scores = [4980, 4260, 3920, 3100, 2900, 2640, 2480, 2480, 2360, 1200];
+const scores = [49800, 42600, 39200, 31000, 29000, 26400, 24800, 24800, 23600, 1200];
 const ranked: LeaderboardView = {
   mode: 'normal',
   scope: 'today',
   date: '2026-10-24',
   entries: names.map((n, i) => ({ rank: i === 7 ? 7 : i + 1, userId: n.toLowerCase(), name: n, score: scores[i], equippedTitle: ACHIEVEMENT_IDS[i % ACHIEVEMENT_IDS.length] })),
-  me: { rank: 7, userId: 'bob', name: 'Bob', score: 2480, equippedTitle: 'album' },
+  me: { rank: 7, userId: 'bob', name: 'Bob', score: 24800, equippedTitle: 'album' },
 };
 
 const profilePreview = async (userId: string, mode: 'normal' | 'fish'): Promise<PlayerProfileView> => {

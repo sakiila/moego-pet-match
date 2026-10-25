@@ -5,7 +5,7 @@ import type { QuizQuestion, QuizResult, ResultPayload, SettleResponse } from '..
 /** 两次出题至少间隔的完整普通局数。 */
 export const QUIZ_INTERVAL = 3;
 /** 答对加到本局总分（并参与最好成绩比较）的分数；答错、跳过不扣分。 */
-export const QUIZ_BONUS = 100;
+export const QUIZ_BONUS = 1000;
 
 const shuffle = <T>(items: T[]) => {
   const a = [...items];

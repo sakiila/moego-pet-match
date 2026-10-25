@@ -13,7 +13,7 @@ export interface AchievementAvatarProps extends Omit<AvatarProps, 'size'> {
 /** C 档：40px 头像，22px 徽章中心贴住右下 45° 圆周。 */
 export function AchievementAvatar({ equippedTitle, onTitleClick, ...avatar }: AchievementAvatarProps) {
   const { t } = useI18n();
-  const badge = equippedTitle ? <Icon name={`title-${equippedTitle}-avatar`} size={22} label={onTitleClick ? undefined : t(achievementName(equippedTitle))} /> : null;
+  const badge = equippedTitle ? <Icon name={equippedTitle === 'hotpot' ? 'title-hotpot-showcase' : `title-${equippedTitle}-avatar`} size={22} label={onTitleClick ? undefined : t(achievementName(equippedTitle))} /> : null;
   return (
     <span className={styles.root}>
       <Avatar {...avatar} size={40} />

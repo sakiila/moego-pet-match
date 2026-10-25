@@ -12,7 +12,7 @@ const entry: GalleryEntry = {
   name: 'ReportHarvest',
   group: 'components',
   states: {
-    'two pets + one new title (mockup)': () => <ReportHarvest pets={real.slice(0, 2)} achievements={['dogs']} onSelectPet={noop} onOpenTitles={noop} />,
+    'one new title first, then two pets': () => <ReportHarvest pets={real.slice(0, 2)} achievements={['dogs']} onSelectPet={noop} onOpenTitles={noop} />,
     'one pet only': () => <ReportHarvest pets={real.slice(0, 1)} onSelectPet={noop} />,
     'titles only (two)': () => <ReportHarvest pets={[]} achievements={['cats', 'album']} onOpenTitles={noop} />,
     'five items wrap to two rows': () => <ReportHarvest pets={real} achievements={['cats', 'friends']} onSelectPet={noop} onOpenTitles={noop} />,

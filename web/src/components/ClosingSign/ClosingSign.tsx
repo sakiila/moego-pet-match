@@ -7,11 +7,11 @@ export interface ClosingSignProps {
   label: string;
 }
 
-/** 已确认挂牌原图，保留绳结、描边与文字的原始比例。 */
+/** 已确认的挂牌造型；中英均使用高分辨率透明素材，等比显示。 */
 export function ClosingSign({ locale, label }: ClosingSignProps) {
   return (
     <div className={styles.sign} data-testid="closing-sign" data-locale={locale}>
-      <Icon name={locale === 'en' ? 'closing-sign-en' : 'closing-sign-zh'} size={240} label={label} className={styles.art} />
+      <Icon name={locale === 'en' ? 'closing-sign-en' : 'closing-sign-zh-hd-v2'} size={240} label={label} className={styles.art} />
     </div>
   );
 }

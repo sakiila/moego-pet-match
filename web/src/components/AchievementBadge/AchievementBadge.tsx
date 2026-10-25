@@ -16,7 +16,7 @@ export function AchievementBadge({ id, chip = false, large = false, locked = fal
   const name = hidden ? t('achievement.hidden_name') : t(achievementName(id));
   return (
     <span className={`${styles.badge} ${chip ? styles.chip : ''} ${locked ? styles.locked : ''}`} data-rarity={rarity ? ACHIEVEMENT_RARITY[id] : undefined} data-hidden={hidden || undefined} title={title ?? name}>
-      <Icon name={rarity ? `title-${id}-${chip ? 'avatar' : 'showcase'}` : `title-${id}`} size={size ?? (chip ? 24 : large ? 72 : 48)} label={chip ? undefined : name} />
+      <Icon name={id === 'hotpot' ? 'title-hotpot-showcase' : rarity ? `title-${id}-${chip ? 'avatar' : 'showcase'}` : `title-${id}`} size={size ?? (chip ? 24 : large ? 72 : 48)} label={chip ? undefined : name} />
       {hidden && <span className={styles.mask} aria-hidden>?</span>}
       {chip && <span className={styles.name}>{name}</span>}
     </span>

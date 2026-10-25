@@ -34,7 +34,7 @@ export interface BoardScreenProps {
 
 export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncollected, families, onFinished, onExit }: BoardScreenProps) {
   useEffect(() => {
-    preloadIcon('closing-sign-zh', 240);
+    preloadIcon('closing-sign-zh-hd-v2', 240);
     preloadIcon('closing-sign-en', 240);
   }, []);
   // 时间到后先停一拍显示「收工」，再进入报告；结果已冻结，成绩在进入报告时提交
@@ -47,11 +47,11 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
     const id = window.setTimeout(() => finishedRef.current(ending), reduced ? MOTION.timeUpHoldReducedMs : MOTION.timeUpHoldMs);
     return () => window.clearTimeout(id);
   }, [ending, reduced]);
-  const session = useGameSession(game, setEnding, { speed, startAt, mode, uncollected, families });
-  const fish = mode === 'fish';
-  const { view } = session;
   const [quitOpen, setQuitOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const session = useGameSession(game, setEnding, { speed, startAt, mode, uncollected, families, cheersEnabled: !quitOpen && !settingsOpen });
+  const fish = mode === 'fish';
+  const { view } = session;
 
   // 退出确认期间计时继续；到时自动关闭弹层并照常收尾结算
   useEffect(() => {
@@ -64,7 +64,7 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
   return (
     <BoardLayout
       mode={mode}
-      header={<BrandHeader title={fish ? 'fish' : 'scheduling'} boardArt={!fish} tagline={fish ? 'fish.prep_rule' : 'board.tagline'} />}
+      header={<BrandHeader title={fish ? 'fish' : 'scheduling'} boardArt tagline={fish ? 'fish.prep_rule' : 'board.tagline'} />}
       status={<StatusPanel timeLeftMs={view.timeLeftMs} score={view.frame.score} />}
       rush={<RushBar view={view.rush} mode={mode} />}
       board={<Board
@@ -74,6 +74,7 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
           interactive={!view.timeUp}
           hint={view.hint}
           popups={view.popups}
+          cheer={view.cheer}
           getPreview={session.preview}
           onSwap={session.attemptSwap}
           onDraggingChange={session.setDragging}

@@ -72,11 +72,13 @@ const PRELOAD_TIMEOUT_MS = 10_000;
 
 /**
  * 开局前预加载本局棋盘贴纸；任一失败或超时视为素材未就绪（准备页显示可重试）。
+ * 默认等待128与512两档都就绪，覆盖放大棋盘；指定size时只加载该档。
  * 用 load/error 事件而非 decode()：页面在后台时 decode 可能一直不返回。
  */
-export async function preloadPets(pets: PetInfo[], size: 128 | 512 = 128): Promise<void> {
-  const loads = pets.map((p) => {
-    const src = petImage(p, size);
+export async function preloadPets(pets: PetInfo[], size?: 128 | 512): Promise<void> {
+  const sizes: readonly (128 | 512)[] = size === undefined ? [128, 512] : [size];
+  const loads = pets.flatMap((p) => sizes.map((imageSize) => {
+    const src = petImage(p, imageSize);
     if (!src) return Promise.resolve();
     return new Promise<void>((resolve, reject) => {
       const img = new Image();
@@ -84,7 +86,7 @@ export async function preloadPets(pets: PetInfo[], size: 128 | 512 = 128): Promi
       img.onerror = () => reject(new Error(`failed to load ${src}`));
       img.src = src;
     });
-  });
+  }));
   let timer: ReturnType<typeof setTimeout> | undefined;
   const timeout = new Promise<never>((_, reject) => {
     timer = setTimeout(() => reject(new Error('preload timeout')), PRELOAD_TIMEOUT_MS);

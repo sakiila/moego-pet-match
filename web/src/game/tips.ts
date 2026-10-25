@@ -17,11 +17,14 @@ export function nextTutorial(board: Board, seen: ReadonlySet<string>): Tutorial 
     for (let c = 0; c < size; c++) {
       const p = board[r][c];
       if (p?.type !== 'tool') continue;
-      if (p.tool === 'dryer' && !seen.has('dryer')) return 'dryer';
+      if (p.tool === 'dryer') {
+        if (!seen.has('dryer')) return 'dryer';
+        continue;
+      }
       firstTool ??= p.tool === 'scissors' ? 'scissors' : 'comb';
       const right = board[r][c + 1];
       const down = board[r + 1]?.[c];
-      const neighbours = [right, down].filter((n) => n?.type === 'tool');
+      const neighbours = [right, down].filter((n) => n?.type === 'tool' && n.tool !== 'dryer');
       if (!seen.has('merge') && p.tool === 'scissors' && neighbours.some((n) => n?.type === 'tool' && n.tool === 'scissors')) return 'merge';
       if (!seen.has('combo') && neighbours.length > 0) return 'combo';
     }

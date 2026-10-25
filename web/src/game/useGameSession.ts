@@ -22,6 +22,7 @@ import { frameAt, type Frame, type PlaybackBase, type Popup } from './playback';
 import { chainStickers } from './stickers';
 import { hintDue, loadSeenTutorials, nextTutorial, pickTip, saveSeenTutorials, type StickerEvent, type TipView, type Tutorial } from './tips';
 import { reunionKey } from './easterEggs';
+import { advanceCheer, type CheerEvent, type CheerState } from './cheers';
 
 /** 系统洗牌的演示时长（墙钟）；期间两个计时器同时暂停。 */
 const SHUFFLE_PAUSE_MS = 700;
@@ -49,6 +50,7 @@ interface Session {
   stickers: (StickerEvent & { at: number })[];
   /** 已放过声音与触感的最大全局批序：每个清除批次在结算时刻只反馈一次。 */
   feedbackSeq: number;
+  cheers: CheerState;
 }
 
 /** 局内贴纸所需的本局背景：阵容 id、未收集宠物与家庭分组。 */
@@ -56,6 +58,8 @@ export interface SessionContext {
   mode?: GameMode;
   uncollected?: ReadonlySet<string>;
   families?: Readonly<Record<string, string>>;
+  /** 设置与退出弹层期间抑制喝彩，不暂停游戏。 */
+  cheersEnabled?: boolean;
 }
 
 export interface GameView {
@@ -66,6 +70,7 @@ export interface GameView {
   tip: TipView | null;
   hint: Move | null;
   popups: Popup[];
+  cheer: CheerEvent | null;
   /** 可接收新交换：已开始、未到时、棋盘稳定且不在洗牌中。 */
   acceptsInput: boolean;
   timeUp: boolean;
@@ -87,7 +92,7 @@ const baseOf = (s: GameState): PlaybackBase => ({ board: s.board, score: s.score
 export function useGameSession(
   initial: GameState,
   onFinished: (summary: GameSummary) => void,
-  { speed = 1, startAt = 0, mode = 'normal', uncollected = new Set(), families = {} }: { speed?: number; startAt?: number } & SessionContext = {},
+  { speed = 1, startAt = 0, mode = 'normal', uncollected = new Set(), families = {}, cheersEnabled = true }: { speed?: number; startAt?: number } & SessionContext = {},
 ): UseGameSession {
   const session = useRef<Session>(null as unknown as Session);
   if (!session.current) {
@@ -107,6 +112,7 @@ export function useGameSession(
       shownFamilies: new Set(),
       stickers: [],
       feedbackSeq: 0,
+      cheers: { handledSeq: 0, active: null },
     };
   }
   const dragging = useRef(false);
@@ -117,7 +123,26 @@ export function useGameSession(
   const feedback = useFeedback();
   const feedbackRef = useRef(feedback);
   feedbackRef.current = feedback;
+  const cheersEnabledRef = useRef(cheersEnabled);
+  cheersEnabledRef.current = cheersEnabled;
   const [, setTick] = useState(0);
+
+  const syncCheer = useCallback((cur: Session, g: number) => {
+    const previous = cur.cheers.active;
+    cur.cheers = advanceCheer(cur.cheers, cur.timeline, g,
+      cheersEnabledRef.current && document.visibilityState === 'visible' && cur.state.phase === 'playing');
+    const current = cur.cheers.active;
+    if (current && current.key !== previous?.key) feedbackRef.current.onCheer(current.kind);
+    if (previous && !current) feedbackRef.current.stopCheer();
+  }, []);
+
+  useEffect(() => {
+    if (!cheersEnabled) {
+      const cur = session.current;
+      cur.cheers = advanceCheer(cur.cheers, cur.timeline, cur.clock.elapsed(), false);
+      feedbackRef.current.stopCheer();
+    }
+  }, [cheersEnabled]);
 
   useEffect(() => {
     const s = session.current;
@@ -150,18 +175,28 @@ export function useGameSession(
       s.state = state;
       if (events.some((e) => e.type === 'finished') && !s.finished) {
         s.finished = true;
+        s.cheers.active = null;
         feedbackRef.current.onFinish();
         finishedRef.current(getSummary(state));
         return;
       }
+      syncCheer(s, s.clock.elapsed());
       setTick((n) => n + 1);
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
     // 背景音乐只在棋盘计时期间播放（开关打开时）；离开棋盘即停
     feedbackRef.current.setMusicActive(true);
+    const onVisibility = () => {
+      if (document.visibilityState !== 'visible') {
+        s.cheers = advanceCheer(s.cheers, s.timeline, s.clock.elapsed(), false);
+        setTick((n) => n + 1);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
     return () => {
       cancelAnimationFrame(raf);
+      document.removeEventListener('visibilitychange', onVisibility);
       feedbackRef.current.setMusicActive(false);
     };
   }, []);
@@ -209,6 +244,7 @@ export function useGameSession(
     }),
     hint,
     popups: [...s.popups.values()],
+    cheer: cheersEnabled && !timeUp ? s.cheers.active : null,
     acceptsInput,
     timeUp,
   };
@@ -219,6 +255,8 @@ export function useGameSession(
     const t = cur.clock.elapsed();
     const result = trySwap(cur.state, from, to, t);
     if (!result.ok) return false;
+    // 两帧之间已回稳时，先收掉上一操作的反馈，再替换时间线。
+    syncCheer(cur, t);
     cur.base = baseOf(cur.state);
     cur.state = result.state;
     cur.timeline = result.timeline;

@@ -31,7 +31,7 @@ function clearingFrame(level: number) {
     impact: impact === 'none' ? null : { kind: impact, key: level },
   };
 }
-const popup = (chain: number, level: number) => ({ key: level, score: 30 * level, chain, level, at: { r: 3, c: 3 }, startAt: 0 });
+const popup = (chain: number, level: number) => ({ key: level, score: 300 * level, chain, level, at: { r: 3, c: 3 }, startAt: 0 });
 
 /** 可交互：真实引擎 + 墙钟驱动的时间线播放，方便单独调手感。 */
 function Live({ rows, refill }: { rows?: string[]; refill?: number[] }) {

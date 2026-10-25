@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-25",
+  "status": "approved_integrated_local_not_deployed",
+  "source": "source/sound.m4a",
+  "source_sha256": "6d54e852465590ffa82e09d175c7cb59b9b46159b7fcae58e7e5154b14c540ca",
+  "timebase": "seconds from start of decoded mono PCM",
+  "sample_rate": 48000,
+  "channels": 1,
+  "target_lufs": -18.0,
+  "max_true_peak_db": -1.5,
+  "processing": {
+    "stereo_to_mono": "mean of L/R; measured source correlation 0.9976",
+    "highpass_hz": 65,
+    "fade_in_ms": 5,
+    "fade_out_ms": 20,
+    "normalization": "two-pass EBU R128 loudnorm; -18 LUFS, LRA 11, TP -1.5 dBTP; linear gain",
+    "noise_reduction": "none; source ambient RMS approximately -73.9 dBFS",
+    "pitch_or_rate_change": "none",
+    "reverb": "none"
+  },
+  "selection": "Four isolated utterances, one take each; no repeated versions to rank.",
+  "segments": [
+    {
+      "label": "nice",
+      "take": "take-01",
+      "source_start": 2.245,
+      "source_end": 2.875,
+      "duration": 0.63,
+      "unprocessed": "takes/take-01.wav",
+      "master": "masters/nice.wav",
+      "preview": "previews/nice.mp3",
+      "source_lufs_after_cleanup": -23.67,
+      "output_lufs": -18.03,
+      "output_true_peak_db": -6.09,
+      "normalization_type": "linear",
+      "master_sha256": "d10ef17d894909df134b0c2b0f761cd1c0646589fdea9b434ae4979931275eb5"
+    },
+    {
+      "label": "great",
+      "take": "take-02",
+      "source_start": 4.085,
+      "source_end": 4.665,
+      "duration": 0.58,
+      "unprocessed": "takes/take-02.wav",
+      "master": "masters/great.wav",
+      "preview": "previews/great.mp3",
+      "source_lufs_after_cleanup": -24.2,
+      "output_lufs": -18.0,
+      "output_true_peak_db": -5.42,
+      "normalization_type": "linear",
+      "master_sha256": "7463c0fed60acaaf7a30b61b671aff13f07d43b33b009a8bad58db5d846c5c65"
+    },
+    {
+      "label": "amazing",
+      "take": "take-03",
+      "source_start": 6.055,
+      "source_end": 6.815,
+      "duration": 0.76,
+      "unprocessed": "takes/take-03.wav",
+      "master": "masters/amazing.wav",
+      "preview": "previews/amazing.mp3",
+      "source_lufs_after_cleanup": -21.29,
+      "output_lufs": -17.99,
+      "output_true_peak_db": -6.77,
+      "normalization_type": "linear",
+      "master_sha256": "7c3cca1866e0e986628d2027fe0fbf4aef5617c73f91f9db6e496b330fb15750"
+    },
+    {
+      "label": "wow",
+      "take": "take-04",
+      "source_start": 8.09,
+      "source_end": 8.585,
+      "duration": 0.495,
+      "unprocessed": "takes/take-04.wav",
+      "master": "masters/wow.wav",
+      "preview": "previews/wow.mp3",
+      "source_lufs_after_cleanup": -26.65,
+      "output_lufs": -18.05,
+      "output_true_peak_db": -5.32,
+      "normalization_type": "linear",
+      "master_sha256": "23d003f0ae3c5218cb2b5413b82b4ecad17686fd54e12e364a6ab1b70bfbb46d"
+    }
+  ],
+  "sampler": "previews/cheers-audition.mp3",
+  "label_verification": {
+    "method": "local faster-whisper tiny.en, no initial prompt",
+    "transcript": "Nice. Great. Amazing. Wow.",
+    "takes_per_phrase": 1,
+    "evidence": "analysis/asr-tiny-en.json",
+    "boundary_policy": "PCM waveform, not ASR word timestamps",
+    "human_listening_performed": false
+  },
+  "integration": {
+    "approved": "2026-10-25",
+    "directory": "web/src/audio/clips",
+    "gain": 0.85,
+    "copies_verified": true
+  }
+}

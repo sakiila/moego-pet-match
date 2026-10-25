@@ -127,6 +127,12 @@
 | home.streak_pending | 连续 {days} 天开工 · 今天还没开工 | {days}-day streak · not clocked in yet today |
 | home.streak_none | 今天开一局，打卡从今天算起 | Play a round today to start your streak |
 | home.photo_notice | 宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob（毛肚和菠萝的铲屎官） | Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack (Maodu and Boluo's human). |
+| home.version | 版本 {version} | Version {version} |
+| home.github_link | GitHub：{repository}（在新标签页打开） | GitHub: {repository} (opens in a new tab) |
+
+版本号在首页页尾链接下方居中展示，使用低层级小字。格式为 `YYYYMMDD.N`（例如 `20261025.5`）：日期取最新 Git 提交的北京时间，序号取当前分支主线（first-parent）中同日提交数。启动／构建时自动生成并固定到产物，同一提交重复构建不换号，未提交的本地修改不递增。GitHub 构建自动向 Docker 传入相同版本；开发服务运行期间提交后，重启开发服务可读取新值。
+
+版本号下方展示 GitHub 仓库地址 `github.com/sakiila/moego-pet-match`，小字居中并保留下划线，点击在新标签页打开项目首页。`home.github_link` 用作链接的中英文可访问名称，提示新标签页行为；可见地址保持原文。
 
 首页主按钮共用「开始营业 / Open Shop」，进入普通宠物局准备，不直接开始计时；次级入口沿用图鉴、排行榜、我的宠物。个人最好只展示普通宠物局记录，不将鱼关成绩混入首页字段。人工处理提示保留用户指定原句，首页没有鱼关入口或解锁预告。
 
@@ -164,6 +170,10 @@
 | board.time_left | 本局剩余 {seconds} 秒 | Time Left: {seconds}s |
 | board.chain | {chain} 连锁！ | {chain}-Step Cascade! |
 | board.chain_max | ×5 顶格！ | MAX ×5! |
+| board.cheer_nice | Nice! | Nice! |
+| board.cheer_great | Great! | Great! |
+| board.cheer_amazing | Amazing! | Amazing! |
+| board.cheer_wow | Wow! | Wow! |
 | board.wave_score | +{waveScore} | +{waveScore} |
 | board.new_pets | 新认识了 {count} 位毛孩子 | Met {count} New Pets |
 | board.reunion | 终于一起下班了！ | Clocking Out Together! |
@@ -176,7 +186,7 @@
 | rush.title | 临时加单！ | Rush Order! |
 | rush.goal | 20 秒内服务 12 格 | Clear 12 tiles in 20s |
 | rush.progress | 已服务 {count}/12 格 · 催单剩余 {seconds} 秒 | {count}/12 tiles · Rush time: {seconds}s |
-| rush.success | 安排得明明白白！+100 分 | All Sorted! +100 Points |
+| rush.success | 安排得明明白白！+1000 分 | All Sorted! +1000 Points |
 | rush.expired | 这单没赶上，继续营业！ | Missed this one. Keep the shop rolling! |
 | round.last_seconds | 最后 10 秒，稳住这班。 | Final 10 Seconds. You've Got This. |
 | round.finishing | 时间到，收完这波就下班。 | Time's up. Clocking out after this chain. |
@@ -192,7 +202,7 @@
 
 2026-10-25 棋盘确认稿：临时加单采用前台夹单小票，倒计时显示「还剩 N 秒 / Left N s」，底行仅保留已服务格数与进度条，不再重复显示 `rush.goal`。20 秒服务 12 格的规则不变。用于强调色与粗数字的分段 key 为 `rush.title_lead` / `rush.title_accent`、`rush.seconds_lead` / `rush.seconds_unit`、`rush.served_lead` / `rush.served_unit`、`rush.success_lead` / `rush.success_accent`、`rush.bonus` / `rush.bonus_unit`；分别组合成上表完整事实，不新增奖励。收工的感谢句只在至少有一张实际服务过的贴纸时随头像出现，零服务局仅挂牌。
 
-催单在游戏时钟第 30 秒触发，目标和倒计时区分主时钟，成功才显示 +100。`board.chain` 的链数与计分倍率分别计算，不因为显示第六轮就变成六倍。新宠提示是局内暂记，正式收集等结算保存；同次连锁合并一条，家庭团聚按同家每局一次。提示、收集和团聚不叠满棋盘。`round.finishing` 只在最后有效连锁仍待结算时显示，`round.last_seconds` 不新增奖励。
+催单在游戏时钟第 30 秒触发，目标和倒计时区分主时钟，成功才显示 +1000。`board.chain` 的链数与计分倍率分别计算，不因为显示第六轮就变成六倍。新宠提示是局内暂记，正式收集等结算保存；同次连锁合并一条，家庭团聚按同家每局一次。提示、收集和团聚不叠满棋盘。`round.finishing` 只在最后有效连锁仍待结算时显示，`round.last_seconds` 不新增奖励。
 
 加分飘字已确认每个逻辑清除批次合并一条。`{waveScore}` 为本批次去重后、按当前连锁倍率计算的清除分，不是累计总分，也不含催单 +100；同批工具命中不拆成多条，补落形成下一批消除时再显示下一条。任务奖励继续用 `rush.success` 原位反馈，固定总分按实际结算实时更新，两种模式一致。
 
@@ -241,17 +251,62 @@
 
 ### 按实际表现选用的角色评语
 
-普通宠物局与鱼关共用同一套固定优先级，每局选择首个满足条件的唯一评语（与称号体系独立计算，不新增竞技分）：
+普通宠物局与鱼关共用同一套固定优先级，先选择首个满足条件的场景，再从该场景的 5 条评语中选一条（与称号体系独立计算，不新增竞技分）：
 
 | 优先级 | 触发条件 | Key / 场景 | 中文 | English |
 | --- | --- | --- | --- | --- |
-| 1 | 有效服务格数 `== 0` | `review.pet.no_service` / 零服务，由店长鼓励 | 没关系，店长陪你热个身。 | Just warming up. Your shop manager's here to help. |
-| 2 | 单次操作最高连锁 `>= 5` | `review.pet.high_chain` / 高连锁 | 这波连锁，把我梳服了。 | Smooth combo. Even smoother fur. |
-| 3 | `rushCompleted == true` | `review.pet.rush_success` / 催单成功 | 临时加单？安排得明明白白。 | A rush order? You made room like a pro. |
-| 4 | 发动过梳＋梳、梳＋剪合体或吹风机 | `review.pet.tool_combo` / 实际发动过道具合体 | 工具一搭档，排班有两下。 | Tools teamed up. Nicely scheduled. |
-| 5 | 其他有真实服务的完整对局（有效服务格数 `>= 1`） | `review.pet.normal` / 有真实服务的普通完成 | 今天这班，有你就放心啦。 | This shift was in good hands. |
+| 1 | 有效服务格数 `== 0` | `review.pet.no_service` / 零服务，由店长鼓励 | 我先可爱，你慢慢来。 | Take your time. I'll be cute. |
+| 2 | 单次操作最高连锁 `>= 5` | `review.pet.high_chain` / 高连锁 | 等等，我还没反应过来！ | Wait! I'm still catching up! |
+| 3 | `rushCompleted == true` | `review.pet.rush_success` / 催单成功 | 赶上了，我撤回那个眼神。 | On time. I take back that look. |
+| 4 | 发动过梳＋梳、梳＋剪合体或吹风机 | `review.pet.tool_combo` / 实际发动过道具合体 | 有两下子，比我多两下。 | You've got skills. I brought none. |
+| 5 | 其他有真实服务的完整对局（有效服务格数 `>= 1`） | `review.pet.normal` / 有真实服务的普通完成 | 先抱抱，别的等会儿。 | Cuddles first. Everything else later. |
 
 鱼关 `review.fish.*`（见第 8 节）按完全相同的 1–5 优先级判定。英文表达不是主人的真实名言。
+
+2026-10-25 结算评语扩充为每个场景 5 条，共 50 条中英文对应文案。上表及第 8 节列出各场景的第 1 条，以下为第 2–5 条。同一局的评语变体保持固定，报告重开、保存重试、分享与切换语言不重新抽取；新对局可出现同场景的其他表达。本次按用户选定的第二版替换全部 50 句：中文用简短的撒娇、嘴硬、贪吃、装忙与轻吐槽，英文保留对应笑点与口吻，不逐字硬译。评语不要求玩家理解连锁、合体或道具术语；零服务用轻松鼓励或玩笑，不编造本局已服务的表现。
+
+| Key | 中文 | English |
+| --- | --- | --- |
+| review.pet.no_service.2 | 没事，我也刚睡醒。 | It's fine. I just woke up too. |
+| review.pet.no_service.3 | 开工？我以为开饭。 | Work time? I heard snack time. |
+| review.pet.no_service.4 | 这把算热身，我说了算。 | Warm-up round. I make the rules. |
+| review.pet.no_service.5 | 不急，我还没伸完懒腰。 | No rush. Still stretching. |
+| review.pet.high_chain.2 | 还有？零食都快吃完了。 | More? I'm running out of snacks. |
+| review.pet.high_chain.3 | 你忙你的，我已经看呆。 | Carry on. I'm busy staring. |
+| review.pet.high_chain.4 | 刚才没看清，再来。 | Missed that. Do it again. |
+| review.pet.high_chain.5 | 行吧，刚才算你帅。 | Fine. That was pretty cool. |
+| review.pet.rush_success.2 | 我急，是因为饭点到了。 | I'm in a hurry. It's dinner time. |
+| review.pet.rush_success.3 | 催你的事，替我保密。 | Don't tell anyone I rushed you. |
+| review.pet.rush_success.4 | 好了，不用喊我家长了。 | Fine. No need to call my human. |
+| review.pet.rush_success.5 | 下次加急，我自带零食。 | Next rush, I'll bring snacks. |
+| review.pet.tool_combo.2 | 我躺好了，你看着办。 | I'm comfy. Do your thing. |
+| review.pet.tool_combo.3 | 顺便挠挠？就一下。 | A little scratch too? Just one. |
+| review.pet.tool_combo.4 | 动静挺大，我先装睡。 | Bit loud. I'll pretend to sleep. |
+| review.pet.tool_combo.5 | 嘘，我在假装上班。 | Shh. I'm pretending to work. |
+| review.pet.normal.2 | 好了，轮到你夸我。 | Okay, your turn to praise me. |
+| review.pet.normal.3 | 嘴上嫌弃，心里续约。 | Acting picky. Secretly rebooking. |
+| review.pet.normal.4 | 别停，我才刚躺好。 | Don't stop. I just got comfy. |
+| review.pet.normal.5 | 人可以走，零食留下。 | You may go. The snacks stay. |
+| review.fish.no_service.2 | 别紧张，先吐个泡泡。 | Nervous? Blow a bubble first. |
+| review.fish.no_service.3 | 等等，我游反了。 | Wait. Wrong way. |
+| review.fish.no_service.4 | 慢慢来，我先绕一圈。 | Take your time. I'll do a lap. |
+| review.fish.no_service.5 | 本鱼批准，下次再试。 | This fish approves another try. |
+| review.fish.high_chain.2 | 我都忘了往哪儿游了。 | I forgot where I was swimming. |
+| review.fish.high_chain.3 | 泡泡还没吐完，又来了！ | More? Let me finish this bubble! |
+| review.fish.high_chain.4 | 刚才那段，我要吹一年。 | I'm bragging about that all year. |
+| review.fish.high_chain.5 | 这热闹，够我下饭了。 | Dinner and a show. I'm in. |
+| review.fish.rush_success.2 | 我没急，尾巴自己动的。 | Not nervous. That's just my tail. |
+| review.fish.rush_success.3 | 没事了，我先潜水。 | Crisis over. Going quiet. |
+| review.fish.rush_success.4 | 刚才那串泡泡，是催你的。 | Those bubbles meant 'hurry up.' |
+| review.fish.rush_success.5 | 催完就跑，有点不好意思。 | Rushed you, then left. Awkward. |
+| review.fish.tool_combo.2 | 小点声，隔壁虾在睡觉。 | Keep it down. The shrimp's asleep. |
+| review.fish.tool_combo.3 | 我负责游，你负责秀。 | You show off. I'll swim. |
+| review.fish.tool_combo.4 | 这排场，我要收门票了。 | I should sell tickets to this. |
+| review.fish.tool_combo.5 | 这手艺，隔壁虾知道吗？ | Do the shrimp next door know? |
+| review.fish.normal.2 | 本店工资，发鱼粮吗？ | Do you pay in fish food? |
+| review.fish.normal.3 | 我先下班，你帮我看缸。 | Clocking out. Watch my tank. |
+| review.fish.normal.4 | 认识你了，下次不躲。 | I know you now. No hiding next time. |
+| review.fish.normal.5 | 别送了，我知道回缸的路。 | No escort. I know the way to my tank. |
 
 ### 既定主称号的中英文对应
 
@@ -360,10 +415,9 @@
 | leaderboard.today_no_score | 今天还没有你的成绩。开一局，上今日榜。 | No score from you today yet. Play a round to get on today's board. |
 | report.today_first | 今日第 1 名，全店最明白 | #1 today. Nobody runs the shop better. |
 | report.today_rank | 今日第 {rank} 名 | #{rank} today |
-| report.today_gap | 差 {points} 分 | {points} behind |
 | report.today_alone | 今天第一个开工，等同事来挑战 | First to clock in today. Let's see who follows. |
 | report.streak_day | 打卡第 {days} 天 | Day {days} streak |
-| report.next_up_label | 下一件事 | Up next |
+| report.next_up_label | 店长说 | Manager says |
 | report.next_up_fish | 再完成 {n} 局，解锁一个隐藏彩蛋。 | Finish {n} more round(s) to unlock a hidden surprise. |
 | report.next_up_cats | 再认识 {n} 只猫，解锁称号「{title}」。 | Meet {n} more cat(s) to unlock the “{title}” title. |
 | report.next_up_dogs | 再认识 {n} 只狗，解锁称号「{title}」。 | Meet {n} more dog(s) to unlock the “{title}” title. |
@@ -411,11 +465,11 @@
 | fish.rush_served | 已清除 {count}/12 格 | {count}/12 tiles cleared |
 | tutorial.conch | 海螺：和邻格交换，螺口喷出水流，清一行或一列。 | Conch: swap with a neighbor to sweep a row or column. |
 | tutorial.pearl_shell | 珍珠贝壳：和邻格交换，贝壳一开，清出一个十字。 | Pearl Shell: swap with a neighbor to clear a row and column. |
-| review.fish.high_chain | 这波水流，鱼都跟上节奏了。 | Now that's a splashy combo. |
-| review.fish.rush_success | 小鱼加急，水到渠成。 | Rush order, smooth sailing. |
-| review.fish.tool_combo | 这波工具搭档，水花刚刚好。 | Tools teamed up. What a splash. |
-| review.fish.normal | 今天的水下营业，稳稳当当。 | A smooth shift under the surface. |
-| review.fish.no_service | 先熟悉一下水流，下局再露一手。 | Get a feel for the current. Next round, make a splash. |
+| review.fish.high_chain | 谁开的派对？没通知我？ | A party? Where's my invite? |
+| review.fish.rush_success | 赶上饭点了，原谅你。 | Dinner on time. You're forgiven. |
+| review.fish.tool_combo | 吹风机就免了。 | I'll skip the blow-dry. |
+| review.fish.normal | 我嘴很严，只吐泡泡。 | I keep secrets. Only bubbles escape. |
+| review.fish.no_service | 我没摸鱼，我就是鱼。 | Not slacking. Just being a fish. |
 
 邀请仅在第三个有效完整普通局成功保存后的报告出现，不用于首页或提前预告。点击只是进入准备页，个人解锁已保存；未点击也可随后从鱼榜重玩。鱼关规则说明保留「连成一线」含义：直线三消与已确认的四消、五连、L / T 形规则并用；`{fishColorName}` 是本局鱼色类别的界面名称，使用相应语言，不是给个体鱼编造姓名。零服务省略 MVP；海螺／珍珠贝壳沿用梳子／剪刀能力、合体和称号条件，鱼关不使用毛发评语。
 
@@ -444,7 +498,7 @@
 | upload.pet_name | 宠物名字 | Pet Name |
 | upload.pet_name_placeholder | 填写宠物名字 | Enter your pet's name |
 | upload.owner_quote | 主人说（选填） | A Word from Home (Optional) |
-| upload.owner_quote_placeholder | 用英文写一句想对大家说的话 | Say something about your pet, in English |
+| upload.owner_quote_placeholder | 用英文对大家介绍一下这位毛孩子 | Introduce your pet to everyone in English |
 | upload.owner_quote_english | 主人说只能用英文字母、数字和英文标点。 | Please use English letters, numbers, and punctuation only. |
 | upload.owner | 主人：{ownerName} | Owner: {ownerName} |
 | upload.owner_hint | 将以当前游戏身份提交。 | This submission will use your current game profile. |

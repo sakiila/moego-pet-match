@@ -4,7 +4,7 @@ import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { ManagerCard } from '../components/ManagerCard/ManagerCard';
 import { DEVELOPER_PETS, managerLineKey } from '../game/easterEggs';
 import { NavTile } from '../components/NavTile/NavTile';
-import { PageLinks } from '../components/PageLinks/PageLinks';
+import { HomeFooter } from '../components/HomeFooter/HomeFooter';
 import { PlayerMenu } from '../components/PlayerMenu/PlayerMenu';
 import { StreakLine } from '../components/StreakLine/StreakLine';
 import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
@@ -17,6 +17,8 @@ import styles from './Screen.module.css';
 
 export interface HomeScreenProps {
   player: PlayerView;
+  version: string;
+  repositoryUrl: string;
   /** 今日店长；读取失败或尚未读取时为 null，门店照常可开局。 */
   manager: DailyManager | null;
   onOpenShop: () => void;
@@ -30,12 +32,12 @@ export interface HomeScreenProps {
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, manager, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, manager, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
   return (
-    <main className={styles.screen}>
+    <main className={`${styles.screen} ${styles.home}`}>
       <BrandHeader
         title="game"
         tagline="access.subtitle"
@@ -56,7 +58,9 @@ export function HomeScreen({ player, manager, onOpenShop, onCollection, onLeader
         <NavTile icon="my-pets" label={t('nav.my_pets')} onClick={onMyPets} />
       </nav>
       <PhotoNotice faces={DEVELOPER_PETS.map((id) => stickerUrl(id, 128))} />
-      <PageLinks
+      <HomeFooter
+        version={version}
+        repositoryUrl={repositoryUrl}
         links={[
           { label: t('info.use_link'), onClick: () => onInfo(false), testId: 'link-info' },
           { label: t('info.removal_link'), onClick: () => onInfo(true), testId: 'link-removal' },

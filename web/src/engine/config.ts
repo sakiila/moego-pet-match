@@ -1,13 +1,13 @@
-/** 规则版本：对局登记与结算时校验，规则或计分口径变化时递增。版本 3：补落导演。 */
-export const RULES_VERSION = 3;
+/** 规则版本：对局登记与结算时校验。版本 3：补落导演；4：每格 100 分；5：直线五连及以上直接生成吹风机。 */
+export const RULES_VERSION = 5;
 
 /** 已确认的首版规则数值（V1_RULES / GAME_FLOW）。 */
 export const RULES = {
   size: 7,
   kinds: 6,
   durationMs: 90_000,
-  rush: { startMs: 30_000, endMs: 50_000, target: 12, bonus: 100 },
-  baseScore: 10,
+  rush: { startMs: 30_000, endMs: 50_000, target: 12, bonus: 1000 },
+  baseScore: 100,
   maxMultiplier: 5,
   lastSecondsMs: 3_000,
   hintIdleMs: 5_000,

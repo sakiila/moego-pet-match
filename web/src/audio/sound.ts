@@ -1,7 +1,12 @@
 import type { SoundKind } from '../game/feedback';
+import { createCheerPlayer } from './cheerPlayer';
+import niceClip from './clips/nice.mp3';
+import greatClip from './clips/great.mp3';
+import amazingClip from './clips/amazing.mp3';
+import wowClip from './clips/wow.mp3';
 
 /**
- * 现场合成的音效与背景音乐（WebAudio），不需要音频文件。总音量很低；
+ * 现场合成的音效与背景音乐，以及独立人声录音通道（WebAudio）。合成音总音量很低；
  * 浏览器没有 WebAudio 时全部静默跳过。AudioContext 在第一次用户操作时创建 / 恢复（自动播放限制）。
  * 日后有正式素材时，只替换这里的播放源。
  */
@@ -12,6 +17,11 @@ const PENTA = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 15
 
 let ctx: AudioContext | null = null;
 let master: GainNode | null = null;
+const cheers = createCheerPlayer(() => audio()?.ctx ?? null, { nice: niceClip, great: greatClip, amazing: amazingClip, wow: wowClip });
+
+export const preloadCheers = cheers.preload;
+export const playCheer = cheers.play;
+export const stopCheer = cheers.stop;
 
 function audio(): { ctx: AudioContext; out: GainNode } | null {
   if (ctx && master) return { ctx, out: master };
@@ -25,13 +35,14 @@ function audio(): { ctx: AudioContext; out: GainNode } | null {
 }
 
 /** 在用户操作（点击「开始这班」、拨动开关）时调用，解除自动播放限制。 */
-export function unlockAudio() {
+export function unlockAudio(): Promise<void> {
   const a = audio();
-  if (a && a.ctx.state === 'suspended') void a.ctx.resume();
+  return a && a.ctx.state === 'suspended' ? a.ctx.resume() : Promise.resolve();
 }
 
 /** 页面隐藏时暂停全部声音；回来后由调用方按开关恢复。 */
 export function suspendAudio() {
+  stopCheer();
   if (ctx && ctx.state === 'running') void ctx.suspend();
 }
 

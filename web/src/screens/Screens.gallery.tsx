@@ -8,7 +8,7 @@ import { ReportScreen } from './ReportScreen';
 const noop = () => {};
 const lineup = PLACEHOLDER_PETS.map((p) => p.id);
 const summary: GameSummary = {
-  score: 2480,
+  score: 24800,
   clearedCells: 186,
   clearedByMultiplier: [120, 40, 20, 6, 0],
   maxChain: 4,
@@ -38,8 +38,8 @@ const reportProps = {
     skipped: choice === null,
     owner: { userId: 'U2', name: 'Zhang Wei' },
     bonus: choice === 'U2' ? 100 : 0,
-    score: choice === 'U2' ? 2580 : 2480,
-    personalBest: { previous: 1200, current: choice === 'U2' ? 2580 : 2480, isNew: true },
+    score: choice === 'U2' ? 25800 : 24800,
+    personalBest: { previous: 1200, current: choice === 'U2' ? 25800 : 24800, isNew: true },
   }),
 };
 
@@ -67,8 +67,8 @@ const entry: GalleryEntry = {
           newPets: [],
           response: {
             gameId: 'g',
-            score: 2480,
-            personalBest: { previous: null, current: 2480, isNew: true },
+            score: 24800,
+            personalBest: { previous: null, current: 24800, isNew: true },
             newCollected: [],
             progress: { completedNormalGames: 5, fishUnlocked: true, unlockedNow: false, counted: false },
             quiz: null,
@@ -96,8 +96,8 @@ const entry: GalleryEntry = {
           newPets: PLACEHOLDER_PETS.slice(0, 2),
           response: {
             gameId: 'g',
-            score: 2480,
-            personalBest: { previous: 1200, current: 2480, isNew: true },
+            score: 24800,
+            personalBest: { previous: 1200, current: 24800, isNew: true },
             newCollected: [],
             progress: { completedNormalGames: 3, fishUnlocked: true, unlockedNow: true, counted: true },
             quiz: { quizId: 'q', petId: 'kiwi', petName: 'Kiwi', options: [{ userId: 'U1', name: 'Alice' }, { userId: 'U2', name: 'Zhang Wei' }, { userId: 'U3', name: 'Sam' }] },
@@ -109,7 +109,7 @@ const entry: GalleryEntry = {
     'report · slim (mockup: tags row, harvest with new title, next up)': () => (
       <ReportScreen
         {...reportProps}
-        loadStanding={async () => ({ rank: 2, score: 15300, leaderScore: 16540, participants: 9 })}
+        loadStanding={async () => ({ rank: 2, score: 153000, leaderScore: 165400, participants: 9 })}
         loadAchievements={async () => [{ id: 'cats', current: 3, target: 5, unlockedAt: null }]}
         onTitles={noop}
         save={{
@@ -117,8 +117,8 @@ const entry: GalleryEntry = {
           newPets: PLACEHOLDER_PETS.slice(0, 2),
           response: {
             gameId: 'g2',
-            score: 15300,
-            personalBest: { previous: 12000, current: 15300, isNew: true },
+            score: 153000,
+            personalBest: { previous: 120000, current: 153000, isNew: true },
             newCollected: [],
             progress: { completedNormalGames: 9, fishUnlocked: true, unlockedNow: false, counted: true },
             quiz: null,

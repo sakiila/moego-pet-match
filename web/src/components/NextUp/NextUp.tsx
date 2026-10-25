@@ -5,7 +5,7 @@ import styles from './NextUp.module.css';
 
 export interface NextUpProps {
   nextUp: NextUpPick;
-  /** 说这句话的毛孩子（通常是本局 MVP）；没有时气泡不带头像。 */
+  /** 说这句话的今日店长；没有时气泡不带头像。 */
   speaker?: { name: string; src: string } | null;
 }
 
@@ -19,8 +19,8 @@ const ACHIEVEMENT_KEY: Record<string, MessageKey> = {
 };
 
 /**
- * 报告尾声「下一件事」（mobile-report-slim-v1）：一句话直说「再做什么 → 得到什么」，
- * 由本局 MVP 的气泡说出；只报离玩家最近的一件事。文案在 i18n，按预告种类选 key。
+ * 报告尾声「店长说」（mobile-report-slim-v1）：一句话直说「再做什么 → 得到什么」，
+ * 由今日店长的气泡说出；只报离玩家最近的一件事。文案在 i18n，按预告种类选 key。
  */
 export function NextUp({ nextUp, speaker = null }: NextUpProps) {
   const { t } = useI18n();

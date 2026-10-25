@@ -11,7 +11,7 @@ const entry: GalleryEntry = {
     'comb · row': () => cell(<ToolPiece tool="combH" />),
     'comb · column': () => cell(<ToolPiece tool="combV" />),
     scissors: () => cell(<ToolPiece tool="scissors" />),
-    'dryer · 两把剪刀合成': () => cell(<ToolPiece tool="dryer" />),
+    'dryer · 直线五连或两把剪刀合成': () => cell(<ToolPiece tool="dryer" />),
     'fish · conch row / column · pearl shell · big wave': () => (
       <div data-theme="fish" style={{ display: 'flex', gap: 8, padding: 12, background: 'var(--bg)', borderRadius: 12 }}>
         {cell(<ToolPiece tool="combH" mode="fish" />)}

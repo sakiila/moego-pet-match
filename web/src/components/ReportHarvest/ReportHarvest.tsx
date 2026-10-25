@@ -18,7 +18,7 @@ export interface ReportHarvestProps {
 }
 
 /**
- * 本局收获（mobile-report-slim-v1）：新收集的宠物卡与新解锁的称号卡放同一排横向滑动（整卡吸附），
+ * 本局收获（mobile-report-slim-v1）：新解锁的称号卡排在前、新收集的宠物卡排在后，同一排横向滑动（整卡吸附），
  * 只在服务端保存成功后点亮；一个都没有时整块不出现。按独立宠物逐只展开，不把服务格数说成宠物数。
  */
 export function ReportHarvest({ pets, achievements = [], onSelectPet, onOpenTitles }: ReportHarvestProps) {
@@ -51,35 +51,35 @@ export function ReportHarvest({ pets, achievements = [], onSelectPet, onOpenTitl
         <span className={styles.count}>{total}</span>
       </h3>
       <div className={styles.row} ref={gridRef} data-count={total}>
+        {badges.map((id, i) => (
+          <TiltCell key={id} enabled={!!onOpenTitles} nudge={nudge} index={i}>
+            <button
+              type="button"
+              className={`${styles.card} ${styles.badge}`}
+              disabled={!onOpenTitles}
+              onClick={onOpenTitles}
+              style={{ animationDelay: `${i * 80}ms` }}
+              data-testid="harvest-badge"
+            >
+              <span className={styles.tag}>{t('report.new_title_tag')}</span>
+              <AchievementBadge id={id} large />
+              <span className={styles.name}>{t(achievementName(id))}</span>
+            </button>
+          </TiltCell>
+        ))}
         {pets.map(({ pet, kind }, i) => (
           // 倾斜放在外层格子上，不与卡片自己的点亮动画冲突
-          <TiltCell key={pet.id} enabled={!!onSelectPet} nudge={nudge} index={i}>
+          <TiltCell key={pet.id} enabled={!!onSelectPet} nudge={nudge} index={badges.length + i}>
             <button
               type="button"
               className={styles.card}
               data-collected="true"
               disabled={!onSelectPet}
               onClick={(e) => onSelectPet?.(pet, e.currentTarget)}
-              style={{ '--tint': `var(--pet-tint-${kind % 6})`, animationDelay: `${i * 80}ms` } as CSSProperties}
+              style={{ '--tint': `var(--pet-tint-${kind % 6})`, animationDelay: `${(badges.length + i) * 80}ms` } as CSSProperties}
             >
               {petImage(pet, 512) ? <img src={petImage(pet, 512)!} alt="" /> : <span className={styles.emoji}>{pet.emoji}</span>}
               <span className={styles.name}>{pet.name}</span>
-            </button>
-          </TiltCell>
-        ))}
-        {badges.map((id, i) => (
-          <TiltCell key={id} enabled={!!onOpenTitles} nudge={nudge} index={pets.length + i}>
-            <button
-              type="button"
-              className={`${styles.card} ${styles.badge}`}
-              disabled={!onOpenTitles}
-              onClick={onOpenTitles}
-              style={{ animationDelay: `${(pets.length + i) * 80}ms` }}
-              data-testid="harvest-badge"
-            >
-              <span className={styles.tag}>{t('report.new_title_tag')}</span>
-              <AchievementBadge id={id} large />
-              <span className={styles.name}>{t(achievementName(id))}</span>
             </button>
           </TiltCell>
         ))}

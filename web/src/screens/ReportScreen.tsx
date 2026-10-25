@@ -11,9 +11,9 @@ import { UnderwaterBackdrop } from '../components/UnderwaterBackdrop/UnderwaterB
 import { ScoreCard } from '../components/ScoreCard/ScoreCard';
 import type { GameSummary } from '../engine';
 import { pickNextUp } from '../game/nextUp';
-import { petImage, stickerUrl, type PetInfo } from '../game/pets';
+import { stickerUrl, type PetInfo } from '../game/pets';
 import { isDeveloperPet } from '../game/easterEggs';
-import { judgeMvp, judgeReview, judgeTitle } from '../game/report';
+import { judgeMvp, judgeTitle, pickReview } from '../game/report';
 import type { Standing } from '../game/standing';
 import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
@@ -28,11 +28,11 @@ export interface ReportScreenProps {
   onRetry: () => void;
   onPlayAgain: () => void;
   onHome: () => void;
-  /** 打开对应模式的排行榜（鱼报告默认选中鱼榜）。 */
-  onLeaderboard: () => void;
+  /** 保留给外层路由；精简版报告内不再放排行榜入口。 */
+  onLeaderboard?: () => void;
   onFishInvite: () => void;
   onAnswerQuiz: (quizId: string, choice: string | null) => Promise<QuizResult>;
-  /** 今日店长：零服务时承接鼓励评语并作为「下一件事」的说话人；读取失败时省略。 */
+  /** 今日店长：零服务时承接鼓励评语，并作为尾声「店长说」的说话人；读取失败时省略。 */
   manager: DailyManager | null;
   /** 保留给外层路由；精简版报告内不再放图鉴入口。 */
   onCollection?: () => void;
@@ -41,7 +41,7 @@ export interface ReportScreenProps {
   onShare: () => void;
   /** 读取今日榜上的名次：保存成功后调用一次，猜主人加分后再调一次；失败或不提供时不显示。 */
   loadStanding?: () => Promise<Standing | null>;
-  /** 读取成就进度，用于「下一件事」：保存成功后调用一次；失败时仍按鱼关与兜底预告。 */
+  /** 读取成就进度，用于尾声「店长说」预告：保存成功后调用一次；失败时仍按鱼关与兜底预告。 */
   loadAchievements?: () => Promise<AchievementStatus[]>;
   equippedTitle?: AchievementId | null;
   onEquipTitle?: (id: AchievementId) => Promise<void>;
@@ -50,12 +50,12 @@ export interface ReportScreenProps {
 
 /**
  * 完整 Report Card（mobile-report-slim-v1，五块）：小票（分数、状态标签行、MVP、称号章、统计）→
- * 本局收获（新收集 + 新称号）→ 猜主人 → 尾声（鱼关邀请或下一件事，二选一）→ 再开 / 分享。
+ * 本局收获（新收集 + 新称号）→ 猜主人 → 尾声（鱼关邀请或「店长说」预告，二选一）→ 再开 / 分享。
  * 分数立即显示，MVP 与称号随后出现，收获在保存成功后点亮；所有判定复用本局冻结结果。
- * 报告内不放跳转按钮：回门店在头部，今日榜挂在名次标签；图鉴从门店进入。
+ * 报告内不放跳转按钮：回门店在头部，排行榜与图鉴都从门店进入。
  */
 export function ReportScreen(props: ReportScreenProps) {
-  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onOpenPet, onShare, loadStanding, loadAchievements } = props;
+  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onFishInvite, onAnswerQuiz, manager, onOpenPet, onShare, loadStanding, loadAchievements } = props;
   const { t } = useI18n();
   const mvpKind = judgeMvp(summary);
   const kindOf = (id: string) => pets.findIndex((p) => p.id === id);
@@ -78,7 +78,7 @@ export function ReportScreen(props: ReportScreenProps) {
   }, [savedScore, loadStanding]);
   // 本局阵容里当前已下架的宠物：不再展示它们的资料（原 MVP 下架用通用图案承接）
   const removed = new Set(saved?.removedPetIds ?? []);
-  // 下一件事：保存成功后读一次成就进度；本局弹出鱼关邀请时不再叠加预告
+  // 店长说预告：保存成功后读一次成就进度；本局弹出鱼关邀请时不再叠加预告
   const [achievements, setAchievements] = useState<AchievementStatus[] | null | undefined>(undefined);
   const savedGameId = saved?.gameId ?? null;
   useEffect(() => {
@@ -92,21 +92,17 @@ export function ReportScreen(props: ReportScreenProps) {
     };
   }, [savedGameId, loadAchievements]);
   const nextUp = saved && achievements !== undefined && !saved.progress.unlockedNow ? pickNextUp({ progress: saved.progress, achievements }) : null;
-  const speaker =
-    mvpKind !== null && !removed.has(pets[mvpKind].id) && petImage(pets[mvpKind], 512)
-      ? { name: pets[mvpKind].name, src: petImage(pets[mvpKind], 512)! }
-      : manager
-        ? { name: manager.pet.name, src: stickerUrl(manager.pet.petId, 512) }
-        : null;
+  // 「店长说」：预告固定由今日店长开口；店长读取失败时气泡不带头像
+  const speaker = manager ? { name: manager.pet.name, src: stickerUrl(manager.pet.petId, 512) } : null;
   const served = summary.clearedCells > 0;
   const fish = mode === 'fish';
   const subtitle = fish ? 'fish.report_subtitle' : served ? 'report.subtitle' : 'report.generic_caption';
 
-  // 鱼报告：不涉及普通图鉴、竞猜、鱼关邀请与预告（服务端也不返回这些）；鱼榜从今日名次标签进入
+  // 鱼报告：不涉及普通图鉴、竞猜、鱼关邀请与预告（服务端也不返回这些）
   return (
     <main className={`${styles.screen} ${styles.withStickyActions} ${styles.afterPrint}`} data-theme={fish ? 'fish' : undefined}>
       {fish && <UnderwaterBackdrop />}
-      <BrandHeader heading={t(mode === 'fish' ? 'fish.report_title' : 'report.title')} headingAccent tagline={subtitle} onBack={onHome} />
+      <BrandHeader title={fish ? 'fish-report' : 'report'} tagline={subtitle} onBack={onHome} />
       <ScoreCard
         mode={mode}
         score={quizResult?.score ?? saved?.score ?? summary.score}
@@ -115,14 +111,13 @@ export function ReportScreen(props: ReportScreenProps) {
         newRecord={!!best?.isNew && best.previous !== null}
         mvp={mvpKind === null ? null : { pet: pets[mvpKind], kind: mvpKind }}
         mvpRemoved={mvpKind !== null && removed.has(pets[mvpKind].id)}
-        review={judgeReview(summary, mode)}
+        review={pickReview(summary, mode)}
         title={judgeTitle(summary)}
         stats={{ tiles: summary.clearedCells, chain: summary.maxChain, tools: summary.toolsFired }}
         host={mode === 'normal' && manager ? { name: manager.pet.name, stickerSrc: stickerUrl(manager.pet.petId, 512) } : null}
         standing={standing}
         streak={saved?.streak ?? null}
         certified={mode === 'normal' && mvpKind !== null && !removed.has(pets[mvpKind].id) && isDeveloperPet(pets[mvpKind].id)}
-        onStanding={onLeaderboard}
       />
       <SaveStatus state={save} onRetry={onRetry} />
       {save.kind === 'saved' && (
@@ -146,7 +141,7 @@ export function ReportScreen(props: ReportScreenProps) {
           }}
         />
       )}
-      {/* 尾声只放一条：解锁那一局是鱼关邀请，其余是「下一件事」 */}
+      {/* 尾声只放一条：解锁那一局是鱼关邀请，其余是「店长说」预告 */}
       {!fish && saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}
       {!fish && nextUp && <NextUp nextUp={nextUp} speaker={speaker} />}
       <div className={`${styles.stickyActions} ${styles.actionPair}`}>

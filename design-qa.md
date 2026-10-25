@@ -144,3 +144,94 @@ final result: passed
 - 手机中英、鱼关、任务四态、零服务、320×568与844×390检查通过；设置/退出交互正常，任务变化时格区x20/y339.109/350×350不变。动态演示到90秒关闭设置，再约1.28秒交出结果；无POST。
 - 初次窄屏读数越界、设置遮住收工和小高度装饰挤占棋盘已修复、复测；最新刷新无新增应用error。其余已有字标、宠物、道具和通用图标保持原资产比例，概念图生成近似不作为替换来源。
 - 最新179项测试通过，typecheck/build通过（保留既有>500kB主包提示）。减少动效路径有代码复核，未实际切换操作系统；未测真实iOS设备。
+
+## 2026-10-25 · 结算页报告字标与副标题
+
+- 采用已确认的 `feature-wordmarks-scheduling-report-v1.png` 中独立 Grooming Report Card 母版；经 `assets/illustrations/build_web.py` 裁边、等比导出为 1080 × 307 WebP，由 `BrandHeader` 的 report 变体显示，保留两行组合、黑橙配色、字形与装饰短线。没有重新生成或改变图案。
+- 「这班辛苦啦，看看毛孩子怎么说。」与游戏页共用同一副标题样式：MoeGo Rounded、16px、1000 字重、1.1 行高、居中。报告页可滚动，短屏仍显示副标题；英文自然换行。零服务保留中性文案，鱼关保留原文字标题与主题。
+- 浏览器使用 browser-skill / bsk Agent Window。实测路径为 `/dev/gallery?c=Screens` 的报告独立状态与 `/dev/gallery?c=BrandHeader`，覆盖 390 × 844 中文/英文、320 × 568 英文和零服务、1440 × 900 桌面、鱼关；标题图案加载成功，无横向溢出或框架错误层。语言按钮切换后副标题和页面文案正确更新，切回中文后结束会话。
+- 对照差异：用户截图与 mobile-report-slim-v1 原来是一行普通文字标题；本次按用户要求换为已确认的两行字标。陈列页使用既有样例数据，未作为真实宠物素材或真实结算验收。页头组件截图：`/Users/bob/.codex/visualizations/2026/10/25/01a17098-f9e8-7ff2-b0bc-bf4edeb09986/report-header/header-component-zh.png`；完整手机、英文、短屏、桌面与鱼关截图在 `/tmp/moego-report-header-*.png`、`/tmp/moego-report-zero-320.png`。
+- 验证：`npm --prefix web run typecheck`、`npm --prefix web run build`、`git diff --check` 通过。构建保留已有大包提示。最终页头刷新与语言操作无新增 error/warn；此前整页陈列过程中有浏览器阻止未交互振动及 favicon 404，与本轮页头无关。
+- 本轮仅修改界面展示，未改引擎、服务端或结算规则；未新跑单元测试、真实对局保存、真机或跨浏览器测试。未提交、推送或部署。
+
+## 2026-10-25 · 鱼关报告字标接入
+
+- 使用已确认的 `feature-wordmarks-ranking-fish-v1.png` 对应 Fish Report Card 独立透明母版，沿现有导出流程生成 1080 × 393 WebP；字形、两行组合、黑橙配色及装饰短线保留。`BrandHeader` 的 report / fish-report 共用外壳，仅选择各自图片、alt 和实际尺寸。
+- 鱼关黑色字形需要浅色承托：鱼主题下 reportTitle 使用与小票相同的 `--receipt-paper`、现有圆角与间距令牌，无额外描边或阴影。副标题仍在深蓝底上显示白字，与游戏页同为 MoeGo Rounded、16px、1000 字重、1.1 行高；短屏保留。
+- bsk Agent Window 实测 `/dev/gallery?c=Screens` 鱼关已保存报告：390 × 844 中文/英文、320 × 568 英文及零服务、1440 × 900 桌面；字标加载、语言切换、主题颜色和无横向溢出均通过。陈列页 BrandHeader 的 fish report artwork 已登记，切换 fish 主题验证浅底和白字；普通报告在默认主题仍使用 Grooming 字标及透明底，副标题规格与游戏页一致。
+- 对照差异：原 Fish Report Card 图案用于深蓝页面时增加代码浅底板，原图没有改色或重绘。完整中文截图：`/Users/bob/.codex/visualizations/2026/10/25/01a17098-f9e8-7ff2-b0bc-bf4edeb09986/report-header/fish-report-zh-390.png`；其它状态为 `/tmp/moego-fish-report-header-*.png`。224px 高度截图被固定操作条覆盖，已拒绝作为验收或展示证据。
+- `npm --prefix web run typecheck`、`npm --prefix web run build`、`git diff --check` 通过；保留既有大包提示。最终导航后的日志只有既有 favicon 404；较早的未交互振动拦截及浏览器消息通道错误不归因于本轮报告。未出现图案加载失败或框架错误层。
+- 本轮未修改引擎、服务端或结算规则；未新跑单元测试、真实保存、真机或跨浏览器测试。未提交、推送或部署。
+
+## 2026-10-25 · 首页游戏版本号
+
+- 首页新增 HomeFooter，复用原信息说明／删除申请／设置链接，在其下居中展示 12px 灰色版本文字；中文为「版本 {version}」，英文为「Version {version}」。已登记组件陈列页默认与两位发布序号状态。
+- 唯一来源为 `web/src/app/version.ts` 的 `GAME_VERSION`，本次为 `20261025.1`；按北京时间 `YYYYMMDD.N` 维护，同日发布递增序号，随构建固定。App → HomeScreen → HomeFooter 通过 props 传入，与结算规则版本独立。
+- 对照 `design/concepts/mobile-home-v2.png` 及本轮改动前截图：延续当前店面与入口，新增页尾小字；首页区块间距从 12px 收紧为已有 8px token，未改插画与按钮尺寸。字体加载完成后 390 × 844 中文文档高度为 844px，版本底边为 832px，无横向溢出。
+- bsk Agent Window 验证首页中英文切换、设置弹窗打开／关闭、HomeFooter 默认及两位发布序号陈列；检查 390 × 844、320 × 568 英文、1440 × 900 桌面。英文长说明与窄屏允许自然纵向滚动，所有页尾内容可达；桌面中文文档高度为 913px，同样允许纵向滚动。
+- 截图：`/Users/bob/.codex/visualizations/2026/10/25/01a170ac-31a1-7fc0-8b25-a189c6f5245d/home-version/home-version-zh-390.png`、同目录 `home-version-en-320.png`；组件中英文为 `/tmp/moego-home-version-gallery-{zh,en}.png`。
+- `npm --prefix web run typecheck`、`npm --prefix web run build`、`git diff --check` 通过，保留现有大包提示。完整导航后未出现本轮新增运行错误或框架错误层；陈列 U_TEST_BOB 头像仍有原有 404，回退文字头像。开发中 i18n Fast Refresh 错误在完整导航后消失。
+- 本轮只改展示，未新写或运行单元测试，未验证真实对局、真机或跨浏览器；未改规则、数据库或部署，未提交、推送。
+
+### 同日跟进 · 版号随 Git 自动更新
+
+- 用 `web/scripts/game-version.mjs` 替代手动版号：取 HEAD 提交的北京时间日期，统计 first-parent 历史同日提交数；当前为 `20261025.5`。同提交重建稳定，未提交修改不递增，开发服务启动时读取；运行中提交后重启即可更新。上述手动维护方式已被本条取代。
+- Vite 注入构建常量；GitHub CI 与镜像构建获取完整历史，镜像构建自动计算并传入 `GAME_VERSION`。Docker 不携带 Git 历史，缺少 Git 又未提供版本、浅克隆以及非法版本格式均明确报错。UI_COPY、部署说明和本地镜像构建命令已同步。
+- 8 项真实临时 Git 仓库测试通过，覆盖同日递增、重复读取、北京时间跨日、first-parent 合并、环境与显式参数、浅克隆及无 Git；测试未修改本项目 Git 历史。类型检查、web 构建、两个 workflow YAML 语法检查及 linux/amd64 Docker 前端构建通过；既有大包提示保留。
+- 浏览器 390 × 844 实测首页为「版本 20261025.5」，无横向溢出或新增运行错误。截图为同目录 `home-git-version-390.png`。未改变视觉布局，未运行完整引擎／服务端测试、真实 GitHub Actions 或线上部署；未提交、推送。
+
+### 同日跟进 · 版本号下方的 GitHub 链接
+
+- 核对 `git remote` 后，在版本号下方新增 `github.com/sakiila/moego-pet-match`，使用 12px 灰色下划线链接，地址统一在 `app/project.ts` 维护并经 App → HomeScreen → HomeFooter props 传入。中英文可访问名称均提示新标签页行为，已补陈列页长地址状态。
+- 原生链接使用 `target="_blank"` 与 `rel="noopener noreferrer"`。bsk 实际点击后确认新标签页 URL 为 `https://github.com/sakiila/moego-pet-match`，原游戏标签页保留，新页 `window.opener` 为 null。Tab 键可聚焦，浏览器原生焦点轮廓清楚。
+- 390 × 844 中文、320 × 568 英文及 1440 × 900 组件陈列检查通过；默认、两位版号、长地址状态均无横向裁切，长地址自然换行。对照此前首页，本轮只增加链接行，未继续压缩主体；中文文档高度 864px，页尾可自然纵向滚动。
+- 首页截图：`/Users/bob/.codex/visualizations/2026/10/25/01a170ac-31a1-7fc0-8b25-a189c6f5245d/home-version/home-github-link-390.png`，同目录 `home-github-link-en-320.png`；组件截图在 `/tmp/moego-home-github-gallery-{zh,en}.png`。
+- 类型检查、生产构建、`git diff --check` 通过，保留既有大包提示。浏览器只有陈列 U_TEST_BOB 头像的原有 404，无新增框架错误。未新写或运行单元测试，未测真机或跨浏览器；未提交、推送或部署。
+
+
+## 棋盘放大反馈 · 2026-10-25
+
+final result: passed
+
+用户反馈棋盘过小后，重新分配周边空间，保留图案原样；完整尺寸与状态验证见 [BOARD_SIZE.md](design/reviews/2026-10-25-board-frontdesk/BOARD_SIZE.md)。当前438×780窗口外框306→425.16px、格区286→413.16px；390×667格区248.44→315.56px；1024×800格区298.22→628px。前后同框 `/tmp/moego-board-enlarged-comparison.png`，最新中文 `/tmp/moego-board-enlarged-final.png`。中英文、鱼关、催单四态、窄横屏长分数均无文字越界，棋盘不随任务状态移动；全部所测视口无整页溢出。实机模拟点击已受理并计分0→300。大盘改选同源512贴纸，并将两档图片纳入开局就绪检查，2项回归红→绿；最新181项测试与typecheck/build通过。旧章节的较小尺寸保留为历史记录，不作为恢复目标。
+
+
+## 收工牌中文高清增强 · 2026-10-25
+
+final result: passed
+
+中文牌原可见母版256×187，在网页300px宽及高分屏中欠采样。现已用内置ImageGen制作同造型高清稿，并以独立ID closing-sign-zh-hd-v2接入组件与开局预载，旧母版/导出哈希保持不变。新原图1448×1086，最大网页资源960×685。390×844的DPR2/3均实测牌宽300px、currentSrc命中新@960并解码；鱼关横屏实测220px宽，无溢出或失效图片。英文资源保持原960×700。造型/文字与原稿对照查看，中文清晰度明显改善。typecheck/build与相关diff check通过；未改计时或收工时序。完整提示词、来源、哈希和步骤见 [高清制作记录](assets/icons/closing-sign-zh-hd-v2/README.md)。实际网页 `/tmp/moego-closing-hd-web-zh.png`，同宽对照 `/tmp/moego-closing-web-hd-comparison.png`。本段取代早期验收中“中文牌受低分镜原稿限制”的现状描述，早期记录保留为历史。
+
+
+## 自录英文喝彩与弹跳字效 · 2026-10-25
+
+final result: passed
+
+用户确认的 Nice / Great / Amazing / Wow 四条原声已本地接入，每次操作全部补落后只播最高档，配 800ms 橙白弹跳字；音效开关、弹层抑制、到时与离开清理生效。215 项 web 测试和 8 项版号测试、typecheck/build 通过；四档真实引擎触发、静音文字、鱼关、中英文、320×568／390×844／844×390／1280×800 布局均通过。后台路径为 visibilitychange 事件模拟，尚未做真机听感／iOS Safari。完整证据、差异与限制见 [QA.md](design/reviews/2026-10-25-game-cheers/QA.md)。未提交、推送或部署。
+
+## 镇店之宝蓝紫统一展示徽章 · 2026-10-25
+
+final result: passed
+
+- 已选第 2 稿蓝紫极光色，使用唯一透明 showcase 母版。头像角标、称号签、列表、玩家名片和解锁展示共用同一图案，保留 22 / 24 / 48 / 56 / 72px 显示尺寸；mythic 标签与边框同步蓝紫青色。[来源与导出记录](assets/icons/hotpot-title-aurora-v2/README.md)。
+- 用 Codex 内置浏览器验收 `/dev/gallery` 的 AchievementShelf、AchievementAvatar、AchievementBadge、LeaderboardRow 与 PlayerProfileCard。390 × 844 中英文称号列表均无横向溢出；切换到全图鉴称号再切回火锅搭子后，佩戴按钮 aria-pressed 为 true。锁定状态只暴露 Hidden Title / 问号，不泄露称号名；全部受测图案解码成功、无框架错误层或相关 error/warn。桌面名片 1024 × 900 同样通过。
+- 与选定参考的差异：将三种形态收敛为右侧带星芒、麦穗的展示造型，各场景只缩放；独立透明母版由 ImageGen 根据参考整理，并非参考图的逐像素裁切。22px 主要识别轮廓与配色，猫和火锅的细节在列表、大图中查看。
+- 实际手机截图：`/Users/bob/.codex/visualizations/2026/10/25/01a17154-fd7b-77d1-ab58-96a28b1af4e9/hotpot-shelf-zh.png` 与同目录 `hotpot-shelf-en.png`、`hotpot-avatar-22px.png`、`hotpot-unified-sizes.png`、`hotpot-hidden-locked.png`、`hotpot-leaderboard-row.png`；桌面为 `hotpot-profile-desktop.png`。
+- `npm --prefix web run typecheck`、`npm --prefix web run build` 通过，构建有现有大包提示。仅改变本枚徽章的显示与资源，无引擎或服务端规则改动；本轮未新增或运行单元测试、真实结算/保存、真机或跨浏览器测试。未提交、推送或部署。
+
+
+## 传奇标签彩虹配色 · 2026-10-25
+
+final result: passed
+
+- 按用户确认的 `design/concepts/legendary-rainbow-label-v1.png`，仅将传奇稀有度标签改为桃橙、金黄、薄荷绿、天蓝、紫、粉的横向彩虹底，文字使用深梅紫；通过现有 tokens 与标签 CSS 实现。标签尺寸和位置沿用当前组件，徽章与行边框保留当前素材，佩戴按钮使用原有配色。
+- Codex 内置浏览器实测 `/dev/gallery?c=AchievementShelf`：390 × 844 中文、320 × 568 英文。标签分别为 40 × 26px 和 78.3 × 25.5px，文字完整、无横向溢出；切到全图鉴称号再切回火锅搭子，佩戴状态正确更新。未出现框架错误层或相关 console error/warn。
+- 与选定稿对照：实现相同的彩虹标签与深色文字，其他生成稿细节不作为页面改动来源。实际截图在 `/Users/bob/.codex/visualizations/2026/10/25/01a17154-fd7b-77d1-ab58-96a28b1af4e9/legendary-rainbow-label-zh-390.png`、同目录 `legendary-rainbow-label-en-320.png` 与 `legendary-rainbow-label-equipped.png`。
+- `npm --prefix web run typecheck`、`npm --prefix web run build` 通过，构建保留大包提示。本轮为 CSS 展示调整，未新增或运行单元测试，未做真机、跨浏览器或真实保存验证；未提交、推送或部署。
+
+
+## 直线五连直接生成吹风机 · 2026-10-25
+
+final result: passed
+
+规则版本5：任一横纵直线五连及以上优先生成一枚吹风机，鱼关对应大浪花；其余交叉形仍出剪刀、四消仍出梳子，双剪合成保留。新增道具不因生成自动发动。236项web测试、8项版号测试、15项服务端登记结算测试、前后端typecheck及web构建通过；本地实际登记返回版本5。IAB验证手动500分留盘、补落1300分生成、再交换清全盘并出现Wow，鱼关五连留大浪花。完整记录见 [QA.md](design/reviews/2026-10-25-five-match-dryer/QA.md)。未提交、推送或部署。

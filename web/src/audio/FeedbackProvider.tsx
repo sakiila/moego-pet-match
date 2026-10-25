@@ -1,9 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { batchFeedback, createLimiter, FEEDBACK_GAP_MS } from '../game/feedback';
+import type { CheerKind } from '../game/cheers';
 import { loadPreferences, savePreferences, type SoundPreferences } from '../game/preferences';
 import type { Batch } from '../engine';
 import { cancelVibration, hapticsSupported, vibrate } from './haptics';
-import { playFinish, playPrinted, playSound, playStamp, startMusic, stopMusic, suspendAudio, unlockAudio } from './sound';
+import { createCheerVoiceLimiter } from './cheerVoiceLimiter';
+import { playCheer, playFinish, playPrinted, playSound, playStamp, preloadCheers, startMusic, stopCheer, stopMusic, suspendAudio, unlockAudio } from './sound';
 
 interface Feedback {
   prefs: SoundPreferences;
@@ -11,6 +13,9 @@ interface Feedback {
   setPref: (key: keyof SoundPreferences, on: boolean) => void;
   /** 一个清除批次结算时调用；按开关与限频播放音效和轻震。 */
   onBatch: (batch: Batch) => void;
+  onCheer: (kind: CheerKind) => void;
+  /** 提示层、退出和其他中断可立即清掉正在播放的人声。 */
+  stopCheer: () => void;
   onFinish: () => void;
   /** 报告小票送到位（「叮」+ 轻震）与印章拍下（「咚」+ 短双点）。 */
   onPrinted: () => void;
@@ -45,6 +50,7 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
   prefsRef.current = prefs;
   const musicActive = useRef(false);
   const allow = useRef(createLimiter(FEEDBACK_GAP_MS));
+  const cheerVoice = useRef(createCheerVoiceLimiter());
 
   const syncMusic = useCallback(() => {
     if (musicActive.current && prefsRef.current.music && document.visibilityState === 'visible') {
@@ -65,6 +71,10 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       // 拨动开关本身就是用户操作，可以解除浏览器的自动播放限制
       if (on && key !== 'haptics') unlockAudio();
       if (key === 'music') syncMusic();
+      if (key === 'sfx') {
+        if (!on) stopCheer();
+        else if (musicActive.current && document.visibilityState === 'visible') void preloadCheers();
+      }
     },
     [available, syncMusic],
   );
@@ -90,6 +100,7 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
     return () => {
       document.removeEventListener('visibilitychange', onVisibility);
       document.removeEventListener('pointerdown', onGesture, { capture: true });
+      stopCheer();
     };
   }, [syncMusic]);
 
@@ -106,7 +117,14 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
         if (p.haptics) vibrate(f.haptic);
         record(`batch:${f.sound}:${f.step}:L${f.level}:${p.sfx ? 'sfx' : '-'}:${p.haptics ? f.haptic : '-'}`);
       },
+      onCheer: (kind) => {
+        if (!musicActive.current || !prefsRef.current.sfx || document.visibilityState !== 'visible') return;
+        if (cheerVoice.current.tryPlay(kind, performance.now(), playCheer)) record(`cheer:${kind}`);
+      },
+      stopCheer,
       onFinish: () => {
+        stopCheer();
+        musicActive.current = false;
         if (prefsRef.current.sfx) playFinish();
         stopMusic();
         record(`finish:${prefsRef.current.sfx ? 'sfx' : '-'}`);
@@ -125,7 +143,11 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       },
       setMusicActive: (active) => {
         musicActive.current = active;
-        if (active) unlockAudio();
+        if (active) {
+          cheerVoice.current.reset();
+          unlockAudio();
+          if (prefsRef.current.sfx && document.visibilityState === 'visible') void preloadCheers();
+        } else stopCheer();
         syncMusic();
       },
     }),
@@ -141,6 +163,8 @@ const SILENT: Feedback = {
   hapticsAvailable: false,
   setPref: () => {},
   onBatch: () => {},
+  onCheer: () => {},
+  stopCheer: () => {},
   onFinish: () => {},
   onPrinted: () => {},
   onStamp: () => {},

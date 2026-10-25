@@ -21,14 +21,14 @@ import { BoardLayout } from './BoardLayout';
 const rows = ['ABCDEFA', 'CDEFABC', 'EFABCDE', 'BChADEF', 'DEFABxC', 'FABCDEF', 'ABCDEFA'];
 const frame = frameAt({ board: parseBoard(rows).board, score: 2480, rushProgress: 7 }, null, 0);
 
-function Review({ rush = { state: 'active', served: 7, secondsLeft: 8 }, mode = 'normal', ending = false, zero = false }: { rush?: RushView; mode?: GameMode; ending?: boolean; zero?: boolean }) {
+function Review({ rush = { state: 'active', served: 7, secondsLeft: 8 }, mode = 'normal', ending = false, zero = false, score = 2480 }: { rush?: RushView; mode?: GameMode; ending?: boolean; zero?: boolean; score?: number }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [quitOpen, setQuitOpen] = useState(false);
   const pets = mode === 'fish' ? SAMPLE_FISH : PREVIEW_PREP_PETS;
   return <BoardLayout
     mode={mode}
-    header={<BrandHeader title={mode === 'fish' ? 'fish' : 'scheduling'} boardArt={mode === 'normal'} tagline={mode === 'fish' ? 'fish.prep_rule' : 'board.tagline'} />}
-    status={<StatusPanel timeLeftMs={ending ? 0 : 48_000} score={zero ? 0 : 2480} />}
+    header={<BrandHeader title={mode === 'fish' ? 'fish' : 'scheduling'} boardArt tagline={mode === 'fish' ? 'fish.prep_rule' : 'board.tagline'} />}
+    status={<StatusPanel timeLeftMs={ending ? 0 : 48_000} score={zero ? 0 : score} />}
     rush={<RushBar view={ending ? { state: 'hidden' } : rush} mode={mode} />}
     board={<Board frame={frame} pets={pets} mode={mode} interactive={false} staticSelected={{ r: 3, c: 2 }} staticPreview={Array.from({ length: 7 }, (_, c) => ({ r: 3, c }))} />}
     tip={<TipBar tip={{ key: ending ? 'round.finishing' : mode === 'fish' ? 'tutorial.conch' : 'tutorial.comb' }} pets={pets} />}
@@ -54,6 +54,7 @@ export default {
   states: {
     'active · approved 48s / 7 of 12': () => <Review />,
     'no rush · fixed board': () => <Review rush={{ state: 'hidden' }} />,
+    'large score · narrow panels': () => <Review score={128_460} />,
     success: () => <Review rush={{ state: 'success' }} />,
     expired: () => <Review rush={{ state: 'expired' }} />,
     'finished · three served pets': () => <Review ending />,

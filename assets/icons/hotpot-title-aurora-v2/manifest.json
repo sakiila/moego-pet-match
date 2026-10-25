@@ -1,0 +1,97 @@
+{
+  "selectedReference": "design/concepts/title-hotpot-electric-aurora-v1.png",
+  "selectedForm": "rightmost showcase badge; one master scaled for all contexts",
+  "source": "design/concepts/title-hotpot-aurora-showcase-v2.png",
+  "method": "Built-in ImageGen transparent isolation; not a pixel-exact crop of the reference. Generated alpha preserved unchanged, including faint exterior noise at alpha 1-2.",
+  "master": "assets/icons/hotpot-title-aurora-v2/masters/title-hotpot-showcase.png",
+  "size": [
+    1254,
+    1254
+  ],
+  "mode": "RGBA",
+  "alphaBounds": [
+    0,
+    32,
+    1218,
+    1238
+  ],
+  "visibleBoundsAboveAlpha8": [
+    81,
+    77,
+    1172,
+    1149
+  ],
+  "sha256": "ab0202b9fffe6ed527d7c0d5bfbeaa614cb7bac1d3aaf5ddd5c72c075041e0d3",
+  "runtimeIntegration": {
+    "status": "integrated locally",
+    "libraryMaster": "assets/icons/library-original-png-v2/masters/15-collection-title-showcase/title-hotpot-showcase.png",
+    "icon": "title-hotpot-showcase",
+    "exportWidths": [
+      32,
+      48,
+      72,
+      96,
+      144,
+      192,
+      288
+    ],
+    "outputs": [
+      {
+        "path": "web/src/ui/icons/png/title-hotpot-showcase@32.png",
+        "size": [
+          32,
+          32
+        ],
+        "sha256": "caf273ec4f29204dca44847fa136b580c91a76090d9c821e60e5bc97fded1407"
+      },
+      {
+        "path": "web/src/ui/icons/png/title-hotpot-showcase@48.png",
+        "size": [
+          48,
+          48
+        ],
+        "sha256": "68921fb851e3ffb29cee5bbc6b1742798e1abaf9e3899efa157f1ff5f4a5e8da"
+      },
+      {
+        "path": "web/src/ui/icons/png/title-hotpot-showcase@72.png",
+        "size": [
+          72,
+          72
+        ],
+        "sha256": "7933e9c7d098780f8924789622d8f17210278e349a5044875158dbeeab662e69"
+      },
+      {
+        "path": "web/src/ui/icons/png/title-hotpot-showcase@96.png",
+        "size": [
+          96,
+          96
+        ],
+        "sha256": "0241444d83bc9832dc26f88681cf398821464905f0e4ab01e54eb5bdd38eb305"
+      },
+      {
+        "path": "web/src/ui/icons/png/title-hotpot-showcase@144.png",
+        "size": [
+          144,
+          144
+        ],
+        "sha256": "9b4a0653909cafcdc3aa3742b8cf261f10aa71581879901868cd6042a4e218b8"
+      },
+      {
+        "path": "web/src/ui/icons/png/title-hotpot-showcase@192.png",
+        "size": [
+          192,
+          192
+        ],
+        "sha256": "18fdd87a99118ebe4460228bf4c57728219052f01ffd727fc28bcdf81ffc2cdc"
+      },
+      {
+        "path": "web/src/ui/icons/png/title-hotpot-showcase@288.png",
+        "size": [
+          288,
+          288
+        ],
+        "sha256": "11bef08f5280d8fd44eeeb621dbc627187dd9c908e5bcd163a96e4d557806d19"
+      }
+    ]
+  }
+}

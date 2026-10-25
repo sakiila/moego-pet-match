@@ -28,6 +28,19 @@ jobs:
       image: ${{ steps.image.outputs.name }}@${{ steps.build.outputs.digest }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
+      - name: Compute game version from Git
+        id: game-version
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(node web/scripts/game-version.mjs)"
+          printf 'value=%s\n' "$version" >> "$GITHUB_OUTPUT"
+          printf 'Game version: `%s`\n' "$version" >> "$GITHUB_STEP_SUMMARY"
       - name: Image name and immutable release tag
         id: image
         shell: bash
@@ -50,6 +63,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: ${{ steps.image.outputs.tag }}
+          build-args: |
+            GAME_VERSION=${{ steps.game-version.outputs.value }}
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}

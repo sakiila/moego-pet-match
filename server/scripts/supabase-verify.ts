@@ -6,6 +6,7 @@ import pg from 'pg';
 import { readSupabaseAdminConfig } from '../src/db/adminUrl.ts';
 import type { Pool } from '../src/db/pool.ts';
 import { registerGame, settleGame } from '../src/services/games.ts';
+import { RULES } from '../../web/src/engine/config.ts';
 
 const appUrl = process.env.PET_MATCH_DATABASE_URL;
 if (!appUrl) throw new Error('PET_MATCH_DATABASE_URL missing');
@@ -61,7 +62,7 @@ try {
   const res = await settleGame(tx, game.gameId, SMOKE_PLAYER, {
     rulesVersion: game.rulesVersion,
     completed: true,
-    score: 30,
+    score: 3 * RULES.baseScore,
     clearedCells: 3,
     clearedByMultiplier: [3, 0, 0, 0, 0],
     rushSucceeded: false,

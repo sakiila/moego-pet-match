@@ -13,14 +13,14 @@ const quiz = {
   ],
 };
 const owner = { userId: 'U2', name: 'Zhang Wei(张伟)' };
-const personalBest = { previous: 2400, current: 2580, isNew: true };
+const personalBest = { previous: 2400, current: 25800, isNew: true };
 /** 模拟服务端：答对 +100，答错、跳过不加分。 */
 const reveal = async (c: string | null) => ({
   correct: c === null ? null : c === 'U2',
   skipped: c === null,
   owner,
   bonus: c === 'U2' ? 100 : 0,
-  score: c === 'U2' ? 2580 : 2480,
+  score: c === 'U2' ? 25800 : 24800,
   personalBest,
 });
 

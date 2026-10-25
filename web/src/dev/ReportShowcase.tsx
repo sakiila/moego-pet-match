@@ -10,7 +10,7 @@ export interface ReportShowcaseProps {
   registered: RegisteredGame;
   pets: PetInfo[];
   manager: DailyManager | null;
-  /** 尾声显示鱼关邀请（否则显示「下一件事」）。 */
+  /** 尾声显示鱼关邀请（否则显示「店长说」预告）。 */
   invite: boolean;
   onPlayAgain: () => void;
   onHome: () => void;
@@ -24,7 +24,7 @@ export interface ReportShowcaseProps {
 /**
  * 开发验收：?report=showcase。用真实登记与自动打完的一局，配上伪造的「已保存」结果，
  * 让结算页的全部元素同时出现：新纪录、今日名次、打卡、两只新收集 + 一枚新称号、猜主人、
- * 下一件事（加 &invite=1 换成鱼关邀请）。不调用结算接口，不写成绩。
+ * 店长说预告（加 &invite=1 换成鱼关邀请）。不调用结算接口，不写成绩。
  */
 export function ReportShowcase({ summary, registered, pets, manager, invite, onTitles, ...nav }: ReportShowcaseProps) {
   const score = summary.score;
@@ -35,7 +35,7 @@ export function ReportShowcase({ summary, registered, pets, manager, invite, onT
       response: {
         gameId: registered.gameId,
         score,
-        personalBest: { previous: Math.max(0, score - 1200), current: score, isNew: true },
+        personalBest: { previous: Math.max(0, score - 12000), current: score, isNew: true },
         newCollected: [],
         progress: { completedNormalGames: 9, fishUnlocked: true, unlockedNow: invite, counted: true },
         quiz: pets[2]
@@ -48,7 +48,7 @@ export function ReportShowcase({ summary, registered, pets, manager, invite, onT
     }),
     [pets, registered.gameId, score, invite],
   );
-  const loadStanding = async (): Promise<Standing> => ({ rank: 2, score, leaderScore: score + 1240, participants: 9 });
+  const loadStanding = async (): Promise<Standing> => ({ rank: 2, score, leaderScore: score + 12400, participants: 9 });
   const loadAchievements = async () => [{ id: 'cats' as const, current: 3, target: 5, unlockedAt: null }];
   const onAnswerQuiz = async (_quizId: string, choice: string | null): Promise<QuizResult> => {
     const correct = choice === 'U2';

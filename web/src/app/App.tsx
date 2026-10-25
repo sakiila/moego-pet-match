@@ -20,6 +20,8 @@ import { InfoScreen } from '../screens/InfoScreen';
 import { PrepScreen } from '../screens/PrepScreen';
 import screen from '../screens/Screen.module.css';
 import { loadSavedPlayerId, savePlayerId } from './identity';
+import { GAME_VERSION } from './version';
+import { GITHUB_REPOSITORY_URL } from './project';
 
 interface Session {
   registered: RegisteredGame;
@@ -155,7 +157,8 @@ export function App() {
     }
   }, []);
   useEffect(() => {
-    if (route.name === 'home') void refreshManager();
+    // 报告页也需要店长（零服务评语与「店长说」）：开发验收直接跳到报告时还没经过首页
+    if (route.name === 'home' || route.name === 'report' || route.name === 'devReport') void refreshManager();
   }, [route.name, refreshManager]);
 
   const toHome = useCallback(() => setRoute({ name: 'home' }), []);
@@ -190,6 +193,8 @@ export function App() {
         return player ? (
           <HomeScreen
             player={player}
+            version={GAME_VERSION}
+            repositoryUrl={GITHUB_REPOSITORY_URL}
             manager={manager}
             onOpenShop={() => void toPrep('normal')}
             onCollection={toPetdex}

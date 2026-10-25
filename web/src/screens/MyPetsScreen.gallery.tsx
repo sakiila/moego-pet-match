@@ -3,7 +3,7 @@ import type { GalleryEntry } from '../dev/gallery/types';
 import { MyPetsScreen } from './MyPetsScreen';
 
 const noop = () => {};
-const player = { userId: 'U03FPQWGTN2', name: 'Bob 包博', best: { normal: 2480, fish: null }, progress: { completedNormalGames: 3, fishUnlocked: true }, streak: { days: 0, today: false } };
+const player = { userId: 'U03FPQWGTN2', name: 'Bob 包博', best: { normal: 24800, fish: null }, progress: { completedNormalGames: 3, fishUnlocked: true }, streak: { days: 0, today: false } };
 const two: MyPet[] = [
   { petId: 'pet_644053d683e0', name: 'Maodu', collected: true, request: null },
   { petId: 'pet_2f55c03f6968', name: 'Boluo', collected: false, request: null },

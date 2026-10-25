@@ -55,6 +55,16 @@ R2 桶默认 `star`，当前为默认 jurisdiction，不设置 `R2_JURISDICTION`
 
 ## 部署顺序
 
+首页版本号由 Git 自动生成，格式为 `YYYYMMDD.N`：最新提交的北京时间日期，加 first-parent 主线中同日提交数。CI 拉取完整历史，计算后通过 `GAME_VERSION` 构建参数传给 Docker；同一提交重复构建版本不变，不需要修改版本文件。无完整 Git 历史且未显式提供版本时构建会报错，避免生成错误序号。
+
+本地查看版本：`npm --prefix web run game-version`。本地开发在启动时读取版本，运行中提交后重启 `npm run dev` 即可更新。本地构建镜像使用：
+
+```sh
+docker buildx build --platform linux/amd64 \
+  --build-arg GAME_VERSION="$(node web/scripts/game-version.mjs)" \
+  -t moego-pet-match:<版本> --load .
+```
+
 1. 在本地 Postgres service 上运行前后端测试、类型检查和生产构建。
 2. 构建 `linux/amd64` 镜像并推送 GHCR；tag 含 commit、run ID 和 attempt，实际按 digest 部署。
 3. 上传候选 Compose 和脚本到独立 `incoming` 目录，校验运行变量。

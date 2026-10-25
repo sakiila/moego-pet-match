@@ -60,7 +60,7 @@ describe('连续开工天数：接口', () => {
     return {
       rulesVersion: game.rulesVersion,
       completed: true,
-      score: validMoves > 0 ? 100 : 0,
+      score: validMoves > 0 ? 1000 : 0,
       clearedCells: validMoves > 0 ? 10 : 0,
       clearedByMultiplier: [validMoves > 0 ? 10 : 0, 0, 0, 0, 0],
       rushSucceeded: false,

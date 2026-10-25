@@ -75,7 +75,7 @@ describe('永久收集成就与佩戴', () => {
     await collect('U_TEST_SAM', ['a0','a1','a2','a3','a4','a5','a6','a7','a8']);
     // 重登记固定阵容，确保本次结算带来第 10 只。
     await ctx.pool.query("UPDATE pet_match.games SET lineup=ARRAY['a9','a0','a1','a2','a3','a4'] WHERE game_id=$1", [game.gameId]);
-    const payload: ResultPayload = { rulesVersion: game.rulesVersion, completed: true, score: 30, clearedCells: 3, clearedByMultiplier: [3,0,0,0,0], rushSucceeded: false, maxChain: 1, toolsFired: 0, validMoves: 1, actedInLastSeconds: false, pets: ['a9','a0','a1','a2','a3','a4'].map((id,i) => ({ id, served:i===0?3:0, firstServedSeq:i===0?1:null })) };
+    const payload: ResultPayload = { rulesVersion: game.rulesVersion, completed: true, score: 300, clearedCells: 3, clearedByMultiplier: [3,0,0,0,0], rushSucceeded: false, maxChain: 1, toolsFired: 0, validMoves: 1, actedInLastSeconds: false, pets: ['a9','a0','a1','a2','a3','a4'].map((id,i) => ({ id, served:i===0?3:0, firstServedSeq:i===0?1:null })) };
     const res = await settleGame(ctx.pool, game.gameId, 'U_TEST_SAM', payload);
     expect(res.newAchievements).toContain('friends');
     expect((await settleGame(ctx.pool, game.gameId, 'U_TEST_SAM', payload)).newAchievements).toEqual(res.newAchievements);
@@ -88,7 +88,7 @@ describe('永久收集成就与佩戴', () => {
     const games = await Promise.all([registerGame(ctx.pool,player,'normal'),registerGame(ctx.pool,player,'normal')]);
     const ids = ['a9','a0','a1','a2','a3','a4'];
     for (const game of games) await ctx.pool.query('UPDATE pet_match.games SET lineup=$2 WHERE game_id=$1',[game.gameId,ids]);
-    const payload: ResultPayload = { rulesVersion:games[0].rulesVersion,completed:true,score:30,clearedCells:3,clearedByMultiplier:[3,0,0,0,0],rushSucceeded:false,maxChain:1,toolsFired:0,validMoves:1,actedInLastSeconds:false,pets:ids.map((id,i)=>({id,served:i===0?3:0,firstServedSeq:i===0?1:null})) };
+    const payload: ResultPayload = { rulesVersion:games[0].rulesVersion,completed:true,score:300,clearedCells:3,clearedByMultiplier:[3,0,0,0,0],rushSucceeded:false,maxChain:1,toolsFired:0,validMoves:1,actedInLastSeconds:false,pets:ids.map((id,i)=>({id,served:i===0?3:0,firstServedSeq:i===0?1:null})) };
     const responses = await Promise.all(games.map(game=>settleGame(ctx.pool,game.gameId,player,payload)));
     expect(responses.flatMap(r=>r.newAchievements??[]).filter(id=>id==='friends')).toHaveLength(1);
   });
@@ -97,7 +97,7 @@ describe('永久收集成就与佩戴', () => {
     await collect('U_TEST_LONG', ['a0','a1','a2','a3','a4','a5','a6','a7','a8']);
     await profile('U_TEST_LONG');
     await ctx.pool.query("UPDATE pet_match.games SET lineup=ARRAY['a9','a0','a1','a2','a3','a4'] WHERE game_id=$1", [game.gameId]);
-    const payload: ResultPayload = { rulesVersion: game.rulesVersion, completed:true, score:30,clearedCells:3,clearedByMultiplier:[3,0,0,0,0],rushSucceeded:false,maxChain:1,toolsFired:0,validMoves:1,actedInLastSeconds:false,pets:['a9','a0','a1','a2','a3','a4'].map((id,i)=>({id,served:i===0?3:0,firstServedSeq:i===0?1:null})) };
+    const payload: ResultPayload = { rulesVersion: game.rulesVersion, completed:true, score:300,clearedCells:3,clearedByMultiplier:[3,0,0,0,0],rushSucceeded:false,maxChain:1,toolsFired:0,validMoves:1,actedInLastSeconds:false,pets:['a9','a0','a1','a2','a3','a4'].map((id,i)=>({id,served:i===0?3:0,firstServedSeq:i===0?1:null})) };
     const failing = buildApp({ pool:ctx.pool, settleHooks:{ beforeCommit: async()=>{throw new Error('rollback');} } });
     expect((await failing.inject({method:'POST',url:`/api/games/${game.gameId}/result`,payload:{playerId:'U_TEST_LONG',result:payload}})).statusCode).toBe(503);
     expect((await profile('U_TEST_LONG')).achievements.find(a=>a.id==='friends')?.unlockedAt).toBeNull();

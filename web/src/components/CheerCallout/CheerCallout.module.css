@@ -1,0 +1,187 @@
+.callout {
+  --cheer-font-size: var(--cheer-nice-size);
+  --cheer-fluid-size: var(--cheer-nice-fluid-size);
+  --cheer-peak-scale: var(--cheer-nice-peak-scale);
+  position: absolute;
+  top: var(--cheer-anchor-y);
+  left: 50%;
+  z-index: var(--cheer-z);
+  display: grid;
+  place-items: center;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  container-type: inline-size;
+  pointer-events: none;
+  user-select: none;
+}
+
+.callout[data-kind='great'] {
+  --cheer-font-size: var(--cheer-great-size);
+  --cheer-fluid-size: var(--cheer-great-fluid-size);
+  --cheer-peak-scale: var(--cheer-great-peak-scale);
+  --cheer-sparkle-size: var(--cheer-sparkle-small-size);
+}
+
+.callout[data-kind='amazing'] {
+  --cheer-font-size: var(--cheer-amazing-size);
+  --cheer-fluid-size: var(--cheer-amazing-fluid-size);
+  --cheer-peak-scale: var(--cheer-strong-peak-scale);
+}
+
+.callout[data-kind='wow'] {
+  --cheer-font-size: var(--cheer-wow-size);
+  --cheer-fluid-size: var(--cheer-wow-fluid-size);
+  --cheer-peak-scale: var(--cheer-strong-peak-scale);
+  --cheer-angle: var(--cheer-wow-angle);
+  --cheer-outline-width: var(--cheer-wow-outline-width);
+}
+
+.message {
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: min(var(--cheer-font-size), var(--cheer-fluid-size));
+  font-weight: var(--weight-display);
+  font-style: italic;
+  line-height: var(--cheer-leading);
+  letter-spacing: var(--cheer-tracking);
+  white-space: nowrap;
+  transform: rotate(var(--cheer-angle));
+  filter: var(--cheer-shadow);
+  animation: cheer-bounce var(--cheer-duration) var(--ease-out) both;
+}
+
+.word {
+  color: var(--cheer-ink);
+  -webkit-text-stroke: var(--cheer-outline-width) var(--cheer-outline);
+  paint-order: stroke fill;
+}
+
+.sparkles {
+  position: absolute;
+  inset: 0;
+  animation: sparkle-pop var(--cheer-duration) var(--ease-out) both;
+}
+
+.sparkles::before,
+.sparkles::after {
+  content: '';
+  position: absolute;
+  width: var(--cheer-sparkle-size);
+  height: var(--cheer-sparkle-size);
+  background: var(--cheer-sparkle-ink);
+  clip-path: polygon(50% 0%, 62% 36%, 100% 50%, 62% 64%, 50% 100%, 38% 64%, 0% 50%, 38% 36%);
+}
+
+.sparkles::before {
+  top: var(--cheer-sparkle-top);
+  left: var(--cheer-sparkle-left);
+  transform: rotate(var(--cheer-sparkle-angle));
+}
+
+.sparkles::after {
+  top: var(--cheer-sparkle-bottom);
+  right: var(--cheer-sparkle-right);
+  transform: scale(0.75) rotate(var(--cheer-sparkle-angle));
+}
+
+.callout[data-animate='false'] .message,
+.callout[data-animate='false'] .sparkles {
+  animation: none;
+}
+
+@keyframes cheer-bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--cheer-start-y)) scale(var(--cheer-start-scale)) rotate(var(--cheer-start-angle));
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(var(--cheer-peak-y)) scale(var(--cheer-peak-scale)) rotate(var(--cheer-angle));
+  }
+  32% {
+    transform: scale(var(--cheer-settle-scale)) rotate(var(--cheer-angle));
+  }
+  42%,
+  74% {
+    opacity: 1;
+    transform: rotate(var(--cheer-angle));
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(var(--cheer-exit-y)) scale(var(--cheer-exit-scale)) rotate(var(--cheer-angle));
+  }
+}
+
+@keyframes sparkle-pop {
+  0%,
+  8% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  24%,
+  65% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes cheer-fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  10%,
+  74% {
+    opacity: 1;
+  }
+}
+
+.reducedPreview .message {
+  animation-name: cheer-fade;
+}
+
+.reducedPreview .sparkles {
+  display: none;
+}
+
+.preview {
+  position: relative;
+  width: 100%;
+}
+
+.replay {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.audition {
+  width: min(100%, var(--cheer-audition-max-width));
+  margin-inline: auto;
+  padding: var(--space-3);
+}
+
+.auditionButtons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.auditionNote {
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .message {
+    animation-name: cheer-fade;
+  }
+
+  .sparkles {
+    display: none;
+  }
+}

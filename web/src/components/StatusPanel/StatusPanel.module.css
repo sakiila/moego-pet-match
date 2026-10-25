@@ -36,8 +36,8 @@
   white-space: nowrap;
 }
 .time .value { color: var(--color-brand); }
-.score[data-digits='wide'] { --stat-current-size: var(--stat-value-wide); --stat-current-ratio: var(--stat-font-ratio-wide); }
-.score[data-digits='long'] { --stat-current-size: var(--stat-value-long); --stat-current-ratio: var(--stat-font-ratio-long); }
+.score[data-digits='wide'] { --stat-current-size: var(--stat-value-wide); --stat-current-ratio: var(--stat-font-ratio-wide); --stat-value-min: var(--stat-value-min-wide); }
+.score[data-digits='long'] { --stat-current-size: var(--stat-value-long); --stat-current-ratio: var(--stat-font-ratio-long); --stat-value-min: var(--stat-value-min-long); }
 .urgent {
   box-shadow: inset 0 0 0 var(--stat-urgent-stroke) var(--color-danger);
   animation: pulse var(--stat-pulse-ms) ease-in-out infinite;

@@ -14,6 +14,8 @@ ITEMS = {
     'ui/title-wordmark-zh.png': ('title-zh', 1080),
     'ui/title-wordmark-en.png': ('title-en', 1080),
     'feature-wordmarks-original-v1/transparent/smart-scheduling.png': ('smart-scheduling', 1080),
+    'feature-wordmarks-original-v1/transparent/grooming-report-card.png': ('grooming-report-card', 1080),
+    'feature-wordmarks-original-v1/transparent/fish-report-card.png': ('fish-report-card', 1080),
     'ui/home-storefront.png': ('storefront', 1080),
     'ui/identity-blue-cat.png': ('blue-cat', 300),
     'brand/moego-logo.png': ('moego-logo', 420),

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { GameSummary } from '../../engine';
-import { judgeMvp, judgeReview, judgeTitle } from '../report';
+import { translate } from '../../i18n';
+import { judgeMvp, judgeReview, judgeTitle, pickReview } from '../report';
 
 const base: GameSummary = {
   score: 300,
@@ -60,5 +61,42 @@ describe('角色评语优先级', () => {
   ] as const)('%o → %s', (over, which) => {
     expect(judgeReview({ ...base, ...over }, 'normal')).toBe(`review.pet.${which}`);
     expect(judgeReview({ ...base, ...over }, 'fish')).toBe(`review.fish.${which}`);
+  });
+});
+
+describe('同场景的多样评语', () => {
+  const scenes = [
+    [{ clearedCells: 0 }, 'no_service'],
+    [{ maxChain: 5, rushSucceeded: true }, 'high_chain'],
+    [{ rushSucceeded: true }, 'rush_success'],
+    [{ combos: { cc: 1, cs: 0, dryer: 0 } }, 'tool_combo'],
+    [{}, 'normal'],
+  ] as const;
+
+  it.each(scenes)('%s：两种模式均有五句中英评语，且始终符合本局表现', (over, scene) => {
+    for (const mode of ['normal', 'fish'] as const) {
+      const prefix = `review.${mode === 'fish' ? 'fish' : 'pet'}.${scene}`;
+      const keys = new Set(
+        Array.from({ length: 100 }, (_, i) => pickReview({ ...base, ...over, pets: base.pets.map((pet) => ({ ...pet, id: `round${i}_${pet.id}` })) }, mode)),
+      );
+      expect(keys).toEqual(new Set([prefix, ...[2, 3, 4, 5].map((n) => `${prefix}.${n}`)]));
+      for (const locale of ['zh', 'en'] as const) {
+        const lines = [...keys].map((key) => translate(locale, key));
+        expect(new Set(lines).size).toBe(5);
+        for (const line of lines) {
+          expect(line).not.toMatch(/^review\./);
+          expect(line).not.toMatch(/连锁|合体|倍率|道具|combo|cascade/i);
+        }
+      }
+    }
+  });
+
+  it('同一冻结结果重新读取、复制和切换语言时保持同一句变体', () => {
+    const result = { ...base, maxChain: 6, rushSucceeded: true };
+    const key = pickReview(result, 'normal');
+    for (let i = 0; i < 10; i++) {
+      expect(pickReview(structuredClone(result), 'normal')).toBe(key);
+      expect(translate('zh', key)).not.toBe(translate('en', key));
+    }
   });
 });

@@ -139,14 +139,15 @@
   --achievement-rainbow: linear-gradient(120deg, #ff7d16, #ffd33d 20%, #39cc88 40%, #429ff7 60%, #a75cf2 80%, #f85b9e);
   --achievement-rainbow-bg: #fffbf3;
   --achievement-legendary-ink: #6d24bb;
-  --achievement-legendary-tag: linear-gradient(125deg, #f3e3ff, #fbd8ee);
-  /* 镇店（mythic）：最高一档，目前只有隐藏称号「火锅搭子」；红汤到金边的火锅配色 */
-  --achievement-mythic: #e8471f;
-  --achievement-mythic-ink: #8f2409;
-  --achievement-mythic-bg: #fff1ea;
-  --achievement-mythic-line: #ff9d6e;
-  --achievement-mythic-gradient: linear-gradient(125deg, #ffb347, #ff5a1f 45%, #d61f3a 80%, #ffcf4d);
-  --achievement-mythic-tag: linear-gradient(125deg, #ffe3b8, #ffc3b0);
+  --achievement-legendary-tag-ink: #382149;
+  --achievement-legendary-tag: linear-gradient(90deg, #ff9f8c, #ffe393 20%, #bbe6b8 40%, #9ed9ee 60%, #c5a9f1 80%, #f58fc4);
+  /* 镇店（mythic）：最高一档，沿用已选展示徽章的蓝紫极光配色。 */
+  --achievement-mythic: #7437ed;
+  --achievement-mythic-ink: #41308f;
+  --achievement-mythic-bg: #f3efff;
+  --achievement-mythic-line: #8c87f4;
+  --achievement-mythic-gradient: linear-gradient(125deg, #a34df4, #5145df 45%, #3379ed 75%, #41e0f0);
+  --achievement-mythic-tag: linear-gradient(125deg, #e9ddff, #d8f7ff);
   /* 未解锁隐藏称号的灰蒙层 */
   --achievement-hidden-mask: rgba(90, 84, 80, 0.55);
   --achievement-equip-width: 68px;
@@ -168,8 +169,11 @@
   --weight-display: 1000;
 
   /* 2026-10-25 确认棋盘稿：字标、数值与固定槽位。 */
-  --board-page-max: 480px;
-  --board-page-inline: 10px;
+  --board-page-max: 560px;
+  --board-page-inline: 6px;
+  --board-frame-padding: var(--space-2);
+  --board-play-padding: 4px;
+  --board-play-max: 640px;
   --board-page-block: 12px;
   --board-page-gap: 12px;
   --board-page-min-height: 560px;
@@ -178,12 +182,25 @@
   --board-tagline-gap: 0px;
   --board-tagline-size: 16px;
   --board-tagline-line: 1.1;
+  --board-wordmark-width: 100%;
+  --board-fish-title-size: 32px;
+  --board-compact-gap: 6px;
+  --board-compact-title-width: 240px;
+  --board-compact-tagline: 14px;
+  --board-compact-fish-title: 24px;
   --board-footer-height: 44px;
   --board-footer-gap: 6px;
   --board-control-disabled: 0.5;
   --board-tiny-gap: 6px;
   --board-tiny-brand-height: 20px;
-  --board-tiny-title-width: 70%;
+  --board-tiny-title-width: 200px;
+  --board-tiny-fish-title: 20px;
+  --stat-compact-height: 60px;
+  --stat-compact-icon: 36px;
+  --stat-compact-label: 12px;
+  --stat-compact-padding: 4px;
+  --stat-compact-value: 34px;
+  --stat-tiny-padding: 2px;
   --stat-tiny-height: 52px;
   --stat-tiny-icon: 32px;
   --stat-tiny-label: 12px;
@@ -195,14 +212,22 @@
   --rush-tiny-countdown: 24px;
   --rush-tiny-progress-gap: 2px;
   --rush-tiny-track: 12px;
+  --rush-compact-height: 70px;
+  --rush-compact-header: 30px;
+  --rush-compact-title: 20px;
+  --rush-compact-countdown: 26px;
+  --rush-compact-count: 16px;
+  --rush-compact-success-icon: 32px;
   --tip-slot-height: 56px;
   --tip-font-size: var(--text-sm);
   --tip-icon-size: 36px;
   --tip-tiny-height: 40px;
   --tip-tiny-icon: 28px;
   --tip-tiny-font: 12px;
-  --board-landscape-max: 920px;
-  --board-landscape-side: 340px;
+  --tip-compact-font: 13px;
+  --board-wide-max: 1120px;
+  --board-desktop-side: 320px;
+  --board-landscape-side: clamp(240px, 32vw, 300px);
   --board-landscape-min-height: 320px;
   --stat-gap: 12px;
   --stat-content-gap: 7px;
@@ -216,6 +241,8 @@
   --stat-label-line: 1.15;
   --stat-value-size: 40px;
   --stat-value-min: 18px;
+  --stat-value-min-wide: 16px;
+  --stat-value-min-long: 14px;
   --stat-font-ratio: 0.38;
   --stat-font-ratio-wide: 0.31;
   --stat-font-ratio-long: 0.27;
@@ -390,4 +417,51 @@
     --print-start: 0ms;
     --print-ms: 0ms;
   }
+}
+
+/* 棋盘喝彩：橙白贴纸字，字号随棋盘容器缩小，800ms 内弹入、停留、淡出。 */
+:root {
+  --cheer-anchor-y: 18%;
+  --cheer-z: 6;
+  --cheer-ink: var(--color-brand);
+  --cheer-outline: var(--color-paper);
+  --cheer-outline-width: 6px;
+  --cheer-wow-outline-width: 7px;
+  --cheer-shadow: drop-shadow(0 3px 0 #c94d0d) drop-shadow(0 5px 4px rgb(31 34 39 / 0.2));
+  --cheer-nice-size: 40px;
+  --cheer-great-size: 46px;
+  --cheer-amazing-size: 50px;
+  --cheer-wow-size: 56px;
+  --cheer-nice-fluid-size: 12cqw;
+  --cheer-great-fluid-size: 13cqw;
+  --cheer-amazing-fluid-size: 14cqw;
+  --cheer-wow-fluid-size: 16cqw;
+  --cheer-leading: 1.2;
+  --cheer-tracking: -0.035em;
+  --cheer-angle: -4deg;
+  --cheer-wow-angle: -7deg;
+  --cheer-duration: 800ms;
+  --cheer-start-y: 10px;
+  --cheer-start-scale: 0.72;
+  --cheer-start-angle: -10deg;
+  --cheer-peak-y: -4px;
+  --cheer-nice-peak-scale: 1.08;
+  --cheer-great-peak-scale: 1.13;
+  --cheer-strong-peak-scale: 1.18;
+  --cheer-settle-scale: 0.97;
+  --cheer-exit-y: -12px;
+  --cheer-exit-scale: 1.01;
+  --cheer-sparkle-ink: var(--color-dog-yellow);
+  --cheer-sparkle-size: 12px;
+  --cheer-sparkle-small-size: 8px;
+  --cheer-sparkle-top: 4px;
+  --cheer-sparkle-bottom: 24px;
+  --cheer-sparkle-left: -20px;
+  --cheer-sparkle-right: -21px;
+  --cheer-sparkle-angle: 12deg;
+  --cheer-audition-max-width: 420px;
+}
+
+[data-theme='fish'] {
+  --cheer-shadow: drop-shadow(0 3px 0 #a63c10) drop-shadow(0 5px 5px rgb(6 24 44 / 0.45));
 }

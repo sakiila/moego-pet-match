@@ -1,7 +1,7 @@
 import type { AchievementStatus } from '../api/types';
 import { ACHIEVEMENTS, type AchievementId } from './achievementRules';
 
-/** 报告末尾「下一件事」：只报离玩家最近的一件。 */
+/** 报告尾声「店长说」预告：只报离玩家最近的一件。 */
 export type NextUp =
   | { kind: 'fish'; rounds: 1 | 2 }
   | { kind: 'achievement'; id: AchievementId; remaining: number }

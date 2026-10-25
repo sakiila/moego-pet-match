@@ -1,0 +1,96 @@
+{
+  "method": "Built-in ImageGen faithful high-resolution restoration, v2 geometry refinement; original low-resolution source preserved.",
+  "source": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/closing-sign-zh.png",
+  "high_resolution_reference": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/closing-sign-en.png",
+  "previous_generation": "assets/icons/closing-sign-zh-hd-v1/original.png",
+  "generation_path": "/Users/bob/.codex/generated_images/01a17040-dc9f-78e3-9d24-b80c0e02bb85/exec-c912914c-0cee-4c3a-9b25-20a09af26e89.png",
+  "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/closing-sign-zh-hd-v2.png",
+  "master_size": [
+    1448,
+    1086
+  ],
+  "master_sha256": "10dc221849374ace7faebc79570ac5fd82a6b79016fffca5e0461b12e301d030",
+  "export_bbox": [
+    34,
+    48,
+    1430,
+    1044
+  ],
+  "export_bbox_alpha_threshold": 8,
+  "export_bbox_padding": 2,
+  "aspect": 1.4016,
+  "exports": [
+    {
+      "path": "web/src/ui/icons/png/closing-sign-zh-hd-v2@32.png",
+      "size": [
+        32,
+        23
+      ],
+      "sha256": "87f2a13deeb62301e8767838302cf30a14d178df59f10d81c3d8762835e4ae34"
+    },
+    {
+      "path": "web/src/ui/icons/png/closing-sign-zh-hd-v2@48.png",
+      "size": [
+        48,
+        34
+      ],
+      "sha256": "bcaa49de905c9e05bda61a4a5d7104e432461e59d9c7021202160a77c18a7d61"
+    },
+    {
+      "path": "web/src/ui/icons/png/closing-sign-zh-hd-v2@72.png",
+      "size": [
+        72,
+        51
+      ],
+      "sha256": "7bb360b8c149c7c9d3a0f802b325488ecde63fb4d0e16ae06949e555ffa82d11"
+    },
+    {
+      "path": "web/src/ui/icons/png/closing-sign-zh-hd-v2@96.png",
+      "size": [
+        96,
+        68
+      ],
+      "sha256": "d6692b52d60ecb793e638df2c491b45d594d45d7eeef5738ba71df1773ee7803"
+    },
+    {
+      "path": "web/src/ui/icons/png/closing-sign-zh-hd-v2@144.png",
+      "size": [
+        144,
+        103
+      ],
+      "sha256": "b4e78b0c5ff78aae7004139926d2d8b92e5a2b6ff33ddba30f5c1e5d8902cde4"
+    },
+    {
+      "path": "web/src/ui/icons/png/closing-sign-zh-hd-v2@192.png",
+      "size": [
+        192,
+        137
+      ],
+      "sha256": "b294c834c2b7dee020dbe398288ed6b0ea9f2dc0fb396f13bc37b7064fa10dce"
+    },
+    {
+      "path": "web/src/ui/icons/png/closing-sign-zh-hd-v2@288.png",
+      "size": [
+        288,
+        205
+      ],
+      "sha256": "27cb599442412e4bba3253cf9f50d2fa0991e54a1f98a584f42ece6a22599750"
+    },
+    {
+      "path": "web/src/ui/icons/png/closing-sign-zh-hd-v2@576.png",
+      "size": [
+        576,
+        411
+      ],
+      "sha256": "a4bc788805f5f49a27357c383ae116b5942ad42ff2625a6b2e95a633d45fec69"
+    },
+    {
+      "path": "web/src/ui/icons/png/closing-sign-zh-hd-v2@960.png",
+      "size": [
+        960,
+        685
+      ],
+      "sha256": "c91dccd8d6657b82235d2d524d367c7fc28187763bb724b968e756354ec0f67e"
+    }
+  ]
+}

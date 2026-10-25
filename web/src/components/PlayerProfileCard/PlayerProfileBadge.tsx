@@ -1,4 +1,4 @@
-import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import type { AchievementId } from '../../api/types';
 import { ACHIEVEMENTS } from '../../game/achievementRules';
 import { useI18n, type MessageKey } from '../../i18n';
@@ -33,30 +33,32 @@ export function PlayerProfileBadge({ id, chip = false }: { id: AchievementId; ch
     }
   };
 
+  const position = useCallback(() => {
+    const button = trigger.current;
+    const bubble = tooltip.current;
+    if (!button || !bubble) return;
+    const anchor = button.getBoundingClientRect();
+    const bounds = bubble.getBoundingClientRect();
+    const tokens = getComputedStyle(bubble);
+    const margin = parseFloat(tokens.getPropertyValue('--space-4'));
+    const gap = parseFloat(tokens.getPropertyValue('--space-2'));
+    const card = button.closest('[role="dialog"]')?.getBoundingClientRect();
+    const leftEdge = Math.max(margin, (card?.left ?? 0) + margin);
+    const rightEdge = Math.min(window.innerWidth - margin, (card?.right ?? window.innerWidth) - margin);
+    const left = Math.max(leftEdge, Math.min(anchor.left + (anchor.width - bounds.width) / 2, rightEdge - bounds.width));
+    const preferredTop = anchor.top - bounds.height - gap;
+    const top = preferredTop >= margin ? preferredTop : anchor.bottom + gap;
+    bubble.style.left = `${left}px`;
+    bubble.style.top = `${Math.max(margin, Math.min(top, window.innerHeight - bounds.height - margin))}px`;
+    bubble.style.visibility = 'visible';
+  }, []);
+
   useLayoutEffect(() => {
     if (!open) return;
-    const position = () => {
-      const button = trigger.current;
-      const bubble = tooltip.current;
-      if (!button || !bubble) return;
-      const anchor = button.getBoundingClientRect();
-      const bounds = bubble.getBoundingClientRect();
-      const tokens = getComputedStyle(bubble);
-      const margin = parseFloat(tokens.getPropertyValue('--space-4'));
-      const gap = parseFloat(tokens.getPropertyValue('--space-2'));
-      const card = button.closest('[role="dialog"]')?.getBoundingClientRect();
-      const leftEdge = Math.max(margin, (card?.left ?? 0) + margin);
-      const rightEdge = Math.min(window.innerWidth - margin, (card?.right ?? window.innerWidth) - margin);
-      const left = Math.max(leftEdge, Math.min(anchor.left + (anchor.width - bounds.width) / 2, rightEdge - bounds.width));
-      const preferredTop = anchor.top - bounds.height - gap;
-      const top = preferredTop >= margin ? preferredTop : anchor.bottom + gap;
-      bubble.style.left = `${left}px`;
-      bubble.style.top = `${Math.max(margin, Math.min(top, window.innerHeight - bounds.height - margin))}px`;
-    };
     position();
     window.addEventListener('resize', position);
     return () => window.removeEventListener('resize', position);
-  }, [open, locale]);
+  }, [open, locale, position]);
 
   useEffect(() => {
     if (!open) return;
@@ -86,7 +88,12 @@ export function PlayerProfileBadge({ id, chip = false }: { id: AchievementId; ch
       {!chip && <span>{name}</span>}
     </button>
     <div ref={tooltip} id={tooltipId} role="tooltip" popover="auto" className={styles.tooltip}
-      onToggle={event => setOpen(event.currentTarget.matches(':popover-open'))}
+      onBeforeToggle={event => { event.currentTarget.style.visibility = 'hidden'; }}
+      onToggle={event => {
+        const shown = event.currentTarget.matches(':popover-open');
+        if (shown) position();
+        setOpen(shown);
+      }}
       onPointerEnter={cancelClose}
       onPointerLeave={event => { if (event.pointerType === 'mouse' && window.matchMedia('(hover: hover)').matches) leave(); }}>
       <strong>{t('achievement.unlock_condition')}</strong>

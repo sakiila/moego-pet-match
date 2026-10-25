@@ -34,8 +34,6 @@ export interface ScoreCardProps {
   streak?: SettleResponse['streak'] | null;
   /** 开发者彩蛋：MVP 是毛肚或菠萝时在评语右下补盖一枚「开发者家的认证」章（game/easterEggs）。 */
   certified?: boolean;
-  /** 点今日名次标签打开今日榜。 */
-  onStanding?: () => void;
 }
 
 const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
@@ -47,7 +45,7 @@ const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
 /** 读 :root 上的毫秒令牌（--print-start / --print-ms），与 CSS 动画同一时间线。 */
 const cssMs = (name: string) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
 
-export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null, streak = null, onStanding, certified = false }: ScoreCardProps) {
+export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null, streak = null, certified = false }: ScoreCardProps) {
   const { t, locale } = useI18n();
   // 声音与轻震跟着打印动画的节拍：纸送到位的瞬间「叮」，印章拍下的瞬间「咚」
   const feedback = useFeedback();
@@ -116,7 +114,7 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
                     {t('report.personal_best')}
                   </span>
                 )}
-                {standing && <TodayStanding standing={standing} onOpen={onStanding} />}
+                {standing && <TodayStanding standing={standing} />}
                 {streak?.firstToday && (
                   <span className={styles.streakTag} data-testid="report-streak">
                     {t('report.streak_day', { days: streak.days })}

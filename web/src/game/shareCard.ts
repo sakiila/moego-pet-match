@@ -2,7 +2,7 @@ import type { DailyManager, GameMode } from '../api/types';
 import type { GameSummary } from '../engine';
 import type { Locale, MessageKey } from '../i18n';
 import { petDisplayName, petImage, stickerUrl, type PetInfo } from './pets';
-import { judgeMvp, judgeReview, judgeTitle } from './report';
+import { judgeMvp, judgeTitle, pickReview } from './report';
 import { developerStampUrl, titleStampUrl } from './titleStamps';
 import { isDeveloperPet, managerLineKey } from './easterEggs';
 
@@ -62,7 +62,7 @@ export function shareCardModel({ summary, pets, mode, playerName, manager, local
     title: t(judgeTitle(summary)),
     titleStamp: titleStampUrl(judgeTitle(summary), locale),
     developerStamp: hero?.kind === 'mvp' && mode === 'normal' && mvp && isDeveloperPet(mvp.id) ? developerStampUrl(locale) : null,
-    review: t(judgeReview(summary, mode)),
+    review: t(pickReview(summary, mode)),
     scoreLabel: t('report.final_score'),
     score: score.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US'),
     player: t('share.player', { playerName }),

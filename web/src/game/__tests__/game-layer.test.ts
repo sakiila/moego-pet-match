@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { RULES } from '../../engine/config';
 import { createGame, findHint, previewRange, trySwap, type GameState, type Timeline } from '../../engine';
 import { parseBoard } from '../../engine/board';
 import { createGameClock } from '../clock';
@@ -96,8 +97,8 @@ describe('时间线播放', () => {
     expect(clearing.score).toBe(0);
     const fall = frameAt(base, timeline, 1300);
     expect(fall.phase).toBe('fall');
-    expect(fall.score).toBe(30);
-    expect(fall.popups).toEqual([expect.objectContaining({ score: 30, chain: 1, startAt: 1300 })]);
+    expect(fall.score).toBe(300);
+    expect(fall.popups).toEqual([expect.objectContaining({ score: 300, chain: 1, startAt: 1300 })]);
     // 补落的 3 个新棋子从上方 3 格落下
     expect([...fall.dropRows.values()]).toEqual([3, 3, 3]);
   });
@@ -105,9 +106,9 @@ describe('时间线播放', () => {
   it('每批一条飘字，连锁批序随批次递增，飘字带强度等级', () => {
     const f = frameAt(base, timeline, 1940);
     expect(f.popups.map((x) => [x.score, x.chain, x.level])).toEqual([
-      [30, 1, 1],
-      [60, 2, 2],
-      [120, 3, 3],
+      [300, 1, 1],
+      [600, 2, 2],
+      [1200, 3, 3],
     ]);
     expect(f.spawnedIds.size).toBe(1);
   });
@@ -243,6 +244,18 @@ describe('提示与带教', () => {
     expect(pickTip(none)).toBeNull();
   });
 
+  it('五连首先生成吹风机时，看过发动提示后不误教成梳子', () => {
+    const dryer = parseBoard(withCells(DEAD, { '2,2': 'd' })).board;
+    expect(nextTutorial(dryer, new Set())).toBe('dryer');
+    expect(nextTutorial(dryer, new Set(['dryer']))).toBeNull();
+  });
+
+  it('吹风机与普通工具相邻不误教双工具合体', () => {
+    const pair = parseBoard(withCells(DEAD, { '0,0': 'h', '0,1': 'd' })).board;
+    expect(nextTutorial(pair, new Set(['dryer']))).toBe('comb');
+    expect(nextTutorial(pair, new Set(['dryer', 'tool']))).toBeNull();
+  });
+
   it('鱼关首次工具带教用海螺 / 珍珠贝壳文案，合体带教共用', () => {
     const none = { finishing: false, shuffling: false, tutorial: null, hint: false, lastSeconds: false, mode: 'fish' as const };
     expect(pickTip({ ...none, tutorial: 'comb' })?.key).toBe('tutorial.conch');
@@ -295,7 +308,7 @@ describe('提交结果', () => {
     if (!r.ok) throw new Error('rejected');
     const { getSummary } = await import('../../engine');
     const payload = toResultPayload(getSummary(r.state), 1);
-    const expected = payload.clearedByMultiplier.reduce((s, n, i) => s + n * (i + 1) * 10, 0) + (payload.rushSucceeded ? 100 : 0);
+    const expected = payload.clearedByMultiplier.reduce((s, n, i) => s + n * (i + 1) * RULES.baseScore, 0) + (payload.rushSucceeded ? RULES.rush.bonus : 0);
     expect(payload.score).toBe(expected);
     expect(payload.clearedByMultiplier.reduce((a, b) => a + b, 0)).toBe(payload.clearedCells);
     expect(payload.pets).toHaveLength(6);

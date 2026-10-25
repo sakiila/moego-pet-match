@@ -1,0 +1,9 @@
+Use case: precise-object-edit.
+Input image 1 is the first high-resolution restoration to correct. Input image 2 is the authoritative original approved Chinese hanging sign.
+Keep input 1's high-resolution sharp Chinese lettering, transparent background, palette and clean antialiasing. Correct ONLY the geometric drift so its graphic matches input 2 more closely:
+- The hanging straps in image1 are too thick and beam-like. Make both charcoal straps about ONE THIRD thinner, matching the slim dark cords of image2. Keep their endpoints and triangle shape; keep a restrained original highlight, not broad beveled beams.
+- The orange plaque in image1 is slightly too short vertically. Keep its width fixed and increase the plaque's height by about 6–7 percent, restoring image2's fuller rounded rectangle proportions. The complete visible pin+cord+plaque graphic should have width:height close to 1.369:1, as in image2, rather than image1's approximately 1.426:1.
+- Preserve the original slight upward-right tilt and original panel corner radii and dark outer outline. Keep the orange pin at the original relative size; if necessary reduce its diameter very slightly (about 5 percent), without changing its center.
+- Preserve text exactly "收工啦！" in a SINGLE line, with the same heavy rounded cream-white Chinese forms and placement as input2. Keep it crisp; do not change font style, stroke count, word spacing style or punctuation. Fit the text naturally to the restored panel height.
+Output one independent HD transparent PNG, around 1536 x 1152 or a near-identical canvas ratio with safe transparent margins. True alpha outside the sign and in the cord triangle. No solid background, checkerboard, extra objects, shadows, motion marks or labels.
+This is a fidelity repair, not a redesign: use image2 as the authority for silhouette, cord thickness, relative pin size, plaque proportions, tilt and Chinese lettering. Preserve all high-resolution edge clarity.

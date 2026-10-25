@@ -27,20 +27,33 @@
 
 2026-10-24 图标接入：用户确认把第 1–10 批图标以原稿 PNG 接入游戏（待矢量化），替换系统 emoji 与手画 SVG；鱼关道具名改为海螺、珍珠贝壳，鱼关图标用天蓝色单鱼贴纸，称号框整图不拉伸。决定与阶段见 [ICON_REDESIGN_PLAN.md](ICON_REDESIGN_PLAN.md)「接入游戏」。
 
+### 2026-10-25 最新规则：直线五连直接生成吹风机／大浪花
+
+用户已确认规则版本 5：每个匹配组只要有一条横向或纵向直线达到 5 格及以上，就优先生成吹风机；即使同组带 L / T / ＋ 分支，也只生成一个吹风机。否则交叉匹配至少 5 个独立格生成剪刀，直线四消生成对应方向的梳子，普通三消不生成道具。手动交换与自动补落形成的匹配使用同一规则，生成位置沿用原约定。
+
+鱼关对应为直线五连及以上生成大浪花，无五连直线的交叉组生成珍珠贝壳，四消生成方向海螺。吹风机与大浪花均为真实道具棋子，生成后留在棋盘上，不自动发动；与任意相邻棋子交换或被其他道具扫到后清全盘 49 格。两个剪刀／珍珠贝壳仍可合成吹风机／大浪花，合成批本身不清除、不计分。
+
+本次沿用已有道具图标、棋格呈现和发动反馈，不重新生成或裁切图片。下文旧图稿、原始提示词及早期方案保留历史原文；其中「直五出剪刀／珍珠贝壳」「吹风机／大浪花仅作全盘演出」「剪＋剪直接清全盘」等旧描述，不再作为当前生成或发动规则，最新规则以本节、V1_RULES 与 GAME_FLOW 为准。本节只记录已确认设计，未声明本次实现或验收完成；接入与验证清单见[本轮计划](reviews/2026-10-25-five-match-dryer/PLAN.md)。
+
 ## 选定展示文件
+
+2026-10-25 英文喝彩补充：用户确认四条自录 Nice / Great / Amazing / Wow 及橙白贴纸式弹跳字效，已本地接入。喝彩在棋盘上缘附近出现约 800ms，每次操作完成后只显示最高档；沿用现有圆体、橙色与白描边，小星光由 CSS 绘制，布局与棋盘位置保持稳定。减少动态效果时只淡入淡出。触发规则见 V1_RULES「英文喝彩」，素材与处理记录见 [自录音效](../assets/audio/cheers-bob-v1/README.md)，接入与验收见 [实施记录](reviews/2026-10-25-game-cheers/PLAN.md)。本轮未新增或替换选定页面图稿。
+
+2026-10-25 实装反馈补充：用户要求放大棋盘。棋盘获得优先空间，中矮窗口先收紧页头与提示区，较宽窗口使用左右排布，手机边距与棋盘内边距适度缩小；当前438×780窗口外框306→425px。图案、贴纸及原始比例保持不变，见[尺寸验收](reviews/2026-10-25-board-frontdesk/BOARD_SIZE.md)，本条优先于旧截图中的空间比例。
 
 | 页面 | 文件 | 设计重点 |
 | --- | --- | --- |
+| 收工挂牌 · 高清中文 | [高清 PNG](../assets/icons/library-original-png-v2/masters/16-board-frontdesk/closing-sign-zh-hd-v2.png) | 2026-10-25 用户确认并选用高清 v2；通过 Icon 接入中文收工牌及开局预载，网页提供最高960px宽导出，保留原有造型、文案与动效；[制作记录](../assets/icons/closing-sign-zh-hd-v2/README.md) |
 | 游戏页前台加单与收工 | [游戏页 v2](concepts/mobile-board-frontdesk-v2.png)、[加单状态 v2](concepts/rush-frontdesk-states-v2.png)、[收工分镜 v2](concepts/shift-finish-storyboard-v2.png) | 2026-10-25 已确认；最新 Smart Scheduling 字标、粗数据、原稿钟/星、前台加单小票（已删右侧目标句）、1.2 秒收工挂牌与真实服务头像；[独立素材与像素来源](../assets/icons/board-frontdesk-original-v1/preview.html)，通过独立组件接入 |
 | 准备页操作示意 | [相邻交换](concepts/prep-adjacent-swap-preview-v1.png)、[依次点选](concepts/prep-sequential-tap-preview-v1.png) | 2026-10-24 已确认并接入；原图裁切透明 PNG，橙框灰猫、双向箭头与 1→2 手指点选；说明为灰色圆润粗体；「也来啦」仅首只自家宠物，最多一行，长名字省略 |
-| 英文文字标题：排班与报告 | [feature-wordmarks-scheduling-report-v1.png](concepts/feature-wordmarks-scheduling-report-v1.png) | 2026-10-24 已确认；Smart Scheduling 与 Grooming Report Card，粗圆字形、错落基线、黑橙分色和短线；[独立透明 PNG](../assets/illustrations/feature-wordmarks-original-v1/README.md) 已按原图裁切，未接入页面 |
+| 英文文字标题：排班与报告 | [feature-wordmarks-scheduling-report-v1.png](concepts/feature-wordmarks-scheduling-report-v1.png) | 2026-10-24 已确认；Smart Scheduling 已用于准备与游戏页；2026-10-25 Grooming Report Card 接入普通结算页，保留原稿两行组合、黑橙分色和短线，副标题沿用游戏页粗圆体；[独立透明 PNG](../assets/illustrations/feature-wordmarks-original-v1/README.md) 等比导出为 WebP，经 BrandHeader 使用 |
 | 英文文字标题：图鉴与我的宠物 | [feature-wordmarks-collection-pets-v1.png](concepts/feature-wordmarks-collection-pets-v1.png) | 2026-10-24 已确认；Pet Collection 与 My Pets；同套文字风格，独立透明 PNG 已裁切，未接入页面 |
-| 英文文字标题：排行榜与鱼关报告 | [feature-wordmarks-ranking-fish-v1.png](concepts/feature-wordmarks-ranking-fish-v1.png) | 2026-10-24 已确认；Leaderboard 与 Fish Report Card；保留原稿黑橙配色，独立透明 PNG 已裁切，未接入页面 |
+| 英文文字标题：排行榜与鱼关报告 | [feature-wordmarks-ranking-fish-v1.png](concepts/feature-wordmarks-ranking-fish-v1.png) | 2026-10-24 已确认；2026-10-25 Fish Report Card 接入鱼关结算页，保留原稿黑橙配色与两行组合，深蓝背景上由报告纸色浅底承托；副标题与游戏页统一。Leaderboard 独立透明 PNG 已裁切，未接入页面 |
 | 首页入口图标 | [home-entry-icons-v3.png](concepts/home-entry-icons-v3.png) | 2026-10-23 效果图已确认；开始营业爪印（2026-10-24 起首页按钮不再使用）、图鉴书本、杯形奖杯、猫狗头像；炭黑描边与橙白配色；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 通用功能图标 | [common-function-icons-v1.png](concepts/common-function-icons-v1.png) | 2026-10-23 已确认；返回、关闭、搜索、设置、选择照片、分享、翻面、信息说明；与首页 v3 同风格；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 详情卡翻面图标 | [flip-card-vertical-v3.png](concepts/flip-card-vertical-v3.png) | 2026-10-24 按用户要求试用大箭头版；沿用 [v2](concepts/flip-card-vertical-v2.png) 的单竖卡，增大橙色弧带与箭头尖；正反面右下角固定 28px、透明无圆底，经图标库等比导出并通过 `Icon` 使用 |
 | 局内操作与状态图标 | [round-operation-icons-v1.png](concepts/round-operation-icons-v1.png) | 2026-10-23 已确认；相邻交换、两步点选、拼图合体、系统洗牌、时钟、计分星形；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
-| 普通／鱼关道具图标 | [tool-family-original-v6.png](concepts/tool-family-original-v6.png) | 2026-10-23 已确认动感版；弧形扫梳、斜向剪刀、海螺与贝壳、风势与浪花；橙色能力标识；吹风机与大浪花仅全盘演出；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
+| 普通／鱼关道具图标 | [tool-family-original-v6.png](concepts/tool-family-original-v6.png) | 2026-10-23 已确认动感版；弧形扫梳、斜向剪刀、海螺与贝壳、风势与浪花；橙色能力标识。吹风机与大浪花均作为真实棋子，规则版本 5 可由直线五连及以上直接生成，也保留双剪刀／双珍珠贝壳合成；发动才清全盘；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 催单反馈图标 | [rush-feedback-original-v1.png](concepts/rush-feedback-original-v1.png) | 2026-10-23 已确认；完整横夹小票、闭合绿色勾印记、灰夹收起小票；普通／鱼关共用；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 结算标记 | [report-marks-original-v4.png](concepts/report-marks-original-v4.png) | 2026-10-23 已确认；MVP 奖章、去回折线并恢复投影的燕尾小旗、保留左侧角花的圆角称号框；圆戳移除；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 排行榜名次徽记 | [leaderboard-marks-original-v1.png](concepts/leaderboard-marks-original-v1.png) | 2026-10-23 已确认；数字 1 皇冠、2 盾牌、3 六角章；并列使用实际名次，本人行橙色高亮；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
@@ -49,7 +62,7 @@
 | 设置与声音触感图标 | [settings-feedback-original-v1.png](concepts/settings-feedback-original-v1.png) | 2026-10-23 已确认；语言、背景音乐、消除音效、轻震；门店默认、局内开启与设备不可用样例；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 通用动作图标 | [common-actions-original-v3.png](concepts/common-actions-original-v3.png) | 2026-10-23 已确认；回门店、退出、换照片、保存图片、重试；重试为连续回环，右上转折收圆，大小图一致；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 趣味称号章 | [report-title-stamps-bilingual-v1.png](concepts/report-title-stamps-bilingual-v1.png) | 2026-10-24 接入游戏；6 款红色小花印章各有中英两版，对应 6 个称号的触发条件；透明素材见 `assets/icons/report-title-stamps-original-v1/transparent`；报告页与分享卡共用，替换原圆角称号框 |
-| 手机 Report Card 精简版 | [mobile-report-slim-v1.png](concepts/mobile-report-slim-v1.png) | 2026-10-25 选定并接入；整页收成五块：小票内分数下一行状态标签（新纪录、今日名次、打卡），MVP 改左右布局、称号章压贴纸右上；小票外「本局收获」一排卡（新收集 + 新称号，多于一屏横向滑动）与「下一件事」气泡，去掉店长签名、导航格与去图鉴按钮；取代 mobile-report-details-v3 的下半部布局 |
+| 手机 Report Card 精简版 | [mobile-report-slim-v1.png](concepts/mobile-report-slim-v1.png) | 2026-10-25 选定并接入；整页收成五块：小票内分数下一行状态标签（新纪录、今日名次、打卡），MVP 改左右布局、称号章压贴纸右上；小票外「本局收获」一排卡（新称号在前、新收集在后，多于一屏横向滑动）与「店长说」预告气泡（头像固定为今日店长），去掉店长签名、导航格与去图鉴按钮；取代 mobile-report-details-v3 的下半部布局 |
 | 排行榜今日榜 | [mobile-leaderboard-daily-v1.png](concepts/mobile-leaderboard-daily-v1.png) | 2026-10-24 选定并接入；在实际排行页截图基础上，模式切换下加「今日榜 / 总榜」下划线标签（默认今日榜）、一行日期与「今天全公司同一盘棋」小字、表头改「今日最好」，其余不变；日历小图标用内联 SVG |
 | 报告今日名次 | [mobile-report-daily-rank-v1.png](concepts/mobile-report-daily-rank-v1.png) | 2026-10-24 选定并接入；小票内分数下方一条浅橙圆角小条：皇冠 + 「今日第 N 名 · 距第一还差 X 分」，次于分数；第 1 名与今天只有自己时各有一句（见 UI_COPY） |
 | 报告下一件事 | [mobile-report-next-up-v1.png](concepts/mobile-report-next-up-v1.png) | 2026-10-24 选定并接入；新收集卡与导航之间一条「毛孩子开口」气泡：左侧 MVP 小圆贴纸（浅橙底），白色圆角气泡带左指小尾巴、细炭黑描边与小偏移阴影，橙色小标签「下一件事」、一句第一人称预告、右下「去图鉴 ›」；实现时头像 44px、尾巴用 CSS 三角 |
@@ -79,7 +92,8 @@
 | 收集称号展示方案 | [collection-titles-system-v1.png](concepts/collection-titles-system-v1.png) | 2026-10-24 已确认视觉方向与解锁后自主选择佩戴；头像旁小称号、排行榜姓名下方称号、「我的称号」抽屉。徽章风格以已确认的[跨物种合照 v3](concepts/collection-title-cross-species-v3.png)为准：大表情、橙白色块与花边轮廓。[整套预览 v3](concepts/collection-title-badges-v3.png)七枚均已确认，并授权直接切图去底；[PNG 母版与提取记录](../assets/icons/collection-titles-original-v1/README.md)已接入 Icon，头像、排行榜、称号抽屉与小票下方新解锁展示已在本地实现；七项门槛以 GAME_FLOW 为准，未部署 |
 | 称号稀有度 PNG 组件 | [collection-title-rarity-v5.png](concepts/collection-title-rarity-v5.png) | 2026-10-24 最终选定闪耀（珊瑚红）、卓越（电紫）、非凡（香槟玫瑰金）、传奇（彩虹）。[新版透明 PNG 与制作记录](../assets/icons/collection-titles-rarity-v5/README.md)已接入头像、排行榜、称号抽屉和解锁展示。头像仍为 C 档 40px / 22px，中心贴右下圆周；中文抽屉等级标签独立列，英文和窄屏放在姓名上方。菜单保留已选第 2 稿[奖章与收工牌](concepts/menu-icons-medal-closing-sign-v1.png)。内部成就 ID 与解锁条件未改，未部署。 |
 | 排行榜玩家名片 | [player-profile-card-v4.png](concepts/player-profile-card-v4.png) | 2026-10-25 接入：点击列表整行、领奖台头像/姓名打开只读名片，展示最高分、收集数、已完成局数、已解锁徽章和最近五局；使用 v5 稀有度素材。真实本地 Alice 数据已通过只读接口验证，昵称下方重复称号签不回到排行榜列表。 |
-| 隐藏称号「火锅搭子」徽章 | [title-hotpot-badge-v1.png](concepts/title-hotpot-badge-v1.png) | 2026-10-25 开发者彩蛋，用户要求的最高一档「镇店之宝 / House Special」；三枚（标准 / 头像 / 展示）沿用收集称号徽章风格，两只猫围着鸳鸯锅。已按 collection-titles 的同一方法切图去底：[母版与提取记录](../assets/icons/hotpot-title-original-v1/README.md)同步到图标库 13/14/15 组，经 `Icon` 使用；解锁条件见 GAME_FLOW |
+| 传奇稀有度标签 | [legendary-rainbow-label-v1.png](concepts/legendary-rainbow-label-v1.png) | 2026-10-25 用户确认：传奇标签采用与行外框呼应的横向彩虹渐变底，保留深色文字。通过 CSS tokens 与标签样式接入；徽章图片、尺寸、排版与佩戴按钮沿用当前实现。 |
+| 隐藏称号「火锅搭子」徽章 | [title-hotpot-aurora-showcase-v2.png](concepts/title-hotpot-aurora-showcase-v2.png) | 2026-10-25 用户选定[配色第 2 稿](concepts/title-hotpot-electric-aurora-v1.png)的蓝紫极光色，全部统一为右侧展示徽章：保留星芒与麦穗，各场景只缩放同一枚，不再区分标准 / 头像 / 展示图案。[唯一透明母版与记录](../assets/icons/hotpot-title-aurora-v2/README.md)已本地接入 Icon，头像角标、称号签、列表、玩家名片和解锁展示统一使用 showcase；标签和边框同步蓝紫青色。22px 保留整体轮廓，细节由大图承载。最高一档「镇店之宝 / House Special」与解锁条件沿用 GAME_FLOW；[原 v1 母版与提取记录](../assets/icons/hotpot-title-original-v1/README.md)保留，未部署。 |
 | 开发者认证章 | [report-developer-stamp-v1.png](concepts/report-developer-stamp-v1.png) | 2026-10-25 开发者彩蛋：中英两版红色印章「开发者家的 · 认证 / DEVELOPER'S PETS · CERTIFIED」，与趣味称号章同一印章语言。[透明素材与提取记录](../assets/icons/report-developer-stamp-original-v1/README.md)经 `build_web.py` 出 `web/src/ui/art/stamps/developer-{zh,en}.webp`；MVP 是毛肚或菠萝时盖在小票评语框右下与分享卡主角图左下 |
 | 手机我的宠物 | [mobile-my-pets-v1.png](concepts/mobile-my-pets-v1.png) | 已确认；仅列自家已上架宠物，完整头像、两种收集状态、查看资料／添加／删除申请 |
 | 手机删除申请 | [mobile-delete-request-v1.png](concepts/mobile-delete-request-v1.png) | 已确认；我的宠物页上的提交前弹层，关联 Maodu、人工处理说明、选填补充及提交申请 |

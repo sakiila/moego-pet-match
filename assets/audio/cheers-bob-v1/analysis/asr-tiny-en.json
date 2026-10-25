@@ -1,0 +1,68 @@
+{
+  "model": "tiny.en",
+  "source": "/Users/bob/Downloads/sound.m4a",
+  "language": "en",
+  "language_probability": 1,
+  "segments": [
+    {
+      "start": 1.46,
+      "end": 2.86,
+      "text": " Nice.",
+      "avg_logprob": -0.49387531810336643,
+      "no_speech_prob": 0.20224156975746155,
+      "words": [
+        {
+          "start": 1.46,
+          "end": 2.86,
+          "word": " Nice.",
+          "probability": 0.7887290120124817
+        }
+      ]
+    },
+    {
+      "start": 4.28,
+      "end": 4.64,
+      "text": " Great.",
+      "avg_logprob": -0.49387531810336643,
+      "no_speech_prob": 0.20224156975746155,
+      "words": [
+        {
+          "start": 4.28,
+          "end": 4.64,
+          "word": " Great.",
+          "probability": 0.9721801280975342
+        }
+      ]
+    },
+    {
+      "start": 6.2,
+      "end": 6.54,
+      "text": " Amazing.",
+      "avg_logprob": -0.49387531810336643,
+      "no_speech_prob": 0.20224156975746155,
+      "words": [
+        {
+          "start": 6.2,
+          "end": 6.54,
+          "word": " Amazing.",
+          "probability": 0.9893446564674377
+        }
+      ]
+    },
+    {
+      "start": 8.22,
+      "end": 8.44,
+      "text": " Wow.",
+      "avg_logprob": -0.49387531810336643,
+      "no_speech_prob": 0.20224156975746155,
+      "words": [
+        {
+          "start": 8.22,
+          "end": 8.44,
+          "word": " Wow.",
+          "probability": 0.987981379032135
+        }
+      ]
+    }
+  ]
+}

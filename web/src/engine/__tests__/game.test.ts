@@ -29,6 +29,13 @@ function chain(timeline: Timeline): Chain {
 const CASCADE_210 = ['EFEFDFD', 'DEDEFEF', 'FDFCEDE', 'EFEBDFD', 'DEDFAEF', 'EDFACDE', 'DEBABCC'];
 const CASCADE_REFILL = [0, 1, 0, 0, 2, 0, 1, 2, 0];
 
+/** (5,3)→(6,3) 凑出底行直五；四个补落格不再形成匹配。 */
+const STRAIGHT_FIVE = ['ABCDEFA', 'CDEFABC', 'EFABCDE', 'ABCDEFA', 'CDEFABC', 'EFAACDE', 'BAACAAD'];
+const STRAIGHT_FIVE_REFILL = [1, 2, 3, 4];
+/** (2,2)→(2,3) 先消竖三，再补成顶行直五。 */
+const REFILL_FIVE = ['BAACAAD', 'CDECABC', 'EFCBCDE', 'ABCDEFA', 'CDEFABC', 'EFABCDE', 'ABCDEFA'];
+const REFILL_FIVE_QUEUE = [0, 3, 5, 1, 2, 3, 4];
+
 describe('开局与洗牌', () => {
   it('随机开局没有现成匹配，且至少一步有效交换', () => {
     for (let seed = 1; seed <= 100; seed++) {
@@ -86,13 +93,52 @@ describe('交换受理', () => {
 });
 
 describe('计分、连锁与道具生成', () => {
-  it('三消 → 三消 → 四消 = 30 + 60 + 120 = 210，并留下梳子', () => {
+  it('手动直五在清除后生成吹风机，五格仍计 500 分且不自动发动', () => {
+    const { state, timeline } = swap(game(STRAIGHT_FIVE, STRAIGHT_FIVE_REFILL), p(5, 3), p(6, 3), 1000);
+    const { batches, boardAfterSwap } = chain(timeline);
+    expect(batches).toHaveLength(1);
+    const first = batches[0];
+    expect(first.cleared).toHaveLength(5);
+    expect(first.score).toBe(500);
+    expect(first.effect).toBe('match');
+    expect(boardAfterSwap[6][3]).toMatchObject({ type: 'pet', kind: 0 });
+    expect(first.spawned).toEqual([{ pos: p(6, 3), piece: expect.objectContaining({ type: 'tool', tool: 'dryer' }) }]);
+    expect(first.boardAfter[6][3]).toMatchObject({ type: 'tool', tool: 'dryer' });
+    expect(first.toolsFired).toEqual([]);
+    expect(state).toMatchObject({ score: 500, clearedCells: 5, clearedByMultiplier: [5, 0, 0, 0, 0], toolsFired: 0, combos: { cc: 0, cs: 0, dryer: 0 } });
+    expect(state.refillQueue).toEqual([]);
+  });
+
+  it('补落直五自动生成吹风机，下一次相邻交换才清除全盘', () => {
+    // 全盘清除后按列补回可操作的固定棋盘，整个验证不依赖随机补落。
+    const afterDryer = Array.from({ length: 7 }, (_, c) => STRAIGHT_FIVE.map((row) => row.charCodeAt(c) - 65)).flat();
+    const { state, timeline } = swap(game(REFILL_FIVE, [...REFILL_FIVE_QUEUE, ...afterDryer]), p(2, 2), p(2, 3), 1000);
+    const { batches } = chain(timeline);
+    expect(batches).toHaveLength(2);
+    expect(batches.map((batch) => batch.cleared.length)).toEqual([3, 5]);
+    expect(formatBoard(batches[0].boardAfter)[0]).toBe('BAAAAAD');
+    expect(batches[0].spawned).toEqual([]);
+    expect(batches[1].spawned).toEqual([{ pos: p(0, 3), piece: expect.objectContaining({ type: 'tool', tool: 'dryer' }) }]);
+    expect(state.board[0][3]).toMatchObject({ type: 'tool', tool: 'dryer' });
+    expect(state).toMatchObject({ score: 1300, toolsFired: 0, combos: { dryer: 0 } });
+
+    const activated = swap(state, p(0, 3), p(0, 4), state.busyUntil);
+    const cleared = chain(activated.timeline).batches;
+    expect(cleared).toHaveLength(1);
+    expect(cleared[0]).toMatchObject({ effect: 'dryer', score: 4900, toolsFired: [{ pos: p(0, 4), tool: 'dryer' }] });
+    expect(cleared[0].cleared).toHaveLength(49);
+    expect(activated.state).toMatchObject({ score: 6200, clearedCells: 57, toolsFired: 1, combos: { dryer: 1 } });
+    expect(formatBoard(activated.state.board)).toEqual(STRAIGHT_FIVE);
+    expect(activated.state.refillQueue).toEqual([]);
+  });
+
+  it('三消 → 三消 → 四消 = 300 + 600 + 1200 = 2100，并留下梳子', () => {
     const { state, timeline } = swap(game(CASCADE_210, CASCADE_REFILL), p(4, 4), p(4, 3), 1000);
     const { batches } = chain(timeline);
     expect(batches.map((b) => b.cleared.length)).toEqual([3, 3, 4]);
     expect(batches.map((b) => b.multiplier)).toEqual([1, 2, 3]);
-    expect(batches.map((b) => b.score)).toEqual([30, 60, 120]);
-    expect(state.score).toBe(210);
+    expect(batches.map((b) => b.score)).toEqual([300, 600, 1200]);
+    expect(state.score).toBe(2100);
     expect(batches[2].spawned).toMatchObject([{ pos: p(6, 5), piece: { type: 'tool', tool: 'combH' } }]);
     // 新道具在批次结束后生成，不因生成本身发动
     expect(formatBoard(state.board)).toEqual([
@@ -133,8 +179,8 @@ describe('计分、连锁与道具生成', () => {
     const summary = getSummary(state);
     expect(state.served.slice(0, 3)).toEqual([3, 3, 4]);
     expect(state.firstServedSeq.slice(0, 3)).toEqual([1, 2, 3]);
-    expect(summary).toMatchObject({ score: 210, clearedCells: 10, maxChain: 3, toolsFired: 0, validMoves: 1 });
-    // 3 格 ×1、3 格 ×2、4 格 ×3：10×(3 + 6 + 12) = 210
+    expect(summary).toMatchObject({ score: 2100, clearedCells: 10, maxChain: 3, toolsFired: 0, validMoves: 1 });
+    // 3 格 ×1、3 格 ×2、4 格 ×3：100×(3 + 6 + 12) = 2100
     expect(summary.clearedByMultiplier).toEqual([3, 3, 4, 0, 0]);
   });
 });
@@ -151,7 +197,7 @@ describe('道具发动与合体', () => {
     expect(first.cleared).toHaveLength(cells);
     expect(first.effect).toBe(effect);
     expect(first.combo?.center).toEqual(p(3, 3));
-    expect(first.score).toBe(cells * 10);
+    expect(first.score).toBe(cells * RULES.baseScore);
     expect(state.toolsFired).toBeGreaterThanOrEqual(2);
   });
 
@@ -192,7 +238,7 @@ describe('道具发动与合体', () => {
     const first = chain(timeline).batches[0];
     expect(first.effect).toBe('dryer');
     expect(first.cleared).toHaveLength(49);
-    expect(first.score).toBe(490);
+    expect(first.score).toBe(4900);
     expect(first.multiplier).toBe(1);
     expect(first.toolsFired).toEqual([{ pos: p(3, 4), tool: 'dryer' }]);
     expect(state.toolsFired).toBeGreaterThanOrEqual(1);
@@ -247,7 +293,7 @@ describe('道具发动与合体', () => {
     const first = chain(timeline).batches[0];
     // 竖梳落到 (6,3) 清第 3 列 7 格 + A 在第 4 列凑成的 3 格
     expect(first.cleared).toHaveLength(10);
-    expect(first.score).toBe(100);
+    expect(first.score).toBe(1000);
     expect(first.toolsFired).toEqual([{ pos: p(6, 3), tool: 'combV' }]);
   });
 
@@ -271,7 +317,7 @@ describe('催单与时间端点', () => {
     expect(batches[0].rushBonus).toBe(true);
     expect(batches.filter((b) => b.rushBonus)).toHaveLength(1);
     const clearScore = batches.reduce((sum, b) => sum + b.score, 0);
-    expect(state.score).toBe(clearScore + 100);
+    expect(state.score).toBe(clearScore + RULES.rush.bonus);
   });
 
   it('结算时刻 50 000 ms 不计入催单', () => {

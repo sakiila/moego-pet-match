@@ -16,9 +16,22 @@ describe('匹配组与道具类型', () => {
     expect(toolsOf(['A......', 'A......', 'A......', 'A......', '.......', '.......', '.......'])).toEqual(['combV']);
   });
 
-  it('直线五连及以上出剪刀', () => {
-    expect(toolsOf(['AAAAA..', ...Array(6).fill('.......')])).toEqual(['scissors']);
-    expect(toolsOf(['AAAAAAA', ...Array(6).fill('.......')])).toEqual(['scissors']);
+  it.each([5, 6, 7])('横向与纵向直线 %i 连都出吹风机', (length) => {
+    const horizontal = ['A'.repeat(length).padEnd(7, '.'), ...Array(6).fill('.......')];
+    const vertical = Array.from({ length: 7 }, (_, r) => r < length ? 'A......' : '.......');
+    expect(toolsOf(horizontal)).toEqual(['dryer']);
+    expect(toolsOf(vertical)).toEqual(['dryer']);
+  });
+
+  it('五连带交叉支线时，整个匹配组只出一个吹风机', () => {
+    const horizontal = ['AAAAA..', '..A....', '..A....', '.......', '.......', '.......', '.......'];
+    const vertical = ['A......', 'A......', 'AAA....', 'A......', 'A......', '.......', '.......'];
+    for (const shape of [horizontal, vertical]) {
+      const groups = groupsOf(shape);
+      expect(groups).toHaveLength(1);
+      expect(groups[0].cells).toHaveLength(7);
+      expect(groups.map(toolForGroup)).toEqual(['dryer']);
+    }
   });
 
   it('L、T、＋ 形至少五格出剪刀', () => {
