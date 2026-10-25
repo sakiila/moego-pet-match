@@ -117,6 +117,8 @@ export const en: Record<MessageKey, string> = {
   'home.streak_none': 'Play a round today to start your streak',
   'home.photo_notice': "Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack (Maodu and Boluo's human).",
   'home.version': 'Version {version}',
+  'home.footer_info': 'Privacy',
+  'home.footer_removal': 'Data Removal',
   'home.copyright': '© {year} {holder} · Made by {author}',
   'home.github_link': 'GitHub: {repository} (opens in a new tab)',
   'report.new_collection': 'New to Your Collection',

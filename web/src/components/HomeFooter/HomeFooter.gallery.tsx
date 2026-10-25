@@ -12,8 +12,8 @@ function Example({ version, repositoryUrl = GITHUB_REPOSITORY_URL }: { version: 
       repositoryUrl={repositoryUrl}
       copyright={COPYRIGHT}
       links={[
-        { label: t('info.use_link'), onClick: () => {} },
-        { label: t('info.removal_link'), onClick: () => {} },
+        { label: t('home.footer_info'), onClick: () => {} },
+        { label: t('home.footer_removal'), onClick: () => {} },
         { label: t('nav.settings'), onClick: () => {} },
       ]}
     />

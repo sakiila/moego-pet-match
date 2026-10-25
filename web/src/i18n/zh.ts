@@ -116,6 +116,8 @@ export const zh = {
   'home.streak_none': '今天开一局，打卡从今天算起',
   'home.photo_notice': '宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob（毛肚和菠萝的铲屎官）',
   'home.version': '版本 {version}',
+  'home.footer_info': '信息使用说明',
+  'home.footer_removal': '资料删除申请',
   'home.copyright': '© {year} {holder} · 由 {author} 制作',
   'home.github_link': 'GitHub：{repository}（在新标签页打开）',
   'report.new_collection': '本局新收集',

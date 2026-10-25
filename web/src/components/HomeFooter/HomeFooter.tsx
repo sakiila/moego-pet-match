@@ -16,7 +16,10 @@ export function HomeFooter({ links, version, repositoryUrl, copyright }: HomeFoo
   const year = /^\d{4}/.exec(version)?.[0];
   return (
     <footer className={styles.footer}>
-      <PageLinks links={links} />
+      <PageLinks
+        links={[...links, { label: 'GitHub', href: repositoryUrl, ariaLabel: t('home.github_link', { repository }), testId: 'game-repository' }]}
+        compact
+      />
       <p className={styles.version}>
         <span data-testid="game-version">{t('home.version', { version })}</span>
         {year && (
@@ -26,16 +29,6 @@ export function HomeFooter({ links, version, repositoryUrl, copyright }: HomeFoo
           </>
         )}
       </p>
-      <a
-        className={`${styles.version} ${styles.repository}`}
-        href={repositoryUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={t('home.github_link', { repository })}
-        data-testid="game-repository"
-      >
-        {repository}
-      </a>
     </footer>
   );
 }

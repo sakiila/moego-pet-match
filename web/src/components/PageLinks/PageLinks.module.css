@@ -8,6 +8,9 @@
 }
 
 .link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
   min-height: 44px;
   padding: 0;
   border: 0;
@@ -27,4 +30,27 @@
 .link:focus-visible {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 首页页尾：小字、链接间「·」分隔，一行排开 */
+.compact {
+  column-gap: var(--space-2);
+}
+
+.compact .item {
+  gap: var(--space-2);
+}
+
+.compact .link {
+  font-size: var(--text-xs);
+}
+
+.dot {
+  color: var(--fg-muted);
+  font-size: var(--text-xs);
 }

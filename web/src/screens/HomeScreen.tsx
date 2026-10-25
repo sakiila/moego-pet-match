@@ -78,8 +78,8 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
         repositoryUrl={repositoryUrl}
         copyright={copyright}
         links={[
-          { label: t('info.use_link'), onClick: () => onInfo(false), testId: 'link-info' },
-          { label: t('info.removal_link'), onClick: () => onInfo(true), testId: 'link-removal' },
+          { label: t('home.footer_info'), onClick: () => onInfo(false), testId: 'link-info' },
+          { label: t('home.footer_removal'), onClick: () => onInfo(true), testId: 'link-removal' },
           { label: t('nav.settings'), onClick: () => setSettings(true), testId: 'link-settings' },
         ]}
       />

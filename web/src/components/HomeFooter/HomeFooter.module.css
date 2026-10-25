@@ -1,6 +1,8 @@
+/* 页尾与上方照片说明拉开，作为底部次要信息 */
 .footer {
   display: grid;
-  gap: var(--space-1);
+  gap: 0;
+  margin-top: var(--space-3);
 }
 
 .version {
@@ -15,17 +17,4 @@
 /* 版权整段不拆行；窄屏放不下时整段换到下一行 */
 .copyright {
   display: inline-block;
-}
-
-.repository {
-  justify-self: center;
-  min-width: 0;
-  max-width: 100%;
-  padding: var(--space-1) var(--space-2);
-  overflow-wrap: anywhere;
-  text-underline-offset: var(--space-1);
-}
-
-.repository:hover {
-  color: var(--fg);
 }
