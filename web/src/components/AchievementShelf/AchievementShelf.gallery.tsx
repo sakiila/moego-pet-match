@@ -7,6 +7,7 @@ const noop = () => {};
 const sample = (count: number): AchievementView => ({ equippedTitle:count?'cats':null, achievements:ACHIEVEMENTS.map((a,i)=>({ id:a.id, target:typeof a.target==='number'?a.target:80, current:i<count?(typeof a.target==='number'?a.target:80):0, unlockedAt:i<count?'2026-10-24T00:00:00Z':null })) });
 function Live({ count=3, equipped }: { count?:number; equipped?:AchievementId }) { const [view,setView]=useState(()=>({ ...sample(count), ...(equipped ? { equippedTitle:equipped } : {}) })); return <AchievementShelf inline view={view} failed={false} saving={false} saveFailed={false} onRetry={noop} onClose={noop} onSelect={(id:AchievementId|null)=>setView(v=>({...v,equippedTitle:id}))} />; }
 const entry: GalleryEntry = {name:'AchievementShelf', group:'components', states:{
+  'v5 · phone preview':()=> <div style={{ margin: '-24px -16px' }}><Live count={7} equipped="album" /></div>,
   'legendary equipped · rainbow':()=> <Live count={7} equipped="album" />,
   'some unlocked · choose title':()=> <Live />,
   'all unlocked':()=> <Live count={7} />,

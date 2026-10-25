@@ -24,6 +24,9 @@
 }
 
 .avatar { grid-column: 2; grid-row: 1; }
+.interactive { width: 100%; font: inherit; text-align: start; cursor: pointer; }
+.interactive:hover { border-color: var(--color-brand); }
+.interactive:focus-visible { outline: var(--stroke) solid var(--color-brand); outline-offset: var(--space-1); }
 
 .name {
   grid-column: 3;
@@ -31,16 +34,6 @@
   min-width: 0;
   font-weight: var(--weight-bold);
   overflow-wrap: anywhere;
-}
-
-/* 本人行「你」标记 */
-.you {
-  padding: var(--achievement-chip-stroke) var(--space-2);
-  border-radius: var(--radius-pill);
-  background: var(--color-brand);
-  font-size: var(--text-xs);
-  color: var(--color-paper);
-  white-space: nowrap;
 }
 
 .tied {

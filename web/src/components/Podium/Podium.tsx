@@ -20,7 +20,7 @@ const METAL: Record<number, string> = { 1: styles.gold, 2: styles.silver, 3: sty
  * 头像坐在台阶上沿，第 1 名戴端正带白边的小皇冠（hall-of-fame-crown-v2）、名字两侧麦穗；台阶正面写名字、分数与大号名次。
  * 两侧品牌蓝猫与黑白狗扶着台阶打招呼（轻微摇摆，减少动态效果时静止）。
  */
-export function Podium({ entries }: { entries: LeaderboardEntry[] }) {
+export function Podium({ entries, onPlayerSelect }: { entries: LeaderboardEntry[]; onPlayerSelect?: (entry: LeaderboardEntry) => void }) {
   const { t, locale } = useI18n();
   const [titlePreview, setTitlePreview] = useState<{ playerName: string; id: AchievementId } | null>(null);
   const top = entries.slice(0, 3);
@@ -39,7 +39,7 @@ export function Podium({ entries }: { entries: LeaderboardEntry[] }) {
             {e.rank === 1 && <Sparkles />}
             <span className={styles.avatar}>
               <AchievementAvatar name={e.name} seed={e.userId} src={`/img/avatars/${encodeURIComponent(e.userId)}`} equippedTitle={e.equippedTitle}
-                onTitleClick={e.equippedTitle ? () => e.equippedTitle && setTitlePreview({ playerName: e.name, id: e.equippedTitle }) : undefined} />
+                onTitleClick={!onPlayerSelect && e.equippedTitle ? () => e.equippedTitle && setTitlePreview({ playerName: e.name, id: e.equippedTitle }) : undefined} />
             </span>
             <div className={styles.step}>
               <span className={styles.nameRow}>
@@ -54,6 +54,7 @@ export function Podium({ entries }: { entries: LeaderboardEntry[] }) {
                 {e.rank}
               </span>
             </div>
+            {onPlayerSelect && <button type="button" className={styles.profileTrigger} onClick={() => onPlayerSelect(e)} aria-label={t('profile.open', {playerName:e.name})} />}
           </div>
         ) : (
           <div key={`empty-${i}`} />

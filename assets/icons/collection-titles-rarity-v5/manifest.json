@@ -1,0 +1,231 @@
+{
+  "approvedDesign": "design/concepts/collection-title-rarity-v5.png",
+  "sourceAtlasSha256": "e5db1b686926f4e1ab69e760914bcd6599c2ce75bf4a8d7d92ed464e4fb52556",
+  "method": "Connected alpha components from built-in ImageGen atlas; source pixels preserved; detached accent stars omitted from avatar variant",
+  "items": [
+    {
+      "id": "cats",
+      "variant": "avatar",
+      "sourceBox": [
+        30,
+        131,
+        387,
+        459
+      ],
+      "size": [
+        357,
+        328
+      ],
+      "sha256": "f05f26cd46472592ac751a9ff98f6e72210d64a48609718038b2efb07e96c751",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "cats",
+      "variant": "showcase",
+      "sourceBox": [
+        30,
+        131,
+        387,
+        459
+      ],
+      "size": [
+        357,
+        328
+      ],
+      "sha256": "f05f26cd46472592ac751a9ff98f6e72210d64a48609718038b2efb07e96c751",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "dogs",
+      "variant": "avatar",
+      "sourceBox": [
+        406,
+        127,
+        759,
+        461
+      ],
+      "size": [
+        353,
+        334
+      ],
+      "sha256": "ce4b02c481db9768da56a6e0848ce13bd544ca68dac033ceff5dcbf393a23c05",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "dogs",
+      "variant": "showcase",
+      "sourceBox": [
+        406,
+        127,
+        759,
+        461
+      ],
+      "size": [
+        353,
+        334
+      ],
+      "sha256": "ce4b02c481db9768da56a6e0848ce13bd544ca68dac033ceff5dcbf393a23c05",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "friends",
+      "variant": "avatar",
+      "sourceBox": [
+        774,
+        125,
+        1132,
+        464
+      ],
+      "size": [
+        358,
+        339
+      ],
+      "sha256": "6e331f67d0da129c719e89cff5d8e77d47a46e85b602f0b86e8a846c10c575a0",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "friends",
+      "variant": "showcase",
+      "sourceBox": [
+        774,
+        125,
+        1132,
+        464
+      ],
+      "size": [
+        358,
+        339
+      ],
+      "sha256": "6e331f67d0da129c719e89cff5d8e77d47a46e85b602f0b86e8a846c10c575a0",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "species",
+      "variant": "avatar",
+      "sourceBox": [
+        1149,
+        126,
+        1506,
+        461
+      ],
+      "size": [
+        357,
+        335
+      ],
+      "sha256": "51810d29e8b6107a4c9ee1d474f68daf0bf8033ea31ac21967430b0f2409f86b",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "species",
+      "variant": "showcase",
+      "sourceBox": [
+        1130,
+        126,
+        1516,
+        471
+      ],
+      "size": [
+        386,
+        345
+      ],
+      "sha256": "31f4f3c6c4031e17112bc877129b09b69a91ed82d863214391ce8946bd224a16",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "neighbors",
+      "variant": "avatar",
+      "sourceBox": [
+        17,
+        554,
+        387,
+        880
+      ],
+      "size": [
+        370,
+        326
+      ],
+      "sha256": "dbf46cf8aa3877a513ce07c7bf1fb62d46ddbcbbc8bca18e35c6fe8e3ec2974a",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "neighbors",
+      "variant": "showcase",
+      "sourceBox": [
+        17,
+        554,
+        387,
+        880
+      ],
+      "size": [
+        370,
+        326
+      ],
+      "sha256": "dbf46cf8aa3877a513ce07c7bf1fb62d46ddbcbbc8bca18e35c6fe8e3ec2974a",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "family",
+      "variant": "avatar",
+      "sourceBox": [
+        398,
+        552,
+        771,
+        880
+      ],
+      "size": [
+        373,
+        328
+      ],
+      "sha256": "9c3a1889e6707955fa2f462279e55ee8f369003d5b46483a3b8a20fcb5345ff2",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "family",
+      "variant": "showcase",
+      "sourceBox": [
+        398,
+        552,
+        771,
+        880
+      ],
+      "size": [
+        373,
+        328
+      ],
+      "sha256": "9c3a1889e6707955fa2f462279e55ee8f369003d5b46483a3b8a20fcb5345ff2",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "album",
+      "variant": "avatar",
+      "sourceBox": [
+        777,
+        554,
+        1159,
+        886
+      ],
+      "size": [
+        382,
+        332
+      ],
+      "sha256": "e42749a2af208eb7a1d217b83b7cd72caf1878599750eb66e206f45d8f30119d",
+      "visibleSourcePixelsChanged": 0
+    },
+    {
+      "id": "album",
+      "variant": "showcase",
+      "sourceBox": [
+        773,
+        554,
+        1196,
+        886
+      ],
+      "size": [
+        423,
+        332
+      ],
+      "sha256": "b63929193d28634a850d6435fe69076c12fffe89c859bab97626ee98df8a3627",
+      "visibleSourcePixelsChanged": 0
+    }
+  ]
+}

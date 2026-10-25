@@ -1,4 +1,4 @@
-import type { LeaderboardView } from '../api/types';
+import type { LeaderboardView, PlayerProfileView } from '../api/types';
 import type { GalleryEntry } from '../dev/gallery/types';
 import { LeaderboardScreen } from './LeaderboardScreen';
 import { ACHIEVEMENT_IDS } from '../game/achievementRules';
@@ -20,21 +20,32 @@ const ranked: LeaderboardView = {
   me: { rank: 7, userId: 'bob', name: 'Bob', score: 2480, equippedTitle: 'album' },
 };
 
+const profilePreview = async (userId: string, mode: 'normal' | 'fish'): Promise<PlayerProfileView> => {
+  const person = ranked.entries.find(entry => entry.userId === userId)!;
+  return {
+    userId, name: person.name, mode, bestScore: person.score, completedGames: 12,
+    collection: {collected:18,total:80}, equippedTitle:person.equippedTitle ?? null,
+    unlockedTitles:ACHIEVEMENT_IDS.filter(id => ['cats','dogs','friends',person.equippedTitle].includes(id)),
+    recentGames:[0,1,2,3,4].map(i => ({gameId:`preview-${i}`,completedAt:new Date(Date.UTC(2026,9,24-Math.floor(i/2),8)).toISOString(),score:Math.max(0,person.score-i*200),newCollected:[3,1,0,2,0][i]})),
+  };
+};
+
 const entry: GalleryEntry = {
   name: 'LeaderboardScreen',
   group: 'screens',
   states: {
+    'local API · click player': () => <LeaderboardScreen player={{...player(true),userId:'U_TEST_BOB'}} initialScope="all" onBack={noop} onChallenge={noop} />,
     'today (default), near me (fish unlocked)': () => (
-      <LeaderboardScreen player={player(true)} onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope })} />
+      <LeaderboardScreen loadProfile={profilePreview} player={player(true)} onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope })} />
     ),
     'all-time, near me': () => (
-      <LeaderboardScreen player={player(true)} initialScope="all" onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope })} />
+      <LeaderboardScreen loadProfile={profilePreview} player={player(true)} initialScope="all" onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope })} />
     ),
     'today: nobody played yet': () => (
-      <LeaderboardScreen player={player(false)} onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope, entries: [], me: null })} />
+      <LeaderboardScreen loadProfile={profilePreview} player={player(false)} onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope, entries: [], me: null })} />
     ),
     'today: others played, not me': () => (
-      <LeaderboardScreen
+      <LeaderboardScreen loadProfile={profilePreview}
         player={player(false)}
         onBack={noop}
         onChallenge={noop}
@@ -42,13 +53,13 @@ const entry: GalleryEntry = {
       />
     ),
     'opened on fish tab (from Fish Report)': () => (
-      <LeaderboardScreen player={player(true)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
+      <LeaderboardScreen loadProfile={profilePreview} player={player(true)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
     ),
     'fish requested but locked → pet shop tab': () => (
-      <LeaderboardScreen player={player(false)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
+      <LeaderboardScreen loadProfile={profilePreview} player={player(false)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
     ),
     'all-time: no score yet': () => (
-      <LeaderboardScreen
+      <LeaderboardScreen loadProfile={profilePreview}
         player={player(false)}
         initialScope="all"
         onBack={noop}
@@ -56,7 +67,7 @@ const entry: GalleryEntry = {
         load={async (mode, _p, scope) => ({ ...ranked, mode, scope, me: null, entries: ranked.entries.filter((e) => e.userId !== 'bob') })}
       />
     ),
-    'load failed': () => <LeaderboardScreen player={player(false)} onBack={noop} onChallenge={noop} load={() => Promise.reject(new Error('down'))} />,
+    'load failed': () => <LeaderboardScreen loadProfile={profilePreview} player={player(false)} onBack={noop} onChallenge={noop} load={() => Promise.reject(new Error('down'))} />,
   },
 };
 export default entry;

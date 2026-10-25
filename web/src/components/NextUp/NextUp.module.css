@@ -67,18 +67,3 @@
   color: var(--color-ink);
 }
 
-.action {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  margin: var(--space-1) 0 0 auto;
-  padding: 0;
-  border: 0;
-  background: none;
-  font: inherit;
-  font-size: var(--text-sm);
-  font-weight: 900;
-  color: var(--color-brand);
-  cursor: pointer;
-  float: right;
-}

@@ -33,7 +33,8 @@ export interface ReportScreenProps {
   onAnswerQuiz: (quizId: string, choice: string | null) => Promise<QuizResult>;
   /** 今日店长：零服务时承接鼓励评语并作为「下一件事」的说话人；读取失败时省略。 */
   manager: DailyManager | null;
-  onCollection: () => void;
+  /** 保留给外层路由；精简版报告内不再放图鉴入口。 */
+  onCollection?: () => void;
   onOpenPet: (pet: PetInfo, el: HTMLElement) => void;
   /** 打开成绩卡预览；不等揭晓动画，也不等保存结果。 */
   onShare: () => void;
@@ -50,10 +51,10 @@ export interface ReportScreenProps {
  * 完整 Report Card（mobile-report-slim-v1，五块）：小票（分数、状态标签行、MVP、称号章、统计）→
  * 本局收获（新收集 + 新称号）→ 猜主人 → 尾声（鱼关邀请或下一件事，二选一）→ 再开 / 分享。
  * 分数立即显示，MVP 与称号随后出现，收获在保存成功后点亮；所有判定复用本局冻结结果。
- * 入口都挂在内容上：回门店在头部，今日榜挂在名次标签，图鉴挂在收获标题与预告气泡。
+ * 报告内不放跳转按钮：回门店在头部，今日榜挂在名次标签；图鉴从门店进入。
  */
 export function ReportScreen(props: ReportScreenProps) {
-  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onCollection, onOpenPet, onShare, loadStanding, loadAchievements } = props;
+  const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onOpenPet, onShare, loadStanding, loadAchievements } = props;
   const { t } = useI18n();
   const mvpKind = judgeMvp(summary);
   const kindOf = (id: string) => pets.findIndex((p) => p.id === id);
@@ -127,7 +128,6 @@ export function ReportScreen(props: ReportScreenProps) {
           pets={fish ? [] : save.newPets.map((p) => ({ pet: pets[kindOf(p.id)] ?? p, kind: kindOf(p.id) }))}
           achievements={save.response.newAchievements ?? []}
           onSelectPet={mode === 'normal' ? onOpenPet : undefined}
-          onOpenCollection={fish ? undefined : onCollection}
           onOpenTitles={props.onTitles}
         />
       )}
@@ -145,7 +145,7 @@ export function ReportScreen(props: ReportScreenProps) {
       )}
       {/* 尾声只放一条：解锁那一局是鱼关邀请，其余是「下一件事」 */}
       {!fish && saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}
-      {!fish && nextUp && <NextUp nextUp={nextUp} speaker={speaker} onOpenCollection={onCollection} />}
+      {!fish && nextUp && <NextUp nextUp={nextUp} speaker={speaker} />}
       <div className={`${styles.stickyActions} ${styles.actionPair}`}>
         <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onPlayAgain} data-testid="play-again">
           {t('action.play_again')}

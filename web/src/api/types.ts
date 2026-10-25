@@ -15,6 +15,19 @@ export interface AchievementView {
 
 export type GameMode = 'normal' | 'fish';
 
+/** 排行榜公开名片：不暴露邮箱、原始对局 payload 或宠物主人关系。 */
+export interface PlayerProfileView {
+  userId: string;
+  name: string;
+  mode: GameMode;
+  bestScore: number | null;
+  completedGames: number;
+  collection: { collected: number; total: number };
+  equippedTitle: AchievementId | null;
+  unlockedTitles: AchievementId[];
+  recentGames: { gameId: string; completedAt: string; score: number; newCollected: number }[];
+}
+
 export interface ColleagueResult {
   userId: string;
   name: string;

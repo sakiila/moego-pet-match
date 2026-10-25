@@ -1,0 +1,67 @@
+.screen {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto auto;
+  gap: var(--board-page-gap);
+  width: 100%;
+  max-width: var(--board-page-max);
+  height: 100dvh;
+  min-height: var(--board-page-min-height);
+  margin: 0 auto;
+  padding: var(--board-page-block) var(--board-page-inline) max(var(--board-page-block), env(safe-area-inset-bottom));
+  color: var(--fg);
+}
+.screen > div { min-width: 0; }
+.boardArea {
+  display: grid;
+  justify-items: center;
+  align-items: start;
+  min-height: 0;
+  container-type: size;
+}
+.screen .boardArea > * {
+  width: min(100cqw, 100cqh);
+  max-width: 100%;
+}
+.tip { align-self: end; }
+@media (max-height: 740px) {
+  .screen {
+    --board-page-gap: var(--space-2);
+    --board-page-block: var(--space-2);
+    --board-title-gap: var(--space-2);
+  }
+}
+@media (orientation: portrait) and (max-height: 620px) {
+  .screen {
+    --board-page-gap: var(--board-tiny-gap);
+    --board-brand-height: var(--board-tiny-brand-height);
+    --stat-height-compact: var(--stat-tiny-height);
+    --stat-icon-size: var(--stat-tiny-icon);
+    --stat-label-size: var(--stat-tiny-label);
+    --stat-value-compact: var(--stat-tiny-value);
+    --rush-ticket-height-compact: var(--rush-tiny-height);
+    --rush-header-height: var(--rush-tiny-header);
+    --rush-title-size: var(--rush-tiny-title);
+    --rush-title-icon-size: var(--rush-tiny-icon);
+    --rush-countdown-size: var(--rush-tiny-countdown);
+    --rush-progress-top-compact: var(--rush-tiny-progress-gap);
+    --rush-track-height: var(--rush-tiny-track);
+    --tip-slot-height: var(--tip-tiny-height);
+    --tip-icon-size: var(--tip-tiny-icon);
+    --tip-font-size: var(--tip-tiny-font);
+  }
+}
+@media (orientation: landscape) and (min-width: 700px) and (max-height: 600px) {
+  .screen {
+    max-width: var(--board-landscape-max);
+    min-height: var(--board-landscape-min-height);
+    grid-template-columns: minmax(0, var(--board-landscape-side)) minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+  }
+  .header { grid-column: 1; grid-row: 1; }
+  .status { grid-column: 1; grid-row: 2; }
+  .rush { grid-column: 1; grid-row: 3; align-self: start; }
+  .boardArea { grid-column: 2; grid-row: 1 / 4; }
+  .tip { grid-column: 2; grid-row: 4; }
+  .controls { grid-column: 1; grid-row: 4; }
+}
+

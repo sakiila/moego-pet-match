@@ -1,0 +1,11 @@
+Use case: precise-object-edit.
+Edit the attached 1536 x 1024 MoeGo collection achievement rarity board. Make ONLY ONE targeted revision: recolor the “闪耀” tier, which is currently pink/lilac and too similar to purple “卓越”.
+New “闪耀” palette: vivid peach-orange #FF985D transitioning into CORAL RED / cherry-coral #F24959. It must clearly read as warm CORAL-RED, not purple, lilac, violet, hot magenta, or pale gold. Keep the light enamel highlight and narrow ivory inner separation rim. Use a light warm-peach pill background and deep coral-red text in the drawer. The large rarity pill may use the peach-to-coral gradient with clearly readable lettering.
+Apply this consistently to ALL 闪耀 motifs: cats, dogs, familiar paws; the large cat badge frame at upper-left; its small horizontal title-chip frame; the “闪耀” label beneath it; the three 闪耀 drawer row outlines, small badge outlines, label fills/text; nearby tiny decorative accents associated with the first tier.
+Keep the FIRST tier vibrant and coral/red, distinct both from the electric-purple second tier AND from the much lighter champagne-gold / rose-gold third tier. Do NOT introduce gold, metallic yellow, or purple into the first tier border. The animals stay orange and ivory exactly as before; avoid recoloring their faces or bodies. The ivory inner rim provides separation from the orange animal artwork.
+Preserve EVERY other element exactly:
+- “卓越” stays lavender-to-electric-violet with its existing purple badges, tags and row frames.
+- “非凡” stays champagne-gold-to-rose-gold, unchanged.
+- “传奇” stays full-spectrum rainbow, unchanged.
+- Same seven achievement names and mapping, same rarity names 闪耀 / 卓越 / 非凡 / 传奇, same typography, all numeric conditions, drawer geometry, alignment, action states, white page surface, illustration expressions, layouts, badge dimensions and overall composition.
+No new objects, no new labels, no UI redesign, no phone frame, no watermark. Output ONE revised board, same 1536 x 1024 landscape composition.

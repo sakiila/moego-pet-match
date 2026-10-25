@@ -1,115 +1,21 @@
-/* 固定高度：出现与收起都不推动棋盘 */
 .slot {
   min-width: 0;
-  height: 76px;
+  height: var(--rush-ticket-height);
 }
 
-.bar {
-  display: flex;
-  overflow: hidden;
-  align-items: center;
-  gap: var(--space-3);
-  height: 100%;
-  padding: var(--space-2) var(--space-3);
-  border: var(--stroke) solid var(--color-brand);
-  border-radius: var(--radius-lg);
-  background: var(--card);
-  box-shadow: 0 3px 0 rgb(249 107 28 / 0.35);
-  animation: rush-in 220ms var(--ease-out) both;
+.narrowPreview {
+  display: grid;
+  gap: var(--space-5);
+  width: var(--rush-preview-narrow-width);
+  max-width: 100%;
 }
 
-@keyframes rush-in {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
+.stillPreview [data-state='expired'] {
+  animation: none;
+}
+
+@media (max-height: 740px) {
+  .slot {
+    height: var(--rush-ticket-height-compact);
   }
-}
-
-.body {
-  flex: 1;
-  min-width: 0;
-}
-
-.head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--space-2);
-}
-
-.title {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: var(--text-md);
-  font-weight: var(--weight-bold);
-  color: var(--color-brand);
-}
-
-.remaining {
-  flex: none;
-  white-space: nowrap;
-  font-size: var(--text-sm);
-  font-weight: var(--weight-bold);
-  font-variant-numeric: tabular-nums;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  white-space: nowrap;
-  margin-top: var(--space-2);
-  font-size: var(--text-sm);
-  color: var(--fg-muted);
-}
-
-/* 窄屏时目标说明先省略，进度条与已服务数保持可见 */
-.row > :last-child {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.served {
-  flex: none;
-  font-weight: var(--weight-bold);
-  color: var(--fg);
-  font-variant-numeric: tabular-nums;
-}
-
-.track {
-  flex: 1;
-  min-width: 32px;
-  height: 12px;
-  border-radius: var(--radius-pill);
-  background: var(--line);
-  overflow: hidden;
-}
-
-.fill {
-  height: 100%;
-  border-radius: inherit;
-  background: var(--color-brand);
-  transition: width var(--dur-base) var(--ease-out);
-}
-
-.message {
-  flex: 1;
-  min-width: 0;
-  font-size: var(--text-lg);
-  font-weight: var(--weight-bold);
-}
-
-.success {
-  border-color: var(--color-success);
-  color: var(--color-success);
-  box-shadow: 0 3px 0 rgb(47 158 107 / 0.35);
-}
-
-.expired {
-  border-color: var(--line);
-  color: var(--fg-muted);
-  box-shadow: none;
 }

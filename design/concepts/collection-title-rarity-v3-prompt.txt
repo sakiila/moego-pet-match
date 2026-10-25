@@ -1,0 +1,17 @@
+Use case: precise-object-edit / ui-mockup revision.
+Edit the attached 1536 x 1024 MoeGo collection rarity design board. Keep the EXACT composition, title, labels, seven existing achievement illustrations, orange-and-ivory animal colors, typography, drawer layout, row names, scores/progress values, action placement and selected legendary row. This is ONE revision of the same design, not alternatives.
+The user says the first three rarity colors feel monotonous; the legendary rainbow is liked. Fix the COLOR TREATMENT of the first three tiers only, creating clearly visible but restrained two-tone jewel/enamel frames instead of flat single-color outlines. The difference must be obvious at thumbnail size and in the drawer, not only on the large icons.
+Exact names and mapping remain:
+“闪耀”: cat pair, dog pair, familiar paws.
+“卓越”: neighbor dog behind orange door, family under roof.
+“非凡”: rabbit/cat/dog cross-species group.
+“传奇”: complete album.
+Specific revised color art direction:
+- 闪耀: an asymmetric lime-to-mint gradient, lime #C9EB70 on upper-left transitioning through fresh mint to turquoise #20BFA8 on lower-right. Pale mint interior edging, ONE fine ivory inner separation line. Fresh, bright, welcoming.
+- 卓越: an ice-cyan-to-indigo gradient, ice cyan #78E1FF on upper-left through clear sky blue to indigo #6261E9 on lower-right. Very thin icy inner rim and small crisp highlight arcs. Clean, cool and luminous.
+- 非凡: a champagne-gold-to-rose-gold gradient, champagne #F7D27D at upper-left through amber #E9AD35 to elegant rose gold #E898A8 toward lower-right. A restrained ivory inner rim with delicate warm copper shading. Premium warm-metal effect, not brown and not a flat yellow outline.
+- 传奇: preserve the existing FULL-SPECTRUM rainbow exactly in spirit, and keep its soft ivory selected card with rainbow border. It remains the ONLY tier using a complete rainbow.
+Apply each two-tone palette CONSISTENTLY across: the large badge scalloped perimeter, the miniature title-chip border, small badge border in the drawer, the drawer card's thin outline, and the small rarity tag. Tags should use a subtle two-tone pale fill with a dark readable label. Keep drawer card interiors overwhelmingly white, do not make every entire row saturated or glossy.
+Visually separate the tiers through color families and modest finish: mint fresh enamel, blue icy glass-like gleam, gold rose-gold metal, rainbow legendary. All keep the SAME compact flat collectible illustration grammar. Use subtle localized highlights and inner edges; never bulky 3D bevels or thick multiple rings. Do not solve this by adding lots of stars, ornaments or new illustrations. Preserve current silhouette, illustration line thickness and icon size.
+Do NOT change or misspell any Chinese: “闪耀”, “卓越”, “非凡”, “传奇”, “猫猫亲友团”, “汪汪好朋友”, “毛孩子熟人”, “跨物种交友家”, “串门小能手”, “一家都熟”, “全员点名成功”, “我的称号”, “已解锁 7 / 7”, “佩戴”, “佩戴中”.
+No added explanatory text, no new controls, no prices, no gacha elements, no phone frame, no watermark. Keep the highest tier visually special while making every other tier satisfying and colorful. Output a refined single landscape board at the same aspect ratio and composition as the source.

@@ -102,3 +102,45 @@ final result: passed
 - 编译验证：`npm --prefix web run build` 退出码 0（含 TypeScript 构建）；保留既有的大包体积提示。浏览器控制台无相关错误。
 - Findings：没有本次图标范围内需要修复的 P0/P1/P2。P3：源稿的大幅材质高光与原生 SVG 的细节存在预期差异。
 - final result: passed
+
+## 2026-10-25 · 排行榜玩家名片补接
+
+- 根因：`player-profile-card-v4.png` 先前仅为设计稿。LeaderboardRow 是没有点击回调的 div，LeaderboardScreen 没有名片状态与资料加载，Podium 仅能打开称号详情；不存在玩家名片接口。
+- Source visual truth: `design/concepts/player-profile-card-v4.png`，1189 × 1323 双栏稿。采用右侧头像/姓名/称号、三项统计、已解锁徽章和最近五局的结构；徽章沿用最终 v5。
+- 实现：新增 PlayerProfileCard、PlayerProfileOverlay 与只读 `GET /api/players/:id/profile?mode=normal|fish`。列表整行变为原生按钮，领奖台有不嵌套交互元素的透明点击入口。关闭恢复原按钮焦点，旧异步请求通过 AbortSignal 丢弃。
+- 真实数据证据：`/Users/bob/.codex/visualizations/2026/10/24/01a16d49-e183-7603-a649-8f1e592e3408/player-profile-qa/alice-live-profile.png`（388 × 701 CSS px 名片裁图）。从 `/dev/gallery?c=LeaderboardScreen` 的 `local API · click player` 场景点击 Alice 列表行及领奖台，均请求真实本地接口，显示最高分 13,770、收集 13/80、已完成 2 局、5/7 徽章及两条真实结算记录。此预览使用明确的测试身份 props 作为榜单查看上下文，不保存或切换浏览器身份。
+- 视觉：原图双栏板只对照名片区域，实际数据与设计稿示例数值不同；未用假记录补齐五行。圆体、颜色、间距和阴影沿用 tokens。姓名下仅在名片详情保留称号签，榜单列表不重复显示。
+- 状态：空记录、加载、失败重试、离册身份、全部徽章、鱼关、长英文名与大分数均登记到陈列页。英文窄屏 320px 场景中名片内容区 254px，scrollWidth 254、无横向溢出；鱼关表格不显示宠物新增列。
+- 交互：列表行打开、关闭后切换总榜、领奖台打开、Escape 关闭均已验证；关闭后 activeElement 的 aria-label 回到对应玩家入口。名片只读，不触发对方佩戴、身份登记或成就补发。
+- 后端：6 项新接口测试覆盖模式隔离、未结算排除、最近五局顺序、只读与离册校验、下架过滤；与既有排行、身份、成就测试合计 24 项通过。前端 167 项测试、两端类型检查、前端构建通过（保留既有包体积提示）。
+- 本轮未新跑游戏结算、没有提交、推送或部署。
+- 开发热更新语言模块期间曾出现 useI18n Provider 错误；完整重新加载后排行榜与真实 Alice 名片恢复。刷新后再次点击的新增 error/warn 为 0，历史日志未当作当前持续错误。
+- final result: passed
+
+## 2026-10-24 · 稀有度最终 v5 实现
+
+- Source visual truth: `design/concepts/collection-title-rarity-v5.png`（1536 × 1024）。映射为闪耀/Radiant（珊瑚红）、卓越/Outstanding（电紫）、非凡/Extraordinary（香槟玫瑰金）、传奇/Legendary（彩虹）。
+- 素材：`assets/icons/collection-titles-rarity-v5/preview.png`、`source-atlas.png` 与 `manifest.json`。内置 ImageGen 将七枚原始构图和 v5 配色整理为单一透明图集，再按 alpha 连通区域切为 14 个母版；Avatar 去分离星芒，Showcase 保留非凡/传奇装饰。没有将页面截图作为卡片或背景。
+- 生成图集与旧 PNG 并非逐像素相同；采用新版母版的界面保持七枚 motif 与橙白画风。图集切出之后的有效像素没有再改色；透明边缘已在浅色、深色底目视检查。
+- 实现截图：`/Users/bob/.codex/visualizations/2026/10/24/01a16d49-e183-7603-a649-8f1e592e3408/rarity-v5-qa/drawer-zh-390.png`、`drawer-en-320.png`、`avatar-badges.png`。预览入口 `/dev/gallery?c=AchievementShelf`、`AchievementAvatar`、`LeaderboardScreen`。
+- 字体与文案：使用当前圆体与 i18n；等级名四档均已更新，英语缩窄时标签独占姓名上方一行。内部 common/rare/epic/legendary ID 只用于稳定映射，不是可见名称。
+- 布局与颜色：中文独立等级列；英文/窄屏为三列与两行内容。常规卡片为各自双色渐变边框，传奇保留彩虹边框与浅色标签；所有样式引用 tokens。
+- 交互：在陈列页选择已解锁的狗狗/猫猫徽章，佩戴状态同步更新。锁定保持灰显与进度条，保存时按钮禁用，加载/失败状态保留。排行榜徽章可打开新材质的大图，确认 `title-dogs-showcase@144.png` 已加载。
+- 图像与尺寸：七枚头像图标均实测 22 × 22 CSS px、加载成功；40px 头像及右下圆周锚点未改。英文 320px 组件七行子元素均无横向溢出。
+- 验证：前端 14 个测试文件、167 项测试通过；生产构建包含 TypeScript 检查，通过（保留既有包体积提示）；相关预览控制台无 error/warn。服务端规则未修改，未新跑真实对局结算或账号佩戴 API。
+- 差异：保留产品既有提示、解锁数、不佩戴与加载/错误入口；源设计板只是视觉参考，不强求整体画布尺寸一致。中文版 390px、英文 320px 的同一组件作为局部验收依据，PNG 图案与边框已和 v5 方向比较。
+- 本地修改，未提交、推送或部署。
+- final result: passed
+
+
+## 游戏页前台加单与收工组件化 · 2026-10-25
+
+final result: passed
+
+- 当前范围：用户确认的游戏页v2、加单状态v2、收工分镜v2，已组件化接入；未改engine或server。完整验收：[本轮QA](design/reviews/2026-10-25-board-frontdesk/QA.md)。
+- 视觉真值：`design/concepts/mobile-board-frontdesk-v2.png`、`rush-frontdesk-states-v2.png`、`shift-finish-storyboard-v2.png`。
+- 实际浏览器：390×844 / DPR2（780×1688），全页归一化并排比较 `/tmp/moego-board-frontdesk-comparison-final.png`，局部 `/tmp/moego-board-frontdesk-focus.png`。源素材放大对照在 `assets/icons/board-frontdesk-original-v1/preview.html`。
+- 12件源图案不透明主体60,510像素RGB保留，经Icon使用；另有仅换字的英文挂牌。字标、数值、夹单、挂牌、头像谢幕均是独立组件，不贴整页或整卡截图。
+- 手机中英、鱼关、任务四态、零服务、320×568与844×390检查通过；设置/退出交互正常，任务变化时格区x20/y339.109/350×350不变。动态演示到90秒关闭设置，再约1.28秒交出结果；无POST。
+- 初次窄屏读数越界、设置遮住收工和小高度装饰挤占棋盘已修复、复测；最新刷新无新增应用error。其余已有字标、宠物、道具和通用图标保持原资产比例，概念图生成近似不作为替换来源。
+- 最新179项测试通过，typecheck/build通过（保留既有>500kB主包提示）。减少动效路径有代码复核，未实际切换操作系统；未测真实iOS设备。

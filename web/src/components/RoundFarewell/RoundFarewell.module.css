@@ -1,0 +1,90 @@
+.farewell {
+  display: grid;
+  justify-items: center;
+  width: min(var(--farewell-width), 100%);
+  padding-top: var(--space-3);
+}
+
+.portraits {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-inline: var(--space-2);
+  animation: farewell-bounce var(--farewell-enter-ms) var(--ease-out) var(--farewell-delay) both;
+}
+
+.portrait {
+  flex: none;
+  width: var(--farewell-portrait-size);
+  height: var(--farewell-portrait-size);
+  filter: var(--album-sticker-shadow);
+  transform: rotate(var(--farewell-left-angle));
+}
+
+.portrait + .portrait {
+  margin-left: var(--farewell-portrait-overlap);
+}
+
+.portrait:nth-child(2):not(:last-child) {
+  transform: translateY(var(--farewell-portrait-lift));
+}
+
+.portrait:last-child {
+  transform: rotate(var(--farewell-right-angle));
+}
+
+.portrait:only-child {
+  transform: none;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+  margin: var(--farewell-message-overlap) 0 0;
+  max-width: 100%;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--receipt-paper);
+  box-shadow: var(--shadow-soft);
+  color: var(--color-ink);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: normal;
+  text-align: center;
+  white-space: nowrap;
+  transform: rotate(var(--farewell-message-angle));
+  animation: farewell-message var(--dur-base) var(--ease-out) var(--farewell-delay) both;
+}
+
+.farewell[data-locale='en'] .message {
+  font-size: var(--text-lg);
+}
+
+@keyframes farewell-bounce {
+  from {
+    opacity: 0;
+    transform: translateY(var(--farewell-start-y)) scale(var(--farewell-start-scale));
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(var(--farewell-peak-y)) scale(var(--farewell-peak-scale));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes farewell-message {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portraits,
+  .message {
+    animation: none;
+  }
+}

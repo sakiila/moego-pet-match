@@ -1,0 +1,6 @@
+Use case: precise-object-edit.
+Make one narrowly scoped consistent correction to the supplied MoeGo "临时加单 · 状态与动效" four-state design sheet.
+Remove the small phrase "20 秒内服务 12 格" at the far right of THREE ticket lower rows: top-left 01递单, top-right 02处理中, bottom-left 03安排妥当. No such phrase should remain anywhere inside any ticket.
+Reclaim the removed-text space by extending each SAME progress track horizontally to that ticket's right inner margin. Keep each track's left edge, vertical center, height and round corner radius fixed. Top-left track must remain 0/12 and fully gray (empty). Top-right orange segment must be exactly 7/12 = 58.33% of the newly widened full track, gray remainder visible. Bottom-left orange track must be completely full at 12/12, 100%. Leave the labels "已服务 0/12 格", "已服务 7/12 格", "已服务 12/12 格" unchanged.
+Preserve EVERYTHING else: same 1484 x 1060 landscape composition, title, subtitle, four numbered states, external timing and explanatory captions, clipboard icons, center orange clips, 20秒/8秒 remaining values, success check, "安排得明明白白！", "+100 分", expired state and its message, entry/exit motion arrows, fonts, colors, divider lines, shadows, borders, all spacing and card sizes.
+No replacement text, no new content, no resizing or repositioning of other elements. Modify only those three progress-and-support-text rows.

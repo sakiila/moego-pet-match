@@ -10,6 +10,17 @@ function srcSet(name: PngIconName) {
   return ICON_CATALOG[name].widths.map((w) => `${URLS[`../icons/png/${name}@${w}.png`]} ${w}w`).join(', ');
 }
 
+/** 开局时预载短暂演出用的原稿，避免挂牌一闪而过时才开始下载。 */
+export function preloadIcon(name: PngIconName, height: number): void {
+  if (typeof Image === 'undefined') return;
+  const { widths, aspect } = ICON_CATALOG[name];
+  const preload = new Image();
+  preload.srcset = srcSet(name);
+  preload.sizes = `${Math.round(height * aspect)}px`;
+  preload.src = URLS[`../icons/png/${name}@${widths[widths.length - 1]}.png`];
+  void preload.decode().catch(() => undefined);
+}
+
 export interface IconProps {
   name: IconName;
   /** 显示高度（px）；宽图标（称号框）按原比例算宽度。 */

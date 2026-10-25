@@ -1,0 +1,9 @@
+{
+  "assets": 12,
+  "exports": 43,
+  "all_opaque_rgb_equal_source": true,
+  "master_resolution": "source-native; not enlarged",
+  "export_scaling": "LANCZOS proportional downscale only; square canvases except rush-clip and closing-sign-zh retain wide ratio",
+  "visual_qa": "Inspected every source and every four-times blue-background preview; no adjoining labels, motion arcs, board or pet heads retained. Intentional original white star keyline and white icon interiors are kept.",
+  "scope": "No React/CSS/TS/catalog/export_web modifications; only new source-extraction assets and new PNG export names."
+}

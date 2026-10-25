@@ -1,6 +1,7 @@
 import { useRef, type ReactNode } from 'react';
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
 import { MOTION } from '../../ui/motion';
+import styles from './ScreenTransition.module.css';
 
 /** 页面层级：更深为前进（右滑入），更浅为返回（左滑入），同级按前进处理。 */
 const DEPTH: Record<string, number> = {
@@ -58,12 +59,14 @@ export function ScreenTransition({ routeName, children }: ScreenTransitionProps)
     custom.current = { ...custom.current, reduced };
   }
   return (
-    <LazyMotion features={domAnimation} strict>
-      <AnimatePresence mode="wait" initial={false} custom={custom.current}>
-        <m.div key={routeName} custom={custom.current} variants={variants} initial="initial" animate="enter" exit="exit">
-          {children}
-        </m.div>
-      </AnimatePresence>
-    </LazyMotion>
+    <div className={styles.viewport}>
+      <LazyMotion features={domAnimation} strict>
+        <AnimatePresence mode="wait" initial={false} custom={custom.current}>
+          <m.div key={routeName} custom={custom.current} variants={variants} initial="initial" animate="enter" exit="exit">
+            {children}
+          </m.div>
+        </AnimatePresence>
+      </LazyMotion>
+    </div>
   );
 }

@@ -26,10 +26,12 @@ export interface BrandHeaderProps {
   headingAction?: ReactNode;
   /** 普通准备页使用已确认的文字素材；棋盘保持原标题。 */
   schedulingArt?: boolean;
+  /** 棋盘使用同一确认字标，保持棋盘页的品牌行与信息密度。 */
+  boardArt?: boolean;
 }
 
 /** 顶部：MoeGo 字标 + 中/EN 切换 + 标题；切换只改界面文字，不影响本局。 */
-export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack, headingAccent, headingAction, schedulingArt = false }: BrandHeaderProps) {
+export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack, headingAccent, headingAction, schedulingArt = false, boardArt = false }: BrandHeaderProps) {
   const { t, locale, setLocale } = useI18n();
   const [lead, accent] =
     title === 'game'
@@ -41,7 +43,7 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
           return [first, rest.join(' ')];
         })();
   return (
-    <header className={schedulingArt ? styles.preparation : undefined}>
+    <header className={boardArt ? styles.boardHeader : schedulingArt ? styles.preparation : undefined}>
       <div className={styles.bar}>
         {/* 浅色页面用官方 Logo；鱼关深蓝底上 Logo 看不清，改用白色文字字标（CSS 按主题切换） */}
         <img className={styles.logo} src={logoSrc} alt="MoeGo" width={120} height={32} />
@@ -78,7 +80,7 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
         </div>
       ) : heading ? (
         <h1 className={`${styles.title} ${styles.heading}`}>{heading}</h1>
-      ) : title === 'scheduling' && schedulingArt ? (
+      ) : title === 'scheduling' && (schedulingArt || boardArt) ? (
         <h1 className={styles.schedulingTitle}>
           <img src={schedulingSrc} alt={t('board.title')} width={1080} height={200} />
         </h1>

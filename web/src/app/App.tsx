@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { ApiError, api } from '../api/client';
 import type { AchievementId, DailyManager, GameMode, PlayerView, RegisteredGame } from '../api/types';
 import { AchievementOverlay } from '../screens/AchievementOverlay';
@@ -38,16 +38,22 @@ type Route =
   | { name: 'info'; player: { userId: string; name: string } | null; removal: boolean; back: 'identity' | 'home'; query?: string }
   | { name: 'prep'; mode: GameMode; session: Session | null; failed: boolean }
   | { name: 'board'; session: Session }
-  | { name: 'report'; session: Session; summary: GameSummary };
+  | { name: 'report'; session: Session; summary: GameSummary }
+  | { name: 'devReport'; session: Session; summary: GameSummary };
 
 /** 开发调试：?speed= 调快或放慢游戏时钟，?t0= 从指定游戏毫秒开始，?preset= 载入固定棋盘。生产环境忽略。 */
 const params = import.meta.env.DEV ? new URLSearchParams(location.search) : new URLSearchParams();
 const speed = Number(params.get('speed')) || 1;
 const startAt = Number(params.get('t0')) || 0;
 const preset = import.meta.env.DEV ? PRESETS[params.get('preset') ?? ''] : undefined;
-/** 开发验收：?report=greedy|casual|zero 刷新即「游戏结束」，直接进入报告页（真实登记、结算与保存；可加 &mode=fish）。 */
+/**
+ * 开发验收：?report=greedy|casual|zero 刷新即「游戏结束」，直接进入报告页（真实登记、结算与保存；可加 &mode=fish）；
+ * ?report=showcase 用伪造的已保存结果让结算页全部元素同时出现（不结算，加 &invite=1 看鱼关邀请）。
+ */
 const devReport = params.get('report');
 const devReportMode: GameMode = params.get('mode') === 'fish' ? 'fish' : 'normal';
+const devInvite = params.get('invite') === '1';
+const ReportShowcase = import.meta.env.DEV ? lazy(() => import('../dev/ReportShowcase').then((m) => ({ default: m.ReportShowcase }))) : null;
 
 export function App() {
   const { t } = useI18n();
@@ -77,6 +83,7 @@ export function App() {
     const registered = await api.registerGame(p.userId, devReportMode);
     await preloadPets(registered.lineup.map((x) => petFromLineup(x, devReportMode)));
     const game = createGame({ seed: registered.seed, lineup: registered.lineup.map((x) => x.petId) });
+    if (devReport === 'showcase') return setRoute({ name: 'devReport', session: { registered, game }, summary: autoplay(game, 'greedy') });
     setRoute({ name: 'report', session: { registered, game }, summary: autoplay(game, parseAutoplayStyle(devReport)) });
   }, []);
 
@@ -267,6 +274,25 @@ export function App() {
             onTitles={() => setShowTitles(true)}
           />
         );
+      case 'devReport':
+        return ReportShowcase ? (
+          <Suspense fallback={null}>
+            <ReportShowcase
+              summary={route.summary}
+              registered={route.session.registered}
+              pets={petsOf(route.session)}
+              manager={manager}
+              invite={devInvite}
+              onPlayAgain={() => void toPrep(route.session.registered.mode)}
+              onHome={toHome}
+              onLeaderboard={() => setRoute({ name: 'leaderboard', mode: route.session.registered.mode })}
+              onFishInvite={() => void toPrep('fish')}
+              onOpenPet={() => {}}
+              onShare={() => {}}
+              onTitles={() => setShowTitles(true)}
+            />
+          </Suspense>
+        ) : null;
     }
   };
 

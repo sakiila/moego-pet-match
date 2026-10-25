@@ -1,0 +1,820 @@
+{
+  "scope": "Exact source-pixel extraction only; no generated/redrawn shapes; no UI implementation changes.",
+  "authorization": "用户已确认全部图稿，原话为「可以，把刚才设计的所有改动都拆分成组件元素，不许随意调整图案」。本轮将其实现为列明图案的原稿拆分，文字、数据和布局仍由独立组件渲染。",
+  "method": "Foreground colour selection and connected components; protected opaque white interiors; explicit clip/rope holes; local background/foreground colour-line matting only in a two-pixel boundary band.",
+  "native_resolution": true,
+  "sources": {
+    "mobile-board-frontdesk-v2.png": {
+      "path": "design/concepts/mobile-board-frontdesk-v2.png",
+      "size": [
+        853,
+        1844
+      ],
+      "sha256": "e49bd3fca1f259c400f1a2102b5d62ef658b70663c13f462af6751b02ad8d8c5"
+    },
+    "rush-frontdesk-states-v2.png": {
+      "path": "design/concepts/rush-frontdesk-states-v2.png",
+      "size": [
+        1484,
+        1060
+      ],
+      "sha256": "bdceefcec5abea39de8584dce52799ebb5b577aa9bbe4a45e0ebdbe65a2f9b0b"
+    },
+    "shift-finish-storyboard-v2.png": {
+      "path": "design/concepts/shift-finish-storyboard-v2.png",
+      "size": [
+        1489,
+        1056
+      ],
+      "sha256": "01ab100280a1c8d006e245bc0efc09efd2d9219e8fcbe452421adde81ba7731f"
+    }
+  },
+  "assets": [
+    {
+      "id": "round-clock",
+      "source": "design/concepts/mobile-board-frontdesk-v2.png",
+      "source_box_xyxy": [
+        45,
+        309,
+        155,
+        420
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/round-clock.png",
+      "master_size": [
+        110,
+        111
+      ],
+      "visible_bbox_xyxy": [
+        11,
+        11,
+        102,
+        103
+      ],
+      "visible_size": [
+        91,
+        92
+      ],
+      "wide": false,
+      "sha256": "b6c717419e627c98bbdbb73353b761d1cac79cb93bb33a7961b359c2f3e16473",
+      "source_crop_sha256": "e4709272a35cbb1b027e303a48427096c3a196c73cc5f014aa5f3d80933bae4c",
+      "opaque_pixels": 6112,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 391,
+      "transparent_pixels": 5707,
+      "clear_holes_source_xy": [],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/round-clock@32.png",
+          "size": [
+            32,
+            32
+          ],
+          "sha256": "a4513cc2753e25569d6ac0362f7fae3aaa8ebc657ab01c3f68d31424e8d62f7d"
+        },
+        {
+          "path": "web/src/ui/icons/png/round-clock@48.png",
+          "size": [
+            48,
+            48
+          ],
+          "sha256": "d878dadd3be696cac00c4e38a78c67b3f4cafc0bcb59573076deb240505f9dd7"
+        },
+        {
+          "path": "web/src/ui/icons/png/round-clock@72.png",
+          "size": [
+            72,
+            72
+          ],
+          "sha256": "c1ffa1e3425938a96d36d4ab32791efb7dfe61b1e8163896b96de8d274eabce0"
+        },
+        {
+          "path": "web/src/ui/icons/png/round-clock@92.png",
+          "size": [
+            92,
+            92
+          ],
+          "sha256": "d3ebad298720298160b77d07110b98410a91b61fd06557b38aabad094b1b055b"
+        }
+      ]
+    },
+    {
+      "id": "round-score",
+      "source": "design/concepts/mobile-board-frontdesk-v2.png",
+      "source_box_xyxy": [
+        487,
+        306,
+        597,
+        410
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/round-score.png",
+      "master_size": [
+        110,
+        104
+      ],
+      "visible_bbox_xyxy": [
+        7,
+        7,
+        106,
+        100
+      ],
+      "visible_size": [
+        99,
+        93
+      ],
+      "wide": false,
+      "sha256": "c9a774d976b17e1133b9f9d2121eb11fcc1ec3ec18a70f7062e7c499dff12daf",
+      "source_crop_sha256": "3c9ad8bbf53b72cc65b2354ccdec2dd111cce1e21117c2cf0b97b585dcc505df",
+      "opaque_pixels": 4344,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 857,
+      "transparent_pixels": 6239,
+      "clear_holes_source_xy": [],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/round-score@32.png",
+          "size": [
+            32,
+            32
+          ],
+          "sha256": "5ac166609d9fbdfe9a2bfd3c4eb16e4441fcd69ba916f768544f33de64052e8c"
+        },
+        {
+          "path": "web/src/ui/icons/png/round-score@48.png",
+          "size": [
+            48,
+            48
+          ],
+          "sha256": "99dbede504afa2d72176d31a08f5b667dc3ed57fc82896cb02d09c5853cebd08"
+        },
+        {
+          "path": "web/src/ui/icons/png/round-score@72.png",
+          "size": [
+            72,
+            72
+          ],
+          "sha256": "449dc25f121ac984a89df4d6686562353b5922ae761a04ff8dfc08f484d627ab"
+        },
+        {
+          "path": "web/src/ui/icons/png/round-score@96.png",
+          "size": [
+            96,
+            96
+          ],
+          "sha256": "4ac318a697a4b59cd503c9b577b2ca639f28372de35d717ff3f0030a7e142a51"
+        },
+        {
+          "path": "web/src/ui/icons/png/round-score@99.png",
+          "size": [
+            99,
+            99
+          ],
+          "sha256": "1472690933c44039044beb72bf355b68a9f89d09768ab6b185ebb61ecd9ba194"
+        }
+      ]
+    },
+    {
+      "id": "rush-clipboard",
+      "source": "design/concepts/mobile-board-frontdesk-v2.png",
+      "source_box_xyxy": [
+        50,
+        479,
+        130,
+        571
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/rush-clipboard.png",
+      "master_size": [
+        80,
+        92
+      ],
+      "visible_bbox_xyxy": [
+        6,
+        6,
+        72,
+        86
+      ],
+      "visible_size": [
+        66,
+        80
+      ],
+      "wide": false,
+      "sha256": "0768fe65f00a850644e2aeeca57861a61061ef401136a0d0451c3640d266a1f0",
+      "source_crop_sha256": "322ee150622b3748d4e3bc2a7d557a4c7c485d8521a0a8b5dccb3b90c54012ce",
+      "opaque_pixels": 4219,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 378,
+      "transparent_pixels": 2763,
+      "clear_holes_source_xy": [
+        [
+          88,
+          496
+        ]
+      ],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/rush-clipboard@32.png",
+          "size": [
+            32,
+            32
+          ],
+          "sha256": "508470c1c05c22b128cd9f1b6e4a0eb584257f064e9a3d40841997d9cd4d4b12"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-clipboard@48.png",
+          "size": [
+            48,
+            48
+          ],
+          "sha256": "c41bf0f840c33f4a6803b9ccf4e9d959d2ef07b7cd31559b10591380483fbcd9"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-clipboard@72.png",
+          "size": [
+            72,
+            72
+          ],
+          "sha256": "9e2beffa84eca29a5f65c6dfb2cbf79386f7d99800a4dac078202a77da1ac019"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-clipboard@80.png",
+          "size": [
+            80,
+            80
+          ],
+          "sha256": "4690f15ad0be13044cda87c3e98de2af65d9dfaabbe751219fe18a26f536c3d7"
+        }
+      ]
+    },
+    {
+      "id": "rush-clip",
+      "source": "design/concepts/mobile-board-frontdesk-v2.png",
+      "source_box_xyxy": [
+        355,
+        421,
+        497,
+        504
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/rush-clip.png",
+      "master_size": [
+        142,
+        83
+      ],
+      "visible_bbox_xyxy": [
+        15,
+        9,
+        129,
+        71
+      ],
+      "visible_size": [
+        114,
+        62
+      ],
+      "wide": true,
+      "sha256": "da7a1348216652ee90b0bd8270d55837629a8186b5302bcb6565faf4222be05c",
+      "source_crop_sha256": "d8a924d60b3bc58efa8aa0ed55e790c464a35fce83e240e0299373065ffd9c85",
+      "opaque_pixels": 4643,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 510,
+      "transparent_pixels": 6633,
+      "clear_holes_source_xy": [
+        [
+          427,
+          449
+        ]
+      ],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/rush-clip@32.png",
+          "size": [
+            32,
+            17
+          ],
+          "sha256": "30f7b078fafb407934efdc8ce4de13ee45e5abdb3e053e3088412a70840bc244"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-clip@48.png",
+          "size": [
+            48,
+            26
+          ],
+          "sha256": "fe2d594e8b544a7720b68d7ebc910e3ad06cf4e237e4f4a428a0a8e953f2918d"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-clip@72.png",
+          "size": [
+            72,
+            39
+          ],
+          "sha256": "684d70b70d56c527fab88b5436d90d887144ed28c5eb9aaa538fd725fff5224b"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-clip@96.png",
+          "size": [
+            96,
+            52
+          ],
+          "sha256": "b51a5f2ad63c553c3cb1a4a4ff0aa4040d6bd6c6a357dabeac2fe5f48f8fc441"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-clip@114.png",
+          "size": [
+            114,
+            62
+          ],
+          "sha256": "3133e090d788698d2e8618a57285c9fdfd82657eac73928ef3eb9e289aaaa37a"
+        }
+      ],
+      "adjacent_line_exclusion": "Source card border at y=463..468 removed outside the clip body. Only ambiguous boundary alpha interpolates from adjacent unobstructed source rows; source opaque RGB retained."
+    },
+    {
+      "id": "rush-check",
+      "source": "design/concepts/rush-frontdesk-states-v2.png",
+      "source_box_xyxy": [
+        64,
+        656,
+        161,
+        803
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/rush-check.png",
+      "master_size": [
+        97,
+        147
+      ],
+      "visible_bbox_xyxy": [
+        8,
+        8,
+        91,
+        142
+      ],
+      "visible_size": [
+        83,
+        134
+      ],
+      "wide": false,
+      "sha256": "0a616f9d525f90b52aa55d1698fc1c0c51b5b556848b503f6cbe293365a4f1f7",
+      "source_crop_sha256": "3d24e202e23babf11a6373e5902eaf24537137e4d024c584c7eef8cd25dfd738",
+      "opaque_pixels": 5442,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 592,
+      "transparent_pixels": 8225,
+      "clear_holes_source_xy": [],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/rush-check@32.png",
+          "size": [
+            32,
+            32
+          ],
+          "sha256": "62b09e0942c02cc4755cf2360fd9fa0b92989928336b657ff53adc7afd25d0d3"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-check@48.png",
+          "size": [
+            48,
+            48
+          ],
+          "sha256": "15e6890c19069e6c44d0847be0c7cce2fbf1e810c7c9d01cf453464a526127cd"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-check@72.png",
+          "size": [
+            72,
+            72
+          ],
+          "sha256": "c5d406a932c61d24663451de4b34059d9e1001c7869de8ebc84793e57fe927fd"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-check@96.png",
+          "size": [
+            96,
+            96
+          ],
+          "sha256": "d0c26a071e4a4a356d53354f87856b72953b77d8b4f94df36acebe71f4e90fd1"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-check@134.png",
+          "size": [
+            134,
+            134
+          ],
+          "sha256": "de2e726e45cc3c9d19dac219ea7d764cf7e517ae6f9b33e5732111f77fcc1c56"
+        }
+      ]
+    },
+    {
+      "id": "rush-expired-clipboard",
+      "source": "design/concepts/rush-frontdesk-states-v2.png",
+      "source_box_xyxy": [
+        888,
+        717,
+        974,
+        813
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/rush-expired-clipboard.png",
+      "master_size": [
+        86,
+        96
+      ],
+      "visible_bbox_xyxy": [
+        9,
+        9,
+        76,
+        89
+      ],
+      "visible_size": [
+        67,
+        80
+      ],
+      "wide": false,
+      "sha256": "0a9da1d35d880dbb72da73de862ed453c174acf49201b72996f51b38cabb6e55",
+      "source_crop_sha256": "de428b0bbb8dfe5d971b69fa1108a8117934a69d3c87c10b455f04fdf7a7e6d3",
+      "opaque_pixels": 4248,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 415,
+      "transparent_pixels": 3593,
+      "clear_holes_source_xy": [
+        [
+          930,
+          738
+        ]
+      ],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/rush-expired-clipboard@32.png",
+          "size": [
+            32,
+            32
+          ],
+          "sha256": "1611925ad5a80f9e1c7b4114b02f2a47143a75f385ad828a016ef076302f6ac9"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-expired-clipboard@48.png",
+          "size": [
+            48,
+            48
+          ],
+          "sha256": "322526f6e9bb86aa09b96750caa756b8044c1cbc90d7afebcaa5c956abffadf7"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-expired-clipboard@72.png",
+          "size": [
+            72,
+            72
+          ],
+          "sha256": "1d06c3b427ff430c1773f46c5ee99595bd9c92ae3b46e1eeab163f92f4ee1bfb"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-expired-clipboard@80.png",
+          "size": [
+            80,
+            80
+          ],
+          "sha256": "de96b7cc24b788ec85067da61572632eecd2809ad994c62872cc19abe6de34ef"
+        }
+      ]
+    },
+    {
+      "id": "closing-sign-zh",
+      "source": "design/concepts/shift-finish-storyboard-v2.png",
+      "source_box_xyxy": [
+        799,
+        375,
+        1069,
+        578
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/closing-sign-zh.png",
+      "master_size": [
+        270,
+        203
+      ],
+      "visible_bbox_xyxy": [
+        7,
+        8,
+        263,
+        195
+      ],
+      "visible_size": [
+        256,
+        187
+      ],
+      "wide": true,
+      "sha256": "0252f19cde7b6de3135832d5c6350b27216a58fa288c8945fadaa58f96b0fe60",
+      "source_crop_sha256": "f1ae150681d38dd75509c91aa78c77443889e6eea069ed7ab3d0f3769894394e",
+      "opaque_pixels": 28333,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 1097,
+      "transparent_pixels": 25380,
+      "clear_holes_source_xy": [
+        [
+          930,
+          430
+        ]
+      ],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/closing-sign-zh@32.png",
+          "size": [
+            32,
+            23
+          ],
+          "sha256": "5392b789e2fe990086e9cd1d4f3dfaadbd7601e486e4e67afbec1419d91d132d"
+        },
+        {
+          "path": "web/src/ui/icons/png/closing-sign-zh@48.png",
+          "size": [
+            48,
+            35
+          ],
+          "sha256": "e35fe97010216ebbea3f811ff3a59d4678efac93a3d0c23943ea776f9f34d52c"
+        },
+        {
+          "path": "web/src/ui/icons/png/closing-sign-zh@72.png",
+          "size": [
+            72,
+            53
+          ],
+          "sha256": "e7643720cc78516ea9af8d71ca972171324f259455af205a618f9e7849c3d8a9"
+        },
+        {
+          "path": "web/src/ui/icons/png/closing-sign-zh@96.png",
+          "size": [
+            96,
+            70
+          ],
+          "sha256": "7a7b673c6f2da134b604e3befd2a13bacb6c0eac1484f1edb091cd1b02f996d5"
+        },
+        {
+          "path": "web/src/ui/icons/png/closing-sign-zh@144.png",
+          "size": [
+            144,
+            105
+          ],
+          "sha256": "b0aed4bae08c2642ec3b97e3cbb29ffb046f6bc600e656855e5acb13ac313339"
+        },
+        {
+          "path": "web/src/ui/icons/png/closing-sign-zh@192.png",
+          "size": [
+            192,
+            140
+          ],
+          "sha256": "37465dd23365d8319c8b45119b67a1f2c37dbf23797c71e3faf0f82ab2f964ce"
+        },
+        {
+          "path": "web/src/ui/icons/png/closing-sign-zh@256.png",
+          "size": [
+            256,
+            187
+          ],
+          "sha256": "e089831efade41748df39dc7f79581ebaa5ef090373332d725cb27264a4cd750"
+        }
+      ],
+      "excluded": "Third storyboard panel: orange motion arc, header annotation, dimmed board/pet tiles; triangle between ropes is transparent."
+    },
+    {
+      "id": "rush-clock",
+      "source": "design/concepts/mobile-board-frontdesk-v2.png",
+      "source_box_xyxy": [
+        538,
+        490,
+        613,
+        565
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/rush-clock.png",
+      "master_size": [
+        75,
+        75
+      ],
+      "visible_bbox_xyxy": [
+        9,
+        7,
+        67,
+        66
+      ],
+      "visible_size": [
+        58,
+        59
+      ],
+      "wide": false,
+      "sha256": "55621552ae98c50b2b47c6e79c547a449767c577eea9e8f14eeef054b11015b2",
+      "source_crop_sha256": "d6d8659ac53263febd6e7855b73394af7ec772423227328e5a06bf303c0e6668",
+      "opaque_pixels": 2421,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 260,
+      "transparent_pixels": 2944,
+      "clear_holes_source_xy": [],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/rush-clock@32.png",
+          "size": [
+            32,
+            32
+          ],
+          "sha256": "6b82e467b0ac1386b664cf98d250d6d0a52dfc23fe606165b56e46c7f59125ef"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-clock@48.png",
+          "size": [
+            48,
+            48
+          ],
+          "sha256": "26c69abf3ce5b974d921da4f514f07b5b8b468c75f0de354c74bf8c0cc5b9157"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-clock@59.png",
+          "size": [
+            59,
+            59
+          ],
+          "sha256": "203631cb7752953620ab8573989925a22ed31fc3bdc9697368175da911b6399e"
+        }
+      ]
+    },
+    {
+      "id": "rush-accent",
+      "source": "design/concepts/mobile-board-frontdesk-v2.png",
+      "source_box_xyxy": [
+        372,
+        505,
+        410,
+        554
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/rush-accent.png",
+      "master_size": [
+        38,
+        49
+      ],
+      "visible_bbox_xyxy": [
+        5,
+        7,
+        32,
+        43
+      ],
+      "visible_size": [
+        27,
+        36
+      ],
+      "wide": false,
+      "sha256": "8eb6aa8aa9be9bb46ccec888655b352e8791d66bd8e997fc6a9f5e4addbbc062",
+      "source_crop_sha256": "0a9abf6ed70d08684e59c1cde1cc95940df3b911d5c3443c5a44767b78c1c7b9",
+      "opaque_pixels": 252,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 162,
+      "transparent_pixels": 1448,
+      "clear_holes_source_xy": [],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/rush-accent@32.png",
+          "size": [
+            32,
+            32
+          ],
+          "sha256": "0c132c2c1bb4718d2263bd187756b15ca8d65f63cc38c2c5e4077189499ed98c"
+        },
+        {
+          "path": "web/src/ui/icons/png/rush-accent@36.png",
+          "size": [
+            36,
+            36
+          ],
+          "sha256": "19a605acd2ffcff69231743d36aa5c8a06ee6e10a061283670a831153490a38e"
+        }
+      ]
+    },
+    {
+      "id": "time-accent",
+      "source": "design/concepts/mobile-board-frontdesk-v2.png",
+      "source_box_xyxy": [
+        405,
+        349,
+        446,
+        403
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/time-accent.png",
+      "master_size": [
+        41,
+        54
+      ],
+      "visible_bbox_xyxy": [
+        7,
+        7,
+        36,
+        45
+      ],
+      "visible_size": [
+        29,
+        38
+      ],
+      "wide": false,
+      "sha256": "c8baed64e197f04514a3137d4b50b04a8ec217b385e9d85ec2983d96cab3931c",
+      "source_crop_sha256": "08a05c64c5d22d299b95ced9883101e580116c0ec0f638cd1f39176243bbb2ab",
+      "opaque_pixels": 268,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 153,
+      "transparent_pixels": 1793,
+      "clear_holes_source_xy": [],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/time-accent@32.png",
+          "size": [
+            32,
+            32
+          ],
+          "sha256": "6c7dfa287be52e1e1ab5f18e1f9851b7fc0397b908050c81f55c077231c8df75"
+        },
+        {
+          "path": "web/src/ui/icons/png/time-accent@38.png",
+          "size": [
+            38,
+            38
+          ],
+          "sha256": "a14ddea2ad63ea778d4e52a1036d51f43c7385b205af664b5010d9e65a06ff24"
+        }
+      ]
+    },
+    {
+      "id": "farewell-accent-left",
+      "source": "design/concepts/shift-finish-storyboard-v2.png",
+      "source_box_xyxy": [
+        794,
+        704,
+        826,
+        745
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/farewell-accent-left.png",
+      "master_size": [
+        32,
+        41
+      ],
+      "visible_bbox_xyxy": [
+        7,
+        8,
+        27,
+        35
+      ],
+      "visible_size": [
+        20,
+        27
+      ],
+      "wide": false,
+      "sha256": "602bcb3ee1489045eaa1d1d7ff29e53755c9ca54b245ea8f560fbbd05ce05c09",
+      "source_crop_sha256": "3b249237678084bf0e8018a5d05d4f1a0156577d6964697760c8a436ea85899e",
+      "opaque_pixels": 128,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 110,
+      "transparent_pixels": 1074,
+      "clear_holes_source_xy": [],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/farewell-accent-left@27.png",
+          "size": [
+            27,
+            27
+          ],
+          "sha256": "750a39dee77eea392811eab7909b87a9ebf3514c994b492b943497d420623aca"
+        }
+      ]
+    },
+    {
+      "id": "farewell-accent-right",
+      "source": "design/concepts/shift-finish-storyboard-v2.png",
+      "source_box_xyxy": [
+        1026,
+        704,
+        1054,
+        745
+      ],
+      "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/farewell-accent-right.png",
+      "master_size": [
+        28,
+        41
+      ],
+      "visible_bbox_xyxy": [
+        5,
+        6,
+        22,
+        32
+      ],
+      "visible_size": [
+        17,
+        26
+      ],
+      "wide": false,
+      "sha256": "656e2e5e9d689c0e0ca421e381aaaf2afbe198c6ae76b69acaafd021aee88526",
+      "source_crop_sha256": "791951941a332ab3ae73944e8be3873082d9eb504dad85dbfb275f61185bebb9",
+      "opaque_pixels": 100,
+      "opaque_rgb_unchanged": true,
+      "partial_alpha_pixels": 100,
+      "transparent_pixels": 948,
+      "clear_holes_source_xy": [],
+      "exports": [
+        {
+          "path": "web/src/ui/icons/png/farewell-accent-right@26.png",
+          "size": [
+            26,
+            26
+          ],
+          "sha256": "91d4a761c32024fe57c69a96ae41ced0c2d616bdb440bd695127172823702436"
+        }
+      ]
+    }
+  ]
+}

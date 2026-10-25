@@ -7,7 +7,7 @@ export const MOTION = {
   /** 前进 / 返回时的横向滑动距离 */
   slidePx: 28,
   /** 时间到后停一拍再进报告（毫秒）；减少动态效果时缩短 */
-  timeUpHoldMs: 900,
+  timeUpHoldMs: 1200,
   timeUpHoldReducedMs: 300,
   easeOut: [0.22, 1, 0.36, 1] as [number, number, number, number],
 } as const;

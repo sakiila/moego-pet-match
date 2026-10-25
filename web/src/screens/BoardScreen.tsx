@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'motion/react';
 import { Board } from '../components/Board/Board';
+import { BoardControls } from '../components/BoardControls/BoardControls';
+import { BoardLayout } from '../components/BoardLayout/BoardLayout';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { QuitDialog } from '../components/QuitDialog/QuitDialog';
 import { RushBar } from '../components/RushBar/RushBar';
@@ -9,14 +11,12 @@ import { StatusPanel } from '../components/StatusPanel/StatusPanel';
 import { TimeUpBanner } from '../components/TimeUpBanner/TimeUpBanner';
 import { TipBar } from '../components/TipBar/TipBar';
 import type { GameMode } from '../api/types';
-import { UnderwaterBackdrop } from '../components/UnderwaterBackdrop/UnderwaterBackdrop';
 import type { GameState, GameSummary } from '../engine';
 import type { PetInfo } from '../game/pets';
 import { useGameSession } from '../game/useGameSession';
-import { useI18n } from '../i18n';
+import { selectFarewellPets } from '../game/farewell';
 import { MOTION } from '../ui/motion';
-import { Icon } from '../ui/primitives/Icon';
-import styles from './Screen.module.css';
+import { preloadIcon } from '../ui/primitives/Icon';
 
 export interface BoardScreenProps {
   mode?: GameMode;
@@ -33,7 +33,10 @@ export interface BoardScreenProps {
 }
 
 export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncollected, families, onFinished, onExit }: BoardScreenProps) {
-  const { t } = useI18n();
+  useEffect(() => {
+    preloadIcon('closing-sign-zh', 240);
+    preloadIcon('closing-sign-en', 240);
+  }, []);
   // 时间到后先停一拍显示「收工」，再进入报告；结果已冻结，成绩在进入报告时提交
   const [ending, setEnding] = useState<GameSummary | null>(null);
   const reduced = useReducedMotion();
@@ -53,18 +56,18 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
   // 退出确认期间计时继续；到时自动关闭弹层并照常收尾结算
   useEffect(() => {
     if (view.timeUp && quitOpen) setQuitOpen(false);
-  }, [view.timeUp, quitOpen]);
+    if (view.timeUp && settingsOpen) setSettingsOpen(false);
+  }, [view.timeUp, quitOpen, settingsOpen]);
 
   if (import.meta.env.DEV) (window as unknown as { __petMatch?: unknown }).__petMatch = { view, attemptSwap: session.attemptSwap, peek: session.peek };
 
   return (
-    <main className={styles.screen} data-theme={fish ? 'fish' : undefined}>
-      {fish && <UnderwaterBackdrop />}
-      <BrandHeader title={fish ? 'fish' : 'scheduling'} tagline={fish ? 'fish.prep_rule' : 'board.tagline'} />
-      <StatusPanel timeLeftMs={view.timeLeftMs} score={view.frame.score} />
-      <RushBar view={view.rush} mode={mode} />
-      <div className={styles.boardArea}>
-        <Board
+    <BoardLayout
+      mode={mode}
+      header={<BrandHeader title={fish ? 'fish' : 'scheduling'} boardArt={!fish} tagline={fish ? 'fish.prep_rule' : 'board.tagline'} />}
+      status={<StatusPanel timeLeftMs={view.timeLeftMs} score={view.frame.score} />}
+      rush={<RushBar view={view.rush} mode={mode} />}
+      board={<Board
           frame={view.frame}
           mode={mode}
           pets={pets}
@@ -74,19 +77,10 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
           getPreview={session.preview}
           onSwap={session.attemptSwap}
           onDraggingChange={session.setDragging}
-        />
-      </div>
-      <TipBar tip={view.tip} pets={pets} />
-      <footer className={styles.footer}>
-        <button type="button" onClick={() => setSettingsOpen(true)}>
-          <Icon name="settings" size={24} />
-          {t('nav.settings')}
-        </button>
-        <button type="button" onClick={() => setQuitOpen(true)} disabled={view.timeUp} data-testid="exit">
-          {t('board.exit')}
-          <Icon name="exit" size={24} />
-        </button>
-      </footer>
+      />}
+      tip={<TipBar tip={view.tip} pets={pets} />}
+      controls={<BoardControls timeUp={view.timeUp} onSettings={() => setSettingsOpen(true)} onExit={() => setQuitOpen(true)} />}
+    >
       <QuitDialog
         open={quitOpen}
         onCancel={() => setQuitOpen(false)}
@@ -96,7 +90,7 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
         }}
       />
       <SettingsDialog variant="board" open={settingsOpen} onClose={() => setSettingsOpen(false)} />
-      {ending && <TimeUpBanner />}
-    </main>
+      {ending && <TimeUpBanner pets={selectFarewellPets(ending, pets)} mode={mode} />}
+    </BoardLayout>
   );
 }

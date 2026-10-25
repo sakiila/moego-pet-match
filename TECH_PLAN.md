@@ -276,4 +276,6 @@ Slack 的 [users.list](https://docs.slack.dev/reference/methods/users.list/) 支
 
 结算响应 `newAchievements` 保存本局首次授予 id 列表，旧结果快照缺少字段时前端按空列表处理。`GET /api/players/:id/achievements` 补发并读取汇总进度；`PATCH /api/players/:id/title` 接受已解锁 id 或 null，未解锁返回 409。玩家资料与排行榜带可选 equippedTitle。进度不下发未知主人/家庭关系。
 
+玩家名片使用独立的只读 `GET /api/players/:id/profile?mode=normal|fish`。只允许查看当前同事视图中的身份，返回所选模式最高已结算成绩、完成局数、最近五份结算、当前上架宠物收集计数与已有称号；不调用身份补登记或成就补发。未结算对局不进入历史，鱼关与宠物局分开；新增收集数从本人 collection 的 first_game_id 和当前上架目录汇总。不返回邮箱、原始 payload 或宠物主人关系。前端关闭/切换玩家时取消旧请求，失败可重试，不存在的身份显示明确状态。
+
 本地开发库已应用 013；生产尚未执行。`supabase-setup.ts` 的应用角色授权清单已包含两张新表，后续正式迁移按既有预览/确认流程执行，不自行部署。

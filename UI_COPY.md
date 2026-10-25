@@ -170,7 +170,7 @@
 | tutorial.tool_combo | 相邻工具交换，搭档开工！ | Swap neighboring tools. Teamwork time! |
 | board.move_hint | 卡住啦？试试这一步。 | Stuck? Try This Move. |
 | board.shuffle | 换个站位，继续营业。 | A quick reshuffle, then back to work. |
-| rush.title | 加急来啦！ | Rush Order! |
+| rush.title | 临时加单！ | Rush Order! |
 | rush.goal | 20 秒内服务 12 格 | Clear 12 tiles in 20s |
 | rush.progress | 已服务 {count}/12 格 · 催单剩余 {seconds} 秒 | {count}/12 tiles · Rush time: {seconds}s |
 | rush.success | 安排得明明白白！+100 分 | All Sorted! +100 Points |
@@ -178,13 +178,16 @@
 | round.last_seconds | 最后 10 秒，稳住这班。 | Final 10 Seconds. You've Got This. |
 | round.finishing | 时间到，收完这波就下班。 | Time's up. Clocking out after this chain. |
 | round.finished | 收工啦！ | Shift Complete! |
+| round.thanks | 这一班辛苦啦 | You made this shift! |
 | board.title | Smart Scheduling | Smart Scheduling |
-| board.tagline | 拖一拖，安排明明白白。 | Drag it, sort it. |
+| board.tagline | 拖一拖，安排得明明白白。 | Drag it, sort it. |
 | board.time_label | 本局剩余 | Time Left |
 | board.score_label | 分数 | Score |
 | board.exit | 退出 | Exit |
 | rush.remaining | 催单剩余 {seconds} 秒 | Rush: {seconds}s |
 | rush.served | 已服务 {count}/12 格 | {count}/12 tiles |
+
+2026-10-25 棋盘确认稿：临时加单采用前台夹单小票，倒计时显示「还剩 N 秒 / Left N s」，底行仅保留已服务格数与进度条，不再重复显示 `rush.goal`。20 秒服务 12 格的规则不变。用于强调色与粗数字的分段 key 为 `rush.title_lead` / `rush.title_accent`、`rush.seconds_lead` / `rush.seconds_unit`、`rush.served_lead` / `rush.served_unit`、`rush.success_lead` / `rush.success_accent`、`rush.bonus` / `rush.bonus_unit`；分别组合成上表完整事实，不新增奖励。收工的感谢句只在至少有一张实际服务过的贴纸时随头像出现，零服务局仅挂牌。
 
 催单在游戏时钟第 30 秒触发，目标和倒计时区分主时钟，成功才显示 +100。`board.chain` 的链数与计分倍率分别计算，不因为显示第六轮就变成六倍。新宠提示是局内暂记，正式收集等结算保存；同次连锁合并一条，家庭团聚按同家每局一次。提示、收集和团聚不叠满棋盘。`round.finishing` 只在最后有效连锁仍待结算时显示，`round.last_seconds` 不新增奖励。
 
@@ -341,7 +344,6 @@
 | leaderboard.tagline | 谁把毛孩子安排得最明白？ | Who keeps the fur crew in line? |
 | leaderboard.points | {score} 分 | {score} pts |
 | leaderboard.colleague | 同事 | Coworker |
-| leaderboard.you | 你 | You |
 | leaderboard.scope | 榜单范围 | Board range |
 | leaderboard.today | 今日榜 | Today |
 | leaderboard.all_time | 总榜 | All-Time |
@@ -354,26 +356,24 @@
 | report.today_gap | 差 {points} 分 | {points} behind |
 | report.today_alone | 今天第一个开工，等同事来挑战 | First to clock in today. Let's see who follows. |
 | report.streak_day | 打卡第 {days} 天 | Day {days} streak |
+| report.next_up_label | 下一件事 | Up next |
+| report.next_up_fish | 再完成 {n} 局，解锁一个隐藏彩蛋。 | Finish {n} more round(s) to unlock a hidden surprise. |
+| report.next_up_cats | 再认识 {n} 只猫，解锁称号「{title}」。 | Meet {n} more cat(s) to unlock the “{title}” title. |
+| report.next_up_dogs | 再认识 {n} 只狗，解锁称号「{title}」。 | Meet {n} more dog(s) to unlock the “{title}” title. |
+| report.next_up_friends | 再认识 {n} 只毛孩子，解锁称号「{title}」。 | Meet {n} more pet(s) to unlock the “{title}” title. |
+| report.next_up_species | 再认识 {n} 种新动物，解锁称号「{title}」。 | Meet {n} more kind(s) of animal to unlock the “{title}” title. |
+| report.next_up_neighbors | 再认识 {n} 位同事家的毛孩子，解锁称号「{title}」。 | Meet pets from {n} more coworker(s) to unlock the “{title}” title. |
+| report.next_up_album | 再认识 {n} 只，就集齐全部毛孩子，解锁称号「{title}」。 | Meet {n} more to complete the collection and unlock the “{title}” title. |
+| report.next_up_milestone | 再认识 {n} 只毛孩子，图鉴就到 {percent}%。 | Meet {n} more pet(s) and your collection hits {percent}%. |
+| report.next_up_tomorrow | 明天换一盘新棋，今日榜重新排。 | New board tomorrow. Today’s ranks reset. |
 | report.harvest | 本局收获 | This Round's Haul |
 | report.new_title_tag | 新称号 | New title |
-| report.next_up_label | 下一件事 | Up next |
-| report.next_up_go_collection | 去图鉴 | Pet Collection |
-| report.next_up_fish_1 | “Peter 让我带话：下班别走。” | "Peter asked me to pass it on: don't leave after this shift." |
-| report.next_up_fish_2 | “听说两个班后来一批不用吹干的，爽。” | "Word is, two shifts from now a batch arrives that needs no blow-dry. Nice." |
-| report.next_up_cats | “群主位置给你留着，先把那 {n} 只猫认全。” | "The cat club saved you the admin seat. {n} more to meet." |
-| report.next_up_dogs | “我们狗这边就缺你一个了，还差 {n} 只。” | "The dog crew is one human short. {n} more to go." |
-| report.next_up_friends | “再认 {n} 个，这条街没人不认识你。” | "{n} more and the whole street knows your name." |
-| report.next_up_species | “猫狗你都混熟了，再认 {n} 种别的毛？” | "Cats and dogs are covered. {n} more kind of fur?" |
-| report.next_up_neighbors | “还有 {n} 家没去过，人家都给你留门了。” | "{n} more homes to visit. They've left the door open." |
-| report.next_up_album | “最后 {n} 位在赶来签到，别下班。” | "The last {n} are rushing in to sign the roster. Don't clock out." |
-| report.next_up_milestone | “再认 {n} 只，店里 {percent}% 的毛孩子都见过你了，剩下的在打听你。” | "{n} more and {percent}% of the shop has met you. The rest are asking around." |
-| report.next_up_tomorrow | “今天的榜睡一觉就没了，明天重新来。” | "Today's board is gone after a nap. Fresh start tomorrow." |
 | leaderboard.challenge | 再挑战一次 | Play Another Round |
 | leaderboard.load_failed | 暂时没能读取排行榜，请重试。 | We couldn't load the leaderboard. Please try again. |
 
 默认领先玩家＋本人附近，名次使用真实并列结果，未保存的成绩不生成名次。鱼榜标签仅对个人已发现鱼关的玩家显示，不放锁定标签或解锁预告。挑战当前榜单对应模式，不新增挑战邀请或相同棋盘对战。
 
-`leaderboard.top_players`（领先三人小标题）、`leaderboard.colleague`（列表表头，与 `leaderboard.rank`、`leaderboard.best_score` 一起）、`leaderboard.you`（本人行标记）于 2026-10-24 按 mobile-leaderboard-v1 确认补入；并列仍在行内标「同分并列」，不另加页脚说明。
+`leaderboard.top_players`（领先三人小标题）、`leaderboard.colleague`（列表表头，与 `leaderboard.rank`、`leaderboard.best_score` 一起）于 2026-10-24 按 mobile-leaderboard-v1 确认补入。2026-10-25 取消本人行的「你 / You」标签，仅保留橙色高亮；并列仍在行内标「同分并列」，不另加页脚说明。
 
 2026-10-24 排行榜页改为「毛孩子光荣榜 / Pet Hall of Fame」标题字标（图片，读屏读 `leaderboard.hall_of_fame`）与副标题 `leaderboard.tagline`；排行记录的是个人最好成绩，副标题不写「今天」。领奖台分数用 `leaderboard.points`。领奖台上方不再显示 `leaderboard.top_players`。鱼关页签仍只对已发现鱼关的玩家显示，不加锁定标签或解锁预告。
 
@@ -543,11 +543,20 @@
 | achievement.neighbors_condition | 主人 · {current} / {target} 位 | Owners · {current} / {target} |
 | achievement.family_condition | 多宠家庭 · {current} / {target} 个 | Pet families · {current} / {target} |
 | achievement.album_condition | 当期名册 · {current} / {target} 只 | Catalog · {current} / {target} |
+| achievement.unlock_condition | 解锁条件 | Unlock Condition |
+| achievement.view_condition | 查看「{title}」的解锁条件 | View the unlock condition for {title} |
+| achievement.cats_unlock | 收集 {target} 只不同的猫。 | Collect {target} different cats. |
+| achievement.dogs_unlock | 收集 {target} 只不同的狗。 | Collect {target} different dogs. |
+| achievement.friends_unlock | 收集 {target} 只不同的宠物。 | Collect {target} different pets. |
+| achievement.species_unlock | 收集 {target} 类动物，猫狗的不同品种不单独计类。 | Collect {target} animal types. Cat breeds count together, as do dog breeds. |
+| achievement.neighbors_unlock | 收集来自 {target} 位不同主人的宠物。 | Collect pets from {target} different owners. |
+| achievement.family_unlock | 收齐 {target} 个多宠家庭的全部上架宠物，每家至少 2 只。 | Collect every listed pet from {target} multi-pet family with at least 2 listed pets. |
+| achievement.album_unlock | 收齐当期名册中全部上架的普通宠物。 | Collect every listed regular pet in the catalog at the time of unlocking. |
 | achievement.my_titles | 我的称号 | My Titles |
-| achievement.rarity_common | 普通 | Common |
-| achievement.rarity_rare | 稀有 | Rare |
-| achievement.rarity_epic | 史诗 | Epic |
-| achievement.rarity_legendary | 传说 | Legendary |
+| achievement.rarity_common | 闪耀 | Radiant |
+| achievement.rarity_rare | 卓越 | Outstanding |
+| achievement.rarity_epic | 非凡 | Extraordinary |
+| achievement.rarity_legendary | 传奇 | Legendary |
 | achievement.wearing_named | 正在佩戴「{title}」 | Wearing {title} |
 | achievement.pick_hint | 解锁后，挑一个喜欢的挂上。 | Unlock a title, then pick your favorite to wear. |
 | achievement.unlocked_count | 已解锁 {count} / {total} | Unlocked {count} / {total} |
@@ -563,3 +572,26 @@
 | achievement.new_unlocks | 新称号解锁！ | New Titles Unlocked! |
 | achievement.worn_by | {playerName} 的称号 | {playerName}'s Title |
 | achievement.view_worn | 查看 {playerName} 的称号：{title} | View {playerName}'s title: {title} |
+
+## 玩家名片 · 排行榜点击入口
+
+| Key | 中文 | English |
+| --- | --- | --- |
+| profile.title | 玩家名片 | Player Card |
+| profile.named | {playerName} 的玩家名片 | {playerName}'s Player Card |
+| profile.open | 查看 {playerName} 的玩家名片 | View {playerName}'s player card |
+| profile.best | 最高分 | Best Score |
+| profile.collected | 已收集 | Collected |
+| profile.games | 已完成局数 | Games Completed |
+| profile.badges | 已解锁徽章 | Unlocked Badges |
+| profile.recent | 最近 5 局 | Last 5 Games |
+| profile.date | 日期 | Date |
+| profile.score | 得分 | Score |
+| profile.new_collected | 新收集 | New Pets |
+| profile.no_badges | 还没有解锁徽章。 | No badges unlocked yet. |
+| profile.no_games | 这个模式还没有完成的对局。 | No completed games in this mode yet. |
+| profile.loading | 正在读取玩家记录… | Loading player records… |
+| profile.load_failed | 玩家记录暂时没读到，请重试。 | We couldn’t load this player’s records. Please try again. |
+| profile.not_found | 这位同事暂时不在可查看的名册中。 | This coworker is not currently available in the roster. |
+
+最高分、已完成局数和最近五局跟随当前排行榜模式；收集统计只计当前上架宠物。未结算/退出的对局不进入历史。鱼关历史不展示宠物新增数。名片只读，不补发或切换对方称号，不展示邮箱、原始对局内容、宠物主人关系。

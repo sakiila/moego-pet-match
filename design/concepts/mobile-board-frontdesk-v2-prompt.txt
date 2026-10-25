@@ -1,0 +1,6 @@
+Use case: precise-object-edit.
+Make one narrowly scoped UI correction to the supplied MoeGo mobile gameplay design.
+Remove ONLY the small support phrase "20 秒内服务 12 格" at the far right of the lower row of the "临时加单！" ticket.
+Reclaim that removed-text space by extending the SAME gray progress track horizontally to the ticket's right inner margin. Its left edge, vertical center, height and pill corner radius stay fixed. Resize the orange filled segment so it represents exactly 7/12 = 58.33% of the newly widened full track. Preserve the left label "已服务 7/12 格" and the header's "还剩 8 秒" unchanged.
+Preserve EVERYTHING else: 853 x 1844 portrait composition, latest Smart Scheduling lettering, real MoeGo logo, subtitle, clock icon, star icon, giant 00:48 and 2,480 numerals, orange clipboard and center clip, ticket border and shadow, divider, EXACTLY all 49 cells of the 7x7 board and every pet/tool, row highlight, lower tip, footer settings/exit, all colors, typography, spacing and positions.
+No replacement text, no new icons or features, no other wording changes, no shifting or resizing the ticket or board. The only changed region is the ticket's bottom-right progress-and-support-text row. Preserve its visual polish.

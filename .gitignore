@@ -1,11 +1,15 @@
-/data/pet-materials/
-/data/pet-studio/
-# 同事上传的原图（submissions pull 下载到这里，可能带 EXIF 位置信息）
-/data/submissions/
+# 名录、上传原图和全部本地工作数据（可能含 EXIF 与同事资料）
+/data/
 
 .env
 .env.*
 !.env.example
+
+# 运行凭据与部署状态只保留在本机/服务器；示例文件允许提交
+/deploy/*.env
+/deploy/*.env.*
+!/deploy/*.env.example
+/.claude/settings.json
 
 # 宠物图片与名录数据不进 git（见 TECH_PLAN）
 /assets/pets/

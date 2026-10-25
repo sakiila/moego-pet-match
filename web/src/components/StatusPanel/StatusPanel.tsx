@@ -19,17 +19,17 @@ export function StatusPanel({ timeLeftMs, score }: StatusPanelProps) {
   return (
     <div className={styles.panel}>
       <div className={`${styles.card} ${styles.time} ${urgent ? styles.urgent : ''}`} aria-label={t('board.time_left', { seconds: Math.ceil(timeLeftMs / 1000) })}>
-        <Icon name="time-left" size={36} />
-        <span>
+        <Icon name="round-clock" className={styles.icon} size={44} />
+        <span className={styles.readout}>
           <span className={styles.label}>{t('board.time_label')}</span>
           <span className={styles.value} data-testid="time-left">
             {formatClock(timeLeftMs)}
           </span>
         </span>
       </div>
-      <div className={`${styles.card} ${styles.score}`}>
-        <Icon name="score" size={36} />
-        <span>
+      <div className={`${styles.card} ${styles.score}`} data-digits={score >= 100_000 ? 'long' : score >= 10_000 ? 'wide' : undefined}>
+        <Icon name="round-score" className={styles.icon} size={44} />
+        <span className={styles.readout}>
           <span className={styles.label}>{t('board.score_label')}</span>
           <span className={styles.value} data-testid="score">
             {score.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US')}

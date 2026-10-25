@@ -1,5 +1,7 @@
 # MoeGo 毛孩子全明星创意方案
 
+> 部署准备更新（2026-10-25）：当前目标已改为公开 GitHub 完整项目及历史、GHCR 镜像、main 自动部署到 RackNerd，由 1Panel 为 `star.baobo.me` 配置反代。操作说明见 [deploy/DEPLOY.md](deploy/DEPLOY.md)，公开范围见 [deploy/PUBLIC_FILE_LIST.md](deploy/PUBLIC_FILE_LIST.md)。准备期先自动测试和发布镜像，待上线条件就绪后开启服务器部署。以下产品创意与历史方案保留。
+
 状态：首版方案与默认规则已确认  
 日期：2026-10-22
 

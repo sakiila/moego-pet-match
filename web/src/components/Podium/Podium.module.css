@@ -53,6 +53,8 @@
   justify-items: center;
   min-width: 0;
 }
+.profileTrigger { position: absolute; inset: 0; z-index: 3; padding: 0; border: 0; border-radius: var(--radius-md); background: none; cursor: pointer; }
+.profileTrigger:focus-visible { outline: var(--stroke) solid var(--color-brand); outline-offset: var(--space-1); }
 
 /* 皇冠端正戴在头像正上方，底边压住头像外圈白边（参考 hall-of-fame-crown-reference-2） */
 .crown {

@@ -1,0 +1,20 @@
+{
+  "method": "Built-in ImageGen text-localization from the extracted Chinese original; only the English wording is intentionally changed.",
+  "reference": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/closing-sign-zh.png",
+  "generation": "/Users/bob/.codex/generated_images/01a17040-dc9f-78e3-9d24-b80c0e02bb85/exec-ca9750f3-d718-4b0b-8dd3-8c821c95c00a.png",
+  "prompt": "assets/icons/board-frontdesk-original-v1/closing-sign-en-prompt.txt",
+  "master": "assets/icons/library-original-png-v2/masters/16-board-frontdesk/closing-sign-en.png",
+  "master_sha256": "cd217fa84b33c6b086dcdc4e1b3425a4842dade194fe7100500a19a0bd329653",
+  "widths": [
+    32,
+    48,
+    72,
+    96,
+    144,
+    192,
+    288,
+    576,
+    960
+  ],
+  "aspect": 1.3719
+}

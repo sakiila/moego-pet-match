@@ -7,7 +7,7 @@ const entry: GalleryEntry = {
   name: 'BrandHeader',
   group: 'components',
   states: {
-    'scheduling + tagline (board)': () => <BrandHeader tagline="board.tagline" />,
+    'scheduling + tagline (board)': () => <BrandHeader boardArt tagline="board.tagline" />,
     'scheduling (prep)': () => <BrandHeader />,
     'scheduling artwork (prep)': () => <BrandHeader schedulingArt onBack={() => {}} />,
     'game + subtitle (identity)': () => <BrandHeader title="game" tagline="access.subtitle" />,

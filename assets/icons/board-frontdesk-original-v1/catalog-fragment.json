@@ -1,0 +1,105 @@
+{
+  "round-clock": {
+    "widths": [
+      32,
+      48,
+      72,
+      92
+    ],
+    "aspect": 1
+  },
+  "round-score": {
+    "widths": [
+      32,
+      48,
+      72,
+      96,
+      99
+    ],
+    "aspect": 1
+  },
+  "rush-clipboard": {
+    "widths": [
+      32,
+      48,
+      72,
+      80
+    ],
+    "aspect": 1
+  },
+  "rush-clip": {
+    "widths": [
+      32,
+      48,
+      72,
+      96,
+      114
+    ],
+    "aspect": 1.8387
+  },
+  "rush-check": {
+    "widths": [
+      32,
+      48,
+      72,
+      96,
+      134
+    ],
+    "aspect": 1
+  },
+  "rush-expired-clipboard": {
+    "widths": [
+      32,
+      48,
+      72,
+      80
+    ],
+    "aspect": 1
+  },
+  "closing-sign-zh": {
+    "widths": [
+      32,
+      48,
+      72,
+      96,
+      144,
+      192,
+      256
+    ],
+    "aspect": 1.369
+  },
+  "rush-clock": {
+    "widths": [
+      32,
+      48,
+      59
+    ],
+    "aspect": 1
+  },
+  "rush-accent": {
+    "widths": [
+      32,
+      36
+    ],
+    "aspect": 1
+  },
+  "time-accent": {
+    "widths": [
+      32,
+      38
+    ],
+    "aspect": 1
+  },
+  "farewell-accent-left": {
+    "widths": [
+      27
+    ],
+    "aspect": 1
+  },
+  "farewell-accent-right": {
+    "widths": [
+      26
+    ],
+    "aspect": 1
+  }
+}

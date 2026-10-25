@@ -166,6 +166,20 @@
   height: auto;
 }
 
+.boardHeader .bar { min-height: var(--board-brand-height); }
+.boardHeader .logo { height: var(--board-brand-height); }
+.boardHeader .schedulingTitle { margin-top: var(--board-title-gap); }
+.boardHeader .tagline {
+  margin-top: var(--board-tagline-gap);
+  font-size: var(--board-tagline-size);
+  font-weight: var(--weight-display);
+  line-height: var(--board-tagline-line);
+}
+
+@media (orientation: portrait) and (max-height: 620px) {
+  .boardHeader .schedulingTitle { width: var(--board-tiny-title-width); }
+}
+
 @media (max-height: 740px) {
   .schedulingTitle {
     width: 90%;

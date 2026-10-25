@@ -1,0 +1,295 @@
+.ticket {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  container: rush-ticket / inline-size;
+  min-width: 0;
+  height: var(--rush-ticket-height);
+  padding: var(--rush-padding-block) var(--rush-padding-inline);
+  border: var(--stroke) solid var(--accent);
+  border-radius: var(--rush-ticket-radius);
+  background: var(--card);
+  color: var(--fg);
+  box-shadow: var(--rush-ticket-shadow);
+  font-weight: var(--weight-display);
+  animation: rush-in var(--rush-entry-duration) var(--ease-out) both;
+}
+
+.clip {
+  position: absolute;
+  top: calc(-1 * var(--rush-clip-overhang));
+  left: 50%;
+  width: var(--rush-clip-width);
+  height: auto;
+  transform: translateX(-50%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-width: 0;
+  min-height: var(--rush-header-height);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.titleIcon {
+  width: var(--rush-title-icon-size);
+  height: var(--rush-title-icon-size);
+}
+
+.titleAccent { width: var(--rush-accent-size); height: var(--rush-accent-size); flex: none; }
+
+.titleText {
+  min-width: 0;
+  font-size: var(--rush-title-size);
+  line-height: var(--rush-title-leading);
+  overflow-wrap: anywhere;
+}
+
+.accent,
+.seconds,
+.fraction strong,
+.bonus strong {
+  color: var(--accent);
+}
+
+.remaining {
+  display: flex;
+  flex: none;
+  align-items: baseline;
+  gap: var(--rush-timer-gap);
+  white-space: nowrap;
+  font-size: var(--rush-countdown-label-size);
+  font-variant-numeric: tabular-nums;
+}
+
+.clockIcon {
+  align-self: center;
+  width: var(--rush-clock-size);
+  height: var(--rush-clock-size);
+  margin-right: var(--rush-timer-icon-gap);
+}
+
+.seconds {
+  font-size: var(--rush-countdown-size);
+  line-height: var(--rush-number-leading);
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  margin-top: var(--rush-divider-gap);
+  padding-top: var(--rush-progress-top);
+  border-top: var(--rush-divider-stroke) solid var(--line);
+}
+
+.served {
+  display: inline-flex;
+  flex: none;
+  align-items: baseline;
+  gap: var(--rush-served-gap);
+  color: var(--fg-muted);
+  white-space: nowrap;
+  font-size: var(--text-sm);
+  line-height: var(--rush-number-leading);
+}
+
+.fraction {
+  color: var(--fg);
+  font-size: var(--rush-progress-count-size);
+  font-variant-numeric: tabular-nums;
+}
+
+.track {
+  flex: 1;
+  min-width: 0;
+  height: var(--rush-track-height);
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--rush-progress-fill);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.successContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+  width: 100%;
+}
+
+.successIcon {
+  width: var(--rush-success-icon-size);
+  height: var(--rush-success-icon-size);
+  animation: rush-check var(--rush-entry-duration) var(--ease-out) both;
+}
+
+.successMessage {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--rush-success-size);
+  line-height: var(--rush-title-leading);
+  overflow-wrap: anywhere;
+}
+
+.bonus {
+  display: flex;
+  flex: none;
+  align-items: baseline;
+  gap: var(--rush-timer-gap);
+  padding-left: var(--space-2);
+  border-left: var(--rush-divider-stroke) solid var(--line);
+  white-space: nowrap;
+  font-size: var(--rush-bonus-unit-size);
+}
+
+.bonus strong {
+  font-size: var(--rush-bonus-size);
+  line-height: var(--rush-number-leading);
+}
+
+.expired {
+  border-color: var(--rush-expired-border);
+  background: var(--rush-expired-paper);
+  color: var(--fg-muted);
+  box-shadow: var(--rush-expired-shadow);
+  animation: rush-out var(--rush-exit-duration) var(--ease-out) var(--rush-exit-delay) both;
+}
+
+.expiredContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.expiredIcon {
+  width: var(--rush-expired-icon-size);
+  height: var(--rush-expired-icon-size);
+}
+
+.expiredMessage {
+  min-width: 0;
+  font-size: var(--rush-expired-size);
+  line-height: var(--rush-title-leading);
+}
+
+.ticket[data-locale='en'] .titleText {
+  font-size: var(--rush-title-size-en);
+}
+
+.ticket[data-locale='en'] .remaining {
+  font-size: var(--rush-countdown-label-size-en);
+}
+
+.ticket[data-mode='fish'] .titleText {
+  font-size: var(--rush-fish-title-size);
+}
+
+.ticket[data-mode='fish'][data-locale='en'] .titleText {
+  font-size: var(--rush-fish-title-size-en);
+}
+
+.ticket[data-locale='en'] .bonus {
+  font-size: var(--rush-bonus-unit-size-en);
+}
+
+.narrowPreview {
+  display: grid;
+  gap: var(--space-5);
+  width: var(--rush-preview-narrow-width);
+  max-width: 100%;
+}
+
+.stillPreview [data-state='expired'] {
+  animation: none;
+}
+
+@container rush-ticket (max-width: 310px) {
+  .titleText,
+  .ticket[data-locale='en'] .titleText,
+  .ticket[data-mode='fish'] .titleText {
+    font-size: var(--rush-title-size-narrow);
+  }
+
+  .titleIcon {
+    width: var(--rush-title-icon-size-narrow);
+    height: var(--rush-title-icon-size-narrow);
+  }
+
+  .clockIcon {
+    width: var(--rush-clock-size-narrow);
+    height: var(--rush-clock-size-narrow);
+    margin-right: 0;
+  }
+
+  .successMessage {
+    font-size: var(--rush-success-size-narrow);
+  }
+
+  .bonus strong {
+    font-size: var(--rush-bonus-size-narrow);
+  }
+}
+
+@media (max-height: 740px) {
+  .ticket {
+    height: var(--rush-ticket-height-compact);
+    padding-block: var(--rush-padding-block-compact);
+  }
+
+  .progressRow {
+    margin-top: var(--rush-divider-gap-compact);
+    padding-top: var(--rush-progress-top-compact);
+  }
+}
+
+@keyframes rush-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--rush-entry-offset));
+  }
+}
+
+@keyframes rush-check {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rush-check-offset)) scale(var(--rush-check-start-scale));
+  }
+}
+
+@keyframes rush-out {
+  to {
+    opacity: 0;
+    transform: translateX(var(--rush-exit-offset));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticket,
+  .successIcon {
+    animation: none;
+  }
+
+  .fill {
+    transition: none;
+  }
+}

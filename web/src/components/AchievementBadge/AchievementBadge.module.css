@@ -3,3 +3,7 @@
 .chip > img { margin: calc(-1 * var(--achievement-chip-stroke)); }
 .name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .locked { filter: grayscale(1); opacity: var(--achievement-locked-opacity); }
+.chip[data-rarity] { --chip-gradient: var(--achievement-common-gradient); border-color: transparent; background: linear-gradient(var(--color-paper), var(--color-paper)) padding-box, var(--chip-gradient) border-box; }
+.chip[data-rarity='rare'] { --chip-gradient: var(--achievement-rare-gradient); }
+.chip[data-rarity='epic'] { --chip-gradient: var(--achievement-epic-gradient); }
+.chip[data-rarity='legendary'] { --chip-gradient: var(--achievement-rainbow); }

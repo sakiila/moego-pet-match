@@ -11,6 +11,7 @@ import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
 import { Tabs } from '../ui/primitives/Tabs';
 import styles from './Screen.module.css';
+import { PlayerProfileOverlay, type ProfileLoader } from './PlayerProfileOverlay';
 
 export interface LeaderboardScreenProps {
   player: PlayerView;
@@ -22,6 +23,7 @@ export interface LeaderboardScreenProps {
   initialScope?: LeaderboardScope;
   /** 陈列页用：替换数据来源。 */
   load?: (mode: GameMode, playerId: string, scope: LeaderboardScope) => Promise<LeaderboardView>;
+  loadProfile?: ProfileLoader;
 }
 
 type View = 'near' | 'all';
@@ -31,13 +33,14 @@ const NEAR_RADIUS = 2;
  * 今日榜（默认，当天全公司同一盘棋）与总榜（个人历史最好）两层；
  * 领先三位 + 我的名次附近；无成绩时先看全榜；鱼榜标签只对已发现鱼关的玩家显示。
  */
-export function LeaderboardScreen({ player, initialMode = 'normal', initialScope = 'today', onBack, onChallenge, load = api.getLeaderboard }: LeaderboardScreenProps) {
+export function LeaderboardScreen({ player, initialMode = 'normal', initialScope = 'today', onBack, onChallenge, load = api.getLeaderboard, loadProfile }: LeaderboardScreenProps) {
   const { t } = useI18n();
   const [mode, setMode] = useState<GameMode>(initialMode === 'fish' && player.progress.fishUnlocked ? 'fish' : 'normal');
   const [scope, setScope] = useState<LeaderboardScope>(initialScope);
   const [view, setView] = useState<View>('near');
   const [data, setData] = useState<LeaderboardView | null>(null);
   const [failed, setFailed] = useState(false);
+  const [selectedPlayer,setSelectedPlayer] = useState<LeaderboardEntry | null>(null);
 
   const fetchBoard = useCallback(async () => {
     setFailed(false);
@@ -96,7 +99,7 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
       {failed && <StatusMessage tone="error" text={t('leaderboard.load_failed')} actionLabel={t('action.retry')} actionIcon="retry" onAction={fetchBoard} />}
       {data && (
         <>
-          {data.entries.length > 0 && <Podium entries={data.entries} />}
+          {data.entries.length > 0 && <Podium entries={data.entries} onPlayerSelect={setSelectedPlayer} />}
           {!data.me && <StatusMessage text={t(emptyKey)} />}
           {data.me && (
             <Tabs
@@ -113,7 +116,7 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
           <div className={styles.list} data-testid="leaderboard-rows">
             {rows.length > 0 && <LeaderboardHeader scoreLabel={today ? 'leaderboard.today_best' : 'leaderboard.best_score'} />}
             {rows.map((e) => (
-              <LeaderboardRow key={e.userId} entry={e} isMe={e.userId === player.userId} tied={(tiedRanks.get(e.rank) ?? 0) > 1} />
+              <LeaderboardRow key={e.userId} entry={e} isMe={e.userId === player.userId} tied={(tiedRanks.get(e.rank) ?? 0) > 1} onSelect={setSelectedPlayer} />
             ))}
           </div>
         </>
@@ -123,6 +126,7 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
           {t('leaderboard.challenge')}
         </Button>
       </div>
+      {selectedPlayer && <PlayerProfileOverlay key={`${selectedPlayer.userId}:${mode}`} player={selectedPlayer} mode={mode} load={loadProfile} onClose={() => setSelectedPlayer(null)} />}
     </main>
   );
 }

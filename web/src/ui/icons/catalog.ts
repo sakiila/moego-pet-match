@@ -10,6 +10,8 @@ export const ICON_CATALOG = {
   'change-photo': { widths: [32, 48, 72, 96, 144, 192, 221], aspect: 1 },
   'choose-photo': { widths: [32, 48, 72, 96, 144, 189], aspect: 1 },
   'close': { widths: [32, 48, 72, 96, 139], aspect: 1 },
+  'closing-sign-en': { widths: [32, 48, 72, 96, 144, 192, 288, 576, 960], aspect: 1.3719 },
+  'closing-sign-zh': { widths: [32, 48, 72, 96, 144, 192, 256], aspect: 1.369 },
   'collected-badge': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
   'collected-bookmark': { widths: [32, 48, 72, 96, 144, 192, 203], aspect: 1 },
   'comb-horizontal': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
@@ -44,6 +46,12 @@ export const ICON_CATALOG = {
   'rank-2': { widths: [32, 48, 72, 96, 144, 192, 249], aspect: 1 },
   'rank-3': { widths: [32, 48, 72, 96, 144, 192, 248], aspect: 1 },
   'retry': { widths: [32, 48, 72, 96, 144, 192, 194], aspect: 1 },
+  'round-clock': { widths: [32, 48, 72, 92], aspect: 1 },
+  'round-score': { widths: [32, 48, 72, 96, 99], aspect: 1 },
+  'rush-check': { widths: [32, 48, 72, 96, 134], aspect: 1 },
+  'rush-clip': { widths: [32, 48, 72, 96, 114], aspect: 1.8387 },
+  'rush-clipboard': { widths: [32, 48, 72, 80], aspect: 1 },
+  'rush-expired-clipboard': { widths: [32, 48, 72, 80], aspect: 1 },
   'rush-ticket': { widths: [32, 48, 72, 96, 144, 192, 275], aspect: 1 },
   'save-image': { widths: [32, 48, 72, 96, 144, 189], aspect: 1 },
   'save-image-white': { widths: [32, 48, 60], aspect: 1 },
@@ -81,6 +89,11 @@ export const ICON_CATALOG = {
   'tool-combo': { widths: [32, 48, 72, 96, 144, 192, 262], aspect: 1 },
   'uncollected-badge': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
   'uncollected-bookmark': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
+  'rush-clock': { widths: [32, 48, 59], aspect: 1 },
+  'rush-accent': { widths: [32, 36], aspect: 1 },
+  'time-accent': { widths: [32, 38], aspect: 1 },
+  'farewell-accent-left': { widths: [27], aspect: 1 },
+  'farewell-accent-right': { widths: [26], aspect: 1 },
 } as const;
 
 export type IconName = keyof typeof ICON_CATALOG;

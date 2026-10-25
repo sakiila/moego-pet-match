@@ -1,5 +1,5 @@
 .slot {
-  height: 56px;
+  height: var(--tip-slot-height);
 }
 
 .tip {
@@ -10,11 +10,13 @@
   padding: 0 var(--space-4);
   border-radius: var(--radius-lg);
   background: var(--panel);
-  font-size: var(--text-sm);
+  font-size: var(--tip-font-size);
   font-weight: var(--weight-bold);
   line-height: 1.3;
   animation: tip-in 200ms var(--ease-out) both;
 }
+
+.icon { width: var(--tip-icon-size); height: var(--tip-icon-size); flex: none; }
 
 
 @keyframes tip-in {

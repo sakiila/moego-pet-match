@@ -16,8 +16,9 @@ ROOT = HERE.parents[2]
 OUT = ROOT / 'web/src/ui/icons'
 WIDTHS = [32, 48, 72, 96, 144, 192, 288]
 PLAN = json.loads((HERE / 'extraction-plan.json').read_text())
-EXTRA_GROUPS = ['11-supplement', '12-prep-gestures', '13-collection-titles', '14-collection-title-avatars', '15-collection-title-showcase']
+EXTRA_GROUPS = ['11-supplement', '12-prep-gestures', '13-collection-titles', '14-collection-title-avatars', '15-collection-title-showcase', '16-board-frontdesk']
 WIDE_GROUPS = {'12-prep-gestures'}
+WIDE_ASSETS = {'rush-clip', 'closing-sign-zh', 'closing-sign-en'}
 
 
 def fit(art: Image.Image, width: int, wide: bool) -> Image.Image:
@@ -37,14 +38,15 @@ def main() -> None:
     catalog: dict[str, dict] = {}
     # 原 10 批来自 extraction-plan.json；补充批（split_supplement.py 拆出）直接读 masters 目录
     groups = [(g['id'], g['assets']) for g in PLAN['groups']]
-    groups += [(g, [{'id': p.stem, 'wide': g in WIDE_GROUPS} for p in sorted((HERE / 'masters' / g).glob('*.png'))]) for g in EXTRA_GROUPS]
+    groups += [(g, [{'id': p.stem, 'wide': g in WIDE_GROUPS or p.stem in WIDE_ASSETS} for p in sorted((HERE / 'masters' / g).glob('*.png'))]) for g in EXTRA_GROUPS]
     for group_id, assets in groups:
         for asset in assets:
             master = Image.open(HERE / 'masters' / group_id / f"{asset['id']}.png").convert('RGBA')
             art = master.crop(master.getbbox())
             wide = asset.get('wide', False)
             limit = art.width if wide else max(art.size)
-            widths = [w for w in WIDTHS if w <= limit]
+            requested_widths = WIDTHS + [576, 960] if asset['id'] == 'closing-sign-en' else WIDTHS
+            widths = [w for w in requested_widths if w <= limit]
             if not widths or (widths[-1] < limit and widths[-1] < WIDTHS[-1]):
                 widths.append(min(limit, WIDTHS[-1]))
             for w in widths:

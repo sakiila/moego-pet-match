@@ -9,7 +9,7 @@ function Demo() {
   const [i, setI] = useState(0);
   const go = (n: number) => setI(Math.min(order.length - 1, Math.max(0, n)));
   return (
-    <div style={{ overflow: 'hidden', width: 320 }}>
+    <div style={{ width: '100%' }}>
       <ScreenTransition routeName={order[i]}>
         <div style={{ padding: 16, minHeight: 120, background: 'var(--card)', borderRadius: 12 }}>
           <strong>{order[i]}</strong>

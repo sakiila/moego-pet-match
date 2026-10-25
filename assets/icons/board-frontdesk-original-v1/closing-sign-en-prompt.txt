@@ -1,0 +1,5 @@
+Use case: text-localization.
+Edit this exact transparent MoeGo hanging shop sign. Replace ONLY the cream-white Chinese lettering "收工啦！" inside the orange panel with cream-white rounded heavy English lettering reading "SHIFT" on the first line and "COMPLETE!" on the second line, centered in the same lettering area.
+The output is a single independent transparent-background UI asset, no presentation sheet or surrounding scene.
+Preserve the existing hanging pin, charcoal rope geometry, tilted rounded panel silhouette, charcoal outline thickness, orange gradient, narrow upper highlight, lower rim and white-letter color. Do not redesign, straighten, rotate, expand or reframe the sign; do not add motion marks, shadows outside its original silhouette, moon, paw, icon, label, pet or decor. Keep the proportions of the supplied 270 x 203 source asset. The only intentional difference is localization of the internal lettering; all graphic shapes must remain faithful to the source.
+Actual alpha transparency outside the sign and in the triangle between the hanging ropes. No white background.

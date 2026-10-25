@@ -44,7 +44,7 @@ export function TipBar({ tip, pets = [] }: { tip: TipView | null; pets?: PetInfo
               )}
             </span>
           ) : (
-            <Icon name={ICON[tip.key] ?? 'information'} size={36} />
+            <Icon name={ICON[tip.key] ?? 'information'} className={styles.icon} size={36} />
           )}
           <span>{t(tip.key, tip.vars)}</span>
         </div>

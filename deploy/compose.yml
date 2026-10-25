@@ -1,12 +1,17 @@
-# DMIT 上的示例编排：容器只监听宿主机本地端口，由现有反向代理提供 HTTPS 并转发。
-# 用法：把镜像与本文件、production.env 放到服务器同一目录，docker compose up -d。
+# RackNerd：由 deploy.sh 指定发布镜像；1Panel 通过宿主机回环端口反代。
+name: moego-pet-match
 services:
   pet-match:
-    image: moego-pet-match:${PET_MATCH_VERSION:-latest}
+    image: ${PET_MATCH_IMAGE:?Set PET_MATCH_IMAGE to a versioned image or digest}
+    platform: linux/amd64
     restart: unless-stopped
     env_file: production.env
     ports:
-      - "127.0.0.1:8787:8787"
+      - "127.0.0.1:${PET_MATCH_PORT:-8787}:8787"
+    mem_limit: ${PET_MATCH_MEMORY:-512m}
+    labels:
+      # 更新必须经过 Actions 的测试和健康检查，不由 Watchtower 自动替换。
+      com.centurylinklabs.watchtower.enable: "false"
     volumes:
       # 图片缓存（可随时删除重建，上限约 1.5 GB，按最近使用淘汰）
       - pet-match-img-cache:/var/cache/pet-match/img

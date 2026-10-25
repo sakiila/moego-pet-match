@@ -31,6 +31,7 @@
 
 | 页面 | 文件 | 设计重点 |
 | --- | --- | --- |
+| 游戏页前台加单与收工 | [游戏页 v2](concepts/mobile-board-frontdesk-v2.png)、[加单状态 v2](concepts/rush-frontdesk-states-v2.png)、[收工分镜 v2](concepts/shift-finish-storyboard-v2.png) | 2026-10-25 已确认；最新 Smart Scheduling 字标、粗数据、原稿钟/星、前台加单小票（已删右侧目标句）、1.2 秒收工挂牌与真实服务头像；[独立素材与像素来源](../assets/icons/board-frontdesk-original-v1/preview.html)，通过独立组件接入 |
 | 准备页操作示意 | [相邻交换](concepts/prep-adjacent-swap-preview-v1.png)、[依次点选](concepts/prep-sequential-tap-preview-v1.png) | 2026-10-24 已确认并接入；原图裁切透明 PNG，橙框灰猫、双向箭头与 1→2 手指点选；说明为灰色圆润粗体；「也来啦」仅首只自家宠物，最多一行，长名字省略 |
 | 英文文字标题：排班与报告 | [feature-wordmarks-scheduling-report-v1.png](concepts/feature-wordmarks-scheduling-report-v1.png) | 2026-10-24 已确认；Smart Scheduling 与 Grooming Report Card，粗圆字形、错落基线、黑橙分色和短线；[独立透明 PNG](../assets/illustrations/feature-wordmarks-original-v1/README.md) 已按原图裁切，未接入页面 |
 | 英文文字标题：图鉴与我的宠物 | [feature-wordmarks-collection-pets-v1.png](concepts/feature-wordmarks-collection-pets-v1.png) | 2026-10-24 已确认；Pet Collection 与 My Pets；同套文字风格，独立透明 PNG 已裁切，未接入页面 |
@@ -48,8 +49,8 @@
 | 设置与声音触感图标 | [settings-feedback-original-v1.png](concepts/settings-feedback-original-v1.png) | 2026-10-23 已确认；语言、背景音乐、消除音效、轻震；门店默认、局内开启与设备不可用样例；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 通用动作图标 | [common-actions-original-v3.png](concepts/common-actions-original-v3.png) | 2026-10-23 已确认；回门店、退出、换照片、保存图片、重试；重试为连续回环，右上转折收圆，大小图一致；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 趣味称号章 | [report-title-stamps-bilingual-v1.png](concepts/report-title-stamps-bilingual-v1.png) | 2026-10-24 接入游戏；6 款红色小花印章各有中英两版，对应 6 个称号的触发条件；透明素材见 `assets/icons/report-title-stamps-original-v1/transparent`；报告页与分享卡共用，替换原圆角称号框 |
+| 手机 Report Card 精简版 | [mobile-report-slim-v1.png](concepts/mobile-report-slim-v1.png) | 2026-10-25 选定并接入；整页收成五块：小票内分数下一行状态标签（新纪录、今日名次、打卡），MVP 改左右布局、称号章压贴纸右上；小票外「本局收获」一排卡（新收集 + 新称号，多于一屏横向滑动）与「下一件事」气泡，去掉店长签名、导航格与去图鉴按钮；取代 mobile-report-details-v3 的下半部布局 |
 | 排行榜今日榜 | [mobile-leaderboard-daily-v1.png](concepts/mobile-leaderboard-daily-v1.png) | 2026-10-24 选定并接入；在实际排行页截图基础上，模式切换下加「今日榜 / 总榜」下划线标签（默认今日榜）、一行日期与「今天全公司同一盘棋」小字、表头改「今日最好」，其余不变；日历小图标用内联 SVG |
-| 手机 Report Card 精简版 | [mobile-report-slim-v1.png](concepts/mobile-report-slim-v1.png) | 2026-10-25 选定并接入；整页收成五块：小票内分数下一行状态标签（新纪录、今日名次、打卡），MVP 改左右布局、称号章压贴纸右上；小票外「本局收获」一排卡（新收集 + 新称号，标题带去图鉴）与「下一件事」气泡，去掉店长签名与导航格；取代 mobile-report-details-v3 的下半部布局 |
 | 报告今日名次 | [mobile-report-daily-rank-v1.png](concepts/mobile-report-daily-rank-v1.png) | 2026-10-24 选定并接入；小票内分数下方一条浅橙圆角小条：皇冠 + 「今日第 N 名 · 距第一还差 X 分」，次于分数；第 1 名与今天只有自己时各有一句（见 UI_COPY） |
 | 报告下一件事 | [mobile-report-next-up-v1.png](concepts/mobile-report-next-up-v1.png) | 2026-10-24 选定并接入；新收集卡与导航之间一条「毛孩子开口」气泡：左侧 MVP 小圆贴纸（浅橙底），白色圆角气泡带左指小尾巴、细炭黑描边与小偏移阴影，橙色小标签「下一件事」、一句第一人称预告、右下「去图鉴 ›」；实现时头像 44px、尾巴用 CSS 三角 |
 | 毛孩子光荣榜 | [hall-of-fame-title-zh-v2.png](concepts/hall-of-fame-title-zh-v2.png)、[hall-of-fame-title-en-v6.png](concepts/hall-of-fame-title-en-v6.png) | 2026-10-24 已确认并接入排行榜；中英标题字标、麦穗、两侧蓝猫与黑白狗贴纸（`hall-of-fame-laurel-v1`、`-cat-v1`、`-dog-v1`）；阶梯领奖台用 CSS；布局参考 `references/hall-of-fame-reference.webp`，不采用其中的鱼缸解锁提示 |
@@ -76,7 +77,8 @@
 | 手机图鉴贴纸册 | [petdex-sticker-sheet-v3.png](concepts/petdex-sticker-sheet-v3.png) | 2026-10-24 确认下半部：撕边橙色胶带、米白毛边纸、玩家署名与收集数、纸外分享按钮；「列表 / 贴纸册」及以上保留当前实现。全部上架宠物固定 8 列，格位按主人英文名、再宠物英文名；已收集用贴纸、未收集用实际剪影，点击复用详情。分享先预览，再保存完整册页 PNG；不导出页面导航、切换与按钮 |
 | 手机已收集宠物详情 | [mobile-pet-detail-v2.png](concepts/mobile-pet-detail-v2.png) | 已确认；Maodu 详情弹层、主人 Bob、原图翻面与删除申请入口 |
 | 收集称号展示方案 | [collection-titles-system-v1.png](concepts/collection-titles-system-v1.png) | 2026-10-24 已确认视觉方向与解锁后自主选择佩戴；头像旁小称号、排行榜姓名下方称号、「我的称号」抽屉。徽章风格以已确认的[跨物种合照 v3](concepts/collection-title-cross-species-v3.png)为准：大表情、橙白色块与花边轮廓。[整套预览 v3](concepts/collection-title-badges-v3.png)七枚均已确认，并授权直接切图去底；[PNG 母版与提取记录](../assets/icons/collection-titles-original-v1/README.md)已接入 Icon，头像、排行榜、称号抽屉与小票下方新解锁展示已在本地实现；七项门槛以 GAME_FLOW 为准，未部署 |
-| 称号稀有度 PNG 组件 | [collection-title-rarity-v1.png](concepts/collection-title-rarity-v1.png) | 2026-10-24 已确认普通橙色、稀有蓝色、史诗紫色与传说彩虹边框；最高档为全员点名成功。[详细 PNG 组件](../assets/icons/collection-titles-rarity-v1/README.md)已从原稿提取，含完整展示版与头像版、多尺寸、透明检查与清单。头像选定 [C 档尺寸对照](../assets/icons/collection-titles-rarity-v1/avatar-badge-sizes-v1.png)：40px 头像 / 22px 徽章，中心贴右下 45° 圆周；已在本地右上角身份头像、排行榜列表与领奖台实现，并去掉姓名下的重复称号签。「我的称号」抽屉已换成完整稀有度 PNG、彩色标签与边框，传说使用彩虹边框；佩戴状态与按钮同列。菜单图标选定第 2 稿[奖章与收工牌](concepts/menu-icons-medal-closing-sign-v1.png)：星星奖章用于我的称号，月亮挂牌用于 Clock Out；已通过统一 Icon 以原生 SVG 实现，菜单和抽屉标题均 24px。初版与 Lucide 单色 v2 不再采用；[图稿顺序与请求留档](concepts/menu-icons-redesign-v3-options.json)。组件陈列页已核对中文 390px 与英文 320px；真实首页身份确认被自动审批拦截，未验证身份切换后的首页。报告素材、解锁条件保持不变，未部署 |
+| 称号稀有度 PNG 组件 | [collection-title-rarity-v5.png](concepts/collection-title-rarity-v5.png) | 2026-10-24 最终选定闪耀（珊瑚红）、卓越（电紫）、非凡（香槟玫瑰金）、传奇（彩虹）。[新版透明 PNG 与制作记录](../assets/icons/collection-titles-rarity-v5/README.md)已接入头像、排行榜、称号抽屉和解锁展示。头像仍为 C 档 40px / 22px，中心贴右下圆周；中文抽屉等级标签独立列，英文和窄屏放在姓名上方。菜单保留已选第 2 稿[奖章与收工牌](concepts/menu-icons-medal-closing-sign-v1.png)。内部成就 ID 与解锁条件未改，未部署。 |
+| 排行榜玩家名片 | [player-profile-card-v4.png](concepts/player-profile-card-v4.png) | 2026-10-25 接入：点击列表整行、领奖台头像/姓名打开只读名片，展示最高分、收集数、已完成局数、已解锁徽章和最近五局；使用 v5 稀有度素材。真实本地 Alice 数据已通过只读接口验证，昵称下方重复称号签不回到排行榜列表。 |
 | 手机我的宠物 | [mobile-my-pets-v1.png](concepts/mobile-my-pets-v1.png) | 已确认；仅列自家已上架宠物，完整头像、两种收集状态、查看资料／添加／删除申请 |
 | 手机删除申请 | [mobile-delete-request-v1.png](concepts/mobile-delete-request-v1.png) | 已确认；我的宠物页上的提交前弹层，关联 Maodu、人工处理说明、选填补充及提交申请 |
 | 手机局外设置 | [mobile-settings-v1.png](concepts/mobile-settings-v1.png) | 已确认；门店上的设置弹层，中文选中、音乐与音效关、支持设备轻震开 |
@@ -465,3 +467,5 @@ Do not change any other words or content. Do not introduce success/approval/publ
 
 
 2026-10-24 排行榜称号布局修订：用户反馈完整称号签挤压领奖台文字，领奖台改为头像右下的小徽章，点击展开大徽章与完整称号；台阶内只保留名字、分数、名次。列表称号与本人/并列标记移入独立的姓名下方区域，分数使用独立列。徽章素材及佩戴规则保持。
+
+2026-10-25 排行榜本人行修订：按用户截图反馈取消「你 / You」标签及其占位，仅保留橙色高亮；同分并列标记仍单独显示。

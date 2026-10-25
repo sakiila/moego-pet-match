@@ -1,4 +1,4 @@
-import type { AchievementId, AchievementView } from './types';
+import type { AchievementId, AchievementView, PlayerProfileView } from './types';
 import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse } from './types';
 
 /**
@@ -62,6 +62,7 @@ async function submitPet(playerId: string, petName: string, ownerQuote: string, 
 }
 
 export const api = {
+  getPlayerProfile: (playerId: string, mode: GameMode, signal?: AbortSignal) => request<PlayerProfileView>(`/api/players/${encodeURIComponent(playerId)}/profile?mode=${mode}`, {signal}),
   submitPet,
   getAchievements: (playerId: string) => request<AchievementView>(`/api/players/${encodeURIComponent(playerId)}/achievements`),
   equipTitle: (playerId: string, title: AchievementId | null) => request<AchievementView>(`/api/players/${encodeURIComponent(playerId)}/title`, { method: 'PATCH', body: JSON.stringify({ title }) }),

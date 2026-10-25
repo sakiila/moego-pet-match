@@ -1,0 +1,23 @@
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: var(--board-footer-height);
+}
+.controls button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--board-footer-gap);
+  min-height: var(--board-footer-height);
+  padding: 0 var(--space-3);
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--fg-muted);
+  cursor: pointer;
+}
+.controls button:disabled { opacity: var(--board-control-disabled); cursor: default; }
+.controls button:focus-visible { outline: var(--stroke) solid var(--accent); outline-offset: var(--space-1); }
+

@@ -1,6 +1,7 @@
 import type { GalleryEntry } from '../../dev/gallery/types';
 import { FishFrame } from '../../dev/gallery/FishFrame';
 import { RushBar } from './RushBar';
+import styles from './RushBar.module.css';
 
 const entry: GalleryEntry = {
   name: 'RushBar',
@@ -11,13 +12,22 @@ const entry: GalleryEntry = {
     'active 7/12': () => <RushBar view={{ state: 'active', served: 7, secondsLeft: 8 }} />,
     'active last second': () => <RushBar view={{ state: 'active', served: 11, secondsLeft: 1 }} />,
     success: () => <RushBar view={{ state: 'success' }} />,
-    expired: () => <RushBar view={{ state: 'expired' }} />,
+    expired: () => <div className={styles.stillPreview}><RushBar view={{ state: 'expired' }} /></div>,
+    'narrow · English long copy via Locale selector': () => (
+      <div className={`${styles.narrowPreview} ${styles.stillPreview}`}>
+        <RushBar mode="fish" view={{ state: 'active', served: 7, secondsLeft: 20 }} />
+        <RushBar view={{ state: 'success' }} />
+        <RushBar view={{ state: 'expired' }} />
+      </div>
+    ),
     'fish · active 6/12 · success · expired': () => (
-      <FishFrame>
-        <RushBar mode="fish" view={{ state: 'active', served: 6, secondsLeft: 8 }} />
-        <RushBar mode="fish" view={{ state: 'success' }} />
-        <RushBar mode="fish" view={{ state: 'expired' }} />
-      </FishFrame>
+      <div className={styles.stillPreview}>
+        <FishFrame>
+          <RushBar mode="fish" view={{ state: 'active', served: 6, secondsLeft: 8 }} />
+          <RushBar mode="fish" view={{ state: 'success' }} />
+          <RushBar mode="fish" view={{ state: 'expired' }} />
+        </FishFrame>
+      </div>
     ),
   },
 };
