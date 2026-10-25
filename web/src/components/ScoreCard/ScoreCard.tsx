@@ -1,4 +1,4 @@
-import { useEffect, useRef, type CSSProperties } from 'react';
+import { useEffect, useRef, type AnimationEvent, type CSSProperties } from 'react';
 import { useFeedback } from '../../audio/FeedbackProvider';
 import { petDisplayName, petImage, type PetInfo } from '../../game/pets';
 import type { TitleKey } from '../../game/report';
@@ -42,25 +42,28 @@ const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
  * 报告首屏：分数立即显示；MVP 与称号短促出现；新纪录只在已保存且严格刷新时显示标记与少量彩纸。
  * 零服务省略 MVP，由鼓励评语承接。所有内容来自冻结结果。
  */
-/** 读 :root 上的毫秒令牌（--print-start / --print-ms），与 CSS 动画同一时间线。 */
+/** 读 :root 上的毫秒令牌（--print-ms），与 CSS 动画同一时间线。 */
 const cssMs = (name: string) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
 
 export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null, streak = null, certified = false }: ScoreCardProps) {
   const { t, locale } = useI18n();
-  // 声音与轻震跟着打印动画的节拍：纸送到位的瞬间「叮」，印章拍下的瞬间「咚」
+  // 声音与轻震跟着打印动画的节拍：纸送到位的瞬间「叮」，印章拍下的瞬间「咚」。
+  // 从各自动画真正开始（animationstart）起计时，而不是从挂载起：手机首帧慢时 CSS 动画会顺延，挂载计时会抢拍。
   const feedback = useFeedback();
   const feedbackRef = useRef(feedback);
   feedbackRef.current = feedback;
-  useEffect(() => {
-    const start = cssMs('--print-start');
-    const ms = cssMs('--print-ms');
-    const landed = window.setTimeout(() => feedbackRef.current.onPrinted(), start + ms * 0.8);
-    const stamped = window.setTimeout(() => feedbackRef.current.onStamp(), start + ms + 150 + 360);
-    return () => {
-      window.clearTimeout(landed);
-      window.clearTimeout(stamped);
-    };
-  }, []);
+  const timers = useRef<number[]>([]);
+  useEffect(() => () => timers.current.forEach((id) => window.clearTimeout(id)), []);
+  const after = (ms: number, fn: () => void) => timers.current.push(window.setTimeout(fn, ms));
+  // 只认元素自身的动画：子元素的 thud、::before 的冲击环也会冒泡上来
+  const own = (e: AnimationEvent<HTMLElement>) => e.target === e.currentTarget && !e.pseudoElement;
+  const onPrintStart = (e: AnimationEvent<HTMLElement>) => {
+    if (own(e)) after(cssMs('--print-ms') * 0.8, () => feedbackRef.current.onPrinted());
+  };
+  // 盖章动画 600ms，55% 处拍到最小；声音落在拍下后一点、与小票轻震同拍
+  const onStampStart = (e: AnimationEvent<HTMLElement>) => {
+    if (own(e)) after(360, () => feedbackRef.current.onStamp());
+  };
   const fmt = (n: number) => n.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US');
   const mvpLabel = mvp
     ? mode === 'fish'
@@ -68,7 +71,7 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
       : t('report.mvp', { petName: mvp.pet.name })
     : null;
   const stamp = (
-    <span className={styles.stamp} data-testid="title-stamp">
+    <span className={styles.stamp} data-testid="title-stamp" onAnimationStart={onStampStart}>
       <TitleStamp title={title} width={84} />
     </span>
   );
@@ -80,7 +83,7 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
   return (
     <div className={styles.printer} data-print>
       <span className={styles.slot} aria-hidden />
-      <div className={styles.wrap}>
+      <div className={styles.wrap} onAnimationStart={onPrintStart}>
         <section className={styles.card} data-testid="score-card">
           <div className={styles.head}>
             <div className={styles.top}>
