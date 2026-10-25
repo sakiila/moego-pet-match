@@ -48,6 +48,24 @@ const CLOSE_EASE = 'cubic-bezier(0.5, 0, 0.2, 1)';
 
 const reduced = () => typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/** 翻面过渡转到一半（90°）所需的毫秒数：按元素的 transition 时长与 cubic-bezier 缓动求解。 */
+function flipHalfMs(el: HTMLElement) {
+  const style = getComputedStyle(el);
+  const duration = parseFloat(style.transitionDuration) * 1000 || 0;
+  const bezier = /cubic-bezier\(([^)]+)\)/.exec(style.transitionTimingFunction);
+  if (!bezier) return duration / 2;
+  const [x1, y1, x2, y2] = bezier[1].split(',').map(Number);
+  const at = (s: number, p1: number, p2: number) => 3 * (1 - s) ** 2 * s * p1 + 3 * (1 - s) * s ** 2 * p2 + s ** 3;
+  let lo = 0;
+  let hi = 1;
+  for (let i = 0; i < 24; i++) {
+    const mid = (lo + hi) / 2;
+    if (at(mid, y1, y2) < 0.5) lo = mid;
+    else hi = mid;
+  }
+  return at((lo + hi) / 2, x1, x2) * duration;
+}
+
 /** 起点卡片相对终点卡片中心的位移与按宽度的缩放。 */
 function moveTo(from: DOMRect, to: DOMRect) {
   const dx = from.left + from.width / 2 - (to.left + to.width / 2);
@@ -175,6 +193,8 @@ export function PetDetailCard(props: PetDetailCardProps) {
 
   const flip = () => {
     if (!canFlip || closing) return;
+    const flipper = flipperRef.current;
+    if (flipper) flipper.style.setProperty('--flip-half', `${Math.round(flipHalfMs(flipper))}ms`);
     setEverFlipped(true);
     setPhotoReady(true);
     setFlipped((f) => !f);

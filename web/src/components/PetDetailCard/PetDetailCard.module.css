@@ -102,6 +102,18 @@
   transform: rotateY(180deg);
 }
 
+/* iOS Safari：face 里自成合成层的子元素（Tilt 按压时的滤镜、动画层等）不一定遵守 backface-visibility，
+   翻到背面会镜像透出来。落地后翻面时，在转过 90° 的那一刻（--flip-half，由组件按缓动曲线算出）
+   直接隐藏背对的一面。飞入与收回时整圈旋转需要两面都在，不加这条（data-settled 只在其间存在）。 */
+.overlay[data-settled] .face {
+  transition: visibility 0s linear var(--flip-half, 0ms);
+}
+
+.overlay[data-settled] .flipper:not([data-flipped]) .back,
+.overlay[data-settled] .flipper[data-flipped] .front {
+  visibility: hidden;
+}
+
 .face {
   position: absolute;
   inset: 0;
