@@ -1,12 +1,15 @@
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import type { AppDeps } from '../app.ts';
-import { dailyManager, listCollection, petDetail } from '../services/pets.ts';
+import { beijingDate, dailyManager, listCollection, petDetail } from '../services/pets.ts';
 import { findColleague } from '../services/players.ts';
+import { singleFlight } from '../services/singleFlight.ts';
+import type { DailyManager } from '../../../web/src/api/types.ts';
 
 const PlayerQuery = z.object({ playerId: z.string().min(1) });
 
-export const petRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool }) => {
+export const petRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, now = () => new Date() }) => {
+  const loadManager = singleFlight<DailyManager | null>();
   app.get('/api/pets', async (request, reply) => {
     const q = PlayerQuery.safeParse(request.query);
     if (!q.success) return reply.status(400).send({ error: 'invalid_request' });
@@ -23,7 +26,8 @@ export const petRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool }) => {
   });
 
   app.get('/api/manager', async (_request, reply) => {
-    const manager = await dailyManager(pool);
+    const time = now();
+    const manager = await loadManager(beijingDate(time), () => dailyManager(pool, time));
     if (!manager) return reply.status(404).send({ error: 'not_found' });
     return manager;
   });

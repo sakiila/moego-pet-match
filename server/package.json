@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production tsx --env-file-if-exists=../.env src/main.ts",
     "migrate": "tsx --env-file-if-exists=../.env scripts/migrate.ts",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "node --test scripts/load-read.test.mjs && vitest run",
     "test:watch": "vitest",
     "bundle": "node scripts/bundle.mjs"
   },

@@ -86,20 +86,22 @@ export function beijingDate(now = new Date()): string {
   return new Date(now.getTime() + 8 * 3600_000).toISOString().slice(0, 10);
 }
 
+const DAILY_MANAGER_SQL = `
+  SELECT d.pet_id, p.name, p.status FROM pet_match.daily_managers d
+  JOIN pet_match.pets p USING (pet_id) WHERE d.manager_date = $1`;
+
 /**
  * 每日店长：同一北京自然日全员同一只。首次请求当日时选出并记录：优先从未当过店长的上架宠物中随机，
  * 都当过则选最久之前当过的；当日店长若已下架则改选。个人权重与排行不影响。
  */
 export async function dailyManager(pool: Pool, now = new Date(), random = Math.random): Promise<DailyManager | null> {
   const date = beijingDate(now);
+  // 通常当天已经选好，只读一次当前上架状态；只有首次选举或下架改选才需要事务锁。
+  const saved = (await pool.query(DAILY_MANAGER_SQL, [date])).rows[0];
+  if (saved?.status === 'published') return { date, pet: { petId: saved.pet_id, name: saved.name } };
   return inTransaction(pool, async (client) => {
     await client.query('SELECT pg_advisory_xact_lock(hashtext($1))', [`daily_manager:${date}`]);
-    const today = (
-      await client.query(
-        `SELECT d.pet_id, p.name, p.status FROM pet_match.daily_managers d JOIN pet_match.pets p USING (pet_id) WHERE d.manager_date = $1`,
-        [date],
-      )
-    ).rows[0];
+    const today = (await client.query(DAILY_MANAGER_SQL, [date])).rows[0];
     if (today?.status === 'published') return { date, pet: { petId: today.pet_id, name: today.name } };
 
     const candidates = (

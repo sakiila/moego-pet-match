@@ -2,6 +2,8 @@ import type { FastifyPluginAsync, FastifyReply } from 'fastify';
 import type { AppDeps } from '../app.ts';
 import { makeSilhouette } from '../catalog/photo.ts';
 import { findColleague } from '../services/players.ts';
+import { singleFlight } from '../services/singleFlight.ts';
+import type { StoredObject } from '../storage/objectStore.ts';
 
 const PET_SIZES = new Set(['128', '512', '1024']);
 const AVATAR_MAX_AGE_MS = 24 * 60 * 60 * 1000;
@@ -17,16 +19,22 @@ function send(reply: FastifyReply, img: { body: Buffer; contentType: string }, c
 export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, images }) => {
   if (!images) return;
   const { cache, store, fetchAvatar } = images;
+  const pendingImage = singleFlight<StoredObject | null>();
+  const loadImage = (key: string, group: string | undefined, load: () => Promise<StoredObject | null>, maxAgeMs?: number) =>
+    pendingImage(JSON.stringify([group, key]), async () => {
+      const cached = await cache.get(key, maxAgeMs, group);
+      if (cached) return cached;
+      const image = await load();
+      if (image) await cache.put(key, image.body, image.contentType, group);
+      return image;
+    });
 
   app.get<{ Params: { userId: string } }>('/img/avatars/:userId', async (request, reply) => {
     const { userId } = request.params;
     if (!(await findColleague(pool, userId))) return reply.status(404).send();
     const key = `avatar/${userId}`;
-    const cached = await cache.get(key, AVATAR_MAX_AGE_MS);
-    if (cached) return send(reply, cached, 'public, max-age=3600');
-    const fetched = await fetchAvatar(userId).catch(() => null);
+    const fetched = await loadImage(key, undefined, () => fetchAvatar(userId).catch(() => null), AVATAR_MAX_AGE_MS);
     if (!fetched) return reply.status(404).send();
-    await cache.put(key, fetched.body, fetched.contentType);
     return send(reply, fetched, 'public, max-age=3600');
   });
 
@@ -46,12 +54,8 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
       const group = groupOf(prefix, id);
       if (!pet || pet.status !== 'published' || !pet.sticker_key) return gone(reply, group);
       const cacheKey = `${pet.sticker_key}/${size}`;
-      const cached = await cache.get(cacheKey, undefined, group);
-      if (cached) return send(reply, cached, 'public, max-age=31536000, immutable');
-      if (!store) return reply.status(503).send();
-      const obj = await store.get(`${pet.sticker_key}/${size}.png`);
-      if (!obj) return reply.status(404).send();
-      await cache.put(cacheKey, obj.body, obj.contentType, group);
+      const obj = await loadImage(cacheKey, group, () => store ? store.get(`${pet.sticker_key}/${size}.png`) : Promise.resolve(null));
+      if (!obj) return reply.status(store ? 404 : 503).send();
       return send(reply, obj, 'public, max-age=31536000, immutable');
     });
 
@@ -65,14 +69,12 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
     const group = groupOf('pets', id);
     if (!pet || pet.status !== 'published' || !pet.sticker_key) return gone(reply, group);
     const cacheKey = `silhouette/${pet.sticker_key}/${size}`;
-    const cached = await cache.get(cacheKey, undefined, group);
-    if (cached) return send(reply, cached, 'public, max-age=31536000, immutable');
-    if (!store) return reply.status(503).send();
-    const obj = await store.get(`${pet.sticker_key}/${size}.png`);
-    if (!obj) return reply.status(404).send();
-    const body = await makeSilhouette(obj.body);
-    await cache.put(cacheKey, body, 'image/png', group);
-    return send(reply, { body, contentType: 'image/png' }, 'public, max-age=31536000, immutable');
+    const image = await loadImage(cacheKey, group, async () => {
+      const obj = await store?.get(`${pet.sticker_key}/${size}.png`);
+      return obj ? { body: await makeSilhouette(obj.body), contentType: 'image/png' } : null;
+    });
+    if (!image) return reply.status(store ? 404 : 503).send();
+    return send(reply, image, 'public, max-age=31536000, immutable');
   });
 
   // 卡背照片（处理后的版本）：只给已收集该宠物的玩家或主人本人
@@ -89,12 +91,8 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
     if (!pet || pet.status !== 'published') return gone(reply, group);
     if (!pet.photo_key || !(pet.collected || pet.owner_user_id === playerId)) return reply.status(404).send();
     const cacheKey = `photo/${pet.photo_key}`;
-    const cached = await cache.get(cacheKey, undefined, group);
-    if (cached) return send(reply, cached, 'private, max-age=86400');
-    if (!store) return reply.status(503).send();
-    const obj = await store.get(pet.photo_key);
-    if (!obj) return reply.status(404).send();
-    await cache.put(cacheKey, obj.body, obj.contentType, group);
+    const obj = await loadImage(cacheKey, group, () => store ? store.get(pet.photo_key) : Promise.resolve(null));
+    if (!obj) return reply.status(store ? 404 : 503).send();
     return send(reply, obj, 'private, max-age=86400');
   });
 

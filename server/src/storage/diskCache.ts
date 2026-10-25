@@ -8,6 +8,8 @@ import { join } from 'node:path';
  * 可按组存放（如 `pet:<pet_id>`）：宠物下架时一次删掉它的贴纸、剪影与卡背照片缓存。
  */
 export class DiskCache {
+  private eviction = Promise.resolve();
+
   constructor(
     readonly dir: string,
     readonly maxBytes: number,
@@ -29,7 +31,8 @@ export class DiskCache {
   async get(key: string, maxAgeMs?: number, group?: string): Promise<{ body: Buffer; contentType: string } | null> {
     const path = this.file(key, group);
     try {
-      const info = await stat(path);
+      // .type 的时间只在写入时更新；图片文件 mtime 用于 LRU，会随读取刷新。
+      const info = await stat(`${path}.type`);
       if (maxAgeMs !== undefined && Date.now() - info.mtimeMs > maxAgeMs) return null;
       const [body, contentType] = await Promise.all([readFile(path), readFile(`${path}.type`, 'utf8')]);
       const now = new Date();
@@ -71,9 +74,23 @@ export class DiskCache {
     await rm(this.dir, { recursive: true, force: true });
   }
 
-  private async evict() {
+  private evict() {
+    const task = this.eviction.then(() => this.evictFiles());
+    this.eviction = task.catch(() => {});
+    return task;
+  }
+
+  private async evictFiles() {
     const names = (await readdir(this.dir)).filter((n) => !n.endsWith('.type'));
-    const files = await Promise.all(names.map(async (n) => ({ n, s: await stat(join(this.dir, n)) })));
+    const files = (await Promise.all(names.map(async (n) => {
+      try {
+        return { n, s: await stat(join(this.dir, n)) };
+      } catch (error) {
+        // 下架清缓存可与淘汰并发；已消失的文件无需再计入容量。
+        if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null;
+        throw error;
+      }
+    }))).filter(file => file !== null);
     let total = files.reduce((sum, f) => sum + f.s.size, 0);
     for (const f of files.sort((a, b) => a.s.mtimeMs - b.s.mtimeMs)) {
       if (total <= this.maxBytes) break;

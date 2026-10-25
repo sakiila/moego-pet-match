@@ -2,8 +2,10 @@ import type { FastifyPluginAsync, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import type { AppDeps } from '../app.ts';
 import { inTransaction } from '../db/pool.ts';
-import { GameError, registerGame, ResultPayloadSchema, settleGame } from '../services/games.ts';
+import { GameError, payloadHash, registerGame, ResultPayloadSchema, settleGame } from '../services/games.ts';
 import { answerQuiz } from '../services/quiz.ts';
+import { singleFlight } from '../services/singleFlight.ts';
+import type { SettleResponse } from '../../../web/src/api/types.ts';
 
 const RegisterBody = z.object({ playerId: z.string().min(1), mode: z.enum(['normal', 'fish']) });
 const SettleBody = z.object({ playerId: z.string().min(1), result: ResultPayloadSchema });
@@ -16,6 +18,7 @@ function sendGameError(reply: FastifyReply, error: unknown) {
 }
 
 export const gameRoutes: FastifyPluginAsync<AppDeps> = async (app, deps) => {
+  const submitResult = singleFlight<SettleResponse>();
   app.post('/api/games', async (request, reply) => {
     const body = RegisterBody.safeParse(request.body);
     if (!body.success) return reply.status(400).send({ error: 'invalid_request' });
@@ -40,7 +43,11 @@ export const gameRoutes: FastifyPluginAsync<AppDeps> = async (app, deps) => {
     const body = SettleBody.safeParse(request.body);
     if (!body.success) return reply.status(422).send({ error: 'invalid', detail: 'schema' });
     try {
-      return await settleGame(deps.pool, request.params.id, body.data.playerId, body.data.result, deps.settleHooks);
+      const { playerId, result } = body.data;
+      const id = request.params.id;
+      // 包含玩家和结果哈希，冲突内容仍进入数据库原有校验；跨进程的最终幂等仍由事务保证。
+      return await submitResult(JSON.stringify([id, playerId, payloadHash(result)]), () =>
+        settleGame(deps.pool, id, playerId, result, deps.settleHooks));
     } catch (error) {
       return sendGameError(reply, error);
     }

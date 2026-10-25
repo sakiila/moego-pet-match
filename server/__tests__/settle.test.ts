@@ -74,14 +74,14 @@ describe('统一结算', () => {
     expect(body.progress).toEqual({ completedNormalGames: 1, fishUnlocked: false, unlockedNow: false, counted: true });
   });
 
-  it('两个请求同时提交同一局只记一次，返回同一结果', async () => {
+  it('两个应用实例同时提交同一局，数据库仍只记一次并返回同一结果', async () => {
     // 让第一个事务提交前停 300 ms，确保第二个请求在它未提交时到达
     const slow = buildApp({ pool: ctx.pool, settleHooks: { beforeCommit: () => new Promise((r) => setTimeout(r, 300)) } });
     const game = await register('U_TEST_ZHANG');
     const payload = result(game);
     const first = submit(slow, game, 'U_TEST_ZHANG', payload);
     await new Promise((r) => setTimeout(r, 50));
-    const [a, b] = await Promise.all([first, submit(slow, game, 'U_TEST_ZHANG', payload)]);
+    const [a, b] = await Promise.all([first, submit(ctx.app, game, 'U_TEST_ZHANG', payload)]);
     await slow.close();
     expect(a.statusCode).toBe(200);
     expect(b.statusCode).toBe(200);
