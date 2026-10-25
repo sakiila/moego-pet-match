@@ -307,6 +307,7 @@ export const en: Record<MessageKey, string> = {
   'share.send': 'Share Image',
   'share.player': 'Played by: {playerName}',
   'share.failed': "We couldn't create the image. Please try again.",
+  'share.generating': 'Creating image…',
   'title.cleanup_chief': 'Poof. All gone.',
   'title.chain_lead': 'I let go. It kept going.',
   'title.scheduling_pro': 'Relax. I got this.',

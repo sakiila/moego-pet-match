@@ -31,7 +31,7 @@ function loadImage(src: string): Promise<HTMLImageElement> {
  * 读取整张册页的布局，而非截取视口；只画册页内的内容。高分辨率贴纸全部就绪后才生成 PNG，
  * 任一素材失败都交给预览重试，避免把缺图保存为成功。DOM 位置在等待图片前冻结。
  */
-export async function drawStickerSheet(sheet: HTMLElement): Promise<Blob> {
+export async function drawStickerSheet(sheet: HTMLElement, onProgress?: (loaded: number, total: number) => void): Promise<Blob> {
   await document.fonts.ready;
   const bounds = sheet.getBoundingClientRect();
   if (!bounds.width || !bounds.height) throw new Error('Sticker sheet is not visible');
@@ -72,10 +72,13 @@ export async function drawStickerSheet(sheet: HTMLElement): Promise<Blob> {
   // 限制并发；即使格子在屏幕外、尚未触发懒加载，也独立加载完整册页的高清素材。
   const images: HTMLImageElement[] = new Array(slots.length);
   let next = 0;
+  let loaded = 0;
+  onProgress?.(0, slots.length);
   await Promise.all(Array.from({ length: Math.min(8, slots.length) }, async () => {
     while (next < slots.length) {
       const i = next++;
       images[i] = await loadImage(slots[i].src);
+      onProgress?.(++loaded, slots.length);
     }
   }));
 

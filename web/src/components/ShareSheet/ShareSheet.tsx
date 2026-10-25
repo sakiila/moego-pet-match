@@ -16,12 +16,14 @@ export interface ShareSheetProps {
   onRetry: () => void;
   onClose: () => void;
   inline?: boolean;
+  /** 生成中的进度 0–1（贴纸册逐张加载贴纸）；不传只显示转圈。 */
+  progress?: number;
   /** 长册页按完整图片比例预览，不压成成绩卡的 4:5。 */
   imageLayout?: 'card' | 'natural';
 }
 
 /** 分享图片预览（成绩卡、店长海报）：先生成预览，玩家主动保存或调用系统分享；不自动发送。 */
-export function ShareSheet({ open, title, state, canShare, onSave, onShare, onRetry, onClose, inline, imageLayout = 'card' }: ShareSheetProps) {
+export function ShareSheet({ open, title, state, canShare, onSave, onShare, onRetry, onClose, inline, progress, imageLayout = 'card' }: ShareSheetProps) {
   const { t } = useI18n();
   const heading = title ?? t('share.preview');
   return (
@@ -29,7 +31,17 @@ export function ShareSheet({ open, title, state, canShare, onSave, onShare, onRe
       <div className={styles.body} data-testid="share-sheet" data-state={state.kind}>
         <div className={`${styles.preview} ${imageLayout === 'natural' ? styles.natural : ''}`}>
           {state.kind === 'ready' && <img src={state.url} alt={heading} data-testid="share-image" />}
-          {state.kind === 'generating' && <span className={styles.loading} aria-busy="true" />}
+          {state.kind === 'generating' && (
+            <div className={styles.loading} role="status" aria-busy="true" data-testid="share-loading">
+              <span className={styles.spinner} aria-hidden="true" />
+              <span className={styles.loadingText}>{t('share.generating')}</span>
+              {progress !== undefined && (
+                <span className={styles.progress} aria-hidden="true">
+                  <span className={styles.progressFill} style={{ transform: `scaleX(${Math.min(1, Math.max(0, progress))})` }} />
+                </span>
+              )}
+            </div>
+          )}
           {state.kind === 'failed' && <p className={styles.failed}>{t('share.failed')}</p>}
         </div>
         {state.kind === 'failed' ? (

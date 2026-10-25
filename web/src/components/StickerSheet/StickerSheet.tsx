@@ -15,7 +15,10 @@ export interface StickerSheetPet {
   collected: boolean;
   /** 已收集为贴纸，未收集为剪影；格子约 40px，传 128 尺寸即可。 */
   imageSrc: string;
-  /** 导出用高清素材；仍须按收集状态传入贴纸或剪影。 */
+  /**
+   * 导出用素材，默认同 imageSrc；仍须按收集状态传入贴纸或剪影。
+   * 导出图宽 1200px，每张贴纸约占 130px，128 尺寸已够用，且多半已在浏览器缓存里。
+   */
   exportSrc?: string;
 }
 
@@ -37,9 +40,9 @@ export function StickerSheet({ playerName, pets, onOpen, caption, onPreload }: S
   const sheetRef = useRef<HTMLDivElement>(null);
   const [preview, setPreview] = useState(false);
   const closePreview = useCallback(() => setPreview(false), []);
-  const draw = useCallback(() => {
+  const draw = useCallback((onProgress?: (loaded: number, total: number) => void) => {
     if (!sheetRef.current) return Promise.reject(new Error('Sticker sheet unavailable'));
-    return drawStickerSheet(sheetRef.current);
+    return drawStickerSheet(sheetRef.current, onProgress);
   }, []);
   const title = t('collection.sheet_title', { playerName });
   const collected = pets.filter((p) => p.collected).length;
@@ -88,10 +91,18 @@ export function StickerSheet({ playerName, pets, onOpen, caption, onPreload }: S
   );
 }
 
-function StickerSheetPreview({ draw, onClose }: { draw: () => Promise<Blob>; onClose: () => void }) {
+type DrawSheet = (onProgress?: (loaded: number, total: number) => void) => Promise<Blob>;
+
+function StickerSheetPreview({ draw, onClose }: { draw: DrawSheet; onClose: () => void }) {
   const { t } = useI18n();
-  const card = useShareCard(draw, 'moego-sticker-album.png');
-  return <ShareSheet open title={t('collection.sheet_preview')} state={card.state} canShare={card.canShare} onSave={card.save} onShare={card.share} onRetry={card.retry} onClose={onClose} imageLayout="natural" />;
+  // 贴纸逐张加载，预览里显示已就绪的比例
+  const [progress, setProgress] = useState(0);
+  const drawWithProgress = useCallback(() => {
+    setProgress(0);
+    return draw((loaded, total) => setProgress(total ? loaded / total : 1));
+  }, [draw]);
+  const card = useShareCard(drawWithProgress, 'moego-sticker-album.png');
+  return <ShareSheet open title={t('collection.sheet_preview')} state={card.state} progress={progress} canShare={card.canShare} onSave={card.save} onShare={card.share} onRetry={card.retry} onClose={onClose} imageLayout="natural" />;
 }
 
 /** 加载失败只留空的待贴位，不显示破图。 */

@@ -306,6 +306,7 @@ export const zh = {
   'share.send': '分享图片',
   'share.player': '本局玩家：{playerName}',
   'share.failed': '图片还没生成好，请重试。',
+  'share.generating': '正在生成图片…',
   'title.cleanup_chief': '这下真没了',
   'title.chain_lead': '我手都松开了',
   'title.scheduling_pro': '急什么我会消',

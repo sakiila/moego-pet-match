@@ -236,6 +236,7 @@
 | share.send | 分享图片 | Share Image |
 | share.player | 本局玩家：{playerName} | Played by: {playerName} |
 | share.failed | 图片还没生成好，请重试。 | We couldn't create the image. Please try again. |
+| share.generating | 正在生成图片… | Creating image… |
 
 `report.subtitle` 只用于有真实服务的普通宠物局；零服务使用下方店长鼓励，省略 MVP，不编造宠物满意或洗护成果。保存失败、校验失败不伪装已上榜；服务端确认严格超过该模式已有个人最好后才显示新纪录，首个成绩不算突破。原 MVP 下架时用通用 MoeGo 图案和中性标题承接，保留真实统计，不改选 MVP。分享按钮不等待揭晓动画，不放二维码。
 

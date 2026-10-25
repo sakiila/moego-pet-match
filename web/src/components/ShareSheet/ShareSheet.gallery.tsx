@@ -69,6 +69,7 @@ const entry: GalleryEntry = {
     'manager poster · long name': () => <Poster name="Sir Fluffington the Third" petId="pet_644053d683e0" />,
     'manager poster · image failed': () => <Poster petId="missing" />,
     generating: () => <ShareSheet open inline state={{ kind: 'generating' }} canShare={false} onSave={noop} onShare={noop} onRetry={noop} onClose={noop} />,
+    'generating · sticker album progress': () => <ShareSheet open inline state={{ kind: 'generating' }} progress={0.45} canShare={false} onSave={noop} onShare={noop} onRetry={noop} onClose={noop} imageLayout="natural" />,
     'ready with share button': () => <ShareSheet open inline state={{ kind: 'generating' }} canShare onSave={noop} onShare={noop} onRetry={noop} onClose={noop} />,
   },
 };
