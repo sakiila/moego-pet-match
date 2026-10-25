@@ -175,6 +175,8 @@
   /* 字体 */
   /* 圆润字体（fonts.css）；未收录的字回退系统圆体与苹方 */
   --font-sans: 'MoeGo Rounded', ui-rounded, 'SF Pro Rounded', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+  --collection-wordmark-min-width: 144px;
+  --collection-wordmark-max-width: 360px;
   --text-xs: 12px;
   --text-sm: 14px;
   --text-md: 16px;
@@ -192,8 +194,6 @@
   --board-play-padding: 4px;
   --board-play-max: 640px;
   --board-page-block: 12px;
-  --collection-wordmark-min-width: 144px;
-  --collection-wordmark-max-width: 360px;
   --board-page-gap: 12px;
   --board-page-min-height: 560px;
   --board-brand-height: 24px;
