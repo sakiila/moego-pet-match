@@ -41,7 +41,7 @@ export function InfoScreen({ player, onBack, openRemoval = false, loadRequests =
   return (
     <main className={styles.screen}>
       <BrandHeader heading={t('info.full.title')} onBack={onBack} />
-      <InfoSections playerName={player?.name ?? null} />
+      <InfoSections />
       {requests.length > 0 && (
         <div className={styles.list} data-testid="my-requests">
           {requests.map((r) => (

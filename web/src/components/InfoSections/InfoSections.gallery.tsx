@@ -4,6 +4,6 @@ import { InfoSections } from './InfoSections';
 const entry: GalleryEntry = {
   name: 'InfoSections',
   group: 'components',
-  states: { 'with player': () => <InfoSections playerName="Bob 包博" />, 'no player selected (no consent line)': () => <InfoSections playerName={null} /> },
+  states: { 'all six sections (before and after profile selection)': () => <InfoSections /> },
 };
 export default entry;
