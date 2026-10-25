@@ -433,6 +433,7 @@ export const en: Record<MessageKey, string> = {
   "achievement.rarity_epic": "Extraordinary",
   "achievement.rarity_legendary": "Legendary",
   "achievement.rarity_mythic": "House Special",
+  "achievement.rarity_guide": "Rarity: low to high",
   "achievement.wearing_named": "Wearing {title}",
   "achievement.pick_hint": "Unlock a title, then pick your favorite to wear.",
   "achievement.unlocked_count": "Unlocked {count} / {total}",

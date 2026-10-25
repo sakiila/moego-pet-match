@@ -432,6 +432,7 @@ export const zh = {
   "achievement.rarity_epic": "非凡",
   "achievement.rarity_legendary": "传奇",
   "achievement.rarity_mythic": "镇店之宝",
+  "achievement.rarity_guide": "稀有度由低到高",
   "achievement.wearing_named": "正在佩戴「{title}」",
   "achievement.pick_hint": "解锁后，挑一个喜欢的挂上。",
   "achievement.unlocked_count": "已解锁 {count} / {total}",

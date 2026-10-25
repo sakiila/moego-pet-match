@@ -6,6 +6,9 @@ export const ACHIEVEMENT_RARITY = {
   neighbors: 'rare', family: 'rare', species: 'epic', album: 'legendary', hotpot: 'mythic',
 } as const satisfies Record<AchievementId, string>;
 
+export type AchievementRarity = (typeof ACHIEVEMENT_RARITY)[AchievementId];
+export const ACHIEVEMENT_RARITY_ORDER = ['common', 'rare', 'epic', 'legendary', 'mythic'] as const satisfies readonly AchievementRarity[];
+
 /** 仅用于界面展示；已解锁优先时也在各组内保持此顺序。 */
 export const ACHIEVEMENT_DISPLAY_ORDER: readonly AchievementId[] = [
   'cats', 'dogs', 'friends', 'neighbors', 'family', 'species', 'album', 'hotpot',

@@ -4,8 +4,10 @@ import { Sheet } from '../../ui/primitives/Sheet';
 import { Icon } from '../../ui/primitives/Icon';
 import { StatusMessage } from '../StatusMessage/StatusMessage';
 import { AchievementBadge, achievementName, achievementCondition } from '../AchievementBadge/AchievementBadge';
-import { ACHIEVEMENT_DISPLAY_ORDER, ACHIEVEMENT_RARITY } from '../../game/achievementRarity';
+import { ACHIEVEMENT_DISPLAY_ORDER, ACHIEVEMENT_RARITY, ACHIEVEMENT_RARITY_ORDER } from '../../game/achievementRarity';
 import { HIDDEN_ACHIEVEMENT_IDS } from '../../game/achievementRules';
+import { RarityGuide } from '../RarityGuide/RarityGuide';
+import { RarityTag } from '../RarityTag/RarityTag';
 import styles from './AchievementShelf.module.css';
 
 export interface AchievementShelfProps {
@@ -27,6 +29,7 @@ export function AchievementShelf({ view, failed, saving, saveFailed, onRetry, on
     <Sheet open inline={inline} label={t('achievement.my_titles')} closeLabel={t('action.close')} onClose={onClose} badge={<h2 className={styles.title}><Icon name="my-titles" size={24} />{t('achievement.my_titles')}</h2>}>
       <div className={styles.root} data-testid="achievement-shelf" data-locale={locale} aria-busy={saving}>
         <p className={styles.hint}>{t('achievement.pick_hint')}</p>
+        <RarityGuide rarities={ACHIEVEMENT_RARITY_ORDER} />
         {failed ? <StatusMessage tone="error" text={t('achievement.load_failed')} actionLabel={t('action.retry')} onAction={onRetry} /> : !view ? <p role="status">{t('achievement.loading')}</p> : <>
           <div className={styles.summary}>
             <strong>{t('achievement.unlocked_count', { count: view.achievements.filter(a => a.unlockedAt).length, total: view.achievements.length })}</strong>
@@ -47,7 +50,7 @@ export function AchievementShelf({ view, failed, saving, saveFailed, onRetry, on
                   <span className={styles.condition}>{hidden ? t('achievement.hidden_condition') : t(achievementCondition(a.id), { current: a.current, target: a.target })}</span>
                   {!unlocked && !hidden && <progress className={styles.progress} value={a.current} max={Math.max(1, a.target)} aria-label={t(achievementName(a.id))} />}
                 </div>
-                <span className={styles.rarity}>{t(`achievement.rarity_${rarity}`)}</span>
+                <RarityTag rarity={rarity} className={styles.rarity} />
                 {unlocked ? <button className={styles.equip} type="button" disabled={saving || wearing} aria-pressed={wearing} onClick={() => onSelect(a.id)} aria-label={t(wearing ? 'achievement.wearing_named' : 'achievement.equip_named', { title: t(achievementName(a.id)) })}>{wearing ? t('achievement.wearing') : t('achievement.equip')}</button> : <span className={styles.locked}>{t('achievement.locked')}</span>}
               </li>;
             })}

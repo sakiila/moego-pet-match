@@ -1,0 +1,36 @@
+Use case: product-mockup / precise UI edit.
+Create ONE design mockup of the selected permanent rarity-order guide for the existing MoeGo pet game's "我的称号" sheet. The user selected a specific solution and requested one draft. This is a small additive UI change, not a redesign and not multiple options.
+
+Target: a single mobile UI frame, 390 x 844 logical pixels (780 x 1688 at 2x is ideal). Preserve the portrait aspect ratio of the attached 390 x 844 screenshot. Show app content only: no phone bezel, no device chrome, no browser frame, no added outer design-board labels or explanatory callouts.
+
+IMAGE 1 is the CURRENT REAL APP SCREENSHOT and the edit target. Continue its exact rounded Chinese font, header with medal icon and X close button, white sheet, left and right 16px gutters, existing hint, gray unlocked-count bar, colorful outline achievement rows, badge artwork, typography, pill buttons and vertical rhythm. Preserve all existing artwork rather than redraw or restyle it. The lower achievement rows may extend naturally below the scroll fold. Do not shrink row fonts or cards to force all rows onto one screen.
+
+ONLY ADD the following compact, permanent rarity guide BETWEEN the existing hint "解锁后，挑一个喜欢的挂上。" and the existing gray "已解锁 8 / 8" / "不佩戴" summary bar:
+- A restrained secondary gray caption, left aligned, verbatim: "稀有度由低到高".
+- Directly below, ONE horizontal row of five small rounded rarity labels connected by delicate gray right-pointing arrows.
+- EXACT LEFT-TO-RIGHT ORDER AND EXACT TEXT:
+"闪耀" → "卓越" → "非凡" → "传奇" → "镇店之宝"
+- All five tiers must be present exactly once in this guide, evenly spaced, all readable on a 390px screen. Guide labels around 11-12px logical font size and 22-24px tall; preserve comfortable horizontal padding and keep the row inside the existing 358px content width.
+- Match their EXISTING product colors: 闪耀 coral-pink with dark coral text, 卓越 pale electric violet with deep purple text, 非凡 champagne-peach/rose gold with warm brown text, 传奇 soft horizontal rainbow with dark plum text, 镇店之宝 saturated blue-violet-cyan aurora with white text and a delicate luminous edge.
+- Match the existing rarity pills' style but make this guide calm and secondary. No star ratings, numbers, Roman numerals, extra icons, new buttons, extra panels, thick borders or a card around the guide. Let white space separate this guide from the summary bar and hint.
+- Keep the guide caption and row together within roughly 48-56px of additional content height. Move the original summary and list down to accommodate the guide; do not cover them.
+
+Keep these existing source strings and rows unchanged where visible:
+"我的称号"
+"解锁后，挑一个喜欢的挂上。"
+"已解锁 8 / 8"
+"不佩戴"
+"猫猫亲友团" / "猫猫 · 5 / 5 只"
+"汪汪好朋友" / "狗狗 · 5 / 5 只"
+"毛孩子熟人" / "毛孩子 · 10 / 10 只"
+"串门小能手" / "主人 · 10 / 10 位"
+"一家都熟" / "多宠家庭 · 1 / 1 个"
+"跨物种交友家" / "动物 · 3 / 3 种"
+The existing right-hand rarity pills and wear buttons continue unchanged; the top guide is explanatory and not a filter or selected state.
+Current date is 2026-10-26; no date needs to appear in the design.
+
+Create realistic, production-quality UI design with clear hierarchy, crisp readable Chinese, faithful original badge imagery and purposeful spacing. The result should look like a screenshot of this exact app with just the requested compact guide added.
+
+Generation record: Built-in image_gen, 2026-10-26. Reference: /tmp/moego-rarity-guide-source.png, a fresh 390 x 844 screenshot of the current AchievementShelf gallery. Output saved as achievement-rarity-guide-v1.png. Added only the permanent five-tier rarity-order guide to the mockup. The generated mockup is a visual reference, not a slicing source. No app code or selected-design records were changed; awaiting user review before implementation.
+
+Acceptance record: User approved this mockup on 2026-10-26 and requested implementation, a 3-second light cycle and animated House Special rarity labels even before unlocking. The interface is implemented with components and tokens, not slices of this image.

@@ -1,3 +1,36 @@
+# 稀有度常驻图例与 3 秒流光验收 · 2026-10-26
+
+final result: passed
+
+## 基准、状态与对照
+
+- 选定稿：`design/concepts/achievement-rarity-guide-v1.png`，853 × 1844；等比归一化到 390px 逻辑宽度（约 390 × 843），底部补白到 844，仅用于对照。
+- 实际截图：`/tmp/moego-rarity-guide-zh-final.png`，390 × 844，DPR 1；320px 英文截图 `/tmp/moego-rarity-guide-locked-en-final.png`。bsk Agent Window，localhost:5180 组件陈列页，复用现有运行环境。
+- 同框完整对照：`/tmp/moego-rarity-guide-comparison-final.png`；重要图例区域的同框对照：`/tmp/moego-rarity-guide-focus-final.png`。未将设计图或对照图用作产品素材。
+
+## 对比与修正
+
+首轮标签留白较选定稿紧凑（`/tmp/moego-rarity-guide-zh-first.png`）。390px 下图例标签的水平留白调整为现有 space-3，360px 以下保留紧凑留白。重新截图后，中文单行、图例高 48px；前四档宽 48px，镇店之宝 72px。320px 英文仍完整分两行、高 76.5px，均无横向溢出。图例位置、顺序、圆角、层级与选定稿一致。原 Sheet 高度与滚动区域保留，因此可见条目数与生成稿示意略有不同；未缩小或重画徽章。
+
+## 五项核验
+
+- 字体：沿用现有中英文字体与 tokens，图例为次要字号，列表字号和按钮不变。
+- 间距：图例置于说明与解锁统计之间，48px 高；手机中文一行，窄屏英文自然换行，原卡片布局保留。
+- 颜色：五档沿用原有标签令牌；RarityTag 供图例与列表复用，镇店之宝保持蓝紫青、白字和亮边。
+- 素材：徽章继续经 Icon 使用既有 PNG，图例由组件、文本箭头与 CSS 构成，无截图切片或新徽章。
+- 文案：顺序为闪耀 → 卓越 → 非凡 → 传奇 → 镇店之宝；英文提示 Rarity: low to high。隐藏名称与条件均未泄露，未解锁时不提供佩戴按钮。
+
+## 行为与证据
+
+- 未解锁标签运行游彩、掠光两条 3000ms 动画；图例与已解锁徽章均为 3000ms。中文未解锁证据 `/tmp/moego-rarity-guide-locked-zh.png`，英文同样核对。
+- 传奇 → 镇店之宝佩戴切换正确；临时激活浏览器 reduced-motion CSS 分支后整表动画数为 0，系统设置未变。
+- 327 项前端测试、8 项版本测试、类型检查、构建与 diff 检查通过；独立代码审查无阻断项。控制台抽查未发现与本次修改相关的异常。
+- 未做真机及跨浏览器验证；未修改服务端或单独运行本地服务端测试。原有大 chunk 提示保留。
+
+未发现尚需修复的 P0/P1/P2 问题。
+
+---
+
 # 火锅搭子全尺寸动效补充验收 · 2026-10-26
 
 final result: passed

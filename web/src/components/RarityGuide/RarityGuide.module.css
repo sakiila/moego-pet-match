@@ -1,0 +1,8 @@
+.guide { display: grid; gap: var(--space-1); min-width: 0; }
+.caption { margin: 0; color: var(--color-ink-muted); font-size: var(--text-xs); }
+.scale { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+.item { display: inline-flex; align-items: center; gap: var(--space-1); flex: none; }
+.arrow { flex: none; width: var(--rarity-guide-arrow-size); color: var(--color-ink-muted); font-size: var(--text-xs); line-height: 1; text-align: center; }
+@media (max-width: 360px) {
+  .guide { --rarity-guide-chip-inset: var(--rarity-guide-chip-inset-narrow); }
+}

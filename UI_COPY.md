@@ -611,6 +611,8 @@
 
 ### 永久收集成就与称号（2026-10-24）
 
+2026-10-26 稀有度图例：在「我的称号」顶部说明与解锁统计之间常驻「稀有度由低到高」，按闪耀 → 卓越 → 非凡 → 传奇 → 镇店之宝展示。图例与称号行复用同一套颜色和标签样式；英文窄屏换行。镇店之宝标签不分是否解锁均使用 3 秒流光，未解锁时名称、条件和问号遮罩仍按隐藏称号规则展示；减少动态效果时静止。
+
 2026-10-25 开发者彩蛋：`achievement.hotpot*` 为隐藏称号「火锅搭子」，解锁前在我的称号里用 `achievement.hidden_name` / `hidden_condition` 占位（灰蒙层 + 问号，只露稀有度）；`hidden_condition` 是喵喵喵加颜文字（2026-10-25 用户确认），玩家名片里看的人自己没解锁该隐藏称号时，名称使用 `hidden_name`、解锁条件使用 `hidden_condition`；佩戴称号签、徽章名称、悬浮提示与读屏文字均遵循同一口径，只有自己已解锁才显示真实名称和条件；`rarity_mythic`「镇店之宝」是新增的最高一档。`home.manager_line_maodu` / `_boluo`、`board.reunion_hotpot` 与 `report.developer_certified`（认证章的读屏文字）只在 Maodu 毛肚、Boluo 菠萝出现时使用，宠物名保留中英混写原文。
 
 | Key | 中文 | English |
@@ -647,6 +649,7 @@
 | achievement.rarity_epic | 非凡 | Extraordinary |
 | achievement.rarity_legendary | 传奇 | Legendary |
 | achievement.rarity_mythic | 镇店之宝 | House Special |
+| achievement.rarity_guide | 稀有度由低到高 | Rarity: low to high |
 | achievement.wearing_named | 正在佩戴「{title}」 | Wearing {title} |
 | achievement.pick_hint | 解锁后，挑一个喜欢的挂上。 | Unlock a title, then pick your favorite to wear. |
 | achievement.unlocked_count | 已解锁 {count} / {total} | Unlocked {count} / {total} |
