@@ -64,8 +64,11 @@ describe('宠物详情', () => {
 });
 
 describe('认识人数', () => {
-  it('仅本人收集时认识人数为 0，头像为空', async () => {
-    expect((await get('/api/pets/mochi?playerId=U_TEST_BOB')).json().knownBy).toEqual({ count: 0, recent: [] });
+  it('仅本人收集时认识人数为 1，并显示本人头像', async () => {
+    expect((await get('/api/pets/mochi?playerId=U_TEST_BOB')).json().knownBy).toEqual({
+      count: 1,
+      recent: [{ userId: 'U_TEST_BOB', name: 'Bob' }],
+    });
   });
 
   it('自家宠物未收集时保留其他同事的人数和头像', async () => {
@@ -75,7 +78,7 @@ describe('认识人数', () => {
     });
   });
 
-  it('人数与最近 5 位头像均排除当前用户，且仅计仍在名单内的同事', async () => {
+  it('人数包含当前用户，最近 5 位头像按收集时间排列，且仅计仍在名单内的同事', async () => {
     await ctx.pool.query(`INSERT INTO pet_match.slack_members (user_id, email, name) VALUES ('U_TEST_NEW', 'new@moego.pet', 'New Hire')`);
     const g = await ctx.pool.query(`SELECT game_id FROM pet_match.games LIMIT 1`);
     const order = ['U_TEST_BOB', 'U_TEST_ALICE', 'U_TEST_ZHANG', 'U_TEST_SAM', 'U_TEST_LONG', 'U_TEST_NEW', 'U_TEST_GONE'];
@@ -86,13 +89,12 @@ describe('认识人数', () => {
       );
     }
     const { knownBy } = (await get('/api/pets/kiwi?playerId=U_TEST_BOB')).json();
-    expect(knownBy.count).toBe(5);
+    expect(knownBy.count).toBe(6);
     expect(knownBy.recent.map((x: { userId: string }) => x.userId)).toEqual(['U_TEST_NEW', 'U_TEST_LONG', 'U_TEST_SAM', 'U_TEST_ZHANG', 'U_TEST_ALICE']);
     expect(knownBy.recent[0]).toEqual({ userId: 'U_TEST_NEW', name: 'New Hire' });
 
     const asNewestCollector = (await get('/api/pets/kiwi?playerId=U_TEST_NEW')).json().knownBy;
-    expect(asNewestCollector.count).toBe(5);
-    expect(asNewestCollector.recent.map((x: { userId: string }) => x.userId)).toEqual(['U_TEST_LONG', 'U_TEST_SAM', 'U_TEST_ZHANG', 'U_TEST_ALICE', 'U_TEST_BOB']);
+    expect(asNewestCollector).toEqual(knownBy);
   });
 
   it('他人未收集的宠物不返回', async () => {
