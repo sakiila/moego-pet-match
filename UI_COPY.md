@@ -85,27 +85,27 @@
 | identity.not_found | 没找到你的同事身份。换个名字试试，或联系 Bob 更新资料。 | We couldn't find your coworker profile. Try another name or contact Bob. |
 | identity.load_failed | 暂时没能读取同事名单，请重试。 | We couldn't load the team directory. Please try again. |
 | info.use_link | 信息使用说明 | How Your Information Is Used |
-| info.entry_summary | 游戏会记录所选身份、成绩和图鉴进度，并在排行榜展示名字、头像与最好成绩，在你收集过的宠物卡上展示头像。 | The game records your selected profile, scores, and collection progress, shows your name, avatar, and best score on the leaderboard, and shows your avatar on cards for pets you've collected. |
+| info.entry_summary | 游戏会保存所选身份、成绩和图鉴进度，并展示名字、头像、最好成绩及收集记录。点击 Clock In 即表示同意信息使用说明；上传宠物为可选。 | The game saves your selected profile, scores, and collection progress, and displays your name, avatar, best score, and collection activity. By tapping Clock In, you agree to the information use described in the notice below. Uploading a pet is optional. |
 | info.removal_link | 资料删除申请 | Request Data Removal |
 
-身份来自现有 Supabase 可参与名单；选择名字不写成「已验证 Slack 本人」。查询失败与未找到身份使用不同提示，头像缺失使用默认头像，不阻止有效同事游戏。完整说明见下方 2.3。
+身份来自 Slack 同步维护的有效同事名册；选择名字不写成「已验证 Slack 本人」。查询失败与未找到身份使用不同提示，头像缺失使用默认头像，不阻止有效同事游戏。完整说明见下方 2.3。
 
 `info.entry_summary` 放在身份确认按钮附近，并保留完整说明入口；点击「以 {playerName} 身份 Clock In」即表示同意，不增加勾选框或第二次确认弹窗。
 
 ### 2.3 完整信息使用说明 · 要点已确认，正文为草稿
 
-六项要点已确认：收集内容、展示范围、AI 处理、存储位置、删除方式、同意方式；须如实写出 AI 处理和实际存储位置。2026-10-23 确认保留现有 R2 桶（亚太区域），存储句改为「数据库和游戏服务器在美国，图片在 Cloudflare R2 亚太区域」，上传说明同步。正文为友好、直接口吻的草稿，接入前按实际字段再核对一次。
+六项要点已确认：收集内容、展示范围、AI 处理、存储位置、删除方式、同意方式；选择身份前后完整展示同一份正文，不按是否已选身份省略同意方式。须如实写出 AI 处理和实际存储方式。2026-10-25 数据库已迁至 RackNerd，图片继续保留在 R2 亚太区域；中英文存储说明与运行文案保持一致。
 
 | 键 | 中文 | English |
 | --- | --- | --- |
 | info.full.title | 这个游戏会用到哪些信息 | What This Game Uses |
-| info.full.intro | 毛孩子全明星是 MoeGo 同事之间的内部小游戏。下面把会用到的信息讲清楚。 | MoeGo Pet All-Stars is an internal game just for MoeGo coworkers. Here's exactly what it uses. |
-| info.full.collect | **会记录什么**：你选择的同事身份（Slack ID、名字、头像，来自公司现有人员名单）；对局成绩、图鉴收集、游玩进度与隐藏关状态；你主动上传的宠物照片、名字及与你的主人关联；你提交的删除申请。上传的照片通常会先在你的设备上缩小，并去除拍摄位置等信息；设备上处理不了的照片按原文件保存，可能带有这类信息。上传文件只私有存储，位置等信息不会在游戏中展示。语言与声音偏好只存在你的浏览器里。服务器会保留常规访问日志。 | **What we record**: the coworker profile you pick (Slack ID, name, and avatar from the company's existing people list); your scores, collection, play progress, and hidden-level status; pet photos, names, and owner links you choose to upload; and any removal requests you send. Uploaded photos are usually resized on your device first, which also removes details like where they were taken; photos your device can't process are stored as original files and may include those details. Uploaded files stay private, and those details are never shown in the game. Language and sound settings stay in your browser. The server keeps standard access logs. |
-| info.full.display | **会在哪里展示**：同事排行榜显示你的名字、头像和最好成绩。宠物会出现在棋盘、图鉴、每日店长和主人竞猜中；主人名字在图鉴里收集后才显示。你收集过的宠物，其图鉴卡会显示一共有多少同事收集了 TA，并可能展示你的头像。成绩卡只在你主动保存或分享时离开游戏。 | **Where it shows up**: the coworker leaderboard shows your name, avatar, and best score. Pets appear on the board, in the Pet Collection, as Manager of the Day, and in the owner quiz; owner names in the Pet Collection appear only after that pet is collected. Cards for pets you've collected show how many coworkers have collected them and may show your avatar. Score cards leave the game only when you save or share them. |
-| info.full.ai | **AI 处理**：宠物照片会提交给 AI 图像服务，生成统一画风的头像贴纸，再由 Bob 人工核对后上架；交给 AI 前会先去掉拍摄位置等信息。已收集的同事可以在图鉴卡背面看到 Bob 处理过的照片版本，不会看到原文件。 | **AI processing**: pet photos are sent to an AI image service to create matching-style head stickers, which Bob reviews by hand before they go live. Location details are removed before anything is sent to AI. Coworkers who have collected a pet can see a processed version of the photo on the back of its card, never the original file. |
-| info.full.storage | **存在哪里**：数据库在美国（Supabase），图片存储在亚太区域（Cloudflare R2），只用于这个内部游戏活动。 | **Where it's stored**: the database is in the United States (Supabase); images are stored in the Asia-Pacific region (Cloudflare R2). Used only for this internal game. |
-| info.full.removal | **想删除怎么办**：在「我的宠物」或本页提交删除申请，Bob 人工核实后会下架并清理游戏里的资料。已有成绩会保留，但不再显示该宠物的资料。飞书原文档、AI 服务和托管备份中的副本不在游戏控制范围内，处理结果里会如实说明。 | **Want something removed?** Send a request from My Pets or this page. Bob will verify it, take the pet down, and clean up the game's copies. Existing scores stay, but the pet's details are no longer shown. Copies in the original Feishu doc, the AI service, or hosted backups are outside the game's control; the result will say so honestly. |
-| info.full.consent | **同意方式**：点击「以 {playerName} 身份 Clock In」即表示你同意以上使用方式。 | **Consent**: tapping "Clock In as {playerName}" means you agree to the above. |
+| info.full.intro | 毛孩子全明星是为 MoeGo 同事制作的小游戏，由 Bob 维护。参与和上传宠物均为自愿；不上传也能玩。 | MoeGo Pet All-Stars is a game made for MoeGo coworkers and maintained by Bob. Playing and uploading a pet are optional; you can play without uploading. |
+| info.full.collect | **会记录什么**：Slack 同事名册中的 ID、名字、头像和工作邮箱（邮箱用于身份搜索，不在游戏中展示）；所选身份的对局成绩、游玩与收集进度、称号及隐藏关状态；你主动提交的宠物照片、名字、主人关联、选填的「主人说」及删除申请。初始宠物名录也会使用同事此前在飞书文档中分享的宠物资料。<br>浏览器会记住所选身份、语言、声音及已读提示。Clock Out 只清除本机记住的身份，不会删除已保存的游戏资料。服务器会保留常规访问日志。 上传和删除申请的文字资料会通过 Slack 私信通知 Bob，不附照片。 | **What we record**: Slack directory IDs, names, avatars, and work email addresses (used for profile search, not displayed in the game); scores, play and collection progress, titles, and hidden-level status for your selected profile; pet photos, names, owner links, optional owner quotes, and removal requests you submit. The initial pet catalog also uses pet information coworkers previously shared in the Feishu document.<br>Your browser remembers your selected profile, language, sound settings, and tips you have seen. Clock Out clears the remembered profile on this browser; it does not delete saved game data. The server keeps standard access logs. Upload and removal-request text is sent to Bob by Slack direct message, without photos. |
+| info.full.display | **会在哪里展示**：游戏通过链接访问，选择名字不等于验证 Slack 本人身份；持有链接的人也可能查看游戏内展示的资料，请勿转发链接。<br>排行榜展示名字、头像、最好成绩和佩戴的称号；玩家卡还展示局数、收集数量、已获称号及近期成绩与时间。你收集过的宠物卡可能展示你的头像和名字。宠物会出现在棋盘、图鉴、每日店长和主人竞猜中；图鉴里的主人信息和处理过的照片对已收集该宠物的玩家或主人本人显示。<br>你可以主动保存或分享成绩卡、店长海报和贴纸册；已保存或分享出去的副本无法由游戏收回。 | **Where it shows up**: the game is accessed by link. Choosing a name does not verify your Slack identity; anyone with the link may be able to view information displayed in the game. Please do not forward the link.<br>The leaderboard shows names, avatars, best scores, and equipped titles. Player cards also show game counts, collection counts, earned titles, and recent scores with dates and times. Cards for pets you have collected may show your avatar and name. Pets appear on the board, in the Pet Collection, as Manager of the Day, and in the owner quiz. Owner details and processed photos in the Pet Collection are shown to players who have collected that pet, or to its owner.<br>You can save or share score cards, manager posters, and sticker albums. The game cannot recall copies that have already been saved or shared. |
+| info.full.ai | **AI 处理**：宠物照片会由 Bob 提交给 AI 图像服务生成统一画风的贴纸，经人工核对后上架。交给 AI 前会先去除 EXIF 位置信息；照片画面本身仍会交给外部 AI 服务。<br>上传时通常会在你的设备上缩图并去除 EXIF；设备无法处理时会上传原文件，可能带有位置等信息。上传文件私有保存，不直接公开；图鉴卡背面展示的是 Bob 处理过、已去除 EXIF 的照片版本。请勿上传含有你不希望分享的人脸、地址或其他私人内容的照片。 | **AI processing**: Bob sends pet photos to an external AI image service to create matching-style stickers, then reviews them before listing. EXIF location metadata is removed first; the visible photo content is still sent to that service.<br>Uploads are usually resized on your device, removing EXIF metadata. If your device cannot process a photo, the original file is uploaded and may contain location details. Upload files are stored privately and are not published directly. The card reverse shows a processed photo with EXIF removed. Please avoid photos containing faces, addresses, or other private content you do not want to share. |
+| info.full.storage | **存在哪里**：数据库和游戏服务部署在 RackNerd 服务器，图片存储在 Cloudflare R2（亚太区域），并由游戏服务器缓存。Bob 本地也会保存用于人工处理的副本。资料用于这次游戏活动，可能在你所在国家或地区以外存储或处理。 | **Where it is stored**: the database and game service run on a RackNerd server. Images are stored in Cloudflare R2 (Asia-Pacific) and cached on the game server. Bob also keeps local copies for manual processing. This information is used for this game activity and may be stored or processed outside your country or region. |
+| info.full.removal | **想删除怎么办**：可在「我的宠物」或本页提交申请；尚未选择身份、找不到自己的名字或有隐私疑问时，可直接在 Slack 联系 Bob，无须先进入游戏。Bob 会人工核实范围并处理，提交申请不会立即隐藏或删除资料。<br>仅移除宠物会保留已有成绩；如希望移除姓名、头像、排行榜身份或尚未上架的上传资料，请在申请中说明或联系 Bob。游戏无法自动删除飞书原文档、AI 服务留存、备份及已保存或分享出去的副本，处理时会说明范围和仍需跟进的部分。 | **Want something removed?** Send a request from My Pets or this page. If you have not selected a profile, cannot find your name, or have privacy questions, contact Bob directly on Slack; you do not need to enter the game first. Bob reviews and handles requests manually. Submitting a request does not immediately hide or delete information.<br>Removing a pet keeps existing scores. To request removal of your name, avatar, leaderboard profile, or uploads that are not yet listed, describe this in your request or contact Bob. The game cannot automatically delete the original Feishu document, AI-service copies, backups, or copies already saved or shared. Bob will explain the scope handled and anything that still needs follow-up. |
+| info.full.consent | **同意方式**：选择自己的名字并点击「Clock In」，即表示你同意以上游戏信息使用方式。仅查看本页不会确认身份。上传宠物为可选；提交前请阅读照片展示与处理说明，不上传也能玩。 | **Consent**: choosing your own name and tapping Clock In means you agree to the game information use described above. Viewing this page does not confirm a profile. Uploading a pet is optional; read the photo use and processing notice before submitting. You can play without uploading. |
 
 
 选中卡片展示姓名与头像，确认后只进入门店，不开始 90 秒计时、不增加第二次确认弹窗。带姓名的按钮已确认，名字须与当前选中卡片一致；较长姓名允许换行并保证可读，不把名字截成无法核对的内容。其他身份页文字为校读修订稿。
@@ -343,7 +343,7 @@
 | collection.sheet_hint | 按主人和宠物名排序 · 点贴纸看详情 | Sorted by owner, then pet name · Tap a sticker for details |
 | collection.sheet_title | {playerName} 的贴纸册 | {playerName}'s Sticker Album |
 | collection.sheet_share | 分享贴纸册图片 | Share Sticker Album |
-| collection.sheet_share_hint | 把这一页毛孩子，存成你的收藏 | Save a page of furry coworkers to your collection |
+| collection.sheet_share_hint | 我的毛孩子朋友，都在这里啦 | All my furry friends, right here. |
 | collection.sheet_preview | 贴纸册图片预览 | Sticker Album Preview |
 | pet.unlock_hint | 棋盘上服务过 TA，完整收工、成绩保存成功后，就会自动收集。 | Serve this pet on the board and finish the round. They'll join your collection automatically once your result is saved. |
 | pet.owner | 主人 | Owner |
@@ -360,7 +360,7 @@
 
 `pet.owner_quote` 下方显示飞书原介绍的原文摘录（不翻译，过长截取前一两句），或 Bob 手工补录的主人名言；两者都没有时隐藏整块。
 
-`pet.known_by_*` 只在已收集或自家宠物详情正面底部出现，人数为 0 时整区隐藏，人数为 1 用 `_one`，其余用 `_other`；下方头像叠放超出 5 位时显示「+{count}」，`pet.known_by_more` 作为该标记的无障碍朗读文本。
+`pet.known_by_*` 只在已收集或自家宠物详情正面底部出现，人数与下方同事头像均排除当前登录用户（2026-10-25 确认）；人数为 0 时整区隐藏，人数为 1 用 `_one`，其余用 `_other`；下方头像叠放超出 5 位时显示「+{count}」，`pet.known_by_more` 作为该标记的无障碍朗读文本。
 
 图鉴展示的关键文案已确认。解锁说明使用「自动收集」，对应本局实际服务过该宠物、完整结束且结果保存成功，不要求另点领取或手动保存。单纯登场、点选或查看卡片不算收集。搜索空结果只说明当前范围没有匹配，不表示该同事没有宠物。没有已收集宠物时，提示与未收集剪影列表并存，不以空白页替代列表。既定排序、搜索范围和收集条件不变。
 
@@ -430,10 +430,18 @@
 | report.next_up_album | 再认识 {n} 只，就集齐全部毛孩子，解锁称号「{title}」。 | Meet {n} more to complete the collection and unlock the “{title}” title. |
 | report.next_up_milestone | 再认识 {n} 只毛孩子，图鉴就到 {percent}%。 | Meet {n} more pet(s) and your collection hits {percent}%. |
 | report.next_up_tomorrow | 明天换一盘新棋，今日榜重新排。 | New board tomorrow. Today’s ranks reset. |
+| report.tip_comb | 四只相同毛孩子连成直线，会生成梳子；和邻格交换，清一整行或列。 | Match 4 identical pets in a line to make a comb. Swap it with a neighbor to clear a row or column. |
+| report.tip_scissors | 五只相同毛孩子连成 L、T 或＋形，会生成剪刀；交换邻格清十字。 | Match 5 identical pets in an L, T or + to make scissors. Swap with a neighbor to clear a cross. |
+| report.tip_dryer | 五只及以上相同毛孩子连成直线，会生成吹风机；和任意邻格交换，清空全盘！ | Match 5 or more identical pets in a line to make a hair dryer. Swap it with any neighbor to clear the whole board! |
+| report.tip_comb_comb | 两把相邻的梳子交换，合体清十字，试试看！ | Swap two neighboring combs to clear a cross. Give it a try! |
+| report.tip_comb_scissors | 相邻的梳子和剪刀交换，能清除落点附近三行三列。 | Swap a comb with neighboring scissors to clear three rows and three columns around the landing spot. |
+| report.tip_scissors_scissors | 两把相邻剪刀交换，先合成吹风机；再交换任意邻格，清空全盘！ | Swap two neighboring scissors to make a hair dryer. Then swap it with any neighbor to clear the whole board! |
 | report.harvest | 本局收获 | This Round's Haul |
 | report.new_title_tag | 新称号 | New title |
 | leaderboard.challenge | 再挑战一次 | Play Another Round |
 | leaderboard.load_failed | 暂时没能读取排行榜，请重试。 | We couldn't load the leaderboard. Please try again. |
+
+2026-10-25「店长说」加入玩法提示：普通局保存后，每局只显示一句，约一半对局从六条道具提示中随机抽一条，另一半保留原有进度预告；按对局 ID 固定抽签，猜主人、分享或切换语言不重新抽取。鱼关解锁邀请仍优先，鱼关报告不显示这些宠物工具提示。
 
 默认领先玩家＋本人附近，名次使用真实并列结果，未保存的成绩不生成名次。鱼榜标签仅对个人已发现鱼关的玩家显示，不放锁定标签或解锁预告。挑战当前榜单对应模式，不新增挑战邀请或相同棋盘对战。
 
@@ -506,8 +514,10 @@
 | upload.owner | 主人：{ownerName} | Owner: {ownerName} |
 | upload.owner_hint | 将以当前游戏身份提交。 | This submission will use your current game profile. |
 | upload.use_info | 查看照片展示与处理说明 | Photo Use and Processing |
-| upload.display_summary | 处理后的头像用于棋盘和图鉴，处理过的照片可在图鉴翻面查看；宠物名字和主人信息也会展示。 | Styled portraits appear on the board and in the Pet Collection. A processed photo is shown on the card's reverse. Pet names and owner details are also shown. |
+| upload.display_summary | 上传为可选。提交即表示同意将照片交给外部 AI 服务制作贴纸；上架后，处理后的头像、照片、宠物名字和主人信息会在游戏中展示。请先阅读照片展示与处理说明。 | Uploading is optional. By submitting, you agree to external AI processing to create a pet sticker and to display of the processed portrait, photo, pet name, and owner profile in the game once listed. Please read the photo use and processing notice first. |
 | upload.submit | 提交 | Submit |
+| upload.preparing | 正在处理照片…… | Preparing Your Photo… |
+| upload.uploading | 正在上传 {percent}% | Uploading {percent}% |
 | upload.submitting | 正在提交照片和资料…… | Sending Your Photo and Details… |
 | upload.received | 资料收到啦！核对处理好，就让毛孩子来上班。 | Submission received! We'll prepare and review it before your pet joins the crew. |
 | upload.photo_required | 先选一张照片吧。 | Choose a photo first. |
@@ -517,8 +527,6 @@
 | upload.daily_limit | 今天已经提交 10 次啦，明天再来吧。 | You've made 10 submissions today. Please try again tomorrow. |
 | upload.invalid_photo | 这张图片暂时无法使用，请换一张。 | We couldn't use this image. Please choose another. |
 | upload.failed | 还没提交成功，填写内容已保留，请重试。 | Your submission didn't go through. Your details are kept. Please try again. |
-| upload.preparing | 正在处理照片…… | Preparing Your Photo… |
-| upload.uploading | 正在上传 {percent}% | Uploading {percent}% |
 | upload.leave_title | 照片和名字还没提交，要离开吗？ | Your photo and pet name haven't been submitted. Leave this page? |
 | upload.keep_editing | 继续填写 | Keep Editing |
 | upload.discard_and_leave | 放弃并离开 | Discard and Leave |
@@ -540,7 +548,7 @@
 | Key | 中文 | English |
 | --- | --- | --- |
 | upload.use_title | 照片展示与处理说明 | Photo Use and Processing |
-| upload.use_body | 1. **内部展示**：上架后，处理后的宠物贴纸头像将用于全公司同事可见的消消乐棋盘、宠物图鉴、每日店长及主人竞猜；已收集该宠物的同事可在图鉴卡背面查看 Bob 处理后的照片版本（已去除 EXIF 位置信息，不直接公开原始文件），并展示宠物名字与你的同事身份。<br>2. **AI 与人工处理**：提交的照片先私有存储在 Cloudflare R2（亚太），由 Bob（@Bob）人工下载、去除位置信息后通过 AI 图像服务转换统一贴纸画风，经人工核对后再上架；不会自动直接公开原始上传文件。<br>3. **随时申请移除**：上架后如不希望继续展示，可随时在「我的宠物」或图鉴详情页提交删除申请，由 Bob 人工核实后下架并清理游戏持有的文件。 | 1. **Internal Display**: Once listed, the styled pet sticker portrait will appear on the match-3 board, in the Pet Collection, as Manager of the Day, and in the owner quiz for MoeGo coworkers. Coworkers who collect your pet can flip the card to view a processed photo (with EXIF location details removed, never the raw file) alongside the pet's name and your coworker profile.<br>2. **AI & Manual Review**: Uploaded photos are stored privately in Cloudflare R2 (Asia-Pacific). Bob (@Bob) manually reviews each submission, strips location metadata, and uses an AI image service to generate the unified sticker portrait before listing. Raw uploads are never published automatically.<br>3. **Removal Anytime**: If you ever want your pet removed, submit a request from My Pets or the pet's detail card, and Bob will manually verify, unlist, and delete the game's copies. |
+| upload.use_body | 1. **展示范围**：上架后，宠物贴纸用于棋盘、图鉴、每日店长及主人竞猜；已收集该宠物的玩家或主人本人可查看处理过的卡背照片、宠物名字、主人身份及选填的「主人说」。游戏通过链接访问，选择名字不等于验证 Slack 本人身份，请勿转发链接。<br>2. **AI 与人工处理**：照片通常在本机缩图并去除 EXIF；设备无法处理时会上传原文件，可能带有位置等信息。文件经游戏服务器私有存入 Cloudflare R2（亚太），Bob 下载并去除 EXIF 位置信息后，将照片交给外部 AI 图像服务制作贴纸，人工核对后上架。照片画面本身仍会交给 AI 服务；请勿上传不希望分享的人脸、地址等内容。游戏服务器会缓存图片，Bob 本地也会保存处理副本；资料可能在你所在国家或地区以外存储或处理。原始上传文件不直接公开。<br>3. **自愿与删除**：不上传也能玩。提交即表示同意以上处理和展示方式。上架前后都可从信息使用说明页申请删除，或直接在 Slack 联系 Bob；上架后也可从「我的宠物」或详情页申请。Bob 人工核实处理，提交不会立即隐藏或删除；仅移除宠物会保留已有成绩。游戏无法自动删除飞书原文档、AI 服务留存、备份及已保存或分享的副本，处理时会说明剩余范围。上传和删除申请的文字资料会通过 Slack 私信通知 Bob，不附照片。 | 1. **Display**: Once listed, pet stickers appear on the board, in the Pet Collection, as Manager of the Day, and in the owner quiz. Players who collect the pet, or its owner, can see its processed card-back photo, name, owner profile, and optional owner quote. The game is accessed by link; choosing a name does not verify a Slack identity. Please do not forward the link.<br>2. **AI and manual processing**: Photos are usually resized on your device with EXIF removed. If processing fails, the original file is uploaded and may contain location details. Files pass through the game server to private Cloudflare R2 storage (Asia-Pacific). Bob downloads them, strips EXIF location metadata, and sends the photo to an external AI image service to create a sticker, then reviews it before listing. The visible photo content still goes to that service; avoid faces, addresses, or other content you do not want to share. Images are cached on the game server, and Bob keeps local processing copies. Information may be stored or processed outside your country or region. Original upload files are not published directly.<br>3. **Your choice and removal**: You can play without uploading. By submitting, you agree to this processing and display. Before or after listing, request removal from the information notice page or contact Bob on Slack. Once listed, you can also request removal from My Pets or the pet card. Requests are reviewed manually and do not immediately hide or delete information; removing a pet keeps existing scores. The game cannot automatically delete the original Feishu document, AI-service copies, backups, or saved or shared copies. Bob will explain what remains. Upload and removal-request text is sent to Bob by Slack direct message, without photos. |
 
 ### 9.2 删除申请 · 关键文案已确认
 
@@ -585,7 +593,7 @@
 
 ## 接入前待核对
 
-- 完整信息使用说明已按六项要点起草（见 2.3），接入前按实际字段再核对；上传照片处理说明沿用同一口径（AI 处理、人工核对；数据库与服务器在美国、图片在 R2 亚太区域）。
+- 完整信息使用说明已按六项要点起草（见 2.3），接入前按实际字段再核对；上传照片处理说明沿用同一口径（AI 处理、人工核对；数据库与游戏服务部署在 RackNerd、图片在 R2 亚太区域）。
 - 宠物下架前已开局及待同步的合法对局按原规则结算已确认；正常到时、基础校验、主动退出不保存与同局去重仍适用，不把这项规则写成无条件保存承诺。结算展示按当前上架目录过滤，符合条件的普通局仍累计隐藏关解锁进度。
 - 本稿没有新增二维码、收齐徽章、公共鱼缸进度、邀请奖励或暂停机制。数字与变量显示、手机换行和英文按钮长度需在实际页面验证；目前仅完成文案草稿。
 
