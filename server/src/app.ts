@@ -13,6 +13,7 @@ import { rosterRoutes } from './routes/roster.ts';
 import { deletionRoutes } from './routes/deletions.ts';
 import { submissionRoutes } from './routes/submissions.ts';
 import { webRoutes } from './routes/web.ts';
+import type { AdminNotifier } from './services/adminNotify.ts';
 import type { SlackDirectory } from './services/slackDirectory.ts';
 import type { SubmissionHooks } from './services/submissions.ts';
 
@@ -28,6 +29,8 @@ export interface AppDeps {
   staticDir?: string;
   /** 实时 Slack 目录：补充人员表里没有的同事；未配置时只用人员表。 */
   directory?: SlackDirectory | null;
+  /** 新上传与删除申请保存后通知 Bob（Slack 私信）；未配置时不通知。 */
+  notify?: AdminNotifier | null;
   images?: {
     cache: DiskCache;
     /** R2 私有桶；未配置时宠物图返回 503。 */

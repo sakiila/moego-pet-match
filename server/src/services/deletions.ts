@@ -35,13 +35,13 @@ export async function createDeletionRequest(pool: Pool, input: { playerId: strin
       if (pet.owner_user_id !== input.playerId) throw new DeletionError('forbidden');
       await client.query("SELECT pg_advisory_xact_lock(hashtext('deletion:' || $1))", [input.petId]);
       const open = (await client.query(`SELECT request_id FROM pet_match.deletion_requests WHERE pet_id = $1 AND status = 'pending' LIMIT 1`, [input.petId])).rows[0];
-      if (open) return { requestId: open.request_id as string, status: 'pending' as const };
+      if (open) return { requestId: open.request_id as string, status: 'pending' as const, created: false };
     }
     const { rows } = await client.query(
       `INSERT INTO pet_match.deletion_requests (player_id, pet_id, note) VALUES ($1, $2, $3) RETURNING request_id`,
       [input.playerId, input.petId, input.note],
     );
-    return { requestId: rows[0].request_id as string, status: 'pending' as const };
+    return { requestId: rows[0].request_id as string, status: 'pending' as const, created: true };
   });
 }
 

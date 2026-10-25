@@ -8,7 +8,7 @@ import { createSubmission, isEnglishText, MAX_UPLOAD_BYTES, OWNER_QUOTE_MAX, PET
  * 上传我家毛孩子：一次一只，照片原样私有保存，由 Bob 用命令行取走后人工处理上架。
  * 主人固定为当前游戏身份；「主人说」选填、只收英文。成功只表示已收到，不进入阵容。
  */
-export const submissionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, images, now = () => new Date(), submissionHooks }) => {
+export const submissionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, images, now = () => new Date(), submissionHooks, notify }) => {
   await app.register(multipart, { limits: { fileSize: MAX_UPLOAD_BYTES, files: 1, fields: 4 } });
 
   app.post('/api/submissions', async (request, reply) => {
@@ -30,9 +30,15 @@ export const submissionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool,
     const ownerQuote = field('ownerQuote').replace(/\r\n?/g, '\n');
     if ([...ownerQuote].length > OWNER_QUOTE_MAX) return reply.status(400).send({ error: 'invalid_request', detail: 'quote too long' });
     if (!isEnglishText(ownerQuote)) return reply.status(400).send({ error: 'quote_not_english' });
-    if (!(await findColleague(pool, playerId))) return reply.status(404).send({ error: 'not_found' });
+    const colleague = await findColleague(pool, playerId);
+    if (!colleague) return reply.status(404).send({ error: 'not_found' });
     try {
-      return await createSubmission(pool, store, { playerId, petName, ownerQuote: ownerQuote || null, file }, now(), submissionHooks);
+      const at = now();
+      const saved = await createSubmission(pool, store, { playerId, petName, ownerQuote: ownerQuote || null, file }, at, submissionHooks);
+      // 保存成功后才通知；不等待发送，失败只记日志
+      notify?.({ kind: 'submission', ...saved, playerId, playerName: colleague.name, petName, ownerQuote: ownerQuote || null, at })
+        .catch((error) => request.log.warn({ err: error }, 'submission notify failed'));
+      return { submissionId: saved.submissionId };
     } catch (error) {
       if (error instanceof SubmissionError) return reply.status(error.code === 'daily_limit' ? 429 : 415).send({ error: error.code });
       throw error;

@@ -52,7 +52,7 @@ export async function createSubmission(
   input: { playerId: string; petName: string; ownerQuote: string | null; file: Buffer },
   now: Date,
   hooks: SubmissionHooks = {},
-): Promise<{ submissionId: string }> {
+): Promise<{ submissionId: string; contentType: string; sizeBytes: number }> {
   const type = sniffImage(input.file);
   if (!type) throw new SubmissionError('unsupported_type');
   const since = beijingDayStart(now);
@@ -73,7 +73,7 @@ export async function createSubmission(
          VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING submission_id`,
         [input.playerId, input.petName, input.ownerQuote, key, type.contentType, input.file.length, now],
       );
-      return { submissionId: rows[0].submission_id as string };
+      return { submissionId: rows[0].submission_id as string, contentType: type.contentType, sizeBytes: input.file.length };
     });
   } catch (error) {
     await store.delete(key).catch(() => {});

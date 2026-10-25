@@ -6,6 +6,7 @@ import { DiskCache } from './storage/diskCache.ts';
 import { localDirStore } from './storage/localDirStore.ts';
 import { r2Store } from './storage/objectStore.ts';
 import { r2FromEnv } from './storage/r2.ts';
+import { slackAdminNotifier } from './services/adminNotify.ts';
 import { slackDirectory } from './services/slackDirectory.ts';
 import { slackAvatarFetcher } from './storage/slackAvatar.ts';
 
@@ -17,6 +18,7 @@ const app = buildApp({
   pool,
   staticDir: config.staticDir,
   directory: slackDirectory(process.env.SLACK_BOT_TOKEN),
+  notify: slackAdminNotifier(process.env.SLACK_BOT_TOKEN, process.env.SLACK_NOTIFY_CHANNEL),
   images: {
     cache: new DiskCache(process.env.IMAGE_CACHE_DIR ?? fileURLToPath(new URL('../.cache/img', import.meta.url)), 1.5 * 1024 ** 3),
     store,
