@@ -245,6 +245,13 @@
   transition: none;
 }
 
+/* 同理：Tilt 的景深给 img 加了带过渡的 transform，点卡片翻面时贴纸正在过渡、自成合成层，
+   iOS Safari 会在翻过 90° 后把它镜像透出来，过渡结束才消失。详情卡内的图片不做景深微移。 */
+.stage .flipper .face img {
+  transform: none;
+  transition: none;
+}
+
 .frontBody {
   display: grid;
   justify-items: center;
