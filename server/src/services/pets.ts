@@ -64,19 +64,19 @@ export async function petDetail(pool: Pool, petId: string, playerId: string): Pr
     quote: visible ? (r.owner_quote ?? r.intro ?? null) : null,
     hasPhoto: visible && !!r.photo_key,
     listed,
-    knownBy: visible ? await knownBy(pool, petId) : null,
+    knownBy: visible ? await knownBy(pool, petId, playerId) : null,
   };
 }
 
-/** 认识人数：保存过该宠物收集记录、仍在名单内的同事数，附最近收集的至多 5 位。 */
-async function knownBy(pool: Pool, petId: string): Promise<PetDetail['knownBy']> {
+/** 认识人数：保存过该宠物收集记录、仍在名单内的其他同事数，人数与最近至多 5 位头像均排除当前用户。 */
+async function knownBy(pool: Pool, petId: string, playerId: string): Promise<PetDetail['knownBy']> {
   const { rows } = await pool.query(
     `SELECT count(*) OVER () AS total, col.player_id, c.name
      FROM pet_match.collections col JOIN pet_match.colleagues c ON c.user_id = col.player_id
-     WHERE col.pet_id = $1
+     WHERE col.pet_id = $1 AND col.player_id <> $2
      ORDER BY col.collected_at DESC, col.player_id
      LIMIT 5`,
-    [petId],
+    [petId, playerId],
   );
   return { count: rows.length ? Number(rows[0].total) : 0, recent: rows.map((x) => ({ userId: x.player_id, name: x.name })) };
 }

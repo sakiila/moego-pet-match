@@ -172,7 +172,7 @@ export interface PetDetail {
   quote: string | null;
   hasPhoto: boolean;
   listed: boolean;
-  /** 认识人数与最近收集的至多 5 位同事；只对已收集或自家宠物返回，否则为 null。 */
+  /** 认识人数与最近收集的至多 5 位同事，均排除当前用户；只对已收集或自家宠物返回，否则为 null。 */
   knownBy: { count: number; recent: { userId: string; name: string }[] } | null;
 }
 
