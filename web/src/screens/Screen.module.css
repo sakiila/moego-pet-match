@@ -43,6 +43,8 @@
 
 .stack {
   display: grid;
+  /* 单列不随内容固有宽度变宽（iOS Safari 上输入框会把 auto 列撑出屏幕） */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
 }
 
