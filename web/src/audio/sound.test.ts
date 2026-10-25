@@ -45,18 +45,56 @@ describe('audio unlock completion', () => {
     expect(context.resume).not.toHaveBeenCalled();
   });
 
-  it('resumes a context that iOS interrupted (call, lock screen, other app audio)', async () => {
+  it('recovers an iOS-interrupted context so the next effect can play', async () => {
+    const start = vi.fn();
+    const gain = { gain: { value: 0, setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() }, connect: vi.fn() };
+    gain.connect.mockReturnValue(gain);
     const context = {
-      state: 'interrupted', destination: {},
-      createGain: () => ({ gain: { value: 0 }, connect: vi.fn() }),
-      resume: vi.fn(async () => {}),
+      state: 'interrupted', currentTime: 1, destination: {},
+      createGain: () => gain,
+      createOscillator: () => ({ frequency: { setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() }, connect: vi.fn().mockReturnValue(gain), start, stop: vi.fn() }),
+      resume: vi.fn(async () => { context.state = 'running'; }),
     };
     vi.stubGlobal('window', { AudioContext: class { constructor() { return context; } } });
     const sound = await import('./sound');
 
     await sound.unlockAudio();
+    sound.playSound('pop');
 
     expect(context.resume).toHaveBeenCalledOnce();
+    expect(start).toHaveBeenCalledOnce();
+  });
+
+  it('can retry on the next gesture if the browser rejects a resume attempt', async () => {
+    const context = {
+      state: 'suspended', destination: {},
+      createGain: () => ({ gain: { value: 0 }, connect: vi.fn() }),
+      resume: vi.fn()
+        .mockRejectedValueOnce(new Error('user gesture required'))
+        .mockImplementationOnce(async () => { context.state = 'running'; }),
+    };
+    vi.stubGlobal('window', { AudioContext: class { constructor() { return context; } } });
+    const sound = await import('./sound');
+
+    await expect(sound.unlockAudio()).resolves.toBeUndefined();
+    await expect(sound.unlockAudio()).resolves.toBeUndefined();
+
+    expect(context.resume).toHaveBeenCalledTimes(2);
+    expect(context.state).toBe('running');
+  });
+
+  it('does not try to resume a closed context', async () => {
+    const context = {
+      state: 'closed', destination: {},
+      createGain: () => ({ gain: { value: 0 }, connect: vi.fn() }),
+      resume: vi.fn(),
+    };
+    vi.stubGlobal('window', { AudioContext: class { constructor() { return context; } } });
+    const sound = await import('./sound');
+
+    await expect(sound.unlockAudio()).resolves.toBeUndefined();
+
+    expect(context.resume).not.toHaveBeenCalled();
   });
 
   it('switches the iOS audio session to playback so the silent switch does not mute the game', async () => {

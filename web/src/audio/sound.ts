@@ -177,12 +177,13 @@ export function playPrinted() {
   tone(a, PENTA[7] * 2.4, t, 0.45, 'sine', 0.22);
 }
 
-/** 印章拍下：低沉的「咚」加一点纸面拍击声。 */
+/** 印章拍下：低沉的「咚」叠一层中频拍击，避免手机外放只剩听不清的低频。 */
 export function playStamp() {
   const a = audio();
   if (!a || a.ctx.state !== 'running') return;
   const t = a.ctx.currentTime;
   tone(a, 150, t, 0.24, 'sine', 1, 55);
+  tone(a, 780, t, 0.1, 'triangle', 0.9, 390);
   noise(a, t, 0.07, 0.5, { type: 'lowpass', from: 1800, to: 300 });
 }
 
