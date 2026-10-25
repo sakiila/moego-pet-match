@@ -1,12 +1,13 @@
 import { StrictMode, Suspense, lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './app/App';
+import { isGalleryPath } from './app/entryRoute';
 import { FeedbackProvider } from './audio/FeedbackProvider';
 import { I18nProvider } from './i18n';
 import './ui/fonts.css';
 import './ui/global.css';
 
-const isGallery = import.meta.env.DEV && window.location.pathname.startsWith('/dev/gallery');
+const isGallery = isGalleryPath(window.location.pathname);
 const Gallery = isGallery ? lazy(() => import('./dev/gallery/Gallery')) : null;
 
 createRoot(document.getElementById('root')!).render(

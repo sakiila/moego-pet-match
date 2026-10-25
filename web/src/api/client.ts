@@ -1,4 +1,5 @@
 import type { AchievementId, AchievementView, PlayerProfileView } from './types';
+import { isGalleryPath } from '../app/entryRoute';
 import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse } from './types';
 
 /**
@@ -15,6 +16,8 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  // Gallery renders fixtures; even GET identity/achievement endpoints can write progress.
+  if (isGalleryPath(globalThis.location?.pathname ?? '')) throw new ApiError('invalid', 'gallery_preview');
   let res: Response;
   try {
     res = await fetch(path, { ...init, headers: { 'content-type': 'application/json', ...init?.headers } });
@@ -40,6 +43,7 @@ export class UploadError extends Error {
 
 /** 上传照片：multipart 原样发送；把服务端错误码映射成提示类别。 */
 async function submitPet(playerId: string, petName: string, ownerQuote: string, photo: File): Promise<{ submissionId: string }> {
+  if (isGalleryPath(globalThis.location?.pathname ?? '')) throw new UploadError('failed');
   const body = new FormData();
   body.append('playerId', playerId);
   body.append('petName', petName);
