@@ -2,6 +2,7 @@ import fastifyStatic from '@fastify/static';
 import type { FastifyPluginAsync } from 'fastify';
 import type { AppDeps } from '../app.ts';
 import { RULES_VERSION } from '../../../web/src/engine/config.ts';
+import { registerLinkPreviews } from './linkPreviews.ts';
 
 const HEALTH_TIMEOUT_MS = 2_000;
 
@@ -35,6 +36,8 @@ export const webRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, static
       res.setHeader('cache-control', /[\\/]assets[\\/]/.test(path) ? 'public, max-age=31536000, immutable' : 'no-cache');
     },
   });
+
+  registerLinkPreviews(app, staticDir);
 
   app.setNotFoundHandler((request, reply) => {
     const path = request.url.split('?')[0];
