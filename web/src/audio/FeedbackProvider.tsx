@@ -92,12 +92,11 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
         syncMusic();
       }
     };
-    // 浏览器（尤其 iOS Safari）只允许在用户操作中启动声音：任意一次按下都顺手解锁。
-    // iOS 只把 touchend / click 算作可以启动声音的操作，pointerdown（来自 touchstart）不算。
+    // 触摸的按下不一定能解锁 iOS 音频；在抬起与点击时继续尝试中断恢复。
     const onGesture = () => {
-      if (prefsRef.current.sfx || prefsRef.current.music) unlockAudio();
+      if (document.visibilityState === 'visible' && (prefsRef.current.sfx || prefsRef.current.music)) unlockAudio();
     };
-    const gestures = ['pointerdown', 'touchend', 'click'] as const;
+    const gestures = ['pointerdown', 'pointerup', 'touchend', 'click'] as const;
     document.addEventListener('visibilitychange', onVisibility);
     gestures.forEach((type) => document.addEventListener(type, onGesture, { capture: true }));
     return () => {

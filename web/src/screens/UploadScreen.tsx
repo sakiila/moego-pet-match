@@ -9,8 +9,10 @@ import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { UploadReceived } from '../components/UploadReceived/UploadReceived';
 import { UseInfoSheet } from '../components/UseInfoSheet/UseInfoSheet';
 import { avatarUrl } from '../game/pets';
+import { preparePhoto as defaultPrepare } from '../game/preparePhoto';
 import { useI18n, type MessageKey } from '../i18n';
 import { Button } from '../ui/primitives/Button';
+import { ProgressBar } from '../ui/primitives/ProgressBar';
 import { TextArea } from '../ui/primitives/TextArea';
 import { TextField } from '../ui/primitives/TextField';
 import styles from './Screen.module.css';
@@ -35,14 +37,20 @@ export interface UploadScreenProps {
   onHome: () => void;
   onPlay: () => void;
   /** 陈列页用：替换提交。 */
-  submit?: (playerId: string, petName: string, ownerQuote: string, photo: File) => Promise<unknown>;
+  submit?: (playerId: string, petName: string, ownerQuote: string, photo: File, onProgress?: (fraction: number) => void) => Promise<unknown>;
+  /** 陈列页用：替换上传前缩图。 */
+  prepare?: (photo: File) => Promise<File>;
 }
+
+/** 提交阶段：缩图 → 上传（有进度）→ 等服务器保存。 */
+type Stage = { kind: 'preparing' } | { kind: 'uploading'; fraction: number } | { kind: 'saving' };
 
 /**
  * 添加我家毛孩子：选一张原图 → 预览 → 填名字与选填的英文「主人说」、看主人与展示说明 → 提交。主人固定为当前身份。
+ * 提交时先在浏览器缩到长边 2560 的 JPEG（解码不了则传原图），再显示上传进度。
  * 失败保留填写内容；有未提交内容时站内离开先确认。成功只表示已收到，后续人工处理上架。
  */
-export function UploadScreen({ player, onHome, onPlay, submit = api.submitPet }: UploadScreenProps) {
+export function UploadScreen({ player, onHome, onPlay, submit = api.submitPet, prepare = defaultPrepare }: UploadScreenProps) {
   const { t } = useI18n();
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState('');
@@ -50,7 +58,8 @@ export function UploadScreen({ player, onHome, onPlay, submit = api.submitPet }:
   const [nameError, setNameError] = useState(false);
   const [quote, setQuote] = useState('');
   const [error, setError] = useState<MessageKey | null>(null);
-  const [submitting, setSubmitting] = useState(false);
+  const [stage, setStage] = useState<Stage | null>(null);
+  const submitting = stage !== null;
   const [received, setReceived] = useState<string | null>(null);
   const [infoOpen, setInfoOpen] = useState(false);
   const [leaving, setLeaving] = useState<(() => void) | null>(null);
@@ -60,22 +69,28 @@ export function UploadScreen({ player, onHome, onPlay, submit = api.submitPet }:
   const dirty = !received && (!!file || name.trim().length > 0 || quote.trim().length > 0);
   const leave = (go: () => void) => (dirty ? setLeaving(() => go) : go());
 
+  // 过大只在提交时按缩图后的文件判断：能缩的原图再大也可以提交
   const choose = (f: File) => {
     setFile(f);
     setError(null);
-    setPhotoError(f.size > UPLOAD_MAX_BYTES ? 'upload.too_large' : null);
+    setPhotoError(null);
   };
 
   const onSubmit = async () => {
     const trimmed = name.trim();
     const missingPhoto = !file;
-    setPhotoError(missingPhoto ? 'upload.photo_required' : file!.size > UPLOAD_MAX_BYTES ? 'upload.too_large' : null);
+    setPhotoError(missingPhoto ? 'upload.photo_required' : null);
     setNameError(!trimmed);
-    if (missingPhoto || !trimmed || quoteInvalid || file!.size > UPLOAD_MAX_BYTES) return;
-    setSubmitting(true);
+    if (missingPhoto || !trimmed || quoteInvalid) return;
+    setStage({ kind: 'preparing' });
     setError(null);
     try {
-      await submit(player.userId, trimmed, quote.trim(), file!);
+      const photo = await prepare(file!);
+      if (photo.size > UPLOAD_MAX_BYTES) throw new UploadError('too_large');
+      setStage({ kind: 'uploading', fraction: 0 });
+      await submit(player.userId, trimmed, quote.trim(), photo, (fraction) =>
+        setStage(fraction >= 1 ? { kind: 'saving' } : { kind: 'uploading', fraction }),
+      );
       setReceived(trimmed);
     } catch (e) {
       const kind: UploadErrorKind = e instanceof UploadError ? e.kind : 'failed';
@@ -83,9 +98,16 @@ export function UploadScreen({ player, onHome, onPlay, submit = api.submitPet }:
       else if (kind === 'name_required') setNameError(true);
       else setError(ERROR_TEXT[kind]);
     } finally {
-      setSubmitting(false);
+      setStage(null);
     }
   };
+
+  const stageText =
+    stage?.kind === 'preparing'
+      ? t('upload.preparing')
+      : stage?.kind === 'uploading'
+        ? t('upload.uploading', { percent: String(Math.round(stage.fraction * 100)) })
+        : t('upload.submitting');
 
   if (received) {
     return (
@@ -135,8 +157,9 @@ export function UploadScreen({ player, onHome, onPlay, submit = api.submitPet }:
       </div>
       {error && <StatusMessage tone="error" text={t(error)} />}
       <div className={styles.stickyActions}>
+        {stage && <ProgressBar value={stage.kind === 'uploading' ? stage.fraction : null} label={stageText} />}
         <Button size="lg" block iconName={submitting ? undefined : 'open-shop-white'} onClick={onSubmit} disabled={submitting} aria-busy={submitting} data-testid="upload-submit">
-          {submitting ? t('upload.submitting') : t('upload.submit')}
+          {stage ? stageText : t('upload.submit')}
         </Button>
       </div>
       <UseInfoSheet open={infoOpen} title="upload.use_title" body="upload.use_body" onClose={() => setInfoOpen(false)} />

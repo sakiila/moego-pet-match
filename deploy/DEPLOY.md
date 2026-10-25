@@ -2,7 +2,7 @@
 
 一个容器同时提供前端、API 和图片代理。游戏数据在 RackNerd PostgreSQL 的 `pet_match` 数据库、`pet_match` schema，图片在 R2 私有桶。应用和 PostgreSQL 通过现有 `1panel-network` 通信。
 
-仓库：`sakiila/moego-pet-match`（公开）。镜像：`ghcr.io/sakiila/moego-pet-match`。`main` push 自动测试、构建和发布镜像；仓库变量 `DEPLOY_ENABLED=true` 时继续自动部署，也可在 Actions 手动运行 **Deploy to RackNerd**。首次准备期该变量为 false；线上迁移时临时关闭自动部署，完成切换后恢复。部署 job 串行执行，不中断进行中的部署。
+仓库：`sakiila/moego-pet-match`（公开）。镜像：`ghcr.io/sakiila/moego-pet-match`。`main` push 自动测试、构建和发布镜像；仓库变量 `DEPLOY_ENABLED=true` 时继续自动部署，也可在 Actions 手动运行 **Deploy to RackNerd**。首次准备期该变量为 false；线上迁移时临时关闭自动部署，完成切换后恢复。新的部署流程触发时，自动取消同组中正在运行或等待的旧流程；CI 按工作流和分支分组，同组只保留最新一次运行。
 
 ## 首次发布前
 

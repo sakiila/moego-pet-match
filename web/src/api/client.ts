@@ -41,22 +41,43 @@ export class UploadError extends Error {
   }
 }
 
-/** 上传照片：multipart 原样发送；把服务端错误码映射成提示类别。 */
-async function submitPet(playerId: string, petName: string, ownerQuote: string, photo: File): Promise<{ submissionId: string }> {
+/** 用 XHR 发 multipart：fetch 拿不到上传进度。网络错误、超时与中止都归为 null。 */
+function postForm(url: string, body: FormData, onProgress?: (fraction: number) => void): Promise<{ status: number; text: string } | null> {
+  return new Promise((resolve) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    if (onProgress) xhr.upload.onprogress = (e) => e.lengthComputable && onProgress(e.loaded / e.total);
+    xhr.onload = () => resolve({ status: xhr.status, text: xhr.responseText });
+    xhr.onerror = xhr.ontimeout = xhr.onabort = () => resolve(null);
+    xhr.send(body);
+  });
+}
+
+/** 上传照片：multipart 发送（照片已在页面里缩好，解码不了的为原图）；把服务端错误码映射成提示类别。 */
+async function submitPet(
+  playerId: string,
+  petName: string,
+  ownerQuote: string,
+  photo: File,
+  onProgress?: (fraction: number) => void,
+): Promise<{ submissionId: string }> {
   if (isGalleryPath(globalThis.location?.pathname ?? '')) throw new UploadError('failed');
   const body = new FormData();
   body.append('playerId', playerId);
   body.append('petName', petName);
   if (ownerQuote) body.append('ownerQuote', ownerQuote);
   body.append('photo', photo, photo.name);
-  let res: Response;
-  try {
-    res = await fetch('/api/submissions', { method: 'POST', body });
-  } catch {
-    throw new UploadError('failed');
-  }
-  if (res.ok) return (await res.json()) as { submissionId: string };
-  const { error } = (await res.json().catch(() => ({}))) as { error?: string };
+  const res = await postForm('/api/submissions', body, onProgress);
+  if (!res) throw new UploadError('failed');
+  const json = (() => {
+    try {
+      return JSON.parse(res.text) as { submissionId?: string; error?: string };
+    } catch {
+      return {};
+    }
+  })();
+  if (res.status >= 200 && res.status < 300 && json.submissionId) return { submissionId: json.submissionId };
+  const { error } = json;
   if (res.status === 413 || error === 'too_large') throw new UploadError('too_large');
   if (res.status === 415 || error === 'unsupported_type') throw new UploadError('invalid_photo');
   if (res.status === 429 || error === 'daily_limit') throw new UploadError('daily_limit');

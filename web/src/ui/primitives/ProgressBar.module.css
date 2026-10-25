@@ -1,0 +1,38 @@
+.track {
+  position: relative;
+  width: 100%;
+  height: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-line);
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-brand);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.fill[data-indeterminate='true'] {
+  width: 40%;
+  animation: slide 1.2s var(--ease-out) infinite;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(250%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill[data-indeterminate='true'] {
+    width: 100%;
+    animation: none;
+    opacity: 0.4;
+  }
+}
