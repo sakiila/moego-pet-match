@@ -50,6 +50,7 @@
 | action.back_to_shop | 回门店 | Back to the Shop |
 | action.view_details | 查看详情 | View Details |
 | action.retry | 重试 | Try Again |
+| action.refresh | 刷新 | Refresh |
 | action.got_it | 知道啦 | Got It |
 | action.cancel | 取消 | Cancel |
 | action.close | 关闭 | Close |
@@ -128,6 +129,7 @@
 | home.streak_none | 今天开一局，打卡从今天算起 | Play a round today to start your streak |
 | home.photo_notice | 宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob（毛肚和菠萝的铲屎官） | Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack (Maodu and Boluo's human). |
 | home.version | 版本 {version} | Version {version} |
+| home.update_available | 游戏更新了，刷新后再开工。 | The game was updated. Refresh before your next shift. |
 | home.github_link | GitHub：{repository}（在新标签页打开） | GitHub: {repository} (opens in a new tab) |
 
 版本号在首页页尾链接下方居中展示，使用低层级小字。格式为 `YYYYMMDD.N`（例如 `20261025.5`）：日期取最新 Git 提交的北京时间，序号取当前分支主线（first-parent）中同日提交数。启动／构建时自动生成并固定到产物，同一提交重复构建不换号，未提交的本地修改不递增。GitHub 构建自动向 Docker 传入相同版本；开发服务运行期间提交后，重启开发服务可读取新值。

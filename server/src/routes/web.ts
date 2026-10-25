@@ -1,6 +1,7 @@
 import fastifyStatic from '@fastify/static';
 import type { FastifyPluginAsync } from 'fastify';
 import type { AppDeps } from '../app.ts';
+import { RULES_VERSION } from '../../../web/src/engine/config.ts';
 
 const HEALTH_TIMEOUT_MS = 2_000;
 
@@ -9,7 +10,10 @@ const HEALTH_TIMEOUT_MS = 2_000;
  * 生产时同一服务提供前端构建产物：带哈希的 /assets 长期缓存，index.html 不缓存，
  * 其他页面路径回退到 index.html；/api、/img 的 404 不返回页面。
  */
-export const webRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, staticDir }) => {
+export const webRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, staticDir, gameVersion = null }) => {
+  // 当前运行的构建版本与引擎规则版本：首页据此提示旧页面刷新（规则不一致时旧页面的结算会被拒绝）
+  app.get('/api/version', async (_request, reply) => reply.header('cache-control', 'no-cache').send({ version: gameVersion, rulesVersion: RULES_VERSION }));
+
   app.get('/api/health', async (_request, reply) => {
     const timeout = new Promise<never>((_, reject) => setTimeout(() => reject(new Error('timeout')), HEALTH_TIMEOUT_MS));
     try {

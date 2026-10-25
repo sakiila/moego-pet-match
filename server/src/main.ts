@@ -20,6 +20,7 @@ const store = r2 ? r2Store(r2) : localDirStore(process.env.OBJECT_STORE_DIR ?? f
 const app = buildApp({
   pool,
   staticDir: config.staticDir,
+  gameVersion: config.gameVersion,
   directory,
   notify: slackAdminNotifier(process.env.SLACK_BOT_TOKEN, process.env.SLACK_NOTIFY_CHANNEL),
   images: {

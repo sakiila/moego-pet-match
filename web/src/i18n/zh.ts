@@ -11,6 +11,8 @@ export const zh = {
   'action.keep_playing': '继续游玩',
   'action.back_to_shop': '回门店',
   'action.retry': '重试',
+  'action.refresh': '刷新',
+  'home.update_available': '游戏更新了，刷新后再开工。',
   'action.cancel': '取消',
   'action.close': '关闭',
   'prep.loading': '毛孩子正在集合……',

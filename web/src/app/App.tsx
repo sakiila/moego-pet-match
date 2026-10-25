@@ -5,8 +5,9 @@ import { AchievementOverlay } from '../screens/AchievementOverlay';
 import { ScreenTransition } from '../components/ScreenTransition/ScreenTransition';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { PRESETS } from '../dev/presets';
-import { createGame, type GameState, type GameSummary } from '../engine';
+import { createGame, RULES_VERSION, type GameState, type GameSummary } from '../engine';
 import { petFromLineup, preloadPets } from '../game/pets';
+import { needsRefresh } from '../game/updateCheck';
 import { useI18n } from '../i18n';
 import { BoardScreen } from '../screens/BoardScreen';
 import { HomeScreen } from '../screens/HomeScreen';
@@ -62,6 +63,8 @@ export function App() {
   const [player, setPlayer] = useState<PlayerView | null>(null);
   const [route, setRoute] = useState<Route>(() => (loadSavedPlayerId() ? { name: 'boot' } : { name: 'identity' }));
   const [manager, setManager] = useState<DailyManager | null>(null);
+  // 服务端已经换了版本（或规则版本不一致）：首页提示刷新；只提示，不打断对局与报告
+  const [updateAvailable, setUpdateAvailable] = useState(false);
   const [showTitles, setShowTitles] = useState(false);
   const closeTitles = useCallback(() => setShowTitles(false), []);
   const titleVersion = useRef(0);
@@ -121,6 +124,12 @@ export function App() {
       setRoute({ name: 'prep', mode, session: null, failed: false });
       try {
         const registered = await api.registerGame(player.userId, mode);
+        // 服务端规则版本已变：这局打完也会被结算拒绝，回门店提示刷新，不进准备页
+        if (registered.rulesVersion !== RULES_VERSION) {
+          setUpdateAvailable(true);
+          setRoute({ name: 'home' });
+          return;
+        }
         // 开局前加载好本局棋盘贴纸，素材就绪才允许开始计时
         await preloadPets(registered.lineup.map((p) => petFromLineup(p, mode)));
         const game = createGame({
@@ -161,6 +170,21 @@ export function App() {
     if (route.name === 'home' || route.name === 'report' || route.name === 'devReport') void refreshManager();
   }, [route.name, refreshManager]);
 
+  // 回门店时比对服务端版本：部署过新版本就提示刷新；读取失败当作没有更新
+  useEffect(() => {
+    if (route.name !== 'home') return;
+    let cancelled = false;
+    api
+      .getVersion()
+      .then((remote) => {
+        if (!cancelled && needsRefresh({ version: GAME_VERSION, rulesVersion: RULES_VERSION }, remote)) setUpdateAvailable(true);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [route.name]);
+
   const toHome = useCallback(() => setRoute({ name: 'home' }), []);
   const toPetdex = useCallback(() => setRoute({ name: 'petdex' }), []);
   const petsOf = (s: Session) =>
@@ -196,6 +220,8 @@ export function App() {
             version={GAME_VERSION}
             repositoryUrl={GITHUB_REPOSITORY_URL}
             manager={manager}
+            updateAvailable={updateAvailable}
+            onRefresh={() => window.location.reload()}
             onOpenShop={() => void toPrep('normal')}
             onCollection={toPetdex}
             onLeaderboard={() => setRoute({ name: 'leaderboard', mode: 'normal' })}

@@ -176,6 +176,12 @@ export interface PetDetail {
   knownBy: { count: number; recent: { userId: string; name: string }[] } | null;
 }
 
+/** 服务端当前运行的版本：构建版本（本地开发为 null）与引擎规则版本；首页据此提示旧页面刷新。 */
+export interface VersionInfo {
+  version: string | null;
+  rulesVersion: number;
+}
+
 export interface DailyManager {
   /** 北京时间日期 YYYY-MM-DD。 */
   date: string;

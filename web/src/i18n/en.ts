@@ -12,6 +12,8 @@ export const en: Record<MessageKey, string> = {
   'action.keep_playing': 'Keep Playing',
   'action.back_to_shop': 'Back to the Shop',
   'action.retry': 'Try Again',
+  'action.refresh': 'Refresh',
+  'home.update_available': 'The game was updated. Refresh before your next shift.',
   'action.cancel': 'Cancel',
   'action.close': 'Close',
   'prep.loading': 'Getting the pets ready…',

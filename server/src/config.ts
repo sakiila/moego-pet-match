@@ -12,6 +12,8 @@ export const config = {
   host: process.env.HOST ?? '127.0.0.1',
   /** 生产：前端构建产物目录（镜像里为 /app/public）；开发不设置，页面由 Vite 提供。 */
   staticDir: process.env.STATIC_DIR || undefined,
+  /** 镜像构建时写入的版本号（Dockerfile ENV GAME_VERSION）；本地开发没有，/api/version 返回 null。 */
+  gameVersion: process.env.GAME_VERSION || null,
   databaseUrl:
     process.env.DATABASE_URL ??
     (process.env.NODE_ENV === 'production' ? process.env.PET_MATCH_DATABASE_URL : undefined) ??

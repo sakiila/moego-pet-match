@@ -34,6 +34,9 @@ COPY server/package.json server/package-lock.json ./
 RUN npm ci --omit=dev --no-audit --no-fund && npm cache clean --force
 COPY --from=server-build /app/server/dist/ ./
 COPY --from=web /app/web/dist/ ./public/
+# 运行时也带上构建版本：/api/version 用它让还开着旧页面的玩家发现更新
+ARG GAME_VERSION
+ENV GAME_VERSION=$GAME_VERSION
 RUN mkdir -p /var/cache/pet-match/img && chown -R node:node /var/cache/pet-match
 USER node
 EXPOSE 8787

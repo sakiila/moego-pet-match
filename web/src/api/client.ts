@@ -1,6 +1,6 @@
 import type { AchievementId, AchievementView, PlayerProfileView } from './types';
 import { isGalleryPath } from '../app/entryRoute';
-import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse } from './types';
+import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse, VersionInfo } from './types';
 
 /**
  * 接口错误分类：not_found（确定不存在）与 unavailable（网络或服务暂时不可用）分开，
@@ -83,6 +83,7 @@ export const api = {
   getPetDetail: (petId: string, playerId: string) =>
     request<PetDetail>(`/api/pets/${encodeURIComponent(petId)}?playerId=${encodeURIComponent(playerId)}`),
   getManager: () => request<DailyManager>('/api/manager'),
+  getVersion: () => request<VersionInfo>('/api/version'),
   getMyPets: (playerId: string) => request<{ pets: MyPet[] }>(`/api/my-pets?playerId=${encodeURIComponent(playerId)}`).then((r) => r.pets),
   getDeletionRequests: (playerId: string) =>
     request<{ requests: DeletionRequestView[] }>(`/api/deletion-requests?playerId=${encodeURIComponent(playerId)}`).then((r) => r.requests),

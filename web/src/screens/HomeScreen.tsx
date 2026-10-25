@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { DailyManager, PlayerView } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { ManagerCard } from '../components/ManagerCard/ManagerCard';
+import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { DEVELOPER_PETS, managerLineKey } from '../game/easterEggs';
 import { NavTile } from '../components/NavTile/NavTile';
 import { HomeFooter } from '../components/HomeFooter/HomeFooter';
@@ -21,6 +22,9 @@ export interface HomeScreenProps {
   repositoryUrl: string;
   /** 今日店长；读取失败或尚未读取时为 null，门店照常可开局。 */
   manager: DailyManager | null;
+  /** 服务端已部署新版本（或规则版本不一致）：在「开始营业」上方提示刷新，不拦截其他操作。 */
+  updateAvailable?: boolean;
+  onRefresh?: () => void;
   onOpenShop: () => void;
   onCollection: () => void;
   onLeaderboard: () => void;
@@ -32,7 +36,7 @@ export interface HomeScreenProps {
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, version, repositoryUrl, manager, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
@@ -48,6 +52,7 @@ export function HomeScreen({ player, version, repositoryUrl, manager, onOpenShop
       <div className={styles.grow} />
       {manager && <ManagerCard name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} line={t(managerLineKey(manager.pet.petId))} onOpen={() => setPoster(true)} />}
       <div className={styles.grow} />
+      {updateAvailable && <StatusMessage text={t('home.update_available')} actionLabel={t('action.refresh')} actionIcon="retry" onAction={onRefresh} />}
       <Button size="lg" block onClick={onOpenShop} data-testid="open-shop">
         {t('action.open_shop')}
       </Button>

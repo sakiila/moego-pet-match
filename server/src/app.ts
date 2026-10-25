@@ -27,6 +27,8 @@ export interface AppDeps {
   now?: () => Date;
   /** 生产：前端构建产物目录，由同一服务提供页面；开发时为空（页面由 Vite 提供）。 */
   staticDir?: string;
+  /** 镜像构建时的版本号（GAME_VERSION，与前端包里的一致），供 /api/version 让旧页面发现更新；本地开发为空。 */
+  gameVersion?: string | null;
   /** 实时 Slack 目录：补充保存名册外的同事；未配置时使用上次保存的名单。 */
   directory?: SlackDirectory | null;
   /** 新上传与删除申请保存后通知 Bob（Slack 私信）；未配置时不通知。 */
