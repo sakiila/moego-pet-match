@@ -15,7 +15,7 @@ export interface AchievementAvatarProps extends Omit<AvatarProps, 'size'> {
 export function AchievementAvatar({ equippedTitle, onTitleClick, revealed = true, ...avatar }: AchievementAvatarProps) {
   const { t } = useI18n();
   const title = equippedTitle ? t(achievementName(equippedTitle, revealed)) : '';
-  const badge = equippedTitle ? <Icon name={equippedTitle === 'hotpot' ? 'title-hotpot-showcase' : `title-${equippedTitle}-avatar`} size={22} label={onTitleClick ? undefined : title} effect={equippedTitle === 'hotpot' ? 'glint' : undefined} /> : null;
+  const badge = equippedTitle ? <Icon name={equippedTitle === 'hotpot' ? 'title-hotpot-showcase' : `title-${equippedTitle}-avatar`} size={22} label={onTitleClick ? undefined : title} effect={equippedTitle === 'hotpot' ? 'aurora' : undefined} /> : null;
   return (
     <span className={styles.root}>
       <Avatar {...avatar} size={40} />

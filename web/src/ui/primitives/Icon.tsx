@@ -29,8 +29,8 @@ export interface IconProps {
   /** 只有图标、没有文字时必须提供，作为读屏名称；旁边已有文字时省略，读屏跳过图标。 */
   label?: string;
   className?: string;
-  /** 保留原 PNG，按其透明轮廓叠加流光；小尺寸仅轻闪。 */
-  effect?: 'aurora' | 'glint';
+  /** 保留原 PNG，所有尺寸按透明轮廓叠加同一套流光与星芒。 */
+  effect?: 'aurora';
 }
 
 /**
@@ -65,10 +65,10 @@ export function Icon({ name, size = 24, label, className, effect }: IconProps) {
   return <span className={`${styles.effect} ${className ?? ''}`} data-icon-effect={effect}
     style={{ width, height: size, '--icon-effect-mask': `url("${src}")` } as CSSProperties}>
     {art}
-    {effect === 'aurora' && <span className={styles.light} aria-hidden>
+    <span className={styles.light} aria-hidden>
       <span className={styles.sheen} />
       <span className={styles.starTop} />
       <span className={styles.starSides} />
-    </span>}
+    </span>
   </span>;
 }

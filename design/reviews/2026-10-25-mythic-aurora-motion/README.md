@@ -21,3 +21,12 @@
 - 证据：`/tmp/moego-aurora-shelf-sweep.png`、`/tmp/moego-aurora-shelf-stars.png`、`/tmp/moego-aurora-shelf-en-320.png`、`/tmp/moego-aurora-profile-hidden-tooltip.png`、`/tmp/moego-aurora-real-locked-viewer.png`、`/tmp/moego-aurora-reduced-motion.png`。
 - 291 项前端 Vitest、8 项版本测试、209 项服务端 Vitest、前后端类型检查与前端构建通过。独立只读代码审查无阻断项。
 - 测试身份/示例头像 404 按原有逻辑回退首字母，无新增运行异常；构建保留原有大 chunk 提示。未做真机或跨浏览器验证。
+
+
+## 补充：所有展示尺寸统一完整动效 · 2026-10-26
+
+用户要求所有展示火锅搭子徽章的地方都有相同动效，包括头像旁边。移除上一版对 22px 头像和 24px 称号签的轻闪分支，统一使用流光与星芒三层动画；原图、尺寸、布局及隐藏名称口径不变。
+
+- 9 项组件测试通过，覆盖首页菜单头像、排行榜、领奖台、名片徽章/称号签、结算收获和新解锁展示；修复前其中 5 项失败，统一后全部通过。
+- 浏览器陈列页实测 22 / 24 / 48 / 56 / 72px 均为同一套三层 6000ms 动画；实际首页 22px 角标同样三层运行。截图：`/tmp/moego-aurora-all-sizes.png`、`/tmp/moego-aurora-home-avatar.png`。
+- 临时激活 reduced-motion CSS 分支后，各尺寸动画均为 0，光效层隐藏。类型检查、构建和 diff 检查通过。原大包提示保留；本次未改服务端或运行真机验证。

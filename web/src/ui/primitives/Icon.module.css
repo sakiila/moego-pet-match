@@ -39,9 +39,6 @@
   background: var(--achievement-mythic-star-sides);
   animation: auroraStars var(--achievement-mythic-cycle) var(--achievement-mythic-star-delay) ease-in-out infinite;
 }
-.effect[data-icon-effect='glint'] .art {
-  animation: auroraGlint var(--achievement-mythic-cycle) ease-in-out infinite;
-}
 
 @keyframes auroraSweep {
   0%, 12% { transform: translateX(-100%); opacity: 0; }
@@ -53,14 +50,7 @@
   0%, 35%, 72%, 100% { opacity: 0; }
   48% { opacity: var(--achievement-mythic-star-opacity); }
 }
-@keyframes auroraGlint {
-  0%, 35%, 70%, 100% { opacity: 1; }
-  45% { opacity: var(--achievement-mythic-glint-opacity); }
-  53% { opacity: 1; }
-  60% { opacity: var(--achievement-mythic-glint-opacity); }
-}
 @media (prefers-reduced-motion: reduce) {
-  .effect[data-icon-effect='glint'] .art { animation: none; }
   .light { display: none; }
   .sheen, .starTop, .starSides { animation: none; }
 }

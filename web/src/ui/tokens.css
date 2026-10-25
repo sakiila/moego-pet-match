@@ -173,7 +173,6 @@
   --achievement-mythic-sweep: linear-gradient(115deg, transparent 30%, rgb(65 224 240 / 0.08) 40%, rgb(255 255 255 / 0.92) 49%, rgb(186 246 255 / 0.4) 53%, transparent 65%);
   --achievement-mythic-sweep-opacity: 0.48;
   --achievement-mythic-star-opacity: 0.75;
-  --achievement-mythic-glint-opacity: 0.72;
   --achievement-mythic-star-top: radial-gradient(ellipse at 50% 8%, white, rgb(65 224 240 / 0.45) 3%, transparent 11%);
   --achievement-mythic-star-sides: radial-gradient(ellipse at 11% 23%, white, transparent 9%), radial-gradient(ellipse at 89% 23%, rgb(186 246 255 / 0.9), transparent 9%), radial-gradient(ellipse at 8% 84%, rgb(186 246 255 / 0.8), transparent 9%), radial-gradient(ellipse at 92% 84%, white, transparent 9%);
   /* 未解锁隐藏称号的灰蒙层 */
