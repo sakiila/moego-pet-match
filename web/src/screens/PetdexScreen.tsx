@@ -7,6 +7,7 @@ import { EmptyState } from '../components/EmptyState/EmptyState';
 import { PetCard } from '../components/PetCard/PetCard';
 import { StickerSheet } from '../components/StickerSheet/StickerSheet';
 import { browseCollection, sheetCollection, type CollectionFilter } from '../game/collection';
+import { isDeveloperPet } from '../game/easterEggs';
 import { avatarUrl, preloadImage, silhouetteUrl, stickerUrl } from '../game/pets';
 import { usePetDetail } from '../game/usePetDetail';
 import { useI18n } from '../i18n';
@@ -108,6 +109,7 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
               collected={p.collected}
               imageSrc={p.collected ? stickerUrl(p.petId, 512) : silhouetteUrl(p.petId, 512)}
               owner={p.collected && p.owner ? { ...p.owner, avatarSrc: avatarUrl(p.owner.userId) } : null}
+              developer={isDeveloperPet(p.petId)}
               onOpen={(el) => void detail.show(p.petId, p.name, el)}
             />
           ))}

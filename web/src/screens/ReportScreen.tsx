@@ -138,6 +138,7 @@ export function ReportScreen(props: ReportScreenProps) {
           quiz={saved.quiz}
           pet={pets[kindOf(saved.quiz.petId)]}
           kind={kindOf(saved.quiz.petId)}
+          developer={isDeveloperPet(saved.quiz.petId)}
           onAnswer={async (choice) => {
             const result = await onAnswerQuiz(saved.quiz!.quizId, choice);
             setQuizResult(result);

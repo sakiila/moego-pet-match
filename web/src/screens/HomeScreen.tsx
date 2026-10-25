@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { DailyManager, PlayerView } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { ManagerCard } from '../components/ManagerCard/ManagerCard';
-import { managerLineKey } from '../game/easterEggs';
+import { DEVELOPER_PETS, managerLineKey } from '../game/easterEggs';
 import { NavTile } from '../components/NavTile/NavTile';
 import { PageLinks } from '../components/PageLinks/PageLinks';
 import { PlayerMenu } from '../components/PlayerMenu/PlayerMenu';
@@ -55,7 +55,7 @@ export function HomeScreen({ player, manager, onOpenShop, onCollection, onLeader
         <NavTile icon="leaderboard" label={t('nav.leaderboard')} onClick={onLeaderboard} />
         <NavTile icon="my-pets" label={t('nav.my_pets')} onClick={onMyPets} />
       </nav>
-      <PhotoNotice />
+      <PhotoNotice faces={DEVELOPER_PETS.map((id) => stickerUrl(id, 128))} />
       <PageLinks
         links={[
           { label: t('info.use_link'), onClick: () => onInfo(false), testId: 'link-info' },

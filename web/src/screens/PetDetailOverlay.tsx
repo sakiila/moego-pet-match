@@ -1,4 +1,5 @@
 import { PetDetailCard } from '../components/PetDetailCard/PetDetailCard';
+import { isDeveloperPet } from '../game/easterEggs';
 import { avatarUrl, photoUrl, silhouetteUrl, stickerUrl } from '../game/pets';
 import { useDeletionRequest } from '../game/useDeletionRequest';
 import type { OpenPet } from '../game/usePetDetail';
@@ -29,6 +30,7 @@ export function PetDetailOverlay({ pet, playerId, onClose, onRetry, onOpenShop, 
         photoSrc={detail?.hasPhoto ? photoUrl(pet.petId, playerId) : null}
         ownerAvatarSrc={detail?.owner ? avatarUrl(detail.owner.userId) : null}
         colleagueAvatarSrc={avatarUrl}
+        developer={isDeveloperPet(pet.petId)}
         origin={pet.origin}
         onClose={onClose}
         onRetry={() => onRetry(pet.petId, pet.name)}

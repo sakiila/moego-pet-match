@@ -281,6 +281,24 @@
   color: var(--color-brand);
 }
 
+/* 开发者认证章：压在贴纸右上角，向右略倾；不挡脸 */
+.art .devStamp {
+  position: absolute;
+  top: -6%;
+  right: -10%;
+  width: 38%;
+  height: auto;
+  rotate: 10deg;
+  pointer-events: none;
+}
+
+/* 主人行里的「本游戏开发者」：次要层级 */
+.ownerRole {
+  color: var(--color-brand-strong);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
 .name {
   margin: 0;
   font-size: var(--text-xl);

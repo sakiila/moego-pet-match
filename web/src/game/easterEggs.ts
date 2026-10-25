@@ -8,6 +8,9 @@ import { HOTPOT_PETS } from './achievementRules';
  */
 const [MAODU, BOLUO] = HOTPOT_PETS;
 
+/** 两只的名录 id（毛肚在前），首页页尾等处按此顺序放小头像。 */
+export const DEVELOPER_PETS: readonly string[] = HOTPOT_PETS;
+
 export const isDeveloperPet = (petId: string) => petId === MAODU || petId === BOLUO;
 
 /** 今日店长的宣言：毛肚、菠萝各有一句店长梗，其他宠物用通用模板台词。 */

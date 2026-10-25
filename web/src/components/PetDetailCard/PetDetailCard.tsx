@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from
 import { createPortal } from 'react-dom';
 import type { PetDetail } from '../../api/types';
 import { quoteExcerpt } from '../../game/collection';
+import { developerStampUrl } from '../../game/titleStamps';
 import { useI18n } from '../../i18n';
 import { Avatar } from '../../ui/primitives/Avatar';
 import { AvatarStack } from '../../ui/primitives/AvatarStack';
@@ -36,6 +37,8 @@ export interface PetDetailCardProps {
   onRequestRemoval?: () => void;
   /** 陈列页：不飞行、不遮罩全屏，直接静态展示。 */
   inline?: boolean;
+  /** 开发者彩蛋：毛肚、菠萝的卡正面右上盖「开发者家的认证」章（未收集也盖），主人行追加「本游戏开发者」（game/easterEggs）。 */
+  developer?: boolean;
 }
 
 const OPEN_MS = 640;
@@ -258,10 +261,12 @@ function Front({
   colleagueAvatarSrc,
   previewSrc,
   previewCollected,
+  developer = false,
 }: PetDetailCardProps & { previewSrc: string | null; previewCollected: boolean }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const detail = state.kind === 'ready' ? state.detail : null;
   const full = !!detail && (detail.collected || detail.own);
+  const stamp = developer ? developerStampUrl(locale) : null;
   // 大图地址一开始就按被点卡片的收集状态定下，读取完成后通常不变，飞行途中不换图；
   // 起点卡片的小图（如贴纸册 128）垫在下面，大图解码完成盖上后再撤掉，不闪空白
   const src = detail ? (full ? stickerSrc : silhouetteSrc) : previewSrc ? (previewCollected ? stickerSrc : silhouetteSrc) : null;
@@ -273,6 +278,7 @@ function Front({
         {underlay && <img className={styles.underlay} src={underlay} alt="" draggable={false} />}
         {src && <img src={src} alt="" draggable={false} decoding="async" onLoad={() => setLoadedSrc(src)} />}
         {full && <Sparks />}
+        {stamp && <img className={styles.devStamp} src={stamp} alt={t('report.developer_certified')} draggable={false} data-testid="detail-developer" />}
       </div>
       <h2 className={styles.name}>{detail?.name ?? name}</h2>
       {/* 主人行始终占位：读取完成后出现时，名字不会被顶得跳一下 */}
@@ -281,6 +287,7 @@ function Front({
           <span className={styles.owner}>
             <Avatar name={detail.owner.name} seed={detail.owner.userId} src={ownerAvatarSrc} size={32} />
             {t('pet.owner')} {detail.owner.name}
+            {developer && <span className={styles.ownerRole}>· {t('pet.owner_developer')}</span>}
           </span>
         )}
       </div>

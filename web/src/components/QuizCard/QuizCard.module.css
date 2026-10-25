@@ -64,6 +64,15 @@
   font-weight: 900;
 }
 
+/* 开发者彩蛋的补充一句：另起一行、次要层级 */
+.aside {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-brand-strong);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+
 .skip {
   justify-self: end;
   padding: 4px 8px;

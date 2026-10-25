@@ -10,3 +10,23 @@
   line-height: 1.5;
   color: var(--color-ink-muted);
 }
+
+/* 两只小头像并排、略微叠在一起，占位与相机图标相当 */
+.faces {
+  display: flex;
+  flex: none;
+  align-items: center;
+}
+
+.face {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--color-paper);
+  background: var(--color-paper);
+  object-fit: cover;
+}
+
+.face + .face {
+  margin-left: -10px;
+}

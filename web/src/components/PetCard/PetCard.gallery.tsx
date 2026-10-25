@@ -16,6 +16,13 @@ const entry: GalleryEntry = {
           <PetCard name="7-Eleven" collected={false} imageSrc="/img/silhouettes/pet_c7ad902c2024/512" onOpen={() => {}} />
         </>,
       ),
+    'developer egg: Maodu (collected) / Boluo (not collected)': () =>
+      grid(
+        <>
+          <PetCard name="Maodu 毛肚" collected imageSrc="/img/pets/pet_644053d683e0/512" owner={{ name: 'Bob 包博', userId: 'U03FPQWGTN2', avatarSrc: '/img/avatars/U03FPQWGTN2' }} developer onOpen={() => {}} />
+          <PetCard name="Boluo 菠萝" collected={false} imageSrc="/img/silhouettes/pet_2f55c03f6968/512" developer onOpen={() => {}} />
+        </>,
+      ),
     'long names / image error': () =>
       grid(
         <>

@@ -24,13 +24,14 @@ const detail: PetDetail = {
   },
 };
 
-const card = (state: PetDetailState, name = 'Sanxian', removable = false) => (
+const card = (state: PetDetailState, name = 'Sanxian', removable = false, developer = false, petId = id) => (
   <PetDetailCard
     inline
     name={name}
     state={state}
-    stickerSrc={`/img/pets/${id}/512`}
-    silhouetteSrc={`/img/silhouettes/${id}/512`}
+    developer={developer}
+    stickerSrc={`/img/pets/${petId}/512`}
+    silhouetteSrc={`/img/silhouettes/${petId}/512`}
     photoSrc={state.kind === 'ready' && state.detail.hasPhoto ? `/img/photos/${id}?playerId=U_TEST_BOB` : null}
     ownerAvatarSrc="/img/avatars/U_TEST_BOB"
     colleagueAvatarSrc={(userId) => `/img/avatars/${userId}`}
@@ -56,6 +57,10 @@ const entry: GalleryEntry = {
     'own pet · nobody yet (known-by hidden)': () =>
       card({ kind: 'ready', detail: { ...detail, own: true, collected: false, knownBy: { count: 0, recent: [] } } }, 'Sanxian', true),
     uncollected: () => card({ kind: 'ready', detail: { ...detail, collected: false, owner: null, quote: null, hasPhoto: false, knownBy: null } }),
+    'developer egg · Maodu collected (stamp + developer owner line)': () =>
+      card({ kind: 'ready', detail: { ...detail, petId: 'pet_644053d683e0', name: 'Maodu 毛肚', owner: { userId: 'U03FPQWGTN2', name: 'Bob 包博' }, quote: '别点我，我在踩键盘写代码。' } }, 'Maodu 毛肚', false, true, 'pet_644053d683e0'),
+    'developer egg · Boluo not collected (stamp on silhouette)': () =>
+      card({ kind: 'ready', detail: { ...detail, petId: 'pet_2f55c03f6968', name: 'Boluo 菠萝', collected: false, owner: null, quote: null, hasPhoto: false, knownBy: null } }, 'Boluo 菠萝', false, true, 'pet_2f55c03f6968'),
     loading: () => card({ kind: 'loading' }),
     failed: () => card({ kind: 'failed' }),
     unlisted: () => card({ kind: 'unlisted' }),

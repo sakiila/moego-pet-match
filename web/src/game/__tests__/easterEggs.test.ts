@@ -37,6 +37,14 @@ describe('开发者彩蛋', () => {
     expect(translate('en', 'achievement.hotpot')).toBe('Hotpot Buddies');
   });
 
+  it('图鉴、猜主人与页尾的身份文案都点明开发者', () => {
+    expect(translate('zh', 'pet.owner_developer')).toBe('本游戏开发者');
+    expect(translate('zh', 'quiz.developer_correct')).toContain('写这个游戏');
+    expect(translate('en', 'quiz.developer_incorrect')).toMatch(/developer/i);
+    expect(translate('zh', 'home.photo_notice')).toContain('毛肚和菠萝的铲屎官');
+    expect(translate('zh', 'achievement.hotpot_condition')).toContain('开发者家的');
+  });
+
   it('开发者认证章中英文图片都存在', () => {
     expect(developerStampUrl('zh')).toMatch(/developer-zh/);
     expect(developerStampUrl('en')).toMatch(/developer-en/);

@@ -32,6 +32,9 @@ const entry: GalleryEntry = {
       <QuizCard quiz={quiz} pet={PLACEHOLDER_PETS[0]} kind={0} onAnswer={reveal} />
     ),
     'answer fails → can retry': () => <QuizCard quiz={quiz} pet={PLACEHOLDER_PETS[0]} kind={0} onAnswer={() => Promise.reject(new Error('down'))} />,
+    'developer egg: Maodu question (answer to see the extra line)': () => (
+      <QuizCard quiz={{ ...quiz, petId: 'pet_644053d683e0', petName: 'Maodu 毛肚', options: [{ userId: 'U1', name: 'Alice Chen' }, { userId: 'U2', name: 'Bob 包博' }, { userId: 'U3', name: 'Samantha Sullivan' }] }} pet={{ ...PLACEHOLDER_PETS[1], name: 'Maodu 毛肚' }} kind={1} developer onAnswer={async (c) => ({ ...(await reveal(c)), owner: { userId: 'U2', name: 'Bob 包博' } })} />
+    ),
   },
 };
 export default entry;

@@ -126,7 +126,7 @@
 | home.streak_active | 连续 {days} 天开工 · 今天已打卡 | {days}-day streak · clocked in today |
 | home.streak_pending | 连续 {days} 天开工 · 今天还没开工 | {days}-day streak · not clocked in yet today |
 | home.streak_none | 今天开一局，打卡从今天算起 | Play a round today to start your streak |
-| home.photo_notice | 宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob | Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack. |
+| home.photo_notice | 宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob（毛肚和菠萝的铲屎官） | Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack (Maodu and Boluo's human). |
 
 首页主按钮共用「开始营业 / Open Shop」，进入普通宠物局准备，不直接开始计时；次级入口沿用图鉴、排行榜、我的宠物。个人最好只展示普通宠物局记录，不将鱼关成绩混入首页字段。人工处理提示保留用户指定原句，首页没有鱼关入口或解锁预告。
 
@@ -289,6 +289,7 @@
 | collection.sheet_preview | 贴纸册图片预览 | Sticker Album Preview |
 | pet.unlock_hint | 棋盘上服务过 TA，完整收工、成绩保存成功后，就会自动收集。 | Serve this pet on the board and finish the round. They'll join your collection automatically once your result is saved. |
 | pet.owner | 主人 | Owner |
+| pet.owner_developer | 本游戏开发者 | the game's developer |
 | pet.original_photo | 翻面看原图 | Flip for the Original Photo |
 | pet.owner_quote | 主人说 | A Word from Home |
 | pet.unlisted | 这位伙伴已下架，回图鉴看看其他伙伴吧。 | This pet is no longer listed. Browse the rest of the collection. |
@@ -324,6 +325,8 @@
 | quiz.question | {petName} 的家长是谁？ | Who is {petName}'s human? |
 | quiz.correct | 认亲成功！总分 +{points} | You Found Their Human! +{points} points |
 | quiz.incorrect | 差一点！原来是 {ownerName}。 | Not quite! It's {ownerName}. |
+| quiz.developer_correct | 没错，就是写这个游戏的那位。 | Yep, the one who built this game. |
+| quiz.developer_incorrect | 它们可是开发者家的猫。 | They're the developer's cats. |
 | quiz.skip | 跳过 | Skip |
 
 题目、答对、答错与跳过四处文案已确认。答题后在原卡片揭晓真实主人头像与名字，错误反馈不责备玩家；可跳过，不增加确认步骤，也不影响本局成绩与下一局。文案不承诺答题奖励。
@@ -550,7 +553,7 @@
 | achievement.neighbors_condition | 主人 · {current} / {target} 位 | Owners · {current} / {target} |
 | achievement.family_condition | 多宠家庭 · {current} / {target} 个 | Pet families · {current} / {target} |
 | achievement.album_condition | 当期名册 · {current} / {target} 只 | Catalog · {current} / {target} |
-| achievement.hotpot_condition | 同一局服务到毛肚和菠萝 | Served Maodu and Boluo in one game |
+| achievement.hotpot_condition | 同一局服务到开发者家的毛肚和菠萝 | Served the developer's Maodu and Boluo in one game |
 | achievement.unlock_condition | 解锁条件 | Unlock Condition |
 | achievement.view_condition | 查看「{title}」的解锁条件 | View the unlock condition for {title} |
 | achievement.cats_unlock | 收集 {target} 只不同的猫。 | Collect {target} different cats. |
@@ -560,7 +563,7 @@
 | achievement.neighbors_unlock | 收集来自 {target} 位不同主人的宠物。 | Collect pets from {target} different owners. |
 | achievement.family_unlock | 收齐 {target} 个多宠家庭的全部上架宠物，每家至少 2 只。 | Collect every listed pet from {target} multi-pet family with at least 2 listed pets. |
 | achievement.album_unlock | 收齐当期名册中全部上架的普通宠物。 | Collect every listed regular pet in the catalog at the time of unlocking. |
-| achievement.hotpot_unlock | 隐藏称号：同一局里把毛肚和菠萝都服务到。 | Hidden title: serve both Maodu and Boluo in the same game. |
+| achievement.hotpot_unlock | 隐藏称号：同一局里把开发者家的毛肚和菠萝都服务到。 | Hidden title: serve the developer's cats, Maodu and Boluo, in the same game. |
 | achievement.my_titles | 我的称号 | My Titles |
 | achievement.rarity_common | 闪耀 | Radiant |
 | achievement.rarity_rare | 卓越 | Outstanding |
