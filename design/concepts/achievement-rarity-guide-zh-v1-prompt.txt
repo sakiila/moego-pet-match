@@ -1,0 +1,29 @@
+Use case: precise localization of an approved UI mockup.
+Create ONE Chinese counterpart of the attached English design. IMAGE 1 is the exact chosen English design, achievement-rarity-guide-en-v5.png: the second displayed variant in the latest three-image set. Preserve that selected design, not any earlier version.
+
+Target canvas 1536 x 1024, the same 3:2 TOP CROP of a 390 x 260 logical-pixel mobile sheet. Show only the upper part: title, hint, rarity guide and unlocked-count bar. Do not add the achievement list, any lower row, any device bezel, browser chrome or external explanatory text.
+
+Keep the same white surface, rounded top corners, medal icon, close X button, hierarchy, margins, vertical spacing and gray summary bar. Preserve the thin continuous pastel-gradient rail, short matching stems and the single right-pointing arrowhead. Keep the five labels in the SAME alternating positions and ascending horizontal order as the reference: top / bottom / top / bottom / top. The rail remains quieter than the labels.
+
+Replace the text ONLY with these exact Chinese translations:
+"My Titles" -> "我的称号"
+"Unlock a title, then pick your favorite to wear." -> "解锁后，挑一个喜欢的挂上。"
+"Rarity: low to high" -> "稀有度由低到高"
+"Unlocked 8 / 8" -> "已解锁 8 / 8"
+"No Title" -> "不佩戴"
+
+Exact five-tier labels, once each, read LEFT TO RIGHT by their connector positions:
+Radiant -> "闪耀" (top left; coral pink fill, dark coral text)
+Outstanding -> "卓越" (lower next; pale violet fill, deep purple text)
+Extraordinary -> "非凡" (top middle; champagne peach fill, warm brown text)
+Legendary -> "传奇" (lower next; pastel rainbow fill, dark plum text)
+House Special -> "镇店之宝" (top right; electric blue-violet-cyan aurora fill, crisp white text, controlled soft glow)
+
+Adapt label widths naturally to the shorter Chinese text without changing the connecting stem positions or tier order. The four two-character labels should be about48 logical px wide, and 镇店之宝 about72px wide, all with the same24px logical height. Use bold rounded Chinese typography matching the existing MoeGo game, around12px logical for the labels, with no artificial letter spacing. Center all text inside the pills. Keep natural Chinese title and hint sizes appropriate to the reference. All five labels and their complete connector stems must be readable with balanced white space and no overlaps.
+
+Do not rename tiers, add tier descriptions, rank numbers, translations in parentheses, extra icons, decorations, controls, cards, accordions, tabs, filters, tooltips or new content. This is the Chinese localization of the same selected small rarity guide, not a redesign. Preserve the rest of the reference layout exactly, and do not increase its height.
+Current date is 2026-10-26; do not display a date.
+
+Generation record: Built-in image_gen, 2026-10-26. Reference: achievement-rarity-guide-en-v5.png, the user-selected second variant of the latest upper-section review. Output: achievement-rarity-guide-zh-v1.png. Upper-section Chinese localization only. Text checked against current zh.ts and local OCR; the five names are 闪耀、卓越、非凡、传奇、镇店之宝. No app code was changed. Awaiting review of the Chinese counterpart.
+
+Implementation record: On 2026-10-26 the user approved both the Chinese and English designs and explicitly authorized faithful implementation, self-testing and production push. Native SVG/CSS components recreate the guide; the images are visual references, not slices. See design/reviews/2026-10-26-rarity-rail/README.md.

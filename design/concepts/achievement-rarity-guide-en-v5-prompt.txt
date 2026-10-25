@@ -1,0 +1,26 @@
+Use case: precise UI concept revision, English rarity scale only.
+The attached image is the user's SELECTED third direction: a continuous horizontal rarity rail with five English labels alternating above and below. Develop ONE closely related variant, not a new screen design.
+
+OUTPUT FRAMING IS CRITICAL: Show ONLY the UPPER SECTION of this mobile sheet. Target canvas 1536 x 1024, representing a cropped 390 x 260 logical-pixel UI area. This is a landscape 3:2 TOP CROP, not the full portrait phone screen. Include the My Titles header, the existing hint, the small rarity scale and the gray unlocked-count bar. End the image just below that bar with a little white breathing space. Do not include ANY achievement-list card, badge row, pet art, partial list row or lower-page content. No phone bezel, browser chrome, OS bars, annotations or design-board titles.
+
+Keep the existing white surface, rounded top corners, medal icon, bold rounded "My Titles" header and X close control unchanged. Existing text verbatim:
+"My Titles"
+"Unlock a title, then pick your favorite to wear."
+"Rarity: low to high"
+"Unlocked 8 / 8"
+"No Title"
+
+Only vary the compact rarity guide. Keep the guide between the hint and the count bar, approximately 80-88 logical px high, within 358px usable width. No extra card around it.
+Use one CONTINUOUS LEFT-TO-RIGHT progression rail, with short connector stems and full English labels arranged in alternating upper/lower positions. Read by horizontal position, exact ascending order: Radiant, Outstanding, Extraordinary, Legendary, House Special.
+Preserve these names verbatim, once each, with no abbreviations, word splits, translations or explanatory tier copy. Use readable rounded bold label text around12px logical. Keep all five full labels visible together without scrolling or overlap.
+Preserve the five approved colors: Radiant coral pink/dark coral text; Outstanding pale violet/deep purple; Extraordinary champagne peach/warm brown; Legendary pastel rainbow/dark plum; House Special electric blue-violet-cyan aurora/white text with a controlled soft glow.
+Keep all unchanged header/hint/count-bar elements in the same positions and dimensions across the variations. Do not add ranks, numbers, extra icons, badges, descriptions, controls, tabs, accordions, filters, tooltips, captions, progress metrics or interactive elements. This guide explains relative rarity only.
+Current date is 2026-10-26; no date should be displayed.
+Direction: soft chromatic progression.
+Keep the same alternating labels and left-to-right order. Make the connector a thin, elegant pastel gradient rail that gently transitions through the same five existing rarity colors, with matching short stems; this is a connector, not a filled progress bar. Use a single subtle rightward arrow at the end rather than repeated arrowheads. Keep the labels word-fitted and slightly soften the middle-tier fills so the entire scale feels coordinated; preserve the House Special aurora pill as the highest emphasis. The line should visually connect the groups while staying quieter than the text. No dot markers or extra content.
+
+Generation record: Built-in image_gen, 2026-10-26. Reference: achievement-rarity-guide-en-v3.png, the third design selected by the user as the direction for further variants. Output: achievement-rarity-guide-en-v5.png. Displayed variant 2 in the current three-image review set. Upper section only: title, hint, rarity guide and unlocked-count bar. Original names, ordering and colors retained. No app code or selected-design records changed. Awaiting user selection.
+
+Selection record: On 2026-10-26 the user selected this second displayed upper-section variant and requested its corresponding Chinese design. The Chinese counterpart is achievement-rarity-guide-zh-v1.png, pending confirmation. No implementation or publishing requested in this design pass.
+
+Implementation record: On 2026-10-26 the user approved both the Chinese and English designs and explicitly authorized faithful implementation, self-testing and production push. Native SVG/CSS components recreate the guide; the images are visual references, not slices. See design/reviews/2026-10-26-rarity-rail/README.md.

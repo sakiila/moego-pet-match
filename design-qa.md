@@ -1,3 +1,37 @@
+# 中英稀有度渐变刻度验收 · 2026-10-26
+
+final result: passed
+
+## 对照基准与证据
+
+- 英文基准：`design/concepts/achievement-rarity-guide-en-v5.png`；中文基准：`design/concepts/achievement-rarity-guide-zh-v1.png`。两者均 1536 × 1024，对照时等比缩为 390 × 260。
+- 实际截图：`/tmp/moego-rarity-rail-en-final.png`、`/tmp/moego-rarity-rail-zh-final.png`，390 × 844、DPR 1，比较上部 390 × 260；英文窄屏 `/tmp/moego-rarity-rail-en-320-final.png`（320 × 844）。Chrome/bsk Agent Window，localhost:5180 陈列页，示例数据。
+- 完整同框：`/tmp/moego-rarity-rail-en-comparison-final.png`、`/tmp/moego-rarity-rail-zh-comparison-final.png`；图例局部同框：对应 `*-focus-final.png`。中英实测并排：`/tmp/moego-rarity-rail-bilingual-final.png`。
+
+## 对比与修正
+
+首轮图例填色、连接杆色和 caption 高度与选定稿有偏差；已在 RarityGuide 专属令牌中按参考取色，校准 caption 高度，不更改共享行内标签样式。后续截图只暂停图例自身的流光相位，不暂停弹层进场；一次误暂停整页产生的空白截图已丢弃并重截。最终同框确认渐变线与末端箭头、上/下交错、各语言标签宽高、顺序和文案一致；页面原标题、说明和计数栏继续沿用既有字体与组件，生成稿字形的细微差异未扩展为无关修改。
+
+## 五项视觉检查
+
+- 字体：原页面 MoeGo Rounded 与字号令牌保留，文案原样；没有为了强塞英文而缩写或分词。
+- 布局：图例高 86px，标签高 24px；英文宽 66/92/94/85/90px，中文宽 65/73/65/75/85px。连接点由数据顺序产生，边缘限制让 320px 英文同排最小间隙约 7px，全部文字完整。
+- 色值：渐变线九个采样色、连接杆及图例专用填色均在 tokens；保留五档配色和最高档光晕，未更改称号列表的标签。
+- 图片：图例为原生 SVG/CSS，渐变 ID 各实例独立；没有把设计图当作图片背景或切片使用。既有图标与徽章原稿不变。
+- 内容：中英五档名称与稀有度顺序不变，SVG/连接杆对读屏隐藏，ol 保留语义顺序。隐藏称号仍不泄露名称与条件。
+
+## 交互与边界
+
+- 390px 中英、320px 英文无横向溢出、同排重叠或文字裁切（Range 实测）。10 个并列图例的渐变 ID 均唯一。
+- 传奇 → 镇店之宝佩戴切换及禁用状态正确；未解锁状态没有佩戴按钮，图例和稀有度标签均保持 3000ms 流光。
+- 临时激活 reduced-motion CSS 后整表动画为 0；系统偏好未变，测试后语言恢复中文。
+- 327 项前端测试、8 项版本测试、类型检查、构建与 diff 检查通过，独立代码审查无阻断项。保留原大 chunk 提示。
+- 控制台出现浏览器异步消息通道关闭提示，页面与交互正常。未做真机、跨浏览器验证；未改服务端/引擎，未单独运行本地服务端测试。
+
+无尚需修复的 P0/P1/P2 项。
+
+---
+
 # 稀有度常驻图例与 3 秒流光验收 · 2026-10-26
 
 final result: passed

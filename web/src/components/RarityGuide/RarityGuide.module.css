@@ -1,8 +1,50 @@
 .guide { display: grid; gap: var(--space-1); min-width: 0; }
-.caption { margin: 0; color: var(--color-ink-muted); font-size: var(--text-xs); }
-.scale { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
-.item { display: inline-flex; align-items: center; gap: var(--space-1); flex: none; }
-.arrow { flex: none; width: var(--rarity-guide-arrow-size); color: var(--color-ink-muted); font-size: var(--text-xs); line-height: 1; text-align: center; }
-@media (max-width: 360px) {
-  .guide { --rarity-guide-chip-inset: var(--rarity-guide-chip-inset-narrow); }
+.caption { margin: 0; color: var(--color-ink-muted); font-size: var(--text-xs); line-height: var(--rarity-rail-caption-line); }
+.track { position: relative; height: var(--rarity-rail-height); min-width: 0; }
+.rail { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.rail path { fill: none; stroke-width: var(--rarity-rail-stroke); stroke-linecap: round; stroke-linejoin: round; }
+.scale { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
+.item {
+  --label-width: var(--rarity-rail-en-common-width);
+  --stem-color: var(--rarity-rail-stem-common);
+  position: absolute;
+  top: 0;
+  left: clamp(calc(var(--label-width) / 2), var(--rarity-position), calc(100% - var(--label-width) / 2));
+  width: var(--label-width);
+  height: 100%;
+  transform: translateX(-50%);
 }
+.item[data-rarity='rare'] { --label-width: var(--rarity-rail-en-rare-width); --stem-color: var(--rarity-rail-stem-rare); }
+.item[data-rarity='epic'] { --label-width: var(--rarity-rail-en-epic-width); --stem-color: var(--rarity-rail-stem-epic); }
+.item[data-rarity='legendary'] { --label-width: var(--rarity-rail-en-legendary-width); --stem-color: var(--rarity-rail-stem-legendary); }
+.item[data-rarity='mythic'] { --label-width: var(--rarity-rail-en-mythic-width); --stem-color: var(--rarity-rail-stem-mythic); }
+.guide[data-locale='zh'] .item[data-rarity='common'] { --label-width: var(--rarity-rail-zh-common-width); }
+.guide[data-locale='zh'] .item[data-rarity='rare'] { --label-width: var(--rarity-rail-zh-rare-width); }
+.guide[data-locale='zh'] .item[data-rarity='epic'] { --label-width: var(--rarity-rail-zh-epic-width); }
+.guide[data-locale='zh'] .item[data-rarity='legendary'] { --label-width: var(--rarity-rail-zh-legendary-width); }
+.guide[data-locale='zh'] .item[data-rarity='mythic'] { --label-width: var(--rarity-rail-zh-mythic-width); }
+.stem {
+  position: absolute;
+  left: calc(50% - var(--rarity-rail-stroke) / 2);
+  top: var(--rarity-rail-label-height);
+  width: var(--rarity-rail-stroke);
+  height: var(--rarity-rail-stem-height);
+  background: var(--stem-color);
+}
+.item .label[data-rarity] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  justify-content: center;
+  width: 100%;
+  height: var(--rarity-rail-label-height);
+  padding: 0 var(--space-1);
+}
+.item[data-side='below'] .stem { top: var(--rarity-rail-midpoint); }
+.item[data-side='below'] .label { top: calc(var(--rarity-rail-midpoint) + var(--rarity-rail-stem-height)); }
+.item .label[data-rarity='common'] { --tag-paint: var(--rarity-rail-common-fill); }
+.item .label[data-rarity='rare'] { --tag-paint: var(--rarity-rail-rare-fill); }
+.item .label[data-rarity='epic'] { --tag-paint: var(--rarity-rail-epic-fill); }
+.item .label[data-rarity='legendary'] { --tag-paint: var(--rarity-rail-legendary-fill); }
+.item .label[data-rarity='mythic'] { --tag-paint: var(--rarity-rail-mythic-fill); }
