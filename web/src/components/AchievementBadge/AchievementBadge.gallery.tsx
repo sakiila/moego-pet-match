@@ -7,4 +7,5 @@ const entry: GalleryEntry = { name:'AchievementBadge', group:'components', state
   'all badges': () => <div style={{ display:'flex', gap:16, flexWrap:'wrap' }}>{ACHIEVEMENT_DISPLAY_ORDER.map(id=><AchievementBadge key={id} id={id} large />)}</div>,
   'title chips · zh / en': () => <div style={{ display:'grid', gap:12 }}>{ACHIEVEMENT_DISPLAY_ORDER.map(id=><AchievementBadge key={id} id={id} chip />)}</div>,
   'locked': () => <AchievementBadge id="cats" locked large />,
+  'hidden (locked hotpot · mask + ?)': () => <div style={{ display:'flex', gap:16 }}><AchievementBadge id="hotpot" locked hidden large rarity /><AchievementBadge id="hotpot" locked hidden size={56} rarity /></div>,
 }}; export default entry;

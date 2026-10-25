@@ -531,7 +531,7 @@
 
 ### 永久收集成就与称号（2026-10-24）
 
-2026-10-25 开发者彩蛋：`achievement.hotpot*` 为隐藏称号「火锅搭子」，解锁前不展示；`rarity_mythic`「镇店」是新增的最高一档。`home.manager_line_maodu` / `_boluo`、`board.reunion_hotpot` 与 `report.developer_certified`（认证章的读屏文字）只在 Maodu 毛肚、Boluo 菠萝出现时使用，宠物名保留中英混写原文。
+2026-10-25 开发者彩蛋：`achievement.hotpot*` 为隐藏称号「火锅搭子」，解锁前在我的称号里用 `achievement.hidden_name` / `hidden_condition` 占位（灰蒙层 + 问号，只露稀有度）；`rarity_mythic`「镇店之宝」是新增的最高一档。`home.manager_line_maodu` / `_boluo`、`board.reunion_hotpot` 与 `report.developer_certified`（认证章的读屏文字）只在 Maodu 毛肚、Boluo 菠萝出现时使用，宠物名保留中英混写原文。
 
 | Key | 中文 | English |
 | --- | --- | --- |
@@ -566,7 +566,7 @@
 | achievement.rarity_rare | 卓越 | Outstanding |
 | achievement.rarity_epic | 非凡 | Extraordinary |
 | achievement.rarity_legendary | 传奇 | Legendary |
-| achievement.rarity_mythic | 镇店 | House Special |
+| achievement.rarity_mythic | 镇店之宝 | House Special |
 | achievement.wearing_named | 正在佩戴「{title}」 | Wearing {title} |
 | achievement.pick_hint | 解锁后，挑一个喜欢的挂上。 | Unlock a title, then pick your favorite to wear. |
 | achievement.unlocked_count | 已解锁 {count} / {total} | Unlocked {count} / {total} |
@@ -575,6 +575,8 @@
 | achievement.equip_named | 佩戴「{title}」 | Wear {title} |
 | achievement.wearing | 佩戴中 | Wearing |
 | achievement.locked | 未解锁 | Locked |
+| achievement.hidden_name | 隐藏称号 | Hidden Title |
+| achievement.hidden_condition | 达成神秘条件后揭晓 | Revealed when a secret condition is met |
 | achievement.no_score | 只改变展示，不影响分数 | Just for display. Your score stays the same. |
 | achievement.loading | 正在整理你的徽章… | Gathering your badges… |
 | achievement.load_failed | 徽章暂时没读到，请重试。 | We couldn’t load your badges. Please try again. |

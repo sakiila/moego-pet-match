@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { ColleagueResult, PlayerProfileView } from '../../api/types';
-import { ACHIEVEMENT_IDS, HIDDEN_ACHIEVEMENT_IDS } from '../../game/achievementRules';
+import { ACHIEVEMENT_IDS } from '../../game/achievementRules';
 import { ACHIEVEMENT_DISPLAY_ORDER } from '../../game/achievementRarity';
 import { useI18n } from '../../i18n';
 import { Avatar } from '../../ui/primitives/Avatar';
@@ -51,7 +51,7 @@ export function PlayerProfileCard({ player, view, error, onRetry, onClose, inlin
             <div><dd>{number(view.completedGames)}</dd><dt>{t('profile.games')}</dt></div>
           </dl>
           <section className={styles.section}>
-            <div className={styles.sectionHeading}><h3>{t('profile.badges')}</h3><span>{view.unlockedTitles.length} / {ACHIEVEMENT_IDS.filter(id => !HIDDEN_ACHIEVEMENT_IDS.includes(id) || view.unlockedTitles.includes(id)).length}</span></div>
+            <div className={styles.sectionHeading}><h3>{t('profile.badges')}</h3><span>{view.unlockedTitles.length} / {ACHIEVEMENT_IDS.length}</span></div>
             {unlockedTitles.length ? <ul className={styles.badges}>{unlockedTitles.map(id => <li key={id}>
               <PlayerProfileBadge id={id} />
             </li>)}</ul> : <p className={styles.hint}>{t('profile.no_badges')}</p>}

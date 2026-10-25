@@ -147,6 +147,8 @@
   --achievement-mythic-line: #ff9d6e;
   --achievement-mythic-gradient: linear-gradient(125deg, #ffb347, #ff5a1f 45%, #d61f3a 80%, #ffcf4d);
   --achievement-mythic-tag: linear-gradient(125deg, #ffe3b8, #ffc3b0);
+  /* 未解锁隐藏称号的灰蒙层 */
+  --achievement-hidden-mask: rgba(90, 84, 80, 0.55);
   --achievement-equip-width: 68px;
   --achievement-shelf-icon: 56px;
   --menu-icon-highlight: #ffb33d;

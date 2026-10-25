@@ -29,7 +29,7 @@ describe('永久收集成就与佩戴', () => {
   it('空记录不解锁；进度只返回汇总，不泄露主人与未收集家庭成员', async () => {
     const view = await profile('U_TEST_BOB');
     expect(view.equippedTitle).toBeNull();
-    expect(view.achievements).toHaveLength(7);
+    expect(view.achievements).toHaveLength(8);
     expect(view.achievements.every((a) => a.unlockedAt === null && a.current === 0)).toBe(true);
     expect(JSON.stringify(view)).not.toContain('owner0');
     expect(JSON.stringify(view)).not.toContain('a0');
@@ -42,7 +42,8 @@ describe('永久收集成就与佩戴', () => {
     expect(view.achievements.find((a) => a.id === 'neighbors')?.current).toBe(9);
     expect(view.equippedTitle).toBeNull();
     await collect('U_TEST_BOB', ['a10', 'a11']);
-    expect((await profile('U_TEST_BOB')).achievements.every((a) => a.unlockedAt)).toBe(true);
+    // 隐藏称号 hotpot 按单局判定，不随图鉴补发，此处仍是未解锁占位
+    expect((await profile('U_TEST_BOB')).achievements.filter((a) => a.id !== 'hotpot').every((a) => a.unlockedAt)).toBe(true);
   });
   it('拒绝佩戴未解锁或不存在的称号；可佩戴与摘下；排行榜同步展示', async () => {
     const url = '/api/players/U_TEST_ALICE/title';
@@ -122,13 +123,12 @@ describe('隐藏称号「火锅搭子」（开发者彩蛋）', () => {
     for (const [id, name] of [[maodu, 'Maodu 毛肚'], [boluo, 'Boluo 菠萝']]) await ctx.pool.query(
       `INSERT INTO pet_match.pets(pet_id,name,status,species,owner_user_id,family_id) VALUES($1,$2,'published','猫','U_DEV','U_DEV') ON CONFLICT (pet_id) DO NOTHING`, [id, name]);
   });
-  it('解锁前列表里没有它，也不计入总数；只服务到一只不授予', async () => {
+  it('解锁前只是一个不带进度的占位（排在最后）；只服务到一只不授予', async () => {
     const before = await profile('U_TEST_ALICE');
-    expect(before.achievements.map((a) => a.id)).not.toContain('hotpot');
-    expect(JSON.stringify(before)).not.toContain('hotpot');
+    expect(before.achievements.at(-1)).toEqual({ id: 'hotpot', current: 0, target: 1, unlockedAt: null });
     const one = await play('U_TEST_ALICE', { [maodu]: 3 });
     expect(one.newAchievements).not.toContain('hotpot');
-    expect((await profile('U_TEST_ALICE')).achievements.some((a) => a.id === 'hotpot')).toBe(false);
+    expect((await profile('U_TEST_ALICE')).achievements.at(-1)?.unlockedAt).toBeNull();
   });
   it('同一局两只都服务到才授予；之后出现在列表末尾并可佩戴；再来一局不重复', async () => {
     const both = await play('U_TEST_ALICE', { [maodu]: 2, [boluo]: 1 });
@@ -145,7 +145,7 @@ describe('隐藏称号「火锅搭子」（开发者彩蛋）', () => {
   it('分两局各服务一只不算；补发（无来源对局）不授予', async () => {
     await play('U_TEST_BOB', { [maodu]: 2 });
     await play('U_TEST_BOB', { [boluo]: 2 });
-    expect((await profile('U_TEST_BOB')).achievements.some((a) => a.id === 'hotpot')).toBe(false);
+    expect((await profile('U_TEST_BOB')).achievements.find((a) => a.id === 'hotpot')?.unlockedAt).toBeNull();
     expect(await inTransaction(ctx.pool, (c) => syncAchievements(c, 'U_TEST_BOB', null, [maodu, boluo]))).toEqual([]);
   });
 });

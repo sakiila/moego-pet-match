@@ -8,3 +8,7 @@
 .chip[data-rarity='epic'] { --chip-gradient: var(--achievement-epic-gradient); }
 .chip[data-rarity='legendary'] { --chip-gradient: var(--achievement-rainbow); }
 .chip[data-rarity='mythic'] { --chip-gradient: var(--achievement-mythic-gradient); }
+/* 未解锁的隐藏称号：徽章灰显之外再盖一层灰蒙层与问号，只看得出轮廓与稀有度 */
+.badge[data-hidden] { position: relative; }
+.badge[data-hidden] > img { filter: grayscale(1) brightness(0.92); opacity: 0.55; }
+.mask { position: absolute; inset: 8%; display: grid; place-items: center; border-radius: 50%; background: var(--achievement-hidden-mask); color: var(--color-paper); font-size: var(--text-xl); font-weight: var(--weight-bold); line-height: 1; pointer-events: none; }

@@ -55,7 +55,7 @@ export async function syncAchievements(client: pg.PoolClient, playerId: string, 
 
 /**
  * 返回汇总进度，不返回未认识的宠物及主人关系。已获得的徽章保留当时目标与完成状态。
- * 隐藏成就解锁前不出现在列表里（也不计入总数），解锁后以已完成状态排在最后。
+ * 隐藏成就固定排在最后：解锁前只返回不带进度的占位（current 0 / target 1，界面显示「隐藏称号」与灰蒙层），解锁后以已完成状态返回。
  */
 export async function readAchievements(client: pg.PoolClient, playerId: string): Promise<AchievementView> {
   await syncAchievements(client, playerId);
@@ -63,9 +63,9 @@ export async function readAchievements(client: pg.PoolClient, playerId: string):
   const awards = await client.query('SELECT achievement_id,target_value,unlocked_at FROM pet_match.achievement_awards WHERE player_id=$1', [playerId]);
   const title = await client.query('SELECT equipped_title FROM pet_match.player_titles WHERE player_id=$1', [playerId]);
   const at = (award: { unlocked_at: Date }) => new Date(award.unlocked_at).toISOString();
-  const hidden = HIDDEN_ACHIEVEMENT_IDS.flatMap(id => {
+  const hidden = HIDDEN_ACHIEVEMENT_IDS.map(id => {
     const award = awards.rows.find(a => a.achievement_id === id);
-    return award ? [{ id, current: award.target_value, target: award.target_value, unlockedAt: at(award) }] : [];
+    return award ? { id, current: award.target_value, target: award.target_value, unlockedAt: at(award) } : { id, current: 0, target: 1, unlockedAt: null };
   });
   return {
     achievements: [

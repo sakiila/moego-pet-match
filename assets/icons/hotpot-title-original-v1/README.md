@@ -7,4 +7,4 @@
 - `preview.png`：深浅背景检查；`manifest.json`：原稿 SHA-256、裁切坐标、母版尺寸及哈希。
 - `extract.py`：确定性脚本（Pillow + NumPy），可重建本组。
 
-稀有度为新增最高一档「镇店 / House Special」（`--achievement-mythic-*`）。解锁条件：同一局里 Maodu 毛肚与 Boluo 菠萝都至少服务一次；解锁前不展示。见 GAME_FLOW「永久收集成就与佩戴称号」。
+稀有度为新增最高一档「镇店之宝 / House Special」（`--achievement-mythic-*`）。解锁条件：同一局里 Maodu 毛肚与 Boluo 菠萝都至少服务一次；解锁前在我的称号里以灰蒙层占位，只露稀有度。见 GAME_FLOW「永久收集成就与佩戴称号」。

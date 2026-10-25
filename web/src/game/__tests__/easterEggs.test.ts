@@ -33,7 +33,7 @@ describe('开发者彩蛋', () => {
     expect(servedHotpot([maodu])).toBe(false);
     expect(servedHotpot([])).toBe(false);
     expect(ACHIEVEMENT_RARITY.hotpot).toBe('mythic');
-    expect(translate('zh', 'achievement.rarity_mythic')).toBe('镇店');
+    expect(translate('zh', 'achievement.rarity_mythic')).toBe('镇店之宝');
     expect(translate('en', 'achievement.hotpot')).toBe('Hotpot Buddies');
   });
 

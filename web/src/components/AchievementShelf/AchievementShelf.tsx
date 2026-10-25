@@ -5,6 +5,7 @@ import { Icon } from '../../ui/primitives/Icon';
 import { StatusMessage } from '../StatusMessage/StatusMessage';
 import { AchievementBadge, achievementName, achievementCondition } from '../AchievementBadge/AchievementBadge';
 import { ACHIEVEMENT_DISPLAY_ORDER, ACHIEVEMENT_RARITY } from '../../game/achievementRarity';
+import { HIDDEN_ACHIEVEMENT_IDS } from '../../game/achievementRules';
 import styles from './AchievementShelf.module.css';
 
 export interface AchievementShelfProps {
@@ -37,12 +38,14 @@ export function AchievementShelf({ view, failed, saving, saveFailed, onRetry, on
               const unlocked = !!a.unlockedAt;
               const wearing = view.equippedTitle === a.id;
               const rarity = ACHIEVEMENT_RARITY[a.id];
-              return <li key={a.id} className={styles.row} data-rarity={rarity} data-wearing={wearing || undefined} data-locked={!unlocked || undefined}>
-                <AchievementBadge id={a.id} locked={!unlocked} size={56} rarity />
+              // 未解锁的隐藏称号：只露稀有度，名字换成「隐藏称号」、条件不揭晓、不画进度
+              const hidden = !unlocked && HIDDEN_ACHIEVEMENT_IDS.includes(a.id);
+              return <li key={a.id} className={styles.row} data-rarity={rarity} data-wearing={wearing || undefined} data-locked={!unlocked || undefined} data-hidden={hidden || undefined}>
+                <AchievementBadge id={a.id} locked={!unlocked} hidden={hidden} size={56} rarity />
                 <div className={styles.details}>
-                  <strong>{t(achievementName(a.id))}</strong>
-                  <span className={styles.condition}>{t(achievementCondition(a.id), { current: a.current, target: a.target })}</span>
-                  {!unlocked && <progress className={styles.progress} value={a.current} max={Math.max(1, a.target)} aria-label={t(achievementName(a.id))} />}
+                  <strong>{hidden ? t('achievement.hidden_name') : t(achievementName(a.id))}</strong>
+                  <span className={styles.condition}>{hidden ? t('achievement.hidden_condition') : t(achievementCondition(a.id), { current: a.current, target: a.target })}</span>
+                  {!unlocked && !hidden && <progress className={styles.progress} value={a.current} max={Math.max(1, a.target)} aria-label={t(achievementName(a.id))} />}
                 </div>
                 <span className={styles.rarity}>{t(`achievement.rarity_${rarity}`)}</span>
                 {unlocked ? <button className={styles.equip} type="button" disabled={saving || wearing} aria-pressed={wearing} onClick={() => onSelect(a.id)} aria-label={t(wearing ? 'achievement.wearing_named' : 'achievement.equip_named', { title: t(achievementName(a.id)) })}>{wearing ? t('achievement.wearing') : t('achievement.equip')}</button> : <span className={styles.locked}>{t('achievement.locked')}</span>}
