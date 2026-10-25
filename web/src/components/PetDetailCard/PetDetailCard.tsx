@@ -211,12 +211,13 @@ export function PetDetailCard(props: PetDetailCardProps) {
                   <Front {...props} state={state} previewSrc={hint.src} previewCollected={hint.collected} />
                   {decorated && <ShineRing />}
                   {decorated && <Twinkles />}
-                  {hasFlipSide && <FlipHint />}
+                  {/* 翻面图标只挂在当前朝上的一面：iOS Safari 会把背面的合成层子元素镜像透出来 */}
+                  {hasFlipSide && !flipped && <FlipHint />}
                 </div>
                 <div className={`${styles.face} ${styles.back}`} data-shine={decorated || undefined} data-testid="detail-back">
                   {full && detail ? <Back detail={detail} photoSrc={photoReady ? props.photoSrc : null} /> : <Pattern />}
                   {decorated && everFlipped && <ShineRing />}
-                  {hasFlipSide && <FlipHint />}
+                  {hasFlipSide && flipped && <FlipHint />}
                 </div>
               </div>
             </div>

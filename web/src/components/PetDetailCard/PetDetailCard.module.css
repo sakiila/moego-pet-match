@@ -114,6 +114,13 @@
   box-shadow: var(--shadow-soft);
 }
 
+/* iOS Safari：有自己合成层的子元素（动画的星光、光带、翻面图标）不继承父级的 backface-visibility，
+   翻到背面时会镜像透出来（背面左下角多一个翻面图标）；逐个声明一遍。 */
+.face * {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 /* 已收集：流动的亮闪闪边框（彩色光带绕卡片一圈）+ 角落星光。
    光带 = 固定的圆环遮罩 + 里面旋转的大块渐变；落地后才开始转（data-settled） */
 .face[data-shine] {
