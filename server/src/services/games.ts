@@ -27,12 +27,18 @@ export class GameError extends Error {
 /**
  * 登记新局：确认身份在名单内（鱼局需已解锁），抽 6 只上架宠物；
  * 种子按登记当天的北京自然日派生（每日同盘），日期一并记录供今日榜分组。
+ * random 只决定阵容抽样，返回 [0, 1)；测试传固定种子，生产用加密随机数。
  */
-export async function registerGame(pool: Pool, playerId: string, mode: GameMode, now = new Date()): Promise<RegisteredGame> {
+export async function registerGame(
+  pool: Pool,
+  playerId: string,
+  mode: GameMode,
+  now = new Date(),
+  random: () => number = () => randomInt(0, 2 ** 32) / 2 ** 32,
+): Promise<RegisteredGame> {
   const player = await loadPlayer(pool, playerId);
   if (!player) throw new GameError('not_found', 'player');
   if (mode === 'fish' && !player.progress.fishUnlocked) throw new GameError('locked');
-  const random = () => randomInt(0, 2 ** 32) / 2 ** 32;
   let lineup: LineupPet[];
   let ownPetIds: string[] = [];
   let uncollectedPetIds: string[] = [];

@@ -3,6 +3,8 @@ import type { RegisteredGame, ResultPayload } from '../../web/src/api/types.ts';
 import { buildApp } from '../src/app.ts';
 import { freshDatabase } from './helpers.ts';
 import { RULES, RULES_VERSION } from '../../web/src/engine/config.ts';
+import { createRng } from '../../web/src/engine/rng.ts';
+import { registerGame } from '../src/services/games.ts';
 
 let ctx: Awaited<ReturnType<typeof freshDatabase>>;
 beforeAll(async () => {
@@ -202,14 +204,16 @@ describe('登记的阵容来源', () => {
     await ctx.pool.query(`UPDATE pet_match.pets SET owner_user_id = 'U_TEST_SAM' WHERE pet_id IN ('mochi', 'tofu')`);
     // 不带自家宠物时也要有足够的他人宠物补满 6 种
     await ctx.pool.query(`INSERT INTO pet_match.pets (pet_id, name, status) VALUES ('extra1', 'Extra1', 'published'), ('extra2', 'Extra2', 'published')`);
+    // 固定种子：抽样比例由 lineup.test.ts 统计验证，这里只验证登记把规则接上、结果可复现
+    const rng = createRng(20261025);
     const seen = new Set<number>();
     for (let i = 0; i < 40; i++) {
-      const game = await register('U_TEST_SAM');
+      const game = await registerGame(ctx.pool, 'U_TEST_SAM', 'normal', new Date(), () => rng.next());
       expect(game.ownPetIds.length).toBeLessThanOrEqual(2);
       expect(game.ownPetIds.every((id) => game.lineup.some((p) => p.petId === id))).toBe(true);
       seen.add(game.ownPetIds.length);
     }
-    // 40 次中 0、1 只都应出现（2 只的概率 20%，大概率也出现）
-    expect(seen.has(0) && seen.has(1)).toBe(true);
+    // 40 次中 0、1、2 只都出现（同一种子结果固定）
+    expect([...seen].sort()).toEqual([0, 1, 2]);
   });
 });
