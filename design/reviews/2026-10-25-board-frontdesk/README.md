@@ -5,6 +5,8 @@
 
 ## 已确认图稿
 
+完整真实链路与保存验收已完成，见 [E2E.md](E2E.md)：加单成功、过期零服务、90秒后的最后连锁均通过，另修复手机转场横向撑宽。
+
 | 内容 | 文件 | 实际尺寸 |
 | --- | --- | --- |
 | 完整手机游戏页 | [mobile-board-frontdesk-v2.png](../../concepts/mobile-board-frontdesk-v2.png) | 853 × 1844 |

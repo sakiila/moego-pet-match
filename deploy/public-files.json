@@ -1,9 +1,7 @@
 {
   "mode": "full_history",
   "personal_information_publication_confirmed": true,
-  "source_head": "729accf951919239b7daa9604c6d0b62ecc35b44",
-  "history_commits_before_publication": 40,
-  "excluded": "credentials, private keys and git-ignored local data",
+  "original_history_commits": 40,
   "files": [
     ".claude/launch.json",
     ".dockerignore",
@@ -1710,6 +1708,7 @@
     "design/reviews/2026-10-24-title-stamps/report-fish-zh.png",
     "design/reviews/2026-10-24-title-stamps/report-zh.png",
     "design/reviews/2026-10-24-title-stamps/share-zh.png",
+    "design/reviews/2026-10-25-board-frontdesk/E2E.md",
     "design/reviews/2026-10-25-board-frontdesk/IMPLEMENTATION_PLAN.md",
     "design/reviews/2026-10-25-board-frontdesk/QA.md",
     "design/reviews/2026-10-25-board-frontdesk/README.md",
@@ -2796,5 +2795,6 @@
     "web/src/ui/tokens.css",
     "web/tsconfig.json",
     "web/vite.config.ts"
-  ]
+  ],
+  "excluded": "credentials, private keys and git-ignored local data"
 }
