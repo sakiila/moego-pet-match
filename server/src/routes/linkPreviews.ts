@@ -19,6 +19,15 @@ export function registerLinkPreviews(app: FastifyInstance, staticDir: string) {
   const images = new Map<string, ImageEntry>();
   let pendingImages = 0;
 
+  app.get('/share.jpg', async (request, reply) => {
+    reply.header('vary', 'User-Agent').header('cache-control', 'private, no-store');
+    // UA 只决定公开海报的表示，不作为身份验证或游戏访问豁免。
+    if (/^(?:slackbot-linkexpanding|slackbot|slack-imgproxy) /i.test(request.headers['user-agent'] ?? '')) {
+      return reply.sendFile('og.jpg');
+    }
+    return reply.redirect('/');
+  });
+
   app.get('/', async (request, reply) => {
     reply.header('cache-control', 'no-cache');
     const variant = (request.query as Record<string, unknown>).unfurl;

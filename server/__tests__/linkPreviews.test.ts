@@ -86,6 +86,61 @@ describe('普通 Slack 分享标签对照', () => {
   });
 });
 
+describe('原生海报分享入口', () => {
+  const url = '/share.jpg?v=trial';
+  const slackAgents = [
+    'Slackbot-LinkExpanding 1.0 (+https://api.slack.com/robots)',
+    'Slackbot 1.0 (+https://api.slack.com/robots)',
+    'Slack-ImgProxy 0.19 (+https://api.slack.com/robots)',
+  ];
+
+  it.each(slackAgents)('%s 获取完整 JPEG，且不缓存按 UA 区分的响应', async (agent) => {
+    const res = await app.inject({ method: 'GET', url, headers: { 'user-agent': agent, accept: 'text/html,*/*' } });
+    expect(res.statusCode).toBe(200);
+    expect(res.headers['content-type']).toContain('image/jpeg');
+    expect(res.rawPayload).toEqual(readFileSync(join(dist, 'og.jpg')));
+    expect(res.headers.vary).toBe('User-Agent');
+    expect(res.headers['cache-control']).toBe('private, no-store');
+    expect(res.headers.location).toBeUndefined();
+  });
+
+  it.each(['GET', 'HEAD'] as const)('普通浏览器的 %s 跳转到游戏首页，不接受任意跳转目标', async (method) => {
+    const res = await app.inject({ method, url: `${url}&next=https%3A%2F%2Fevil.test%2F`, headers: { 'user-agent': 'Mozilla/5.0', accept: 'text/html' } });
+    expect(res.statusCode).toBe(302);
+    expect(res.headers.location).toBe('/');
+    expect(res.headers.vary).toBe('User-Agent');
+    expect(res.headers['cache-control']).toBe('private, no-store');
+    expect(res.headers['content-type'] ?? '').not.toContain('image/');
+  });
+
+  it('缺少 UA 或仅在其他 UA 内含 Slack 字样时仍跳转游戏', async () => {
+    for (const agent of [undefined, 'Mozilla/5.0 Slackbot 1.0', 'Slackbot-Impostor 1.0']) {
+      const res = await app.inject({ method: 'GET', url, headers: agent ? { 'user-agent': agent } : {} });
+      expect(res.statusCode).toBe(302);
+      expect(res.headers.location).toBe('/');
+    }
+  });
+
+  it('Slack 的 HEAD 提供图片信息且没有响应体', async () => {
+    const res = await app.inject({ method: 'HEAD', url, headers: { 'user-agent': slackAgents[0] } });
+    expect(res.statusCode).toBe(200);
+    expect(res.headers['content-type']).toContain('image/jpeg');
+    expect(Number(res.headers['content-length'])).toBe(readFileSync(join(dist, 'og.jpg')).length);
+    expect(res.body).toBe('');
+    expect(res.headers['cache-control']).toBe('private, no-store');
+  });
+
+  it('支持 Slack 的 Range 探测，分段响应也禁止缓存', async () => {
+    const res = await app.inject({ method: 'GET', url, headers: { 'user-agent': slackAgents[0], range: 'bytes=0-1023' } });
+    expect(res.statusCode).toBe(206);
+    expect(res.headers['content-type']).toContain('image/jpeg');
+    expect(res.rawPayload).toEqual(readFileSync(join(dist, 'og.jpg')).subarray(0, 1024));
+    expect(res.headers['content-range']).toMatch(/^bytes 0-1023\//);
+    expect(res.headers['cache-control']).toBe('private, no-store');
+    expect(res.headers.vary).toBe('User-Agent');
+  });
+});
+
 describe('标准 oEmbed 表示', () => {
   it('photo 返回公开海报和真实原始尺寸', async () => {
     const res = await get(embedUrl(`${ORIGIN}/?unfurl=oembed-photo`));
