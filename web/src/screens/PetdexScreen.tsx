@@ -59,6 +59,7 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
   return (
     <main className={styles.screen}>
       <BrandHeader
+        title="collection"
         heading={t('nav.collection')}
         onBack={onBack}
         headingAction={

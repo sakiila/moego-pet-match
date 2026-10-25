@@ -9,11 +9,12 @@ import hallZhSrc from '../../ui/art/hall-title-zh.webp';
 import schedulingSrc from '../../ui/art/smart-scheduling.webp';
 import reportSrc from '../../ui/art/grooming-report-card.webp';
 import fishReportSrc from '../../ui/art/fish-report-card.webp';
+import collectionSrc from '../../ui/art/pet-collection.webp';
 import styles from './BrandHeader.module.css';
 
 export interface BrandHeaderProps {
-  /** game：游戏名；scheduling：Smart Scheduling；fish：鱼关；hall：光荣榜；report / fish-report：结算页字标。 */
-  title?: 'game' | 'scheduling' | 'fish' | 'hall' | 'report' | 'fish-report';
+  /** game：游戏名；scheduling：Smart Scheduling；fish：鱼关；hall：光荣榜；report / fish-report：结算页；collection：图鉴字标。 */
+  title?: 'game' | 'scheduling' | 'fish' | 'hall' | 'report' | 'fish-report' | 'collection';
   /** 标题下的一句说明。 */
   tagline?: MessageKey;
   /** 右上角额外内容（如当前身份头像）。 */
@@ -36,6 +37,12 @@ export interface BrandHeaderProps {
 export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack, headingAccent, headingAction, schedulingArt = false, boardArt = false }: BrandHeaderProps) {
   const { t, locale, setLocale } = useI18n();
   const report = title === 'report' || title === 'fish-report';
+  const collection = title === 'collection';
+  const pageHeading = heading ?? (collection ? t('nav.collection') : undefined);
+  const headingContent = collection
+    ? <img src={collectionSrc} alt={pageHeading} width={1080} height={208} />
+    : pageHeading;
+  const headingClass = `${styles.title} ${styles.heading} ${collection ? styles.collectionTitle : ''}`;
   const [lead, accent] =
     title === 'game'
       ? [t('brand.title_lead'), t('brand.title_accent')]
@@ -72,17 +79,17 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
           {trailing}
         </span>
       </div>
-      {heading && headingAccent ? (
+      {pageHeading && headingAccent ? (
         <h1 className={styles.title}>
-          {heading.split(' ')[0]} <em>{heading.split(' ').slice(1).join(' ')}</em>
+          {pageHeading.split(' ')[0]} <em>{pageHeading.split(' ').slice(1).join(' ')}</em>
         </h1>
-      ) : heading && headingAction ? (
-        <div className={styles.headingRow}>
-          <h1 className={`${styles.title} ${styles.heading}`}>{heading}</h1>
+      ) : pageHeading && headingAction ? (
+        <div className={`${styles.headingRow} ${collection ? styles.collectionRow : ''}`}>
+          <h1 className={headingClass}>{headingContent}</h1>
           {headingAction}
         </div>
-      ) : heading ? (
-        <h1 className={`${styles.title} ${styles.heading}`}>{heading}</h1>
+      ) : pageHeading ? (
+        <h1 className={headingClass}>{headingContent}</h1>
       ) : report ? (
         <h1 className={styles.reportTitle}>
           <img src={title === 'fish-report' ? fishReportSrc : reportSrc} alt={t(title === 'fish-report' ? 'fish.report_title' : 'report.title')} width={1080} height={title === 'fish-report' ? 393 : 307} />

@@ -146,6 +146,26 @@
   flex: none;
 }
 
+.collectionRow {
+  flex-wrap: wrap;
+}
+
+.collectionTitle {
+  flex: 1 0 var(--collection-wordmark-min-width);
+  max-width: var(--collection-wordmark-max-width);
+  line-height: 0;
+}
+
+.collectionTitle img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.collectionRow > :last-child {
+  margin-left: auto;
+}
+
 
 .schedulingTitle,
 .reportTitle {

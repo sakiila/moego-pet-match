@@ -175,6 +175,8 @@
   --board-play-padding: 4px;
   --board-play-max: 640px;
   --board-page-block: 12px;
+  --collection-wordmark-min-width: 144px;
+  --collection-wordmark-max-width: 360px;
   --board-page-gap: 12px;
   --board-page-min-height: 560px;
   --board-brand-height: 24px;

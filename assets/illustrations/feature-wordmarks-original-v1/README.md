@@ -23,4 +23,4 @@
 
 `source-crops/` 保存去底前原尺寸裁切；`reference/` 保存三张已确认预览和完整提示词；`extract.py` 为可复现的本地裁切与校验脚本，仅依赖 Pillow 和 NumPy。目录中的 SHA-256、裁切坐标、透明边界与白底回合成误差见 `manifest.json`。
 
-本目录保留独立素材母版。Smart Scheduling 已接入准备与游戏页；2026-10-25 Grooming Report Card 与 Fish Report Card 接入对应结算页，均由 `../build_web.py` 等比导出 WebP，通过 `BrandHeader` 使用。其余字标仍未接入页面。
+本目录保留独立素材母版。Smart Scheduling 已接入准备与游戏页；2026-10-25 Grooming Report Card 与 Fish Report Card 接入对应结算页，Pet Collection 接入图鉴页，均由 `../build_web.py` 等比导出 WebP，通过 `BrandHeader` 使用。My Pets 与 Leaderboard 字标仍未接入页面。
