@@ -26,7 +26,8 @@ ITEMS = {
     'ui/hall-laurel-left.png': ('hall-laurel-left', 72),
     'ui/hall-laurel-right.png': ('hall-laurel-right', 72),
     'ui/hall-cat.png': ('hall-cat', 240),
-    'ui/hall-dog.png': ('hall-dog', 240),
+    # v2 用内置 ImageGen 修复白毛被误去底，保留 v1 源文件作对照。
+    'ui/hall-dog-v2.png': ('hall-dog-v2', 240),
     # 皇冠 v2：端正、带白边（品红底出图，tools/remove_key.py 去底）
     'ui/hall-crown-v2.png': ('hall-crown', 144),
 }

@@ -68,7 +68,7 @@
 | 排行榜今日榜 | [mobile-leaderboard-daily-v1.png](concepts/mobile-leaderboard-daily-v1.png) | 2026-10-24 选定并接入；在实际排行页截图基础上，模式切换下加「今日榜 / 总榜」下划线标签（默认今日榜）、一行日期与「今天全公司同一盘棋」小字、表头改「今日最好」，其余不变；日历小图标用内联 SVG |
 | 报告今日名次 | [mobile-report-daily-rank-v1.png](concepts/mobile-report-daily-rank-v1.png) | 2026-10-24 选定并接入；小票内分数下方一条浅橙圆角小条：皇冠 + 「今日第 N 名 · 距第一还差 X 分」，次于分数；第 1 名与今天只有自己时各有一句（见 UI_COPY） |
 | 报告下一件事 | [mobile-report-next-up-v1.png](concepts/mobile-report-next-up-v1.png) | 2026-10-24 选定并接入；新收集卡与导航之间一条「毛孩子开口」气泡：左侧 MVP 小圆贴纸（浅橙底），白色圆角气泡带左指小尾巴、细炭黑描边与小偏移阴影，橙色小标签「下一件事」、一句第一人称预告、右下「去图鉴 ›」；实现时头像 44px、尾巴用 CSS 三角 |
-| 毛孩子光荣榜 | [hall-of-fame-title-zh-v2.png](concepts/hall-of-fame-title-zh-v2.png)、[hall-of-fame-title-en-v6.png](concepts/hall-of-fame-title-en-v6.png) | 2026-10-24 已确认并接入排行榜；中英标题字标、麦穗、两侧蓝猫与黑白狗贴纸（`hall-of-fame-laurel-v1`、`-cat-v1`、`-dog-v1`）；阶梯领奖台用 CSS；布局参考 `references/hall-of-fame-reference.webp`，不采用其中的鱼缸解锁提示 |
+| 毛孩子光荣榜 | [hall-of-fame-title-zh-v2.png](concepts/hall-of-fame-title-zh-v2.png)、[hall-of-fame-title-en-v6.png](concepts/hall-of-fame-title-en-v6.png) | 2026-10-24 已确认并接入排行榜；中英标题字标、麦穗、两侧蓝猫与黑白狗贴纸（`hall-of-fame-laurel-v1`、`-cat-v1`、`-dog-v1`）；2026-10-26 小狗改用[透明修复 v2](../assets/illustrations/ui/hall-dog-v2.png)，恢复被误抠的白毛，两侧贴纸向台阶后收进 4px 避免摇摆露缝；阶梯领奖台用 CSS；布局参考 `references/hall-of-fame-reference.webp`，不采用其中的鱼缸解锁提示 |
 | 补充图标 | [supplement-marks-original-v1.png](concepts/supplement-marks-original-v1.png) | 2026-10-24 已确认；选中小勾、向前箭头、未收集书签，补齐图标库缺口；已拆图接入游戏 |
 | 手机首次入口与身份确认 | [mobile-identity-v2.png](concepts/mobile-identity-v2.png) | 已确认；游戏名与 90 秒介绍、直接搜索与选中 Bob、默认头像、带名字的按钮与信息摘要，同页完成 |
 | 门店首页 | [home-v2.png](concepts/home-v2.png) | 开始营业按钮、今日店长、个人纪录、上传与图鉴入口；图中鱼缸区已取消，后续加入人工处理提示 |

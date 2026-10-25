@@ -24,11 +24,12 @@
 }
 
 .cat {
-  left: calc(-1 * var(--space-4));
+  /* 切边多藏入台阶一格间距，摇摆到端点时也不露出缺口。 */
+  left: calc(-1 * var(--space-4) + var(--space-1));
 }
 
 .dog {
-  right: calc(-1 * var(--space-4));
+  right: calc(-1 * var(--space-4) + var(--space-1));
   animation-delay: -1.7s;
 }
 
