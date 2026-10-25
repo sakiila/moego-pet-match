@@ -1,0 +1,24 @@
+Use case: ui-mockup. Redesign the LAYOUT of the MoeGo "毛孩子全明星" mobile Grooming Report Card into a calmer, slimmer page. Output ONE flat portrait screenshot EXACTLY 853 x 1844 pixels, no phone frame, no collage.
+
+References (style only, keep their design system exactly: fonts, MoeGo orange #F47721, charcoal, cream receipt with zigzag tear, rounded cards, sticker pets):
+- IMAGE1: current report top (header, title, receipt with score, a status chip, MVP block, quote, three stats).
+- IMAGE2: current report tail (receipt bottom, the "下一件事" speech bubble with a small cat avatar, three nav tiles, bottom buttons).
+- IMAGE3: an older report tail showing the "本局新收集 2" pet cards (Deedee, Koa style cards with pastel backgrounds) and the two bottom buttons.
+
+NEW PAGE STRUCTURE, top to bottom, exactly five blocks, generous but not wasteful spacing:
+
+1. Header as IMAGE1 (MoeGo logo, "回门店", "中 / EN"), then title "Grooming Report Card" and subtitle "这班辛苦啦，看看毛孩子怎么说。" exactly as IMAGE1.
+
+2. The cream receipt, SLIMMER than IMAGE1:
+   - "本局得分" and the big orange score "15,300"; top-right gray "本局结果已保存".
+   - Directly under the score ONE ROW of small pill tags (same pill family as IMAGE1's status chip, slightly smaller, they may wrap to a second line): an orange-outlined pill with a small flag icon "个人新纪录！"; a pale-orange pill with a tiny crown "今日第 2 名 · 差 1,240 分 ›" (the › hints it opens the leaderboard); a plain light-gray pill "打卡第 3 天". No separate rows for these any more.
+   - Dashed divider; then the MVP block exactly like IMAGE1 but about 20% smaller overall: pastel sticker tile with the ragdoll cat Little White, red flower title stamp overlapping the tile's top-right, bone label "本局 MVP：Little White", dashed quote bubble “这波连锁，把我梳服了。”.
+   - Dashed divider; the three stat rows "服务格数 746", "最高连锁 7", "工具发动次数 23" as in IMAGE1; barcode; zigzag tear edge.
+
+3. "本局收获" section: a heading row with "本局收获" left and a small orange link "去图鉴 ›" right. Below, ONE horizontal row of three equal cards: two new-pet cards (pastel background, sticker head, name "Deedee" and "Koa", like IMAGE3) and one new-badge card (white background, a round badge icon and the label "汪汪好朋友" under it, with a tiny orange "新称号" tag). Cards are compact (about 1/3 width each).
+
+4. The "下一件事" speech bubble exactly as IMAGE2 (small cat avatar left, white bubble with tail, orange small label "下一件事", quote text “群主位置给你留着，先把那 2 只猫认全。”, bottom-right "去图鉴 ›"). This is the ONLY block between the harvest section and the buttons: NO manager signature, NO three nav tiles.
+
+5. Bottom fixed buttons as IMAGE1: orange "再开一局" with paw icon, outlined "分享成绩" with share icon.
+
+Do NOT include: the three nav tiles (宠物图鉴 / 排行榜 / 回门店), the manager signature, the owner-quiz card, the fish invitation, any extra decorations or new copy beyond the strings given. Keep every Chinese string exactly as written and legible. The whole page must fit the 853x1844 frame with comfortable bottom spacing above the buttons.

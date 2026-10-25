@@ -53,13 +53,38 @@
   opacity: 0.7;
 }
 
+.head {
+  display: grid;
+  gap: var(--space-2);
+  padding-bottom: var(--space-3);
+  border-bottom: 2px dashed var(--color-line);
+}
+
 .top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--space-2);
-  padding-bottom: var(--space-3);
-  border-bottom: 2px dashed var(--color-line);
+}
+
+/* 状态标签一行：新纪录 / 今日名次 / 打卡，放不下就换行 */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-xs);
+}
+
+.streakTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-muted);
 }
 
 .scoreLabel {
@@ -93,23 +118,17 @@
   font-weight: normal;
 }
 
-/* 今天第一次打卡：今日名次小条下的一行小字 */
-.streak {
-  display: block;
-  margin-top: var(--space-2);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-bold);
-  color: var(--color-ink-muted);
-}
-
-/* 新纪录：小旗 + 橙色文字（report-marks-original-v4） */
+/* 新纪录：小旗 + 橙色描边小标签（report-marks-original-v4） */
 .record {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  margin-top: var(--space-1);
+  gap: 2px;
+  padding: 3px 10px 3px 4px;
+  border: 1.5px solid var(--color-brand);
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
   color: var(--color-brand);
-  font-size: var(--text-md);
+  font-size: var(--text-xs);
   font-weight: 900;
   animation: pop 560ms var(--ease-out) calc(var(--print-start) + var(--print-ms) + 100ms) both;
 }
@@ -138,20 +157,31 @@
   }
 }
 
+/* MVP 左右布局（mobile-report-slim-v1）：贴纸在左，名牌与评语在右，称号章压在贴纸右上 */
 .mvp {
   display: grid;
-  justify-items: center;
+  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+}
+
+.side {
+  display: grid;
   gap: var(--space-2);
+  min-width: 0;
 }
 
 .sticker {
-  width: min(56vw, 210px);
+  position: relative;
+  width: 100%;
   aspect-ratio: 1;
-  border-radius: 28%;
+  border-radius: 24%;
   background: var(--tint, var(--color-surface-muted));
 }
 
-.sticker img {
+/* 只作用于贴纸本体，不影响压在角上的称号章图片 */
+.sticker > img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -161,39 +191,42 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
-  padding: 4px 14px 4px 6px;
+  justify-self: start;
+  max-width: 100%;
+  padding: 4px 12px 4px 6px;
   border-radius: var(--radius-pill);
   background: #fbe7cf;
   font-weight: 900;
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
 }
 
 .review {
   margin: 0;
-  max-width: 300px;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   border: var(--stroke) dashed var(--color-ink);
   border-radius: var(--radius-lg);
   text-align: center;
-  font-size: var(--text-lg);
+  font-size: var(--text-md);
   font-weight: var(--weight-bold);
   line-height: 1.4;
 }
 
+/* 称号章压在贴纸右上角；圆形红章略微倾斜，像随手盖上去的 */
 .stamp {
   position: absolute;
-  top: 96px;
-  right: 6px;
-  /* 圆形红章略微倾斜，像随手盖上去的 */
+  top: -14px;
+  right: -26px;
+  z-index: 1;
   rotate: 8deg;
-  /* 称号框原图已自带倾斜，这里不再整体旋转 */
   animation: stamp 600ms var(--ease-out) calc(var(--print-start) + var(--print-ms) + 150ms) both;
 }
 
 .noMvp {
-  align-self: center;
-  /* 给绝对定位的称号章留出位置，避免压住鼓励文案 */
-  margin: calc(var(--space-6) * 3) 0 0;
-  padding: var(--space-4);
+  position: relative;
+  align-self: stretch;
+  margin: var(--space-4) 0 0;
+  padding: var(--space-5) var(--space-4) var(--space-4);
   border-radius: var(--radius-lg);
   background: var(--color-surface-muted);
   text-align: center;
@@ -309,6 +342,15 @@
   .bonus {
     animation: none;
   }
+}
+
+.noMvp p {
+  margin: 0;
+}
+
+.noMvp .stamp {
+  top: -22px;
+  right: -6px;
 }
 
 /* 原 MVP 已下架时的通用 MoeGo 爪印 */

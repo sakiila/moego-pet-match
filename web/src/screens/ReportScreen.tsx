@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { AchievementId, AchievementStatus, DailyManager, GameMode, QuizResult } from '../api/types';
-import { AchievementUnlocks } from '../components/AchievementUnlocks/AchievementUnlocks';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
-import { CollectionCards } from '../components/CollectionCards/CollectionCards';
 import { FishInvitation } from '../components/FishInvitation/FishInvitation';
-import { ManagerCard } from '../components/ManagerCard/ManagerCard';
 import { ModeMark } from '../components/ModeMark/ModeMark';
-import { NavTile } from '../components/NavTile/NavTile';
 import { NextUp } from '../components/NextUp/NextUp';
 import { QuizCard } from '../components/QuizCard/QuizCard';
+import { ReportHarvest } from '../components/ReportHarvest/ReportHarvest';
 import { SaveStatus, type SaveState } from '../components/SaveStatus/SaveStatus';
 import { UnderwaterBackdrop } from '../components/UnderwaterBackdrop/UnderwaterBackdrop';
 import { ScoreCard } from '../components/ScoreCard/ScoreCard';
@@ -34,7 +31,7 @@ export interface ReportScreenProps {
   onLeaderboard: () => void;
   onFishInvite: () => void;
   onAnswerQuiz: (quizId: string, choice: string | null) => Promise<QuizResult>;
-  /** 今日店长：零服务承接鼓励，报告末尾留形象与签名；读取失败时省略。 */
+  /** 今日店长：零服务时承接鼓励评语并作为「下一件事」的说话人；读取失败时省略。 */
   manager: DailyManager | null;
   onCollection: () => void;
   onOpenPet: (pet: PetInfo, el: HTMLElement) => void;
@@ -50,8 +47,10 @@ export interface ReportScreenProps {
 }
 
 /**
- * 完整 Report Card：分数立即显示，MVP 与称号随后出现，收获在保存成功后点亮；
- * 正文可滚动，底部固定「再开一局」。所有判定复用本局冻结结果。
+ * 完整 Report Card（mobile-report-slim-v1，五块）：小票（分数、状态标签行、MVP、称号章、统计）→
+ * 本局收获（新收集 + 新称号）→ 猜主人 → 尾声（鱼关邀请或下一件事，二选一）→ 再开 / 分享。
+ * 分数立即显示，MVP 与称号随后出现，收获在保存成功后点亮；所有判定复用本局冻结结果。
+ * 入口都挂在内容上：回门店在头部，今日榜挂在名次标签，图鉴挂在收获标题与预告气泡。
  */
 export function ReportScreen(props: ReportScreenProps) {
   const { mode, summary, pets, save, onRetry, onPlayAgain, onHome, onLeaderboard, onFishInvite, onAnswerQuiz, manager, onCollection, onOpenPet, onShare, loadStanding, loadAchievements } = props;
@@ -101,7 +100,7 @@ export function ReportScreen(props: ReportScreenProps) {
   const fish = mode === 'fish';
   const subtitle = fish ? 'fish.report_subtitle' : served ? 'report.subtitle' : 'report.generic_caption';
 
-  // 鱼报告：不涉及普通图鉴、竞猜、鱼关邀请与店长（服务端也不返回这些），导航为鱼关排行榜与回门店
+  // 鱼报告：不涉及普通图鉴、竞猜、鱼关邀请与预告（服务端也不返回这些）；鱼榜从今日名次标签进入
   return (
     <main className={`${styles.screen} ${styles.withStickyActions} ${styles.afterPrint}`} data-theme={fish ? 'fish' : undefined}>
       {fish && <UnderwaterBackdrop />}
@@ -120,11 +119,17 @@ export function ReportScreen(props: ReportScreenProps) {
         host={mode === 'normal' && manager ? { name: manager.pet.name, stickerSrc: stickerUrl(manager.pet.petId, 512) } : null}
         standing={standing}
         streak={saved?.streak ?? null}
+        onStanding={onLeaderboard}
       />
       <SaveStatus state={save} onRetry={onRetry} />
-      {saved && <AchievementUnlocks ids={saved.newAchievements ?? []} equippedTitle={props.equippedTitle} onEquip={props.onEquipTitle} onOpenTitles={props.onTitles} />}
-      {!fish && save.kind === 'saved' && (
-        <CollectionCards pets={save.newPets.map((p) => ({ pet: pets[kindOf(p.id)] ?? p, kind: kindOf(p.id) }))} onSelect={mode === 'normal' ? onOpenPet : undefined} />
+      {save.kind === 'saved' && (
+        <ReportHarvest
+          pets={fish ? [] : save.newPets.map((p) => ({ pet: pets[kindOf(p.id)] ?? p, kind: kindOf(p.id) }))}
+          achievements={save.response.newAchievements ?? []}
+          onSelectPet={mode === 'normal' ? onOpenPet : undefined}
+          onOpenCollection={fish ? undefined : onCollection}
+          onOpenTitles={props.onTitles}
+        />
       )}
       {!fish && saved?.quiz && kindOf(saved.quiz.petId) >= 0 && !removed.has(saved.quiz.petId) && (
         <QuizCard
@@ -138,14 +143,9 @@ export function ReportScreen(props: ReportScreenProps) {
           }}
         />
       )}
+      {/* 尾声只放一条：解锁那一局是鱼关邀请，其余是「下一件事」 */}
       {!fish && saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}
       {!fish && nextUp && <NextUp nextUp={nextUp} speaker={speaker} onOpenCollection={onCollection} />}
-      {mode === 'normal' && manager && <ManagerCard variant="signature" name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} />}
-      <nav className={styles.navRow}>
-        {!fish && <NavTile icon="pet-collection" label={t('nav.collection')} onClick={onCollection} />}
-        <NavTile icon="leaderboard" label={t(fish ? 'fish.leaderboard' : 'nav.leaderboard')} onClick={onLeaderboard} />
-        <NavTile icon="back-to-shop" label={t('action.back_to_shop')} onClick={onHome} />
-      </nav>
       <div className={`${styles.stickyActions} ${styles.actionPair}`}>
         <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onPlayAgain} data-testid="play-again">
           {t('action.play_again')}

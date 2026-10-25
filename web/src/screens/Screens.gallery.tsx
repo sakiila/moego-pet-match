@@ -106,6 +106,29 @@ const entry: GalleryEntry = {
         }}
       />
     ),
+    'report · slim (mockup: tags row, harvest with new title, next up)': () => (
+      <ReportScreen
+        {...reportProps}
+        loadStanding={async () => ({ rank: 2, score: 15300, leaderScore: 16540, participants: 9 })}
+        loadAchievements={async () => [{ id: 'cats', current: 3, target: 5, unlockedAt: null }]}
+        onTitles={noop}
+        save={{
+          kind: 'saved',
+          newPets: PLACEHOLDER_PETS.slice(0, 2),
+          response: {
+            gameId: 'g2',
+            score: 15300,
+            personalBest: { previous: 12000, current: 15300, isNew: true },
+            newCollected: [],
+            progress: { completedNormalGames: 9, fishUnlocked: true, unlockedNow: false, counted: true },
+            quiz: null,
+            removedPetIds: [],
+            newAchievements: ['dogs'],
+            streak: { days: 3, today: true, firstToday: true },
+          },
+        }}
+      />
+    ),
     'report · zero service': () => (
       <ReportScreen {...reportProps} summary={{ ...summary, score: 0, clearedCells: 0, clearedByMultiplier: [0, 0, 0, 0, 0], maxChain: 0, toolsFired: 0, rushSucceeded: false, pets: summary.pets.map((p) => ({ ...p, served: 0, firstServedSeq: null })) }} save={{ kind: 'saving' }} />
     ),

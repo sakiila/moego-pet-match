@@ -351,10 +351,11 @@
 | leaderboard.today_no_score | 今天还没有你的成绩。开一局，上今日榜。 | No score from you today yet. Play a round to get on today's board. |
 | report.today_first | 今日第 1 名，全店最明白 | #1 today. Nobody runs the shop better. |
 | report.today_rank | 今日第 {rank} 名 | #{rank} today |
-| report.today_gap | 距第一还差 {points} 分 | {points} pts behind #1 |
+| report.today_gap | 差 {points} 分 | {points} behind |
 | report.today_alone | 今天第一个开工，等同事来挑战 | First to clock in today. Let's see who follows. |
-| report.streak_first_day | 今天打卡完成，明天继续 | Clocked in. See you tomorrow. |
-| report.streak_days | 今天打卡完成，连续 {days} 天开工 | Clocked in. {days} days in a row. |
+| report.streak_day | 打卡第 {days} 天 | Day {days} streak |
+| report.harvest | 本局收获 | This Round's Haul |
+| report.new_title_tag | 新称号 | New title |
 | report.next_up_label | 下一件事 | Up next |
 | report.next_up_go_collection | 去图鉴 | Pet Collection |
 | report.next_up_fish_1 | “Peter 让我带话：下班别走。” | "Peter asked me to pass it on: don't leave after this shift." |

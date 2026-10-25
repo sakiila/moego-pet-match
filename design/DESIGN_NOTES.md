@@ -49,6 +49,7 @@
 | 通用动作图标 | [common-actions-original-v3.png](concepts/common-actions-original-v3.png) | 2026-10-23 已确认；回门店、退出、换照片、保存图片、重试；重试为连续回环，右上转折收圆，大小图一致；[原稿透明 PNG 已完成](../assets/icons/library-original-png-v2/preview.html)，2026-10-24 已接入游戏（PNG，待矢量化） |
 | 趣味称号章 | [report-title-stamps-bilingual-v1.png](concepts/report-title-stamps-bilingual-v1.png) | 2026-10-24 接入游戏；6 款红色小花印章各有中英两版，对应 6 个称号的触发条件；透明素材见 `assets/icons/report-title-stamps-original-v1/transparent`；报告页与分享卡共用，替换原圆角称号框 |
 | 排行榜今日榜 | [mobile-leaderboard-daily-v1.png](concepts/mobile-leaderboard-daily-v1.png) | 2026-10-24 选定并接入；在实际排行页截图基础上，模式切换下加「今日榜 / 总榜」下划线标签（默认今日榜）、一行日期与「今天全公司同一盘棋」小字、表头改「今日最好」，其余不变；日历小图标用内联 SVG |
+| 手机 Report Card 精简版 | [mobile-report-slim-v1.png](concepts/mobile-report-slim-v1.png) | 2026-10-25 选定并接入；整页收成五块：小票内分数下一行状态标签（新纪录、今日名次、打卡），MVP 改左右布局、称号章压贴纸右上；小票外「本局收获」一排卡（新收集 + 新称号，标题带去图鉴）与「下一件事」气泡，去掉店长签名与导航格；取代 mobile-report-details-v3 的下半部布局 |
 | 报告今日名次 | [mobile-report-daily-rank-v1.png](concepts/mobile-report-daily-rank-v1.png) | 2026-10-24 选定并接入；小票内分数下方一条浅橙圆角小条：皇冠 + 「今日第 N 名 · 距第一还差 X 分」，次于分数；第 1 名与今天只有自己时各有一句（见 UI_COPY） |
 | 报告下一件事 | [mobile-report-next-up-v1.png](concepts/mobile-report-next-up-v1.png) | 2026-10-24 选定并接入；新收集卡与导航之间一条「毛孩子开口」气泡：左侧 MVP 小圆贴纸（浅橙底），白色圆角气泡带左指小尾巴、细炭黑描边与小偏移阴影，橙色小标签「下一件事」、一句第一人称预告、右下「去图鉴 ›」；实现时头像 44px、尾巴用 CSS 三角 |
 | 毛孩子光荣榜 | [hall-of-fame-title-zh-v2.png](concepts/hall-of-fame-title-zh-v2.png)、[hall-of-fame-title-en-v6.png](concepts/hall-of-fame-title-en-v6.png) | 2026-10-24 已确认并接入排行榜；中英标题字标、麦穗、两侧蓝猫与黑白狗贴纸（`hall-of-fame-laurel-v1`、`-cat-v1`、`-dog-v1`）；阶梯领奖台用 CSS；布局参考 `references/hall-of-fame-reference.webp`，不采用其中的鱼缸解锁提示 |
@@ -62,7 +63,7 @@
 | 手机竖屏棋盘（催单中） | [mobile-board-v3.png](concepts/mobile-board-v3.png) | 布局与密度已确认；7 × 7 一屏、六宠固定辅助底色、主时钟与催单区分、梳子横向预览及剪刀十字标识 |
 | Report Card | [report-v2.png](concepts/report-v2.png) | 纸质报告、MVP、称号、宠物评语、新图鉴与可跳过的主人竞猜；图中鱼缸贡献区已取消 |
 | 手机 Report Card 首屏 | [mobile-report-top-v2.png](concepts/mobile-report-top-v2.png) | 信息层级与趣味方向已确认；已保存结果、Maodu MVP、评语与称号、两只新收集；卡片规格以本图为准 |
-| 手机 Report Card 下半部示意 | [mobile-report-details-v3.png](concepts/mobile-report-details-v3.png) | 邀请区排布已确认；符合条件的 Peter 邀请、店长签名与次级入口；底部操作保持原位 |
+| 手机 Report Card 下半部示意 | [mobile-report-details-v3.png](concepts/mobile-report-details-v3.png) | 邀请区排布已确认；符合条件的 Peter 邀请、店长签名与次级入口；底部操作保持原位。2026-10-25 起下半部布局以 mobile-report-slim-v1 为准，店长签名与导航格已移除，仅保留为历史参考 |
 | 普通宠物局成绩分享卡 | [share-card-pets-v1.png](concepts/share-card-pets-v1.png) | 已确认；独立图片，Maodu 与评语为主、分数醒目、小称号与玩家署名 |
 | 鱼关成绩分享卡 | [share-card-fish-v2.png](concepts/share-card-fish-v2.png) | 已确认；独立图片，深蓝水下与白色收据、天蓝色鱼、气泡名牌、评语与玩家署名 |
 | 店长小海报 | [manager-poster-v1.png](concepts/manager-poster-v1.png) | 2026-10-23 已确认；橱窗遮阳篷、店长大头像、宣言气泡、「今日店长 · 名字」骨头名牌与北京日期；实现时收紧柜台与日期间留白 |

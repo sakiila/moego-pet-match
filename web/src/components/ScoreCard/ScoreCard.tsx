@@ -29,8 +29,10 @@ export interface ScoreCardProps {
   quizBonus?: number;
   /** 今日榜上的名次（保存成功后读取）；null 或未提供时不显示。 */
   standing?: Standing | null;
-  /** 结算返回的连续开工天数；只在本局是今天第一次打卡时显示一行。 */
+  /** 结算返回的连续开工天数；只在本局是今天第一次打卡时显示「打卡第 N 天」标签。 */
   streak?: SettleResponse['streak'] | null;
+  /** 点今日名次标签打开今日榜。 */
+  onStanding?: () => void;
 }
 
 const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
@@ -42,7 +44,7 @@ const CONFETTI = ['#f96b1c', '#f7b733', '#4a8fe0', '#e5533d', '#2f9e6b'];
 /** 读 :root 上的毫秒令牌（--print-start / --print-ms），与 CSS 动画同一时间线。 */
 const cssMs = (name: string) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
 
-export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null, streak = null }: ScoreCardProps) {
+export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, title, stats, host, mvpRemoved = false, quizBonus = 0, standing = null, streak = null, onStanding }: ScoreCardProps) {
   const { t, locale } = useI18n();
   // 声音与轻震跟着打印动画的节拍：纸送到位的瞬间「叮」，印章拍下的瞬间「咚」
   const feedback = useFeedback();
@@ -64,44 +66,57 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
       ? t('fish.report_mvp', { fishColorName: petDisplayName(mvp.pet, locale) })
       : t('report.mvp', { petName: mvp.pet.name })
     : null;
+  const stamp = (
+    <span className={styles.stamp} data-testid="title-stamp">
+      <TitleStamp title={title} width={84} />
+    </span>
+  );
+  const showTags = newRecord || !!standing || !!streak?.firstToday;
   return (
     <div className={styles.printer} data-print>
       <span className={styles.slot} aria-hidden />
       <div className={styles.wrap}>
         <section className={styles.card} data-testid="score-card">
-          <div className={styles.top}>
-            <div>
-              <span className={styles.scoreLabel}>{t('report.final_score')}</span>
-              <span key={quizBonus} className={styles.score} data-bump={quizBonus > 0 || undefined} data-testid="report-score">
-                {fmt(score)}
+          <div className={styles.head}>
+            <div className={styles.top}>
+              <div>
+                <span className={styles.scoreLabel}>{t('report.final_score')}</span>
+                <span key={quizBonus} className={styles.score} data-bump={quizBonus > 0 || undefined} data-testid="report-score">
+                  {fmt(score)}
+                </span>
+                {quizBonus > 0 && (
+                  <span className={styles.bonus} data-testid="quiz-bonus">
+                    {t('report.quiz_bonus', { points: fmt(quizBonus) })}
+                  </span>
+                )}
+              </div>
+              <span className={styles.saveBadge} data-state={saveState}>
+                {saveState === 'saved' ? (
+                  t('report.saved')
+                ) : saveState === 'saving' ? (
+                  t('report.saving')
+                ) : (
+                  ''
+                )}
               </span>
-              {quizBonus > 0 && (
-                <span className={styles.bonus} data-testid="quiz-bonus">
-                  {t('report.quiz_bonus', { points: fmt(quizBonus) })}
-                </span>
-              )}
-              {newRecord && (
-                <span className={styles.record}>
-                  <Icon name="new-record-flag" size={34} />
-                  {t('report.personal_best')}
-                </span>
-              )}
-              {standing && <TodayStanding standing={standing} />}
-              {streak?.firstToday && (
-                <span className={styles.streak} data-testid="report-streak">
-                  {streak.days >= 2 ? t('report.streak_days', { days: streak.days }) : t('report.streak_first_day')}
-                </span>
-              )}
             </div>
-            <span className={styles.saveBadge} data-state={saveState}>
-              {saveState === 'saved' ? (
-                t('report.saved')
-              ) : saveState === 'saving' ? (
-                t('report.saving')
-              ) : (
-                ''
-              )}
-            </span>
+            {/* 状态标签一行：新纪录、今日名次、打卡，有几个显示几个（mobile-report-slim-v1） */}
+            {showTags && (
+              <div className={styles.tags}>
+                {newRecord && (
+                  <span className={styles.record}>
+                    <Icon name="new-record-flag" size={22} />
+                    {t('report.personal_best')}
+                  </span>
+                )}
+                {standing && <TodayStanding standing={standing} onOpen={onStanding} />}
+                {streak?.firstToday && (
+                  <span className={styles.streakTag} data-testid="report-streak">
+                    {t('report.streak_day', { days: streak.days })}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
           {newRecord && (
             <span className={styles.confetti} aria-hidden>
@@ -124,37 +139,46 @@ export function ScoreCard({ mode, score, saveState, newRecord, mvp, review, titl
             <div className={styles.mvp} data-testid="mvp-removed">
               <div className={styles.sticker} style={{ '--tint': 'var(--color-brand-soft)' } as CSSProperties}>
                 <Icon name="open-shop" size={96} className={styles.generic} />
+                {stamp}
               </div>
-              <span className={styles.mvpName}>{t('report.generic_title')}</span>
-              <p className={styles.review}>“{t(review)}”</p>
+              <div className={styles.side}>
+                <span className={styles.mvpName}>{t('report.generic_title')}</span>
+                <p className={styles.review}>“{t(review)}”</p>
+              </div>
             </div>
           ) : mvp ? (
             <div className={styles.mvp} data-testid="mvp">
               <div className={styles.sticker} style={{ '--tint': `var(--pet-tint-${mvp.kind % 6})` } as CSSProperties}>
                 {petImage(mvp.pet, 512) ? <img src={petImage(mvp.pet, 512)!} alt={mvp.pet.name} /> : null}
+                {stamp}
               </div>
-              <span className={styles.mvpName}>
-                <Icon name="mvp-medal" size={30} />
-                {mvpLabel}
-              </span>
-              <p className={styles.review}>“{t(review)}”</p>
+              <div className={styles.side}>
+                <span className={styles.mvpName}>
+                  <Icon name="mvp-medal" size={26} />
+                  {mvpLabel}
+                </span>
+                <p className={styles.review}>“{t(review)}”</p>
+              </div>
             </div>
           ) : host ? (
             <div className={styles.mvp} data-testid="manager-host">
               <div className={styles.sticker} style={{ '--tint': 'var(--color-surface-muted)' } as CSSProperties}>
                 <img src={host.stickerSrc} alt={host.name} />
+                {stamp}
               </div>
-              <span className={styles.mvpName}>
-                {t('home.manager')} · {host.name}
-              </span>
-              <p className={styles.review}>“{t(review)}”</p>
+              <div className={styles.side}>
+                <span className={styles.mvpName}>
+                  {t('home.manager')} · {host.name}
+                </span>
+                <p className={styles.review}>“{t(review)}”</p>
+              </div>
             </div>
           ) : (
-            <p className={styles.noMvp}>{t(review)}</p>
+            <div className={styles.noMvp}>
+              {stamp}
+              <p>{t(review)}</p>
+            </div>
           )}
-          <span className={styles.stamp} data-testid="title-stamp">
-            <TitleStamp title={title} />
-          </span>
           <dl className={styles.stats}>
             <div>
               <dt>{t(mode === 'fish' ? 'fish.report_tiles' : 'report.service_tiles')}</dt>
