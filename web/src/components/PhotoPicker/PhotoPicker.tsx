@@ -14,8 +14,8 @@ export interface PhotoPickerProps {
 }
 
 /**
- * 选一张宠物原图并预览。原样提交，不压缩、不裁切；浏览器解码不了（如非 Safari 的 HEIC）时
- * 显示文件名占位，照常可提交。
+ * 选一张宠物原图并预览，不裁切；提交时由上传页缩图。浏览器解码不了（如非 Safari 的 HEIC）时
+ * 显示文件名占位，照常可提交（原样上传）。
  */
 export function PhotoPicker({ file, onChange, error, disabled }: PhotoPickerProps) {
   const { t } = useI18n();

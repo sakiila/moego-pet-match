@@ -33,3 +33,57 @@ describe('gallery preview isolation', () => {
     expect(fetch).toHaveBeenCalledWith('/api/deletion-requests', expect.objectContaining({ method: 'POST' }));
   });
 });
+
+class FakeXhr {
+  static next: { status: number; body: string } | 'network' = { status: 200, body: '{}' };
+  static sent: FormData | null = null;
+  status = 0;
+  responseText = '';
+  upload: { onprogress: ((e: { lengthComputable: boolean; loaded: number; total: number }) => void) | null } = { onprogress: null };
+  onload: (() => void) | null = null;
+  onerror: (() => void) | null = null;
+  ontimeout: (() => void) | null = null;
+  onabort: (() => void) | null = null;
+  open() {}
+  send(body: FormData) {
+    FakeXhr.sent = body;
+    this.upload.onprogress?.({ lengthComputable: true, loaded: 50, total: 100 });
+    this.upload.onprogress?.({ lengthComputable: true, loaded: 100, total: 100 });
+    const next = FakeXhr.next;
+    if (next === 'network') return this.onerror?.();
+    this.status = next.status;
+    this.responseText = next.body;
+    this.onload?.();
+  }
+}
+
+describe('submitPet', () => {
+  const photo = new File(['jpeg'], 'cat.jpg', { type: 'image/jpeg' });
+  const submit = (onProgress?: (f: number) => void) => api.submitPet('player', 'Mochi', '', photo, onProgress);
+
+  it('reports upload progress and returns the submission id', async () => {
+    vi.stubGlobal('location', { pathname: '/' });
+    vi.stubGlobal('XMLHttpRequest', FakeXhr);
+    FakeXhr.next = { status: 200, body: JSON.stringify({ submissionId: 'sub-1' }) };
+    const progress: number[] = [];
+
+    await expect(submit((f) => progress.push(f))).resolves.toEqual({ submissionId: 'sub-1' });
+    expect(progress).toEqual([0.5, 1]);
+    expect((FakeXhr.sent?.get('photo') as File).name).toBe('cat.jpg');
+  });
+
+  it.each([
+    [{ status: 413, body: '' }, 'too_large'],
+    [{ status: 415, body: '{"error":"unsupported_type"}' }, 'invalid_photo'],
+    [{ status: 429, body: '{"error":"daily_limit"}' }, 'daily_limit'],
+    [{ status: 400, body: '{"error":"name_required"}' }, 'name_required'],
+    [{ status: 400, body: '{"error":"quote_not_english"}' }, 'quote_not_english'],
+    [{ status: 502, body: '<html>' }, 'failed'],
+    ['network' as const, 'failed'],
+  ])('maps %j to %s', async (next, kind) => {
+    vi.stubGlobal('location', { pathname: '/' });
+    vi.stubGlobal('XMLHttpRequest', FakeXhr);
+    FakeXhr.next = next;
+    await expect(submit()).rejects.toMatchObject({ kind });
+  });
+});
