@@ -49,7 +49,7 @@ export function NextUp({ nextUp, speaker = null }: NextUpProps) {
         </span>
       )}
       <div className={`${styles.bubble} ${speaker ? styles.withTail : ''}`}>
-        <span className={styles.label}>{t('report.next_up_label')}</span>
+        <span className={styles.label}>{speaker ? t('report.next_up_named_label', { name: speaker.name }) : t('report.next_up_label')}</span>
         <p className={styles.text}>{text}</p>
       </div>
     </section>

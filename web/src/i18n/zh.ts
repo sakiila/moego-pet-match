@@ -132,6 +132,7 @@ export const zh = {
   'report.today_rank': '今日第 {rank} 名',
   'report.streak_day': '打卡第 {days} 天',
   'report.next_up_label': '店长说',
+  'report.next_up_named_label': '{name} 店长说',
   'report.next_up_fish': '再完成 {n} 局，解锁一个隐藏彩蛋。',
   'report.next_up_cats': '再认识 {n} 只猫，解锁称号「{title}」。',
   'report.next_up_dogs': '再认识 {n} 只狗，解锁称号「{title}」。',

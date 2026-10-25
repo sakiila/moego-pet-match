@@ -133,6 +133,7 @@ export const en: Record<MessageKey, string> = {
   'report.today_rank': '#{rank} today',
   'report.streak_day': 'Day {days} streak',
   'report.next_up_label': 'Manager says',
+  'report.next_up_named_label': 'Manager {name} says',
   'report.next_up_fish': 'Finish {n} more round(s) to unlock a hidden surprise.',
   'report.next_up_cats': 'Meet {n} more cat(s) to unlock the “{title}” title.',
   'report.next_up_dogs': 'Meet {n} more dog(s) to unlock the “{title}” title.',

@@ -52,6 +52,7 @@
 
 .label {
   display: block;
+  overflow-wrap: anywhere;
   margin-bottom: 2px;
   font-size: var(--text-xs);
   font-weight: 900;

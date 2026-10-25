@@ -19,6 +19,8 @@ const entry: GalleryEntry = {
     'fish: 1 round left': () => <NextUp nextUp={{ kind: 'fish', rounds: 1 }} speaker={manager} />,
     'fish: 2 rounds left': () => <NextUp nextUp={{ kind: 'fish', rounds: 2 }} speaker={manager} />,
     'tomorrow (fallback)': () => <NextUp nextUp={{ kind: 'tomorrow' }} speaker={manager} />,
+    'Chinese manager name': () => <NextUp nextUp={{ kind: 'tomorrow' }} speaker={{ ...manager, name: '小白' }} />,
+    'long English manager name': () => <NextUp nextUp={{ kind: 'tomorrow' }} speaker={{ ...manager, name: 'Sir Bartholomew Fluffington the Third' }} />,
     'no manager loaded (no avatar)': () => <NextUp nextUp={{ kind: 'tomorrow' }} />,
     'tip without manager (no avatar)': () => <NextUp nextUp={{ kind: 'tip', id: 'dryer' }} />,
   },

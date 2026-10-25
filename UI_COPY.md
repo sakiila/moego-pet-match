@@ -425,6 +425,7 @@
 | report.today_alone | 今天第一个开工，等同事来挑战 | First to clock in today. Let's see who follows. |
 | report.streak_day | 打卡第 {days} 天 | Day {days} streak |
 | report.next_up_label | 店长说 | Manager says |
+| report.next_up_named_label | {name} 店长说 | Manager {name} says |
 | report.next_up_fish | 再完成 {n} 局，解锁一个隐藏彩蛋。 | Finish {n} more round(s) to unlock a hidden surprise. |
 | report.next_up_cats | 再认识 {n} 只猫，解锁称号「{title}」。 | Meet {n} more cat(s) to unlock the “{title}” title. |
 | report.next_up_dogs | 再认识 {n} 只狗，解锁称号「{title}」。 | Meet {n} more dog(s) to unlock the “{title}” title. |
