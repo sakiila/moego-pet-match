@@ -134,7 +134,7 @@
 | home.update_available | 游戏更新了，刷新后再开工。 | The game was updated. Refresh before your next shift. |
 | home.github_link | GitHub：{repository}（在新标签页打开） | GitHub: {repository} (opens in a new tab) |
 
-2026-10-25 首页页尾精简为两行（用户确认）：第一行 `home.footer_info` · `home.footer_removal` · `nav.settings` · GitHub 小字链接，英文用短文案，打开后的说明页标题仍用 `info.use_link` / `info.removal_link`；「GitHub」小链接接在同一行末（读屏用 `home.github_link`）；第二行版本 · 版权。身份页链接不变。版本号在首页页尾链接下方居中展示，使用低层级小字。格式为 `YYYYMMDD.N`（例如 `20261025.5`）：日期取最新 Git 提交的北京时间，序号取当前分支主线（first-parent）中同日提交数。启动／构建时自动生成并固定到产物，同一提交重复构建不换号，未提交的本地修改不递增。GitHub 构建自动向 Docker 传入相同版本；开发服务运行期间提交后，重启开发服务可读取新值。
+2026-10-25 首页页尾精简为三行（用户确认）：第一行 `home.footer_info` · `home.footer_removal` · `nav.settings` 小字链接，英文用短文案，打开后的说明页标题仍用 `info.use_link` / `info.removal_link`；第二行版本 · 版权；第三行只显示「GitHub」小链接（读屏用 `home.github_link`）。身份页链接不变。版本号在首页页尾链接下方居中展示，使用低层级小字。格式为 `YYYYMMDD.N`（例如 `20261025.5`）：日期取最新 Git 提交的北京时间，序号取当前分支主线（first-parent）中同日提交数。启动／构建时自动生成并固定到产物，同一提交重复构建不换号，未提交的本地修改不递增。GitHub 构建自动向 Docker 传入相同版本；开发服务运行期间提交后，重启开发服务可读取新值。
 
 版本号下方展示 GitHub 仓库地址 `github.com/sakiila/moego-pet-match`，小字居中并保留下划线，点击在新标签页打开项目首页。`home.github_link` 用作链接的中英文可访问名称，提示新标签页行为；可见地址保持原文。
 

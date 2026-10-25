@@ -18,3 +18,15 @@
 .copyright {
   display: inline-block;
 }
+
+/* 第三行：只显示「GitHub」小链接，读屏读完整地址 */
+.repository {
+  justify-self: center;
+  padding: var(--space-1) var(--space-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.repository:hover {
+  color: var(--fg);
+}
