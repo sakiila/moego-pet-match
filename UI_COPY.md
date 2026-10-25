@@ -148,6 +148,7 @@
 | Key | 中文 | English |
 | --- | --- | --- |
 | prep.loading | 毛孩子正在集合…… | Getting the pets ready… |
+| prep.preparing | 准备中… | Getting ready… |
 | prep.guests | 本局来客 | This Round's Guests |
 | prep.guests_lead | 本局 | This Round's |
 | prep.guests_accent | 来客 | Guests |

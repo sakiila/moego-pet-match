@@ -21,7 +21,7 @@ const pet: PetInfo = {
 
 function finishImages(size: 128 | 512, outcome: 'load' | 'error') {
   for (const image of FakeImage.instances) {
-    if (image.src.endsWith(`/${size}`)) {
+    if (image.src.split('?')[0].endsWith(`/${size}`)) {
       if (outcome === 'load') image.onload?.();
       else image.onerror?.();
     }
@@ -52,12 +52,23 @@ describe('preloadPets opening readiness', () => {
     await expect(preload).resolves.toBeUndefined();
   });
 
+  it('preloads the same compact image URLs used by the visible pets', async () => {
+    const preload = preloadPets([pet]);
+    expect(FakeImage.instances.map(image => image.src)).toEqual([
+      '/img/pets/preload-cat/128?format=webp',
+      '/img/pets/preload-cat/512?format=webp',
+    ]);
+    finishImages(128, 'load');
+    finishImages(512, 'load');
+    await preload;
+  });
+
   it('rejects when the large board sticker fails even if the small sticker is ready', async () => {
     const preload = preloadPets([pet]);
 
     finishImages(128, 'load');
     finishImages(512, 'error');
 
-    await expect(preload).rejects.toThrow('failed to load /img/pets/preload-cat/512');
+    await expect(preload).rejects.toThrow('failed to load /img/pets/preload-cat/512?format=webp');
   });
 });

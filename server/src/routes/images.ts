@@ -4,6 +4,7 @@ import { makeSilhouette } from '../catalog/photo.ts';
 import { findColleague } from '../services/players.ts';
 import { singleFlight } from '../services/singleFlight.ts';
 import type { StoredObject } from '../storage/objectStore.ts';
+import sharp from 'sharp';
 
 const PET_SIZES = new Set(['128', '512', '1024']);
 const AVATAR_MAX_AGE_MS = 24 * 60 * 60 * 1000;
@@ -46,15 +47,22 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
   };
 
   const stickerRoute = (prefix: 'pets' | 'fish', sql: string) =>
-    app.get<{ Params: { id: string; size: string } }>(`/img/${prefix}/:id/:size`, async (request, reply) => {
+    app.get<{ Params: { id: string; size: string }; Querystring: { format?: string } }>(`/img/${prefix}/:id/:size`, async (request, reply) => {
       const { id, size } = request.params;
-      if (!PET_SIZES.has(size)) return reply.status(404).send();
+      const { format } = request.query;
+      if (!PET_SIZES.has(size) || (format !== undefined && format !== 'png' && format !== 'webp')) return reply.status(404).send();
       const { rows } = await pool.query(sql, [id]);
       const pet = rows[0] as { status: string; sticker_key: string | null } | undefined;
       const group = groupOf(prefix, id);
       if (!pet || pet.status !== 'published' || !pet.sticker_key) return gone(reply, group);
       const cacheKey = `${pet.sticker_key}/${size}`;
-      const obj = await loadImage(cacheKey, group, () => store ? store.get(`${pet.sticker_key}/${size}.png`) : Promise.resolve(null));
+      const source = () => loadImage(cacheKey, group, () => store ? store.get(`${pet.sticker_key}/${size}.png`) : Promise.resolve(null));
+      const obj = format === 'webp'
+        ? await loadImage(`${cacheKey}/webp-lossless-v1`, group, async () => {
+          const png = await source();
+          return png ? { body: await sharp(png.body).webp({ lossless: true }).toBuffer(), contentType: 'image/webp' } : null;
+        })
+        : await source();
       if (!obj) return reply.status(store ? 404 : 503).send();
       return send(reply, obj, 'public, max-age=31536000, immutable');
     });

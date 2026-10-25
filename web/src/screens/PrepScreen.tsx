@@ -13,8 +13,10 @@ import styles from './Screen.module.css';
 
 export interface PrepScreenProps {
   mode?: GameMode;
-  /** 登记成功后的本局阵容；登记中或失败为 null。 */
+  /** 登记成功即展示本局阵容；登记中或登记失败为 null。 */
   pets: PetInfo[] | null;
+  /** 阵容已返回，但开局所需的图片仍在加载。 */
+  loading?: boolean;
   /** 本局入选的自家宠物名字。 */
   ownPetNames?: string[];
   failed?: boolean;
@@ -24,27 +26,28 @@ export interface PrepScreenProps {
 }
 
 /** 开局准备：棋盘的计时前状态，读说明不计时；对局登记成功后才允许点「开始这班」进入 90 秒。鱼关换深蓝水下主题。 */
-export function PrepScreen({ mode = 'normal', pets, ownPetNames = [], failed, onStart, onRetry, onBack }: PrepScreenProps) {
+export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames = [], failed, onStart, onRetry, onBack }: PrepScreenProps) {
   const { t } = useI18n();
   const fish = mode === 'fish';
   return (
     <main className={styles.screen} data-theme={fish ? 'fish' : undefined}>
       {fish && <UnderwaterBackdrop />}
       <BrandHeader title={fish ? 'fish' : 'scheduling'} schedulingArt={!fish} onBack={onBack} />
-      {pets ? (
+      {pets && (
         <>
           <LineupPanel pets={pets} mode={mode} />
           {!fish && <OwnPetBanner names={ownPetNames} />}
         </>
-      ) : failed ? (
-        <StatusMessage tone="error" text={t('prep.failed')} actionLabel={t('action.retry')} actionIcon="retry" onAction={onRetry} />
-      ) : (
-        <StatusMessage text={t(fish ? 'fish.prep_loading' : 'prep.loading')} />
       )}
+      {failed ? (
+        <StatusMessage tone="error" text={t('prep.failed')} actionLabel={t('action.retry')} actionIcon="retry" onAction={onRetry} />
+      ) : !pets ? (
+        <StatusMessage text={t(fish ? 'fish.prep_loading' : 'prep.loading')} />
+      ) : null}
       <RulesCard mode={mode} />
       <div className={styles.grow} />
-      <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onStart} disabled={!pets} data-testid="start">
-        {t('prep.start')}
+      <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onStart} disabled={!pets || loading || failed} aria-busy={loading} data-testid="start">
+        {t(loading && !failed ? 'prep.preparing' : 'prep.start')}
       </Button>
     </main>
   );

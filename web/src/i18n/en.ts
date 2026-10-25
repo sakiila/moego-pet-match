@@ -17,6 +17,7 @@ export const en: Record<MessageKey, string> = {
   'action.cancel': 'Cancel',
   'action.close': 'Close',
   'prep.loading': 'Getting the pets ready…',
+  'prep.preparing': 'Getting ready…',
   'prep.guests': 'This Round\'s Guests',
   'prep.guests_lead': "This Round's",
   'prep.guests_accent': 'Guests',

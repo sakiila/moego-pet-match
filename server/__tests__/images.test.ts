@@ -2,13 +2,14 @@ import { mkdtempSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import sharp from 'sharp';
 import { buildApp } from '../src/app.ts';
 import { sniffImage } from '../src/services/submissions.ts';
 import { DiskCache } from '../src/storage/diskCache.ts';
 import { memoryStore } from '../src/storage/objectStore.ts';
 import { freshDatabase } from './helpers.ts';
 
-const PNG = Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), Buffer.alloc(64, 1)]);
+let PNG: Buffer;
 const JPEG = Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), Buffer.alloc(64, 2)]);
 
 let ctx: Awaited<ReturnType<typeof freshDatabase>>;
@@ -18,6 +19,7 @@ let cacheDir: string;
 let avatarCalls = 0;
 
 beforeAll(async () => {
+  PNG = await sharp({ create: { width: 128, height: 128, channels: 4, background: { r: 120, g: 80, b: 40, alpha: 0.5 } } }).png().toBuffer();
   ctx = await freshDatabase();
   cacheDir = mkdtempSync(join(tmpdir(), 'pm-img-'));
   app = buildApp({
@@ -77,9 +79,29 @@ describe('宠物图代理', () => {
     expect(store.gets - before).toBe(1);
   });
 
+  it('无损 WebP 保留像素与透明度，并发生成只回源一次且可复用缓存', async () => {
+    await new DiskCache(cacheDir, 0).clear();
+    const before = store.gets;
+    const responses = await Promise.all(Array.from({ length: 12 }, () => get('/img/pets/mochi/128?format=webp')));
+    for (const res of responses) {
+      expect(res.statusCode).toBe(200);
+      expect(res.headers['content-type']).toBe('image/webp');
+      expect(res.headers['cache-control']).toContain('immutable');
+      const raw = await sharp(res.rawPayload).ensureAlpha().raw().toBuffer();
+      expect(raw.equals(await sharp(PNG).ensureAlpha().raw().toBuffer())).toBe(true);
+      expect(res.rawPayload.length).toBeLessThan(PNG.length);
+    }
+    expect(store.gets - before).toBe(1);
+    expect((await get('/img/pets/mochi/128?format=webp')).rawPayload.equals(responses[0].rawPayload)).toBe(true);
+    expect(store.gets - before).toBe(1);
+    expect((await get('/img/pets/mochi/128')).rawPayload.equals(PNG)).toBe(true);
+    expect((await get('/img/pets/mochi/128?format=unknown')).statusCode).toBe(404);
+  });
+
   it('下架后立即拒绝并清掉本地缓存；不支持的尺寸与无素材返回 404', async () => {
     await ctx.pool.query(`UPDATE pet_match.pets SET status = 'unpublished' WHERE pet_id = 'mochi'`);
     expect((await get('/img/pets/mochi/128')).statusCode).toBe(404);
+    expect((await get('/img/pets/mochi/128?format=webp')).statusCode).toBe(404);
     const cached = await new DiskCache(cacheDir, 10 * 1024 * 1024).get('pet/pets/mochi/abc123/128');
     expect(cached).toBeNull();
     expect((await get('/img/pets/tofu/128')).statusCode).toBe(404);
@@ -113,6 +135,9 @@ describe('鱼色贴纸', () => {
     await ctx.pool.query(`UPDATE pet_match.fish_colors SET sticker_key = 'fish/fish_color_red/aaa' WHERE color_id = 'fish_color_red'`);
     await store.put('fish/fish_color_red/aaa/128.png', PNG, 'image/png');
     expect((await get('/img/fish/fish_color_red/128')).statusCode).toBe(200);
+    const webp = await get('/img/fish/fish_color_red/128?format=webp');
+    expect(webp.statusCode).toBe(200);
+    expect(webp.headers['content-type']).toBe('image/webp');
     expect((await get('/img/fish/fish_color_blue/128')).statusCode).toBe(404);
   });
 });

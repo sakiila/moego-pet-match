@@ -16,6 +16,7 @@ export const zh = {
   'action.cancel': '取消',
   'action.close': '关闭',
   'prep.loading': '毛孩子正在集合……',
+  'prep.preparing': '准备中…',
   'prep.guests': '本局来客',
   'prep.guests_lead': '本局',
   'prep.guests_accent': '来客',

@@ -47,7 +47,7 @@ export function petFromLineup(pet: LineupPet, mode: GameMode = 'normal'): PetInf
 }
 
 /** 普通宠物的贴纸、剪影与处理后照片地址（均经自有域名 /img 代理）。 */
-export const stickerUrl = (petId: string, size: 128 | 512 | 1024) => `/img/pets/${encodeURIComponent(petId)}/${size}`;
+export const stickerUrl = (petId: string, size: 128 | 512 | 1024) => `/img/pets/${encodeURIComponent(petId)}/${size}?format=webp`;
 export const silhouetteUrl = (petId: string, size: 128 | 512 | 1024) => `/img/silhouettes/${encodeURIComponent(petId)}/${size}`;
 export const photoUrl = (petId: string, playerId: string) =>
   `/img/photos/${encodeURIComponent(petId)}?playerId=${encodeURIComponent(playerId)}`;
@@ -64,7 +64,7 @@ export function preloadImage(src: string) {
   void img.decode().catch(() => preloaded.delete(src));
 }
 
-export const petImage = (pet: PetInfo, size: 128 | 512 | 1024) => (pet.imageBase ? `${pet.imageBase}/${size}` : null);
+export const petImage = (pet: PetInfo, size: 128 | 512 | 1024) => (pet.imageBase ? `${pet.imageBase}/${size}?format=webp` : null);
 
 export const petDisplayName = (pet: PetInfo, locale: 'zh' | 'en') => (locale === 'en' && pet.nameEn ? pet.nameEn : pet.name);
 

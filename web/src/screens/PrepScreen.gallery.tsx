@@ -12,8 +12,11 @@ const entry: GalleryEntry = {
     'ready · no own pet': () => <PrepScreen pets={PREVIEW_PREP_PETS} onStart={noop} onBack={noop} />,
     'long names · two own pets': () => <PrepScreen pets={PREVIEW_PREP_PETS.map((p, i) => i === 1 ? { ...p, name: 'Sir Fluffington the Magnificent' } : p)} ownPetNames={['Sir Fluffington the Magnificent', 'Boluo']} onStart={noop} onBack={noop} />,
     loading: () => <PrepScreen pets={null} onStart={noop} onBack={noop} />,
+    'images loading · lineup visible': () => <PrepScreen pets={PREVIEW_PREP_PETS} loading onStart={noop} onBack={noop} />,
+    'images failed · retry': () => <PrepScreen pets={PREVIEW_PREP_PETS} failed onRetry={noop} onStart={noop} onBack={noop} />,
     failed: () => <PrepScreen pets={null} failed onRetry={noop} onStart={noop} onBack={noop} />,
     fish: () => <PrepScreen pets={SAMPLE_FISH} mode="fish" onStart={noop} onBack={noop} />,
+    'fish images loading': () => <PrepScreen pets={SAMPLE_FISH} mode="fish" loading onStart={noop} onBack={noop} />,
   },
 };
 export default entry;

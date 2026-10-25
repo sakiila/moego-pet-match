@@ -39,7 +39,7 @@ type Route =
   | { name: 'upload' }
   | { name: 'myPets' }
   | { name: 'info'; player: { userId: string; name: string } | null; removal: boolean; back: 'identity' | 'home'; query?: string }
-  | { name: 'prep'; mode: GameMode; session: Session | null; failed: boolean }
+  | { name: 'prep'; mode: GameMode; session: Session | null; ready: boolean; failed: boolean }
   | { name: 'board'; session: Session }
   | { name: 'report'; session: Session; summary: GameSummary }
   | { name: 'devReport'; session: Session; summary: GameSummary };
@@ -62,6 +62,7 @@ export function App() {
   const { t } = useI18n();
   const [player, setPlayer] = useState<PlayerView | null>(null);
   const [route, setRoute] = useState<Route>(() => (loadSavedPlayerId() ? { name: 'boot' } : { name: 'identity' }));
+  const prepAttempt = useRef(0);
   const [manager, setManager] = useState<DailyManager | null>(null);
   // 服务端已经换了版本（或规则版本不一致）：首页提示刷新；只提示，不打断对局与报告
   const [updateAvailable, setUpdateAvailable] = useState(false);
@@ -121,26 +122,32 @@ export function App() {
   const toPrep = useCallback(
     async (mode: GameMode = 'normal') => {
       if (!player) return;
-      setRoute({ name: 'prep', mode, session: null, failed: false });
+      const attempt = ++prepAttempt.current;
+      setRoute({ name: 'prep', mode, session: null, ready: false, failed: false });
       try {
         const registered = await api.registerGame(player.userId, mode);
+        if (attempt !== prepAttempt.current) return;
         // 服务端规则版本已变：这局打完也会被结算拒绝，回门店提示刷新，不进准备页
         if (registered.rulesVersion !== RULES_VERSION) {
           setUpdateAvailable(true);
           setRoute({ name: 'home' });
           return;
         }
-        // 开局前加载好本局棋盘贴纸，素材就绪才允许开始计时
-        await preloadPets(registered.lineup.map((p) => petFromLineup(p, mode)));
         const game = createGame({
           seed: registered.seed,
           lineup: registered.lineup.map((p) => p.petId),
           board: preset?.board,
           refill: preset?.refill,
         });
-        setRoute({ name: 'prep', mode, session: { registered, game }, failed: false });
+        const session = { registered, game };
+        // 阵容先展示，缓存命中的宠物立即出现；素材全部就绪后才允许开始计时。
+        setRoute({ name: 'prep', mode, session, ready: false, failed: false });
+        await preloadPets(registered.lineup.map((p) => petFromLineup(p, mode)));
+        if (attempt !== prepAttempt.current) return;
+        setRoute(current => current.name === 'prep' && current.session === session ? { ...current, ready: true } : current);
       } catch {
-        setRoute({ name: 'prep', mode, session: null, failed: true });
+        if (attempt !== prepAttempt.current) return;
+        setRoute(current => current.name === 'prep' ? { ...current, ready: false, failed: true } : current);
       }
     },
     [player],
@@ -185,7 +192,10 @@ export function App() {
     };
   }, [route.name]);
 
-  const toHome = useCallback(() => setRoute({ name: 'home' }), []);
+  const toHome = useCallback(() => {
+    prepAttempt.current++;
+    setRoute({ name: 'home' });
+  }, []);
   const toPetdex = useCallback(() => setRoute({ name: 'petdex' }), []);
   const petsOf = (s: Session) =>
     s.game.lineup.map((id) => petFromLineup(s.registered.lineup.find((p) => p.petId === id)!, s.registered.mode));
@@ -263,10 +273,11 @@ export function App() {
             mode={route.mode}
             onBack={toHome}
             pets={route.session ? petsOf(route.session) : null}
+            loading={!!route.session && !route.ready && !route.failed}
             ownPetNames={route.session ? ownNamesOf(route.session) : []}
             failed={route.failed}
             onRetry={() => void toPrep(route.mode)}
-            onStart={() => route.session && setRoute({ name: 'board', session: route.session })}
+            onStart={() => route.ready && route.session && setRoute({ name: 'board', session: route.session })}
           />
         );
       case 'board':
