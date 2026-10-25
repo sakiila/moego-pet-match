@@ -13,6 +13,7 @@ import { Button } from '../ui/primitives/Button';
 import { Tabs } from '../ui/primitives/Tabs';
 import styles from './Screen.module.css';
 import { PlayerProfileOverlay, loadUnlockedTitles, type ProfileLoader, type ViewerTitlesLoader } from './PlayerProfileOverlay';
+import type { PlayerLikesLoader, PlayerLikesSender } from '../game/playerLikes';
 
 export interface LeaderboardScreenProps {
   player: PlayerView;
@@ -26,6 +27,8 @@ export interface LeaderboardScreenProps {
   load?: (mode: GameMode, playerId: string, scope: LeaderboardScope) => Promise<LeaderboardView>;
   loadProfile?: ProfileLoader;
   loadViewerTitles?: ViewerTitlesLoader;
+  loadLikes?: PlayerLikesLoader;
+  sendLike?: PlayerLikesSender;
 }
 
 type View = 'near' | 'all';
@@ -35,7 +38,7 @@ const NEAR_RADIUS = 2;
  * 今日榜（默认，当天全公司同一盘棋）与总榜（个人历史最好）两层；
  * 领先三位 + 我的名次附近；无成绩时先看全榜；鱼榜标签只对已发现鱼关的玩家显示。
  */
-export function LeaderboardScreen({ player, initialMode = 'normal', initialScope = 'today', onBack, onChallenge, load = api.getLeaderboard, loadProfile, loadViewerTitles = loadUnlockedTitles }: LeaderboardScreenProps) {
+export function LeaderboardScreen({ player, initialMode = 'normal', initialScope = 'today', onBack, onChallenge, load = api.getLeaderboard, loadProfile, loadViewerTitles = loadUnlockedTitles, loadLikes, sendLike }: LeaderboardScreenProps) {
   const { t } = useI18n();
   const [mode, setMode] = useState<GameMode>(initialMode === 'fish' && player.progress.fishUnlocked ? 'fish' : 'normal');
   const [scope, setScope] = useState<LeaderboardScope>(initialScope);
@@ -141,7 +144,7 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
           {t('leaderboard.challenge')}
         </Button>
       </div>
-      {selectedPlayer && <PlayerProfileOverlay key={`${selectedPlayer.userId}:${mode}`} player={selectedPlayer} viewerId={player.userId} mode={mode} load={loadProfile} loadViewerTitles={loadViewerTitles} onClose={() => setSelectedPlayer(null)} />}
+      {selectedPlayer && <PlayerProfileOverlay key={`${selectedPlayer.userId}:${mode}`} player={selectedPlayer} viewerId={player.userId} mode={mode} load={loadProfile} loadViewerTitles={loadViewerTitles} loadLikes={loadLikes} sendLike={sendLike} onClose={() => setSelectedPlayer(null)} />}
     </main>
   );
 }

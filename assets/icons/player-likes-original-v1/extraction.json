@@ -1,0 +1,37 @@
+{
+  "source_sha256": "df41cdf69b278de1c8b78aca2d0b554927c8d346869929f340deb98d549ce2b2",
+  "source_dimensions": [
+    1254,
+    1254
+  ],
+  "assets": [
+    {
+      "id": "player-like-high-five",
+      "crop": [
+        490,
+        105,
+        854,
+        443
+      ],
+      "size": [
+        350,
+        334
+      ],
+      "opaque_rgb_identical_pixels": 75851
+    },
+    {
+      "id": "player-like-high-five-outline",
+      "crop": [
+        840,
+        240,
+        994,
+        385
+      ],
+      "size": [
+        145,
+        143
+      ],
+      "opaque_rgb_identical_pixels": 10779
+    }
+  ]
+}

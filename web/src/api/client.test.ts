@@ -8,6 +8,8 @@ describe('gallery preview isolation', () => {
   it.each([
     ['read player', () => api.getPlayer('U03FPQWGTN2')],
     ['read achievements', () => api.getAchievements('U03FPQWGTN2')],
+    ['read likes', () => api.getPlayerLikes('U03FPQWGTN2', 'U_TEST_ALICE')],
+    ['like player', () => api.likePlayer('U03FPQWGTN2', 'U_TEST_ALICE')],
     ['register game', () => api.registerGame('U03FPQWGTN2', 'normal')],
     ['save result', () => api.submitResult('game', 'U03FPQWGTN2', {} as ResultPayload)],
     ['answer quiz', () => api.answerQuiz('quiz', 'U03FPQWGTN2', null)],
@@ -31,6 +33,24 @@ describe('gallery preview isolation', () => {
 
     await expect(api.requestDeletion('player', null, 'Request')).resolves.toEqual(result);
     expect(fetch).toHaveBeenCalledWith('/api/deletion-requests', expect.objectContaining({ method: 'POST' }));
+  });
+});
+
+describe('permanent player like API', () => {
+  it('encodes target and viewer separately and passes read cancellation', async () => {
+    const view = { receivedLikes: 0, likedByViewer: false, canLike: true };
+    const fetch = vi.fn().mockResolvedValue(new Response(JSON.stringify(view)));
+    vi.stubGlobal('fetch', fetch);
+    const controller = new AbortController();
+    await expect(api.getPlayerLikes('target/id', 'viewer&id', controller.signal)).resolves.toEqual(view);
+    expect(fetch).toHaveBeenCalledWith('/api/players/target%2Fid/likes?viewerId=viewer%26id', expect.objectContaining({ signal: controller.signal }));
+  });
+  it('sends an idempotent add request with the current identity', async () => {
+    const view = { receivedLikes: 13, likedByViewer: true, canLike: false };
+    const fetch = vi.fn().mockResolvedValue(new Response(JSON.stringify(view)));
+    vi.stubGlobal('fetch', fetch);
+    await expect(api.likePlayer('alice', 'bob')).resolves.toEqual(view);
+    expect(fetch).toHaveBeenCalledWith('/api/players/alice/likes', expect.objectContaining({ method: 'POST', body: '{"playerId":"bob"}' }));
   });
 });
 

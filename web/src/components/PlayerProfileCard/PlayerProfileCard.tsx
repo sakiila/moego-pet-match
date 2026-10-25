@@ -9,6 +9,8 @@ import { Sheet } from '../../ui/primitives/Sheet';
 import { PlayerProfileBadge } from './PlayerProfileBadge';
 import { ModeMark } from '../ModeMark/ModeMark';
 import { StatusMessage } from '../StatusMessage/StatusMessage';
+import { PlayerLikesRow } from '../PlayerLikes/PlayerLikes';
+import type { PlayerLikesState } from '../../game/playerLikes';
 import styles from './PlayerProfileCard.module.css';
 
 export interface PlayerProfileCardProps {
@@ -20,9 +22,13 @@ export interface PlayerProfileCardProps {
   inline?: boolean;
   /** 正在看名片的玩家自己已解锁的称号；隐藏称号的名称与条件只对其中的显示真实文字。 */
   viewerTitles?: readonly AchievementId[];
+  likes?: PlayerLikesState;
+  own?: boolean;
+  onLike?: () => void;
+  onLikesRetry?: () => void;
 }
 
-export function PlayerProfileCard({ player, view, error, onRetry, onClose, inline, viewerTitles = [] }: PlayerProfileCardProps) {
+export function PlayerProfileCard({ player, view, error, onRetry, onClose, inline, viewerTitles = [], likes, own = false, onLike, onLikesRetry }: PlayerProfileCardProps) {
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (inline) return;
@@ -45,6 +51,7 @@ export function PlayerProfileCard({ player, view, error, onRetry, onClose, inlin
           {view?.equippedTitle && <PlayerProfileBadge id={view.equippedTitle} chip revealed={conditionRevealed(view.equippedTitle, viewerTitles)} />}
         </div>
       </div>
+      {likes && <PlayerLikesRow state={likes} own={own} onLike={() => onLike?.()} onRetry={() => onLikesRetry?.()} />}
       {error ? <StatusMessage tone="error" text={t(error === 'not_found' ? 'profile.not_found' : 'profile.load_failed')}
         actionLabel={error === 'unavailable' ? t('action.retry') : undefined} onAction={error === 'unavailable' ? onRetry : undefined} />
         : !view ? <p role="status" className={styles.hint}>{t('profile.loading')}</p> : <>

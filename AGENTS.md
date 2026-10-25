@@ -96,3 +96,7 @@ codex exec -m gpt-6-sol -s workspace-write -C /Users/bob/WebstormProjects/moego-
 - 宠物照片、名录数据与 `/data/` 下的工作数据不提交到 git。
 - 不迁移、不修改 Supabase `public."user"` 原表的结构、数据或权限。生产游戏只读写 RackNerd `pet_match` 数据库，独立同事名单保存在 `pet_match.slack_members`。
 - 不自行推送 main（即部署）、修改 DNS、连接或改动 RackNerd 服务器与 1Panel（以及原 DMIT 服务器），除非用户明确要求。
+
+## 2026-10-26 玩家点赞素材补充授权
+
+用户选定「举爪击掌」，明确要求按原图切图为透明 PNG，并实现、测试幂等和推送上线；点赞不可取消。未赞与已赞两枚允许从 `design/concepts/player-likes-high-five-v1.png` 原图直接提取，来源记录在 `assets/icons/player-likes-original-v1/`，透明母版在 `masters/17-player-likes/`，仍通过统一 `Icon` 使用。此例外只授权本次两枚举爪图标，不扩大到其他截图。

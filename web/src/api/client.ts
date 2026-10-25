@@ -1,4 +1,4 @@
-import type { AchievementId, AchievementView, PlayerProfileView } from './types';
+import type { AchievementId, AchievementView, PlayerLikesView, PlayerProfileView } from './types';
 import { isGalleryPath } from '../app/entryRoute';
 import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse, VersionInfo } from './types';
 
@@ -87,6 +87,8 @@ async function submitPet(
 }
 
 export const api = {
+  getPlayerLikes: (targetId: string, viewerId: string, signal?: AbortSignal) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes?viewerId=${encodeURIComponent(viewerId)}`, { signal }),
+  likePlayer: (targetId: string, playerId: string) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes`, { method: 'POST', body: JSON.stringify({ playerId }) }),
   getPlayerProfile: (playerId: string, mode: GameMode, signal?: AbortSignal) => request<PlayerProfileView>(`/api/players/${encodeURIComponent(playerId)}/profile?mode=${mode}`, {signal}),
   submitPet,
   getAchievements: (playerId: string) => request<AchievementView>(`/api/players/${encodeURIComponent(playerId)}/achievements`),

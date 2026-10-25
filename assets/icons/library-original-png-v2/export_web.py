@@ -16,7 +16,7 @@ ROOT = HERE.parents[2]
 OUT = ROOT / 'web/src/ui/icons'
 WIDTHS = [32, 48, 72, 96, 144, 192, 288]
 PLAN = json.loads((HERE / 'extraction-plan.json').read_text())
-EXTRA_GROUPS = ['11-supplement', '12-prep-gestures', '13-collection-titles', '14-collection-title-avatars', '15-collection-title-showcase', '16-board-frontdesk']
+EXTRA_GROUPS = ['11-supplement', '12-prep-gestures', '13-collection-titles', '14-collection-title-avatars', '15-collection-title-showcase', '16-board-frontdesk', '17-player-likes']
 WIDE_GROUPS = {'12-prep-gestures'}
 WIDE_ASSETS = {'rush-clip', 'closing-sign-zh', 'closing-sign-en', 'closing-sign-zh-hd-v2'}
 

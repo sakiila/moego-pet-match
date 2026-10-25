@@ -7,5 +7,7 @@ export function appRoleGrants(role: string): string[] {
     `GRANT USAGE ON SCHEMA pet_match TO ${role}`,
     `GRANT SELECT ON ${RO_OBJECTS.map((t) => `pet_match.${t}`).join(', ')} TO ${role}`,
     `GRANT SELECT, INSERT, UPDATE ON ${RW_TABLES.map((t) => `pet_match.${t}`).join(', ')} TO ${role}`,
+    `GRANT SELECT, INSERT ON pet_match.player_likes TO ${role}`,
+    `REVOKE UPDATE, DELETE, TRUNCATE ON pet_match.player_likes FROM ${role}`,
   ];
 }

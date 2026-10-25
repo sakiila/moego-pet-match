@@ -15,6 +15,13 @@ export interface AchievementView {
 
 export type GameMode = 'normal' | 'fish';
 
+/** 玩家永久点赞；独立加载，不影响成绩与名片的可用性。 */
+export interface PlayerLikesView {
+  receivedLikes: number;
+  likedByViewer: boolean;
+  canLike: boolean;
+}
+
 /** 排行榜公开名片：不暴露邮箱、原始对局 payload 或宠物主人关系。 */
 export interface PlayerProfileView {
   userId: string;

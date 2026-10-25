@@ -6,14 +6,17 @@ import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { DEVELOPER_PETS, managerLineKey } from '../game/easterEggs';
 import { NavTile } from '../components/NavTile/NavTile';
 import { HomeFooter } from '../components/HomeFooter/HomeFooter';
-import { PlayerMenu } from '../components/PlayerMenu/PlayerMenu';
+import { HomePlayerActions } from '../components/HomePlayerActions/HomePlayerActions';
 import { StreakLine } from '../components/StreakLine/StreakLine';
 import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
 import { PhotoNotice } from '../components/PhotoNotice/PhotoNotice';
-import { avatarUrl, stickerUrl } from '../game/pets';
+import { stickerUrl } from '../game/pets';
+import { usePlayerLikes } from '../game/usePlayerLikes';
+import type { PlayerLikesLoader } from '../game/playerLikes';
 import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
 import { ManagerPosterOverlay } from './ManagerPosterOverlay';
+import { PlayerProfileOverlay, type ProfileLoader } from './PlayerProfileOverlay';
 import styles from './Screen.module.css';
 
 export interface HomeScreenProps {
@@ -33,20 +36,25 @@ export interface HomeScreenProps {
   onInfo: (removal: boolean) => void;
   onClockOut: () => void;
   onTitles?: () => void;
+  /** 陈列页使用示例数据，不读取玩家 API。 */
+  loadLikes?: PlayerLikesLoader;
+  loadProfile?: ProfileLoader;
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, version, repositoryUrl, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles, loadLikes, loadProfile }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
+  const [profile, setProfile] = useState(false);
+  const likes = usePlayerLikes(player.userId, player.userId, loadLikes);
   return (
     <main className={`${styles.screen} ${styles.home}`}>
       <BrandHeader
         title="game"
         tagline="access.subtitle"
         trailing={
-          <PlayerMenu name={player.name} userId={player.userId} avatarSrc={avatarUrl(player.userId)} onClockOut={onClockOut} equippedTitle={player.equippedTitle} onTitles={onTitles} />
+          <HomePlayerActions player={player} likes={likes} onProfile={() => setProfile(true)} onClockOut={onClockOut} onTitles={onTitles} />
         }
       />
       <div className={styles.grow} />
@@ -74,6 +82,8 @@ export function HomeScreen({ player, version, repositoryUrl, manager, updateAvai
       />
       <SettingsDialog open={settings} onClose={() => setSettings(false)} />
       {poster && manager && <ManagerPosterOverlay manager={manager} onClose={() => setPoster(false)} />}
+      {profile && <PlayerProfileOverlay player={player} viewerId={player.userId} mode="normal" load={loadProfile} loadLikes={loadLikes}
+        onClose={() => { setProfile(false); void likes.refresh(); }} />}
     </main>
   );
 }

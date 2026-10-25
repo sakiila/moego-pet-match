@@ -683,4 +683,25 @@
 | profile.load_failed | 玩家记录暂时没读到，请重试。 | We couldn’t load this player’s records. Please try again. |
 | profile.not_found | 这位同事暂时不在可查看的名册中。 | This coworker is not currently available in the roster. |
 
-最高分、已完成局数和最近五局跟随当前排行榜模式；收集统计只计当前上架宠物。未结算/退出的对局不进入历史。鱼关历史不展示宠物新增数。名片只读，不补发或切换对方称号，不展示邮箱、原始对局内容、宠物主人关系。
+最高分、已完成局数和最近五局跟随当前排行榜模式；收集统计只计当前上架宠物。未结算/退出的对局不进入历史。鱼关历史不展示宠物新增数。名片中的成绩、徽章与历史记录只读；点赞独立保存，不补发或切换对方称号，不展示邮箱、原始对局内容、宠物主人关系。
+
+## Player likes (2026-10-26)
+
+| Key | 中文 | English |
+| --- | --- | --- |
+| likes.received | 收到 {count} 个赞 | {count} likes received |
+| likes.received_one | 收到 {count} 个赞 | {count} like received |
+| likes.received_before | 收到 | — |
+| likes.received_after | 个赞 | likes received |
+| likes.received_after_one | 个赞 | like received |
+| likes.like | 送个赞 | Like |
+| likes.liked | 已点赞 | Liked |
+| likes.sending | 发送中… | Sending… |
+| likes.loading | 正在读取赞… | Loading likes… |
+| likes.unavailable | 暂时没读到赞 | Likes unavailable |
+| likes.load_failed | 赞的数量暂时没读到。 | We couldn’t load the likes. |
+| likes.send_failed | 这次没确认成功，请重试。 | We couldn’t confirm your like. Please retry. |
+| likes.success | 点赞成功！ | Like sent! |
+| likes.open_own | 查看我的玩家名片：收到 {count} 个赞 | View my player card: {count} likes received |
+| likes.open_own_one | 查看我的玩家名片：收到 {count} 个赞 | View my player card: {count} like received |
+| likes.open_own_loading | 查看我的玩家名片和收到的赞 | View my player card and received likes |

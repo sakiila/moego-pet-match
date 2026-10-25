@@ -7,9 +7,30 @@ import { inTransaction } from '../db/pool.ts';
 import { readAchievements } from '../services/achievements.ts';
 import { ACHIEVEMENT_IDS } from '../../../web/src/game/achievementRules.ts';
 import { loadPlayerProfile } from '../services/playerProfile.ts';
+import { addPlayerLike, loadPlayerLikes } from '../services/playerLikes.ts';
 
 /** 回访校验所选身份：仍在可参与名单则返回资料与个人记录，否则 404；名单外的在职 Slack 同事首次选中时登记。 */
 export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, directory }) => {
+  app.get<{ Params: { id: string } }>('/api/players/:id/likes', async (request, reply) => {
+    const query = z.object({ viewerId: z.string().min(1) }).safeParse(request.query);
+    if (!query.success) return reply.status(400).send({ error: 'invalid_request' });
+    const view = await loadPlayerLikes(pool, request.params.id, query.data.viewerId);
+    return view ?? reply.status(404).send({ error: 'not_found' });
+  });
+
+  app.post<{ Params: { id: string } }>('/api/players/:id/likes', async (request, reply) => {
+    const body = z.object({ playerId: z.string().min(1) }).strict().safeParse(request.body);
+    if (!body.success) return reply.status(400).send({ error: 'invalid_request' });
+    const targetId = request.params.id;
+    const sourceId = body.data.playerId;
+    if (targetId === sourceId) {
+      const self = await loadPlayerLikes(pool, targetId, sourceId);
+      return self ? reply.status(400).send({ error: 'invalid_request' }) : reply.status(404).send({ error: 'not_found' });
+    }
+    const view = await addPlayerLike(pool, targetId, sourceId);
+    return view ?? reply.status(404).send({ error: 'not_found' });
+  });
+
   app.get<{ Params: { id: string } }>('/api/players/:id/profile', async (request, reply) => {
     const query = z.object({mode:z.enum(['normal','fish']).default('normal')}).safeParse(request.query);
     if (!query.success) return reply.status(400).send({error:'invalid_request'});

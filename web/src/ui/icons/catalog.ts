@@ -43,6 +43,8 @@ export const ICON_CATALOG = {
   'open-shop-white': { widths: [32, 48, 72, 96, 103], aspect: 1 },
   'pearl-shell': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
   'pet-collection': { widths: [32, 48, 72, 96, 144, 192, 278], aspect: 1 },
+  'player-like-high-five': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
+  'player-like-high-five-outline': { widths: [32, 48, 72, 96, 144, 145], aspect: 1 },
   'prep-adjacent-swap': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 2.8835 },
   'prep-sequential-tap': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1.7798 },
   'rank-1': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },

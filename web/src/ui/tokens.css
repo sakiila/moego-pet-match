@@ -374,6 +374,18 @@
   --nav-tile-my-pets-scale: 1.24;
   --nav-tile-back-to-shop-scale: 0.80;
 
+  /* 玩家永久点赞：浅橙行与头像旁的紧凑入口，采用确认稿的举爪原图。 */
+  --player-likes-paper: #fff0e4;
+  --player-likes-line: #ffc595;
+  --player-likes-row-height: 68px;
+  --player-likes-touch-size: 44px;
+  --player-likes-button-width: 82px;
+  --player-likes-press-scale: 0.96;
+  --player-likes-success-scale: 1.14;
+  --player-likes-success-angle: -9deg;
+  --player-likes-success-duration: 420ms;
+  --player-likes-sr-size: 1px;
+
   /* 间距 */
   --space-1: 4px;
   --space-2: 8px;

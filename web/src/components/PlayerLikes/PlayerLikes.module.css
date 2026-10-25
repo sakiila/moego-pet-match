@@ -1,0 +1,52 @@
+.group { display: grid; gap: var(--space-1); }
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--player-likes-row-height);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--player-likes-paper);
+  color: var(--color-ink);
+}
+.paw { display: inline-flex; flex: none; transform-origin: bottom center; }
+.count { display: flex; align-items: baseline; justify-content: flex-start; flex: 1; flex-wrap: wrap; gap: var(--space-1); min-width: 0; font-size: var(--text-sm); font-weight: var(--weight-bold); line-height: 1.2; }
+.count strong { color: var(--color-brand-strong); font-size: var(--text-xl); font-variant-numeric: tabular-nums; }
+.count span { white-space: nowrap; }
+.likeButton {
+  flex: none;
+  min-height: var(--player-likes-touch-size);
+  min-width: var(--player-likes-button-width);
+  padding: var(--space-2) var(--space-3);
+  border: var(--stroke) solid var(--color-brand-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-strong);
+  color: var(--color-paper);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.likeButton:active:not(:disabled), .pill:active { transform: scale(var(--player-likes-press-scale)); }
+.likeButton:disabled { cursor: default; }
+.likedButton { background: var(--color-brand-soft); color: var(--color-brand-strong); }
+.likeButton:focus-visible, .pill:focus-visible, .retry:focus-visible { outline: var(--stroke) solid var(--color-brand); outline-offset: var(--space-1); }
+.placeholder { flex: 1; color: var(--color-ink-muted); font-size: var(--text-sm); }
+.error { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); color: var(--color-danger); font-size: var(--text-xs); }
+.retry { flex: none; min-height: var(--player-likes-touch-size); padding: 0 var(--space-2); border: 0; border-radius: var(--radius-sm); background: none; color: var(--color-brand-strong); font: inherit; font-weight: var(--weight-bold); cursor: pointer; }
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); min-height: var(--player-likes-touch-size); min-width: var(--player-likes-touch-size); padding: var(--space-1) var(--space-2); border: var(--achievement-chip-stroke) solid var(--player-likes-line); border-radius: var(--radius-pill); background: var(--player-likes-paper); color: var(--color-ink); font: inherit; font-size: var(--text-sm); font-weight: var(--weight-bold); cursor: pointer; transition: transform var(--dur-fast) var(--ease-out); }
+.pillCount { font-variant-numeric: tabular-nums; }
+.success { animation: highFive var(--player-likes-success-duration) var(--ease-out) both; }
+.srOnly { position: absolute; width: var(--player-likes-sr-size); height: var(--player-likes-sr-size); padding: 0; margin: calc(-1 * var(--player-likes-sr-size)); overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@keyframes highFive {
+  0%, 100% { transform: rotate(0) scale(1); }
+  40% { transform: rotate(var(--player-likes-success-angle)) scale(var(--player-likes-success-scale)); }
+  70% { transform: rotate(calc(-1 * var(--player-likes-success-angle))) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .success { animation: none; }
+  .likeButton, .pill { transition: none; }
+  .likeButton:active:not(:disabled), .pill:active { transform: none; }
+}
