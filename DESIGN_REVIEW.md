@@ -1,5 +1,7 @@
 # MoeGo 毛孩子全明星 · 设计文档复核
 
+> 历史复核记录（2026-10-22）：以下外部服务、R2 地域约束及「尚未实现」描述记录当时判断，不作为当前基础设施或操作指引。当前已保留 R2 APAC 桶，并迁至 RackNerd PostgreSQL；现行方案见 [TECH_PLAN.md](TECH_PLAN.md) 与 [部署说明](deploy/DEPLOY.md)。第 4–8 条规则后来已确认并写入 V1_RULES 与 GAME_FLOW，以现行规则为准。
+
 日期：2026-10-22
 状态：文档审查已完成；旧状态和排版已修正，以下实现边界仍待补齐。未编写游戏代码。
 
@@ -20,7 +22,7 @@
 
 R2 的 Location Hint 是位置倾向，地域保证需要 Jurisdictional Restrictions；目前官方提供 us jurisdiction。本轮只补文档约束，没有创建或核验实际桶。[Cloudflare 数据位置说明](https://developers.cloudflare.com/r2/reference/data-location/)
 
-Supabase 免费项目可能因一周内活动不足而暂停，免费项目的备份下载与自行导出安排需按实际套餐核实。[项目暂停说明](https://supabase.com/docs/guides/platform/free-project-pausing)、[数据库备份说明](https://supabase.com/docs/guides/platform/backups)
+迁移前曾核对 Supabase 免费套餐的暂停和备份限制，相关来源保留作历史依据：[项目暂停说明](https://supabase.com/docs/guides/platform/free-project-pausing)、[数据库备份说明](https://supabase.com/docs/guides/platform/backups)。当前游戏已迁至 RackNerd PostgreSQL，采用每日备份与实际恢复验证；现行维护步骤见 [部署说明](deploy/DEPLOY.md)。
 
 ## 实现前需补齐：上传与下架
 

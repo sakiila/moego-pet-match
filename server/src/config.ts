@@ -4,7 +4,7 @@ export const LOCAL_TEST_URL = 'postgres://postgres:postgres@localhost:54329/pet_
 
 /**
  * 数据库选择：显式 DATABASE_URL 优先；只有 NODE_ENV=production 才使用 .env 里的正式库
- * PET_MATCH_DATABASE_URL，避免本地开发误连 Supabase。
+ * PET_MATCH_DATABASE_URL，避免本地开发误连正式库。
  */
 export const config = {
   port: Number(process.env.PORT ?? 8787),

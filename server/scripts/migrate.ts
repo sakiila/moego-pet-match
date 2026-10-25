@@ -1,4 +1,4 @@
-/** 本地：建模拟人员表 → 迁移 → 种占位宠物。只允许本地库；Supabase 用 supabase-setup.ts。 */
+/** 本地：建模拟人员表 → 迁移 → 种占位宠物。只允许本地库；生产用 database.ts migrate --prod。 */
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import pg from 'pg';

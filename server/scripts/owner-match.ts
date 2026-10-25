@@ -1,5 +1,5 @@
 /**
- * 主人 → Slack user_id 对应表（只读）：用飞书显示名／英文名与 Supabase colleagues 视图匹配。
+ * 主人 → Slack user_id 对应表（只读）：用飞书显示名／英文名与生产独立同事视图匹配。
  * 输出 data/pet-materials/owner-slack-map.{json,md}（不进 git），供人工审核；本脚本不写数据库。
  * 规则：中文名一致，或英文全名一致，且只有一位同事满足 → confident；
  * 只有英文名首词或邮箱前缀能对上、或多人满足 → candidates；都没有 → not_found。

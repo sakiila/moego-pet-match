@@ -1,10 +1,10 @@
 # MoeGo 毛孩子全明星技术方案逐步讨论
 
-> 2026-10-25 数据库方案更新：生产游戏迁至 RackNerd 自建 PostgreSQL 18.4，数据库与 schema 均名为 `pet_match`。`public."user"` 不迁移；同事名单改从 Slack 初始化和每五分钟同步至 `pet_match.slack_members`，`colleagues` 视图只读有效条目。图片仍存 R2。下文关于 Supabase、原人员表和 DMIT 的部署描述为历史设计，以本段及 [数据库迁移记录](deploy/DATABASE_MIGRATION.md)、[当前部署说明](deploy/DEPLOY.md) 为准。
+> 当前生产方案（2026-10-25）：应用与 PostgreSQL 部署在 RackNerd，数据库与 schema 均为 `pet_match`；同事名册由 Slack 同步，图片保存在 R2。本文各节使用当前方案，迁移经过与恢复依据见 [数据库迁移记录](deploy/DATABASE_MIGRATION.md)，操作步骤见 [部署说明](deploy/DEPLOY.md)。
 
 日期：2026-10-22  
-更新：2026-10-22  
-状态：已确认直接搜索并选择同事身份，不设活动口令及相关访问功能；现有 Supabase `public."user"` 表的字段结构与有效同事过滤条件（155 人）已核验确认，游戏只读该来源，Slack 头像由 DMIT 后端通过 `SLACK_BOT_TOKEN` 按 `user_id` 拉取并本地缓存代理返回。Peter 小鱼关按每位玩家累计三局有效完整普通局触发，取消首页鱼缸入口与公共活动进度，采用水流喷头和气泡机道具外观。首版部署目标为自有 DMIT 洛杉矶服务器，中国优化线路、1 核 CPU、2 GB 内存；域名稍后决定。存储方案已调整：DMIT 只运行 Node 应用；全部游戏数据存入现有 Supabase 项目中独立的 `pet_match` schema，由专用数据库角色经 Postgres 直连读写；图片存 Cloudflare R2 私有桶，由 DMIT 代理并本地缓存；素材上下架与申请处理由本地命令行工具完成。下架后旧报告移除宠物资料并保留真实成绩的呈现已确认；下架前已开局及待同步的合法对局按原规则结算，也按原资格累计有效局。删除申请的清理范围已确认采用墓碑记录方案。本轮只整理文档。
+更新：2026-10-25
+状态：同事自选身份、个人三局触发 Peter 鱼关及墓碑删除方案保持已确认规则。生产使用 RackNerd Node 应用、自建 PostgreSQL 和 R2 私有桶；同事名册由 Slack 初始化与定期同步，头像由后端代理缓存。旧人员表不迁移或写回，历史成绩、收集、称号和主人关联保留。素材上下架与申请处理继续使用本地命令行工具。
 
 产品规则以 [第一版规则总表](V1_RULES.md) 为准，页面与交互见 [游戏流程](GAME_FLOW.md)。
 
@@ -16,7 +16,7 @@
 
 已确认直接搜索并选择自己的同事身份。
 
-流程：打开链接 → 搜索并选择现有 Supabase 可参与名单中的同事身份 → 确认姓名与头像 → 进入门店。
+流程：打开 `https://star.baobo.me` → 搜索并选择独立同事名册中的有效身份 → 确认姓名与头像 → 进入门店。
 
 - 从同事名单中选择游戏身份，以固定的 Slack 用户 ID 关联成绩、图鉴和宠物归属，名字和头像用于展示。
 - 开局身份须存在于该可参与名单；不提供名册外试玩、临时身份或后续成绩合并。开局登记按名单中的稳定成员标识检查，不能仅凭任意输入的名字建立玩家。
@@ -29,35 +29,34 @@
 
 ## 第 2 步 同事名册与宠物归属
 
-用户已有一份存于 Supabase 的 Slack 人员数据表，已明确后续直接读取它作为成员来源。该决定替代此前游戏另行预导名册、手动更新或接入 Slack 自动同步的候选：游戏读取现有表，不接管原表及其同步维护。
+同事名册直接从 Slack `users.list` 初始化，生产启动时和每五分钟完整同步到 `pet_match.slack_members`；`pet_match.colleagues` 只读取 `active=true` 的条目。原人员表不迁移、不修改，也不再参与运行时查询。
 
-由 DMIT 的 Node 后端读取指定人员表／视图，返回搜索和选择身份所需的最小资料；浏览器不直接获取后台凭据或整份人员表。游戏在现有表中找到可参与的同事身份后才可开局，不增加 Slack 本人登录验证。
+RackNerd 的 Node 后端返回搜索与身份选择所需的最小资料；浏览器不获取数据库凭据或完整名册。名单匹配仍采用同事互信，不增加 Slack 本人登录验证。
 
-已确认后端使用专用数据库角色经 Postgres 连接串直连（Supabase 连接池），不使用 `service_role` 等高权限 key，也不向前端下发任何数据库凭据。该角色只读人员表（或其只读视图），读写 `pet_match` schema。除新增 `pet_match` schema 与专用角色外，不修改原人员表的结构、数据、权限或同步流程。
+应用使用 `pet_match_app` 专用角色，通过 Docker 内网访问 PostgreSQL；管理员使用独立的 `PET_MATCH_ADMIN_DATABASE_URL`，本机经 SSH 隧道连接，维护命令不得回退到旧 JDBC 连接。应用只有运行需要的查询、插入和更新权限，不能修改表结构或写宠物目录。
 
-已通过只读方式核验现有 Supabase `public."user"` 表结构（列包含 `id, created_at, updated_at, deleted, user_id, email, real_name_normalized, entry_date, confirm_date, birthday_date, tz, is_bot, team_id, country`），确认游戏所需字段映射与过滤口径如下：
-
-| 信息 | 已核验字段与来源 | 用途 |
+| 信息 | 当前字段与来源 | 用途 |
 | --- | --- | --- |
-| Slack 用户 ID | `public."user".user_id`（如 `U03FPQWGTN2`，非自增主键 `id`） | 关联玩家记录与宠物归属，避免改名或重名影响成绩与图鉴 |
-| 显示名字与搜索 | 展示用 `real_name_normalized`；搜索同时匹配 `real_name_normalized` 与 `email` 前缀 | 搜索自己、展示排行榜和宠物主人（兼顾英文名、中英混写及纯中文名同事） |
-| Slack 头像 | `public."user"` 表无头像列；由 DMIT 后端用 `SLACK_BOT_TOKEN` 按 `user_id` 调 Slack API（`users.info` / `users.list`）获取 `image_72` / `image_192`，本地缓存并经自有域名代理返回（缺失或失败回退彩色首字母头像） | 身份选择、排行榜及主人竞猜 |
-| 可参与名单过滤条件 | `deleted = false AND is_bot = false AND (team_id = 'T011CF3CMJN' OR email ILIKE '%@moego.pet')`（共 155 位有效 MoeGo 同事，排除已停用、机器人及外部共享频道访客） | 准入按成员是否在该过滤集合内判断，只返回上述必需最小字段，不返回生日、入职日等无关字段 |
-| 飞书主人账号对应关系 | 名录中全部 55 位活跃宠物主人（60 位历史主人中除 5 位无在架宠物的停用账号外）已 100% 精确匹配至上述 155 人集合中的唯一 `user_id` | 找到当前玩家的宠物，用于自家宠物优先、图鉴与竞猜 |
+| Slack 用户 ID | Slack `id` 保存为 `slack_members.user_id` | 关联玩家记录与宠物归属，改名或重名不改变既有记录 |
+| 显示名字与搜索 | Slack 资料中的姓名保存为 `name`；按姓名包含或邮箱前缀搜索 | 身份选择、排行榜和宠物主人展示 |
+| Slack 头像 | Node 用 `SLACK_BOT_TOKEN` 获取头像并本地缓存，经 `/img/avatars/:userId` 代理返回 | 身份选择、排行榜及主人竞猜；缺失时回退默认头像 |
+| 可参与名单 | 排除停用、机器人与 Slackbot；工作区为 `T011CF3CMJN` 或邮箱以 `@moego.pet` 结尾，保留原已允许的有效访客 | 准入依据 `colleagues` 的有效条目；人数随目录变化，不写死为早期核验人数 |
+| 同步与失败边界 | 完整分页成功后在同一事务更新姓名、邮箱和有效状态；空名单、缺页或请求失败不覆盖已保存名单 | 防止临时故障清空身份；已停用账号不由搜索或选择重新启用 |
+| 宠物主人关联 | 沿用已核对的主人 Slack `user_id`，不按显示名字重新匹配 | 自家宠物优先、图鉴与竞猜 |
 
-名录与主人归属核验结果：
+名录与主人归属核验结果（早期核验记录，稳定 `user_id` 沿用）：
 
-- 全部 55 位有上架宠物的活跃主人在上述过滤条件下均能 1:1 对应到唯一 `user_id`（包括昵称或中英文写法差异，如 `Samantha Sullivan` → `U070B3C75FA`、`Zhangdong(张栋)` → `U04NU63F1HV`、`Jason Sun(孙俊毅)` → `U03JQTFVCC9`、`Peter(梁广攀)` → `U03JFM4M82C`、`Mike Palma` → `U09B3UHUTCJ`、`Ivy Nguyen` → `U08HT4CF4NA`、`Willwang(王啸岩)` → `U0A7AB2P2RZ`、`Steven Miller` → `U0AM33FF8SF`、`Shu Wenbin(舒文斌)` → `U0AT51JKFEY`、`Alex` → `U0BJF25MDMY`）。
+- 名录核验时，全部 55 位有上架宠物的活跃主人在当时的可参与名单中均能 1:1 对应到唯一 `user_id`（包括昵称或中英文写法差异，如 `Samantha Sullivan` → `U070B3C75FA`、`Zhangdong(张栋)` → `U04NU63F1HV`、`Jason Sun(孙俊毅)` → `U03JQTFVCC9`、`Peter(梁广攀)` → `U03JFM4M82C`、`Mike Palma` → `U09B3UHUTCJ`、`Ivy Nguyen` → `U08HT4CF4NA`、`Willwang(王啸岩)` → `U0A7AB2P2RZ`、`Steven Miller` → `U0AM33FF8SF`、`Shu Wenbin(舒文斌)` → `U0AT51JKFEY`、`Alex` → `U0BJF25MDMY`）。
 - 最终名录 `catalog-final-v4` 的 82 条记录中，Erika Intfen（`U096HEK293U`）的两条灰猫 `Banjo`（`pet_7104fa8cdaea` 与 `pet_ba0182ef65c6`，标记为同一 `duplicate_group: "dup_06b1daed4a24"`）已确认在游戏上线目录中归并为 **1 只独立宠物 `Banjo`**（主素材采用 `accept` 状态的 `pet_7104fa8cdaea`），因此首版普通宠物图鉴与棋盘候选池共 **80 只独立宠物**，另加 1 条鱼群档案关联 6 款单鱼。
 - 归并后全库共 **19 个已确认同主多宠家庭**（11 家有同框原图、8 家为分拍单照），局内双宠团聚彩蛋统一在棋盘外轻提示区并排展示当次消除的两只宠物 B 类贴纸头像。
 
-现有人员表更新时，同一 Slack 用户 ID（`user_id`）下的成绩与图鉴保持关联；改名或换头像仅更新展示。未匹配成员不创建临时记录，也不进入游戏。
+Slack 名册更新时，同一 `user_id` 下的成绩与图鉴保持关联；改名或换头像只更新展示。未匹配成员不创建临时记录，也不进入游戏。
 
-已确认全部游戏数据放在人员表所在的同一 Supabase 项目、独立的 `pet_match` schema：宠物名录与主人关系、对局、个人最好成绩、图鉴、个人游玩进度、隐藏关解锁、上传提交与删除申请。玩家记录以 Slack 用户 ID（`user_id`）关联人员表，可直接联表查询；不向人员源表写回游戏记录。DMIT 上不再运行 SQLite。数据新鲜度由原表维护情况决定，不将读取该表称为实时查验 Slack。
+全部游戏数据保存在 RackNerd PostgreSQL 的独立 `pet_match` 数据库与 schema：宠物名录与主人关系、对局、最高成绩、图鉴、个人进度、隐藏关状态、称号、上传与删除申请。同事资料也保存在 `slack_members`，通过稳定 `user_id` 联表；不再依赖外部人员数据库。完整目录以五分钟同步为周期，搜索另有缓存，不将每次读取保存名册称为实时查验 Slack。
 
 ## 第 3 步 在线数据与部署方向
 
-已确认采用独立项目托管，为小游戏单独准备后端、数据库和图片存储。当前尚未配置或创建实际资源，只讨论技术方案，不写游戏代码。
+当前采用独立应用、数据库和图片存储：Node 与 PostgreSQL 部署在 RackNerd，R2 保存图片。三者均已接通，验证与恢复记录见 `deploy/DATABASE_MIGRATION.md`。
 
 推荐按一套轻量后端、一个数据库和一处图片存储设计，分工如下：
 
@@ -65,31 +64,31 @@
 | --- | --- |
 | 浏览器网页 | 页面、三消操作、局内逻辑、动效与音效，以及当前一局的即时反馈 |
 | 轻量后端 | 同事名册读取、完成对局的统一记录、排行榜、图鉴、个人游玩进度与隐藏关准入、上传资料接收与删除申请 |
-| 数据库（Supabase `pet_match` schema） | 宠物名录与上架状态、同事与宠物对应关系、对局及个人最好成绩、收集记录、个人游玩进度与隐藏关解锁状态、上传提交与删除申请 |
-| 图片存储（Cloudflare R2 私有桶） | 上传原图、统一风格后的棋子图、图鉴图和相关素材；浏览器不直连 R2，由 DMIT 后端代理并缓存 |
+| 数据库（RackNerd PostgreSQL，`pet_match` 数据库与 schema） | 独立同事名册、宠物名录与主人关系、对局、成绩、收集、进度、称号、上传提交与删除申请 |
+| 图片存储（Cloudflare R2 私有桶） | 上传文件、棋子图、图鉴图与素材；浏览器不直连 R2，由 Node 后端代理缓存 |
 
 同一玩家在不同设备选择同一 Slack 身份后，读取同一套个人记录。浏览器缓存偏好和展示资料；未保存的本局结果只在当前报告页内存中保留供重试。持久成绩、图鉴、个人游玩进度与隐藏关解锁状态以线上记录为准。同一局重复提交只记录一次；排行榜与个人进度在读取相关页面及局后更新。隐藏关按个人游玩进度触发，首页不提供鱼缸入口。
 
-首版部署到用户自有 DMIT 服务器，组合见第 4 步；数据结构与接口在后续步骤细化。
+生产部署在 RackNerd，技术组合见第 4 步；具体目录、镜像、内网及反向代理配置见 `deploy/DEPLOY.md`。
 
 此处的独立项目指独立的应用、数据与部署配置，允许部署在用户已有的个人服务器上，并不要求另购一台机器。若与其他网站共用服务器，应使用本项目自己的配置、持久目录和运行边界。
 
 ## 第 4 步 技术组合与访问体验
 
-首版部署目标已确定为用户自有的 DMIT 服务器。用户提供的配置为洛杉矶机房、中国优化线路、1 核 CPU、2 GB 内存，按此目标安排轻量自托管方案。操作系统、已有服务、反向代理与磁盘余量在部署准备时核实；本轮只讨论和记录，不连接服务器或执行部署。
+生产复用 RackNerd 上现有的 Debian、Docker、1Panel/OpenResty 和 PostgreSQL 18.4。应用使用独立 Compose project 与配置目录，数据库为独立 `pet_match` 库；不替换其他站点或数据库。资源上限以 Compose 配置和实际监控为准。
 
 | 部分 | 推荐技术 | 本项目中的职责 |
 | --- | --- | --- |
 | 网页 | React ＋ Vite ＋ TypeScript | 页面、棋盘操作、状态展示与音画反馈 |
-| 网页托管与接口 | DMIT 上的一个 Node.js 应用服务 | 同时提供网页构建产物与 API，处理数据读取、完成对局、照片提交与删除申请 |
-| 数据库 | Supabase Postgres（现有项目、独立 `pet_match` schema，美西 us-west-1 连接池） | 保存宠物名录、同事与宠物关系、对局、图鉴、榜单、个人游玩进度与隐藏关解锁状态、上传提交与删除申请；Node 以专用角色直连并在事务中结算 |
-| 图片存储 | Cloudflare R2 私有桶 ＋ DMIT 本地磁盘缓存 | R2 长期保存原图与处理图；DMIT 按需拉取、缓存并经自有域名返回 |
-| 素材维护 | 本地命令行工具 | 读取名录 JSON 与贴纸文件，用仅存于本机的管理员凭据写入 R2 与 Supabase；处理上传提交与删除申请 |
-| HTTPS 入口 | 沿用现有反向代理；没有时再考虑 Caddy | 提供 HTTPS 并将请求转到本项目应用；具体配置在了解现有服务后确定 |
+| 网页托管与接口 | RackNerd 的独立 Node.js 容器 | 同时提供网页构建产物、API、照片提交与图片代理 |
+| 数据库 | RackNerd PostgreSQL 18.4 | 独立 `pet_match` 数据库与 schema；应用以专用角色经 Docker 内网访问，在事务中结算 |
+| 图片存储 | Cloudflare R2 私有桶与 Node 本地磁盘缓存 | R2 长期保存文件；Node 按需拉取、缓存并经自有域名返回 |
+| 素材维护 | 本地命令行工具 | 读取已确认名录与贴纸，使用独立管理员连接维护 PostgreSQL，并处理 R2、上传与删除申请 |
+| HTTPS 入口 | 1Panel/OpenResty | 为 `star.baobo.me` 提供 HTTPS，反代到宿主机回环端口 8787 |
 
 已确认棋盘架构：底层是不依赖界面的纯 TypeScript 规则引擎，负责匹配、下落、道具、合体、计分、洗牌与计时，支持随机种子与固定棋盘，每次操作输出事件时间线（交换、消除、生成道具、下落、补位）；界面只按时间线播放。棋盘用 React DOM 渲染，动画用 CSS transform／Web Animations，泡泡等粒子另铺一层 Canvas；成绩卡与店长海报单独用 Canvas 绘制导出。若试玩发现低端机掉帧，只替换棋盘渲染层（如 PixiJS），规则引擎不变。
 
-选择依据是当前局内逻辑由浏览器完成，后端主要提供页面进入及局后的小量业务读写，可用一个应用服务完成首版；数据库与对象存储交给托管服务，1C2G 机器不承担数据库文件与离机备份维护。Supabase 连接池位于美西，与洛杉矶 DMIT 距离近，局后一次结算的往返延迟可接受。1 核、2 GB 作为本项目的部署设计目标，实际资源余量与访问表现通过原型验证，不预先承诺并发数字。
+局内逻辑由浏览器完成，Node 负责页面、身份与局后业务读写；同机 PostgreSQL 通过 Docker 内网连接，避免外部数据库往返。数据库持久目录与应用发布分开，每日备份并保留约 14 天；本次迁移另留本机副本。实际容量与访问体验由监控和实测判断，不预设并发数字。
 
 前端与应用构建在本地或 CI 完成，服务器运行构建后的生产产物；照片的统一风格制作、裁剪与规格整理仍由项目发起人在本地人工完成。服务器负责页面、轻量接口与图片代理缓存。上传体积、日志、缓存与旧发布包的保留设置上限，控制磁盘长期增长；图片存 R2，数据库记录对应资料和对象键。
 
@@ -97,14 +96,14 @@
 
 ### 存储、缓存与维护边界
 
-- 持久数据不在 DMIT：游戏数据在 Supabase `pet_match` schema，图片在 R2 私有桶。DMIT 只保存应用产物、服务配置与可随时重建的图片缓存，重新发布应用不影响任何持久数据。
-- R2 位置：2026-10-23 核验现有 `star` 桶位置为 APAC、默认 jurisdiction；已确认保留该桶，并把信息说明改为「数据库与服务器在美国、图片在 R2 亚太区域」。原先「桶须使用 `us` jurisdiction」的要求不再适用；如日后改回美国存储，须新建 `us` jurisdiction 的桶并迁移对象，同时改回说明。依据见 [R2 数据位置说明](https://developers.cloudflare.com/r2/reference/data-location/)。
-- 对局结算由 Node 在同一 Postgres 事务中完成，用唯一对局编号约束保证整体保存、重复只记一次；多语句事务走直连，不依赖 Supabase REST 接口。
+- 持久数据与应用容器分离：数据库位于 RackNerd PostgreSQL 的持久卷，图片在 R2；应用镜像和图片缓存可替换，重新发布不删除数据库或 R2 对象。
+- R2 位置：2026-10-23 已核验现有 `star` 桶位于 APAC、使用默认 jurisdiction，并确认继续保留。信息说明按实际基础设施写明 RackNerd 与 R2 亚太区域；今后若迁移图片位置或桶，先核实创建参数和对象迁移方案，再同步中英文说明。位置依据见 [R2 数据位置说明](https://developers.cloudflare.com/r2/reference/data-location/)。
+- 对局结算由 Node 在同一 PostgreSQL 事务中完成，用唯一对局编号约束保证整体保存、重复只记一次；不通过数据库 REST API 结算。
 - 图片接口：浏览器只访问自有域名下的图片路径（如 `/img/pets/<pet_id>/128`），Node 首次从 R2 拉取后写入本地磁盘缓存，再直接返回；文件名带内容哈希，可设长期浏览器缓存。磁盘缓存设上限（约 1–2 GB）并按最近使用淘汰。
 - 下架即时生效：图片接口返回前检查宠物上架状态（上架名单可在内存缓存数十秒），下架后拒绝返回并清除对应本地缓存。
-- 上传原图由浏览器传到 DMIT，再由 Node 转存 R2，不提供公开读取；只有命令行工具可取回原图。
-- Slack 头像复用同一机制：由于 `public."user"` 无头像列，由 Node 后端用 `SLACK_BOT_TOKEN` 按 `user_id` 拉取 Slack 头像 URL 后下载并本地磁盘缓存，经自有域名（如 `/img/avatars/<user_id>`）返回，避免大陆直连 Slack 图片域名；缺失或拉取失败时由前端显示彩色首字母默认头像。
-- 备份：R2 与 Supabase 各自托管；Supabase 免费版不提供可下载的自动备份，免费项目可能因一周内活动不足而暂停。上线前确认套餐，免费版需定期导出 `pet_match` 数据到 DMIT 之外的位置。依据见 [免费项目暂停说明](https://supabase.com/docs/guides/platform/free-project-pausing) 与 [数据库备份说明](https://supabase.com/docs/guides/platform/backups)。
+- 上传文件经浏览器传到 RackNerd Node，再转存 R2，不提供公开读取；只有命令行维护工具可取回原文件。
+- Slack 头像由 Node 用 `SLACK_BOT_TOKEN` 拉取并本地缓存，经 `/img/avatars/:userId` 返回，避免浏览器直连 Slack 图片域名；缺失或失败时显示默认头像。
+- 备份：`moego-pet-match-db-backup.timer` 每日北京时间 04:10 导出 PostgreSQL 归档，保留约 14 天，权限受限；迁移后已实际恢复验证。R2 继续保存图片；源库迁移归档与本机副本单独保留，不把它们当作最新生产数据。恢复步骤见 `deploy/DATABASE_MIGRATION.md`。
 - 服务器运行、系统更新与磁盘余量由项目维护者负责，沿用现有运维方式；本轮不做任何安装、端口、DNS 或现有服务的修改。
 
 ### 本地命令行工具与素材维护
@@ -114,7 +113,7 @@
 | 命令 | 作用 |
 | --- | --- |
 | `publish [pet_id...]` | 上架指定宠物或全部「已就绪」宠物：贴纸按内容哈希上传 R2，并由原图生成卡背面照片（长边 1600 JPEG、去 EXIF，合照保留全图，多宠共用照片在确认清单中列出供过目），在 `pet_match.pets` 新增或更新记录并设为上架；未变化的文件跳过。只增不减，不会因 JSON 缺项而下架 |
-| `unpublish <pet_id>` | 显式下架：状态改为下架并删除 R2 上的贴纸；DMIT 图片接口随即拒绝返回并清除缓存 |
+| `unpublish <pet_id>` | 显式下架：状态改为下架并删除 R2 对象；Node 图片接口拒绝返回并清除对应缓存 |
 | `submissions pull` / `submissions done <id>` | 拉取用户上传的原图与资料到本地，人工处理后标记已处理 |
 | `deletions list` / `deletions resolve <id>` | 查看删除申请，人工核实并处理后更新结果 |
 
@@ -122,21 +121,21 @@
 
 先前的 Cloudflare Workers、Static Assets 与 D1 方案不作为实施基线；R2 仅作为对象存储使用，不由浏览器直连。
 
-已确认玩家在中国大陆和海外均有分布。进入实现阶段后，首个最小在线原型先使用占位资料验证完整链路：打开网页 → 搜索并确认测试同事身份 → 读取示例资料和图片 → 提交测试成绩 → 上传测试照片并确认资料、文件均保存。分别从大陆和海外检查，验证通过后再扩大功能和真实素材接入；最终域名确定后复测实际入口。本轮只整理验证顺序，不创建资源或部署原型。
+玩家在中国大陆和海外均有分布。最小在线原型的验收顺序为：打开网页 → 搜索并确认身份 → 读取资料和图片 → 提交成绩 → 上传照片并确认资料、文件均保存。生产入口现为 `https://star.baobo.me`；迁移后的已验证链路见迁移记录，大陆与海外访问表现仍分别实测，不以静态首页可打开代表全部链路通过。
 
 ### 两地访问的设计原则
 
 - 开始计时前加载好普通局 6 种宠物或鱼关本局所需鱼色的棋盘小图与必要素材；图鉴大图和原图按需加载。棋盘操作和动画在浏览器完成，局内即时反馈不逐步等待网络往返。
-- 姓名和头像来源从现有 Supabase 人员表读取，经后端提供必需资料；头像由 DMIT 拉取缓存后经自有域名返回，宠物图片同理，浏览器不直连 Slack 或 R2。字体和音效随游戏资源提供。
+- 姓名从独立 Slack 名册读取，头像由 Node 从 Slack 拉取、缓存并经自有域名返回；宠物图片同理由 Node 代理，浏览器不直连 Slack 或 R2。字体和音效随游戏资源提供。
 - 结算先展示本局报告，线上成绩、图鉴、个人游玩进度与隐藏关解锁以提交成功为准；失败仅在当前报告页保留结果供重试，同一局不重复计局或触发重复解锁。
 - 网页、接口与相关素材优先使用统一的自有域名或有使用权限的子域名入口，便于后续调整托管；自定义域名本身不等于网络加速保证。
 - 原型可部署后，分别验证大陆常用网络和海外网络的身份选择、图片加载、对局提交，以及刷新后读取所选有效身份与已保存记录。当前尚未进行这些实测。
 
-已记录洛杉矶机房及中国优化线路；实际访问体验仍以该服务器在大陆和海外网络上的完整链路实测为准。若后续改用 Cloudflare，也不能把普通方案视为自动具备大陆加速。当前不增加多地数据库同步。
+实际访问体验以 RackNerd 在大陆和海外网络上的完整链路实测为准，不沿用旧服务器的机房或线路假设。当前不增加多地数据库同步，也不把普通代理或 CDN 方案视为自动具备大陆加速。
 
-已确认当前没有准备好的游戏域名，域名稍后决定，不作为当前数据与接口设计的前置条件。最终选定域名后，再处理 DNS、HTTPS 接入及上线前的两地验证；本轮不修改 DNS、不迁移现有域名。
+当前生产域名为 `star.baobo.me`，由 1Panel/OpenResty 提供 HTTPS 与反向代理；应用只绑定宿主机回环端口。今后的域名或 DNS 修改仍需独立授权。
 
-以下结算设计按 Node.js 与 Supabase Postgres 方向细化；域名、进程管理和反向代理配置在部署准备时落实。
+以下结算设计采用 Node.js 与 RackNerd PostgreSQL；域名、镜像、内网和反向代理配置见部署说明。
 
 ## 第 5 步 一局结束如何保存
 
@@ -235,10 +234,10 @@
 | --- | --- |
 | `pet_match.pets` 记录 | 保留墓碑：只留 `pet_id`、`status=removed` 与下架时间，清空名字、介绍、主人关联、名言、图片对象键等其余字段；历史对局仍可凭 `pet_id` 识别并过滤 |
 | R2 贴纸与原图 | 删除 |
-| DMIT 图片缓存 | `unpublish` 触发清除，之后新请求一律拒绝 |
+| Node 图片缓存 | `unpublish` 触发清除，之后新请求一律拒绝 |
 | 本地名录（Excel／JSON）与 `assets/pets` | 名录标记 `removed` 并删除本地图片；`publish` 遇到数据库中已是墓碑的 `pet_id` 拒绝重新上架 |
 | 涉及该宠物的合照与团聚关系 | 一并移除或替换相关素材 |
-| 外部副本：飞书原文档、生成贴纸时提交给 AI 服务的图片、Supabase 与 R2 托管备份 | 游戏无法控制，只在申请处理结果中列明，不承诺已删除 |
+| 外部副本：飞书原文档、生成贴纸时提交给 AI 服务的图片、托管存储及历史迁移副本 | 游戏无法即时召回，只在申请处理结果中列明，不承诺已删除 |
 | 申请状态 | 游戏自身持有的副本全部清理完才标记「已处理」 |
 
 ### 对游戏记录的影响
@@ -261,9 +260,9 @@
 
 Slack 的 [users.list](https://docs.slack.dev/reference/methods/users.list/) 支持读取工作区用户列表，需要相应读取权限；[用户对象](https://docs.slack.dev/reference/objects/user-object/) 包含用户 ID、姓名、头像及账号状态等字段。字段未提供时要允许缺失。
 
-现有 Supabase 人员表接入参考：[Data API 与自有 API 服务协作](https://supabase.com/docs/guides/api)、[API key 的用途与权限边界](https://supabase.com/docs/guides/getting-started/api-keys)。现有表的字段结构、过滤条件与主人对应关系已核验；游戏接入、专用数据库角色与实际运行权限尚未实施验证。
+当前实现入口：`server/src/services/slackDirectory.ts`、`syncSlackMembers.ts`、`players.ts`；数据库维护使用 `server/scripts/database.ts`，素材与申请命令统一读取显式生产管理员连接。迁移历史见 `deploy/DATABASE_MIGRATION.md`。
 
-部署参考：[DMIT 官方产品与机房说明](https://www.dmit.io/)、[Supabase 连接 Postgres](https://supabase.com/docs/guides/database/connecting-to-postgres)、[R2 S3 兼容接口](https://developers.cloudflare.com/r2/api/s3/api/)、[Caddy 自动 HTTPS](https://caddyserver.com/docs/automatic-https)。用户这台机器的洛杉矶、中国优化线路及 1 核、2 GB 配置来自用户提供；当前负载与实际连通性尚未测量。
+部署与备份参考：[PostgreSQL 备份恢复](https://www.postgresql.org/docs/current/backup-dump.html)、[R2 S3 兼容接口](https://developers.cloudflare.com/r2/api/s3/api/)；本项目已验证的具体配置、权限与恢复步骤以 `deploy/` 中的记录为准。
 
 先前 Cloudflare 候选参考：[React/Vite 与 API 托管](https://developers.cloudflare.com/workers/static-assets/)、[D1 数据库](https://developers.cloudflare.com/d1/)、[Workers 读取 R2](https://developers.cloudflare.com/r2/api/workers/workers-api-usage/)、[Workers 额度与计费](https://developers.cloudflare.com/workers/platform/pricing/)。
 
@@ -280,4 +279,4 @@ Slack 的 [users.list](https://docs.slack.dev/reference/methods/users.list/) 支
 
 玩家名片使用独立的只读 `GET /api/players/:id/profile?mode=normal|fish`。只允许查看当前同事视图中的身份，返回所选模式最高已结算成绩、完成局数、最近五份结算、当前上架宠物收集计数与已有称号；不调用身份补登记或成就补发。未结算对局不进入历史，鱼关与宠物局分开；新增收集数从本人 collection 的 first_game_id 和当前上架目录汇总。不返回邮箱、原始 payload 或宠物主人关系。前端关闭/切换玩家时取消旧请求，失败可重试，不存在的身份显示明确状态。
 
-本地开发库已应用 013；生产尚未执行。`supabase-setup.ts` 的应用角色授权清单已包含两张新表，后续正式迁移按既有预览/确认流程执行，不自行部署。
+生产 RackNerd 已执行迁移 001–016，含收集成就、佩戴称号、每日同盘和独立名册；专用角色权限已验证。后续迁移使用 `database.ts migrate --prod` 预览，确认后加 `--apply`，不使用历史 Supabase 初始化脚本。

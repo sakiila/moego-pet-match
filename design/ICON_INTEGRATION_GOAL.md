@@ -60,7 +60,7 @@
 ## 约束
 - 遵守 AGENTS.md 组件化规则：页面只组合组件；样式只引用 tokens；数据全部来自 props；文案经 i18n 读取；每个改动的组件都更新对应的 .gallery.tsx。
 - 只改与本目标相关的代码，不做无关重构。不改 tools/pet-studio、engine 规则、服务端结算或数据库；不改宠物和单鱼源素材，也不改图标母版的像素。
-- 不提交 git，不部署，不碰 .env、Supabase 或 DMIT 服务器。
+- 不提交 git，不部署，不碰 .env、生产数据库或生产服务器。
 - 本地开发服务已有 .claude/launch.json（web 端口 5180，server 端口 8787），用 preview 工具启动，不要用 Bash 起服务。
 
 ## 每个阶段的验收

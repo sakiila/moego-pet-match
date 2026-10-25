@@ -1,7 +1,7 @@
 import type pg from 'pg';
 
 /**
- * 仅本地开发／测试：模拟 Supabase 的 public."user"（同列名）并放入测试同事，
+ * 仅本地开发／测试：为历史迁移准备 public."user" 模拟表，并放入测试同事，
  * 含应被过滤掉的停用账号、机器人和外部访客。正式库绝不运行。
  */
 export const TEST_COLLEAGUES = [

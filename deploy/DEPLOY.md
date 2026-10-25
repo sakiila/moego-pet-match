@@ -34,7 +34,7 @@ GHCR 新包默认可能是 private，与代码仓库公开与否分开管理。s
 
 ## 服务器运行配置
 
-按 `production.env.example` 填入RackNerd `pet_match` 库的专用 `pet_match_app` 角色连接、R2 桶读写凭据和可选 Slack token。值使用单引号，防止密码中的 `$` 被 Compose 插值。不要添加 `DATABASE_URL`、`DATABASE_SSL`、`OBJECT_STORE`、`HOST`、`PORT` 等覆盖镜像默认行为的变量；脚本会拒绝未知键或缺失的必填值。
+按 `production.env.example` 填入 RackNerd `pet_match` 库的专用 `pet_match_app` 角色连接、R2 桶读写凭据和可选 Slack token。值使用单引号，防止密码中的 `$` 被 Compose 插值。不要添加 `DATABASE_URL`、`DATABASE_SSL`、`OBJECT_STORE`、`HOST`、`PORT` 等覆盖镜像默认行为的变量；脚本会拒绝未知键或缺失的必填值。
 
 ```sh
 install -d -m 700 /app/moego-pet-match
