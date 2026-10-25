@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { ColleagueResult, PlayerProfileView } from '../../api/types';
-import { ACHIEVEMENT_IDS } from '../../game/achievementRules';
+import type { AchievementId } from '../../api/types';
+import { ACHIEVEMENT_IDS, conditionRevealed } from '../../game/achievementRules';
 import { ACHIEVEMENT_DISPLAY_ORDER } from '../../game/achievementRarity';
 import { useI18n } from '../../i18n';
 import { Avatar } from '../../ui/primitives/Avatar';
@@ -17,9 +18,11 @@ export interface PlayerProfileCardProps {
   onRetry: () => void;
   onClose: () => void;
   inline?: boolean;
+  /** 正在看名片的玩家自己已解锁的称号；隐藏称号的解锁条件只对其中的显示真实文字。 */
+  viewerTitles?: readonly AchievementId[];
 }
 
-export function PlayerProfileCard({ player, view, error, onRetry, onClose, inline }: PlayerProfileCardProps) {
+export function PlayerProfileCard({ player, view, error, onRetry, onClose, inline, viewerTitles = [] }: PlayerProfileCardProps) {
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (inline) return;
@@ -39,7 +42,7 @@ export function PlayerProfileCard({ player, view, error, onRetry, onClose, inlin
         <Avatar name={player.name} seed={player.userId} src={`/img/avatars/${encodeURIComponent(player.userId)}`} size={64} />
         <div className={styles.identityText}>
           <h3 className={styles.name}>{view?.name ?? player.name}</h3>
-          {view?.equippedTitle && <PlayerProfileBadge id={view.equippedTitle} chip />}
+          {view?.equippedTitle && <PlayerProfileBadge id={view.equippedTitle} chip revealed={conditionRevealed(view.equippedTitle, viewerTitles)} />}
         </div>
       </div>
       {error ? <StatusMessage tone="error" text={t(error === 'not_found' ? 'profile.not_found' : 'profile.load_failed')}
@@ -53,7 +56,7 @@ export function PlayerProfileCard({ player, view, error, onRetry, onClose, inlin
           <section className={styles.section}>
             <div className={styles.sectionHeading}><h3>{t('profile.badges')}</h3><span>{view.unlockedTitles.length} / {ACHIEVEMENT_IDS.length}</span></div>
             {unlockedTitles.length ? <ul className={styles.badges}>{unlockedTitles.map(id => <li key={id}>
-              <PlayerProfileBadge id={id} />
+              <PlayerProfileBadge id={id} revealed={conditionRevealed(id, viewerTitles)} />
             </li>)}</ul> : <p className={styles.hint}>{t('profile.no_badges')}</p>}
           </section>
           <section className={styles.section}>

@@ -412,7 +412,7 @@ export const en: Record<MessageKey, string> = {
   "achievement.wearing": "Wearing",
   "achievement.locked": "Locked",
   "achievement.hidden_name": "Hidden Title",
-  "achievement.hidden_condition": "Revealed when a secret condition is met",
+  "achievement.hidden_condition": "Meow meow? Mew, mew mew mew~ (=^･ω･^=)",
   "achievement.no_score": "Just for display. Your score stays the same.",
   "achievement.loading": "Gathering your badges…",
   "achievement.load_failed": "We couldn’t load your badges. Please try again.",

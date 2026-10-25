@@ -23,7 +23,8 @@ function ModalPreview() {
 const entry: GalleryEntry = {name:'PlayerProfileCard',group:'components',states:{
   'modal · hover / touch / Escape': () => <ModalPreview />,
   'default · latest rarity':()=>render(),
-  'all badges':()=>render({...view,equippedTitle:'album',unlockedTitles:[...ACHIEVEMENT_IDS]}),
+  'all badges · viewer has not unlocked hotpot (meow)':()=>render({...view,equippedTitle:'hotpot',unlockedTitles:[...ACHIEVEMENT_IDS]}),
+  'all badges · viewer unlocked hotpot':()=><PlayerProfileCard inline player={view} view={{...view,equippedTitle:'hotpot',unlockedTitles:[...ACHIEVEMENT_IDS]}} viewerTitles={['hotpot']} onRetry={noop} onClose={noop} />,
   'empty':()=>render({...view,bestScore:null,completedGames:0,equippedTitle:null,unlockedTitles:[],recentGames:[],collection:{collected:0,total:80}}),
   loading:()=>render(null),
   'load failed':()=>render(null,'unavailable'),

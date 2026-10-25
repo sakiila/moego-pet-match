@@ -5,8 +5,11 @@ import { useI18n, type MessageKey } from '../../i18n';
 import { AchievementBadge, achievementName } from '../AchievementBadge/AchievementBadge';
 import styles from './PlayerProfileBadge.module.css';
 
-/** 名片里的只读徽章：悬浮、键盘聚焦或轻点查看条件。 */
-export function PlayerProfileBadge({ id, chip = false }: { id: AchievementId; chip?: boolean }) {
+/**
+ * 名片里的只读徽章：悬浮、键盘聚焦或轻点查看条件。
+ * revealed 为 false 时（隐藏称号，看的人自己还没解锁）条件换成喵喵喵占位。
+ */
+export function PlayerProfileBadge({ id, chip = false, revealed = true }: { id: AchievementId; chip?: boolean; revealed?: boolean }) {
   const { t, locale } = useI18n();
   const tooltipId = useId();
   const trigger = useRef<HTMLButtonElement>(null);
@@ -97,7 +100,7 @@ export function PlayerProfileBadge({ id, chip = false }: { id: AchievementId; ch
       onPointerEnter={cancelClose}
       onPointerLeave={event => { if (event.pointerType === 'mouse' && window.matchMedia('(hover: hover)').matches) leave(); }}>
       <strong>{t('achievement.unlock_condition')}</strong>
-      <p>{t(`achievement.${id}_unlock` as MessageKey, { target })}</p>
+      <p>{revealed ? t(`achievement.${id}_unlock` as MessageKey, { target }) : t('achievement.hidden_condition')}</p>
     </div>
   </div>;
 }

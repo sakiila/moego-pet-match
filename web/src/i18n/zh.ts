@@ -411,7 +411,7 @@ export const zh = {
   "achievement.wearing": "佩戴中",
   "achievement.locked": "未解锁",
   "achievement.hidden_name": "隐藏称号",
-  "achievement.hidden_condition": "达成神秘条件后揭晓",
+  "achievement.hidden_condition": "喵喵喵？喵喵，喵喵喵喵～ (=^･ω･^=)",
   "achievement.no_score": "只改变展示，不影响分数",
   "achievement.loading": "正在整理你的徽章…",
   "achievement.load_failed": "徽章暂时没读到，请重试。",

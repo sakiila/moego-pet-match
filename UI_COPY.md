@@ -589,7 +589,7 @@
 
 ### 永久收集成就与称号（2026-10-24）
 
-2026-10-25 开发者彩蛋：`achievement.hotpot*` 为隐藏称号「火锅搭子」，解锁前在我的称号里用 `achievement.hidden_name` / `hidden_condition` 占位（灰蒙层 + 问号，只露稀有度）；`rarity_mythic`「镇店之宝」是新增的最高一档。`home.manager_line_maodu` / `_boluo`、`board.reunion_hotpot` 与 `report.developer_certified`（认证章的读屏文字）只在 Maodu 毛肚、Boluo 菠萝出现时使用，宠物名保留中英混写原文。
+2026-10-25 开发者彩蛋：`achievement.hotpot*` 为隐藏称号「火锅搭子」，解锁前在我的称号里用 `achievement.hidden_name` / `hidden_condition` 占位（灰蒙层 + 问号，只露稀有度）；`hidden_condition` 是喵喵喵加颜文字（2026-10-25 用户确认），玩家名片里看的人自己没解锁该隐藏称号时，徽章的解锁条件也显示它，只有解锁了才看到真实条件；`rarity_mythic`「镇店之宝」是新增的最高一档。`home.manager_line_maodu` / `_boluo`、`board.reunion_hotpot` 与 `report.developer_certified`（认证章的读屏文字）只在 Maodu 毛肚、Boluo 菠萝出现时使用，宠物名保留中英混写原文。
 
 | Key | 中文 | English |
 | --- | --- | --- |
@@ -634,7 +634,7 @@
 | achievement.wearing | 佩戴中 | Wearing |
 | achievement.locked | 未解锁 | Locked |
 | achievement.hidden_name | 隐藏称号 | Hidden Title |
-| achievement.hidden_condition | 达成神秘条件后揭晓 | Revealed when a secret condition is met |
+| achievement.hidden_condition | 喵喵喵？喵喵，喵喵喵喵～ (=^･ω･^=) | Meow meow? Mew, mew mew mew~ (=^･ω･^=) |
 | achievement.no_score | 只改变展示，不影响分数 | Just for display. Your score stays the same. |
 | achievement.loading | 正在整理你的徽章… | Gathering your badges… |
 | achievement.load_failed | 徽章暂时没读到，请重试。 | We couldn’t load your badges. Please try again. |

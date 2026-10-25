@@ -19,5 +19,11 @@ export const ACHIEVEMENTS: readonly { id: AchievementId; metric: AchievementMetr
  */
 export const HOTPOT_PETS = ['pet_644053d683e0', 'pet_2f55c03f6968'] as const;
 export const HIDDEN_ACHIEVEMENT_IDS: readonly AchievementId[] = ['hotpot'];
+/**
+ * 解锁条件文字只给自己已解锁的人看：隐藏称号的条件，看的人没解锁时一律换成喵喵喵占位。
+ * unlockedByViewer 为正在看的玩家已解锁的称号；还没读到时传空，按未解锁处理。
+ */
+export const conditionRevealed = (id: AchievementId, unlockedByViewer: readonly AchievementId[]) =>
+  !HIDDEN_ACHIEVEMENT_IDS.includes(id) || unlockedByViewer.includes(id);
 /** 本局服务到的宠物 id 是否满足「火锅搭子」。 */
 export const servedHotpot = (servedPetIds: readonly string[]) => HOTPOT_PETS.every((id) => servedPetIds.includes(id));

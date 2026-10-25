@@ -10,6 +10,8 @@ const entry: GalleryEntry = {
     'hover · tap · keyboard focus': () => <ul className={styles.badges}>{ACHIEVEMENT_DISPLAY_ORDER.map(id => <li key={id}><PlayerProfileBadge id={id} /></li>)}</ul>,
     'equipped title': () => <PlayerProfileBadge id="friends" chip />,
     'long condition': () => <PlayerProfileBadge id="family" />,
+    'hidden title · viewer not unlocked (meow)': () => <PlayerProfileBadge id="hotpot" revealed={false} />,
+    'hidden title · viewer unlocked (real condition)': () => <PlayerProfileBadge id="hotpot" />,
   },
 };
 export default entry;
