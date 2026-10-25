@@ -34,15 +34,69 @@ function audio(): { ctx: AudioContext; out: GainNode } | null {
   return { ctx, out: master };
 }
 
-/** 在用户操作（点击「开始这班」、拨动开关）时调用，解除自动播放限制。 */
+/**
+ * iOS 默认把网页 WebAudio 归为「环境音」，侧边静音开关打开时整页无声（铃声音量也不影响它）。
+ * 玩家在设置里主动打开声音后，改走「播放」类别，和视频、音乐 App 一样不受静音开关影响：
+ * iOS 17+ 用 navigator.audioSession；更早的 iOS 用循环播放的静音 <audio> 把会话切成播放类别。
+ */
+type AudioSessionNavigator = Navigator & { audioSession?: { type: string } };
+let keepAlive: HTMLAudioElement | null = null;
+
+const isIOS = () =>
+  typeof navigator !== 'undefined' && (/iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.userAgent.includes('Macintosh') && navigator.maxTouchPoints > 1));
+
+/** 0.1 秒单声道静音 WAV。 */
+function silentWav(): string {
+  const samples = 800;
+  const bytes = new Uint8Array(44 + samples);
+  const view = new DataView(bytes.buffer);
+  const text = (at: number, s: string) => [...s].forEach((c, i) => view.setUint8(at + i, c.charCodeAt(0)));
+  text(0, 'RIFF'); view.setUint32(4, 36 + samples, true); text(8, 'WAVE');
+  text(12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
+  view.setUint32(24, 8000, true); view.setUint32(28, 8000, true); view.setUint16(32, 1, true); view.setUint16(34, 8, true);
+  text(36, 'data'); view.setUint32(40, samples, true);
+  bytes.fill(128, 44);
+  return `data:audio/wav;base64,${btoa(String.fromCharCode(...bytes))}`;
+}
+
+function preferPlaybackSession() {
+  if (typeof navigator === 'undefined') return;
+  const session = (navigator as AudioSessionNavigator).audioSession;
+  if (session) {
+    if (session.type !== 'playback') session.type = 'playback';
+    return;
+  }
+  if (!isIOS() || typeof Audio === 'undefined') return;
+  if (!keepAlive) {
+    keepAlive = new Audio(silentWav());
+    keepAlive.loop = true;
+    keepAlive.setAttribute('playsinline', '');
+  }
+  if (keepAlive.paused) void keepAlive.play().catch(() => {});
+}
+
+/** 声音全部关闭时交还会话类别：静音开关重新生效，也不再打断其他 App 的音乐。 */
+export function releaseAudioSession() {
+  keepAlive?.pause();
+  const session = typeof navigator === 'undefined' ? undefined : (navigator as AudioSessionNavigator).audioSession;
+  if (session && session.type === 'playback') session.type = 'auto';
+}
+
+/**
+ * 在用户操作（点击「开始这班」、拨动开关、任意一次点按）时调用，解除自动播放限制。
+ * iOS 来电、锁屏、切到别的 App 播放后，上下文会变成 interrupted 而不是 suspended，同样需要恢复。
+ */
 export function unlockAudio(): Promise<void> {
   const a = audio();
-  return a && a.ctx.state === 'suspended' ? a.ctx.resume() : Promise.resolve();
+  if (!a) return Promise.resolve();
+  preferPlaybackSession();
+  return a.ctx.state !== 'running' && a.ctx.state !== 'closed' ? a.ctx.resume().catch(() => {}) : Promise.resolve();
 }
 
 /** 页面隐藏时暂停全部声音；回来后由调用方按开关恢复。 */
 export function suspendAudio() {
   stopCheer();
+  keepAlive?.pause();
   if (ctx && ctx.state === 'running') void ctx.suspend();
 }
 

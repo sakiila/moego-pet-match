@@ -45,6 +45,38 @@ describe('audio unlock completion', () => {
     expect(context.resume).not.toHaveBeenCalled();
   });
 
+  it('resumes a context that iOS interrupted (call, lock screen, other app audio)', async () => {
+    const context = {
+      state: 'interrupted', destination: {},
+      createGain: () => ({ gain: { value: 0 }, connect: vi.fn() }),
+      resume: vi.fn(async () => {}),
+    };
+    vi.stubGlobal('window', { AudioContext: class { constructor() { return context; } } });
+    const sound = await import('./sound');
+
+    await sound.unlockAudio();
+
+    expect(context.resume).toHaveBeenCalledOnce();
+  });
+
+  it('switches the iOS audio session to playback so the silent switch does not mute the game', async () => {
+    const context = {
+      state: 'running', destination: {},
+      createGain: () => ({ gain: { value: 0 }, connect: vi.fn() }),
+      resume: vi.fn(),
+    };
+    const audioSession = { type: 'auto' };
+    vi.stubGlobal('window', { AudioContext: class { constructor() { return context; } } });
+    vi.stubGlobal('navigator', { userAgent: 'iPhone', maxTouchPoints: 5, audioSession });
+    const sound = await import('./sound');
+
+    await sound.unlockAudio();
+    expect(audioSession.type).toBe('playback');
+
+    sound.releaseAudioSession();
+    expect(audioSession.type).toBe('auto');
+  });
+
   it('returns a resolved promise when WebAudio is unavailable', async () => {
     vi.stubGlobal('window', {});
     const sound = await import('./sound');

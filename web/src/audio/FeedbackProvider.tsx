@@ -5,7 +5,7 @@ import { loadPreferences, savePreferences, type SoundPreferences } from '../game
 import type { Batch } from '../engine';
 import { cancelVibration, hapticsSupported, vibrate } from './haptics';
 import { createCheerVoiceLimiter } from './cheerVoiceLimiter';
-import { playCheer, playFinish, playPrinted, playSound, playStamp, preloadCheers, startMusic, stopCheer, stopMusic, suspendAudio, unlockAudio } from './sound';
+import { playCheer, playFinish, playPrinted, playSound, playStamp, preloadCheers, startMusic, stopCheer, stopMusic, releaseAudioSession, suspendAudio, unlockAudio } from './sound';
 
 interface Feedback {
   prefs: SoundPreferences;
@@ -70,6 +70,7 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       savePreferences(storage(), next);
       // 拨动开关本身就是用户操作，可以解除浏览器的自动播放限制
       if (on && key !== 'haptics') unlockAudio();
+      else if (!next.sfx && !next.music) releaseAudioSession();
       if (key === 'music') syncMusic();
       if (key === 'sfx') {
         if (!on) stopCheer();
@@ -91,15 +92,17 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
         syncMusic();
       }
     };
-    // 浏览器（尤其 iOS Safari）只允许在用户操作中启动声音：任意一次按下都顺手解锁
+    // 浏览器（尤其 iOS Safari）只允许在用户操作中启动声音：任意一次按下都顺手解锁。
+    // iOS 只把 touchend / click 算作可以启动声音的操作，pointerdown（来自 touchstart）不算。
     const onGesture = () => {
       if (prefsRef.current.sfx || prefsRef.current.music) unlockAudio();
     };
+    const gestures = ['pointerdown', 'touchend', 'click'] as const;
     document.addEventListener('visibilitychange', onVisibility);
-    document.addEventListener('pointerdown', onGesture, { capture: true });
+    gestures.forEach((type) => document.addEventListener(type, onGesture, { capture: true }));
     return () => {
       document.removeEventListener('visibilitychange', onVisibility);
-      document.removeEventListener('pointerdown', onGesture, { capture: true });
+      gestures.forEach((type) => document.removeEventListener(type, onGesture, { capture: true }));
       stopCheer();
     };
   }, [syncMusic]);
