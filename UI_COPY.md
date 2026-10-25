@@ -608,7 +608,7 @@
 | achievement.neighbors_condition | 主人 · {current} / {target} 位 | Owners · {current} / {target} |
 | achievement.family_condition | 多宠家庭 · {current} / {target} 个 | Pet families · {current} / {target} |
 | achievement.album_condition | 当期名册 · {current} / {target} 只 | Catalog · {current} / {target} |
-| achievement.hotpot_condition | 在一局里面同时遇到 Maodu 毛肚和 Boluo 菠萝 | Served the developer's Maodu and Boluo in one game |
+| achievement.hotpot_condition | 在一局里面同时遇到开发者家的 Maodu 毛肚和 Boluo 菠萝 | Served the developer's Maodu and Boluo in one game |
 | achievement.unlock_condition | 解锁条件 | Unlock Condition |
 | achievement.view_condition | 查看「{title}」的解锁条件 | View the unlock condition for {title} |
 | achievement.cats_unlock | 收集 {target} 只不同的猫。 | Collect {target} different cats. |
