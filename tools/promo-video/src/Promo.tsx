@@ -1,9 +1,10 @@
-import { AbsoluteFill, Audio, Img, Sequence, interpolate, staticFile, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, Audio, Freeze, Img, Sequence, interpolate, staticFile, useCurrentFrame } from 'remotion';
+import { Cover } from './Cover';
 import { COPY, type Lang } from './copy';
 import { Backdrop, Caption, CheerWord, Clip, Fonts, Phone, Sparkle, Sticker, usePop } from './parts';
 import { PETS } from './pets.js';
 import { C, FONT } from './theme';
-import { BAR, BEAT, at, firstCheer, montageMoves, rushMove, type Cheer, type Timing } from './timeline';
+import { BAR, BEAT, COVER, at, firstCheer, montageMoves, rushMove, type Cheer, type Timing } from './timeline';
 
 export type PromoProps = {
   lang: Lang;
@@ -17,9 +18,25 @@ const WORDS: Record<Cheer, string> = { nice: 'Nice!', great: 'Great!', amazing: 
 /** 中段每半小节一个高光：喝彩、+1000 都落在拍点上（第 4–6 小节）。 */
 const HIT = { drag: at(4, 1), nice: at(4, 3), great: at(5, 1), amazing: at(5, 3), wow: at(6, 1), rush: at(6, 3) };
 
-/** 分镜见 design/reviews/2026-10-26-promo-video/STORYBOARD.md；镜头编号与表格一致。 */
+/** 开头 0.5 秒封面定格，之后是正片。 */
 export function Promo({ lang, timing, recording }: PromoProps) {
   if (!timing) return null;
+  return (
+    <AbsoluteFill style={{ background: C.brand }}>
+      <Sequence durationInFrames={COVER}>
+        <Freeze frame={0}>
+          <Cover lang={lang} timing={timing} recording={recording} />
+        </Freeze>
+      </Sequence>
+      <Sequence from={COVER}>
+        <Main lang={lang} timing={timing} recording={recording} />
+      </Sequence>
+    </AbsoluteFill>
+  );
+}
+
+/** 正片。分镜见 design/reviews/2026-10-26-promo-video/STORYBOARD.md；镜头编号与表格一致。 */
+function Main({ lang, timing, recording }: Required<PromoProps>) {
   const t = COPY[lang];
   const src = staticFile(`${recording}/game.mp4`);
   const clip = { timing, src };

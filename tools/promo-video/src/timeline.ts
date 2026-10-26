@@ -1,10 +1,12 @@
-/** 30fps、120 BPM：一拍 15 帧，一小节 60 帧；10 小节 + 1 秒定格 = 630 帧。 */
+/** 30fps、120 BPM：一拍 15 帧，一小节 60 帧；开头封面 0.5 秒 + 10 小节 + 1 秒定格 = 645 帧。 */
 export const FPS = 30;
 export const BEAT = 15;
 export const BAR = 60;
-export const DURATION = 10 * BAR + FPS;
+/** 开头封面定格的帧数；平台取首帧当缩略图时显示封面。正片（含音轨）整体从这里开始。 */
+export const COVER = BEAT;
+export const DURATION = COVER + 10 * BAR + FPS;
 
-/** 第 bar 小节（从 1 数）第 beat 拍（从 0 数）的帧号；beat 可以是小数。 */
+/** 正片里第 bar 小节（从 1 数）第 beat 拍（从 0 数）的帧号，不含开头封面；beat 可以是小数。 */
 export const at = (bar: number, beat = 0) => Math.round((bar - 1) * BAR + beat * BEAT);
 
 export type Cheer = 'nice' | 'great' | 'amazing' | 'wow';

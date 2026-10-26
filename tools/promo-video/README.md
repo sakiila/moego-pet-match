@@ -28,11 +28,15 @@ npm run record -- --lang en
 ```sh
 npm run sync        # 复制贴纸、Logo、字体、喝彩、节拍与音效到 public/assets/
 npm run studio      # 预览与调整
-npm run render:zh   # 渲出 out/promo-zh-raw.mp4，再标准化响度输出 out/promo-zh.mp4（1080 × 1920、30fps、21 秒）
+npm run render:zh   # 渲出 out/promo-zh-raw.mp4，再标准化响度输出 out/promo-zh.mp4（1080 × 1920、30fps、21.5 秒，约 21 MB）
+npm run compress:zh # 压缩成 out/promo-zh-small.mp4（CRF 26，约 6 MB，用于发 Slack / 微信）
+npm run cover:zh    # 导出封面 out/cover-zh.png 与 out/cover-zh.jpg（1080 × 1920）
 ```
 
 - 渲染直接用本机 Chrome。渲完由 `scripts/loudnorm.mjs` 做两遍 loudnorm，目标 −14 LUFS、真峰值 −1 dBTP，画面直接复制。
 - Remotion 许可：2026-10-26 用户确认为个人自用，按个人免费许可使用；若改为以公司名义发布，需要重新确认。
+- 压缩版保持 1080 × 1920，与原片 SSIM 约 0.990，放大对比只有泡泡粒子略软；再小可以缩到 720 × 1280（约 4 MB，SSIM 约 0.981）。
+- 封面在 `src/Cover.tsx`：口号、斜放的手机（录屏里「×5 顶格！」那一帧）、四只宠物与入口。它既单独导出，也作为成片开头 0.5 秒定格，平台取首帧当缩略图时会显示封面；正片和音轨整体后移 0.5 秒。封面用 30fps、1 帧的普通合成，因为 `<Still>` 默认 1fps，录屏帧号会被当成秒数。
 - 镜头在 `src/Promo.tsx`，通用部件在 `src/parts.tsx`，字幕在 `src/copy.ts`，选定的宠物在 `src/pets.js`。
 - 节拍是 120 BPM，`at(小节, 拍)` 换算成帧。每段录屏用「素材时刻 → 成片帧」对齐：喝彩、+1000 等关键时刻落在拍点上，倍速 1–1.5。
 - 中文字幕只用游戏字体子集里已有的字（`web/src/ui/fonts/chars.txt`），新加字幕前先核对。
