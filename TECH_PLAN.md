@@ -107,8 +107,9 @@ Slack 名册更新时，同一 `user_id` 下的成绩与图鉴保持关联；改
 - 持久数据与应用容器分离：数据库位于 RackNerd PostgreSQL 的持久卷，图片在 R2；应用镜像和图片缓存可替换，重新发布不删除数据库或 R2 对象。
 - R2 位置：2026-10-23 已核验现有 `star` 桶位于 APAC、使用默认 jurisdiction，并确认继续保留。信息说明按实际基础设施写明 RackNerd 与 R2 亚太区域；今后若迁移图片位置或桶，先核实创建参数和对象迁移方案，再同步中英文说明。位置依据见 [R2 数据位置说明](https://developers.cloudflare.com/r2/reference/data-location/)。
 - 对局结算由 Node 在同一 PostgreSQL 事务中完成，用唯一对局编号约束保证整体保存、重复只记一次；不通过数据库 REST API 结算。
-- 图片接口：浏览器只访问自有域名下的图片路径（如 `/img/pets/<pet_id>/128`），Node 首次从 R2 拉取后写入本地磁盘缓存，再直接返回；文件名带内容哈希，可设长期浏览器缓存。磁盘缓存设上限（约 1–2 GB）并按最近使用淘汰。
-- 下架即时生效：图片接口返回前检查宠物上架状态（上架名单可在内存缓存数十秒），下架后拒绝返回并清除对应本地缓存。
+- 图片接口：浏览器只访问自有域名下的图片路径。原 PNG 与 R2 内容哈希对象保留；新贴纸 URL 为 `/img/pets/<pet_id>/128?format=webp&v=q85-v2`（鱼色使用 `/img/fish/`），按 WebP quality 85、alphaQuality 100、effort 4 编码，若无损版更小则沿用无损版。编码版本同时进入 URL 与磁盘缓存键；无版本的旧 WebP 仍返回无损编码。磁盘缓存约 1.5 GB，按最近使用淘汰。
+- CDN：只缓存 `star.baobo.me` 上查询参数精确等于 `format=webp&v=q85-v2` 的 `/img/pets/`、`/img/fish/` 成功响应；尊重源站 `Cloudflare-CDN-Cache-Control`（2 小时），保留全部查询参数，浏览器沿用长期缓存。API、私有照片、剪影及旧图片 URL 不加入这条规则；错误响应 `no-store`。部署与规则启用步骤见 `deploy/DEPLOY.md`。
+- 下架即时生效：图片回源前检查上架状态，下架后拒绝返回并清除对应本地缓存。生产 `catalog unpublish` 在提交墓碑后清除该宠物三个尺寸的 CDN URL；缺少清理凭据时在数据库写入前停止。清 CDN 失败不恢复已下架资料，命令以非零状态报告，使用 `image-cache.ts purge` 独立重试。已载入或保存在玩家设备上的副本无法远程召回。
 - 上传文件经浏览器传到 RackNerd Node，再转存 R2，不提供公开读取；只有命令行维护工具可取回原文件。
 - Slack 头像由 Node 用 `SLACK_BOT_TOKEN` 拉取并本地缓存，经 `/img/avatars/:userId` 返回，避免浏览器直连 Slack 图片域名；缺失或失败时显示默认头像。
 - 备份：`moego-pet-match-db-backup.timer` 每日北京时间 04:10 导出 PostgreSQL 归档，保留约 14 天，权限受限；迁移后已实际恢复验证。R2 继续保存图片；源库迁移归档与本机副本单独保留，不把它们当作最新生产数据。恢复步骤见 `deploy/DATABASE_MIGRATION.md`。

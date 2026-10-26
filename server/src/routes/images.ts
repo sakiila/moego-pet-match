@@ -6,8 +6,9 @@ import { findColleague } from '../services/players.ts';
 import { singleFlight } from '../services/singleFlight.ts';
 import type { StoredObject } from '../storage/objectStore.ts';
 import sharp from 'sharp';
+import { STICKER_SIZES, STICKER_WEBP_VERSION } from '../../../web/src/game/stickerImage.ts';
 
-const PET_SIZES = new Set(['128', '512', '1024']);
+const PET_SIZES = new Set<string>(STICKER_SIZES.map(String));
 const AVATAR_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
 function send(reply: FastifyReply, img: { body: Buffer; contentType: string }, cacheControl: string) {
@@ -48,10 +49,13 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
   };
 
   const stickerRoute = (prefix: 'pets' | 'fish', sql: string) =>
-    app.get<{ Params: { id: string; size: string }; Querystring: { format?: string } }>(`/img/${prefix}/:id/:size`, async (request, reply) => {
+    app.get<{ Params: { id: string; size: string }; Querystring: { format?: string; v?: string } }>(`/img/${prefix}/:id/:size`, async (request, reply) => {
+      // 错误、下架与未知版本不可被 CDN 缓存；成功时再覆盖浏览器缓存头。
+      reply.header('cache-control', 'no-store');
       const { id, size } = request.params;
-      const { format } = request.query;
+      const { format, v } = request.query;
       if (!PET_SIZES.has(size) || (format !== undefined && format !== 'png' && format !== 'webp')) return reply.status(404).send();
+      if (v !== undefined && (format !== 'webp' || v !== STICKER_WEBP_VERSION)) return reply.status(404).send();
       const { rows } = await pool.query(sql, [id]);
       const pet = rows[0] as { status: string; sticker_key: string | null } | undefined;
       const group = groupOf(prefix, id);
@@ -59,12 +63,23 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
       const cacheKey = `${pet.sticker_key}/${size}`;
       const source = () => loadImage(cacheKey, group, () => store ? store.get(`${pet.sticker_key}/${size}.png`) : Promise.resolve(null));
       const obj = format === 'webp'
-        ? await loadImage(`${cacheKey}/webp-lossless-v1`, group, async () => {
+        ? await loadImage(`${cacheKey}/${v === STICKER_WEBP_VERSION ? `webp-${STICKER_WEBP_VERSION}` : 'webp-lossless-v1'}`, group, async () => {
           const png = await source();
-          return png ? { body: await sharp(png.body).webp({ lossless: true }).toBuffer(), contentType: 'image/webp' } : null;
+          if (!png) return null;
+          const options = v === STICKER_WEBP_VERSION ? { quality: 85, alphaQuality: 100, effort: 4 } : { lossless: true };
+          const body = await sharp(png.body).webp(options).toBuffer();
+          if (v === STICKER_WEBP_VERSION) {
+            // 简单色块有时无损编码更小，保留更小的结果，避免压缩反而增大体积。
+            const lossless = await loadImage(`${cacheKey}/webp-lossless-v1`, group, async () => ({
+              body: await sharp(png.body).webp({ lossless: true }).toBuffer(), contentType: 'image/webp',
+            }));
+            if (lossless && lossless.body.length <= body.length) return lossless;
+          }
+          return { body, contentType: 'image/webp' };
         })
         : await source();
       if (!obj) return reply.status(store ? 404 : 503).send();
+      if (v === STICKER_WEBP_VERSION) reply.header('cloudflare-cdn-cache-control', 'public, max-age=7200');
       return send(reply, obj, 'public, max-age=31536000, immutable');
     });
 

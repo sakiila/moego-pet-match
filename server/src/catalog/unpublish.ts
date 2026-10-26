@@ -3,6 +3,7 @@ import pgDefault from 'pg';
 import { inTransaction } from '../db/pool.ts';
 import type { ObjectStore } from '../storage/objectStore.ts';
 import { SIZES } from './build.ts';
+import type { PurgeStickerImages } from '../services/imageCdn.ts';
 
 /** 卡背照片对象键 photos/<pet_id>/<原图哈希>.jpg 里的原图哈希：哈希相同即共用同一张原图。 */
 const photoHash = (key: string | null) => key?.split('/').pop() ?? null;
@@ -74,7 +75,7 @@ async function transaction(db: pg.Pool | pg.Client, fn: (client: pg.PoolClient |
   }
 }
 
-export async function applyUnpublish(db: pg.Pool | pg.Client, store: ObjectStore, plan: UnpublishPlan): Promise<{ failed: string[] }> {
+export async function applyUnpublish(db: pg.Pool | pg.Client, store: ObjectStore, plan: UnpublishPlan, purgeImages?: PurgeStickerImages): Promise<{ failed: string[]; cdnPurged: boolean | null }> {
   await transaction(db, async (client) => {
     const status = (await client.query('SELECT status FROM pet_match.pets WHERE pet_id = $1 FOR UPDATE', [plan.petId])).rows[0]?.status;
     if (!status || status === 'removed') throw new Error(`pet ${plan.petId} changed since the plan was made`);
@@ -88,7 +89,18 @@ export async function applyUnpublish(db: pg.Pool | pg.Client, store: ObjectStore
     for (const s of plan.sharedPhoto) await client.query('UPDATE pet_match.pets SET photo_key = NULL, updated_at = now() WHERE pet_id = $1', [s.petId]);
     for (const f of plan.familyDissolves) await client.query('UPDATE pet_match.pets SET family_id = NULL, updated_at = now() WHERE pet_id = $1', [f.petId]);
   });
+  // 先提交下架，再清边缘缓存，避免清理后又从仍上架的记录填回缓存。
+  let cdnPurged: boolean | null = null;
+  if (purgeImages) {
+    try {
+      await purgeImages(plan.petId);
+      cdnPurged = true;
+    } catch {
+      // 不恢复已下架资料；命令行显式报告，并可独立重试清 CDN。
+      cdnPurged = false;
+    }
+  }
   const failed: string[] = [];
   for (const key of plan.objects) await store.delete(key).catch(() => failed.push(key));
-  return { failed };
+  return { failed, cdnPurged };
 }

@@ -74,6 +74,34 @@ docker buildx build --platform linux/amd64 \
 
 不运行全机 `prune`，不重启 OpenResty，不修改其他 Compose project。
 
+## 公开贴纸压缩与 CDN
+
+压缩版使用 `?format=webp&v=q85-v2`，透明通道无损，颜色采用 WebP quality 85、effort 4；若无损版更小则返回无损版。原 PNG 与无版本的旧 WebP 保持原行为。新编码使用独立 URL 与磁盘缓存键，无需清掉玩家已有图片缓存。
+
+Cloudflare Cache Rule「star.baobo.me - Public sticker WebP q85 v2」只匹配：
+
+```text
+(http.host eq "star.baobo.me" and http.request.uri.query eq "format=webp&v=q85-v2" and (starts_with(http.request.uri.path, "/img/pets/") or starts_with(http.request.uri.path, "/img/fish/")))
+```
+
+设置为 Eligible for cache，Edge TTL 选择「Use cache-control header if present, bypass cache if not」，不改缓存键或浏览器 TTL。成功响应的 `Cloudflare-CDN-Cache-Control: public, max-age=7200` 控制边缘 2 小时缓存；404/503 等响应 `no-store`。规则不匹配 API、私有照片、剪影、旧 URL 或其他子域名。
+
+下架清 CDN 的凭据只配置在本机 `.env`，不要复制进应用容器：
+
+```dotenv
+CLOUDFLARE_ZONE_ID='<baobo.me zone id>'
+CLOUDFLARE_API_TOKEN='<仅限 baobo.me 的 Zone / Cache Purge 权限>'
+```
+
+生产 `catalog.ts unpublish --prod --yes` 缺少配置时会在修改数据库前停止；配置齐全时先提交下架，再清该宠物的三个压缩版 URL。清理失败会报告非零退出状态，已下架资料不会恢复。独立重试（在 `server/` 下，去掉 `--yes` 只预览 URL，不需要数据库连接）：
+
+```sh
+npx tsx --env-file-if-exists=../.env scripts/image-cache.ts purge <pet_id> --prod --yes
+# 鱼色维护可加 --fish
+```
+
+首次启用顺序：先配置并验证清 CDN 令牌 → 部署压缩版代码 → 确认新 URL 返回压缩图片与 2 小时边缘缓存头 → 启用已准备的 Cache Rule → 验证连续请求从 MISS 变为 HIT，并验证单 URL 清理后重新回源。规则应保持禁用，直到以上前置项就绪。只按精确 URL 清理，不使用全域 Purge Everything。
+
 ## 1Panel 反向代理
 
 当前 1Panel：**网站 → 创建网站 → 反向代理**，建立独立站点：

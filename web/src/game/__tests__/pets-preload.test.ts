@@ -55,8 +55,8 @@ describe('preloadPets opening readiness', () => {
   it('preloads the same compact image URLs used by the visible pets', async () => {
     const preload = preloadPets([pet]);
     expect(FakeImage.instances.map(image => image.src)).toEqual([
-      '/img/pets/preload-cat/128?format=webp',
-      '/img/pets/preload-cat/512?format=webp',
+      '/img/pets/preload-cat/128?format=webp&v=q85-v2',
+      '/img/pets/preload-cat/512?format=webp&v=q85-v2',
     ]);
     finishImages(128, 'load');
     finishImages(512, 'load');
@@ -69,6 +69,6 @@ describe('preloadPets opening readiness', () => {
     finishImages(128, 'load');
     finishImages(512, 'error');
 
-    await expect(preload).rejects.toThrow('failed to load /img/pets/preload-cat/512?format=webp');
+    await expect(preload).rejects.toThrow('failed to load /img/pets/preload-cat/512?format=webp&v=q85-v2');
   });
 });
