@@ -5,16 +5,21 @@ import type { SocialPost } from '../../social/model';
 import { socialDate } from '../../social/dates';
 import { Icon } from '../../ui/primitives/Icon';
 import { useSocialModal } from './useSocialModal';
+import logo from '../../ui/art/moego-logo.webp';
 import styles from './Social.module.css';
 
 export function SocialPhotoViewer({
   post,
   initialIndex,
   onClose,
+  onHome,
 }: {
   post: SocialPost;
   initialIndex: number;
+  /** 关闭回到打开大图的页面。 */
   onClose: () => void;
+  /** 品牌栏「回门店」直接回游戏首页。 */
+  onHome: () => void;
 }) {
   const { t, locale } = useI18n();
   const [index, setIndex] = useState(Math.min(initialIndex, post.photos.length - 1));
@@ -44,20 +49,31 @@ export function SocialPhotoViewer({
       aria-modal="true"
       aria-label={t('social.view_photo', { index: index + 1, count: post.photos.length })}
     >
-      <div className={styles.topbar}>
-        <button className={styles.iconButton} onClick={onClose} aria-label={t('social.close')}>
-          <Icon name="close" size={23} className={styles.viewerControlIcon} />
-        </button>
-        <span aria-live="polite">{t('social.photo_count', { index: index + 1, count: post.photos.length })}</span>
-        <a
-          className={styles.iconButton}
-          href={photo.src}
-          download={`pet-moment-${index + 1}${extension}`}
-          aria-label={t('social.download')}
-        >
-          <Icon name="save-image-white" size={23} />
-        </a>
+      <div className={styles.viewerBar}>
+        <span className={styles.viewerLogo}>
+          <img src={logo} alt="MoeGo" width={120} height={32} />
+        </span>
+        <span className={styles.utility}>
+          <button type="button" className={styles.viewerHome} onClick={onHome}>
+            <Icon name="back-to-shop" size={22} />
+            {t('social.back_shop')}
+          </button>
+          <a
+            className={styles.iconButton}
+            href={photo.src}
+            download={`pet-moment-${index + 1}${extension}`}
+            aria-label={t('social.download')}
+          >
+            <Icon name="save-image-white" size={23} />
+          </a>
+          <button className={styles.iconButton} onClick={onClose} aria-label={t('social.close')}>
+            <Icon name="close" size={23} className={styles.viewerControlIcon} />
+          </button>
+        </span>
       </div>
+      <p className={styles.viewerCount} aria-live="polite">
+        {t('social.photo_count', { index: index + 1, count: post.photos.length })}
+      </p>
       <img
         className={styles.viewerImage}
         src={photo.src}
@@ -76,18 +92,6 @@ export function SocialPhotoViewer({
         <p className={styles.viewerMeta}>
           {post.author.name} · {socialDate(post.createdAt, locale, t('social.today'), t('social.yesterday'))}
         </p>
-        <div className={styles.viewerControls}>
-          <button className={styles.textButton} disabled={index === 0} onClick={() => setIndex((i) => i - 1)}>
-            {t('social.previous_photo')}
-          </button>
-          <button
-            className={styles.textButton}
-            disabled={index === post.photos.length - 1}
-            onClick={() => setIndex((i) => i + 1)}
-          >
-            {t('social.next_photo')}
-          </button>
-        </div>
         <div className={styles.viewerThumbs}>
           {post.photos.map((p, i) => (
             <button
@@ -100,6 +104,20 @@ export function SocialPhotoViewer({
             </button>
           ))}
         </div>
+        {post.photos.length > 1 && (
+          <div className={styles.viewerControls}>
+            <button className={styles.textButton} disabled={index === 0} onClick={() => setIndex((i) => i - 1)}>
+              ‹ {t('social.previous_photo')}
+            </button>
+            <button
+              className={styles.textButton}
+              disabled={index === post.photos.length - 1}
+              onClick={() => setIndex((i) => i + 1)}
+            >
+              {t('social.next_photo')} ›
+            </button>
+          </div>
+        )}
       </div>
     </div>,
     document.body,

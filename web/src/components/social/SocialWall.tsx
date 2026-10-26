@@ -12,16 +12,17 @@ import {
 import type { SocialActions } from '../../social/actions';
 import { Avatar } from '../../ui/primitives/Avatar';
 import { Icon } from '../../ui/primitives/Icon';
-import { SocialHeader, SocialLanguage, SocialIdentity, SocialEmpty, type SocialLoadState } from './SocialChrome';
+import { SocialHeader, SocialEmpty, type SocialLoadState } from './SocialChrome';
 import { SocialGate } from './SocialGate';
 import { SocialPostCard } from './SocialPostCard';
 import { SocialComposer } from './SocialComposer';
-import { SocialComments, SocialCommentInput } from './SocialComments';
+import { SocialComments, SocialCommentInput, SOCIAL_COMMENT_INPUT } from './SocialComments';
 import { SocialActivity } from './SocialActivity';
 import { SocialPhotoViewer } from './SocialPhotoViewer';
 import { SocialDialogs, type SocialOverlay } from './SocialDialogs';
 import styles from './Social.module.css';
 
+const COMMENTS_ID = 'social-comments';
 export type SocialPage = { name: 'gate' | 'feed' | 'mine' | 'compose' | 'activity' } | { name: 'post'; id: string };
 export interface SocialWallProps {
   state: SocialState;
@@ -38,6 +39,8 @@ export interface SocialWallProps {
   readPhoto: (file: File) => Promise<SocialPhoto>;
   onHome: () => void;
   onReset: () => void;
+  /** 与浏览器 / 系统返回联动：站内每进一页压一条历史，返回统一走同一套回退。 */
+  browserHistory?: boolean;
 }
 
 /** 社交模块的页面编排；所有帖子、身份和媒体都由上层传入。 */
@@ -56,6 +59,7 @@ export function SocialWall({
   readPhoto,
   onHome,
   onReset,
+  browserHistory = false,
 }: SocialWallProps) {
   const { t } = useI18n();
   const [page, setPage] = useState<SocialPage>(initialPage);
@@ -93,21 +97,37 @@ export function SocialWall({
       setPending([...inFlight.current]);
     }
   };
-  const navigate = (next: SocialPage) => {
+  const navigate = (next: SocialPage, then?: () => void) => {
     void perform('navigation', async () => {
       await onPrepareRoute?.(next);
       history.current.push({ page, scroll: window.scrollY });
+      if (browserHistory) window.history.pushState({ social: history.current.length }, '');
       setPage(next);
       setReplyTo(undefined);
       setError('');
       window.scrollTo(0, 0);
+      if (then) requestAnimationFrame(then);
     });
   };
-  const back = () => {
+  /** 回到来路页并恢复浏览位置；深链接没有来路时回动态列表。 */
+  const restore = () => {
     const previous = history.current.pop();
     setPage(previous?.page ?? { name: 'feed' });
     setReplyTo(undefined);
     requestAnimationFrame(() => window.scrollTo(0, previous?.scroll ?? 0));
+  };
+  const back = () => {
+    if (browserHistory && history.current.length) window.history.back();
+    else restore();
+  };
+  const dirty = page.name === 'compose' && (!!draft.body || !!draft.photos.length || processing);
+  const leaveGuard = useRef({ dirty, overlay: false, restore });
+  leaveGuard.current = { dirty, overlay: !!overlay || !!photoView, restore };
+  /** 「回门店」与取消、系统返回共用草稿确认。 */
+  const goHome = () => {
+    if (publishing) return;
+    if (dirty) setOverlay({ kind: 'discard', leave: 'home' });
+    else onHome();
   };
   const releasePhotos = (photos: SocialPhoto[]) => {
     for (const photo of photos) void actions.releasePhoto?.(photo).catch(() => undefined);
@@ -115,6 +135,7 @@ export function SocialWall({
   const clearDraft = (release = true) => {
     if (release) releasePhotos(draft.photos);
     draftVersion.current++;
+    leaveGuard.current.dirty = false;
     draftId.current = crypto.randomUUID();
     setDraft({ body: '', photos: [], petId: '' });
     setError('');
@@ -122,7 +143,7 @@ export function SocialWall({
   };
   const cancelDraft = () => {
     if (publishing) return;
-    if (draft.body || draft.photos.length || processing) setOverlay({ kind: 'discard' });
+    if (dirty) setOverlay({ kind: 'discard', leave: 'back' });
     else {
       clearDraft();
       back();
@@ -188,8 +209,8 @@ export function SocialWall({
       const saved = await actions.publish(post);
       clearDraft(false);
       setListState('normal');
+      // 新帖详情替换发布页；返回仍回到发起发布的列表与位置。
       setPage({ name: 'post', id: saved.id });
-      history.current = [{ page: { name: 'feed' }, scroll: 0 }];
       setToast(t(preview ? 'social.publish_success' : 'social.publish_saved'));
       window.scrollTo(0, 0);
     } catch (failure) {
@@ -212,8 +233,11 @@ export function SocialWall({
     setModalError('');
     try {
       if (overlay?.kind === 'discard') {
+        // popstate 可能早于重新渲染，先同步放行这次离开。
+        leaveGuard.current.overlay = false;
         clearDraft();
-        back();
+        if (overlay.leave === 'home') onHome();
+        else back();
       }
       if (overlay?.kind === 'reset') {
         clearDraft();
@@ -226,6 +250,7 @@ export function SocialWall({
         const post = overlay.post;
         await actions.remove(post.id);
         setToast(t(post.source === 'slack' ? 'social.hidden' : 'social.deleted'));
+        leaveGuard.current.overlay = false;
         if (page.name === 'post') back();
       }
       setOverlay(null);
@@ -240,6 +265,24 @@ export function SocialWall({
     onPageChange?.(page);
   }, [page, onPageChange]);
   useEffect(() => {
+    if (!browserHistory) return;
+    const pop = () => {
+      const guard = leaveGuard.current;
+      // 弹层、大图和未发布草稿先拦下这次返回，留在原页。
+      if (guard.overlay || guard.dirty) {
+        window.history.pushState({ social: history.current.length + 1 }, '');
+        if (guard.overlay) {
+          setOverlay(null);
+          setPhotoView(null);
+        } else setOverlay({ kind: 'discard', leave: 'back' });
+        return;
+      }
+      guard.restore();
+    };
+    window.addEventListener('popstate', pop);
+    return () => window.removeEventListener('popstate', pop);
+  }, [browserHistory]);
+  useEffect(() => {
     if (!toast) return;
     const timer = setTimeout(() => setToast(''), 3000);
     return () => clearTimeout(timer);
@@ -250,6 +293,12 @@ export function SocialWall({
     window.addEventListener('beforeunload', beforeUnload);
     return () => window.removeEventListener('beforeunload', beforeUnload);
   }, [page.name, draft.body, draft.photos.length]);
+  const showComments = () => document.getElementById(COMMENTS_ID)?.scrollIntoView({ block: 'start' });
+  const focusComment = () => {
+    const input = document.getElementById(SOCIAL_COMMENT_INPUT);
+    input?.scrollIntoView({ block: 'center' });
+    input?.focus({ preventScroll: true });
+  };
   const postCard = (post: SocialPost, detail = false) => (
     <SocialPostCard
       key={`${detail ? 'detail' : 'list'}:${post.id}`}
@@ -263,6 +312,7 @@ export function SocialWall({
       onReaction={(kind, selected) => {
         void perform(`reaction:${post.id}`, () => actions.reaction(post.id, kind, selected));
       }}
+      onComments={() => (detail ? focusComment() : navigate({ name: 'post', id: post.id }, showComments))}
     />
   );
   const feed = page.name === 'feed';
@@ -277,6 +327,9 @@ export function SocialWall({
   const nextPage = mine ? state.mineCursors?.[sourceTab] : state.feedCursor;
   const title: MessageKey =
     page.name === 'post' ? 'social.post_detail' : page.name === 'activity' ? 'social.activity' : 'social.my_posts';
+  const from = history.current.at(-1)?.page.name;
+  const backLabel = t(from === 'activity' ? 'social.back_activity' : from === 'mine' ? 'social.back_mine' : 'social.back_feed');
+  const identity = { name: viewer.name, src: viewer.avatarSrc, onOpen: () => page.name !== 'mine' && navigate({ name: 'mine' }) };
   return (
     <main className={styles.root}>
       {preview && <p className={styles.preview}>{t('social.preview')}</p>}
@@ -297,31 +350,50 @@ export function SocialWall({
           onInfo={() => setOverlay({ kind: 'info' })}
         />
       ) : page.name === 'compose' ? (
-        <SocialComposer
-          author={viewer}
-          {...draft}
-          pets={pets}
-          processing={processing}
-          publishing={publishing}
-          error={error}
-          onBody={(body) => setDraft((d) => ({ ...d, body }))}
-          onPet={(petId) => setDraft((d) => ({ ...d, petId }))}
-          onFiles={(selected) => {
-            void files(selected);
-          }}
-          onRemovePhoto={(id) => {
-            const photo = draft.photos.find((p) => p.id === id);
-            if (photo) releasePhotos([photo]);
-            setDraft((d) => ({ ...d, photos: d.photos.filter((p) => p.id !== id) }));
-          }}
-          onCancel={cancelDraft}
-          onPublish={() => {
-            void publish();
-          }}
-        />
+        <>
+          <SocialHeader
+            title={t('social.new_post')}
+            onHome={goHome}
+            identity={identity}
+            back={{ label: t('social.cancel'), onClick: cancelDraft }}
+          >
+            <button
+              className={styles.smallCta}
+              onClick={() => {
+                void publish();
+              }}
+              disabled={processing || publishing || (!draft.body.trim() && !draft.photos.length)}
+            >
+              {t(publishing ? 'social.publish_busy' : 'social.publish')}
+            </button>
+          </SocialHeader>
+          <SocialComposer
+            author={viewer}
+            {...draft}
+            pets={pets}
+            processing={processing}
+            publishing={publishing}
+            error={error}
+            onBody={(body) => setDraft((d) => ({ ...d, body }))}
+            onPet={(petId) => setDraft((d) => ({ ...d, petId }))}
+            onFiles={(selected) => {
+              void files(selected);
+            }}
+            onRemovePhoto={(id) => {
+              const photo = draft.photos.find((p) => p.id === id);
+              if (photo) releasePhotos([photo]);
+              setDraft((d) => ({ ...d, photos: d.photos.filter((p) => p.id !== id) }));
+            }}
+          />
+        </>
       ) : (
         <Fragment key={page.name}>
-          <SocialHeader title={feed ? undefined : t(title)} onBack={feed ? onHome : back} backHome={feed}>
+          <SocialHeader
+            title={t(feed ? 'social.title' : title)}
+            onHome={goHome}
+            identity={identity}
+            back={feed ? undefined : { label: backLabel, onClick: back }}
+          >
             {feed ? (
               <>
                 <button
@@ -329,12 +401,14 @@ export function SocialWall({
                   aria-label={t('social.activity')}
                   onClick={() => navigate({ name: 'activity' })}
                 >
-                  <Icon name="social-bell" size={24} />
+                  <Icon name="social-bell" size={26} />
                   {(state.unreadCount ?? notices.filter((n) => !n.read).length) > 0 && (
                     <span className={styles.unreadDot} />
                   )}
                 </button>
-                <SocialIdentity name={viewer.name} src={viewer.avatarSrc} onOpen={() => navigate({ name: 'mine' })} />
+                <button className={`${styles.smallCta} ${styles.publishCta}`} onClick={() => navigate({ name: 'compose' })}>
+                  ＋ {t('social.publish')}
+                </button>
               </>
             ) : page.name === 'activity' ? (
               <button
@@ -347,11 +421,11 @@ export function SocialWall({
               </button>
             ) : mine ? (
               <button
-                className={styles.iconButton}
+                className={`${styles.iconButton} ${styles.createButton}`}
                 aria-label={t('social.new_post')}
                 onClick={() => navigate({ name: 'compose' })}
               >
-                <Icon name="social-create" size={26} />
+                <Icon name="social-pencil" size={24} />
               </button>
             ) : (
               <button
@@ -367,15 +441,7 @@ export function SocialWall({
           {(feed || mine) && (
             <>
               {feed ? (
-                <>
-                  <div className={styles.headingRow}>
-                    <h1 className={styles.heading}>{t('social.title')}</h1>
-                    <button className={styles.smallCta} onClick={() => navigate({ name: 'compose' })}>
-                      ＋ {t('social.new_post')}
-                    </button>
-                  </div>
-                  <p className={styles.subtitle}>{t('social.subtitle')}</p>
-                </>
+                <p className={styles.subtitle}>{t('social.subtitle')}</p>
               ) : (
                 <div className={styles.profile}>
                   <Avatar name={viewer.name} src={viewer.avatarSrc} seed={viewer.id} size={42} />
@@ -462,6 +528,7 @@ export function SocialWall({
                   </button>
                 )}
                 <SocialComments
+                  id={COMMENTS_ID}
                   comments={current.comments}
                   total={current.commentCount}
                   viewerId={viewer.id}
@@ -491,8 +558,8 @@ export function SocialWall({
               <SocialEmpty
                 title={t('social.removed')}
                 body={t('social.removed_body')}
-                actionLabel={t('social.back_feed')}
-                onAction={() => setPage({ name: 'feed' })}
+                actionLabel={backLabel}
+                onAction={back}
                 state="empty"
               />
             ))}
@@ -502,7 +569,7 @@ export function SocialWall({
               posts={visible}
               onOpen={(n) => {
                 void perform(`read:${n.id}`, () => actions.readNotices(n.id));
-                navigate({ name: 'post', id: n.postId });
+                navigate({ name: 'post', id: n.postId }, n.kind === 'comment' ? showComments : undefined);
               }}
             />
           )}
@@ -523,7 +590,6 @@ export function SocialWall({
       )}
       {preview && page.name !== 'compose' && (
         <footer className={styles.previewTools}>
-          <SocialLanguage />
           <label>
             {t('social.preview_states')}{' '}
             <select
@@ -546,7 +612,6 @@ export function SocialWall({
       )}
       {!preview && page.name !== 'compose' && (
         <footer className={styles.previewTools}>
-          <SocialLanguage />
           <button onClick={() => setOverlay({ kind: 'info' })}>{t('social.info')}</button>
         </footer>
       )}
@@ -583,7 +648,12 @@ export function SocialWall({
         />
       )}
       {photoView && photoPost && (
-        <SocialPhotoViewer post={photoPost} initialIndex={photoView.index} onClose={() => setPhotoView(null)} />
+        <SocialPhotoViewer
+          post={photoPost}
+          initialIndex={photoView.index}
+          onClose={() => setPhotoView(null)}
+          onHome={goHome}
+        />
       )}
       {toast && (
         <div className={styles.toast} role="status">

@@ -31,7 +31,7 @@ export default {
     other: () => <Example initial={{ kind: 'menu', post: createSocialFixtures().posts[0] }} />,
     delete: () => <Example initial={{ kind: 'remove', post: createSocialFixtures().posts[1] }} />,
     hide: () => <Example initial={{ kind: 'remove', post: createSocialFixtures().posts[2] }} />,
-    discard: () => <Example initial={{ kind: 'discard' }} />,
+    discard: () => <Example initial={{ kind: 'discard', leave: 'back' }} />,
     info: () => <Example initial={{ kind: 'info' }} />,
     feedback: () => <Example initial={{ kind: 'feedback', post: createSocialFixtures().posts[0] }} />,
   },

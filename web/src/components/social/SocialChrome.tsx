@@ -3,56 +3,42 @@ import { useI18n } from '../../i18n';
 import { Avatar } from '../../ui/primitives/Avatar';
 import { Icon } from '../../ui/primitives/Icon';
 import { Button } from '../../ui/primitives/Button';
-import logo from '../../ui/art/moego-logo.webp';
+import { BrandHeader } from '../BrandHeader/BrandHeader';
 import styles from './Social.module.css';
 
-export function SocialHeader({
-  title,
-  onBack,
-  backHome = false,
-  backLabel,
-  children,
-}: {
-  title?: string;
-  onBack: () => void;
-  backHome?: boolean;
-  backLabel?: string;
+export interface SocialHeaderProps {
+  title: string;
+  /** 回游戏首页（品牌栏「回门店」）。 */
+  onHome: () => void;
+  /** 子页的来路返回；根页不传，标题左对齐。 */
+  back?: { label: string; onClick: () => void };
+  /** 品牌栏右侧的身份头像，点击进入我的动态。 */
+  identity?: { name: string; src?: string; onOpen: () => void };
+  /** 页面导航栏右侧的当前页主操作。 */
   children?: ReactNode;
-}) {
+}
+/** 动态墙页头：上层沿用门店品牌栏（MoeGo / 回门店 / 语言 / 头像），下层是返回来路、标题与主操作。 */
+export function SocialHeader({ title, onHome, back, identity, children }: SocialHeaderProps) {
   const { t } = useI18n();
   return (
-    <header className={styles.topbar}>
-      <button
-        className={styles.back}
-        onClick={onBack}
-        aria-label={backLabel ?? t(backHome ? 'action.back_to_shop' : 'social.back')}
-      >
-        {backLabel ? (
-          <span>{backLabel}</span>
-        ) : (
-          <>
-            <Icon name="back" size={19} />
-            {backHome && <span className={styles.backText}>{t('action.back_to_shop')}</span>}
-          </>
+    <header className={styles.header}>
+      <BrandHeader
+        barOnly
+        onBack={onHome}
+        backLabel={t('social.back_shop')}
+        trailing={identity && <SocialIdentity name={identity.name} src={identity.src} onOpen={identity.onOpen} />}
+      />
+      <div className={back ? styles.pageNav : styles.rootNav}>
+        {back && (
+          <button type="button" className={styles.back} onClick={back.onClick}>
+            <Icon name="back" size={18} />
+            <span className={styles.backText}>{back.label}</span>
+          </button>
         )}
-      </button>
-      {title ? <h1>{title}</h1> : <img className={styles.logo} src={logo} alt="MoeGo" />}
-      <div className={styles.utility}>{children}</div>
+        <h1>{title}</h1>
+        <div className={styles.utility}>{children}</div>
+      </div>
     </header>
-  );
-}
-export function SocialLanguage() {
-  const { locale, setLocale } = useI18n();
-  return (
-    <span className={styles.locale}>
-      <button aria-pressed={locale === 'zh'} onClick={() => setLocale('zh')}>
-        中
-      </button>
-      /
-      <button aria-pressed={locale === 'en'} onClick={() => setLocale('en')}>
-        EN
-      </button>
-    </span>
   );
 }
 export function SocialIdentity({ name, src, onOpen }: { name: string; src?: string; onOpen: () => void }) {

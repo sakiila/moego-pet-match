@@ -11,7 +11,7 @@ function Example() {
     <>
       <Button onClick={() => setOpen(true)}>{t('social.view_photo', { index: 1, count: 2 })}</Button>
       {open && (
-        <SocialPhotoViewer post={createSocialFixtures().posts[1]} initialIndex={0} onClose={() => setOpen(false)} />
+        <SocialPhotoViewer post={createSocialFixtures().posts[1]} initialIndex={0} onClose={() => setOpen(false)} onHome={() => setOpen(false)} />
       )}
     </>
   );

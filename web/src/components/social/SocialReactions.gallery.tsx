@@ -3,7 +3,7 @@ import type { GalleryEntry } from '../../dev/gallery/types';
 import { emptyReactions } from '../../social/model';
 import { SocialReactions } from './SocialReactions';
 function Example({ selected = false, disabled = false }: { selected?: boolean; disabled?: boolean }) {
-  const [reactions, setReactions] = useState(() => ({ ...emptyReactions(), paw: selected ? ['demo'] : [] }));
+  const [reactions, setReactions] = useState(() => ({ ...emptyReactions(), play: selected ? ['demo'] : [] }));
   return (
     <SocialReactions
       reactions={reactions}

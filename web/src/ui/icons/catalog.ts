@@ -79,6 +79,7 @@ export const ICON_CATALOG = {
   'selected-check': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
   'settings': { widths: [32, 48, 72, 96, 144, 179], aspect: 1 },
   'share-image': { widths: [32, 48, 72, 96, 144, 158], aspect: 1 },
+  'social-comment': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
   'sound-effects': { widths: [32, 48, 72, 96, 144, 179], aspect: 1 },
   'tap-swap': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
   'time-accent': { widths: [32, 38], aspect: 1 },

@@ -457,8 +457,13 @@
   --social-hero-icon: 124px;
   --social-thumb: 56px;
   --social-avatar: 36px;
-  --social-photo-ratio: 2.25 / 1;
-  --social-detail-ratio: 1.72 / 1;
+  --social-photo-ratio: 5 / 3;
+  --social-detail-ratio: 10 / 7;
+  --social-nav-height: 56px;
+  --social-back-width: 112px;
+  --social-reaction-gap: 6px;
+  --social-reaction-inner-gap: 2px;
+  --social-notice-icon: 48px;
   --social-composer-height: 144px;
   --social-editor-bottom: 100px;
   --social-photo-height: 62dvh;

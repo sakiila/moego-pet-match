@@ -31,10 +31,14 @@ export interface BrandHeaderProps {
   schedulingArt?: boolean;
   /** 棋盘的品牌行与已确认的 Smart Scheduling 字标。 */
   boardArt?: boolean;
+  /** 只要品牌行（动态墙等自带页面导航的模块）。 */
+  barOnly?: boolean;
+  /** 右侧还有头像时用的短返回文字，避免英文换行挤压字标。 */
+  backLabel?: string;
 }
 
 /** 顶部：MoeGo 字标 + 中/EN 切换 + 标题；切换只改界面文字，不影响本局。 */
-export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack, headingAccent, headingAction, schedulingArt = false, boardArt = false }: BrandHeaderProps) {
+export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack, headingAccent, headingAction, schedulingArt = false, boardArt = false, barOnly = false, backLabel }: BrandHeaderProps) {
   const { t, locale, setLocale } = useI18n();
   const report = title === 'report' || title === 'fish-report';
   const collection = title === 'collection';
@@ -62,7 +66,7 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
           {onBack && (
             <button type="button" className={styles.back} onClick={onBack} data-testid="back">
               <Icon name="back-to-shop" size={22} />
-              {t('action.back_to_shop')}
+              {backLabel ?? t('action.back_to_shop')}
             </button>
           )}
           <span className={styles.lang}>
@@ -77,7 +81,7 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
           {trailing}
         </span>
       </div>
-      {pageHeading && headingAccent ? (
+      {barOnly ? null : pageHeading && headingAccent ? (
         <h1 className={styles.title}>
           {pageHeading.split(' ')[0]} <em>{pageHeading.split(' ').slice(1).join(' ')}</em>
         </h1>

@@ -1,7 +1,7 @@
 import { useI18n } from '../../i18n';
 import { Icon } from '../../ui/primitives/Icon';
 import { Button } from '../../ui/primitives/Button';
-import { SocialHeader, SocialLanguage } from './SocialChrome';
+import { SocialHeader } from './SocialChrome';
 import styles from './Social.module.css';
 
 export function SocialGate({
@@ -16,9 +16,7 @@ export function SocialGate({
   const { t } = useI18n();
   return (
     <>
-      <SocialHeader onBack={onBack} backHome>
-        <SocialLanguage />
-      </SocialHeader>
+      <SocialHeader title={t('social.title')} onHome={onBack} />
       <section className={styles.gate}>
         <Icon name="social-feed" size={124} />
         <h1>{t('social.gate_title')}</h1>

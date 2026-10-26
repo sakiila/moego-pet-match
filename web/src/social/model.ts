@@ -1,4 +1,4 @@
-export const REACTION_KINDS = ['paw', 'heart', 'bone'] as const;
+export const REACTION_KINDS = ['cute', 'pets', 'play', 'love'] as const;
 export type ReactionKind = (typeof REACTION_KINDS)[number];
 export interface SocialPerson {
   id: string;
@@ -64,7 +64,7 @@ export interface SocialState {
 export const MAX_PHOTOS = 9;
 export const MAX_POST_LENGTH = 2000;
 export const MAX_COMMENT_LENGTH = 500;
-export const emptyReactions = (): SocialPost['reactions'] => ({ paw: [], heart: [], bone: [] });
+export const emptyReactions = (): SocialPost['reactions'] => ({ cute: [], pets: [], play: [], love: [] });
 
 /** 显式设置选中状态；同一次操作重试不会重复计数。 */
 export function setReaction(

@@ -136,7 +136,7 @@ describe('社交服务：真实会话、媒体隔离与事务', () => {
   });
   it('表情显式设定且幂等；计数不暴露其他同事的 ID', async () => {
     const { view } = await makePost();
-    const url = `/api/social/posts/${view.id}/reactions/bone`;
+    const url = `/api/social/posts/${view.id}/reactions/play`;
     const results = await Promise.all(
       Array.from({ length: 5 }, () =>
         app.inject({ method: 'PUT', url, headers: auth(alice), payload: { selected: true } }),
@@ -144,19 +144,43 @@ describe('社交服务：真实会话、媒体隔离与事务', () => {
     );
     expect(results.every((r) => r.statusCode === 200)).toBe(true);
     const result = (await app.inject({ url: `/api/social/posts/${view.id}`, headers: auth(bob) })).json();
-    expect(result.reactionCounts.bone).toBe(1);
-    expect(result.reactions.bone).toEqual([]);
+    expect(result.reactionCounts.play).toBe(1);
+    expect(result.reactions.play).toEqual([]);
     const notices = (await app.inject({ url: '/api/social/notices', headers: auth(bob) })).json();
     expect(notices.notices.filter((n: any) => n.postId === view.id)).toHaveLength(1);
     await app.inject({ method: 'PUT', url, headers: auth(alice), payload: { selected: false } });
     const cancelled = (await app.inject({ url: '/api/social/notices', headers: auth(bob) })).json();
     expect(cancelled.notices.some((n: any) => n.postId === view.id)).toBe(false);
   });
+  it('快捷互动只认四种宠物小动作，计数与选中按种类分开', async () => {
+    const { view } = await makePost();
+    for (const kind of ['cute', 'pets', 'play', 'love']) {
+      const res = await app.inject({
+        method: 'PUT',
+        url: `/api/social/posts/${view.id}/reactions/${kind}`,
+        headers: auth(alice),
+        payload: { selected: true },
+      });
+      expect(res.statusCode).toBe(200);
+    }
+    const result = (await app.inject({ url: `/api/social/posts/${view.id}`, headers: auth(alice) })).json();
+    expect(result.reactionCounts).toEqual({ cute: 1, pets: 1, play: 1, love: 1 });
+    expect(result.reactions.pets).toEqual(['U_TEST_ALICE']);
+    for (const kind of ['paw', 'heart', 'bone', 'comment']) {
+      const res = await app.inject({
+        method: 'PUT',
+        url: `/api/social/posts/${view.id}/reactions/${kind}`,
+        headers: auth(alice),
+        payload: { selected: true },
+      });
+      expect(res.statusCode).toBe(400);
+    }
+  });
   it('自己的表情不产生自己的通知；仅能标记自己的消息', async () => {
     const { view } = await makePost();
     await app.inject({
       method: 'PUT',
-      url: `/api/social/posts/${view.id}/reactions/paw`,
+      url: `/api/social/posts/${view.id}/reactions/cute`,
       headers: auth(bob),
       payload: { selected: true },
     });
@@ -166,7 +190,7 @@ describe('社交服务：真实会话、媒体隔离与事务', () => {
     ).toBe(0);
     await app.inject({
       method: 'PUT',
-      url: `/api/social/posts/${view.id}/reactions/heart`,
+      url: `/api/social/posts/${view.id}/reactions/love`,
       headers: auth(alice),
       payload: { selected: true },
     });

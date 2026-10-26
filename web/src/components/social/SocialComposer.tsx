@@ -3,7 +3,6 @@ import { useI18n } from '../../i18n';
 import { MAX_PHOTOS, MAX_POST_LENGTH, type SocialPerson, type SocialPhoto, type SocialPet } from '../../social/model';
 import { Avatar } from '../../ui/primitives/Avatar';
 import { Icon } from '../../ui/primitives/Icon';
-import { SocialHeader } from './SocialChrome';
 import styles from './Social.module.css';
 
 export interface SocialComposerProps {
@@ -19,24 +18,14 @@ export interface SocialComposerProps {
   onPet: (value: string) => void;
   onFiles: (files: File[]) => void;
   onRemovePhoto: (id: string) => void;
-  onCancel: () => void;
-  onPublish: () => void;
 }
+/** 发布页正文；页头的取消 / 发布由页面编排提供。 */
 export function SocialComposer(props: SocialComposerProps) {
   const { t } = useI18n();
   const input = useRef<HTMLInputElement>(null);
   const busy = props.processing || props.publishing;
   return (
     <>
-      <SocialHeader title={t('social.new_post')} onBack={props.onCancel} backLabel={t('social.cancel')}>
-        <button
-          className={styles.smallCta}
-          onClick={props.onPublish}
-          disabled={busy || (!props.body.trim() && !props.photos.length)}
-        >
-          {t(props.publishing ? 'social.publish_busy' : 'social.publish')}
-        </button>
-      </SocialHeader>
       <div className={styles.authorRow}>
         <Avatar name={props.author.name} src={props.author.avatarSrc} seed={props.author.id} size={40} />
         <div>
@@ -112,9 +101,12 @@ export function SocialComposer(props: SocialComposerProps) {
           </label>
         </div>
       )}
-      <div className={styles.hint}>
-        <p>{t('social.publish_hint')}</p>
-        <p className={styles.meta}>{t('social.photos_only')}</p>
+      <div className={`${styles.hint} ${styles.tipCard}`}>
+        <Icon name="social-tip" size={32} />
+        <div>
+          <p>{t('social.photos_only')}</p>
+          <p className={styles.meta}>{t('social.publish_hint')}</p>
+        </div>
       </div>
     </>
   );

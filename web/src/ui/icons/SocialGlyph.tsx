@@ -1,10 +1,9 @@
 export const SOCIAL_GLYPHS = [
   'social-feed',
   'social-create',
-  'social-comment',
   'social-bell',
-  'social-heart',
-  'social-bone',
+  'social-tip',
+  'social-pencil',
   'social-delete',
   'social-link',
   'social-more',
@@ -19,7 +18,6 @@ export const isSocialGlyph = (name: string): name is SocialGlyphName =>
 export function SocialGlyph({ name }: { name: SocialGlyphName }) {
   const cream = 'var(--receipt-paper)';
   const orange = 'var(--color-brand)';
-  const fill = 'var(--social-reaction-fill, var(--receipt-paper))';
   return (
     <g stroke="var(--color-ink)" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
       {name === 'social-feed' && (
@@ -44,12 +42,6 @@ export function SocialGlyph({ name }: { name: SocialGlyphName }) {
           <path d="m19 20 4 4" />
         </>
       )}
-      {name === 'social-comment' && (
-        <>
-          <path d="M8 4h16a5 5 0 0 1 5 5v12a5 5 0 0 1-5 5H13l-7 5v-6a5 5 0 0 1-4-5V10a6 6 0 0 1 6-6Z" fill={cream} />
-          <path d="M11 15h10" stroke={orange} />
-        </>
-      )}
       {name === 'social-bell' && (
         <>
           <path d="M6 22c4-4 2-7 4-12 1-3 3-4 6-4s5 1 6 4c2 5 0 8 4 12Z" fill={cream} />
@@ -57,11 +49,18 @@ export function SocialGlyph({ name }: { name: SocialGlyphName }) {
           <path d="M16 3v3" />
         </>
       )}
-      {name === 'social-heart' && (
-        <path d="M16 28S2 20 2 11C2 2 12 1 16 8 21 1 30 2 30 11c0 9-14 17-14 17Z" fill={fill} />
+      {name === 'social-tip' && (
+        <>
+          <path d="M14 26c0-4-6-6-6-13a8 8 0 0 1 16 0c0 7-6 9-6 13Z" fill={cream} />
+          <path d="M13 29h6" />
+          <path d="M24 3l-2 4M28 8l-4 2" stroke={orange} strokeWidth="3" />
+        </>
       )}
-      {name === 'social-bone' && (
-        <path d="M7 18a5 5 0 1 1 2-9l10-4a5 5 0 1 1 9 4 5 5 0 0 1-3 8l-10 5a5 5 0 1 1-8-4Z" fill={fill} />
+      {name === 'social-pencil' && (
+        <g stroke="var(--color-paper)" fill="none" strokeWidth="2.6">
+          <path d="m8 25 1-6L21 7l5 5-12 12Z" />
+          <path d="m18 10 5 5M8 28h17" />
+        </g>
       )}
       {name === 'social-delete' && (
         <>

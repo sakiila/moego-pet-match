@@ -16,6 +16,7 @@ import {
 } from '../social/write.ts';
 import { SOCIAL_MAX_BYTES, stagePhoto, visibleMedia } from '../social/media.ts';
 import { SocialError } from '../social/types.ts';
+import { REACTION_KINDS } from '../../../web/src/social/model.ts';
 
 const idSchema = z.string().uuid();
 const text = (max: number) => z.string().trim().max(max);
@@ -122,7 +123,7 @@ export const socialRoutes: FastifyPluginAsync<AppDeps> = async (
     const actor = await user(request, reply);
     if (!actor) return;
     const id = idSchema.parse(request.params.id),
-      kind = z.enum(['paw', 'heart', 'bone']).parse(request.params.kind);
+      kind = z.enum(REACTION_KINDS).parse(request.params.kind);
     await changeReaction(
       pool,
       id,

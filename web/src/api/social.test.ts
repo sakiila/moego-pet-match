@@ -10,7 +10,7 @@ const value: SocialPost = {
   createdAt: '2026-10-26T00:00:00Z',
   photos: [{ id: 'media-id', src: '/private-photo', alt: '' }],
   comments: [],
-  reactions: { paw: [], heart: [], bone: [] },
+  reactions: { cute: [], pets: [], play: [], love: [] },
 };
 describe('社交 API 边界', () => {
   const fetchMock = vi.fn<typeof fetch>();

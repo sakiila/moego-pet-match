@@ -112,6 +112,7 @@
   font: inherit;
   font-weight: var(--weight-bold);
   color: var(--color-brand);
+  white-space: nowrap;
   cursor: pointer;
 }
 

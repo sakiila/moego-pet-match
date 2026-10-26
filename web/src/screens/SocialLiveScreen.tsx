@@ -322,7 +322,7 @@ export function SocialLiveScreen({ onHome }: { onHome: () => void }) {
   if (phase !== 'ready' || !session)
     return (
       <main className={styles.root}>
-        <SocialHeader title={t('social.title')} onBack={onHome} />
+        <SocialHeader title={t('social.title')} onHome={onHome} />
         <SocialEmpty
           state={phase === 'loading' ? 'loading' : phase === 'disabled' ? 'empty' : 'error'}
           title={phase === 'disabled' ? t('social.disabled') : undefined}
@@ -357,6 +357,7 @@ export function SocialLiveScreen({ onHome }: { onHome: () => void }) {
         readPhoto={socialApi.upload}
         onHome={onHome}
         onReset={() => {}}
+        browserHistory
       />
     </>
   );

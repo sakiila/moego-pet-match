@@ -1,4 +1,4 @@
-import type { SocialPost, SocialComment, SocialNotice, ReactionKind } from '../../../web/src/social/model.ts';
+import { REACTION_KINDS, type SocialPost, type SocialComment, type SocialNotice, type ReactionKind } from '../../../web/src/social/model.ts';
 import { decodeCursor, encodeCursor, mediaUrl, visiblePost, type SocialDb, SocialError } from './types.ts';
 
 export const socialPerson = (id: string, name: string) => ({
@@ -32,7 +32,7 @@ export async function postViews(db: SocialDb, rows: Record<string, any>[], viewe
   ]);
   return rows.map((row) => {
     const summary = Object.fromEntries(
-      ['paw', 'heart', 'bone'].map((kind) => [
+      REACTION_KINDS.map((kind) => [
         kind,
         reactions.rows.find((r) => r.post_id === row.id && r.kind === kind),
       ]),
@@ -51,10 +51,10 @@ export async function postViews(db: SocialDb, rows: Record<string, any>[], viewe
         ? { id: row.pet_id, name: row.pet_name, stickerSrc: `/img/stickers/${encodeURIComponent(row.pet_id)}?size=128` }
         : undefined,
       reactions: Object.fromEntries(
-        ['paw', 'heart', 'bone'].map((kind) => [kind, summary[kind]?.selected ? [viewerId] : []]),
+        REACTION_KINDS.map((kind) => [kind, summary[kind]?.selected ? [viewerId] : []]),
       ) as Record<ReactionKind, string[]>,
       reactionCounts: Object.fromEntries(
-        ['paw', 'heart', 'bone'].map((kind) => [kind, summary[kind]?.count ?? 0]),
+        REACTION_KINDS.map((kind) => [kind, summary[kind]?.count ?? 0]),
       ) as Record<ReactionKind, number>,
       comments: [],
       commentCount: counts.rows.find((c) => c.post_id === row.id)?.count ?? 0,

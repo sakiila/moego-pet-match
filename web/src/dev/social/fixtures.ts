@@ -23,7 +23,7 @@ export function createSocialFixtures(): SocialState {
         createdAt: '2026-10-22T00:16:44+08:00',
         body: 'Not parvo safe for a while, so stroller walks it is for now 💖',
         photos: [{ id: 'demo-dog', src: dog, alt: 'Synthetic demo: a copper puppy in a green stroller' }],
-        reactions: { paw: ['a', 'b', 'c', 'd'], heart: ['a', 'b'], bone: ['c'] },
+        reactions: { cute: ['a', 'b', 'c', 'd'], pets: ['a', 'b'], play: ['c'], love: ['a', 'b', 'd'] },
         comments: [
           { id: 'demo-comment-1', author: alex, body: '这位乘客也太可爱了！', createdAt: '2026-10-25T10:20:00+08:00' },
           {
@@ -44,7 +44,7 @@ export function createSocialFixtures(): SocialState {
           { id: 'demo-cat-1', src: cat, alt: 'Synthetic demo: a tabby cat basking in sunlight' },
           { id: 'demo-cat-2', src: paws, alt: 'Synthetic demo: the tabby cat’s white paws' },
         ],
-        reactions: { paw: ['a', 'b', 'c', 'd'], heart: ['a', 'b', previewViewer.id], bone: ['c', 'd'] },
+        reactions: { cute: ['a', 'b', 'c', 'd'], pets: ['a', 'b'], play: [previewViewer.id], love: ['a', 'b', 'c'] },
         comments: [
           {
             id: 'demo-comment-3',
@@ -72,7 +72,7 @@ export function createSocialFixtures(): SocialState {
         postId: 'demo-native-cat',
         recipientId: previewViewer.id,
         actor: alex,
-        kind: 'bone',
+        kind: 'play',
         read: false,
         createdAt: '2026-10-26T10:32:00+08:00',
       },
@@ -91,7 +91,7 @@ export function createSocialFixtures(): SocialState {
         postId: 'demo-native-cat',
         recipientId: previewViewer.id,
         actor: { id: 'demo-mia', name: 'Mia' },
-        kind: 'heart',
+        kind: 'love',
         read: false,
         createdAt: '2026-10-26T09:41:00+08:00',
       },
@@ -100,7 +100,7 @@ export function createSocialFixtures(): SocialState {
         postId: 'demo-own-slack',
         recipientId: previewViewer.id,
         actor: { id: 'demo-jamie', name: 'Jamie' },
-        kind: 'paw',
+        kind: 'cute',
         read: true,
         createdAt: '2026-10-25T20:14:00+08:00',
       },

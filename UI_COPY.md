@@ -793,9 +793,17 @@
 | social.comment_placeholder | 留一句给毛孩子… | Leave a little note… |
 | social.comment_local | 留言仅在动态墙内可见 | Comments stay here in Pet Moments |
 | social.send | 发送 | Send |
-| social.paw | 点赞 | High five |
-| social.heart | 喜欢 | Love |
-| social.bone | 小骨头 | Little bone |
+| social.cute | 被你萌到了 | You're adorable! |
+| social.pets | 想摸摸头 | Can I pet you? |
+| social.play | 想和你玩 | Let's play! |
+| social.love | 给你比个心 | Sending you love! |
+| social.comments_label | 留言，{count} 条 | Comments, {count} |
+| social.comments_title | 留言 | Comments |
+| social.source_channel | #the-pet-corner | #the-pet-corner |
+| social.view_original | 查看原帖 | View original |
+| social.back_shop | 回门店 | Shop |
+| social.back_activity | 返回消息 | Back to activity |
+| social.back_mine | 返回我的 | Back to mine |
 | social.reaction_label | {reaction}，{count}，{state} | {reaction}, {count}, {state} |
 | social.selected | 已选 | selected |
 | social.unselected | 未选 | not selected |
@@ -809,8 +817,8 @@
 | social.post_placeholder | 分享毛孩子的一点日常… | Share a little moment with your pet… |
 | social.link_pet | 关联毛孩子（选填） | Link a pet (optional) |
 | social.no_pet | 不关联 | No pet linked |
-| social.publish_hint | 发布后，同事可以送爪印和留言。 | Colleagues can send paws and leave notes. |
-| social.photos_only | 只支持照片与文字 | Photos and text only |
+| social.publish_hint | 发布后，同事可以点赞和留言。 | Once posted, colleagues can react and leave notes. |
+| social.photos_only | 照片与文字，分享一点日常。 | Photos and text: share a little moment. |
 | social.publish_busy | 正在发布… | Posting… |
 | social.photo_busy | 正在处理照片… | Preparing photos… |
 | social.publish_success | 动态已加入本机预览 | Post added to this local preview |
@@ -827,9 +835,10 @@
 | social.no_activity | 还没有新互动 | No new activity yet |
 | social.no_activity_body | 有人送来爪印或留言时，会出现在这里。 | Paws and comments from colleagues will appear here. |
 | social.activity_hint | 只提醒与你有关的新互动 | Only new interactions involving you |
-| social.notice_paw | {name} 给你的动态点了赞 | {name} high-fived your post |
-| social.notice_heart | {name} 喜欢了你的动态 | {name} loved your post |
-| social.notice_bone | {name} 给你的动态送了小骨头 | {name} sent your post a little bone |
+| social.notice_cute | {name} 被你萌到了 | {name}: You're adorable! |
+| social.notice_pets | {name} 想摸摸头 | {name}: Can I pet you? |
+| social.notice_play | {name} 想和你玩 | {name}: Let's play! |
+| social.notice_love | {name} 给你比个心 | {name}: Sending you love! |
 | social.notice_comment | {name} 留言了 | {name} left a comment |
 | social.unread | 未读 | Unread |
 | social.more | 更多操作 | More actions |
@@ -881,8 +890,8 @@
 | social.menu_label | 动态操作 | Post actions |
 | social.close | 关闭 | Close |
 | social.download | 保存照片 | Save photo |
-| social.previous_photo | 上一张照片 | Previous photo |
-| social.next_photo | 下一张照片 | Next photo |
+| social.previous_photo | 上一张 | Previous |
+| social.next_photo | 下一张 | Next |
 | social.no_comments | 来留第一句话吧。 | Be the first to leave a little note. |
 | social.comment_empty | 请先写一句留言。 | Write a comment first. |
 | social.chars | {count} / {max} | {count} / {max} |

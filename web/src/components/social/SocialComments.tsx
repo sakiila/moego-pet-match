@@ -7,6 +7,7 @@ import { Icon } from '../../ui/primitives/Icon';
 import styles from './Social.module.css';
 
 export function SocialComments({
+  id,
   comments,
   total,
   viewerId,
@@ -14,6 +15,7 @@ export function SocialComments({
   onReply,
   onDelete,
 }: {
+  id?: string;
   comments: SocialComment[];
   total?: number;
   viewerId: string;
@@ -24,7 +26,7 @@ export function SocialComments({
   const { t, locale } = useI18n();
   const count = total ?? comments.length;
   return (
-    <section aria-label={t('social.comment_count', { count })}>
+    <section id={id} aria-label={t('social.comment_count', { count })}>
       <h2 className={styles.sectionTitle}>{t('social.comment_count', { count })}</h2>
       {!comments.length && <p className={styles.meta}>{t('social.no_comments')}</p>}
       {comments.map((comment) => (
@@ -55,6 +57,8 @@ export function SocialComments({
     </section>
   );
 }
+/** 详情页留言按钮定位的输入框。 */
+export const SOCIAL_COMMENT_INPUT = 'social-comment-input';
 export function SocialCommentInput({
   replyTo,
   onCancelReply,
@@ -116,6 +120,7 @@ export function SocialCommentInput({
       >
         <textarea
           ref={input}
+          id={SOCIAL_COMMENT_INPUT}
           rows={1}
           maxLength={MAX_COMMENT_LENGTH}
           value={body}

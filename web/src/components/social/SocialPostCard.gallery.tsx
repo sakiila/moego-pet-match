@@ -8,6 +8,7 @@ const callbacks = {
   onPhoto: () => {},
   onMenu: () => {},
   onReaction: () => {},
+  onComments: () => {},
 };
 export default {
   name: 'SocialPostCard',

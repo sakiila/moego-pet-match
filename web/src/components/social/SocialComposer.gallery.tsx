@@ -32,8 +32,6 @@ function Example({
       onPet={(petId) => setDraft((d) => ({ ...d, petId }))}
       onRemovePhoto={(id) => setDraft((d) => ({ ...d, photos: d.photos.filter((p) => p.id !== id) }))}
       onFiles={() => {}}
-      onCancel={() => {}}
-      onPublish={() => {}}
     />
   );
 }

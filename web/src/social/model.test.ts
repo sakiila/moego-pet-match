@@ -28,16 +28,16 @@ function fixture(source: 'native' | 'slack' = 'native'): SocialState {
 }
 describe('social preview interaction rules', () => {
   it('repeated selection counts once; removing it clears only that reaction and its notification', () => {
-    const first = setReaction(fixture(), 'post', visitor, 'heart', true);
-    expect(setReaction(first, 'post', visitor, 'heart', true)).toBe(first);
-    const both = setReaction(first, 'post', visitor, 'bone', true);
-    const undone = setReaction(both, 'post', visitor, 'heart', false);
-    expect(undone.posts[0].reactions).toEqual({ paw: [], heart: [], bone: ['visitor'] });
-    expect(undone.notices.map((n) => n.kind)).toEqual(['bone']);
-    expect(first.posts[0].reactions.heart).toEqual(['visitor']);
+    const first = setReaction(fixture(), 'post', visitor, 'love', true);
+    expect(setReaction(first, 'post', visitor, 'love', true)).toBe(first);
+    const both = setReaction(first, 'post', visitor, 'play', true);
+    const undone = setReaction(both, 'post', visitor, 'love', false);
+    expect(undone.posts[0].reactions).toEqual({ cute: [], pets: [], play: ['visitor'], love: [] });
+    expect(undone.notices.map((n) => n.kind)).toEqual(['play']);
+    expect(first.posts[0].reactions.love).toEqual(['visitor']);
   });
   it('does not notify a person about their own reaction', () => {
-    expect(setReaction(fixture(), 'post', owner, 'paw', true).notices).toEqual([]);
+    expect(setReaction(fixture(), 'post', owner, 'cute', true).notices).toEqual([]);
   });
   it('publishing the same post twice is idempotent and rejects an empty or over-limit post', () => {
     const state = fixture();
@@ -72,14 +72,14 @@ describe('social preview interaction rules', () => {
     expect(() => addComment(fixture(), 'post', { ...comment, body: ' ' })).toThrow();
   });
   it('only the author can delete a post; deletion also clears associated interaction previews', () => {
-    const liked = setReaction(fixture(), 'post', visitor, 'heart', true);
+    const liked = setReaction(fixture(), 'post', visitor, 'love', true);
     expect(() => removePost(liked, 'post', visitor.id)).toThrow('forbidden');
     const removed = removePost(liked, 'post', owner.id);
     expect(removed.posts).toEqual([]);
     expect(removed.notices).toEqual([]);
   });
   it('hiding a synced post leaves a content-free tombstone and cannot receive new interactions', () => {
-    const hidden = removePost(setReaction(fixture('slack'), 'post', visitor, 'bone', true), 'post', owner.id);
+    const hidden = removePost(setReaction(fixture('slack'), 'post', visitor, 'play', true), 'post', owner.id);
     expect(hidden.posts[0]).toMatchObject({
       hidden: true,
       body: '',
@@ -88,7 +88,7 @@ describe('social preview interaction rules', () => {
       reactions: emptyReactions(),
     });
     expect(hidden.notices).toEqual([]);
-    expect(setReaction(hidden, 'post', visitor, 'paw', true)).toBe(hidden);
+    expect(setReaction(hidden, 'post', visitor, 'cute', true)).toBe(hidden);
   });
   it('a person can only delete their own comment, and its notification is removed', () => {
     const commented = addComment(fixture(), 'post', { id: 'c', author: visitor, body: 'Hello', createdAt: '' });

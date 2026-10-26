@@ -183,7 +183,7 @@ describe('Slack 单向同步与重启恢复', () => {
     expect(view.body).toBe('A puppy 💖');
     expect(view.photos).toHaveLength(1);
     expect(view.comments).toEqual([]);
-    expect(view.reactionCounts).toEqual({ paw: 0, heart: 0, bone: 0 });
+    expect(view.reactionCounts).toEqual({ cute: 0, pets: 0, play: 0, love: 0 });
     expect(view.createdAt).toBe('2026-10-21T16:16:44.599Z');
     expect(view.author.id).toBe('U_TEST_BOB');
     expect(view.sourceUrl).toContain('/archives/C_TARGET/');

@@ -15,6 +15,8 @@ export interface SocialPostCardProps {
   onPhoto: (index: number) => void;
   onMenu: () => void;
   onReaction: (kind: ReactionKind, selected: boolean) => void;
+  /** 留言入口：列表进入详情，详情定位输入栏。 */
+  onComments: () => void;
 }
 export function SocialPostCard({
   post,
@@ -25,6 +27,7 @@ export function SocialPostCard({
   onPhoto,
   onMenu,
   onReaction,
+  onComments,
 }: SocialPostCardProps) {
   const { t, locale } = useI18n();
   const first = post.photos[0];
@@ -74,10 +77,13 @@ export function SocialPostCard({
         </button>
       )}
       {post.source === 'slack' && post.sourceUrl && (
-        <a className={styles.source} href={post.sourceUrl} target="_blank" rel="noopener noreferrer">
-          {t('social.original')}
-          <Icon name="social-link" size={14} />
-        </a>
+        <p className={styles.sourceLine}>
+          {!detail && <span>{t('social.source_channel')} · </span>}
+          <a className={styles.source} href={post.sourceUrl} target="_blank" rel="noopener noreferrer">
+            {t(detail ? 'social.original' : 'social.view_original')}
+            <Icon name="social-link" size={14} />
+          </a>
+        </p>
       )}
       {post.pet && (
         <span className={styles.petTag}>
@@ -92,7 +98,7 @@ export function SocialPostCard({
         viewerId={viewerId}
         onReaction={onReaction}
         commentCount={post.commentCount ?? post.comments.length}
-        onComments={detail ? undefined : onOpen}
+        onComments={onComments}
       />
     </article>
   );

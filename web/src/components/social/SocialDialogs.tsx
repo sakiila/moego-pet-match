@@ -8,7 +8,9 @@ import { useSocialModal } from './useSocialModal';
 import styles from './Social.module.css';
 
 export type SocialOverlay =
-  { kind: 'menu' | 'remove' | 'feedback'; post: SocialPost } | { kind: 'discard' | 'info' | 'reset' };
+  | { kind: 'menu' | 'remove' | 'feedback'; post: SocialPost }
+  | { kind: 'discard'; leave: 'back' | 'home' }
+  | { kind: 'info' | 'reset' };
 export function SocialDialogs({
   overlay,
   viewerId,

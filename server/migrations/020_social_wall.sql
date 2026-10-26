@@ -58,7 +58,7 @@ CREATE INDEX social_comments_post_idx ON pet_match.social_comments(post_id,creat
 CREATE TABLE pet_match.social_reactions (
   post_id uuid NOT NULL REFERENCES pet_match.social_posts(id),
   player_id text NOT NULL,
-  kind text NOT NULL CHECK (kind IN ('paw','heart','bone')),
+  kind text NOT NULL CHECK (kind IN ('cute','pets','play','love')),
   active boolean NOT NULL DEFAULT true,
   created_at timestamptz(3) NOT NULL DEFAULT now(),
   PRIMARY KEY (post_id,player_id,kind)
@@ -72,7 +72,7 @@ CREATE TABLE pet_match.social_notices (
   comment_id uuid REFERENCES pet_match.social_comments(id),
   recipient_id text NOT NULL,
   actor_id text NOT NULL,
-  kind text NOT NULL CHECK (kind IN ('paw','heart','bone','comment')),
+  kind text NOT NULL CHECK (kind IN ('cute','pets','play','love','comment')),
   excerpt text,
   created_at timestamptz(3) NOT NULL DEFAULT now(),
   read_at timestamptz,
