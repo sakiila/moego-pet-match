@@ -14,6 +14,7 @@ import { deletionRoutes } from './routes/deletions.ts';
 import { submissionRoutes } from './routes/submissions.ts';
 import { slackEventRoutes } from './routes/slackEvents.ts';
 import { webRoutes } from './routes/web.ts';
+import { authRoutes } from './routes/auth.ts';
 import type { AdminNotifier } from './services/adminNotify.ts';
 import type { SlackDirectory } from './services/slackDirectory.ts';
 import type { SubmissionHooks } from './services/submissions.ts';
@@ -47,7 +48,7 @@ export interface AppDeps {
 }
 
 export function buildApp(deps: AppDeps) {
-  const app = Fastify({ logger: process.env.NODE_ENV === 'test' ? false : { level: 'info' } });
+  const app = Fastify({ logger: process.env.NODE_ENV === 'test' ? false : { level: 'info', redact: ['req.headers.cookie', 'req.headers.authorization', 'res.headers.set-cookie'] } });
 
   // 数据库等内部错误统一成「暂时不可用」，前端据此区分读取失败与未找到
   app.setErrorHandler((error: FastifyError, request, reply) => {
@@ -56,6 +57,7 @@ export function buildApp(deps: AppDeps) {
     return reply.status(503).send({ error: 'unavailable' });
   });
 
+  app.register(authRoutes, deps);
   app.register(rosterRoutes, deps);
   app.register(playerRoutes, deps);
   app.register(gameRoutes, deps);

@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import { LOCAL_TEST_URL } from '../src/config.ts';
 import { appRoleGrants } from '../src/db/appGrants.ts';
 import { listMigrations } from '../src/db/migrate.ts';

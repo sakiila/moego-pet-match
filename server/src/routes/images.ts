@@ -1,4 +1,5 @@
 import type { FastifyPluginAsync, FastifyReply } from 'fastify';
+import { requirePlayer } from '../services/requirePlayer.ts';
 import type { AppDeps } from '../app.ts';
 import { makeSilhouette } from '../catalog/photo.ts';
 import { findColleague } from '../services/players.ts';
@@ -88,6 +89,7 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
   // 卡背照片（处理后的版本）：只给已收集该宠物的玩家或主人本人
   app.get<{ Params: { id: string }; Querystring: { playerId?: string } }>('/img/photos/:id', async (request, reply) => {
     const playerId = request.query.playerId ?? '';
+    if (!await requirePlayer(request, reply, pool, playerId)) return;
     const { rows } = await pool.query(
       `SELECT p.status, p.photo_key, p.owner_user_id,
               EXISTS (SELECT 1 FROM pet_match.collections c WHERE c.pet_id = p.pet_id AND c.player_id = $2) AS collected
@@ -101,7 +103,7 @@ export const imageRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, imag
     const cacheKey = `photo/${pet.photo_key}`;
     const obj = await loadImage(cacheKey, group, () => store ? store.get(pet.photo_key) : Promise.resolve(null));
     if (!obj) return reply.status(store ? 404 : 503).send();
-    return send(reply, obj, 'private, max-age=86400');
+    return send(reply, obj, 'private, no-store');
   });
 
   // 启动时清一次已下架宠物的缓存（下架发生在命令行，服务端此前可能没收到对应请求）

@@ -1,3 +1,4 @@
+import { requirePlayer } from '../services/requirePlayer.ts';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import type { AppDeps } from '../app.ts';
@@ -16,6 +17,7 @@ export const deletionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, n
   app.get('/api/my-pets', async (request, reply) => {
     const q = PlayerQuery.safeParse(request.query);
     if (!q.success) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, pool, q.data.playerId)) return;
     if (!(await findColleague(pool, q.data.playerId))) return reply.status(404).send({ error: 'not_found' });
     return { pets: await listMyPets(pool, q.data.playerId) };
   });
@@ -23,6 +25,7 @@ export const deletionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, n
   app.get('/api/deletion-requests', async (request, reply) => {
     const q = PlayerQuery.safeParse(request.query);
     if (!q.success) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, pool, q.data.playerId)) return;
     if (!(await findColleague(pool, q.data.playerId))) return reply.status(404).send({ error: 'not_found' });
     return { requests: await listDeletionRequests(pool, q.data.playerId) };
   });
@@ -30,6 +33,7 @@ export const deletionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, n
   app.post('/api/deletion-requests', async (request, reply) => {
     const body = RequestBody.safeParse(request.body);
     if (!body.success) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, pool, body.data.playerId)) return;
     const note = body.data.note?.trim() || null;
     if (note && [...note].length > DELETION_NOTE_MAX) return reply.status(400).send({ error: 'invalid_request', detail: 'note too long' });
     const colleague = await findColleague(pool, body.data.playerId);

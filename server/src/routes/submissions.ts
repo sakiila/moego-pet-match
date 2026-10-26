@@ -1,3 +1,4 @@
+import { requirePlayer } from '../services/requirePlayer.ts';
 import multipart from '@fastify/multipart';
 import type { FastifyPluginAsync } from 'fastify';
 import type { AppDeps } from '../app.ts';
@@ -25,6 +26,7 @@ export const submissionRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool,
     const playerId = field('playerId');
     const petName = field('petName');
     if (!playerId) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, pool, playerId)) return;
     if (!petName) return reply.status(400).send({ error: 'name_required' });
     if ([...petName].length > PET_NAME_MAX) return reply.status(400).send({ error: 'invalid_request', detail: 'name too long' });
     const ownerQuote = field('ownerQuote').replace(/\r\n?/g, '\n');

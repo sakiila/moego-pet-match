@@ -1,3 +1,4 @@
+import { requirePlayer } from '../services/requirePlayer.ts';
 import type { FastifyPluginAsync, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import type { AppDeps } from '../app.ts';
@@ -50,6 +51,7 @@ export const gameRoutes: FastifyPluginAsync<AppDeps> = async (app, deps) => {
   app.post('/api/games', async (request, reply) => {
     const body = RegisterBody.safeParse(request.body);
     if (!body.success) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, deps.pool, body.data.playerId)) return;
     if (!await rate(body.data.playerId, 'prepare', reply)) return;
     try {
       return await registerGame(deps.pool, body.data.playerId, body.data.mode, now(), undefined, !!deps.gameSecurity);
@@ -64,6 +66,7 @@ export const gameRoutes: FastifyPluginAsync<AppDeps> = async (app, deps) => {
     if (!z.string().uuid().safeParse(request.params.id).success) return reply.status(404).send({ error: 'not_found' });
     if (!body.success || !playToken) return reply.status(400).send({ error: 'invalid_request' });
     if (!deps.gameSecurity) return reply.status(404).send({ error: 'not_found' });
+    if (!await requirePlayer(request, reply, deps.pool, body.data.playerId)) return;
     if (!await rate(body.data.playerId, 'start', reply)) return;
     try {
       return await startVerifiedGame(deps.pool, request.params.id, body.data.playerId, body.data.turnstileToken, playToken, deps.gameSecurity, now());
@@ -74,6 +77,7 @@ export const gameRoutes: FastifyPluginAsync<AppDeps> = async (app, deps) => {
     if (!z.string().uuid().safeParse(request.params.id).success) return reply.status(404).send({ error: 'not_found' });
     const body = AnswerBody.safeParse(request.body);
     if (!body.success) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, deps.pool, body.data.playerId)) return;
     const result = await inTransaction(deps.pool, (client) => answerQuiz(client, request.params.id, body.data.playerId, body.data.choice));
     if (!result) return reply.status(404).send({ error: 'not_found' });
     return result;
@@ -83,6 +87,7 @@ export const gameRoutes: FastifyPluginAsync<AppDeps> = async (app, deps) => {
     if (!z.string().uuid().safeParse(request.params.id).success) return reply.status(404).send({ error: 'not_found' });
     const body = SettleBody.safeParse(request.body);
     if (!body.success) return reply.status(422).send({ error: 'invalid', detail: 'schema' });
+    if (!await requirePlayer(request, reply, deps.pool, body.data.playerId)) return;
     if (!await rate(body.data.playerId, 'result', reply)) return;
     try {
       const { playerId, result } = body.data;

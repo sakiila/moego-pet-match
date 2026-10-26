@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { RegisteredGame, ResultPayload } from '../../web/src/api/types.ts';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import { freshDatabase } from './helpers.ts';
 import { RULES, RULES_VERSION } from '../../web/src/engine/config.ts';
 import { createRng } from '../../web/src/engine/rng.ts';

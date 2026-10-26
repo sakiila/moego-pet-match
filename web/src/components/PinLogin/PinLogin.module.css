@@ -1,0 +1,50 @@
+.wrap, .form, .field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.wrap {
+  padding-top: var(--space-6);
+}
+
+.field {
+  gap: var(--space-2);
+  color: var(--fg);
+  font-weight: var(--weight-bold);
+}
+
+.title {
+  font-size: var(--text-xl);
+  margin: 0 0 var(--space-2);
+}
+
+.hint {
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--touch-target);
+  padding: var(--space-3) var(--space-4);
+  border: var(--stroke) solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  color: var(--fg);
+  font: inherit;
+  font-size: var(--text-xl);
+  letter-spacing: var(--space-3);
+}
+
+.input:focus-visible {
+  outline: var(--stroke) solid var(--accent);
+  outline-offset: var(--space-1);
+}
+
+.input:disabled {
+  color: var(--fg-muted);
+}

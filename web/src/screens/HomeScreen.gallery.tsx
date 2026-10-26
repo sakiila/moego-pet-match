@@ -3,6 +3,7 @@ import { GAME_VERSION } from '../app/version';
 import type { GalleryEntry } from '../dev/gallery/types';
 import { HomeScreen, type HomeScreenProps } from './HomeScreen';
 import { loadPlayerPetDetailPreview, loadPlayerPetsPreview } from '../dev/gallery/playerPets';
+import { useI18n } from '../i18n';
 
 const noop = () => {};
 const loadLikes = async () => ({ receivedLikes: 12, likedByViewer: false, canLike: false });
@@ -22,10 +23,16 @@ const player = (best: number | null) => ({
 
 const manager = { date: '2026-10-23', pet: { petId: 'pet_4750baaed3f0', name: 'Sanxian' } };
 
+function ClockOutFailedPreview() {
+  const { t } = useI18n();
+  return <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(24800)} manager={manager} clockOutError={t('auth.logout_failed')} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />;
+}
+
 const entry: GalleryEntry = {
   name: 'HomeScreen',
   group: 'screens',
   states: {
+    'clock out failed / retry': () => <ClockOutFailedPreview />,
     'first browser visit · sound tip': () => <HomePreview soundTipPreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(null)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
     'equipped legendary · C size': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={{ ...player(24800), equippedTitle: 'album' }} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} onTitles={noop} />,
     'first visit': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(null)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,

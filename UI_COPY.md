@@ -80,6 +80,25 @@
 
 | Key | 中文 | English |
 | --- | --- | --- |
+| auth.loading | 正在确认登录方式… | Checking sign-in options… |
+| auth.setup_title | 设置四位数字密码 | Set a four-digit PIN |
+| auth.login_title | 欢迎回来 | Welcome back |
+| auth.setup_hint | 第一次来？设置一个密码，下次登录时使用。 | First time here? Set a PIN to use next time you sign in. |
+| auth.login_hint | 输入你的四位数字密码，继续开店。 | Enter your four-digit PIN to open the shop. |
+| auth.pin_label | 四位数字密码 | Four-digit PIN |
+| auth.confirm_label | 再输入一次 | Enter your PIN again |
+| auth.invalid_pin | 请输入四位数字。 | Enter four digits. |
+| auth.pin_mismatch | 两次密码不一致，请重新确认。 | The PINs don’t match. Please try again. |
+| auth.wrong_pin | 密码不对，再试一次。 | That PIN isn’t right. Try again. |
+| auth.locked | 密码连续输错，请 15 分钟后再试。 | Too many incorrect attempts. Try again in 15 minutes. |
+| auth.pin_exists | 这个身份已设置密码，请输入密码登录。 | This profile already has a PIN. Enter it to sign in. |
+| auth.failed | 暂时没能完成登录，请重试。 | We couldn’t sign you in. Please try again. |
+| auth.submitting | 正在登录… | Signing in… |
+| auth.login | 登录并 Clock In | Sign In & Clock In |
+| auth.setup | 设置密码并 Clock In | Set PIN & Clock In |
+| auth.forgot | 忘记密码？联系 Bob 核实后重置。 | Forgot your PIN? Contact Bob to verify your identity and reset it. |
+| auth.change_player | 返回选择身份 | Choose another profile |
+| auth.logout_failed | 暂时没能退出，请重试。 | We couldn’t sign you out. Please try again. |
 | identity.title | 你是哪位同事？ | Who's Playing? |
 | identity.search | 搜索你的 Slack 名字 | Search your Slack name |
 | identity.hint | 选择自己的身份，成绩和图鉴会记在这里。 | Choose your own profile. Your scores and collection will be saved to it. |
@@ -105,11 +124,11 @@
 | --- | --- | --- |
 | info.full.title | 这个游戏会用到哪些信息 | What This Game Uses |
 | info.full.intro | 这是为 MoeGo 同事制作、由 Bob 维护的小游戏。自愿参与，不上传宠物也能玩。 | A game made for MoeGo coworkers and maintained by Bob. Participation is optional; you can play without uploading a pet. |
-| info.full.collect | **会记录什么**：Slack 名册中的 ID、名字、头像和工作邮箱（邮箱用于搜索，不展示）；成绩、游玩与收集进度；你提交的宠物照片、名字、主人信息及删除申请。初始宠物资料来自同事分享的飞书文档。浏览器记住身份和偏好，服务器保留常规访问日志。 | **What we record**: Slack directory IDs, names, avatars, and work emails (for search, not display); scores, play and collection progress; pet photos, names, owner details, and removal requests you submit. Initial pet data comes from the shared Feishu document. Your browser remembers your profile and preferences; the server keeps standard access logs. |
+| info.full.collect | **会记录什么**：Slack 名册中的 ID、名字、头像和工作邮箱（邮箱用于搜索，不展示）；成绩、游玩与收集进度；你提交的宠物照片、名字、主人信息及删除申请。初始宠物资料来自同事分享的飞书文档。浏览器记住登录状态和偏好；服务器保存密码的加盐哈希、登录凭证及常规访问日志，不保存明文密码。 | **What we record**: Slack directory IDs, names, avatars, and work emails (for search, not display); scores, play and collection progress; pet photos, names, owner details, and removal requests you submit. Initial pet data comes from the shared Feishu document. Your browser remembers your sign-in and preferences; the server stores a salted PIN hash, sign-in sessions, and standard access logs, never your plain-text PIN. |
 | info.full.display | **会在哪里展示**：名字、头像、成绩、收集记录和称号会在排行榜、玩家卡或宠物卡展示。宠物贴纸和名字用于游戏，玩家卡会列出该同事已上架的宠物名字与收集状态；未收集的他人宠物显示剪影，已收集该宠物的玩家和主人还可查看主人说及处理后的照片。游戏不验证 Slack 身份，持有链接的人也可能查看，请勿转发链接。 | **Where it shows up**: names, avatars, scores, collection activity, and titles appear on leaderboards, player cards, or pet cards. Pet stickers and names are used in the game. Player cards list a coworker's published pet names and your collection status; other people's uncollected pets appear as silhouettes. Players who collect a pet and its owner can also see the owner's quote and processed photos. Slack identities are not verified; anyone with the link may be able to view this information. Please do not forward it. |
 | info.full.ai | **AI 处理**：上传照片私有保存，通常会去除位置等元数据；设备无法处理时可能保留。Bob 会先去除这些信息，再交给外部 AI 图像服务制作贴纸，核对后上架。游戏只展示处理后的照片，请避免上传不愿分享的人脸、地址等内容。 | **AI processing**: uploads are stored privately. Location and other metadata are usually removed, but may remain if your device cannot process the photo. Bob removes that metadata before sending photos to an external AI image service for stickers, then reviews them before listing. Only processed photos are displayed. Avoid faces, addresses, or other content you do not want to share. |
 | info.full.storage | **存在哪里**：游戏服务和数据库在 RackNerd，图片在 Cloudflare R2（亚太）；服务器及 Bob 本地会保留缓存或处理副本。资料仅用于本次游戏，可能在你所在国家或地区以外存储或处理。 | **Where it is stored**: the game and database run on RackNerd; images are in Cloudflare R2 (Asia-Pacific), with cache or processing copies on the server and Bob's device. Data is used only for this game and may be stored or processed outside your country or region. |
-| info.full.removal | **想删除怎么办**：在本页或「我的宠物」提交申请，或直接在 Slack 联系 Bob，无需先进入游戏。Bob 人工核实处理，提交不会立即删除；可说明希望移除哪些个人资料。仅移除宠物会保留成绩；Clock Out 不会删除已保存资料。飞书、AI 服务、备份及已保存或分享的副本不能自动同步删除。 | **Want something removed?** Request it here or in My Pets, or contact Bob on Slack without entering the game. Specify which personal data to remove. Bob reviews requests manually; deletion is not immediate. Removing a pet keeps scores, and Clock Out does not delete saved data. Feishu, AI-service, backup, and saved or shared copies cannot be deleted automatically. |
+| info.full.removal | **想删除怎么办**：登录后在本页或「我的宠物」提交申请；也可直接在 Slack 联系 Bob，无需登录。Bob 人工核实处理，提交不会立即删除；可说明希望移除哪些个人资料。仅移除宠物会保留成绩；Clock Out 不会删除已保存资料。飞书、AI 服务、备份及已保存或分享的副本不能自动同步删除。 | **Want something removed?** Sign in to request removal here or in My Pets, or contact Bob on Slack without signing in. Specify which personal data to remove. Bob reviews requests manually; deletion is not immediate. Removing a pet keeps scores, and Clock Out does not delete saved data. Feishu, AI-service, backup, and saved or shared copies cannot be deleted automatically. |
 | info.full.consent | **同意方式**：点击「Clock In」表示同意以上使用方式，仅查看本页不算同意。上传宠物为可选；提交即表示同意照片说明中的处理和展示方式。 | **Consent**: tapping Clock In means you agree to the use described above; viewing this page does not. Uploading a pet is optional. Submitting means you agree to the processing and display described in the photo notice. |
 
 
@@ -153,7 +172,7 @@
 
 2026-10-26 用户确认首次声音提示：同一浏览器首次选定身份进入首页后显示一次，气泡左上仅保留音乐图标，指向高亮的「设置」。说明按 lead / features / tail 组合，中文在 lead 后换行，英文自然折行；两项声音名称用橙色强调。点击关闭或设置收起，展示时即记住已提示；刷新、退出再选身份不重复。提示不改变音乐与音效开关；较长页面在提示出现时将设置入口滚入可视范围。
 
-点击右上角头像，在头像下方展开下拉框，显示「Clock Out」（中英文一致）；再次点击头像、点击外部或按 Escape 收起。点击「Clock Out」清除浏览器记住的身份并返回身份选择页。
+点击右上角头像，在头像下方展开下拉框，显示「Clock Out」（中英文一致）；再次点击头像、点击外部或按 Escape 收起。点击「Clock Out」先撤销当前登录凭证，再清除浏览器记住的身份并返回身份选择页；失败可重试，后续登录输入四位密码。
 
 店长小海报已确认（2026-10-23，图稿 manager-poster-v1）：点门店的今日店长打开预览，海报含店长贴纸、「今日店长 · 名字」、既定宣言与北京日期；不自动弹出。保存与分享沿用成绩卡的 `share.save`、`share.send`、`share.failed`。
 

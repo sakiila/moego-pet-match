@@ -3,7 +3,7 @@ import { freshDatabase } from './helpers.ts';
 import { inTransaction } from '../src/db/pool.ts';
 import { readAchievements, syncAchievements } from '../src/services/achievements.ts';
 import { registerGame, settleGame } from '../src/services/games.ts';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import type { ResultPayload } from '../../web/src/api/types.ts';
 import { HOTPOT_PETS } from '../../web/src/game/achievementRules.ts';
 import { RULES } from '../../web/src/engine/config.ts';

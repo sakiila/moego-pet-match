@@ -2,7 +2,7 @@ import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import { MAX_UPLOAD_BYTES, SUBMISSION_DAILY_LIMIT } from '../src/services/submissions.ts';
 import { DiskCache } from '../src/storage/diskCache.ts';
 import { memoryStore } from '../src/storage/objectStore.ts';

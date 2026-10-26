@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import sharp from 'sharp';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { RegisteredGame, ResultPayload } from '../../web/src/api/types.ts';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import { excludeRemoved, type PetRecord } from '../src/catalog/build.ts';
 import { applyUnpublish, planUnpublish } from '../src/catalog/unpublish.ts';
 import { dailyManager } from '../src/services/pets.ts';

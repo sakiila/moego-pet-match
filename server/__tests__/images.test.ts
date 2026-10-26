@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import sharp from 'sharp';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import { sniffImage } from '../src/services/submissions.ts';
 import { DiskCache } from '../src/storage/diskCache.ts';
 import { memoryStore } from '../src/storage/objectStore.ts';

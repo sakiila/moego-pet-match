@@ -4,6 +4,7 @@ import type { ColleagueResult } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { ColleagueCard } from '../components/ColleagueCard/ColleagueCard';
 import { InfoSummary } from '../components/InfoSummary/InfoSummary';
+import { PinLogin } from '../components/PinLogin/PinLogin';
 import { PageLinks } from '../components/PageLinks/PageLinks';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { useI18n } from '../i18n';
@@ -28,6 +29,7 @@ export function IdentityScreen({ onConfirm, onInfo, search = api.searchRoster, i
   const [query, setQuery] = useState(initialQuery);
   const [state, setState] = useState<SearchState>({ kind: 'idle' });
   const [selected, setSelected] = useState<ColleagueResult | null>(null);
+  const [signingIn, setSigningIn] = useState<ColleagueResult | null>(null);
   const [attempt, setAttempt] = useState(0);
   // 输入后到结果回来之间（含 250 ms 防抖）都算搜索中；新结果回来前旧结果保留，列表不闪
   const [searching, setSearching] = useState(false);
@@ -62,6 +64,15 @@ export function IdentityScreen({ onConfirm, onInfo, search = api.searchRoster, i
 
   const results = state.kind === 'ok' ? state.results : [];
 
+  if (signingIn) return (
+    <main className={styles.screen}>
+      <BrandHeader title="game" tagline="access.subtitle" />
+      <PinLogin key={signingIn.userId} colleague={signingIn} loadState={api.getLoginState} submit={api.signIn}
+        onSuccess={onConfirm} onBack={() => setSigningIn(null)} />
+      <InfoSummary />
+    </main>
+  );
+
   return (
     <main className={styles.screen}>
       <BrandHeader title="game" tagline="access.subtitle" />
@@ -91,15 +102,13 @@ export function IdentityScreen({ onConfirm, onInfo, search = api.searchRoster, i
       </section>
       <div className={styles.grow} />
       <InfoSummary />
-      <Button size="lg" block iconName="open-shop-white" disabled={!selected} onClick={() => selected && onConfirm(selected)} data-testid="identity-confirm">
+      <Button size="lg" block iconName="open-shop-white" disabled={!selected} onClick={() => selected && setSigningIn(selected)} data-testid="identity-confirm">
         {selected ? t('identity.confirm', { playerName: selected.name }) : t('identity.title')}
       </Button>
       {onInfo && (
         <PageLinks
           links={[
-            { label: t('info.use_link'), onClick: () => onInfo(selected, false), testId: 'link-info' },
-            // 删除申请需要知道是谁提交的：选中同事后才能以该身份提交
-            { label: t('info.removal_link'), onClick: () => onInfo(selected, true), disabled: !selected, testId: 'link-removal' },
+            { label: t('info.use_link'), onClick: () => onInfo(null, false), testId: 'link-info' },
           ]}
         />
       )}

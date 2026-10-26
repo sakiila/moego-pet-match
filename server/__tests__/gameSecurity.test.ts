@@ -1,7 +1,7 @@
 import { randomBytes } from 'node:crypto';
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { freshDatabase } from './helpers.ts';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import type { RegisteredGame } from '../../web/src/api/types.ts';
 import { createGame, findHint, getSummary, trySwap } from '../../web/src/engine/game.ts';
 import { toResultPayload } from '../../web/src/game/result.ts';

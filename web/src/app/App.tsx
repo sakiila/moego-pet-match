@@ -69,6 +69,8 @@ export function App() {
   // 服务端已经换了版本（或规则版本不一致）：首页提示刷新；只提示，不打断对局与报告
   const [updateAvailable, setUpdateAvailable] = useState(false);
   const [showTitles, setShowTitles] = useState(false);
+  const [clockOutFailed, setClockOutFailed] = useState(false);
+  const clockOutPending = useRef(false);
   const closeTitles = useCallback(() => setShowTitles(false), []);
   const titleVersion = useRef(0);
   const playerId = player?.userId;
@@ -111,7 +113,7 @@ export function App() {
       if (import.meta.env.DEV && devReport) return void (await devJumpToReport(restored));
       setRoute({ name: 'home' });
     } catch (error) {
-      if (error instanceof ApiError && error.kind === 'not_found') {
+      if (error instanceof ApiError && (error.kind === 'not_found' || error.kind === 'unauthorized')) {
         savePlayerId(null);
         setRoute({ name: 'identity' });
       } else {
@@ -119,6 +121,18 @@ export function App() {
       }
     }
   }, [devJumpToReport]);
+
+  useEffect(() => {
+    const requireLogin = () => {
+      prepAttempt.current++;
+      setShowTitles(false);
+      savePlayerId(null);
+      setPlayer(null);
+      setRoute({ name: 'identity' });
+    };
+    window.addEventListener('pet-match:login-required', requireLogin);
+    return () => window.removeEventListener('pet-match:login-required', requireLogin);
+  }, []);
 
   useEffect(() => {
     // 只在首次进入时校验记住的身份
@@ -246,12 +260,23 @@ export function App() {
             onMyPets={() => setRoute({ name: 'myPets' })}
             onTitles={() => setShowTitles(true)}
             onInfo={(removal) => setRoute({ name: 'info', player: { userId: player.userId, name: player.name }, removal, back: 'home' })}
-            onClockOut={() => {
-              setShowTitles(false);
-              savePlayerId(null);
-              setPlayer(null);
-              setRoute({ name: 'identity' });
+            onClockOut={async () => {
+              if (clockOutPending.current) return;
+              clockOutPending.current = true;
+              setClockOutFailed(false);
+              try {
+                await api.logout();
+                setShowTitles(false);
+                savePlayerId(null);
+                setPlayer(null);
+                setRoute({ name: 'identity' });
+              } catch {
+                setClockOutFailed(true);
+              } finally {
+                clockOutPending.current = false;
+              }
             }}
+            clockOutError={clockOutFailed ? t('auth.logout_failed') : undefined}
           />
         ) : null;
       case 'leaderboard':

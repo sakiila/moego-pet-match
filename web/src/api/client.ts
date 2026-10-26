@@ -8,7 +8,7 @@ import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView
  */
 export class ApiError extends Error {
   constructor(
-    readonly kind: 'not_found' | 'unavailable' | 'invalid' | 'conflict' | 'verification_failed' | 'rate_limited',
+    readonly kind: 'not_found' | 'unavailable' | 'invalid' | 'conflict' | 'unauthorized' | 'verification_failed' | 'rate_limited',
     readonly detail?: string,
   ) {
     super(kind);
@@ -26,10 +26,14 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   }
   if (res.ok) return (await res.json()) as T;
   const body = (await res.json().catch(() => ({}))) as { error?: string; detail?: string };
-  if (res.status === 429) throw new ApiError('rate_limited');
   if (res.status === 403 && body.error === 'verification_failed') throw new ApiError('verification_failed');
   if (res.status === 404) throw new ApiError('not_found', body.detail);
-  if (res.status === 409) throw new ApiError('conflict', body.detail);
+  if (res.status === 409) throw new ApiError('conflict', body.detail ?? body.error);
+  if (res.status === 401 || (res.status === 403 && body.error === 'identity_mismatch')) {
+    if (body.error === 'login_required' || body.error === 'identity_mismatch') window.dispatchEvent(new Event('pet-match:login-required'));
+    throw new ApiError('unauthorized', body.error);
+  }
+  if (res.status === 429) throw new ApiError('rate_limited', body.error);
   if (res.status === 400 || res.status === 422) throw new ApiError('invalid', body.detail ?? body.error);
   throw new ApiError('unavailable', body.detail);
 }
@@ -80,6 +84,7 @@ async function submitPet(
   })();
   if (res.status >= 200 && res.status < 300 && json.submissionId) return { submissionId: json.submissionId };
   const { error } = json;
+  if (res.status === 401 || (res.status === 403 && error === 'identity_mismatch')) window.dispatchEvent(new Event('pet-match:login-required'));
   if (res.status === 413 || error === 'too_large') throw new UploadError('too_large');
   if (res.status === 415 || error === 'unsupported_type') throw new UploadError('invalid_photo');
   if (res.status === 429 || error === 'daily_limit') throw new UploadError('daily_limit');
@@ -100,6 +105,11 @@ export const api = {
     if (gameTokens.size > 8) gameTokens.delete(gameTokens.keys().next().value!);
     return result;
   },
+  getLoginState: (playerId: string, signal?: AbortSignal) => request<ColleagueResult & { hasPin: boolean }>(`/api/auth/players/${encodeURIComponent(playerId)}`, { signal }),
+  signIn: (playerId: string, pin: string, confirmation?: string) => request<{ userId: string }>(`/api/auth/${confirmation === undefined ? 'login' : 'setup'}`, {
+    method: 'POST', body: JSON.stringify({ playerId, pin, ...(confirmation === undefined ? {} : { confirmation }) }),
+  }),
+  logout: () => request<{ ok: true }>('/api/auth/logout', { method: 'POST', body: '{}' }),
   getPlayerPets: (ownerId: string, viewerId: string, signal?: AbortSignal) => request<{ pets: PlayerPet[] }>(`/api/players/${encodeURIComponent(ownerId)}/pets?viewerId=${encodeURIComponent(viewerId)}`, { signal }).then(view => view.pets),
   getPlayerLikes: (targetId: string, viewerId: string, signal?: AbortSignal) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes?viewerId=${encodeURIComponent(viewerId)}`, { signal }),
   likePlayer: (targetId: string, playerId: string) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes`, { method: 'POST', body: JSON.stringify({ playerId }) }),

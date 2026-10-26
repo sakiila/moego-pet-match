@@ -1,4 +1,4 @@
-/** 浏览器记住所选同事身份；只存 userId，回访时向服务端校验是否仍有效。 */
+/** 只记住所选 userId；登录权限由服务端 HttpOnly 会话验证，不以本地记录作为凭证。 */
 const KEY = 'pet-match.player';
 
 export function loadSavedPlayerId(): string | null {

@@ -2,7 +2,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import { dailyManager } from '../src/services/pets.ts';
 import { DiskCache } from '../src/storage/diskCache.ts';
 import { freshDatabase } from './helpers.ts';
@@ -107,6 +107,8 @@ describe('重复结算的数据库压力', () => {
     };
     const app = buildApp({ pool: ctx.pool, settleHooks: { beforeCommit: () => new Promise(resolve => setTimeout(resolve, 50)) } });
     await app.ready();
+    // 先建立测试会话；计数包括并发合并的两次身份读取和一次结算事务。
+    await app.inject('/api/players/U_TEST_BOB');
     let acquired = 0;
     const count = () => { acquired++; };
     ctx.pool.on('acquire', count);
@@ -116,7 +118,7 @@ describe('重复结算的数据库压力', () => {
       })));
       expect(responses.every(r => r.statusCode === 200)).toBe(true);
       for (const response of responses) expect(response.json()).toEqual(responses[0].json());
-      expect(acquired).toBe(1);
+      expect(acquired).toBe(3);
     } finally {
       ctx.pool.off('acquire', count);
       await app.close();
