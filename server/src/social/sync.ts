@@ -80,6 +80,71 @@ async function bodyText(pool: Pool, body: string) {
   const characters = [...text];
   return characters.length > 2000 ? characters.slice(0, 1999).join('') + '…' : text;
 }
+/** 线程回复单向同步为只读留言：Slack 编辑跟随更新，回复删除后本站移除；不产生站内通知。 */
+async function syncReplies(pool: Pool, config: SlackSyncConfig, postId: string, message: SlackMessage) {
+  const known = await pool.query(
+    "SELECT 1 FROM pet_match.social_comments WHERE post_id=$1 AND source='slack' AND deleted_at IS NULL LIMIT 1",
+    [postId],
+  );
+  if (!message.reply_count && !known.rowCount) return;
+  const replies: SlackMessage[] = [];
+  let cursor = '',
+    complete = false;
+  try {
+    for (let page = 0; page < 5; page++) {
+      const data = await slackRead(config, 'conversations.replies', {
+        channel: config.channelId,
+        ts: message.ts,
+        limit: '200',
+        ...(cursor ? { cursor } : {}),
+      });
+      replies.push(...((data.messages as SlackMessage[] | undefined) ?? []));
+      cursor = data.response_metadata?.next_cursor ?? '';
+      if (!data.has_more && !cursor) {
+        complete = true;
+        break;
+      }
+      if (!cursor) break;
+    }
+  } catch (error) {
+    if (!(error instanceof SlackReadError && error.code === 'thread_not_found')) throw error;
+    complete = true;
+  }
+  const candidates = replies.filter((r) => r.ts !== message.ts && r.user && !r.bot_id);
+  const users = [...new Set(candidates.map((r) => r.user!))];
+  const colleagues = users.length
+    ? new Set(
+        (await pool.query('SELECT user_id FROM pet_match.colleagues WHERE user_id=ANY($1::text[])', [users])).rows.map(
+          (r) => r.user_id,
+        ),
+      )
+    : new Set<string>();
+  const rows: { key: string; user: string; body: string; ts: string }[] = [];
+  for (const reply of candidates) {
+    if (!colleagues.has(reply.user!)) continue;
+    const characters = [...(await bodyText(pool, reply.text ?? ''))];
+    const body = characters.length > 500 ? characters.slice(0, 499).join('') + '…' : characters.join('');
+    if (body) rows.push({ key: sourceKey(config, reply.ts), user: reply.user!, body, ts: reply.ts });
+  }
+  await inTransaction(pool, async (db) => {
+    const post = (await db.query('SELECT hidden_at,deleted_at FROM pet_match.social_posts WHERE id=$1 FOR UPDATE', [postId]))
+      .rows[0];
+    if (!post || post.hidden_at || post.deleted_at) return;
+    for (const row of rows)
+      await db.query(
+        `INSERT INTO pet_match.social_comments(id,post_id,author_id,body,created_at,source,source_key)
+        VALUES($1,$2,$3,$4,$5,'slack',$6) ON CONFLICT(source_key) DO UPDATE SET body=EXCLUDED.body,author_id=EXCLUDED.author_id
+        WHERE social_comments.deleted_at IS NULL AND social_comments.post_id=EXCLUDED.post_id`,
+        [randomUUID(), postId, row.user, row.body, at(row.ts), row.key],
+      );
+    if (complete)
+      await db.query(
+        `UPDATE pet_match.social_comments SET body='',deleted_at=now()
+        WHERE post_id=$1 AND source='slack' AND deleted_at IS NULL AND NOT(source_key=ANY($2::text[]))`,
+        [postId, rows.map((r) => r.key)],
+      );
+  });
+}
 export async function syncMessage(
   pool: Pool,
   store: ObjectStore,
@@ -118,6 +183,7 @@ export async function syncMessage(
     return rows[0];
   });
   if (old.hidden_at || old.deleted_at || micros(old.source_version) > micros(version)) return;
+  await syncReplies(pool, config, old.id, message);
   const author = (await pool.query('SELECT 1 FROM pet_match.colleagues WHERE user_id=$1', [message.user])).rowCount;
   let files = (message.files ?? [])
     .filter(

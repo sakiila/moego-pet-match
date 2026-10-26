@@ -20,6 +20,8 @@ export interface SocialComment {
   author: SocialPerson;
   body: string;
   createdAt: string;
+  /** Slack 线程回复同步而来，只读。 */
+  source?: 'slack';
   replyTo?: SocialPerson;
 }
 export interface SocialPost {

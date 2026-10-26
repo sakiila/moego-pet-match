@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { socialApi, SocialApiError, type SocialSession, type PostPage } from '../api/social';
-import type { SocialState, SocialPost } from '../social/model';
+import type { SocialState, SocialPost, SocialPerson } from '../social/model';
 import type { SocialActions } from '../social/actions';
 import type { SocialPage } from '../components/social/SocialWall';
 import { SocialHeader, SocialEmpty } from '../components/social/SocialChrome';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { SocialWallScreen } from './SocialWallScreen';
 import { useI18n } from '../i18n';
+import { PlayerProfileOverlay } from './PlayerProfileOverlay';
 import styles from '../components/social/Social.module.css';
 
 const initial = (): SocialState => ({
@@ -77,6 +78,7 @@ function mergePage(
 export function SocialLiveScreen({ onHome }: { onHome: () => void }) {
   const { t } = useI18n();
   const [state, setState] = useState<SocialState>(initial);
+  const [profile, setProfile] = useState<SocialPerson | null>(null);
   const data = useRef(state);
   const revision = useRef(0);
   const requestEpoch = useRef(0);
@@ -187,6 +189,9 @@ export function SocialLiveScreen({ onHome }: { onHome: () => void }) {
     [loadPost, loadPosts, loadNotices],
   );
   const pageChanged = useCallback((page: SocialPage) => {
+    const key = (p?: SocialPage) => (p ? (p.name === 'post' ? `post:${p.id}` : p.name) : '');
+    // 只有真正换页（含系统返回）才收起玩家卡片。
+    if (key(page) !== key(activePage.current)) setProfile(null);
     activePage.current = page;
   }, []);
   const refresh = useCallback(async () => {
@@ -357,8 +362,19 @@ export function SocialLiveScreen({ onHome }: { onHome: () => void }) {
         readPhoto={socialApi.upload}
         onHome={onHome}
         onReset={() => {}}
+        onAuthor={setProfile}
         browserHistory
       />
+      {profile && (
+        <PlayerProfileOverlay
+          key={profile.id}
+          player={{ userId: profile.id, name: profile.name }}
+          viewerId={session.viewer.id}
+          mode="normal"
+          onClose={() => setProfile(null)}
+          onOpenShop={onHome}
+        />
+      )}
     </>
   );
 }

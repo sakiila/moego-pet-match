@@ -9,7 +9,7 @@ import { fetchSlackPhoto, type SlackMessage, type SlackFile } from '../src/socia
 import { markFileDeleted, markSourceDeleted, syncMessage, sourceKey } from '../src/social/sync.ts';
 import { pollSlackChannel, processSyncJob } from '../src/social/worker.ts';
 import { getPost, listPosts } from '../src/social/read.ts';
-import { removeSocialPost } from '../src/social/write.ts';
+import { removeComment, removeSocialPost } from '../src/social/write.ts';
 
 describe('Slack 单向同步与重启恢复', () => {
   let ctx: Awaited<ReturnType<typeof freshDatabase>>;
@@ -17,6 +17,7 @@ describe('Slack 单向同步与重启恢复', () => {
   let png: Buffer;
   const messages = new Map<string, SlackMessage>();
   const files = new Map<string, SlackFile>();
+  const threads = new Map<string, SlackMessage[]>();
   let failNext = false;
   let partial = false;
   const fetchImpl = vi.fn(async (raw: string | URL) => {
@@ -37,6 +38,11 @@ describe('Slack 单向同步与重启恢复', () => {
         has_more: partial,
         response_metadata: { next_cursor: partial ? 'more' : '' },
       });
+    }
+    if (url.pathname.endsWith('conversations.replies')) {
+      const parent = messages.get(url.searchParams.get('ts')!);
+      if (!parent) return Response.json({ ok: false, error: 'thread_not_found' });
+      return Response.json({ ok: true, messages: [parent, ...(threads.get(parent.ts) ?? [])], has_more: false });
     }
     if (url.pathname.endsWith('files.info')) {
       const file = files.get(url.searchParams.get('file')!);
@@ -84,6 +90,7 @@ describe('Slack 单向同步与重启恢复', () => {
       'TRUNCATE pet_match.social_posts,pet_match.social_slack_jobs,pet_match.social_deleted_files,pet_match.social_sync_state CASCADE',
     );
     messages.clear();
+    threads.clear();
     files.clear();
     files.set('F1', file());
     messages.set(ts, message());
@@ -176,7 +183,7 @@ describe('Slack 单向同步与重启恢复', () => {
       await app.close();
     }
   });
-  it('导入照片和原时间，不导入 Slack 的回复、赞数，不写回 Slack', async () => {
+  it('导入照片和原时间，不导入 Slack 的赞数，不写回 Slack', async () => {
     messages.set(ts, { ...message(), reactions: [{ count: 99 }], reply_count: 8 } as SlackMessage);
     await syncMessage(ctx.pool, store, config, { type: 'message', ts, version: ts });
     const view = await getPost(ctx.pool, await currentId(), 'U_TEST_BOB');
@@ -191,11 +198,36 @@ describe('Slack 单向同步与重启恢复', () => {
     expect(
       fetchImpl.mock.calls.every(
         ([url]) =>
-          ['conversations.history', 'chat.getPermalink', 'files.info'].some(
+          ['conversations.history', 'conversations.replies', 'chat.getPermalink', 'files.info'].some(
             (m) => String(url).endsWith(m) || String(url).includes(m + '?'),
           ) || String(url).startsWith('https://files.slack.com/'),
       ),
     ).toBe(true);
+  });
+  it('线程回复同步为只读留言，编辑跟随，删除后移除，不发站内通知', async () => {
+    const reply = (rts: string, user: string, text: string): SlackMessage => ({ ts: rts, user, text, thread_ts: ts });
+    messages.set(ts, { ...message(), reply_count: 3, latest_reply: '1792599410.000003' });
+    threads.set(ts, [
+      reply('1792599410.000001', 'U_TEST_SAM', 'So cute :heart_eyes:'),
+      reply('1792599410.000002', 'U_OUTSIDER', 'not in roster'),
+      { ...reply('1792599410.000003', 'U_TEST_SAM', 'bot'), bot_id: 'B1' },
+    ]);
+    await syncMessage(ctx.pool, store, config, { type: 'message', ts, version: ts });
+    const id = await currentId();
+    let view = await getPost(ctx.pool, id, 'U_TEST_BOB');
+    expect(view.commentCount).toBe(1);
+    expect(view.comments).toMatchObject([{ body: 'So cute 😍', source: 'slack', author: { id: 'U_TEST_SAM' } }]);
+    expect(view.comments[0].createdAt).toBe('2026-10-21T16:16:50.000Z');
+    expect((await ctx.pool.query('SELECT count(*)::int AS n FROM pet_match.social_notices')).rows[0].n).toBe(0);
+    threads.set(ts, [reply('1792599410.000001', 'U_TEST_SAM', 'Edited reply')]);
+    await syncMessage(ctx.pool, store, config, { type: 'verify', ts, version: ts });
+    view = await getPost(ctx.pool, id, 'U_TEST_BOB');
+    expect(view.comments.map((c) => c.body)).toEqual(['Edited reply']);
+    await expect(removeComment(ctx.pool, id, view.comments[0].id, 'U_TEST_SAM', true)).rejects.toMatchObject({ status: 403 });
+    threads.set(ts, []);
+    messages.set(ts, { ...message(), reply_count: 0 });
+    await syncMessage(ctx.pool, store, config, { type: 'verify', ts, version: ts });
+    expect((await getPost(ctx.pool, id, 'U_TEST_BOB')).commentCount).toBe(0);
   });
   it('重复同步复用图片，更新正文不改原始发布时间', async () => {
     await syncMessage(ctx.pool, store, config, { type: 'message', ts, version: ts });

@@ -105,6 +105,7 @@ export async function listComments(db: SocialDb, postId: string, cursor?: string
       author: person(r.author_id, r.name),
       body: r.body,
       createdAt: r.created_at.toISOString(),
+      ...(r.source === 'slack' ? { source: 'slack' as const } : {}),
       replyTo: r.reply_name ? person(r.reply_to_user_id, r.reply_name) : undefined,
     }))
     .reverse();

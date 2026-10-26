@@ -6,6 +6,7 @@
   padding: var(--space-3) var(--space-4) var(--space-5);
   color: var(--fg);
   background: var(--card);
+  overflow-x: clip;
 }
 .preview {
   margin: 0 0 var(--space-2);
@@ -240,6 +241,68 @@
   flex: 1;
   min-width: 0;
 }
+.authorButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+button.authorButton,
+.avatarButton {
+  cursor: pointer;
+}
+.avatarButton {
+  align-self: flex-start;
+  border: 0;
+  padding: 0;
+  background: none;
+  border-radius: var(--radius-pill);
+}
+.page {
+  animation: social-page-in var(--social-page-duration) var(--ease-out) both;
+}
+.page[data-motion='back'] {
+  --social-page-from: calc(var(--social-page-shift) * -1);
+}
+@keyframes social-page-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--social-page-from, var(--social-page-shift)));
+  }
+}
+.navLoading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-dialog);
+  height: var(--social-loading-height);
+  margin: 0;
+  background: var(--accent);
+  transform-origin: left;
+  animation: social-loading 900ms var(--ease-out) infinite;
+}
+@keyframes social-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes social-loading {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 0.3;
+  }
+}
 .name {
   display: block;
   font-size: var(--text-md);
@@ -289,15 +352,16 @@
   overflow: hidden;
   cursor: zoom-in;
 }
+/* 按原比例完整显示；超长竖图限制高度并留底色，不裁切。 */
 .postPhoto {
   display: block;
   width: 100%;
-  aspect-ratio: var(--social-photo-ratio);
-  object-fit: cover;
-  object-position: center top;
+  height: auto;
+  max-height: var(--social-photo-max-height);
+  object-fit: contain;
 }
-.detailPhoto {
-  aspect-ratio: var(--social-detail-ratio);
+.photoButton + .photoButton {
+  margin-top: var(--space-2);
 }
 .photoCounter {
   position: absolute;
@@ -725,6 +789,7 @@
   width: 100%;
 }
 .viewer {
+  animation: social-fade-in var(--social-page-duration) var(--ease-out) both;
   position: fixed;
   inset: 0;
   z-index: var(--z-dialog);
@@ -948,7 +1013,10 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .skeleton {
+  .skeleton,
+  .page,
+  .viewer,
+  .navLoading {
     animation: none;
   }
 }

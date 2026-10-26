@@ -62,6 +62,8 @@ export async function pollSlackChannel(pool: Pool, config: SlackSyncConfig) {
             message.text,
             message.edited?.ts,
             message.files?.map((f) => [f.id, f.mode, f.is_deleted]),
+            message.reply_count,
+            message.latest_reply,
           ]),
         )
         .digest('hex')

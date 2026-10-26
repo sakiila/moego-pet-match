@@ -18,6 +18,8 @@ export interface SlackMessage {
   user?: string;
   text?: string;
   thread_ts?: string;
+  reply_count?: number;
+  latest_reply?: string;
   bot_id?: string;
   subtype?: string;
   edited?: { ts: string };
@@ -32,7 +34,7 @@ export class SlackReadError extends Error {
   }
 }
 const nextRequest = new Map<string, number>();
-const METHODS = ['conversations.history', 'files.info', 'chat.getPermalink'] as const;
+const METHODS = ['conversations.history', 'conversations.replies', 'files.info', 'chat.getPermalink'] as const;
 
 /** 仅提供读取方法；令牌不会出现在 URL，也不会传给外部文件主机。 */
 export async function slackRead(

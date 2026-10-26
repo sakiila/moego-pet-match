@@ -458,7 +458,10 @@
   --social-thumb: 56px;
   --social-avatar: 36px;
   --social-photo-ratio: 5 / 3;
-  --social-detail-ratio: 10 / 7;
+  --social-photo-max-height: 80dvh;
+  --social-page-duration: 240ms;
+  --social-page-shift: 28px;
+  --social-loading-height: 3px;
   --social-nav-height: 56px;
   --social-back-width: 112px;
   --social-reaction-gap: 6px;

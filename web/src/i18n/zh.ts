@@ -33,6 +33,7 @@ export const zh = {
   "social.my_description": "我发布的照片和日常",
   "social.published": "我发布的",
   "social.imported": "Slack 同步",
+  "social.open_profile": "查看 {name} 的玩家卡片",
   "social.from_slack": "来自 Slack",
   "social.original": "查看 Slack 原帖",
   "social.publish": "发布",

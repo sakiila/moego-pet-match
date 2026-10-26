@@ -777,6 +777,7 @@
 | social.my_description | 我发布的照片和日常 | Photos and little moments I've shared |
 | social.published | 我发布的 | My posts |
 | social.imported | Slack 同步 | From Slack |
+| social.open_profile | 查看 {name} 的玩家卡片 | View {name}'s player card |
 | social.from_slack | 来自 Slack | From Slack |
 | social.original | 查看 Slack 原帖 | View original in Slack |
 | social.publish | 发布 | Post |

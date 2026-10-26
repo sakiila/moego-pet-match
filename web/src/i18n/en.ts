@@ -34,6 +34,7 @@ export const en: Record<MessageKey, string> = {
   "social.my_description": "Photos and little moments I've shared",
   "social.published": "My posts",
   "social.imported": "From Slack",
+  "social.open_profile": "View {name}'s player card",
   "social.from_slack": "From Slack",
   "social.original": "View original in Slack",
   "social.publish": "Post",

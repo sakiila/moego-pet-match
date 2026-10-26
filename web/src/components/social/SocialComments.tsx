@@ -14,6 +14,7 @@ export function SocialComments({
   replyTo,
   onReply,
   onDelete,
+  onAuthor,
 }: {
   id?: string;
   comments: SocialComment[];
@@ -22,6 +23,7 @@ export function SocialComments({
   replyTo?: SocialPerson;
   onReply: (person: SocialPerson) => void;
   onDelete: (id: string) => void;
+  onAuthor?: (person: SocialPerson) => void;
 }) {
   const { t, locale } = useI18n();
   const count = total ?? comments.length;
@@ -31,7 +33,18 @@ export function SocialComments({
       {!comments.length && <p className={styles.meta}>{t('social.no_comments')}</p>}
       {comments.map((comment) => (
         <article className={styles.comment} key={comment.id} id={`comment-${comment.id}`}>
-          <Avatar name={comment.author.name} src={comment.author.avatarSrc} seed={comment.author.id} size={32} />
+          {onAuthor ? (
+            <button
+              type="button"
+              className={styles.avatarButton}
+              aria-label={t('social.open_profile', { name: comment.author.name })}
+              onClick={() => onAuthor(comment.author)}
+            >
+              <Avatar name={comment.author.name} src={comment.author.avatarSrc} seed={comment.author.id} size={32} />
+            </button>
+          ) : (
+            <Avatar name={comment.author.name} src={comment.author.avatarSrc} seed={comment.author.id} size={32} />
+          )}
           <div className={styles.commentContent}>
             <strong className={styles.name}>{comment.author.name}</strong>
             {comment.replyTo && (
@@ -42,10 +55,11 @@ export function SocialComments({
               <time dateTime={comment.createdAt}>
                 {socialDate(comment.createdAt, locale, t('social.today'), t('social.yesterday'))}
               </time>
+              {comment.source === 'slack' && <span>{t('social.from_slack')}</span>}
               <button aria-pressed={replyTo?.id === comment.author.id} onClick={() => onReply(comment.author)}>
                 {t('social.reply')}
               </button>
-              {comment.author.id === viewerId && (
+              {comment.author.id === viewerId && comment.source !== 'slack' && (
                 <button onClick={() => onDelete(comment.id)} aria-label={t('social.delete_comment')}>
                   <Icon name="social-delete" size={15} />
                 </button>

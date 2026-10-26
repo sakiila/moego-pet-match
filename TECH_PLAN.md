@@ -297,7 +297,7 @@ Slack 的 [users.list](https://docs.slack.dev/reference/methods/users.list/) 支
 
 ## 毛孩子动态 · 数据与接口（2026-10-26）
 
-新增 020_social_wall，以 018_player_auth 为前置。表为 social_posts、social_media、social_comments、social_reactions、social_notices、social_reports、social_slack_jobs、social_deleted_files、social_sync_state，均在 pet_match schema，应用只授予 SELECT/INSERT/UPDATE。
+新增 020_social_wall，以 018_player_auth 为前置。表为 social_posts、social_media、social_comments、social_reactions、social_notices、social_reports、social_slack_jobs、social_deleted_files、social_sync_state，均在 pet_match schema，应用只授予 SELECT/INSERT/UPDATE。 021_social_slack_replies 为 social_comments 增加 source 与唯一 source_key，承接 Slack 线程回复。
 
 REST 接口位于 /api/social，图片在 /img/social/:id。读取现有会话与有效名册，写入不信任客户端作者；写操作检查来源，内容/图片不缓存。新对象使用 social/ 独立键，服务端重编码照片并去除 EXIF。删除用事务先撤销可见性，再持久重试对象清理；暂存超过 24 小时不可读并清理。
 

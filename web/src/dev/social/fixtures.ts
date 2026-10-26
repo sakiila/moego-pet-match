@@ -25,7 +25,13 @@ export function createSocialFixtures(): SocialState {
         photos: [{ id: 'demo-dog', src: dog, alt: 'Synthetic demo: a copper puppy in a green stroller' }],
         reactions: { cute: ['a', 'b', 'c', 'd'], pets: ['a', 'b'], play: ['c'], love: ['a', 'b', 'd'] },
         comments: [
-          { id: 'demo-comment-1', author: alex, body: '这位乘客也太可爱了！', createdAt: '2026-10-25T10:20:00+08:00' },
+          {
+            id: 'demo-comment-1',
+            author: alex,
+            body: '这位乘客也太可爱了！',
+            createdAt: '2026-10-25T10:20:00+08:00',
+            source: 'slack',
+          },
           {
             id: 'demo-comment-2',
             author: previewViewer,

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useI18n, type MessageKey } from '../../i18n';
 import {
   emptyReactions,
@@ -34,6 +34,8 @@ export interface SocialWallProps {
   actions: SocialActions;
   preview?: boolean;
   canModerate?: boolean;
+  /** 点头像打开玩家卡片；不传时头像不可点。 */
+  onAuthor?: (person: SocialPerson) => void;
   onPrepareRoute?: (page: SocialPage) => Promise<void>;
   onPageChange?: (page: SocialPage) => void;
   readPhoto: (file: File) => Promise<SocialPhoto>;
@@ -54,6 +56,7 @@ export function SocialWall({
   actions,
   preview = true,
   canModerate = false,
+  onAuthor,
   onPrepareRoute,
   onPageChange,
   readPhoto,
@@ -97,10 +100,13 @@ export function SocialWall({
       setPending([...inFlight.current]);
     }
   };
+  /** 页面进场方向：前进从右侧滑入，返回从左侧滑入。 */
+  const motion = useRef<'forward' | 'back'>('forward');
   const navigate = (next: SocialPage, then?: () => void) => {
     void perform('navigation', async () => {
       await onPrepareRoute?.(next);
       history.current.push({ page, scroll: window.scrollY });
+      motion.current = 'forward';
       if (browserHistory) window.history.pushState({ social: history.current.length }, '');
       setPage(next);
       setReplyTo(undefined);
@@ -112,6 +118,7 @@ export function SocialWall({
   /** 回到来路页并恢复浏览位置；深链接没有来路时回动态列表。 */
   const restore = () => {
     const previous = history.current.pop();
+    motion.current = 'back';
     setPage(previous?.page ?? { name: 'feed' });
     setReplyTo(undefined);
     requestAnimationFrame(() => window.scrollTo(0, previous?.scroll ?? 0));
@@ -313,6 +320,7 @@ export function SocialWall({
         void perform(`reaction:${post.id}`, () => actions.reaction(post.id, kind, selected));
       }}
       onComments={() => (detail ? focusComment() : navigate({ name: 'post', id: post.id }, showComments))}
+      onAuthor={onAuthor}
     />
   );
   const feed = page.name === 'feed';
@@ -334,8 +342,8 @@ export function SocialWall({
     <main className={styles.root}>
       {preview && <p className={styles.preview}>{t('social.preview')}</p>}
       {pending.includes('navigation') && (
-        <p className={styles.meta} role="status">
-          {t('social.loading')}
+        <p className={styles.navLoading} role="status">
+          <span className={styles.visuallyHidden}>{t('social.loading')}</span>
         </p>
       )}
       {storageFailed && (
@@ -343,6 +351,11 @@ export function SocialWall({
           {t('social.storage_failed')}
         </p>
       )}
+      <div
+        key={page.name === 'post' ? `post:${page.id}` : page.name}
+        className={styles.page}
+        data-motion={motion.current}
+      >
       {page.name === 'gate' ? (
         <SocialGate
           onContinue={() => navigate({ name: 'feed' })}
@@ -387,7 +400,7 @@ export function SocialWall({
           />
         </>
       ) : (
-        <Fragment key={page.name}>
+        <>
           <SocialHeader
             title={t(feed ? 'social.title' : title)}
             onHome={goHome}
@@ -534,6 +547,7 @@ export function SocialWall({
                   viewerId={viewer.id}
                   replyTo={replyTo}
                   onReply={setReplyTo}
+                  onAuthor={onAuthor}
                   onDelete={(id) => {
                     void perform(`comment:${id}`, () => actions.deleteComment(current.id, id));
                   }}
@@ -586,8 +600,9 @@ export function SocialWall({
               {t('social.load_more')}
             </button>
           )}
-        </Fragment>
+        </>
       )}
+      </div>
       {preview && page.name !== 'compose' && (
         <footer className={styles.previewTools}>
           <label>

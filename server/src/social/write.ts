@@ -166,10 +166,12 @@ export async function removeComment(pool: Pool, postId: string, commentId: strin
   await inTransaction(pool, async (db) => {
     await lockPost(db, postId);
     const { rows } = await db.query(
-      'SELECT author_id FROM pet_match.social_comments WHERE id=$1 AND post_id=$2 FOR UPDATE',
+      'SELECT author_id,source FROM pet_match.social_comments WHERE id=$1 AND post_id=$2 FOR UPDATE',
       [commentId, postId],
     );
     if (!rows[0]) throw new SocialError('not_found', 404);
+    // Slack 回复由原线程管理，本站不能删除。
+    if (rows[0].source === 'slack') throw new SocialError('forbidden', 403);
     if (rows[0].author_id !== actorId && !admin) throw new SocialError('forbidden', 403);
     await db.query("UPDATE pet_match.social_comments SET body='',deleted_at=coalesce(deleted_at,now()) WHERE id=$1", [
       commentId,
