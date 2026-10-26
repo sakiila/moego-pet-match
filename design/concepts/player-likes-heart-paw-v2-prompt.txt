@@ -1,0 +1,4 @@
+Input image: design/concepts/player-likes-heart-paw-v1.png
+transparent_background: false
+
+Edit the attached existing MoeGo player-like concept review sheet. Preserve absolutely everything except the ONE subtitle sentence directly beneath the large title 爱心肉垫. Replace the old subtitle 用一枚爱心肉垫，给喜欢的毛孩子送个赞。 with this exact text: 给认真营业的你，送一个赞。 This feature gives a like to a human PLAYER, never to a pet. Keep all paw icons, four toe beans and heart-shaped central pad, colors, outlines, title, player card, buttons, number 12, layout, MoeGo logo and avatar header IDENTICAL. Do not add or remove any graphic. The correction should be seamless and keep existing font style and baseline. Preserve the original square 1536 x 1536 dimensions and white opaque background.

@@ -43,7 +43,7 @@
 
 | 页面 | 文件 | 设计重点 |
 | --- | --- | --- |
-| 首次浏览器声音提示 | [first-visit-sound-tip-v2.png](concepts/first-visit-sound-tip-v2.png) | 2026-10-26 用户确认方向并要求本地接入：左上只保留音符、移除喇叭；浅暖色轻提示指向页尾高亮设置，说明开启背景音乐与消除音效体验更好，可关闭，同一浏览器一次。组件用 CSS、tokens 与现有 Icon 绘制；实际气泡收紧以避开导航文字，保留原首页文案、真实店长与三行页尾。见[计划与验收](reviews/2026-10-26-first-visit-sound-tip/PLAN.md)；仅本地，未部署。 |
+| 首次浏览器声音提示 | [first-visit-sound-tip-v2.png](concepts/first-visit-sound-tip-v2.png) | 2026-10-26 用户确认方向并要求本地接入：左上只保留音符、移除喇叭；浅暖色轻提示指向页尾高亮设置，说明开启背景音乐与消除音效体验更好，可关闭，同一浏览器一次。组件用 CSS、tokens 与现有 Icon 绘制；实际气泡收紧以避开导航文字，保留原首页文案、真实店长与三行页尾。见[计划与验收](reviews/2026-10-26-first-visit-sound-tip/PLAN.md)；同日用户追加授权并入 main 推送上线，发布结果以部署任务回执为准。 |
 | 网站 Favicon | [蓝猫 v3](concepts/favicon-blue-cat-v3.png) | 2026-10-25 用户选定并授权接入；橙底蓝猫、大眼睛、腮红与歪头，无小爪，下巴藏在下边框后；原稿等比导出 16 / 32px PNG、多尺寸 ICO 与 180px Apple Touch Icon，由 `web/index.html` 引用；[来源与导出](../assets/icons/favicon-blue-cat-v3/README.md)，早期对比稿及 v2 保留 |
 | Slack 链接分享图 | [slack-og-c-v3.png](concepts/slack-og-c-v3.png) | 2026-10-26 用户确认 v3 并授权替换、提交和推送：加入「在家逆子，在外顶流。✨ / A menace at home. A star in the game. ✨」，保留「90 秒消消乐」「游戏入口：star.baobo.me」、中英标题与右侧消除棋盘（三连 +120、吹风机、梳子、剪刀）。1200×630，导出为 `web/public/og.jpg`，供 OG/Twitter 与 `/share.jpg` 使用。完整请求与导出记录见 [v3 提示词](concepts/slack-og-c-v3-prompt.txt)；[v2](concepts/slack-og-c-v2.png)、[v1](concepts/slack-og-c-v1.png) 和未选的 [A](concepts/slack-og-a-v1.png)、[B](concepts/slack-og-b-v1.png) 留档 |
 | 收工挂牌 · 高清中文 | [高清 PNG](../assets/icons/library-original-png-v2/masters/16-board-frontdesk/closing-sign-zh-hd-v2.png) | 2026-10-25 用户确认并选用高清 v2；通过 Icon 接入中文收工牌及开局预载，网页提供最高960px宽导出，保留原有造型、文案与动效；[制作记录](../assets/icons/closing-sign-zh-hd-v2/README.md) |
