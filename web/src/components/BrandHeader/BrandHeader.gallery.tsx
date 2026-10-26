@@ -1,5 +1,6 @@
 import type { GalleryEntry } from '../../dev/gallery/types';
 import { useI18n } from '../../i18n';
+import { FishFrame } from '../../dev/gallery/FishFrame';
 import { Avatar } from '../../ui/primitives/Avatar';
 import { Button } from '../../ui/primitives/Button';
 import { BrandHeader } from './BrandHeader';
@@ -16,6 +17,8 @@ const entry: GalleryEntry = {
     'scheduling + tagline (board)': () => <BrandHeader boardArt tagline="board.tagline" />,
     'scheduling (prep)': () => <BrandHeader />,
     'scheduling artwork (prep)': () => <BrandHeader schedulingArt onBack={() => {}} />,
+    'fish · scheduling artwork (board)': () => <FishFrame><BrandHeader boardArt tagline="board.tagline" /></FishFrame>,
+    'fish · scheduling artwork (prep)': () => <FishFrame><BrandHeader schedulingArt onBack={() => {}} /></FishFrame>,
     'game + subtitle (identity)': () => <BrandHeader title="game" tagline="access.subtitle" />,
     'page heading + back (leaderboard)': () => <BrandHeader heading="排行榜" onBack={() => {}} />,
     'page heading + action (petdex)': () => <BrandHeader heading="宠物图鉴" onBack={() => {}} headingAction={<Button variant="secondary" iconName="open-shop">添加我家毛孩子</Button>} />,

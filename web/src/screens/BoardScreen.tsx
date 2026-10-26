@@ -50,7 +50,6 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
   const [quitOpen, setQuitOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const session = useGameSession(game, setEnding, { speed, startAt, mode, uncollected, families, cheersEnabled: !quitOpen && !settingsOpen });
-  const fish = mode === 'fish';
   const { view } = session;
 
   // 退出确认期间计时继续；到时自动关闭弹层并照常收尾结算
@@ -64,7 +63,7 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
   return (
     <BoardLayout
       mode={mode}
-      header={<BrandHeader title={fish ? 'fish' : 'scheduling'} boardArt tagline={fish ? 'fish.prep_rule' : 'board.tagline'} />}
+      header={<BrandHeader title="scheduling" boardArt tagline="board.tagline" />}
       status={<StatusPanel timeLeftMs={view.timeLeftMs} score={view.frame.score} />}
       rush={<RushBar view={view.rush} mode={mode} />}
       board={<Board

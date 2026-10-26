@@ -475,7 +475,7 @@
 | fish.invitation_action | 去看看 | Take a Peek |
 | fish.prep_title | 小鱼也来排班啦 | The Fish Have Appointments Too |
 | fish.board_title | 小鱼也来排班啦 | The Fish Have Appointments Too |
-| fish.prep_rule | 相邻交换，同色小鱼连成一线，3 个及以上即可消除。 | Swap neighbors. Match 3 or more fish of the same color in a line. |
+| fish.prep_rule | 交换相邻棋子，让 3 个及以上同色小鱼连成一线。 | Swap neighbors. Line up 3 or more fish of the same color. |
 | fish.big_wave | 大浪花 | Big Wave |
 | fish.conch | 海螺 | Conch |
 | fish.conch_hint | 和邻格交换，螺口喷出水流，清一行或一列。 | Swap with a neighbor to sweep a row or column. |
@@ -507,7 +507,7 @@
 
 2026-10-24 按 V1_RULES 已定的海底元素改名并确认文案：`fish.water_jet`／`fish.bubble_machine`（及 `_hint`）改为 `fish.conch`／`fish.pearl_shell`，带教键同步改为 `tutorial.conch`／`tutorial.pearl_shell`；`tutorial.big_wave_merge` 改为珍珠贝壳合成。`fish.big_wave`、`tutorial.big_wave` 与评语中的「水流」「水花」不变。
 
-鱼关深蓝水下方向已确认。局内标题复用已校读的「小鱼也来排班啦」，不把实际游玩误标为加载或准备状态；鱼关催单进度用「已清除」表达格数，不表示独立鱼的数量，倒计时和奖励条件不变。
+2026-10-26 界面统一：准备页与局内标题使用已确认的 Smart Scheduling 字标，局内副标题复用 `board.tagline`。准备页的交换图标、`prep.controls`、`prep.timer_hint` 与普通关一致，`fish.prep_rule` 采用相同句式并保留同色小鱼。用户确认只统一提示、保留海底道具，因此局内带教统一使用 `tutorial.comb`、`tutorial.scissors`、`tutorial.dryer_merge`、`tutorial.dryer` 与 `tutorial.tool_combo` 的原图标和文案；上表四条海底带教文案保留历史记录，不再用于局内提示。鱼关催单进度仍用「已清除」表达格数，不表示独立鱼的数量，倒计时和奖励条件不变。
 
 鱼色名称沿用当前素材清单的中英文展示名；例如「天蓝色 / Sky Blue」是一个鱼色类别，不是个体鱼的名字。鱼报告的「清除格数」与工具、连消统计仍按同一套真实结算口径，排行榜入口指向当前已解锁的鱼榜。
 

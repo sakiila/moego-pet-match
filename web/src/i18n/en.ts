@@ -297,7 +297,7 @@ export const en: Record<MessageKey, string> = {
   // 阶段 3D：UI_COPY 第 8 节已确认的鱼关文案
   'fish.prep_title': 'The Fish Have Appointments Too',
   'fish.board_title': 'The Fish Have Appointments Too',
-  'fish.prep_rule': 'Swap neighbors. Match 3 or more fish of the same color in a line.',
+  'fish.prep_rule': 'Swap neighbors. Line up 3 or more fish of the same color.',
   'fish.big_wave': 'Big Wave',
   'fish.conch': 'Conch',
   'fish.conch_hint': 'Swap with a neighbor to sweep a row or column.',

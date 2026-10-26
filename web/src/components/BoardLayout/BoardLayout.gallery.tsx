@@ -27,11 +27,11 @@ function Review({ rush = { state: 'active', served: 7, secondsLeft: 8 }, mode = 
   const pets = mode === 'fish' ? SAMPLE_FISH : PREVIEW_PREP_PETS;
   return <BoardLayout
     mode={mode}
-    header={<BrandHeader title={mode === 'fish' ? 'fish' : 'scheduling'} boardArt tagline={mode === 'fish' ? 'fish.prep_rule' : 'board.tagline'} />}
+    header={<BrandHeader title="scheduling" boardArt tagline="board.tagline" />}
     status={<StatusPanel timeLeftMs={ending ? 0 : 48_000} score={zero ? 0 : score} />}
     rush={<RushBar view={ending ? { state: 'hidden' } : rush} mode={mode} />}
     board={<Board frame={frame} pets={pets} mode={mode} interactive={false} staticSelected={{ r: 3, c: 2 }} staticPreview={Array.from({ length: 7 }, (_, c) => ({ r: 3, c }))} />}
-    tip={<TipBar tip={{ key: ending ? 'round.finishing' : mode === 'fish' ? 'tutorial.conch' : 'tutorial.comb' }} pets={pets} />}
+    tip={<TipBar tip={{ key: ending ? 'round.finishing' : 'tutorial.comb' }} pets={pets} />}
     controls={<BoardControls timeUp={ending} onSettings={() => setSettingsOpen(true)} onExit={() => setQuitOpen(true)} />}
   >
     <SettingsDialog variant="board" open={settingsOpen} onClose={() => setSettingsOpen(false)} />
@@ -40,12 +40,13 @@ function Review({ rush = { state: 'active', served: 7, secondsLeft: 8 }, mode = 
   </BoardLayout>;
 }
 
-function LocalRound() {
-  const [game] = useState(() => createGame({ seed: 11, lineup: PREVIEW_PREP_PETS.map((pet) => pet.id) }));
+function LocalRound({ mode = 'normal' }: { mode?: GameMode }) {
+  const pets = mode === 'fish' ? SAMPLE_FISH : PREVIEW_PREP_PETS;
+  const [game] = useState(() => createGame({ seed: 11, lineup: pets.map((pet) => pet.id), board: mode === 'fish' ? rows : undefined }));
   const [done, setDone] = useState(false);
   return done
-    ? <Review ending />
-    : <BoardScreen game={game} pets={PREVIEW_PREP_PETS} startAt={29_000} speed={3} onFinished={() => setDone(true)} onExit={() => setDone(true)} />;
+    ? <Review mode={mode} ending />
+    : <BoardScreen mode={mode} game={game} pets={pets} startAt={29_000} speed={3} onFinished={() => setDone(true)} onExit={() => setDone(true)} />;
 }
 
 export default {
@@ -62,6 +63,7 @@ export default {
     'fish · active': () => <Review mode="fish" />,
     'fish · finished': () => <Review mode="fish" ending />,
     'local interactive round · no save': () => <LocalRound />,
+    'fish · local interactive round · no save': () => <LocalRound mode="fish" />,
   },
 } satisfies GalleryEntry;
 

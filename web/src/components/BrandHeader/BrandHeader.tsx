@@ -27,9 +27,9 @@ export interface BrandHeaderProps {
   headingAccent?: boolean;
   /** 与普通页标题同一行、靠右的一个操作（如图鉴的「添加我家毛孩子」）。 */
   headingAction?: ReactNode;
-  /** 普通准备页使用已确认的文字素材；棋盘保持原标题。 */
+  /** 准备页使用已确认的 Smart Scheduling 文字素材。 */
   schedulingArt?: boolean;
-  /** 棋盘的品牌行；普通局用确认字标，鱼关保留鱼关标题。 */
+  /** 棋盘的品牌行与已确认的 Smart Scheduling 字标。 */
   boardArt?: boolean;
 }
 
@@ -55,10 +55,8 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
   return (
     <header className={boardArt ? styles.boardHeader : schedulingArt ? styles.preparation : report ? styles.reportHeader : undefined}>
       <div className={styles.bar}>
-        {/* 浅色页面用官方 Logo；鱼关深蓝底上 Logo 看不清，改用白色文字字标（CSS 按主题切换） */}
-        <img className={styles.logo} src={logoSrc} alt="MoeGo" width={120} height={32} />
-        <span className={styles.wordmark} aria-hidden>
-          Moe<span>Go</span>
+        <span className={styles.logoFrame}>
+          <img className={styles.logo} src={logoSrc} alt="MoeGo" width={120} height={32} />
         </span>
         <span className={styles.right}>
           {onBack && (

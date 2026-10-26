@@ -52,8 +52,6 @@ export interface TipInputs {
   tutorial: Tutorial | null;
   hint: boolean;
   lastSeconds: boolean;
-  /** 鱼关的梳子 / 剪刀外观是海螺 / 珍珠贝壳，带教文案随之切换。 */
-  mode?: GameMode;
 }
 
 /** 棋盘外提示区同一时刻至多一条：收尾 > 洗牌 > 局内事件贴纸 > 带教 > 卡关提示 > 最后 10 秒。 */
@@ -62,11 +60,10 @@ export function pickTip(t: TipInputs): TipView | null {
   if (t.shuffling) return { key: 'board.shuffle' };
   if (t.event) return t.event;
   if (t.tutorial === 'combo') return { key: 'tutorial.tool_combo' };
-  const fish = t.mode === 'fish';
-  if (t.tutorial === 'merge') return { key: fish ? 'tutorial.big_wave_merge' : 'tutorial.dryer_merge' };
-  if (t.tutorial === 'dryer') return { key: fish ? 'tutorial.big_wave' : 'tutorial.dryer' };
-  if (t.tutorial === 'comb') return { key: fish ? 'tutorial.conch' : 'tutorial.comb' };
-  if (t.tutorial === 'scissors') return { key: fish ? 'tutorial.pearl_shell' : 'tutorial.scissors' };
+  if (t.tutorial === 'merge') return { key: 'tutorial.dryer_merge' };
+  if (t.tutorial === 'dryer') return { key: 'tutorial.dryer' };
+  if (t.tutorial === 'comb') return { key: 'tutorial.comb' };
+  if (t.tutorial === 'scissors') return { key: 'tutorial.scissors' };
   if (t.hint) return { key: 'board.move_hint' };
   if (t.lastSeconds) return { key: 'round.last_seconds' };
   return null;

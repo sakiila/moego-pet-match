@@ -12,10 +12,13 @@ const entry: GalleryEntry = {
     'tutorial · scissors': () => <TipBar tip={{ key: 'tutorial.scissors' }} />,
     'tutorial · combo': () => <TipBar tip={{ key: 'tutorial.tool_combo' }} />,
     'move hint': () => <TipBar tip={{ key: 'board.move_hint' }} />,
-    'fish · conch · pearl shell · hint': () => (
+    'fish · shared tool tutorials · hint': () => (
       <FishFrame>
-        <TipBar tip={{ key: 'tutorial.conch' }} />
-        <TipBar tip={{ key: 'tutorial.pearl_shell' }} />
+        <TipBar tip={{ key: 'tutorial.comb' }} />
+        <TipBar tip={{ key: 'tutorial.scissors' }} />
+        <TipBar tip={{ key: 'tutorial.dryer_merge' }} />
+        <TipBar tip={{ key: 'tutorial.dryer' }} />
+        <TipBar tip={{ key: 'tutorial.tool_combo' }} />
         <TipBar tip={{ key: 'board.move_hint' }} />
       </FishFrame>
     ),

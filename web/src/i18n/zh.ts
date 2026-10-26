@@ -296,7 +296,7 @@ export const zh = {
   // 阶段 3D：UI_COPY 第 8 节已确认的鱼关文案
   'fish.prep_title': '小鱼也来排班啦',
   'fish.board_title': '小鱼也来排班啦',
-  'fish.prep_rule': '相邻交换，同色小鱼连成一线，3 个及以上即可消除。',
+  'fish.prep_rule': '交换相邻棋子，让 3 个及以上同色小鱼连成一线。',
   'fish.big_wave': '大浪花',
   'fish.conch': '海螺',
   'fish.conch_hint': '和邻格交换，螺口喷出水流，清一行或一列。',

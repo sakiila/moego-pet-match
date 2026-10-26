@@ -240,7 +240,6 @@ export function useGameSession(
       tutorial: s.tutorial?.kind ?? null,
       hint: hint !== null,
       lastSeconds: !timeUp && RULES.durationMs - g <= 10_000,
-      mode,
     }),
     hint,
     popups: [...s.popups.values()],

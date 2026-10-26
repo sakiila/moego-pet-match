@@ -12,19 +12,17 @@ export function RulesCard({ mode = 'normal' }: { mode?: GameMode }) {
     <>
       <div className={styles.card} data-mode={mode}>
         <p className={styles.row}>
-          <Icon name={mode === 'normal' ? 'prep-adjacent-swap' : 'adjacent-swap'} size={mode === 'normal' ? 52 : 30} className={styles.instructionIcon} />
+          <Icon name="prep-adjacent-swap" size={52} className={styles.instructionIcon} />
           <span>{t(mode === 'fish' ? 'fish.prep_rule' : 'prep.rule')}</span>
         </p>
         <p className={styles.row}>
-          <Icon name={mode === 'normal' ? 'prep-sequential-tap' : 'tap-swap'} size={mode === 'normal' ? 52 : 30} className={styles.instructionIcon} />
+          <Icon name="prep-sequential-tap" size={52} className={styles.instructionIcon} />
           <span>{t('prep.controls')}</span>
         </p>
       </div>
       <p className={styles.timer} data-mode={mode} data-locale={locale}>
-        <Icon name="time-left" size={mode === 'normal' ? 28 : 20} />
-        {mode === 'normal' ? (
-          <span>{beforeDuration}<strong className={styles.duration}>{duration}</strong>{afterDuration}</span>
-        ) : <span>{t('prep.timer_hint')}</span>}
+        <Icon name="time-left" size={28} />
+        <span>{beforeDuration}<strong className={styles.duration}>{duration}</strong>{afterDuration}</span>
       </p>
     </>
   );

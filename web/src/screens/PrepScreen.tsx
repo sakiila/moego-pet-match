@@ -32,7 +32,7 @@ export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames
   return (
     <main className={styles.screen} data-theme={fish ? 'fish' : undefined}>
       {fish && <UnderwaterBackdrop />}
-      <BrandHeader title={fish ? 'fish' : 'scheduling'} schedulingArt={!fish} onBack={onBack} />
+      <BrandHeader title="scheduling" schedulingArt onBack={onBack} />
       {pets && (
         <>
           <LineupPanel pets={pets} mode={mode} />
