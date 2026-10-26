@@ -179,6 +179,7 @@ export const zh = {
   // 游戏名拆成两段以便强调色（即已确认的游戏名「MoeGo 毛孩子全明星 / MoeGo Pet All-Stars」）
   'brand.title_lead': '毛孩子',
   'brand.title_accent': '全明星',
+  'brand.tagline': '在家逆子，在外顶流。✨',
   // 阶段 3B：完整报告、评语、称号与猜主人（取自 UI_COPY；称号 key 按「既定主称号的中英文对应」表命名）
   'report.subtitle': '这班辛苦啦，看看毛孩子怎么说。',
   'report.mvp': '本局 MVP：{petName}',
