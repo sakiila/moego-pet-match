@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { freshDatabase } from './helpers.ts';
 import { tokenHash, resetPin } from '../src/services/auth.ts';
 import { inTransaction } from '../src/db/pool.ts';
@@ -124,6 +124,29 @@ describe('四位密码与登录会话（真实 HTTP 入口，不使用业务测�
       expect((await ctx.app.inject({ ...request, headers: alice })).statusCode).toBe(403);
     }
     expect((await ctx.app.inject({ method: 'POST', url: `/api/games/${game.gameId}/result`, payload: { playerId: 'U_TEST_BOB', result }, headers: bob })).statusCode).toBe(200);
+  });
+
+  it('正式开局同时要求登录身份与 Turnstile，二者不能互相替代', async () => {
+    const verify = vi.fn<typeof fetch>(async () => new Response(JSON.stringify({ success: false })));
+    const app = buildApp({ pool: ctx.pool, gameSecurity: { siteKey: 'test', secret: 'test-secret', hostname: 'star.baobo.me', fetchImpl: verify } });
+    try {
+      const bob = { cookie: cookie(await setup()) };
+      const alice = { cookie: cookie(await setup('U_TEST_ALICE')) };
+      const prepared = await app.inject({ method: 'POST', url: '/api/games', payload: { playerId: 'U_TEST_BOB', mode: 'normal' }, headers: bob });
+      expect(prepared.statusCode).toBe(200);
+      const request = {
+        method: 'POST' as const, url: `/api/games/${prepared.json().gameId}/start`,
+        payload: { playerId: 'U_TEST_BOB', turnstileToken: 'test-widget-token' },
+        headers: { authorization: `Bearer ${'a'.repeat(64)}` },
+      };
+      expect((await app.inject(request)).statusCode).toBe(401);
+      expect((await app.inject({ ...request, headers: { ...request.headers, ...alice } })).statusCode).toBe(403);
+      expect(verify).not.toHaveBeenCalled();
+      const authenticated = await app.inject({ ...request, headers: { ...request.headers, ...bob } });
+      expect(authenticated.statusCode).toBe(403);
+      expect(authenticated.json().error).toBe('verification_failed');
+      expect(verify).toHaveBeenCalledOnce();
+    } finally { await app.close(); }
   });
 
   it('手工重置撤销所有设备登录并保留成绩；停用同事不能登录', async () => {
