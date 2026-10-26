@@ -32,7 +32,7 @@ const en = (key: Parameters<typeof translate>[1], vars?: Record<string, string |
 describe('成绩卡内容', () => {
   it('普通局：MVP 贴纸与名牌、评语、称号、分数与原对局玩家署名，均复用本局判定', () => {
     const m = shareCardModel({ summary: summary(), pets, mode: 'normal', playerName: 'Bob 包博', manager, locale: 'zh', t: zh });
-    expect(m.hero).toEqual({ src: '/img/pets/pet_2/1024?format=webp', label: '本局 MVP：Pet2', kind: 'mvp' });
+    expect(m.hero).toEqual({ src: '/img/pets/pet_2/1024?format=webp&v=q85-v2', label: '本局 MVP：Pet2', kind: 'mvp' });
     expect(m.review).toBe('催你的事，替我保密。');
     expect(m.title).toBe('急什么我会消');
     expect(m.titleStamp).toMatch(/03-got-this-zh/);
@@ -60,7 +60,7 @@ describe('成绩卡内容', () => {
   it('鱼关：MVP 用鱼色类别名并跟随语言，模式牌为摸鱼分店', () => {
     const s = summary({ pets: summary().pets.map((p, i) => ({ ...p, id: fish[i].id, served: i === 0 ? 50 : 5 })) });
     const zhCard = shareCardModel({ summary: s, pets: fish, mode: 'fish', playerName: 'Bob', manager, locale: 'zh', t: zh });
-    expect(zhCard.hero).toEqual({ src: '/img/fish/fish_color_blue/1024?format=webp', label: '本局 MVP：天蓝色', kind: 'mvp' });
+    expect(zhCard.hero).toEqual({ src: '/img/fish/fish_color_blue/1024?format=webp&v=q85-v2', label: '本局 MVP：天蓝色', kind: 'mvp' });
     expect(zhCard.mode).toBe('摸鱼分店');
     expect(zhCard.review).toBe('催完就跑，有点不好意思。');
     const enCard = shareCardModel({ summary: s, pets: fish, mode: 'fish', playerName: 'Bob', manager, locale: 'en', t: en });
@@ -70,7 +70,7 @@ describe('成绩卡内容', () => {
 
   it('普通局零服务：不编造 MVP，由今日店长承接', () => {
     const m = shareCardModel({ summary: zero(summary()), pets, mode: 'normal', playerName: 'Bob', manager, locale: 'zh', t: zh });
-    expect(m.hero).toEqual({ src: '/img/pets/pet_mgr/1024?format=webp', label: '今日店长 · Sanxian', kind: 'manager' });
+    expect(m.hero).toEqual({ src: '/img/pets/pet_mgr/1024?format=webp&v=q85-v2', label: '今日店长 · Sanxian', kind: 'manager' });
     expect(m.review).toBe('我先可爱，你慢慢来。');
     expect(m.score).toBe('0');
   });
@@ -122,7 +122,7 @@ describe('原 MVP 已下架', () => {
 describe('店长小海报内容', () => {
   it('店长贴纸、名牌、宣言与北京日期（中文）', () => {
     const m = managerPosterModel({ manager, t: zh, locale: 'zh' });
-    expect(m.hero).toEqual({ src: '/img/pets/pet_mgr/1024?format=webp', label: '今日店长 · Sanxian', kind: 'manager' });
+    expect(m.hero).toEqual({ src: '/img/pets/pet_mgr/1024?format=webp&v=q85-v2', label: '今日店长 · Sanxian', kind: 'manager' });
     expect(m.mode).toBe('今日店长');
     expect(m.line).toBe('你负责排班，我负责可爱。');
     expect(m.date).toBe('2026 年 10 月 23 日 · 深圳时间');

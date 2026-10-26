@@ -12,6 +12,7 @@ import { coatOf, type Coat } from '../src/catalog/coat.ts';
 import { makeCardPhoto } from '../src/catalog/photo.ts';
 import { applyUnpublish, planUnpublish } from '../src/catalog/unpublish.ts';
 import { connect, describeTarget, storeFromEnv } from './cli.ts';
+import { createImageCdnPurger } from '../src/services/imageCdn.ts';
 
 const args = process.argv.slice(2);
 const cmd = args[0];
@@ -123,8 +124,14 @@ try {
     if (plan.managerDates.length) console.log(`  was manager on: ${plan.managerDates.join(', ')} (today's manager is reselected automatically)`);
     console.log(`  pending deletion requests: ${plan.pendingRequests.map((r) => r.requestId).join(', ') || 'none'} — resolve with deletions.ts after cleanup`);
     if (yes) {
-      const { failed } = await applyUnpublish(client, store, plan);
+      // 缺少清缓存配置时，在改数据库之前停止。
+      const purge = prod ? createImageCdnPurger() : undefined;
+      const { failed, cdnPurged } = await applyUnpublish(client, store, plan, purge);
       console.log(failed.length ? `applied; objects NOT deleted (retry by hand): ${failed.join(', ')}` : 'applied.');
+      if (cdnPurged === false) {
+        console.error(`Pet removed, but CDN purge failed. Retry: scripts/image-cache.ts purge ${plan.petId} --prod --yes`);
+        process.exitCode = 1;
+      } else if (cdnPurged) console.log('CDN sticker cache purged.');
       console.log('Also: mark the pet removed in the local catalog, delete its files under assets/pets, and check copies you downloaded for processing.');
     }
   } else {

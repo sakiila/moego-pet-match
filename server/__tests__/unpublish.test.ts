@@ -84,7 +84,14 @@ describe('下架墓碑', () => {
   });
 
   it('执行后只留墓碑字段，对象删除；共用原图的宠物去掉卡背照片，家庭只剩一只时解散', async () => {
-    await applyUnpublish(ctx.pool, store, await planUnpublish(ctx.pool, 'mochi'));
+    let purgeCalls = 0;
+    const applied = await applyUnpublish(ctx.pool, store, await planUnpublish(ctx.pool, 'mochi'), async id => {
+      expect(id).toBe('mochi');
+      expect((await pet(id)).status).toBe('removed');
+      purgeCalls++;
+    });
+    expect(applied.cdnPurged).toBe(true);
+    expect(purgeCalls).toBe(1);
     const m = await pet('mochi');
     expect(m).toMatchObject({ pet_id: 'mochi', status: 'removed', name: null, owner_user_id: null, family_id: null, species: null, intro: null, owner_quote: null, sticker_key: null, photo_key: null, coat: null });
     expect(m.removed_at).toBeInstanceOf(Date);
@@ -132,6 +139,15 @@ describe('下架墓碑', () => {
     // 重试拿到同一份结果，已下架标记按当前目录计算
     const again = await app.inject({ method: 'POST', url: `/api/games/${lineupGame.gameId}/result`, payload: { playerId: 'U_TEST_BOB', result: result(lineupGame) } });
     expect(again.json().removedPetIds).toEqual(['mochi']);
+  });
+
+  it('CDN 失败明确报告，已提交的下架和对象清理不会被回滚', async () => {
+    const applied = await applyUnpublish(ctx.pool, store, await planUnpublish(ctx.pool, 'extra1'), async () => {
+      throw new Error('temporary CDN failure');
+    });
+    expect(applied).toEqual({ failed: [], cdnPurged: false });
+    expect((await pet('extra1')).status).toBe('removed');
+    expect(store.objects.has('pets/extra1/s1/128.png')).toBe(false);
   });
 });
 

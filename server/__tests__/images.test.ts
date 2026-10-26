@@ -8,6 +8,7 @@ import { sniffImage } from '../src/services/submissions.ts';
 import { DiskCache } from '../src/storage/diskCache.ts';
 import { memoryStore } from '../src/storage/objectStore.ts';
 import { freshDatabase } from './helpers.ts';
+import { stickerImageUrl, STICKER_WEBP_VERSION } from '../../web/src/game/stickerImage.ts';
 
 let PNG: Buffer;
 const JPEG = Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), Buffer.alloc(64, 2)]);
@@ -96,6 +97,65 @@ describe('宠物图代理', () => {
     expect(store.gets - before).toBe(1);
     expect((await get('/img/pets/mochi/128')).rawPayload.equals(PNG)).toBe(true);
     expect((await get('/img/pets/mochi/128?format=unknown')).statusCode).toBe(404);
+  });
+
+  it('版本化压缩图显著减小体积、保留透明通道，并隔离旧无损缓存', async () => {
+    const pixels = Buffer.alloc(128 * 128 * 4);
+    let seed = 123456789;
+    const channel = () => {
+      seed ^= seed << 13;
+      seed ^= seed >>> 17;
+      seed ^= seed << 5;
+      return seed & 255;
+    };
+    for (let y = 0; y < 128; y++) for (let x = 0; x < 128; x++) {
+      const i = (y * 128 + x) * 4;
+      pixels[i] = channel();
+      pixels[i + 1] = channel();
+      pixels[i + 2] = channel();
+      pixels[i + 3] = Math.min(255, Math.min(x, y, 127 - x, 127 - y) * 24);
+    }
+    const input = await sharp(pixels, { raw: { width: 128, height: 128, channels: 4 } }).png().toBuffer();
+    const lossless = await sharp(input).webp({ lossless: true }).toBuffer();
+    await ctx.pool.query(`INSERT INTO pet_match.pets (pet_id, name, status, sticker_key) VALUES ('compression-test', 'Test', 'published', 'pets/compression-test/v1')`);
+    await store.put('pets/compression-test/v1/128.png', input, 'image/png');
+    await new DiskCache(cacheDir, 10 * 1024 * 1024).put('pets/compression-test/v1/128/webp-lossless-v1', lossless, 'image/webp', 'pet:compression-test');
+    const before = store.gets;
+    const url = stickerImageUrl('pets', 'compression-test', 128);
+    const responses = await Promise.all(Array.from({ length: 12 }, () => get(url)));
+    const first = responses[0];
+    expect(first.statusCode).toBe(200);
+    expect(first.headers['cloudflare-cdn-cache-control']).toBe('public, max-age=7200');
+    expect(first.rawPayload.length).toBeLessThan(lossless.length * 0.8);
+    expect(await sharp(first.rawPayload).ensureAlpha().extractChannel(3).raw().toBuffer())
+      .toEqual(await sharp(input).ensureAlpha().extractChannel(3).raw().toBuffer());
+    expect(responses.every(res => res.rawPayload.equals(first.rawPayload))).toBe(true);
+    expect(store.gets - before).toBe(1);
+    expect((await get(url)).rawPayload).toEqual(first.rawPayload);
+    expect(store.gets - before).toBe(1);
+    expect((await get('/img/pets/compression-test/128?format=webp')).rawPayload).toEqual(lossless);
+    expect((await get('/img/pets/compression-test/128')).rawPayload).toEqual(input);
+    for (const query of ['format=webp&v=unknown', `format=png&v=${STICKER_WEBP_VERSION}`]) {
+      const invalid = await get(`/img/pets/compression-test/128?${query}`);
+      expect(invalid.statusCode).toBe(404);
+      expect(invalid.headers['cache-control']).toBe('no-store');
+      expect(invalid.headers['cloudflare-cdn-cache-control']).toBeUndefined();
+    }
+    await ctx.pool.query(`UPDATE pet_match.pets SET status = 'unpublished' WHERE pet_id = 'compression-test'`);
+    const gone = await get(url);
+    expect(gone.statusCode).toBe(404);
+    expect(gone.headers['cache-control']).toBe('no-store');
+    expect(gone.headers['cloudflare-cdn-cache-control']).toBeUndefined();
+    expect(await new DiskCache(cacheDir, 1).hasGroup('pet:compression-test')).toBe(false);
+  });
+
+  it('简单色块的有损编码更大时沿用无损版本', async () => {
+    const lossless = await get('/img/pets/mochi/128?format=webp');
+    const compressed = await get(stickerImageUrl('pets', 'mochi', 128));
+    expect(compressed.statusCode).toBe(200);
+    expect(compressed.rawPayload.length).toBeLessThanOrEqual(lossless.rawPayload.length);
+    expect(await sharp(compressed.rawPayload).ensureAlpha().extractChannel(3).raw().toBuffer())
+      .toEqual(await sharp(PNG).ensureAlpha().extractChannel(3).raw().toBuffer());
   });
 
   it('下架后立即拒绝并清掉本地缓存；不支持的尺寸与无素材返回 404', async () => {
