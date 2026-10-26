@@ -6,7 +6,7 @@ import { freshDatabase } from './helpers.ts';
 const raw = (over: Record<string, unknown>) => ({ id: 'U1', team_id: 'T011CF3CMJN', profile: { real_name_normalized: 'New Hire', email: 'new@moego.pet' }, ...over });
 
 describe('Slack 目录过滤', () => {
-  it('在职同事通过；停用、机器人、访客、Slackbot、外部工作区被排除', () => {
+  it('公司邮箱的在职同事通过；停用、机器人、访客、Slackbot 被排除', () => {
     expect(toMember(raw({}))).toEqual({ userId: 'U1', name: 'New Hire', email: 'new@moego.pet' });
     expect(toMember(raw({ deleted: true }))).toBeNull();
     expect(toMember(raw({ is_bot: true }))).toBeNull();
@@ -16,21 +16,46 @@ describe('Slack 目录过滤', () => {
     expect(toMember(raw({ team_id: 'T_OTHER', profile: { real_name_normalized: 'X', email: 'x@partner.com' } }))).toBeNull();
     expect(toMember(raw({ team_id: 'T_OTHER', profile: { real_name_normalized: 'Y', email: 'y@moego.pet' } }))?.userId).toBe('U1');
   });
+
+  it.each([undefined, null, '', 'person@partner.com', 'person@othermoego.pet', 'person@moego.pet.example.com', 'person@sub.moego.pet'])(
+    '即使属于 MoeGo 工作区或允许访客，邮箱 %s 也不能通过', (email) => {
+      const user = raw({ is_restricted: true, profile: { real_name: 'External', email } });
+      expect(toMember(user, true)).toBeNull();
+    },
+  );
+
+  it.each(['infra@moego.pet', 'devops@moego.pet', 'admin_MSlack@moego.pet', 'test.tim@moego.pet', ' INFRA@MOEGO.PET '])(
+    '排除未标记为机器人的公共账号 %s', (email) => {
+      expect(toMember(raw({ profile: { real_name: 'Shared Account', email } }), true)).toBeNull();
+    },
+  );
+
+  it('邮箱忽略大小写和首尾空格；不按职位或邮箱前缀误伤真人', () => {
+    expect(toMember(raw({ profile: { real_name: 'Engineer', email: ' Person@MOEGO.PET ' } }))?.email).toBe('Person@MOEGO.PET');
+    expect(toMember(raw({ profile: { real_name: 'Infra Engineer', email: 'infra.engineer@moego.pet' } }))?.userId).toBe('U1');
+    expect(toMember(raw({ profile: { real_name: 'Salesforce Administrator', email: 'admin.person@moego.pet' } }))?.userId).toBe('U1');
+  });
 });
 
 describe('Slack 目录缓存', () => {
   const page = (members: unknown[], next = '') => ({ json: async () => ({ ok: true, members, response_metadata: { next_cursor: next } }), status: 200 });
 
-  it('独立生产名册沿用原名单资格，包含有效工作区访客，仍排除停用及外部账号', async () => {
+  it('完整同步、搜索与按 ID 查询共用过滤；允许访客仍须公司邮箱', async () => {
     const dir = slackDirectory('xoxb-test', {
       allowGuests: true,
       fetchImpl: (async () => page([
         raw({ id: 'GUEST', is_restricted: true, is_ultra_restricted: true }),
         raw({ id: 'GONE', deleted: true }),
         raw({ id: 'OUTSIDE', team_id: 'T_OTHER', profile: { real_name_normalized: 'Outside', email: 'a@partner.com' } }),
+        raw({ id: 'WORKSPACE_EXTERNAL', profile: { real_name: 'External', email: 'external@partner.com' } }),
+        raw({ id: 'SHARED', profile: { real_name: 'Infra', email: 'infra@moego.pet' } }),
       ])) as unknown as typeof fetch,
     })!;
     expect((await dir.all()).map(m => m.userId)).toEqual(['GUEST']);
+    expect((await dir.search('new')).map(m => m.userId)).toEqual(['GUEST']);
+    expect(await dir.search('infra')).toEqual([]);
+    expect(await dir.get('SHARED')).toBeNull();
+    expect(await dir.get('WORKSPACE_EXTERNAL')).toBeNull();
   });
 
   it('分页读取、缓存期内不重复请求、过期后刷新、刷新失败沿用旧缓存', async () => {

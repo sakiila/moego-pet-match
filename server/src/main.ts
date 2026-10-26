@@ -12,7 +12,7 @@ import { slackAvatarFetcher } from './storage/slackAvatar.ts';
 import { syncSlackMembers } from './services/syncSlackMembers.ts';
 
 const pool = createPool(config.databaseUrl);
-// 与原同事视图一致：有效工作区账号（含访客）或 MoeGo 邮箱，不因迁库收紧资格。
+// 访客仍可参与，但必须使用 MoeGo 邮箱并通过真人账号过滤。
 const directory = slackDirectory(process.env.SLACK_BOT_TOKEN, { allowGuests: true });
 // 默认本地目录对象存储（与 R2 相同的键布局）；OBJECT_STORE=r2 时使用 R2
 const r2 = process.env.OBJECT_STORE === 'r2' ? r2FromEnv() : null;
