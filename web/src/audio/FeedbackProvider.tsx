@@ -20,7 +20,7 @@ interface Feedback {
   /** 报告小票送到位（「叮」+ 轻震）与印章拍下（「咚」+ 短双点）。 */
   onPrinted: () => void;
   onStamp: () => void;
-  /** 棋盘计时期间为 true：只有这时（且音乐开关打开）播放背景音乐。 */
+  /** 棋盘计时期间为 true：播放棋盘曲；其余页面播放局外曲。 */
   setMusicActive: (active: boolean) => void;
 }
 
@@ -49,16 +49,20 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
   const prefsRef = useRef(prefs);
   prefsRef.current = prefs;
   const musicActive = useRef(false);
+  const mounted = useRef(false);
   const allow = useRef(createLimiter(FEEDBACK_GAP_MS));
   const cheerVoice = useRef(createCheerVoiceLimiter());
 
   const syncMusic = useCallback(() => {
-    if (musicActive.current && prefsRef.current.music && document.visibilityState === 'visible') {
-      unlockAudio();
-      startMusic();
-      record('music:start');
+    if (prefsRef.current.music && document.visibilityState === 'visible') {
+      void unlockAudio().then(() => {
+        if (!mounted.current || !prefsRef.current.music || document.visibilityState !== 'visible') return;
+        const scene = musicActive.current ? 'board' : 'lobby';
+        startMusic(scene);
+        record(`music:start:${scene}`);
+      });
     } else {
-      stopMusic();
+      stopMusic(true);
     }
   }, []);
 
@@ -81,9 +85,10 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
+    mounted.current = true;
+    syncMusic();
     const onVisibility = () => {
       if (document.visibilityState === 'hidden') {
-        stopMusic();
         suspendAudio();
         cancelVibration();
         record('hidden:stop');
@@ -94,14 +99,19 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
     };
     // 触摸的按下不一定能解锁 iOS 音频；在抬起与点击时继续尝试中断恢复。
     const onGesture = () => {
-      if (document.visibilityState === 'visible' && (prefsRef.current.sfx || prefsRef.current.music)) unlockAudio();
+      if (document.visibilityState === 'visible') {
+        if (prefsRef.current.sfx) void unlockAudio();
+        syncMusic();
+      }
     };
     const gestures = ['pointerdown', 'pointerup', 'touchend', 'click'] as const;
     document.addEventListener('visibilitychange', onVisibility);
     gestures.forEach((type) => document.addEventListener(type, onGesture, { capture: true }));
     return () => {
+      mounted.current = false;
       document.removeEventListener('visibilitychange', onVisibility);
       gestures.forEach((type) => document.removeEventListener(type, onGesture, { capture: true }));
+      stopMusic(true);
       stopCheer();
     };
   }, [syncMusic]);
@@ -128,7 +138,7 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
         stopCheer();
         musicActive.current = false;
         if (prefsRef.current.sfx) playFinish();
-        stopMusic();
+        syncMusic();
         record(`finish:${prefsRef.current.sfx ? 'sfx' : '-'}`);
       },
       onPrinted: () => {

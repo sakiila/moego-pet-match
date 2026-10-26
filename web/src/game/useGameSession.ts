@@ -185,7 +185,7 @@ export function useGameSession(
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
-    // 背景音乐只在棋盘计时期间播放（开关打开时）；离开棋盘即停
+    // 计时期间切到棋盘曲，离开后由声音模块恢复局外曲（均遵循音乐开关）。
     feedbackRef.current.setMusicActive(true);
     const onVisibility = () => {
       if (document.visibilityState !== 'visible') {

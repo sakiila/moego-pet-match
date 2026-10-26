@@ -1,12 +1,14 @@
 import type { SoundKind } from '../game/feedback';
 import { createCheerPlayer } from './cheerPlayer';
+import { createLoopMusic } from './loopMusic';
+import lobbyClip from './clips/little-paws-afternoon-v1.mp3';
 import niceClip from './clips/nice.mp3';
 import greatClip from './clips/great.mp3';
 import amazingClip from './clips/amazing.mp3';
 import wowClip from './clips/wow.mp3';
 
 /**
- * 现场合成的音效与背景音乐，以及独立人声录音通道（WebAudio）。合成音总音量很低；
+ * 现场合成的音效与棋盘曲、局外音乐文件，以及独立人声录音通道（WebAudio）。合成音总音量很低；
  * 浏览器没有 WebAudio 时全部静默跳过。AudioContext 在第一次用户操作时创建 / 恢复（自动播放限制）。
  * 日后有正式素材时，只替换这里的播放源。
  */
@@ -18,6 +20,7 @@ const PENTA = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 15
 let ctx: AudioContext | null = null;
 let master: GainNode | null = null;
 const cheers = createCheerPlayer(() => audio()?.ctx ?? null, { nice: niceClip, great: greatClip, amazing: amazingClip, wow: wowClip });
+const lobbyMusic = createLoopMusic(audio, lobbyClip, 0.55);
 
 export const preloadCheers = cheers.preload;
 export const playCheer = cheers.play;
@@ -95,6 +98,7 @@ export function unlockAudio(): Promise<void> {
 
 /** 页面隐藏时暂停全部声音；回来后由调用方按开关恢复。 */
 export function suspendAudio() {
+  stopMusic(true);
   stopCheer();
   keepAlive?.pause();
   if (ctx && ctx.state === 'running') void ctx.suspend();
@@ -187,7 +191,7 @@ export function playStamp() {
   noise(a, t, 0.07, 0.5, { type: 'lowpass', from: 1800, to: 300 });
 }
 
-// ---------- 背景音乐：低音量五声音阶循环（占位，日后替换为正式音乐文件） ----------
+// ---------- 背景音乐：局外原创循环曲；棋盘沿用五声音阶合成旋律 ----------
 
 /** 两小节旋律（八分音符，音阶下标；-1 为休止）与对应的低音根音。 */
 const MELODY = [0, 2, 4, 2, 3, 4, 2, -1, 4, 3, 2, 0, 1, 2, 0, -1];
@@ -198,10 +202,21 @@ let musicGain: GainNode | null = null;
 let timer: ReturnType<typeof setInterval> | null = null;
 let nextAt = 0;
 let stepIndex = 0;
+let musicScene: 'board' | 'lobby' | null = null;
+const fadingGains = new Set<GainNode>();
 
-export function startMusic() {
+export function startMusic(scene: 'board' | 'lobby' = 'board') {
   const a = audio();
-  if (!a || timer) return;
+  if (!a) return;
+  if (musicScene !== scene) {
+    stopMusic();
+    musicScene = scene;
+  }
+  if (scene === 'lobby') {
+    void lobbyMusic.start();
+    return;
+  }
+  if (timer) return;
   musicGain = a.ctx.createGain();
   musicGain.gain.value = MUSIC_LEVEL;
   musicGain.connect(a.out);
@@ -223,13 +238,23 @@ export function startMusic() {
   timer = setInterval(schedule, 100);
 }
 
-export function stopMusic() {
+export function stopMusic(immediate = false) {
+  musicScene = null;
+  lobbyMusic.stop(immediate ? 0 : .12);
   if (timer) clearInterval(timer);
   timer = null;
   if (musicGain && ctx) {
     const g = musicGain;
-    g.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.08);
-    setTimeout(() => g.disconnect(), 400);
+    if (immediate) g.disconnect();
+    else {
+      g.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.08);
+      fadingGains.add(g);
+      setTimeout(() => { g.disconnect(); fadingGains.delete(g); }, 400);
+    }
   }
   musicGain = null;
+  if (immediate) {
+    fadingGains.forEach((gain) => gain.disconnect());
+    fadingGains.clear();
+  }
 }
