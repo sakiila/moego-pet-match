@@ -1,0 +1,27 @@
+# Slack OG C v3：双语宣传语（已选定）
+
+日期：2026-10-26
+方式：Codex 内置 image_gen；不使用 CLI 或图片 API。
+编辑目标：web/public/og.jpg（当前 /share.jpg 在 Slack 中返回的 1200×630 分享海报）。
+用户要求：仅保留店长小海报的宣传语并先提交；随后提供 share.jpg 加入宣传语的预览图。
+宣传语：在家逆子，在外顶流。✨ / A menace at home. A star in the game. ✨
+初始范围：生成新版本预览并保留原图，不修改 share.jpg 路由或发布配置。
+选定：2026-10-26 用户确认使用此版本，授权替换正式分享封面、提交并推送。完整生成提示词保留预览阶段的原始要求。
+状态：已选定并导出为 web/public/og.jpg；图像编辑轻微重绘局部，不声明像素完全不变。
+原始输出：/Users/bob/.codex/generated_images/01a17514-e466-7ca3-86c4-8026818b858e/exec-3f48b7ef-a140-452c-ba65-cfd21a094e66.png
+留档：slack-og-c-v3-original.png；缩放为 slack-og-c-v3.png（1200×630），经 Sharp 以 JPEG quality 92、4:4:4 色度采样导出 web/public/og.jpg，供 OG/Twitter 与 /share.jpg 使用。旧 v2 及其原稿保留。
+
+## 完整提示词
+
+Use case: text-localization
+Asset type: a preview revision of the existing MoeGo Pet All-Stars landscape Slack share.jpg poster.
+Input image 1 (/Users/bob/WebstormProjects/moego-pet-match/web/public/og.jpg) is the EDIT TARGET, not a loose style reference. The poster already has a finished white/orange/charcoal design. Preserve its recognizable design and all artwork.
+Primary request: Add the following EXACT bilingual slogan to the left text column:
+Chinese: "在家逆子，在外顶流。✨"
+English: "A menace at home. A star in the game. ✨"
+The Chinese slogan should be clearly readable in the same rounded bold charcoal font family as the existing copy, with a restrained orange accent if appropriate. The English slogan should be slightly smaller, bold and clearly readable, on one line if possible or on two natural sentence lines. Keep the sparkle at the end of each language's slogan. Do not translate or rewrite either sentence.
+Typography/layout: Keep the left logo, very large Chinese 毛孩子 / 全明星 title, "MoeGo Pet All-Stars", existing "90 秒消消乐" explanation and orange website capsule "游戏入口：star.baobo.me". Keep the Chinese game title as the largest element. Integrate the new bilingual slogan into the lower part of the left copy column, preferably between the English game name and the gameplay explanation/website capsule, with clean visual hierarchy and comfortable spacing. You may tighten the left copy stack's vertical spacing and modestly reduce the existing left title/text sizes ONLY as needed to fit the new slogan cleanly. The orange website capsule must stay prominent and fully readable. No text may overlap, become cropped, spill into the board or be reduced to tiny fine print. Keep an airy intentional composition with safe margins inside the 1200x630 canvas.
+Invariants: Keep the MoeGo brand logo and official wordmark recognizable, unchanged colors, warm white background, left text/right board split, right tilted pastel match-3 board and its crop/angle/scale, all existing pet faces and white sticker borders, glowing three-dog match, "+120", orange hairdryer, comb, scissors, orange paws, stars and rays. Do not add new pets, badges, interface controls, mockup frames, device chrome, voting text, event names, or other words. Avoid restyling or redrawing the right-hand artwork.
+Existing text to retain verbatim: "MoeGo", "毛孩子全明星", "MoeGo Pet All-Stars", "90 秒消消乐", "游戏入口：star.baobo.me", "+120".
+New text to add verbatim: "在家逆子，在外顶流。✨" and "A menace at home. A star in the game. ✨".
+Output: One polished opaque 1200x630 landscape poster in the exact original 40:21 aspect ratio. This is a review preview only; the production share.jpg/og.jpg asset will not be replaced in this task.
