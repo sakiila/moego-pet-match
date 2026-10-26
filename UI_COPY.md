@@ -64,6 +64,12 @@
 | --- | --- | --- |
 | access.title | MoeGo 毛孩子全明星 | MoeGo Pet All-Stars |
 | access.subtitle | 和同事家的毛孩子，来一局 90 秒消消乐。 | A 90-second match-3 with your coworkers' pets. |
+| security.title | 开局验证 | Ready check |
+| security.checking | 开局前确认一下，准备好就能玩。 | One quick check before your shift. |
+| security.verified | 验证完成，可以开始这班啦。 | All checked. Ready for your shift! |
+| security.failed | 验证暂时没有通过，请重试。 | The check did not go through. Please try again. |
+| security.starting | 正在开局… | Starting… |
+| security.rate_limited | 操作有点频繁，请稍后再试。 | Too many attempts. Please wait a moment and try again. |
 | access.internal | 仅供 MoeGo 同事游玩 | For MoeGo Coworkers |
 
 副标题承担玩法说明。游戏入口直接提供下方的同事身份搜索与带名字的确认按钮，确认后进入门店；文案已接入身份页；页面状态与排版验收记录见 design-qa.md。

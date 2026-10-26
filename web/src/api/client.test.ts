@@ -55,6 +55,26 @@ describe('permanent player like API', () => {
   });
 });
 
+describe('verified game credential', () => {
+  it('开局和原局结算使用同一内存凭证，其他对局不携带它', async () => {
+    vi.stubGlobal('location', { pathname: '/' });
+    const fetcher = vi.fn().mockImplementation(() => Promise.resolve(new Response('{}')));
+    vi.stubGlobal('fetch', fetcher);
+    await api.startGame('secure-game', 'player', 'widget-token', 'a'.repeat(64));
+    await api.submitResult('secure-game', 'player', {} as ResultPayload);
+    await api.submitResult('other-game', 'player', {} as ResultPayload);
+    expect(fetcher.mock.calls[0][1].headers.authorization).toBe(`Bearer ${'a'.repeat(64)}`);
+    expect(fetcher.mock.calls[1][1].headers.authorization).toBe(`Bearer ${'a'.repeat(64)}`);
+    expect(fetcher.mock.calls[2][1].headers.authorization).toBeUndefined();
+  });
+  it('验证失败或限流保留可识别的错误类型', async () => {
+    for (const [status, error, kind] of [[403, 'verification_failed', 'verification_failed'], [429, 'rate_limited', 'rate_limited']] as const) {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({ error }), { status })));
+      await expect(api.startGame('blocked', 'player', 'token', 'b'.repeat(64))).rejects.toMatchObject({ kind });
+    }
+  });
+});
+
 class FakeXhr {
   static next: { status: number; body: string } | 'network' = { status: 200, body: '{}' };
   static sent: FormData | null = null;

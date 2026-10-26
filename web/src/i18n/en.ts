@@ -1,6 +1,12 @@
 import type { MessageKey } from './zh';
 
 export const en: Record<MessageKey, string> = {
+  'security.title': 'Ready check',
+  'security.checking': 'One quick check before your shift.',
+  'security.verified': 'All checked. Ready for your shift!',
+  'security.failed': 'The check did not go through. Please try again.',
+  'security.starting': 'Starting…',
+  'security.rate_limited': 'Too many attempts. Please wait a moment and try again.',
   'app.title': 'Pet All-Stars',
   'nav.home': 'Shop',
   'nav.collection': 'Pet Collection',

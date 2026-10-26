@@ -8,7 +8,7 @@ import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView
  */
 export class ApiError extends Error {
   constructor(
-    readonly kind: 'not_found' | 'unavailable' | 'invalid' | 'conflict',
+    readonly kind: 'not_found' | 'unavailable' | 'invalid' | 'conflict' | 'verification_failed' | 'rate_limited',
     readonly detail?: string,
   ) {
     super(kind);
@@ -26,6 +26,8 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   }
   if (res.ok) return (await res.json()) as T;
   const body = (await res.json().catch(() => ({}))) as { error?: string; detail?: string };
+  if (res.status === 429) throw new ApiError('rate_limited');
+  if (res.status === 403 && body.error === 'verification_failed') throw new ApiError('verification_failed');
   if (res.status === 404) throw new ApiError('not_found', body.detail);
   if (res.status === 409) throw new ApiError('conflict', body.detail);
   if (res.status === 400 || res.status === 422) throw new ApiError('invalid', body.detail ?? body.error);
@@ -86,7 +88,18 @@ async function submitPet(
   throw new UploadError('failed');
 }
 
+const gameTokens = new Map<string, string>();
+
 export const api = {
+  getGameSecurity: () => request<{ enabled: boolean; siteKey?: string }>('/api/game-security'),
+  startGame: async (gameId: string, playerId: string, turnstileToken: string, playToken: string) => {
+    const result = await request<{ startedAt: string }>(`/api/games/${encodeURIComponent(gameId)}/start`, {
+      method: 'POST', headers: { authorization: `Bearer ${playToken}` }, body: JSON.stringify({ playerId, turnstileToken }),
+    });
+    gameTokens.set(gameId, playToken);
+    if (gameTokens.size > 8) gameTokens.delete(gameTokens.keys().next().value!);
+    return result;
+  },
   getPlayerPets: (ownerId: string, viewerId: string, signal?: AbortSignal) => request<{ pets: PlayerPet[] }>(`/api/players/${encodeURIComponent(ownerId)}/pets?viewerId=${encodeURIComponent(viewerId)}`, { signal }).then(view => view.pets),
   getPlayerLikes: (targetId: string, viewerId: string, signal?: AbortSignal) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes?viewerId=${encodeURIComponent(viewerId)}`, { signal }),
   likePlayer: (targetId: string, playerId: string) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes`, { method: 'POST', body: JSON.stringify({ playerId }) }),
@@ -117,6 +130,7 @@ export const api = {
   submitResult: (gameId: string, playerId: string, result: ResultPayload) =>
     request<SettleResponse>(`/api/games/${encodeURIComponent(gameId)}/result`, {
       method: 'POST',
+      headers: gameTokens.has(gameId) ? { authorization: `Bearer ${gameTokens.get(gameId)}` } : undefined,
       body: JSON.stringify({ playerId, result }),
     }),
 };

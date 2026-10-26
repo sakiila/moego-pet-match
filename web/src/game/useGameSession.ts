@@ -1,4 +1,4 @@
-import type { GameMode } from '../api/types';
+import type { GameMode, GameMove } from '../api/types';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useFeedback } from '../audio/FeedbackProvider';
 import {
@@ -32,6 +32,7 @@ const POPUP_MS = 800;
 const STICKER_MS = 2_500;
 
 interface Session {
+  moves: GameMove[];
   state: GameState;
   base: PlaybackBase;
   timeline: Timeline | null;
@@ -97,6 +98,7 @@ export function useGameSession(
   const session = useRef<Session>(null as unknown as Session);
   if (!session.current) {
     session.current = {
+      moves: [],
       state: initial,
       base: baseOf(initial),
       timeline: null,
@@ -177,7 +179,7 @@ export function useGameSession(
         s.finished = true;
         s.cheers.active = null;
         feedbackRef.current.onFinish();
-        finishedRef.current(getSummary(state));
+        finishedRef.current({ ...getSummary(state), moves: s.moves });
         return;
       }
       syncCheer(s, s.clock.elapsed());
@@ -251,9 +253,10 @@ export function useGameSession(
   const attemptSwap = useCallback((from: Pos, to: Pos) => {
     const cur = session.current;
     if (cur.clock.paused) return false;
-    const t = cur.clock.elapsed();
+    const t = Math.floor(cur.clock.elapsed());
     const result = trySwap(cur.state, from, to, t);
     if (!result.ok) return false;
+    cur.moves.push({ at: t, from: { ...from }, to: { ...to } });
     // 两帧之间已回稳时，先收掉上一操作的反馈，再替换时间线。
     syncCheer(cur, t);
     cur.base = baseOf(cur.state);

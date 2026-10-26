@@ -139,6 +139,8 @@ export function findHint(state: GameState): Move | null {
 }
 
 export interface GameSummary {
+  /** 浏览器记录的实际交换，正式结算时由服务端重演；引擎统计本身不依赖它。 */
+  moves?: import('../api/types').GameMove[];
   score: number;
   clearedCells: number;
   clearedByMultiplier: number[];

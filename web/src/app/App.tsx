@@ -19,6 +19,8 @@ import { UploadScreen } from '../screens/UploadScreen';
 import { MyPetsScreen } from '../screens/MyPetsScreen';
 import { InfoScreen } from '../screens/InfoScreen';
 import { PrepScreen } from '../screens/PrepScreen';
+import { TurnstileGate } from '../components/TurnstileGate/TurnstileGate';
+import { useGameVerification } from '../game/useGameVerification';
 import screen from '../screens/Screen.module.css';
 import { loadSavedPlayerId, savePlayerId } from './identity';
 import { GAME_VERSION } from './version';
@@ -70,6 +72,11 @@ export function App() {
   const closeTitles = useCallback(() => setShowTitles(false), []);
   const titleVersion = useRef(0);
   const playerId = player?.userId;
+  const prepared = route.name === 'prep' ? route.session?.registered ?? null : null;
+  const verification = useGameVerification(prepared, playerId, () => setRoute(current =>
+    current.name === 'prep' && current.ready && current.session && current.session.registered.gameId === prepared?.gameId
+      ? { name: 'board', session: current.session } : current,
+  ));
   const onEquipped = useCallback((id: AchievementId | null) => {
     titleVersion.current++;
     setPlayer(p => p && p.userId === playerId && p.equippedTitle !== id ? { ...p, equippedTitle: id } : p);
@@ -277,8 +284,16 @@ export function App() {
             loading={!!route.session && !route.ready && !route.failed}
             ownPetNames={route.session ? ownNamesOf(route.session) : []}
             failed={route.failed}
+            verificationReady={!verification.required || !!verification.token}
+            starting={verification.starting}
+            verification={verification.required && route.session && <TurnstileGate
+              key={`${route.session.registered.gameId}:${verification.attempt}`}
+              siteKey={verification.siteKey} gameId={route.session.registered.gameId}
+              onToken={verification.onToken} failed={verification.failed} rateLimited={verification.rateLimited}
+              onRetry={() => { if (verification.newGameNeeded) void toPrep(route.mode); else verification.retry(); }}
+            />}
             onRetry={() => void toPrep(route.mode)}
-            onStart={() => route.ready && route.session && setRoute({ name: 'board', session: route.session })}
+            onStart={() => { if (route.ready) void verification.start(); }}
           />
         );
       case 'board':

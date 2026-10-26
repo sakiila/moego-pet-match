@@ -1,5 +1,11 @@
 // Key 与 UI_COPY.md 对应；随页面接入逐步补齐。
 export const zh = {
+  'security.title': '开局验证',
+  'security.checking': '开局前确认一下，准备好就能玩。',
+  'security.verified': '验证完成，可以开始这班啦。',
+  'security.failed': '验证暂时没有通过，请重试。',
+  'security.starting': '正在开局…',
+  'security.rate_limited': '操作有点频繁，请稍后再试。',
   'app.title': '毛孩子全明星',
   'nav.home': '门店',
   'nav.collection': '宠物图鉴',

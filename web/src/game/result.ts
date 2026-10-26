@@ -15,5 +15,6 @@ export function toResultPayload(summary: GameSummary, rulesVersion: number): Res
     validMoves: summary.validMoves,
     actedInLastSeconds: summary.actedInLastSeconds,
     pets: summary.pets.map((p) => ({ id: p.id, served: p.served, firstServedSeq: p.firstServedSeq })),
+    ...(summary.moves ? { moves: summary.moves } : {}),
   };
 }

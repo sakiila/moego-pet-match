@@ -17,9 +17,11 @@ import { webRoutes } from './routes/web.ts';
 import type { AdminNotifier } from './services/adminNotify.ts';
 import type { SlackDirectory } from './services/slackDirectory.ts';
 import type { SubmissionHooks } from './services/submissions.ts';
+import type { TurnstileConfig } from './services/turnstile.ts';
 
 export interface AppDeps {
   pool: Pool;
+  gameSecurity?: TurnstileConfig;
   /** 测试用：结算事务中途注入失败。 */
   settleHooks?: SettleHooks;
   /** 测试用：上传写库前注入失败。 */
