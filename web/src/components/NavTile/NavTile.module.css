@@ -20,6 +20,7 @@
 }
 
 .iconFrame {
+  position: relative;
   --icon-scale: 1;
   display: flex;
   align-items: center;
@@ -27,6 +28,8 @@
   width: var(--nav-tile-icon-size);
   height: var(--nav-tile-icon-size);
 }
+
+.iconFrame[data-unread]::after { content: ''; position: absolute; top: 0; right: 0; width: var(--paw-dot-size); height: var(--paw-dot-size); border: var(--stroke) solid var(--card); border-radius: var(--radius-pill); background: var(--color-brand); }
 
 .iconFrame[data-icon='my-pets'] {
   --icon-scale: var(--nav-tile-my-pets-scale);

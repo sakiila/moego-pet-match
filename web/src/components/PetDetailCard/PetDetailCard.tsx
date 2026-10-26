@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import type { PetDetail } from '../../api/types';
 import { quoteExcerpt } from '../../game/collection';
@@ -41,6 +41,11 @@ export interface PetDetailCardProps {
   aboveSheet?: boolean;
   /** 开发者彩蛋：毛肚、菠萝的卡正面右上盖「开发者家的认证」章（未收集也盖），主人行追加「本游戏开发者」（game/easterEggs）。 */
   developer?: boolean;
+  /** 独立于整面翻转的局外动作。 */
+  action?: ReactNode;
+  /** 上层爪印簿打开时保留卡片并暂停交互。 */
+  suspended?: boolean;
+  onReady?: () => void;
 }
 
 const OPEN_MS = 640;
@@ -78,10 +83,10 @@ function moveTo(from: DOMRect, to: DOMRect) {
 /**
  * 图鉴详情卡：点开时列表里的卡片翻转着飞到屏幕中央，点遮罩或右上角关闭就翻转着收回原位。
  * 落地先显示正面（贴纸、名字、主人）；点卡片本身翻到背面（处理后照片与「主人说」），再点翻回。
- * 未收集只给名字、剪影与解锁说明；自家宠物即使未收集也显示完整资料。开始营业、重试、资料删除申请放在卡片下方。
+ * 未收集只给名字与剪影；自家宠物即使未收集也显示完整资料。开始营业、重试、资料删除申请放在卡片下方。
  */
 export function PetDetailCard(props: PetDetailCardProps) {
-  const { name, origin, onClose, onRetry, onOpenShop, onRequestRemoval, inline, aboveSheet } = props;
+  const { name, origin, onClose, onRetry, onOpenShop, onRequestRemoval, inline, aboveSheet, suspended = false } = props;
   const { t } = useI18n();
   const [flipped, setFlipped] = useState(false);
   const [closing, setClosing] = useState(false);
@@ -90,6 +95,7 @@ export function PetDetailCard(props: PetDetailCardProps) {
   // 第一次落地后才换上读取到的详情：飞行途中换内容（主人行、认识人数头像、背面大照片）会让卡片中途重排、重新光栅化而顿一下。
   // 只置一次，关闭飞回时不再切回读取中
   const [landed, setLanded] = useState(!!inline);
+  useEffect(() => { if (settled) props.onReady?.(); }, [settled, props.onReady]);
   const state: PetDetailState = landed ? props.state : { kind: 'loading' };
   // 背面照片（长边 1600）落地后稍等再加载，或一翻面就加载；背面的光带第一次翻面才挂上
   const [photoReady, setPhotoReady] = useState(!!inline);
@@ -104,11 +110,15 @@ export function PetDetailCard(props: PetDetailCardProps) {
   const flyRef = useRef<HTMLDivElement>(null);
   const flipperRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
+  const hasFocused = useRef(false);
   useEffect(() => {
-    if (inline || !aboveSheet) return;
+    if (inline || suspended) return;
     const previous = document.activeElement;
     const overlay = backdropRef.current?.parentElement;
-    overlay?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+    if (!hasFocused.current) {
+      overlay?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+      hasFocused.current = true;
+    }
     const trapFocus = (event: globalThis.KeyboardEvent) => {
       if (event.key !== 'Tab' || !overlay) return;
       const controls = [...overlay.querySelectorAll<HTMLElement>('button:not(:disabled), [href], [tabindex="0"]')]
@@ -128,7 +138,7 @@ export function PetDetailCard(props: PetDetailCardProps) {
       const target = origin?.isConnected ? origin : previous;
       if (target instanceof HTMLElement && target.isConnected) target.focus({ preventScroll: true });
     };
-  }, [inline, aboveSheet, origin]);
+  }, [inline, suspended, origin]);
 
   const detail = state.kind === 'ready' ? state.detail : null;
   const collected = detail ? detail.collected : hint.collected;
@@ -212,7 +222,7 @@ export function PetDetailCard(props: PetDetailCardProps) {
   };
 
   useEffect(() => {
-    if (inline) return;
+    if (inline || suspended) return;
     const onKey = (e: globalThis.KeyboardEvent) => e.key === 'Escape' && close();
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -234,7 +244,7 @@ export function PetDetailCard(props: PetDetailCardProps) {
   };
 
   const overlay = (
-    <div className={`${styles.overlay} ${inline ? styles.inline : ''} ${aboveSheet ? styles.aboveSheet : ''}`} role="dialog" aria-modal="true" aria-label={detail?.name ?? name} data-testid="pet-detail" data-closing={closing || undefined} data-settled={settled || undefined}>
+    <div className={`${styles.overlay} ${inline ? styles.inline : ''} ${aboveSheet ? styles.aboveSheet : ''}`} role="dialog" aria-modal="true" aria-label={detail?.name ?? name} inert={suspended || undefined} aria-hidden={suspended || undefined} data-testid="pet-detail" data-closing={closing || undefined} data-settled={settled || undefined}>
       <div className={styles.backdrop} ref={backdropRef} onClick={close} aria-hidden />
       <button type="button" className={styles.close} onClick={close} aria-label={t('action.close')} data-testid="detail-close">
         <Icon name="close" size={20} />
@@ -271,22 +281,18 @@ export function PetDetailCard(props: PetDetailCardProps) {
           </Tilt>
         </div>
         <div className={styles.actions}>
+          {detail && props.action}
           {state.kind === 'unlisted' && <p className={styles.note}>{t('pet.unlisted')}</p>}
           {state.kind === 'failed' && (
             <Button variant="secondary" iconName="retry" onClick={onRetry}>
               {t('action.retry')}
             </Button>
           )}
-          {detail && !collected && (
-            <>
-              <p className={styles.note}>{t('pet.unlock_hint')}</p>
-              {/* 自家宠物从「我的宠物」查看完整资料，不在这里引导开局（图稿 mobile-my-pets-v1） */}
-              {!detail.own && (
-                <Button size="lg" iconName="open-shop-white" onClick={onOpenShop}>
-                  {t('action.open_shop')}
-                </Button>
-              )}
-            </>
+          {/* 自家宠物从「我的宠物」查看完整资料，不在这里引导开局（图稿 mobile-my-pets-v1） */}
+          {detail && !collected && !detail.own && (
+            <Button size="lg" iconName="open-shop-white" onClick={onOpenShop}>
+              {t('action.open_shop')}
+            </Button>
           )}
           {detail?.own && onRequestRemoval && (
             <button type="button" className={styles.remove} onClick={onRequestRemoval} data-testid="detail-remove">

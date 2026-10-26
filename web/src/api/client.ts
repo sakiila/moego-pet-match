@@ -1,4 +1,4 @@
-import type { AchievementId, AchievementView, PlayerLikesView, PlayerPet, PlayerProfileView } from './types';
+import type { AchievementId, AchievementView, PlayerLikesView, PlayerPet, PlayerProfileView, PawBookView, PawMessage, PawNotices } from './types';
 import { isGalleryPath } from '../app/entryRoute';
 import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse, VersionInfo } from './types';
 
@@ -93,6 +93,13 @@ async function submitPet(
   throw new UploadError('failed');
 }
 
+/** 爪印动作超时后由控制器重新读取，处理已落库但响应丢失的情况。 */
+function pawRequest<T>(path: string, init?: RequestInit): Promise<T> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 12_000);
+  return request<T>(path, { ...init, signal: controller.signal }).finally(() => clearTimeout(timer));
+}
+
 const gameTokens = new Map<string, string>();
 
 export const api = {
@@ -110,6 +117,15 @@ export const api = {
     method: 'POST', body: JSON.stringify({ playerId, pin, ...(confirmation === undefined ? {} : { confirmation }) }),
   }),
   logout: () => request<{ ok: true }>('/api/auth/logout', { method: 'POST', body: '{}' }),
+  getPawBook: (petId: string, playerId: string, cursor?: string | null) => pawRequest<PawBookView>(
+    `/api/pets/${encodeURIComponent(petId)}/paws?playerId=${encodeURIComponent(playerId)}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`),
+  changePaw: (petId: string, playerId: string, message: PawMessage | null, version: number, limit = 20) => pawRequest<PawBookView>(
+    `/api/pets/${encodeURIComponent(petId)}/paws`, { method: 'PUT', body: JSON.stringify({ playerId, message, version, limit }) }),
+  replyPaw: (petId: string, playerId: string, id: string, version: number, limit = 20) => pawRequest<PawBookView>(
+    `/api/pets/${encodeURIComponent(petId)}/paws/${encodeURIComponent(id)}/reply`, { method: 'POST', body: JSON.stringify({ playerId, version, limit }) }),
+  readPaws: (petId: string, playerId: string, ids: string[], kind: 'message' | 'reply') => pawRequest<{ ok: true }>(
+    `/api/pets/${encodeURIComponent(petId)}/paws/read`, { method: 'POST', body: JSON.stringify({ playerId, ids, kind }) }),
+  getPawNotices: (playerId: string) => pawRequest<PawNotices>(`/api/players/${encodeURIComponent(playerId)}/paw-notices`),
   getPlayerPets: (ownerId: string, viewerId: string, signal?: AbortSignal) => request<{ pets: PlayerPet[] }>(`/api/players/${encodeURIComponent(ownerId)}/pets?viewerId=${encodeURIComponent(viewerId)}`, { signal }).then(view => view.pets),
   getPlayerLikes: (targetId: string, viewerId: string, signal?: AbortSignal) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes?viewerId=${encodeURIComponent(viewerId)}`, { signal }),
   likePlayer: (targetId: string, playerId: string) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes`, { method: 'POST', body: JSON.stringify({ playerId }) }),

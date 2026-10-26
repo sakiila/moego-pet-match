@@ -4,7 +4,7 @@ import { FishFrame } from '../../dev/gallery/FishFrame';
 import { ICON_CATALOG } from '../icons/catalog';
 import { Icon, type IconName } from './Icon';
 
-const NAMES = [...Object.keys(ICON_CATALOG), 'my-titles', 'clock-out'] as IconName[];
+const NAMES = [...Object.keys(ICON_CATALOG), 'my-titles', 'clock-out', 'paw-print', 'paw-cute', 'paw-pets', 'paw-play', 'paw-love'] as IconName[];
 const SIZES = [24, 32, 48];
 
 function Grid({ names = NAMES }: { names?: IconName[] }) {

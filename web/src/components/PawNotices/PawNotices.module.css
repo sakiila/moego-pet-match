@@ -1,0 +1,5 @@
+.list { display: grid; gap: var(--space-2); }
+.notice { display: flex; align-items: center; gap: var(--space-2); width: 100%; min-height: var(--touch-target); padding: var(--space-3); border: 0; border-radius: var(--radius-md); background: var(--time-bg); color: var(--color-ink); text-align: start; font: inherit; font-size: var(--text-sm); cursor: pointer; }
+.notice > svg { color: var(--color-brand); flex-shrink: 0; }
+.notice span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.notice:focus-visible { outline: var(--stroke) solid var(--color-brand); outline-offset: var(--space-1); }

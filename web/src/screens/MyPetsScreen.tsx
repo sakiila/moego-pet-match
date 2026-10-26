@@ -4,6 +4,8 @@ import type { MyPet, PetDetail, PlayerView } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { MyPetCard } from '../components/MyPetCard/MyPetCard';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
+import { PawNotices } from '../components/PawNotices/PawNotices';
+import { usePawNotices } from '../game/usePawNotices';
 import { avatarUrl, stickerUrl } from '../game/pets';
 import { useDeletionRequest } from '../game/useDeletionRequest';
 import { usePetDetail } from '../game/usePetDetail';
@@ -32,6 +34,8 @@ export function MyPetsScreen({ player, onBack, onUpload, onOpenShop, load = api.
   const { t } = useI18n();
   const [pets, setPets] = useState<MyPet[] | null>(null);
   const [failed, setFailed] = useState(false);
+  const paws = usePawNotices(player.userId);
+  const [pawId, setPawId] = useState<string | null>(null);
 
   const fetchPets = useCallback(async () => {
     setFailed(false);
@@ -78,12 +82,15 @@ export function MyPetsScreen({ player, onBack, onUpload, onOpenShop, load = api.
             stickerSrc={stickerUrl(p.petId, 512)}
             collected={p.collected}
             request={p.request?.status ?? null}
+            notice={<PawNotices items={paws.messages.filter(n => n.petId === p.petId)} kind="message" onOpen={(item, el) => {
+              setPawId(item.petId); void detail.show(item.petId, item.petName, el);
+            }} />}
             onView={(el) => void detail.show(p.petId, p.name, el)}
             onRequestRemoval={() => removal.open({ kind: 'pet', petId: p.petId, name: p.name, ownerName: player.name })}
           />
         ))}
       </div>
-      <PetDetailOverlay pet={detail.open} playerId={player.userId} onClose={detail.close} onRetry={detail.show} onOpenShop={onOpenShop} onRemovalSubmitted={fetchPets} />
+      <PetDetailOverlay pet={detail.open} playerId={player.userId} openPaws={pawId === detail.open?.petId} onClose={() => { setPawId(null); detail.close(); }} onRetry={detail.show} onOpenShop={onOpenShop} onRemovalSubmitted={fetchPets} />
       <DeletionRequestOverlay target={removal.target} onSubmit={removal.submit} onClose={removal.close} />
     </main>
   );

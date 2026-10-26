@@ -91,17 +91,23 @@ try {
         await uploadSticker(p.sticker);
         const photo = photoPlan.get(p.pet_id);
         if (photo) await store.put(photo.key, photo.body, 'image/jpeg');
-        await client.query(
-          `INSERT INTO pet_match.pets (pet_id, name, owner_user_id, family_id, species, intro, owner_quote, sticker_key, status)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,'published')
-           ON CONFLICT (pet_id) DO UPDATE SET name = EXCLUDED.name, owner_user_id = EXCLUDED.owner_user_id, family_id = EXCLUDED.family_id,
-             species = EXCLUDED.species, intro = EXCLUDED.intro, owner_quote = EXCLUDED.owner_quote, sticker_key = EXCLUDED.sticker_key,
-             status = 'published', updated_at = now()`,
-          [p.pet_id, p.name, p.owner_user_id, p.family_id, p.species, p.intro, p.owner_quote, p.sticker.key],
-        );
-        if (photo) await client.query('UPDATE pet_match.pets SET photo_key = $2 WHERE pet_id = $1', [p.pet_id, photo.key]);
-        const coat = coatPlan.get(p.pet_id);
-        if (coat) await client.query('UPDATE pet_match.pets SET coat = $2 WHERE pet_id = $1', [p.pet_id, coat]);
+        // 上架变更与爪印写入同序取锁；先锁宠物身份，再由 INSERT/UPDATE 取得行锁。
+        await client.query("SELECT pg_advisory_lock(hashtextextended('pet-paw:' || $1,0))", [p.pet_id]);
+        try {
+          await client.query(
+            `INSERT INTO pet_match.pets (pet_id, name, owner_user_id, family_id, species, intro, owner_quote, sticker_key, status)
+             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,'published')
+             ON CONFLICT (pet_id) DO UPDATE SET name = EXCLUDED.name, owner_user_id = EXCLUDED.owner_user_id, family_id = EXCLUDED.family_id,
+               species = EXCLUDED.species, intro = EXCLUDED.intro, owner_quote = EXCLUDED.owner_quote, sticker_key = EXCLUDED.sticker_key,
+               status = 'published', updated_at = now()`,
+            [p.pet_id, p.name, p.owner_user_id, p.family_id, p.species, p.intro, p.owner_quote, p.sticker.key],
+          );
+          if (photo) await client.query('UPDATE pet_match.pets SET photo_key = $2 WHERE pet_id = $1', [p.pet_id, photo.key]);
+          const coat = coatPlan.get(p.pet_id);
+          if (coat) await client.query('UPDATE pet_match.pets SET coat = $2 WHERE pet_id = $1', [p.pet_id, coat]);
+        } finally {
+          await client.query("SELECT pg_advisory_unlock(hashtextextended('pet-paw:' || $1,0))", [p.pet_id]);
+        }
       }
       for (const f of fishPlan as FishRecord[]) {
         await uploadSticker(f.sticker);

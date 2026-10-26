@@ -15,6 +15,32 @@ export interface AchievementView {
 
 export type GameMode = 'normal' | 'fish';
 
+export type PawMessage = 'cute' | 'pets' | 'play' | 'love';
+export interface PetPaw {
+  id: string;
+  sender: { userId: string; name: string };
+  message: PawMessage;
+  version: number;
+  createdAt: string;
+  reply: { owner: { userId: string; name: string }; at: string } | null;
+  unreadMessage: boolean;
+  unreadReply: boolean;
+}
+export interface PawBookView {
+  petId: string;
+  petName: string;
+  own: boolean;
+  count: number;
+  unreadCount: number;
+  mine: PetPaw | null;
+  /** 撤回的关系也保留版本，阻止旧请求覆盖新的表达。 */
+  mineVersion: number;
+  entries: PetPaw[];
+  nextCursor: string | null;
+}
+export interface PawNotice { petId: string; petName: string; count: number }
+export interface PawNotices { messages: PawNotice[]; replies: PawNotice[] }
+
 /** 玩家永久点赞；独立加载，不影响成绩与名片的可用性。 */
 export interface PlayerLikesView {
   receivedLikes: number;
