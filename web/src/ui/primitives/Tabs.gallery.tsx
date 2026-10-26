@@ -7,7 +7,7 @@ function Demo({ variant, count, icons }: { variant: 'pill' | 'underline'; count:
   const [v, setV] = useState('a');
   const opts = [
     { value: 'a', label: '宠物店', icon: icons ? <Icon name={v === 'a' ? 'open-shop-white' : 'open-shop'} size={26} /> : undefined },
-    { value: 'b', label: '鱼关卡', icon: icons ? <Icon name="leaderboard" size={26} /> : undefined },
+    { value: 'b', label: '摸鱼分店', icon: icons ? <Icon name="leaderboard" size={26} /> : undefined },
   ].slice(0, count);
   return <Tabs value={v} options={opts} onChange={setV} variant={variant} label="demo" />;
 }

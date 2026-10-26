@@ -157,7 +157,7 @@ export const en: Record<MessageKey, string> = {
   'report.tip_comb_scissors': 'Swap a comb with neighboring scissors to clear three rows and three columns around the landing spot.',
   'report.today_alone': 'First to clock in today. Let\'s see who follows.',
   'leaderboard.pets': 'Pet Shop',
-  'leaderboard.fish': 'Fish Round',
+  'leaderboard.fish': 'Fish Tank',
   'leaderboard.near_me': 'My Rank',
   'leaderboard.all': 'All Rankings',
   'leaderboard.find_me': 'Back to My Rank',
@@ -306,7 +306,7 @@ export const en: Record<MessageKey, string> = {
   'fish.rush_title': 'A Rush Order from Peter!',
   'fish.rush_goal': 'Clear 12 tiles in 20s',
   'fish.rush_progress': '{count}/12 tiles cleared · Rush time: {seconds}s',
-  'fish.leaderboard': 'Fish Leaderboard',
+  'fish.leaderboard': 'Fish Tank Leaderboard',
   // 阶段 3D 补入（2026-10-23 确认）
   'fish.prep_loading': 'The fish are swimming in…',
   'fish.rush_served': '{count}/12 tiles cleared',

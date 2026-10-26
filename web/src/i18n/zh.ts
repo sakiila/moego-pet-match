@@ -156,7 +156,7 @@ export const zh = {
   'report.tip_comb_scissors': '相邻的梳子和剪刀交换，能清除落点附近三行三列。',
   'report.today_alone': '今天第一个开工，等同事来挑战',
   'leaderboard.pets': '宠物店',
-  'leaderboard.fish': '鱼关卡',
+  'leaderboard.fish': '摸鱼分店',
   'leaderboard.near_me': '我的名次',
   'leaderboard.all': '全榜',
   'leaderboard.find_me': '回到我的名次',
@@ -305,7 +305,7 @@ export const zh = {
   'fish.rush_title': 'Peter 的小鱼加急啦！',
   'fish.rush_goal': '20 秒内清除 12 格',
   'fish.rush_progress': '已清除 {count}/12 格 · 催单剩余 {seconds} 秒',
-  'fish.leaderboard': '鱼关排行榜',
+  'fish.leaderboard': '摸鱼分店排行榜',
   // 阶段 3D 补入（2026-10-23 确认）
   'fish.prep_loading': '小鱼正在入缸……',
   'fish.rush_served': '已清除 {count}/12 格',

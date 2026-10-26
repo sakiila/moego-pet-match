@@ -57,11 +57,11 @@ describe('成绩卡内容', () => {
     expect(managerPosterModel({ manager, locale: 'zh', t: zh }).line).toBe('你负责排班，我负责可爱。');
   });
 
-  it('鱼关：MVP 用鱼色类别名并跟随语言，模式牌为鱼关卡', () => {
+  it('鱼关：MVP 用鱼色类别名并跟随语言，模式牌为摸鱼分店', () => {
     const s = summary({ pets: summary().pets.map((p, i) => ({ ...p, id: fish[i].id, served: i === 0 ? 50 : 5 })) });
     const zhCard = shareCardModel({ summary: s, pets: fish, mode: 'fish', playerName: 'Bob', manager, locale: 'zh', t: zh });
     expect(zhCard.hero).toEqual({ src: '/img/fish/fish_color_blue/1024?format=webp', label: '本局 MVP：天蓝色', kind: 'mvp' });
-    expect(zhCard.mode).toBe('鱼关卡');
+    expect(zhCard.mode).toBe('摸鱼分店');
     expect(zhCard.review).toBe('催完就跑，有点不好意思。');
     const enCard = shareCardModel({ summary: s, pets: fish, mode: 'fish', playerName: 'Bob', manager, locale: 'en', t: en });
     expect(enCard.hero?.label).toBe("This Round's MVP: Sky Blue");

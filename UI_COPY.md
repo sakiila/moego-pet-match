@@ -412,7 +412,7 @@
 | Key | 中文 | English |
 | --- | --- | --- |
 | leaderboard.pets | 宠物店 | Pet Shop |
-| leaderboard.fish | 鱼关卡 | Fish Round |
+| leaderboard.fish | 摸鱼分店 | Fish Tank |
 | leaderboard.near_me | 我的名次 | My Rank |
 | leaderboard.all | 全榜 | All Rankings |
 | leaderboard.find_me | 回到我的名次 | Back to My Rank |
@@ -488,7 +488,7 @@
 | fish.report_subtitle | 今天，这批客人不用吹干。 | These guests can skip the blow-dry. |
 | fish.report_mvp | 本局 MVP：{fishColorName} | This Round's MVP: {fishColorName} |
 | fish.report_tiles | 清除格数 | Tiles Cleared |
-| fish.leaderboard | 鱼关排行榜 | Fish Leaderboard |
+| fish.leaderboard | 摸鱼分店排行榜 | Fish Tank Leaderboard |
 | fish.prep_loading | 小鱼正在入缸…… | The fish are swimming in… |
 | fish.rush_served | 已清除 {count}/12 格 | {count}/12 tiles cleared |
 | tutorial.big_wave_merge | 两个珍珠贝壳相邻交换，合成大浪花！ | Swap two neighboring pearl shells to merge them into a big wave! |
