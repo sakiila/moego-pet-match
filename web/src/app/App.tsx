@@ -56,6 +56,9 @@ const preset = import.meta.env.DEV ? PRESETS[params.get('preset') ?? ''] : undef
 const devReport = params.get('report');
 const devReportMode: GameMode = params.get('mode') === 'fish' ? 'fish' : 'normal';
 const devInvite = params.get('invite') === '1';
+/** 宣传片录屏：?demo=<棋盘种子>&play=<走法种子>，用固定种子开局，进棋盘后按 dev/demo 的计划自动走子。 */
+const demoSeed = import.meta.env.DEV && params.has('demo') ? Number(params.get('demo')) : null;
+const demoPlay = Number(params.get('play')) || 0;
 const ReportShowcase = import.meta.env.DEV ? lazy(() => import('../dev/ReportShowcase').then((m) => ({ default: m.ReportShowcase }))) : null;
 
 export function App() {
@@ -134,7 +137,7 @@ export function App() {
           return;
         }
         const game = createGame({
-          seed: registered.seed,
+          seed: demoSeed ?? registered.seed,
           lineup: registered.lineup.map((p) => p.petId),
           board: preset?.board,
           refill: preset?.refill,
@@ -191,6 +194,20 @@ export function App() {
       cancelled = true;
     };
   }, [route.name]);
+
+  const boardGame = route.name === 'board' ? route.session.game : null;
+  useEffect(() => {
+    if (!import.meta.env.DEV || demoSeed === null || !boardGame) return;
+    let stop = () => {};
+    let cancelled = false;
+    void import('../dev/demo').then(({ planDemo, runDemo }) => {
+      if (!cancelled) stop = runDemo(planDemo(boardGame, { seed: demoSeed, play: demoPlay }));
+    });
+    return () => {
+      cancelled = true;
+      stop();
+    };
+  }, [boardGame]);
 
   const toHome = useCallback(() => {
     prepAttempt.current++;

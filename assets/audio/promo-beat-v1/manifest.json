@@ -1,0 +1,20 @@
+{
+  "title": "毛孩子全明星 · 宣传片节拍 / Promo Beat v1",
+  "bpm": 120,
+  "meter": "4/4",
+  "key": "C major",
+  "bars": 12,
+  "tailSeconds": 1.0,
+  "seconds": 25.0,
+  "sampleRate": 48000,
+  "peakDbFS": -1.938200260161128,
+  "rmsDbFS": -21.22597450566368,
+  "sfx": [
+    "crash.wav",
+    "ding.wav",
+    "pop.wav",
+    "slam.wav",
+    "whoosh.wav"
+  ],
+  "source": "Original score, additive synthesis and seeded noise; no external samples."
+}

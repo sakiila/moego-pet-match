@@ -62,7 +62,7 @@ tools/pet-studio/  已有的独立素材工作台，与游戏代码分开，不�
 - 生产镜像：仓库根目录 `docker buildx build --platform linux/amd64 --build-arg GAME_VERSION="$(node web/scripts/game-version.mjs)" -t moego-pet-match:<版本> --load .`；首页版号取 Git 最新提交的北京时间日期与当日主线提交序号，CI 自动传入，开发服务启动时读取。部署说明、编排示例与生产环境变量清单在 `deploy/`。
 - 自动部署：推送 `main` 即触发 GitHub Actions「Deploy to RackNerd」，依次测试、构建 GHCR 镜像并部署到 `https://star.baobo.me`（仓库变量 `DEPLOY_ENABLED=true`；维护时可临时关闭）。**推送 main 等同上线**：只在用户明确要求时推送，推送后用 `gh run list --workflow deploy.yml` 确认运行结果。
 - engine 与 server 的规则改动必须有单元测试并跑通。引擎只认游戏时钟毫秒数；测试用 ASCII 棋盘夹具与固定补落序列（见 `web/src/engine/__tests__/fixtures.ts`）。
-- 报告页验收（仅开发环境）：打开 `http://localhost:5180/?report=greedy`（或 `casual` 随机走子、`zero` 零服务局；加 `&mode=fish` 看鱼关报告），刷新一次就登记并自动打完一局、直接进入报告页，走真实结算与保存；`?report=showcase` 用伪造的已保存结果让结算页全部元素同时出现（新纪录、今日名次、打卡、新收集与新称号、猜主人、下一件事；加 `&invite=1` 换成鱼关邀请），只登记不结算；需要先在浏览器里选过一次身份，会向本地开发库写入对局记录（成绩、图鉴、局数）。生产构建不含此功能。
+- 报告页验收（仅开发环境）：打开 `http://localhost:5180/?report=greedy`（或 `casual` 随机走子、`zero` 零服务局；加 `&mode=fish` 看鱼关报告），刷新一次就登记并自动打完一局、直接进入报告页，走真实结算与保存；`?report=showcase` 用伪造的已保存结果让结算页全部元素同时出现（新纪录、今日名次、打卡、新收集与新称号、猜主人、下一件事；加 `&invite=1` 换成鱼关邀请），只登记不结算；需要先在浏览器里选过一次身份，会向本地开发库写入对局记录（成绩、图鉴、局数）。生产构建不含此功能。宣传片录屏用 `?demo=<棋盘种子>&play=<走法种子>`：开局后棋盘按固定走法自动打完整局，挑种子用 `web/` 下的 `npx vite-node scripts/demo-seeds.ts`，见 [宣传片分镜](design/reviews/2026-10-26-promo-video/STORYBOARD.md)。
 - UI 改动在浏览器 390 × 844 下截图，与对应的已选定图稿（见 DESIGN_NOTES「选定展示文件」）对比并说明差异；同时检查陈列页中的各状态。
 - 未实际运行验证的内容，在交付说明中明确写出。
 

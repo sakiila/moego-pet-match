@@ -26,3 +26,8 @@ __pycache__/
 # 服务端本地图片缓存（可随时删除重建）
 server/.cache/
 server/.store/
+
+# 宣传片录屏与渲染产物（可随时重录）
+tools/promo-video/public/recordings/
+tools/promo-video/out/
+tools/promo-video/public/assets/
