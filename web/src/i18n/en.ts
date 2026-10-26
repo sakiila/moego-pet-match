@@ -180,6 +180,7 @@ export const en: Record<MessageKey, string> = {
   // 游戏名拆成两段以便强调色（即已确认的游戏名「MoeGo 毛孩子全明星 / MoeGo Pet All-Stars」）
   'brand.title_lead': 'Pet',
   'brand.title_accent': 'All-Stars',
+  'brand.tagline': 'A menace at home.\nA star in the game. ✨',
   // 阶段 3B：完整报告、评语、称号与猜主人（取自 UI_COPY；称号 key 按「既定主称号的中英文对应」表命名）
   'report.subtitle': 'Shift complete. Here\'s what your MVP has to say.',
   'report.mvp': 'This Round\'s MVP: {petName}',

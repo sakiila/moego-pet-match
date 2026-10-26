@@ -115,6 +115,7 @@
 
 | Key | 中文 | English |
 | --- | --- | --- |
+| brand.tagline | 在家逆子，在外顶流。✨ | A menace at home.<br>A star in the game. ✨ |
 | home.manager | 今日店长 | Today's Shop Manager |
 | home.manager_line | 你负责排班，我负责可爱。 | You handle the schedule. I'll bring the cuteness. |
 | home.manager_line_maodu | 键盘我踩过了，bug 归店长。 | I walked the keyboard. Today's bugs are on me. |
@@ -143,6 +144,8 @@
 点击右上角头像，在头像下方展开下拉框，显示「Clock Out」（中英文一致）；再次点击头像、点击外部或按 Escape 收起。点击「Clock Out」清除浏览器记住的身份并返回身份选择页。
 
 店长小海报已确认（2026-10-23，图稿 manager-poster-v1）：点门店的今日店长打开预览，海报含店长贴纸、「今日店长 · 名字」、既定宣言与北京日期；不自动弹出。保存与分享沿用成绩卡的 `share.save`、`share.send`、`share.failed`。
+
+2026-10-26 品牌宣传语：用户确认 `brand.tagline` 仅用于店长小海报，按当前界面语言显示单一语言；英文在两句之间换行。首页与身份选择页继续使用 `access.subtitle`，保留 90 秒消消乐介绍。海报宣传语放在收据虚线下、日期上方，保留店长宣言和小票外网址。
 
 默认店长宣言已确认：「你负责排班，我负责可爱。 / You handle the schedule. I'll bring the cuteness.」这是游戏角色台词，不是主人原话，不增加每日随机或其他新机制。
 

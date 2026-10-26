@@ -82,6 +82,11 @@
   /* 成绩卡（Canvas）上贴纸的投影色 */
   --share-shadow: rgb(31 34 39 / 0.16);
   --share-url-size: 32px;
+  --share-tagline-size: 44px;
+  --share-tagline-min-size: 36px;
+  --share-tagline-line-height: 1.25;
+  --share-manager-tagline-y: 1200px;
+  --share-manager-date-y: 1290px;
   --share-card-ratio: 0.75;
 
   /* 图鉴贴纸册：纸、胶带与导出共用的视觉令牌。 */

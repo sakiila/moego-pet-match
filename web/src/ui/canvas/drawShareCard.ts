@@ -30,6 +30,11 @@ function readTokens(mode: GameMode) {
     font: v('--font-sans'),
     urlSize: parseFloat(v('--share-url-size')),
     urlWeight: v('--weight-regular'),
+    taglineSize: parseFloat(v('--share-tagline-size')),
+    taglineMinSize: parseFloat(v('--share-tagline-min-size')),
+    taglineLineHeight: parseFloat(v('--share-tagline-line-height')),
+    managerTaglineY: parseFloat(v('--share-manager-tagline-y')),
+    managerDateY: parseFloat(v('--share-manager-date-y')),
     bg: v('--bg'),
     waterTop: v('--water-top'),
     waterDeep: v('--water-deep'),
@@ -706,7 +711,7 @@ export async function drawManagerPoster(model: ManagerPosterModel): Promise<Blob
   ctx.fillStyle = k.ink;
   lines.forEach((l, i) => ctx.fillText(l, bx + bw2 / 2, by + 32 + lh * (i + 0.5)));
 
-  // 收据虚线与北京日期
+  // 收据虚线、品牌宣传语与北京日期
   ctx.strokeStyle = k.line;
   ctx.lineWidth = 3;
   ctx.setLineDash([14, 10]);
@@ -715,9 +720,20 @@ export async function drawManagerPoster(model: ManagerPosterModel): Promise<Blob
   ctx.lineTo(1000, 1132);
   ctx.stroke();
   ctx.setLineDash([]);
+  const tagline = fit(
+    ctx, (s) => `800 ${s}px ${k.font}`, model.tagline, 860, 2, k.taglineSize, k.taglineMinSize,
+    (ctx, text, width) => text.split('\n').flatMap((line) => wrap(ctx, line, width)),
+  );
+  ctx.fillStyle = k.brand;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  tagline.lines.forEach((line, i) => {
+    const y = k.managerTaglineY + (i - (tagline.lines.length - 1) / 2) * tagline.size * k.taglineLineHeight;
+    ctx.fillText(line, 540, y);
+  });
   fit(ctx, (s) => `800 ${s}px ${k.font}`, model.date, 860, 1, 40, 26);
   ctx.fillStyle = k.ink;
-  ctx.fillText(model.date, 540, 1226);
+  ctx.fillText(model.date, 540, k.managerDateY);
   shareUrl(ctx, k);
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('export failed'))), 'image/png'));
 }

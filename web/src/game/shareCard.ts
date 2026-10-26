@@ -73,6 +73,7 @@ export function shareCardModel({ summary, pets, mode, playerName, manager, local
 export interface ManagerPosterModel {
   mode: string;
   brand: { lead: string; accent: string };
+  tagline: string;
   hero: { src: string; label: string; kind: 'manager' };
   line: string;
   date: string;
@@ -85,6 +86,7 @@ export function managerPosterModel({ manager, locale, t }: { manager: DailyManag
   return {
     mode: t('home.manager'),
     brand: { lead: t('brand.title_lead'), accent: t('brand.title_accent') },
+    tagline: t('brand.tagline'),
     hero: { src: stickerUrl(manager.pet.petId, 1024), label: `${t('home.manager')} · ${manager.pet.name}`, kind: 'manager' },
     line: t(managerLineKey(manager.pet.petId)),
     date: t('manager.poster_date', { year, month, day, monthName: locale === 'en' ? MONTHS[month - 1] : '' }),
