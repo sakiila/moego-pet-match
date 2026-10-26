@@ -79,7 +79,10 @@ export const socialRoutes: FastifyPluginAsync<AppDeps> = async (
     const id = await user(request, reply);
     if (!id) return;
     const [person, pets, count] = await Promise.all([
-      pool.query('SELECT name FROM pet_match.colleagues WHERE user_id=$1', [id]),
+      pool.query(
+        'SELECT c.name,t.equipped_title FROM pet_match.colleagues c LEFT JOIN pet_match.player_titles t ON t.player_id=c.user_id WHERE c.user_id=$1',
+        [id],
+      ),
       pool.query(
         "SELECT pet_id,name FROM pet_match.pets WHERE owner_user_id=$1 AND status='published' ORDER BY name,pet_id",
         [id],
@@ -88,7 +91,7 @@ export const socialRoutes: FastifyPluginAsync<AppDeps> = async (
     ]);
     if (!person.rows[0]) return reply.status(401).send({ error: 'login_required' });
     return {
-      viewer: socialPerson(id, person.rows[0].name),
+      viewer: socialPerson(id, person.rows[0].name, person.rows[0].equipped_title),
       pets: pets.rows.map((p) => ({
         id: p.pet_id,
         name: p.name,

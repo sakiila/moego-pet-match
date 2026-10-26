@@ -5,10 +5,10 @@ export default {
   name: 'SocialAuthor',
   group: 'components',
   states: {
-    clickable: () => <SocialAuthor person={person} size={36} onOpen={() => {}}>今天 · 来自 Slack</SocialAuthor>,
-    readOnly: () => <SocialAuthor person={person} size={36} />,
+    clickable: () => <SocialAuthor person={person} onOpen={() => {}}>今天 · 来自 Slack</SocialAuthor>,
+    readOnly: () => <SocialAuthor person={person} />,
     longEnglish: () => (
-      <SocialAuthor person={{ id: 'U_LONG', name: 'Alexandria Catherine Montgomery-Wellington' }} size={36} onOpen={() => {}}>
+      <SocialAuthor person={{ id: 'U_LONG', name: 'Alexandria Catherine Montgomery-Wellington' }} onOpen={() => {}}>
         Yesterday · From Slack
       </SocialAuthor>
     ),

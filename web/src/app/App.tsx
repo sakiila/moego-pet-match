@@ -250,6 +250,25 @@ export function App() {
   const ownNamesOf = (s: Session) =>
     s.registered.ownPetIds.map((id) => s.registered.lineup.find((p) => p.petId === id)?.name).filter((n): n is string => !!n);
 
+  /** 首页与动态墙头像菜单共用的收工：成功返回 true。 */
+  const clockOut = async () => {
+    if (clockOutPending.current) return false;
+    clockOutPending.current = true;
+    setClockOutFailed(false);
+    try {
+      await api.logout();
+      setShowTitles(false);
+      savePlayerId(null);
+      setPlayer(null);
+      setRoute({ name: 'identity' });
+      return true;
+    } catch {
+      setClockOutFailed(true);
+      return false;
+    } finally {
+      clockOutPending.current = false;
+    }
+  };
   const renderRoute = (): ReactNode => {
     switch (route.name) {
       case 'boot':
@@ -288,27 +307,14 @@ export function App() {
             onSocial={socialEnabled ? () => location.assign('/moments') : import.meta.env.DEV ? () => location.assign('/dev/social') : undefined}
             onTitles={() => setShowTitles(true)}
             onInfo={(removal) => setRoute({ name: 'info', player: { userId: player.userId, name: player.name }, removal, back: 'home' })}
-            onClockOut={async () => {
-              if (clockOutPending.current) return;
-              clockOutPending.current = true;
-              setClockOutFailed(false);
-              try {
-                await api.logout();
-                setShowTitles(false);
-                savePlayerId(null);
-                setPlayer(null);
-                setRoute({ name: 'identity' });
-              } catch {
-                setClockOutFailed(true);
-              } finally {
-                clockOutPending.current = false;
-              }
-            }}
+            onClockOut={() => void clockOut()}
             clockOutError={clockOutFailed ? t('auth.logout_failed') : undefined}
           />
         ) : null;
       case 'social':
-        return player ? <Suspense fallback={<main className={screen.screen}/>}><LiveSocial onHome={()=>location.assign('/')}/></Suspense> : null;
+        return player ? <Suspense fallback={<main className={screen.screen}/>}><LiveSocial onHome={()=>location.assign('/')}
+          onTitles={() => setShowTitles(true)} equippedTitle={player.equippedTitle ?? null}
+          onClockOut={() => void clockOut().then(ok => { if (ok) history.replaceState(null, '', '/'); })}/></Suspense> : null;
       case 'leaderboard':
         return player ? <LeaderboardScreen key={route.mode} player={player} initialMode={route.mode} onBack={toHome} onChallenge={(mode) => void toPrep(mode)} /> : null;
       case 'petdex':

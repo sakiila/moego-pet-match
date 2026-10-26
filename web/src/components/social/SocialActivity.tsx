@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { useI18n } from '../../i18n';
 import { socialDate } from '../../social/dates';
 import type { SocialNotice, SocialPost } from '../../social/model';
-import { Avatar } from '../../ui/primitives/Avatar';
+import { AchievementAvatar } from '../AchievementAvatar/AchievementAvatar';
 import { Icon } from '../../ui/primitives/Icon';
 import { SocialEmpty } from './SocialChrome';
 import { REACTION_ICONS } from './SocialReactions';
@@ -30,7 +30,7 @@ export function SocialActivity({
           <Fragment key={n.id}>
             {(index === 0 || days[index] !== days[index - 1]) && <h2 className={styles.sectionTitle}>{days[index]}</h2>}
             <button className={`${styles.notice} ${!n.read ? styles.noticeUnread : ''}`} onClick={() => onOpen(n)}>
-              <Avatar name={n.actor.name} src={n.actor.avatarSrc} seed={n.actor.id} size={36} />
+              <AchievementAvatar name={n.actor.name} src={n.actor.avatarSrc} seed={n.actor.id} equippedTitle={n.actor.title} />
               <span className={styles.noticeIcon}>
                 <Icon name={n.kind === 'comment' ? 'social-comment' : REACTION_ICONS[n.kind]} size={48} />
               </span>

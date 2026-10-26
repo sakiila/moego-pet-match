@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react';
 import { useI18n } from '../../i18n';
-import { Avatar } from '../../ui/primitives/Avatar';
 import { Icon } from '../../ui/primitives/Icon';
 import { Button } from '../../ui/primitives/Button';
 import { BrandHeader } from '../BrandHeader/BrandHeader';
+import { PlayerMenu } from '../PlayerMenu/PlayerMenu';
+import type { SocialPerson } from '../../social/model';
 import styles from './Social.module.css';
 
 export interface SocialHeaderProps {
@@ -12,8 +13,8 @@ export interface SocialHeaderProps {
   onHome: () => void;
   /** 子页的来路返回；根页不传，标题左对齐。 */
   back?: { label: string; onClick: () => void };
-  /** 品牌栏右侧的身份头像，点击进入我的动态。 */
-  identity?: { name: string; src?: string; onOpen: () => void };
+  /** 品牌栏右侧的身份头像，点开下拉：我的动态、我的称号、收工。 */
+  identity?: SocialIdentityProps;
   /** 页面导航栏右侧的当前页主操作。 */
   children?: ReactNode;
 }
@@ -26,7 +27,7 @@ export function SocialHeader({ title, onHome, back, identity, children }: Social
         barOnly
         onBack={onHome}
         backLabel={t('social.back_shop')}
-        trailing={identity && <SocialIdentity name={identity.name} src={identity.src} onOpen={identity.onOpen} />}
+        trailing={identity && <SocialIdentity {...identity} />}
       />
       <div className={back ? styles.pageNav : styles.rootNav}>
         {back && (
@@ -41,12 +42,25 @@ export function SocialHeader({ title, onHome, back, identity, children }: Social
     </header>
   );
 }
-export function SocialIdentity({ name, src, onOpen }: { name: string; src?: string; onOpen: () => void }) {
+export interface SocialIdentityProps {
+  person: SocialPerson;
+  onMine: () => void;
+  onTitles?: () => void;
+  /** 不传时（开发预览）菜单不提供收工。 */
+  onClockOut?: () => void;
+}
+export function SocialIdentity({ person, onMine, onTitles, onClockOut }: SocialIdentityProps) {
   const { t } = useI18n();
   return (
-    <button className={styles.iconButton} aria-label={t('social.my_posts')} onClick={onOpen}>
-      <Avatar name={name} src={src} size={32} />
-    </button>
+    <PlayerMenu
+      name={person.name}
+      userId={person.id}
+      avatarSrc={person.avatarSrc}
+      equippedTitle={person.title}
+      actions={[{ icon: 'paw-print', label: t('social.my_posts'), onClick: onMine }]}
+      onTitles={onTitles}
+      onClockOut={onClockOut}
+    />
   );
 }
 export type SocialLoadState = 'normal' | 'empty' | 'loading' | 'error';

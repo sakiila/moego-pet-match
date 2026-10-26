@@ -1,9 +1,12 @@
+import type { AchievementId } from '../game/achievementRules';
 export const REACTION_KINDS = ['cute', 'pets', 'play', 'love'] as const;
 export type ReactionKind = (typeof REACTION_KINDS)[number];
 export interface SocialPerson {
   id: string;
   name: string;
   avatarSrc?: string;
+  /** 当前佩戴的称号徽章。 */
+  title?: AchievementId;
 }
 export interface SocialPhoto {
   id: string;

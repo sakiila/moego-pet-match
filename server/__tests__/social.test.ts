@@ -95,6 +95,24 @@ describe('社交服务：真实会话、媒体隔离与事务', () => {
     expect(created.view.photos).toHaveLength(1);
     expect((await app.inject({ url: photo.src, headers: auth(alice) })).statusCode).toBe(200);
   });
+  it('作者、留言者与当前身份都带上佩戴中的称号徽章', async () => {
+    await ctx.pool.query(
+      "INSERT INTO pet_match.achievement_awards(player_id,achievement_id,target_value) VALUES($1,'dogs',1) ON CONFLICT DO NOTHING",
+      [owner],
+    );
+    await ctx.pool.query(
+      "INSERT INTO pet_match.player_titles(player_id,equipped_title) VALUES($1,'dogs') ON CONFLICT(player_id) DO UPDATE SET equipped_title='dogs'",
+      [owner],
+    );
+    const { view } = await makePost();
+    await post(bob, `/api/social/posts/${view.id}/comments`, { id: randomUUID(), body: 'Mine' });
+    const detail = (await app.inject({ url: `/api/social/posts/${view.id}`, headers: auth(alice) })).json();
+    expect(detail.author.title).toBe('dogs');
+    expect(detail.comments[0].author.title).toBe('dogs');
+    expect((await app.inject({ url: '/api/social/session', headers: auth(bob) })).json().viewer.title).toBe('dogs');
+    expect((await app.inject({ url: '/api/social/session', headers: auth(alice) })).json().viewer).not.toHaveProperty('title');
+    await ctx.pool.query('DELETE FROM pet_match.player_titles WHERE player_id=$1', [owner]);
+  });
   it('不接受视频、伪造类型或跨站写入', async () => {
     expect((await upload(bob, Buffer.from('not an image'), 'video/mp4')).statusCode).toBe(415);
     expect((await upload(bob, Buffer.from('<svg/>'), 'image/png')).statusCode).toBe(415);

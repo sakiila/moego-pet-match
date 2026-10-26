@@ -3,19 +3,22 @@ import { useI18n } from '../../i18n';
 import styles from './PlayerMenu.module.css';
 import type { AchievementId } from '../../api/types';
 import { AchievementAvatar } from '../AchievementAvatar/AchievementAvatar';
-import { Icon } from '../../ui/primitives/Icon';
+import { Icon, type IconName } from '../../ui/primitives/Icon';
 
 export interface PlayerMenuProps {
   name: string;
   userId: string;
   avatarSrc?: string | null;
-  onClockOut: () => void;
+  /** 不传时不显示「收工」（如开发预览）。 */
+  onClockOut?: () => void;
   defaultOpen?: boolean;
   equippedTitle?: AchievementId | null;
   onTitles?: () => void;
+  /** 排在「我的称号」之前的页面专属选项，如动态墙的「我的动态」。 */
+  actions?: { icon: IconName; label: string; onClick: () => void }[];
 }
 
-export function PlayerMenu({ name, userId, avatarSrc, onClockOut, defaultOpen = false, equippedTitle, onTitles }: PlayerMenuProps) {
+export function PlayerMenu({ name, userId, avatarSrc, onClockOut, defaultOpen = false, equippedTitle, onTitles, actions = [] }: PlayerMenuProps) {
   const { t } = useI18n();
   const [open, setOpen] = useState(defaultOpen);
   const root = useRef<HTMLSpanElement>(null);
@@ -60,8 +63,13 @@ export function PlayerMenu({ name, userId, avatarSrc, onClockOut, defaultOpen = 
       </button>
       {open && (
         <span id={panelId} className={styles.dropdown} data-testid="player-menu">
+          {actions.map((action) => (
+            <button key={action.label} type="button" className={styles.action} onClick={() => { setOpen(false); action.onClick(); }}>
+              <Icon name={action.icon} size={24} />{action.label}
+            </button>
+          ))}
           {onTitles && <button type="button" className={styles.action} onClick={() => { setOpen(false); onTitles(); }} data-testid="my-titles"><Icon name="my-titles" size={24} />{t('achievement.my_titles')}</button>}
-          <button
+          {onClockOut && <button
             type="button"
             className={styles.action}
             onClick={() => {
@@ -71,7 +79,7 @@ export function PlayerMenu({ name, userId, avatarSrc, onClockOut, defaultOpen = 
             data-testid="clock-out"
           >
             <Icon name="clock-out" size={24} />{t('action.clock_out')}
-          </button>
+          </button>}
         </span>
       )}
     </span>

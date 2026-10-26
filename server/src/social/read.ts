@@ -1,14 +1,19 @@
+import type { AchievementId } from '../../../web/src/game/achievementRules.ts';
 import { REACTION_KINDS, type SocialPost, type SocialComment, type SocialNotice, type ReactionKind } from '../../../web/src/social/model.ts';
 import { decodeCursor, encodeCursor, mediaUrl, visiblePost, type SocialDb, SocialError } from './types.ts';
 
-export const socialPerson = (id: string, name: string) => ({
+/** title 为当前佩戴的称号徽章，没有佩戴时省略。 */
+export const socialPerson = (id: string, name: string, title?: AchievementId | null) => ({
   id,
   name,
   avatarSrc: /^[UW][A-Z0-9]{8,}$/.test(id) ? `/img/avatars/${encodeURIComponent(id)}` : undefined,
+  ...(title ? { title } : {}),
 });
+const titleJoin = (alias: string, column: string) =>
+  `LEFT JOIN pet_match.player_titles ${alias} ON ${alias}.player_id=${column}`;
 const person = socialPerson;
-const base = `SELECT p.*,c.name,pet.name AS pet_name FROM pet_match.social_posts p
-  JOIN pet_match.colleagues c ON c.user_id=p.author_id
+const base = `SELECT p.*,c.name,pt.equipped_title AS author_title,pet.name AS pet_name FROM pet_match.social_posts p
+  JOIN pet_match.colleagues c ON c.user_id=p.author_id ${titleJoin('pt', 'p.author_id')}
   LEFT JOIN pet_match.pets pet ON pet.pet_id=p.pet_id AND pet.status='published'`;
 
 export async function postViews(db: SocialDb, rows: Record<string, any>[], viewerId: string): Promise<SocialPost[]> {
@@ -39,7 +44,7 @@ export async function postViews(db: SocialDb, rows: Record<string, any>[], viewe
     );
     return {
       id: row.id,
-      author: person(row.author_id, row.name),
+      author: person(row.author_id, row.name, row.author_title),
       body: row.body,
       source: row.source,
       sourceUrl: row.source_url ?? undefined,
@@ -92,8 +97,8 @@ export async function listPosts(
 export async function listComments(db: SocialDb, postId: string, cursor?: string) {
   const decoded = decodeCursor(cursor);
   const { rows } = await db.query(
-    `SELECT c.*,a.name,rc.name AS reply_name FROM pet_match.social_comments c
-    JOIN pet_match.colleagues a ON a.user_id=c.author_id LEFT JOIN pet_match.colleagues rc ON rc.user_id=c.reply_to_user_id
+    `SELECT c.*,a.name,ct.equipped_title AS author_title,rc.name AS reply_name FROM pet_match.social_comments c
+    JOIN pet_match.colleagues a ON a.user_id=c.author_id ${titleJoin('ct', 'c.author_id')} LEFT JOIN pet_match.colleagues rc ON rc.user_id=c.reply_to_user_id
     WHERE c.post_id=$1 AND c.deleted_at IS NULL AND ($2::timestamptz IS NULL OR (c.created_at,c.id)<($2::timestamptz,$3::uuid))
     ORDER BY c.created_at DESC,c.id DESC LIMIT 51`,
     [postId, decoded?.[0] ?? null, decoded?.[1] ?? null],
@@ -102,7 +107,7 @@ export async function listComments(db: SocialDb, postId: string, cursor?: string
   const comments: SocialComment[] = page
     .map((r) => ({
       id: r.id,
-      author: person(r.author_id, r.name),
+      author: person(r.author_id, r.name, r.author_title),
       body: r.body,
       createdAt: r.created_at.toISOString(),
       ...(r.source === 'slack' ? { source: 'slack' as const } : {}),
@@ -132,7 +137,7 @@ export async function unreadCount(db: SocialDb, viewerId: string) {
 export async function listNotices(db: SocialDb, viewerId: string, cursor?: string) {
   const decoded = decodeCursor(cursor);
   const { rows } = await db.query(
-    `SELECT n.*,actor.name,m.id AS media_id ${noticeJoins}
+    `SELECT n.*,actor.name,nt.equipped_title AS actor_title,m.id AS media_id ${noticeJoins} ${titleJoin('nt', 'n.actor_id')}
     LEFT JOIN LATERAL (SELECT id FROM pet_match.social_media WHERE post_id=p.id AND ready AND deleted_at IS NULL ORDER BY position,id LIMIT 1) m ON true
     WHERE ${noticeVisible} AND ($2::timestamptz IS NULL OR (n.created_at,n.id)<($2::timestamptz,$3::uuid))
     ORDER BY n.created_at DESC,n.id DESC LIMIT 51`,
@@ -143,7 +148,7 @@ export async function listNotices(db: SocialDb, viewerId: string, cursor?: strin
     id: r.id,
     postId: r.post_id,
     recipientId: r.recipient_id,
-    actor: person(r.actor_id, r.name),
+    actor: person(r.actor_id, r.name, r.actor_title),
     kind: r.kind,
     createdAt: r.created_at.toISOString(),
     excerpt: r.excerpt ?? undefined,

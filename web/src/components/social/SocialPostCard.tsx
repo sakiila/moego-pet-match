@@ -38,7 +38,7 @@ export function SocialPostCard({
   return (
     <article className={styles.post} aria-label={t('social.author', { name: post.author.name })}>
       <div className={styles.authorRow}>
-        <SocialAuthor person={post.author} size={36} onOpen={onAuthor}>
+        <SocialAuthor person={post.author} onOpen={onAuthor}>
           <span className={styles.meta}>
             {socialDate(post.createdAt, locale, t('social.today'), t('social.yesterday'))}
             {post.source === 'slack' ? ` · ${t('social.from_slack')}` : ''}

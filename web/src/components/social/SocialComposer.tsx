@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useI18n } from '../../i18n';
 import { MAX_PHOTOS, MAX_POST_LENGTH, type SocialPerson, type SocialPhoto, type SocialPet } from '../../social/model';
-import { Avatar } from '../../ui/primitives/Avatar';
+import { AchievementAvatar } from '../AchievementAvatar/AchievementAvatar';
 import { Icon } from '../../ui/primitives/Icon';
 import styles from './Social.module.css';
 
@@ -27,7 +27,7 @@ export function SocialComposer(props: SocialComposerProps) {
   return (
     <>
       <div className={styles.authorRow}>
-        <Avatar name={props.author.name} src={props.author.avatarSrc} seed={props.author.id} size={40} />
+        <AchievementAvatar name={props.author.name} src={props.author.avatarSrc} seed={props.author.id} equippedTitle={props.author.title} />
         <div>
           <strong className={styles.name}>{props.author.name}</strong>
           <span className={styles.meta}>{t('social.colleagues_only')}</span>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useI18n } from '../../i18n';
 import { socialDate } from '../../social/dates';
 import { MAX_COMMENT_LENGTH, type SocialComment, type SocialPerson } from '../../social/model';
-import { Avatar } from '../../ui/primitives/Avatar';
+import { AchievementAvatar } from '../AchievementAvatar/AchievementAvatar';
 import { Icon } from '../../ui/primitives/Icon';
 import styles from './Social.module.css';
 
@@ -40,10 +40,10 @@ export function SocialComments({
               aria-label={t('social.open_profile', { name: comment.author.name })}
               onClick={() => onAuthor(comment.author)}
             >
-              <Avatar name={comment.author.name} src={comment.author.avatarSrc} seed={comment.author.id} size={32} />
+              <AchievementAvatar name={comment.author.name} src={comment.author.avatarSrc} seed={comment.author.id} equippedTitle={comment.author.title} />
             </button>
           ) : (
-            <Avatar name={comment.author.name} src={comment.author.avatarSrc} seed={comment.author.id} size={32} />
+            <AchievementAvatar name={comment.author.name} src={comment.author.avatarSrc} seed={comment.author.id} equippedTitle={comment.author.title} />
           )}
           <div className={styles.commentContent}>
             <strong className={styles.name}>{comment.author.name}</strong>

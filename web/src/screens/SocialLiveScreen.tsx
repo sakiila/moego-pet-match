@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { socialApi, SocialApiError, type SocialSession, type PostPage } from '../api/social';
 import type { SocialState, SocialPost, SocialPerson } from '../social/model';
+import type { AchievementId } from '../api/types';
 import type { SocialActions } from '../social/actions';
 import type { SocialPage } from '../components/social/SocialWall';
 import { SocialHeader, SocialEmpty } from '../components/social/SocialChrome';
@@ -75,7 +76,18 @@ function mergePage(
 }
 
 /** 真实服务容器；视觉和交互仍复用同一组已验收组件。 */
-export function SocialLiveScreen({ onHome }: { onHome: () => void }) {
+export function SocialLiveScreen({
+  onHome,
+  onTitles,
+  onClockOut,
+  equippedTitle,
+}: {
+  onHome: () => void;
+  onTitles?: () => void;
+  onClockOut?: () => void;
+  /** 由外层玩家状态提供，换称号后即时更新头像徽章。 */
+  equippedTitle?: AchievementId | null;
+}) {
   const { t } = useI18n();
   const [state, setState] = useState<SocialState>(initial);
   const [profile, setProfile] = useState<SocialPerson | null>(null);
@@ -351,7 +363,7 @@ export function SocialLiveScreen({ onHome }: { onHome: () => void }) {
       )}
       <SocialWallScreen
         state={state}
-        viewer={session.viewer}
+        viewer={equippedTitle === undefined ? session.viewer : { ...session.viewer, title: equippedTitle ?? undefined }}
         pets={session.pets}
         canModerate={session.canModerate}
         preview={false}
@@ -363,6 +375,8 @@ export function SocialLiveScreen({ onHome }: { onHome: () => void }) {
         onHome={onHome}
         onReset={() => {}}
         onAuthor={setProfile}
+        onTitles={onTitles}
+        onClockOut={onClockOut}
         browserHistory
       />
       {profile && (

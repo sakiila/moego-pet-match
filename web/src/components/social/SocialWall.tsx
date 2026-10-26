@@ -10,7 +10,7 @@ import {
   type SocialState,
 } from '../../social/model';
 import type { SocialActions } from '../../social/actions';
-import { Avatar } from '../../ui/primitives/Avatar';
+import { AchievementAvatar } from '../AchievementAvatar/AchievementAvatar';
 import { Icon } from '../../ui/primitives/Icon';
 import { SocialHeader, SocialEmpty, type SocialLoadState } from './SocialChrome';
 import { SocialGate } from './SocialGate';
@@ -36,6 +36,9 @@ export interface SocialWallProps {
   canModerate?: boolean;
   /** 点头像打开玩家卡片；不传时头像不可点。 */
   onAuthor?: (person: SocialPerson) => void;
+  /** 头像下拉的「我的称号」与「收工」；开发预览不传。 */
+  onTitles?: () => void;
+  onClockOut?: () => void;
   onPrepareRoute?: (page: SocialPage) => Promise<void>;
   onPageChange?: (page: SocialPage) => void;
   readPhoto: (file: File) => Promise<SocialPhoto>;
@@ -57,6 +60,8 @@ export function SocialWall({
   preview = true,
   canModerate = false,
   onAuthor,
+  onTitles,
+  onClockOut,
   onPrepareRoute,
   onPageChange,
   readPhoto,
@@ -337,7 +342,12 @@ export function SocialWall({
     page.name === 'post' ? 'social.post_detail' : page.name === 'activity' ? 'social.activity' : 'social.my_posts';
   const from = history.current.at(-1)?.page.name;
   const backLabel = t(from === 'activity' ? 'social.back_activity' : from === 'mine' ? 'social.back_mine' : 'social.back_feed');
-  const identity = { name: viewer.name, src: viewer.avatarSrc, onOpen: () => page.name !== 'mine' && navigate({ name: 'mine' }) };
+  const identity = {
+    person: viewer,
+    onMine: () => page.name !== 'mine' && navigate({ name: 'mine' }),
+    onTitles,
+    onClockOut,
+  };
   return (
     <main className={styles.root}>
       {preview && <p className={styles.preview}>{t('social.preview')}</p>}
@@ -457,7 +467,7 @@ export function SocialWall({
                 <p className={styles.subtitle}>{t('social.subtitle')}</p>
               ) : (
                 <div className={styles.profile}>
-                  <Avatar name={viewer.name} src={viewer.avatarSrc} seed={viewer.id} size={42} />
+                  <AchievementAvatar name={viewer.name} src={viewer.avatarSrc} seed={viewer.id} equippedTitle={viewer.title} />
                   <div>
                     <strong className={styles.name}>{viewer.name}</strong>
                     <span className={styles.meta}>{t('social.my_description')}</span>

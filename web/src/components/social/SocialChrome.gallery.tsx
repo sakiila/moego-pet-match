@@ -1,6 +1,6 @@
 import type { GalleryEntry } from '../../dev/gallery/types';
 import { SocialEmpty, SocialHeader } from './SocialChrome';
-const identity = { name: 'Bob', onOpen: () => {} };
+const identity = { person: { id: 'U_DEMO', name: 'Bob', title: 'dogs' as const }, onMine: () => {}, onTitles: () => {}, onClockOut: () => {} };
 export default {
   name: 'SocialChrome',
   group: 'components',
@@ -17,7 +17,7 @@ export default {
       <SocialHeader
         title="Alexandria Catherine's Pet Moment"
         onHome={() => {}}
-        identity={{ name: 'Alexandria Catherine Montgomery-Wellington', onOpen: () => {} }}
+        identity={{ person: { id: 'U_LONG', name: 'Alexandria Catherine Montgomery-Wellington' }, onMine: () => {} }}
         back={{ label: 'Back to activity', onClick: () => {} }}
       />
     ),
