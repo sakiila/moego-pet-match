@@ -13,16 +13,19 @@ export interface PetDetailOverlayProps {
   onOpenShop: () => void;
   /** 删除申请提交成功后（如刷新我的宠物的状态）。 */
   onRemovalSubmitted?: () => void;
+  aboveSheet?: boolean;
+  allowRemoval?: boolean;
 }
 
 /** 图鉴、报告与我的宠物共用的详情卡：把宠物编号换成经 /img 代理的图片地址；自家宠物可从这里申请移除（申请弹层叠在卡片上方，卡片保持不动）。 */
-export function PetDetailOverlay({ pet, playerId, onClose, onRetry, onOpenShop, onRemovalSubmitted }: PetDetailOverlayProps) {
+export function PetDetailOverlay({ pet, playerId, onClose, onRetry, onOpenShop, onRemovalSubmitted, aboveSheet, allowRemoval = true }: PetDetailOverlayProps) {
   const removal = useDeletionRequest(playerId, onRemovalSubmitted);
   if (!pet) return null;
   const detail = pet.state.kind === 'ready' ? pet.state.detail : null;
   return (
     <>
       <PetDetailCard
+        aboveSheet={aboveSheet}
         name={pet.name}
         state={pet.state}
         stickerSrc={stickerUrl(pet.petId, 512)}
@@ -36,7 +39,7 @@ export function PetDetailOverlay({ pet, playerId, onClose, onRetry, onOpenShop, 
         onRetry={() => onRetry(pet.petId, pet.name)}
         onOpenShop={onOpenShop}
         onRequestRemoval={
-          detail?.own && detail.owner ? () => removal.open({ kind: 'pet', petId: pet.petId, name: detail.name, ownerName: detail.owner!.name }) : undefined
+          allowRemoval && detail?.own && detail.owner ? () => removal.open({ kind: 'pet', petId: pet.petId, name: detail.name, ownerName: detail.owner!.name }) : undefined
         }
       />
       {removal.target && <DeletionRequestOverlay target={removal.target} onSubmit={removal.submit} onClose={removal.close} />}

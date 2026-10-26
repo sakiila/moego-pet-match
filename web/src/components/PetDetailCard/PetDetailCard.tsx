@@ -37,6 +37,8 @@ export interface PetDetailCardProps {
   onRequestRemoval?: () => void;
   /** 陈列页：不飞行、不遮罩全屏，直接静态展示。 */
   inline?: boolean;
+  /** 玩家名片中的详情卡需叠在 Sheet 上方。 */
+  aboveSheet?: boolean;
   /** 开发者彩蛋：毛肚、菠萝的卡正面右上盖「开发者家的认证」章（未收集也盖），主人行追加「本游戏开发者」（game/easterEggs）。 */
   developer?: boolean;
 }
@@ -79,7 +81,7 @@ function moveTo(from: DOMRect, to: DOMRect) {
  * 未收集只给名字、剪影与解锁说明；自家宠物即使未收集也显示完整资料。开始营业、重试、资料删除申请放在卡片下方。
  */
 export function PetDetailCard(props: PetDetailCardProps) {
-  const { name, origin, onClose, onRetry, onOpenShop, onRequestRemoval, inline } = props;
+  const { name, origin, onClose, onRetry, onOpenShop, onRequestRemoval, inline, aboveSheet } = props;
   const { t } = useI18n();
   const [flipped, setFlipped] = useState(false);
   const [closing, setClosing] = useState(false);
@@ -98,10 +100,35 @@ export function PetDetailCard(props: PetDetailCardProps) {
     return () => window.clearTimeout(timer);
   }, [landed, photoReady]);
   // 详情读取完成前，沿用被点卡片上已有的贴纸与「已收集」状态，飞行期间内容不跳变
-  const [hint] = useState(() => ({ src: origin?.querySelector('img')?.currentSrc || null, collected: origin?.dataset.collected === 'true' }));
+  const [hint] = useState(() => ({ src: origin?.querySelector('img')?.currentSrc || null, collected: origin?.dataset.collected === 'true' || origin?.dataset.own === 'true' }));
   const flyRef = useRef<HTMLDivElement>(null);
   const flipperRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (inline || !aboveSheet) return;
+    const previous = document.activeElement;
+    const overlay = backdropRef.current?.parentElement;
+    overlay?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+    const trapFocus = (event: globalThis.KeyboardEvent) => {
+      if (event.key !== 'Tab' || !overlay) return;
+      const controls = [...overlay.querySelectorAll<HTMLElement>('button:not(:disabled), [href], [tabindex="0"]')]
+        .filter(element => !element.closest('[inert]') && element.getClientRects().length > 0);
+      const first = controls[0];
+      const last = controls.at(-1);
+      if (!first || !last) return;
+      const active = document.activeElement;
+      if (!overlay.contains(active) || (event.shiftKey ? active === first : active === last)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus({ preventScroll: true });
+      }
+    };
+    document.addEventListener('keydown', trapFocus, true);
+    return () => {
+      document.removeEventListener('keydown', trapFocus, true);
+      const target = origin?.isConnected ? origin : previous;
+      if (target instanceof HTMLElement && target.isConnected) target.focus({ preventScroll: true });
+    };
+  }, [inline, aboveSheet, origin]);
 
   const detail = state.kind === 'ready' ? state.detail : null;
   const collected = detail ? detail.collected : hint.collected;
@@ -207,7 +234,7 @@ export function PetDetailCard(props: PetDetailCardProps) {
   };
 
   const overlay = (
-    <div className={`${styles.overlay} ${inline ? styles.inline : ''}`} role="dialog" aria-modal="true" aria-label={detail?.name ?? name} data-testid="pet-detail" data-closing={closing || undefined} data-settled={settled || undefined}>
+    <div className={`${styles.overlay} ${inline ? styles.inline : ''} ${aboveSheet ? styles.aboveSheet : ''}`} role="dialog" aria-modal="true" aria-label={detail?.name ?? name} data-testid="pet-detail" data-closing={closing || undefined} data-settled={settled || undefined}>
       <div className={styles.backdrop} ref={backdropRef} onClick={close} aria-hidden />
       <button type="button" className={styles.close} onClick={close} aria-label={t('action.close')} data-testid="detail-close">
         <Icon name="close" size={20} />
@@ -227,14 +254,14 @@ export function PetDetailCard(props: PetDetailCardProps) {
             >
               <div className={styles.flipper} ref={flipperRef} data-flipped={flipped || undefined}>
                 {/* 飞行期间卡片保持素面：光带、星光、发光阴影都等落地后再挂，起飞第一帧不用光栅化大块渐变与遮罩 */}
-                <div className={`${styles.face} ${styles.front}`} data-shine={decorated || undefined} data-testid="detail-front">
+                <div className={`${styles.face} ${styles.front}`} inert={aboveSheet && flipped || undefined} aria-hidden={aboveSheet ? flipped : undefined} data-shine={decorated || undefined} data-testid="detail-front">
                   <Front {...props} state={state} previewSrc={hint.src} previewCollected={hint.collected} />
                   {decorated && <ShineRing />}
                   {decorated && <Twinkles />}
                   {/* 翻面图标只挂在当前朝上的一面：iOS Safari 会把背面的合成层子元素镜像透出来 */}
                   {hasFlipSide && !flipped && <FlipHint />}
                 </div>
-                <div className={`${styles.face} ${styles.back}`} data-shine={decorated || undefined} data-testid="detail-back">
+                <div className={`${styles.face} ${styles.back}`} inert={aboveSheet && !flipped || undefined} aria-hidden={aboveSheet ? !flipped : undefined} data-shine={decorated || undefined} data-testid="detail-back">
                   {full && detail ? <Back detail={detail} photoSrc={photoReady ? props.photoSrc : null} /> : <Pattern />}
                   {decorated && everFlipped && <ShineRing />}
                   {hasFlipSide && flipped && <FlipHint />}

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import type { ColleagueResult, PlayerProfileView } from '../../api/types';
 import type { AchievementId } from '../../api/types';
 import { ACHIEVEMENT_IDS, conditionRevealed } from '../../game/achievementRules';
@@ -20,6 +20,8 @@ export interface PlayerProfileCardProps {
   onRetry: () => void;
   onClose: () => void;
   inline?: boolean;
+  pets?: ReactNode;
+  suspended?: boolean;
   /** 正在看名片的玩家自己已解锁的称号；隐藏称号的名称与条件只对其中的显示真实文字。 */
   viewerTitles?: readonly AchievementId[];
   likes?: PlayerLikesState;
@@ -28,7 +30,7 @@ export interface PlayerProfileCardProps {
   onLikesRetry?: () => void;
 }
 
-export function PlayerProfileCard({ player, view, error, onRetry, onClose, inline, viewerTitles = [], likes, own = false, onLike, onLikesRetry }: PlayerProfileCardProps) {
+export function PlayerProfileCard({ player, view, error, onRetry, onClose, inline, pets, suspended, viewerTitles = [], likes, own = false, onLike, onLikesRetry }: PlayerProfileCardProps) {
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (inline) return;
@@ -41,7 +43,7 @@ export function PlayerProfileCard({ player, view, error, onRetry, onClose, inlin
   const number = (value: number) => value.toLocaleString(language);
   const date = new Intl.DateTimeFormat(language, {month:'short',day:'numeric',timeZone:'Asia/Shanghai'});
   const unlockedTitles = ACHIEVEMENT_DISPLAY_ORDER.filter(id => view?.unlockedTitles.includes(id));
-  return <Sheet open inline={inline} label={t('profile.named', {playerName:player.name})} closeLabel={t('action.close')} onClose={onClose}
+  return <Sheet open inline={inline} suspended={suspended} label={t('profile.named', {playerName:player.name})} closeLabel={t('action.close')} onClose={onClose}
     badge={<h2 className={styles.title}>{t('profile.title')}</h2>}>
     <div ref={root} className={styles.root} data-testid="player-profile">
       <div className={styles.identity}>
@@ -60,6 +62,7 @@ export function PlayerProfileCard({ player, view, error, onRetry, onClose, inlin
             <div><dd>{number(view.collection.collected)} / {number(view.collection.total)}</dd><dt>{t('profile.collected')}</dt></div>
             <div><dd>{number(view.completedGames)}</dd><dt>{t('profile.games')}</dt></div>
           </dl>
+          {pets}
           <section className={styles.section}>
             <div className={styles.sectionHeading}><h3>{t('profile.badges')}</h3><span>{view.unlockedTitles.length} / {ACHIEVEMENT_IDS.length}</span></div>
             {unlockedTitles.length ? <ul className={styles.badges}>{unlockedTitles.map(id => <li key={id}>

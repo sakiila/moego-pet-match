@@ -169,6 +169,13 @@ export interface CollectionView {
   sheetOrder: string[];
 }
 
+/** 玩家名片中的已上架自家宠物；collected 始终属于当前查看者。 */
+export interface PlayerPet {
+  petId: string;
+  name: string;
+  collected: boolean;
+}
+
 export interface PetDetail {
   petId: string;
   name: string;

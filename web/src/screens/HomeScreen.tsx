@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { DailyManager, PlayerView } from '../api/types';
+import type { DailyManager, PetDetail, PlayerView } from '../api/types';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { ManagerCard } from '../components/ManagerCard/ManagerCard';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
@@ -16,7 +16,7 @@ import type { PlayerLikesLoader } from '../game/playerLikes';
 import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
 import { ManagerPosterOverlay } from './ManagerPosterOverlay';
-import { PlayerProfileOverlay, type ProfileLoader } from './PlayerProfileOverlay';
+import { PlayerProfileOverlay, type PlayerPetsLoader, type ProfileLoader } from './PlayerProfileOverlay';
 import styles from './Screen.module.css';
 
 export interface HomeScreenProps {
@@ -41,10 +41,12 @@ export interface HomeScreenProps {
   /** 陈列页使用示例数据，不读取玩家 API。 */
   loadLikes?: PlayerLikesLoader;
   loadProfile?: ProfileLoader;
+  loadPets?: PlayerPetsLoader;
+  loadPetDetail?: (petId: string, playerId: string) => Promise<PetDetail>;
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles, loadLikes, loadProfile }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
@@ -86,6 +88,8 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
       <SettingsDialog open={settings} onClose={() => setSettings(false)} />
       {poster && manager && <ManagerPosterOverlay manager={manager} onClose={() => setPoster(false)} />}
       {profile && <PlayerProfileOverlay player={player} viewerId={player.userId} mode="normal" load={loadProfile} loadLikes={loadLikes}
+        loadPets={loadPets} loadPetDetail={loadPetDetail}
+        onOpenShop={() => { setProfile(false); onOpenShop(); }}
         onClose={() => { setProfile(false); void likes.refresh(); }} />}
     </main>
   );

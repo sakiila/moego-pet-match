@@ -2,6 +2,9 @@ import type { LeaderboardView, PlayerProfileView } from '../api/types';
 import type { GalleryEntry } from '../dev/gallery/types';
 import { LeaderboardScreen } from './LeaderboardScreen';
 import { ACHIEVEMENT_IDS } from '../game/achievementRules';
+import { loadPlayerPetDetailPreview, loadPlayerPetsPreview } from '../dev/gallery/playerPets';
+
+const petPreview = { loadPets: loadPlayerPetsPreview, loadPetDetail: loadPlayerPetDetailPreview };
 
 const noop = () => {};
 const player = (fishUnlocked: boolean) => ({
@@ -39,18 +42,18 @@ const entry: GalleryEntry = {
   name: 'LeaderboardScreen',
   group: 'screens',
   states: {
-    'local API · click player': () => <LeaderboardScreen player={{...player(true),userId:'U_TEST_BOB'}} initialScope="all" onBack={noop} onChallenge={noop} />,
+    'local API · click player': () => <LeaderboardScreen {...petPreview} player={{...player(true),userId:'U_TEST_BOB'}} initialScope="all" onBack={noop} onChallenge={noop} />,
     'today (default), near me (fish unlocked)': () => (
-      <LeaderboardScreen loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(true)} onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope })} />
+      <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(true)} onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope })} />
     ),
     'all-time, near me': () => (
-      <LeaderboardScreen loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(true)} initialScope="all" onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope })} />
+      <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(true)} initialScope="all" onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope })} />
     ),
     'today: nobody played yet': () => (
-      <LeaderboardScreen loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(false)} onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope, entries: [], me: null })} />
+      <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(false)} onBack={noop} onChallenge={noop} load={async (mode, _p, scope) => ({ ...ranked, mode, scope, entries: [], me: null })} />
     ),
     'today: others played, not me': () => (
-      <LeaderboardScreen loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview}
+      <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview}
         player={player(false)}
         onBack={noop}
         onChallenge={noop}
@@ -58,13 +61,13 @@ const entry: GalleryEntry = {
       />
     ),
     'opened on fish tab (from Fish Report)': () => (
-      <LeaderboardScreen loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(true)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
+      <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(true)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
     ),
     'fish requested but locked → pet shop tab': () => (
-      <LeaderboardScreen loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(false)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
+      <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(false)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
     ),
     'all-time: no score yet': () => (
-      <LeaderboardScreen loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview}
+      <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview}
         player={player(false)}
         initialScope="all"
         onBack={noop}
@@ -72,7 +75,7 @@ const entry: GalleryEntry = {
         load={async (mode, _p, scope) => ({ ...ranked, mode, scope, me: null, entries: ranked.entries.filter((e) => e.userId !== 'bob') })}
       />
     ),
-    'load failed': () => <LeaderboardScreen loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(false)} onBack={noop} onChallenge={noop} load={() => Promise.reject(new Error('down'))} />,
+    'load failed': () => <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(false)} onBack={noop} onChallenge={noop} load={() => Promise.reject(new Error('down'))} />,
   },
 };
 export default entry;
