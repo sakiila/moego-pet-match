@@ -10,6 +10,8 @@ import { HomePlayerActions } from '../components/HomePlayerActions/HomePlayerAct
 import { StreakLine } from '../components/StreakLine/StreakLine';
 import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
 import { PhotoNotice } from '../components/PhotoNotice/PhotoNotice';
+import { SoundTip } from '../components/SoundTip/SoundTip';
+import { useSoundTip } from '../game/useSoundTip';
 import { stickerUrl } from '../game/pets';
 import { usePlayerLikes } from '../game/usePlayerLikes';
 import type { PlayerLikesLoader } from '../game/playerLikes';
@@ -43,14 +45,17 @@ export interface HomeScreenProps {
   loadProfile?: ProfileLoader;
   loadPets?: PlayerPetsLoader;
   loadPetDetail?: (petId: string, playerId: string) => Promise<PetDetail>;
+  /** 陈列页可固定提示状态，不读写浏览器的一次性展示记录。 */
+  soundTipPreview?: boolean;
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail, soundTipPreview }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
   const [profile, setProfile] = useState(false);
+  const soundTip = useSoundTip(soundTipPreview);
   const likes = usePlayerLikes(player.userId, player.userId, loadLikes);
   return (
     <main className={`${styles.screen} ${styles.home}`}>
@@ -82,7 +87,9 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
         links={[
           { label: t('home.footer_info'), onClick: () => onInfo(false), testId: 'link-info' },
           { label: t('home.footer_removal'), onClick: () => onInfo(true), testId: 'link-removal' },
-          { label: t('nav.settings'), onClick: () => setSettings(true), testId: 'link-settings' },
+          { label: t('nav.settings'), onClick: () => { soundTip.dismiss(); setSettings(true); }, testId: 'link-settings',
+            icon: soundTip.open ? 'settings' : undefined,
+            hint: soundTip.open ? { id: 'home-sound-tip', content: <SoundTip onClose={soundTip.dismiss} /> } : undefined },
         ]}
       />
       <SettingsDialog open={settings} onClose={() => setSettings(false)} />

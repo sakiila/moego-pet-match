@@ -15,6 +15,11 @@
   --color-surface: #fbfbfc;
   --color-surface-muted: #f1f4f8;
   --color-line: #e3e6eb;
+  --sound-tip-bg: #fff6ec;
+  --sound-tip-width: 358px;
+  --sound-tip-pointer: 12px;
+  --sound-tip-close: 28px;
+  --touch-target: 44px;
 
   /* 角色辅助色 */
   --color-cat-blue: #4a8fe0;

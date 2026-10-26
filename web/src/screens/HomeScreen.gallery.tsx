@@ -11,7 +11,7 @@ const loadProfile = async (userId: string, mode: 'normal' | 'fish') => ({
   collection: { collected: 18, total: 80 }, equippedTitle: null, unlockedTitles: [], recentGames: [],
 });
 function HomePreview(props: Omit<HomeScreenProps, 'copyright'>) {
-  return <HomeScreen {...props} copyright={COPYRIGHT} loadLikes={loadLikes} loadProfile={loadProfile} loadPets={loadPlayerPetsPreview} loadPetDetail={loadPlayerPetDetailPreview} />;
+  return <HomeScreen soundTipPreview={false} {...props} copyright={COPYRIGHT} loadLikes={loadLikes} loadProfile={loadProfile} loadPets={loadPlayerPetsPreview} loadPetDetail={loadPlayerPetDetailPreview} />;
 }
 const player = (best: number | null) => ({
   userId: 'U_TEST_BOB',
@@ -26,6 +26,7 @@ const entry: GalleryEntry = {
   name: 'HomeScreen',
   group: 'screens',
   states: {
+    'first browser visit · sound tip': () => <HomePreview soundTipPreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(null)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
     'equipped legendary · C size': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={{ ...player(24800), equippedTitle: 'album' }} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} onTitles={noop} />,
     'first visit': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(null)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
     'long English name + equipped title + own profile': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={{ ...player(24800), name: 'Alexandria Catherine Montgomery-Wellington', equippedTitle: 'album' }} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} onTitles={noop} />,

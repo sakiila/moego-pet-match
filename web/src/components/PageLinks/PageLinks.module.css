@@ -1,5 +1,7 @@
 /* 一行排开、放不下时自然换行；不加分隔符，换行后不会留下孤立的竖线 */
 .row {
+  position: relative;
+  scroll-margin-bottom: var(--space-3);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -53,4 +55,39 @@
 .dot {
   color: var(--fg-muted);
   font-size: var(--text-xs);
+}
+
+.highlighted {
+  position: relative;
+  gap: var(--space-1);
+  padding: 0 var(--space-2);
+  border: var(--stroke) solid var(--color-brand);
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-soft);
+  color: var(--color-brand-strong);
+  font-weight: var(--weight-bold);
+}
+
+.highlighted::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + var(--space-1));
+  left: 50%;
+  width: var(--sound-tip-pointer);
+  height: var(--sound-tip-pointer);
+  border-right: var(--stroke) solid var(--color-ink);
+  border-bottom: var(--stroke) solid var(--color-ink);
+  background: var(--sound-tip-bg);
+  transform: translateX(-50%) rotate(45deg);
+  z-index: calc(var(--z-overlay) + 1);
+  pointer-events: none;
+}
+
+.hint {
+  position: absolute;
+  bottom: calc(100% + var(--space-1));
+  inset-inline: 0;
+  width: min(100%, var(--sound-tip-width));
+  margin-inline: auto;
+  z-index: var(--z-overlay);
 }
