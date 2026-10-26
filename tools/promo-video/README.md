@@ -32,7 +32,7 @@ npm run render:zh   # 渲出 out/promo-zh-raw.mp4，再标准化响度输出 out
 ```
 
 - 渲染直接用本机 Chrome。渲完由 `scripts/loudnorm.mjs` 做两遍 loudnorm，目标 −14 LUFS、真峰值 −1 dBTP，画面直接复制。
-- Remotion 对 4 人及以上的公司要求购买公司许可，正式发布前请先确认。
+- Remotion 许可：2026-10-26 用户确认为个人自用，按个人免费许可使用；若改为以公司名义发布，需要重新确认。
 - 镜头在 `src/Promo.tsx`，通用部件在 `src/parts.tsx`，字幕在 `src/copy.ts`，选定的宠物在 `src/pets.js`。
 - 节拍是 120 BPM，`at(小节, 拍)` 换算成帧。每段录屏用「素材时刻 → 成片帧」对齐：喝彩、+1000 等关键时刻落在拍点上，倍速 1–1.5。
 - 中文字幕只用游戏字体子集里已有的字（`web/src/ui/fonts/chars.txt`），新加字幕前先核对。
