@@ -11,9 +11,7 @@
 
 ## 版权与使用 · Copyright & Usage
 
-© 2026 MoeGo · Made by Bob（Bob Bao）。
-
-**代码**以 [MIT 许可](LICENSE) 开放：个人自用与商业使用均可，可修改、再发布，但须在副本或衍生作品中保留版权声明与许可全文，并请在作品说明或页面显著位置标明出处：
+**代码** © 2026 Bob Bao，以 [MIT 许可](LICENSE) 开放：个人自用与商业使用均可，可修改、再发布，但须在副本或衍生作品中保留版权声明与许可全文，并请在作品说明或页面显著位置标明出处：
 
 > 基于 MoeGo 毛孩子全明星（MoeGo Pet All-Stars）· https://github.com/sakiila/moego-pet-match
 
@@ -25,7 +23,7 @@
 
 第三方字体、图标等按各自许可分发，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
-The **source code** is available under the [MIT License](LICENSE) for personal and commercial use. Keep the copyright and license notice in all copies, and please credit the project visibly: "Based on MoeGo Pet All-Stars · https://github.com/sakiila/moego-pet-match". Pet photos and stickers, coworker data, project artwork and audio (`assets/`, `design/`, project images in `web/public/`) and the MoeGo name and logo are **not** covered and remain all rights reserved. Third-party assets follow their own licenses listed in THIRD_PARTY_NOTICES.md.
+The **source code** is © 2026 Bob Bao and available under the [MIT License](LICENSE) for personal and commercial use. Keep the copyright and license notice in all copies, and please credit the project visibly: "Based on MoeGo Pet All-Stars · https://github.com/sakiila/moego-pet-match". Pet photos and stickers, coworker data, project artwork and audio (`assets/`, `design/`, project images in `web/public/`) and the MoeGo name and logo are **not** covered and remain all rights reserved. Third-party assets follow their own licenses listed in THIRD_PARTY_NOTICES.md.
 
 ## 创意与吸引力
 
