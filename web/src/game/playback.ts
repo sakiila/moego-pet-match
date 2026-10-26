@@ -15,7 +15,7 @@ export type Sweep =
 export interface Popup {
   key: number;
   score: number;
-  /** 本次操作内的批序，≥ 2 时显示连锁。 */
+  /** 本次操作内的批序，≥ 2 时显示连消。 */
   chain: number;
   /** 强度等级 1–5，飘字按它分级（合体与吹风机为 5）。 */
   level: number;

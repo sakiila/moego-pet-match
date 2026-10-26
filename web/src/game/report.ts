@@ -29,7 +29,7 @@ export function judgeTitle(summary: GameSummary): TitleKey {
   return 'title.pet_officer';
 }
 
-/** 角色评语：零服务 > 单次最高连锁 ≥ 5 > 催单成功 > 发动过合体 > 普通完成；鱼关用 review.fish.*。 */
+/** 角色评语：零服务 > 单次最高连消 ≥ 5 > 催单成功 > 发动过合体 > 普通完成；鱼关用 review.fish.*。 */
 export function judgeReview(summary: GameSummary, mode: GameMode): MessageKey {
   const prefix = mode === 'fish' ? 'review.fish' : 'review.pet';
   const combos = summary.combos.cc + summary.combos.cs + summary.combos.dryer;

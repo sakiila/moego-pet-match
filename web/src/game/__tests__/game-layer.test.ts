@@ -46,11 +46,11 @@ describe('游戏时钟', () => {
     expect(clock.elapsed()).toBe(6_000);
   });
 
-  it('洗牌从连锁结束的游戏时刻起暂停，渲染帧晚到也不多计时', () => {
+  it('洗牌从连消结束的游戏时刻起暂停，渲染帧晚到也不多计时', () => {
     let wall = 0;
     const clock = createGameClock(() => wall, 1);
     clock.start();
-    wall = 2_300; // 连锁在 2 000 结束，但下一帧 2 300 才发现
+    wall = 2_300; // 连消在 2 000 结束，但下一帧 2 300 才发现
     const pausedWall = clock.pauseAt(2_000);
     expect(pausedWall).toBe(2_000);
     expect(clock.elapsed()).toBe(2_000);
@@ -103,7 +103,7 @@ describe('时间线播放', () => {
     expect([...fall.dropRows.values()]).toEqual([3, 3, 3]);
   });
 
-  it('每批一条飘字，连锁批序随批次递增，飘字带强度等级', () => {
+  it('每批一条飘字，连消批序随批次递增，飘字带强度等级', () => {
     const f = frameAt(base, timeline, 1940);
     expect(f.popups.map((x) => [x.score, x.chain, x.level])).toEqual([
       [300, 1, 1],

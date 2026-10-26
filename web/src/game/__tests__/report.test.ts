@@ -85,7 +85,7 @@ describe('同场景的多样评语', () => {
         expect(new Set(lines).size).toBe(5);
         for (const line of lines) {
           expect(line).not.toMatch(/^review\./);
-          expect(line).not.toMatch(/连锁|合体|倍率|道具|combo|cascade/i);
+          expect(line).not.toMatch(/连消|合体|倍率|道具|combo|cascade/i);
         }
       }
     }

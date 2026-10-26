@@ -13,9 +13,9 @@ final result: passed
 
 | 用例 | 操作与观察 | 本地持久化 |
 | --- | --- | --- |
-| 加单成功 | 30秒窗口内交换相邻梳子与剪刀；进度达标，原位成功反馈；后续连锁继续计分 | 840分、validMoves=1、clearedCells=52、rushSucceeded=true、counted=true |
+| 加单成功 | 30秒窗口内交换相邻梳子与剪刀；进度达标，原位成功反馈；后续连消继续计分 | 840分、validMoves=1、clearedCells=52、rushSucceeded=true、counted=true |
 | 加单过期 / 零服务 | 不操作，50秒任务截止显示未赶上；到时只挂牌，无服务头像 | 0分、validMoves=0、rushSucceeded=false、counted=false，仍已保存 |
-| 到时仍在连锁 | 第89秒提交固定连锁；时钟到00:00时仍busy且无收工覆盖；三批全部结算后才挂牌 | 210分、validMoves=1、rushSucceeded=false、counted=true，三批结果完整保存 |
+| 到时仍在连消 | 第89秒提交固定连消；时钟到00:00时仍busy且无收工覆盖；三批全部结算后才挂牌 | 210分、validMoves=1、rushSucceeded=false、counted=true，三批结果完整保存 |
 
 成功局清除分按[33,16,3,0,0]计算：10×(33 + 16×2 + 3×3)=740，再加固定100，合计840；任务奖励未重复计算。
 

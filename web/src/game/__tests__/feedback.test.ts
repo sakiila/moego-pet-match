@@ -48,7 +48,7 @@ describe('强度等级', () => {
 });
 
 describe('批次反馈', () => {
-  it('普通消除：短「啵」+ 一次短点；连锁时音调随批序逐级上扬', () => {
+  it('普通消除：短「啵」+ 一次短点；连消时音调随批序逐级上扬', () => {
     expect(batchFeedback(batch())).toEqual({ sound: 'pop', step: 0, haptic: 'tap', level: 1 });
     expect(batchFeedback(batch({ index: 2, multiplier: 2 })).step).toBe(1);
     expect(batchFeedback(batch({ index: 3, multiplier: 3 })).step).toBe(2);

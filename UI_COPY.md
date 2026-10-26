@@ -176,7 +176,7 @@
 | --- | --- | --- |
 | board.score | 分数 {score} | Score {score} |
 | board.time_left | 本局剩余 {seconds} 秒 | Time Left: {seconds}s |
-| board.chain | {chain} 连锁！ | {chain}-Step Cascade! |
+| board.chain | {chain} 连消！ | {chain}-Step Cascade! |
 | board.chain_max | ×5 顶格！ | MAX ×5! |
 | board.cheer_nice | Nice! | Nice! |
 | board.cheer_great | Great! | Great! |
@@ -212,11 +212,11 @@
 
 2026-10-25 棋盘确认稿：临时加单采用前台夹单小票，倒计时显示「还剩 N 秒 / Left N s」，底行仅保留已服务格数与进度条，不再重复显示 `rush.goal`。20 秒服务 12 格的规则不变。用于强调色与粗数字的分段 key 为 `rush.title_lead` / `rush.title_accent`、`rush.seconds_lead` / `rush.seconds_unit`、`rush.served_lead` / `rush.served_unit`、`rush.success_lead` / `rush.success_accent`、`rush.bonus` / `rush.bonus_unit`；分别组合成上表完整事实，不新增奖励。收工的感谢句只在至少有一张实际服务过的贴纸时随头像出现，零服务局仅挂牌。
 
-催单在游戏时钟第 30 秒触发，目标和倒计时区分主时钟，成功才显示 +1000。`board.chain` 的链数与计分倍率分别计算，不因为显示第六轮就变成六倍。新宠提示是局内暂记，正式收集等结算保存；同次连锁合并一条，家庭团聚按同家每局一次。提示、收集和团聚不叠满棋盘。`round.finishing` 只在最后有效连锁仍待结算时显示，`round.last_seconds` 不新增奖励。
+催单在游戏时钟第 30 秒触发，目标和倒计时区分主时钟，成功才显示 +1000。`board.chain` 的链数与计分倍率分别计算，不因为显示第六轮就变成六倍。新宠提示是局内暂记，正式收集等结算保存；同次连消合并一条，家庭团聚按同家每局一次。提示、收集和团聚不叠满棋盘。`round.finishing` 只在最后有效连消仍待结算时显示，`round.last_seconds` 不新增奖励。
 
-加分飘字已确认每个逻辑清除批次合并一条。`{waveScore}` 为本批次去重后、按当前连锁倍率计算的清除分，不是累计总分，也不含催单 +1000；同批工具命中不拆成多条，补落形成下一批消除时再显示下一条。任务奖励继续用 `rush.success` 原位反馈，固定总分按实际结算实时更新，两种模式一致。
+加分飘字已确认每个逻辑清除批次合并一条。`{waveScore}` 为本批次去重后、按当前连消倍率计算的清除分，不是累计总分，也不含催单 +1000；同批工具命中不拆成多条，补落形成下一批消除时再显示下一条。任务奖励继续用 `rush.success` 原位反馈，固定总分按实际结算实时更新，两种模式一致。
 
-到时收尾句已确认：「时间到，收完这波就下班。 / Time's up. Clocking out after this chain.」只表达正在完成已生效的最后连锁，不开放新操作、不自动引爆闲置工具或额外加分；没有待完成连锁时直接进入正常结算，不为台词增加停留。
+到时收尾句已确认：「时间到，收完这波就下班。 / Time's up. Clocking out after this chain.」只表达正在完成已生效的最后连消，不开放新操作、不自动引爆闲置工具或额外加分；没有待完成连消时直接进入正常结算，不为台词增加停留。
 
 ## 5. Report Card、称号与分享 · 副标题已确认
 
@@ -227,7 +227,7 @@
 | report.final_score | 本局得分 | Round Score |
 | report.mvp | 本局 MVP：{petName} | This Round's MVP: {petName} |
 | report.service_tiles | 服务格数 | Tiles Served |
-| report.highest_chain | 最高连锁 | Longest Cascade |
+| report.highest_chain | 最高连消 | Longest Cascade |
 | report.tools_used | 工具发动次数 | Tools Activated |
 | report.new_collection | 本局新收集 | New to Your Collection |
 | report.personal_best | 个人新纪录！ | New Personal Best! |
@@ -269,14 +269,14 @@
 | 优先级 | 触发条件 | Key / 场景 | 中文 | English |
 | --- | --- | --- | --- | --- |
 | 1 | 有效服务格数 `== 0` | `review.pet.no_service` / 零服务，由店长鼓励 | 我先可爱，你慢慢来。 | Take your time. I'll be cute. |
-| 2 | 单次操作最高连锁 `>= 5` | `review.pet.high_chain` / 高连锁 | 等等，我还没反应过来！ | Wait! I'm still catching up! |
+| 2 | 单次操作最高连消 `>= 5` | `review.pet.high_chain` / 高连消 | 等等，我还没反应过来！ | Wait! I'm still catching up! |
 | 3 | `rushCompleted == true` | `review.pet.rush_success` / 催单成功 | 赶上了，我撤回那个眼神。 | On time. I take back that look. |
 | 4 | 发动过梳＋梳、梳＋剪合体或吹风机 | `review.pet.tool_combo` / 实际发动过道具合体 | 有两下子，比我多两下。 | You've got skills. I brought none. |
 | 5 | 其他有真实服务的完整对局（有效服务格数 `>= 1`） | `review.pet.normal` / 有真实服务的普通完成 | 先抱抱，别的等会儿。 | Cuddles first. Everything else later. |
 
 鱼关 `review.fish.*`（见第 8 节）按完全相同的 1–5 优先级判定。英文表达不是主人的真实名言。
 
-2026-10-25 结算评语扩充为每个场景 5 条，共 50 条中英文对应文案。上表及第 8 节列出各场景的第 1 条，以下为第 2–5 条。同一局的评语变体保持固定，报告重开、保存重试、分享与切换语言不重新抽取；新对局可出现同场景的其他表达。本次按用户选定的第二版替换全部 50 句：中文用简短的撒娇、嘴硬、贪吃、装忙与轻吐槽，英文保留对应笑点与口吻，不逐字硬译。评语不要求玩家理解连锁、合体或道具术语；零服务用轻松鼓励或玩笑，不编造本局已服务的表现。
+2026-10-25 结算评语扩充为每个场景 5 条，共 50 条中英文对应文案。上表及第 8 节列出各场景的第 1 条，以下为第 2–5 条。同一局的评语变体保持固定，报告重开、保存重试、分享与切换语言不重新抽取；新对局可出现同场景的其他表达。本次按用户选定的第二版替换全部 50 句：中文用简短的撒娇、嘴硬、贪吃、装忙与轻吐槽，英文保留对应笑点与口吻，不逐字硬译。评语不要求玩家理解连消、合体或道具术语；零服务用轻松鼓励或玩笑，不编造本局已服务的表现。
 
 | Key | 中文 | English |
 | --- | --- | --- |
@@ -326,7 +326,7 @@
 | 实际触发条件（按既定优先级） | 中文 | English |
 | --- | --- | --- |
 | 剪刀＋剪刀全盘合体；鱼关对应珍珠贝壳双合体 | 这下真没了 | Poof. All gone. |
-| 单次操作最高连锁达到 5 轮 | 我手都松开了 | I let go. It kept going. |
+| 单次操作最高连消达到 5 轮 | 我手都松开了 | I let go. It kept going. |
 | 催单成功 | 急什么我会消 | Relax. I got this. |
 | 实际发动至少 3 个工具 | 道具比我还忙 | My tools work harder. |
 | 最后 3 秒发起有效操作 | 差点准时下班 | Almost clocked out. |
@@ -503,7 +503,7 @@
 
 鱼关深蓝水下方向已确认。局内标题复用已校读的「小鱼也来排班啦」，不把实际游玩误标为加载或准备状态；鱼关催单进度用「已清除」表达格数，不表示独立鱼的数量，倒计时和奖励条件不变。
 
-鱼色名称沿用当前素材清单的中英文展示名；例如「天蓝色 / Sky Blue」是一个鱼色类别，不是个体鱼的名字。鱼报告的「清除格数」与工具、连锁统计仍按同一套真实结算口径，排行榜入口指向当前已解锁的鱼榜。
+鱼色名称沿用当前素材清单的中英文展示名；例如「天蓝色 / Sky Blue」是一个鱼色类别，不是个体鱼的名字。鱼报告的「清除格数」与工具、连消统计仍按同一套真实结算口径，排行榜入口指向当前已解锁的鱼榜。
 
 邀请、准备规则、水族道具与鱼关评语的关键文案已确认；只有已触发的玩家能在对应局外位置看到这些内容，不以本段文案增加首页预告或提前模式入口。「不用吹干」是已定鱼关主题梗，不表示真实洗护操作。
 

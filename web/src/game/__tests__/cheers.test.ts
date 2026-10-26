@@ -22,17 +22,17 @@ describe('每次操作的唯一最高档喝彩', () => {
   it('只有一次消除时保持安静', () => {
     expect(pickCheer(chain(batch(1)))).toBeNull();
   });
-  it('二连锁 Nice、三连锁 Great、四连锁及以上 Amazing', () => {
+  it('二连消 Nice、三连消 Great、四连消及以上 Amazing', () => {
     expect(pickCheer(chain(batch(1), batch(2)))).toBe('nice');
     expect(pickCheer(chain(batch(3)))).toBe('great');
     expect(pickCheer(chain(batch(4)))).toBe('amazing');
     expect(pickCheer(chain(batch(5)))).toBe('amazing');
     expect(pickCheer(chain(batch(8)))).toBe('amazing');
   });
-  it('实际双道具合体即使在第一轮，也给 Great，不冒充五连锁', () => {
+  it('实际双道具合体即使在第一轮，也给 Great，不冒充五连消', () => {
     for (const effect of ['comboCC', 'comboCS'] as const) expect(pickCheer(chain(batch(1, { effect })))).toBe('great');
   });
-  it('吹风机和实际清全盘优先给 Wow，不被连锁或 18 格条件覆盖', () => {
+  it('吹风机和实际清全盘优先给 Wow，不被连消或 18 格条件覆盖', () => {
     expect(pickCheer(chain(batch(1, { effect: 'dryer' })))).toBe('wow');
     const all = board.flatMap((row, r) => row.map((_, c) => ({ r, c })));
     expect(pickCheer(chain(batch(1, { cleared: all })))).toBe('wow');
@@ -47,13 +47,13 @@ describe('每次操作的唯一最高档喝彩', () => {
     expect(pickCheer(chain(batch(1, { cleared: cleared(9) }), batch(2, { cleared: cleared(9) })))).toBe('amazing');
     expect(pickCheer(chain(batch(1, { cleared: cleared(8) }), batch(2, { cleared: cleared(9) })))).toBe('nice');
   });
-  it('合成吹风机的零分批不喝彩，也不按批次数冒充连锁', () => {
+  it('合成吹风机的零分批不喝彩，也不按批次数冒充连消', () => {
     const merge = batch(0, { seq: 1, effect: 'merge', score: 0, cleared: [], merge: { from: { r: 0, c: 0 }, to: { r: 0, c: 1 } } });
     expect(pickCheer(chain(merge))).toBeNull();
     expect(pickCheer(chain(merge, batch(1, { seq: 2 })))).toBeNull();
     expect(pickCheer(chain(merge, batch(1, { seq: 2 }), batch(2, { seq: 3 })))).toBe('nice');
   });
-  it('真实引擎的二连锁会在补落完成后发出一次 Nice', () => {
+  it('真实引擎的二连消会在补落完成后发出一次 Nice', () => {
     const lineup = ['a', 'b', 'c', 'd', 'e', 'f'];
     const game = createGame({ seed: 4, lineup });
     const move = findHint(game)!;

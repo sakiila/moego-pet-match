@@ -53,7 +53,7 @@ export type Timeline =
       boardAfterSwap: Board;
       batches: Batch[];
       busyUntil: number;
-      /** 连锁结束后若成死局，洗牌后的棋盘（洗牌不占游戏时间）。 */
+      /** 连消结束后若成死局，洗牌后的棋盘（洗牌不占游戏时间）。 */
       shuffled: Board | null;
     };
 
@@ -71,7 +71,7 @@ export interface GameState {
   refillQueue: number[];
   /** 补落导演参数；null 表示关闭，补落退回均匀随机。 */
   director: DirectorConfig | null;
-  /** 连续多少次有效操作没有出现连锁（回弹不计）；连锁出现时归零，决定导演的运气。 */
+  /** 连续多少次有效操作没有出现连消（回弹不计）；连消出现时归零，决定导演的运气。 */
   drought: number;
   nextId: number;
   phase: 'playing' | 'ended' | 'discarded';
@@ -79,7 +79,7 @@ export interface GameState {
   batchSeq: number;
   score: number;
   clearedCells: number;
-  /** 按连锁倍率 ×1…×5 汇总的清除格数，服务端据此核对分数。 */
+  /** 按连消倍率 ×1…×5 汇总的清除格数，服务端据此核对分数。 */
   clearedByMultiplier: number[];
   maxChain: number;
   toolsFired: number;

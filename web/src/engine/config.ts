@@ -37,7 +37,7 @@ export const TIMING = {
 /**
  * 补落导演参数。补落时只看落点的局部形态给各类加权，不按宠物身份加权：
  * 落定后能与已稳定邻居（下方、左右）直接形成三连的种类拿 boost3，形成「差一个」的种类拿 boost2，
- * 其余权重 1。加权部分 = (base + luck × 运气) × 阶段系数；运气随玩家连续无连锁的步数上升。
+ * 其余权重 1。加权部分 = (base + luck × 运气) × 阶段系数；运气随玩家连续无连消的步数上升。
  * 定义放在本文件，因为服务端也直接引用 config.ts。
  */
 export interface DirectorConfig {
@@ -45,7 +45,7 @@ export interface DirectorConfig {
   boost3: { base: number; luck: number };
   /** 形成「差一个」（两连）的加权。 */
   boost2: { base: number; luck: number };
-  /** 连续多少步无连锁时运气达到 1。 */
+  /** 连续多少步无连消时运气达到 1。 */
   droughtCap: number;
   /** 阶段系数，按游戏时钟半开区间取最后一个 fromMs ≤ t 的项；须按 fromMs 升序且首项 fromMs 为 0。 */
   phases: { fromMs: number; factor: number }[];
@@ -53,7 +53,7 @@ export interface DirectorConfig {
 
 /**
  * 补落导演默认参数（V1_RULES「补落导演」，2026-10-24 确认，可随试玩调整）。
- * 加权只看落点局部形态，不看宠物身份；运气在连续 4 步无连锁时到顶；
+ * 加权只看落点局部形态，不看宠物身份；运气在连续 4 步无连消时到顶；
  * 阶段：开局基线、催单期略高、催单后回落、最后 15 秒冲刺最高。
  */
 export const DIRECTOR: DirectorConfig = {

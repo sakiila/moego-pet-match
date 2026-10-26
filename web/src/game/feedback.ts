@@ -6,7 +6,7 @@ export type ImpactKind = 'none' | 'punch' | 'shake';
 
 export interface BatchFeedback {
   sound: SoundKind;
-  /** 连锁音调级别：本次操作内的批序 − 1，逐级上扬。 */
+  /** 连消音调级别：本次操作内的批序 − 1，逐级上扬。 */
   step: number;
   haptic: HapticPattern;
   /** 强度等级 1–5，各层反馈（定格、震屏、飘字、音效、震动、粒子）都按它分级。 */

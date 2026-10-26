@@ -85,7 +85,7 @@ function applyGravity(board: Board, s: GameState, rng: Rng, atMs: number) {
 
 /**
  * 结算一次已受理的交换，直接修改传入的（已复制的）状态，返回时间线。
- * 整条连锁在受理时一次算完；每批按 TIMING 推算结算时刻，催单据此判定。
+ * 整条连消在受理时一次算完；每批按 TIMING 推算结算时刻，催单据此判定。
  */
 export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Timeline {
   const size = s.board.length;
@@ -109,7 +109,7 @@ export function resolveMove(s: GameState, move: Move, t: number, rng: Rng): Time
   let chainIndex = 0;
   while (seed || groups.length > 0) {
     const merging = seed?.merge ?? null;
-    // 合成批不计分，序号 0；之后的连锁从 ×1 开始
+    // 合成批不计分，序号 0；之后的连消从 ×1 开始
     const index = merging ? 0 : ++chainIndex;
     const cover = new Map<number, Pos>();
     const add = (p: Pos) => cover.set(posKey(p, size), p);

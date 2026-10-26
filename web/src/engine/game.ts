@@ -115,7 +115,7 @@ export function confirmExit(state: GameState, t: number): { state: GameState; di
 /**
  * 工具直接范围预览：手势已指向相邻目标但未触发交换时调用。
  * 单工具按交换后的位置计算，两工具按合体与落点计算；不涉及工具时返回 null。
- * 只描述直接范围，不预测扫到其他道具后的扩展与后续连锁。
+ * 只描述直接范围，不预测扫到其他道具后的扩展与后续连消。
  */
 export function previewRange(state: GameState, from: Pos, to: Pos): Pos[] | null {
   const size = state.board.length;

@@ -14,7 +14,7 @@ export interface CheerState {
   active: CheerEvent | null;
 }
 
-/** 一次操作只选最高档；批序与视觉强度不同，首轮合体不能当作五连锁。 */
+/** 一次操作只选最高档；批序与视觉强度不同，首轮合体不能当作五连消。 */
 export function pickCheer(timeline: Timeline): CheerKind | null {
   if (timeline.kind !== 'chain') return null;
   const batches = timeline.batches.filter((b) => !b.merge && b.index > 0 && b.cleared.length > 0);

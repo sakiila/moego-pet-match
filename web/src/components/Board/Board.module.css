@@ -235,7 +235,7 @@
   font-weight: var(--weight-bold);
 }
 
-/* 飘字分级：×3 起连锁标签橙底放大，×4 更大并弹一下，×5 最大 */
+/* 飘字分级：×3 起连消标签橙底放大，×4 更大并弹一下，×5 最大 */
 .popupScore[data-level='4'],
 .popupScore[data-level='5'] {
   font-size: calc(var(--text-xl) * 1.2);

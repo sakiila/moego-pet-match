@@ -4,7 +4,7 @@ import type { Board, Pos } from './types';
 
 /**
  * 补落导演：参数见 config.ts 的 DirectorConfig 与 DIRECTOR。
- * 只看局部、不搜索全盘、不预测整条连锁；每格开销 O(种类数)。
+ * 只看局部、不搜索全盘、不预测整条连消；每格开销 O(种类数)。
  */
 /** 运气 0…1：久旱步数 / 上限，封顶。 */
 export function luckOf(drought: number, cfg: DirectorConfig): number {

@@ -14,7 +14,7 @@ import wowClip from './clips/wow.mp3';
  */
 const MASTER = 0.22;
 const MUSIC_LEVEL = 0.18;
-/** 五声音阶（C 大调宫调式），连锁音调逐级上扬也取这里的音。 */
+/** 五声音阶（C 大调宫调式），连消音调逐级上扬也取这里的音。 */
 const PENTA = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 1567.98];
 
 let ctx: AudioContext | null = null;
@@ -138,7 +138,7 @@ function noise(a: { ctx: AudioContext; out: AudioNode }, at: number, dur: number
   src.start(at);
 }
 
-/** 播放一个批次的音效；step 为连锁级别（逐级上扬），level 为强度等级：×4 叠高八度亮音，×5 再加短琶音收尾。 */
+/** 播放一个批次的音效；step 为连消级别（逐级上扬），level 为强度等级：×4 叠高八度亮音，×5 再加短琶音收尾。 */
 export function playSound(kind: SoundKind, step = 0, level = 1) {
   const a = audio();
   if (!a || a.ctx.state !== 'running') return;

@@ -92,7 +92,7 @@ describe('交换受理', () => {
   });
 });
 
-describe('计分、连锁与道具生成', () => {
+describe('计分、连消与道具生成', () => {
   it('手动直五在清除后生成吹风机，五格仍计 500 分且不自动发动', () => {
     const { state, timeline } = swap(game(STRAIGHT_FIVE, STRAIGHT_FIVE_REFILL), p(5, 3), p(6, 3), 1000);
     const { batches, boardAfterSwap } = chain(timeline);
@@ -163,7 +163,7 @@ describe('计分、连锁与道具生成', () => {
     expect(busyUntil).toBe(2080);
   });
 
-  it('连锁倍率依次 ×1…×5，之后封顶 ×5', () => {
+  it('连消倍率依次 ×1…×5，之后封顶 ×5', () => {
     expect([1, 2, 3, 4, 5, 6, 9].map(chainMultiplier)).toEqual([1, 2, 3, 4, 5, 5, 5]);
   });
 
@@ -222,7 +222,7 @@ describe('道具发动与合体', () => {
     expect(state.validMoves).toBe(1);
   });
 
-  it('合成后的连锁倍率从 ×1 开始，合成批不抬高倍率', () => {
+  it('合成后的连消倍率从 ×1 开始，合成批不抬高倍率', () => {
     for (let seed = 1; seed <= 30; seed++) {
       const s = createGame({ seed, lineup: LINEUP, board: withCells(DEAD, { '3,2': 'x', '3,3': 'x' }) });
       const { timeline } = swap(s, p(3, 2), p(3, 3), 1000);
@@ -261,7 +261,7 @@ describe('道具发动与合体', () => {
     expect(state.combos.dryer).toBeGreaterThanOrEqual(1);
   });
 
-  it('吹风机被别的道具扫到时连锁引爆，清全盘', () => {
+  it('吹风机被别的道具扫到时连消引爆，清全盘', () => {
     const s = game(withCells(DEAD, { '3,1': 'h', '3,5': 'd' }));
     const { timeline } = swap(s, p(3, 1), p(3, 0), 1000);
     const first = chain(timeline).batches[0];
@@ -333,14 +333,14 @@ describe('催单与时间端点', () => {
     expect(chain(timeline).batches[0].rushProgress).toBeNull();
   });
 
-  it('90 s 前受理的操作，连锁越过 90 s 仍完整计分', () => {
+  it('90 s 前受理的操作，连消越过 90 s 仍完整计分', () => {
     const { state, timeline } = swap(ss(), p(3, 2), p(3, 3), 89_999);
     const { batches } = chain(timeline);
     expect(batches[0].settleAt).toBeGreaterThan(RULES.durationMs);
     expect(state.score).toBe(batches.reduce((sum, b) => sum + b.score, 0));
   });
 
-  it('到时停止受理，收完连锁后结束；闲置道具不自动发动', () => {
+  it('到时停止受理，收完连消后结束；闲置道具不自动发动', () => {
     const s = game(withCells(DEAD, { '0,0': 'x' }));
     const ended = advance(s, 90_000);
     expect(ended.events.map((e) => e.type)).toEqual(['rushStart', 'rushEnd', 'timeUp', 'finished']);
@@ -349,7 +349,7 @@ describe('催单与时间端点', () => {
     expect(ended.state.score).toBe(0);
   });
 
-  it('连锁未收完时到时，等收尾结束才 finished', () => {
+  it('连消未收完时到时，等收尾结束才 finished', () => {
     const { state } = swap(ss(), p(3, 2), p(3, 3), 89_900);
     expect(advance(state, 90_000).events.map((e) => e.type)).not.toContain('finished');
     const done = advance(advance(state, 90_000).state, state.busyUntil);

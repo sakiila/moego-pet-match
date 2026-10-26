@@ -36,7 +36,7 @@ interface Session {
   base: PlaybackBase;
   timeline: Timeline | null;
   clock: GameClock;
-  /** 最近一次有效操作的连锁结束时刻；无效交换不重置卡关提示计时。 */
+  /** 最近一次有效操作的连消结束时刻；无效交换不重置卡关提示计时。 */
   quietSince: number;
   shuffleHandled: boolean;
   shuffleResumeAt: number | null;
@@ -158,7 +158,7 @@ export function useGameSession(
       const g = s.clock.elapsed();
       const tl = s.timeline;
       if (tl?.kind === 'chain' && tl.shuffled && !s.shuffleHandled && g >= tl.busyUntil) {
-        // 两个计时器从连锁结束、开始洗牌的那一刻起暂停，不受渲染帧延迟影响
+        // 两个计时器从连消结束、开始洗牌的那一刻起暂停，不受渲染帧延迟影响
         s.shuffleHandled = true;
         s.shuffleResumeAt = s.clock.pauseAt(tl.busyUntil) + SHUFFLE_PAUSE_MS;
       }

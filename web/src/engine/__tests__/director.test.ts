@@ -140,7 +140,7 @@ describe('接入结算：补落受导演影响', () => {
     return r.timeline;
   }
 
-  it('极大加权时，久旱玩家的补落必然接出连锁', () => {
+  it('极大加权时，久旱玩家的补落必然接出连消', () => {
     const cfg: DirectorConfig = { ...FLAT, boost3: { base: 1e9, luck: 0 } };
     for (let seed = 1; seed <= 20; seed++) {
       const s = createGame({ seed, lineup: LINEUP, board: VERT, director: cfg });
@@ -150,7 +150,7 @@ describe('接入结算：补落受导演影响', () => {
     }
   });
 
-  it('关闭导演时同一局面不保证连锁，补落退回均匀随机', () => {
+  it('关闭导演时同一局面不保证连消，补落退回均匀随机', () => {
     let cascades = 0;
     for (let seed = 1; seed <= 30; seed++) {
       const s = createGame({ seed, lineup: LINEUP, board: VERT, director: null });
@@ -161,7 +161,7 @@ describe('接入结算：补落受导演影响', () => {
 
   it('固定补落序列优先于导演，用完后才由导演接管', () => {
     const cfg: DirectorConfig = { ...FLAT, boost3: { base: 1e9, luck: 0 } };
-    // 先按队列从顶到底补 B、C、D：底格 (2,2) 是 D，不形成连锁
+    // 先按队列从顶到底补 B、C、D：底格 (2,2) 是 D，不形成连消
     const s = createGame({ seed: 1, lineup: LINEUP, board: VERT, director: cfg, refill: [1, 2, 3] });
     const chain = chainOf(s, ...SWAP);
     expect(chain.batches).toHaveLength(1);
@@ -169,7 +169,7 @@ describe('接入结算：补落受导演影响', () => {
     expect(formatBoard(chain.batches[0].boardAfter)[2][2]).toBe('D');
   });
 
-  it('久旱计数：无连锁的有效操作 +1，出现连锁归零', () => {
+  it('久旱计数：无连消的有效操作 +1，出现连消归零', () => {
     const cfg: DirectorConfig = { ...FLAT, boost3: { base: 1e9, luck: 0 } };
     const s0 = createGame({ seed: 1, lineup: LINEUP, board: VERT, director: cfg, refill: [1, 2, 3] });
     expect(s0.drought).toBe(0);
@@ -208,7 +208,7 @@ describe('接入结算：补落受导演影响', () => {
   });
 });
 
-describe('统计：导演提高连锁率，同时保持各类掉落公平', () => {
+describe('统计：导演提高连消率，同时保持各类掉落公平', () => {
   interface Stat {
     moves: number;
     cascades: number;
@@ -255,7 +255,7 @@ describe('统计：导演提高连锁率，同时保持各类掉落公平', () =
     return total;
   }
 
-  it('开启导演后连锁率明显高于均匀随机', () => {
+  it('开启导演后连消率明显高于均匀随机', () => {
     const on = aggregate(DIRECTOR);
     const off = aggregate(null);
     const rate = (s: Stat) => s.cascades / s.moves;

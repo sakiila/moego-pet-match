@@ -138,7 +138,7 @@ const entry: GalleryEntry = {
     'game · Nice': () => <GamePreview seed={4} />,
     'game · Amazing four cascades': () => <GamePreview seed={20} />,
     'game · Amazing large clear': () => <GamePreview seed={1} board={LARGE_CLEAR_BOARD} />,
-    // 二连锁：首次提示 (0,1) → (0,2)，用于验证 Nice 的新门槛。
+    // 二连消：首次提示 (0,1) → (0,2)，用于验证 Nice 的新门槛。
     'game · Nice two cascades': () => <GamePreview seed={4} />,
     'game · Wow': () => <GamePreview seed={1} board={WOW_BOARD} />,
     'game · fish Amazing': () => <GamePreview seed={195} mode="fish" />,

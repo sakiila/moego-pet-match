@@ -7,7 +7,7 @@
 | 优先级 | 触发条件 | key | 章 | 中文 / English |
 | --- | --- | --- | --- | --- |
 | 1 | 发动过吹风机（鱼关大浪花） | `title.cleanup_chief` | 02-all-gone | 这下真没了 / Poof. All gone. |
-| 2 | 单次最高连锁 ≥ 5 | `title.chain_lead` | 01-hands-off | 我手都松开了 / I let go. It kept going. |
+| 2 | 单次最高连消 ≥ 5 | `title.chain_lead` | 01-hands-off | 我手都松开了 / I let go. It kept going. |
 | 3 | 催单成功 | `title.scheduling_pro` | 03-got-this | 急什么我会消 / Relax. I got this. |
 | 4 | 实际发动 ≥ 3 个道具 | `title.tool_pro` | 04-tools-work-harder | 道具比我还忙 / My tools work harder. |
 | 5 | 最后 3 秒仍有有效操作 | `title.last_second` | 05-almost-clocked-out | 差点准时下班 / Almost clocked out. |
@@ -24,12 +24,12 @@
 
 ## 截图与验收
 
-`report-zh.png`（催单成功 → 急什么我会消）、`report-en.png`（Relax. I got this.）、`report-fish-zh.png`（连锁 6 → 我手都松开了）、`share-zh.png`（分享卡同一枚章）、`gallery-titlestamp-zh.png`、`gallery-titlestamp-en.png`。
+`report-zh.png`（催单成功 → 急什么我会消）、`report-en.png`（Relax. I got this.）、`report-fish-zh.png`（连消 6 → 我手都松开了）、`share-zh.png`（分享卡同一枚章）、`gallery-titlestamp-zh.png`、`gallery-titlestamp-en.png`。
 
 typecheck、test（127 通过）、build 通过。
 
 ## 未验证与遗留
 
-- 只在真实结算中触发了「催单成功」「连锁 ≥ 5」两种称号；其余四种只在陈列页与单元测试核对。
+- 只在真实结算中触发了「催单成功」「连消 ≥ 5」两种称号；其余四种只在陈列页与单元测试核对。
 - 章在 80 px 以下时英文小字较难读，报告页使用 120 px；如需在更小位置展示需另外评估。
 - 原圆角称号框（图标库 title-stamp）不再使用，保留在图标库中。

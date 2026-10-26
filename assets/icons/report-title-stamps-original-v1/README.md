@@ -30,7 +30,7 @@
 | 称号 key | 触发条件（优先级） | 章 |
 | --- | --- | --- |
 | `title.cleanup_chief` | 1 发动过吹风机／大浪花 | `02-all-gone` |
-| `title.chain_lead` | 2 单次最高连锁 ≥ 5 | `01-hands-off` |
+| `title.chain_lead` | 2 单次最高连消 ≥ 5 | `01-hands-off` |
 | `title.scheduling_pro` | 3 催单成功 | `03-got-this` |
 | `title.tool_pro` | 4 实际发动 ≥ 3 个道具 | `04-tools-work-harder` |
 | `title.last_second` | 5 最后 3 秒仍有有效操作 | `05-almost-clocked-out` |

@@ -8,7 +8,7 @@ export interface ChainStickers {
 }
 
 /**
- * 根据一次操作的整条连锁计算局内贴纸。新宠按独立宠物去重，不按格数累计；
+ * 根据一次操作的整条连消计算局内贴纸。新宠按独立宠物去重，不按格数累计；
  * 团聚每个家庭每局最多一次（shownFamilies 由调用方维护）。只影响展示，不改变收集或得分。
  */
 export function chainStickers(
