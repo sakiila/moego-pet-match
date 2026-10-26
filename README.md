@@ -9,6 +9,24 @@
 
 游戏仅面向公司同事使用，需覆盖中国大陆和海外访问；当前部署在 RackNerd，入口为 `https://star.baobo.me`。Node.js 应用与自建 PostgreSQL 通过 Docker 内网通信，生产数据库与 schema 均为 `pet_match`；图片存于 Cloudflare R2 私有桶。首版功能范围、玩法及默认规则已统一确认；可选项继续保留可选，待评估项不自动加入首版。
 
+## 版权与使用 · Copyright & Usage
+
+© 2026 MoeGo · Made by Bob（Bob Bao）。
+
+**代码**以 [MIT 许可](LICENSE) 开放：个人自用与商业使用均可，可修改、再发布，但须在副本或衍生作品中保留版权声明与许可全文，并请在作品说明或页面显著位置标明出处：
+
+> 基于 MoeGo 毛孩子全明星（MoeGo Pet All-Stars）· https://github.com/sakiila/moego-pet-match
+
+**以下内容不在 MIT 许可范围内**，保留全部权利，未经书面许可不得使用：
+
+- 宠物照片、贴纸、剪影与同事的姓名、头像、主人说等资料（照片与名录本就不在仓库中）；
+- 项目自制的美术与音频：`assets/`（图标、插画、录音等）、`design/` 设计稿与 `web/public/` 中的项目图片；
+- MoeGo 名称、标志与品牌元素。
+
+第三方字体、图标等按各自许可分发，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+The **source code** is available under the [MIT License](LICENSE) for personal and commercial use. Keep the copyright and license notice in all copies, and please credit the project visibly: "Based on MoeGo Pet All-Stars · https://github.com/sakiila/moego-pet-match". Pet photos and stickers, coworker data, project artwork and audio (`assets/`, `design/`, project images in `web/public/`) and the MoeGo name and logo are **not** covered and remain all rights reserved. Third-party assets follow their own licenses listed in THIRD_PARTY_NOTICES.md.
+
 ## 创意与吸引力
 
 已确认名称：**MoeGo 毛孩子全明星 / MoeGo Pet All-Stars**。
