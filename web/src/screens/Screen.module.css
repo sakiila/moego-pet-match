@@ -225,3 +225,8 @@
     transform: translateY(14px);
   }
 }
+
+/* 有返回顶部浮钮的长列表页：底部留出浮钮高度，滚到底时最后一排不被遮住 */
+.backToTopClear {
+  padding-bottom: calc(var(--back-to-top-size) + var(--space-4) * 2 + env(safe-area-inset-bottom));
+}

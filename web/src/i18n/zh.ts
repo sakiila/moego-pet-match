@@ -19,6 +19,7 @@ export const zh = {
   'home.sound_tip_tail': '，体验更好。',
   'action.cancel': '取消',
   'action.close': '关闭',
+  'action.back_to_top': '返回顶部',
   'prep.loading': '毛孩子正在集合……',
   'prep.preparing': '准备中…',
   'prep.guests': '本局来客',

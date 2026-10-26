@@ -1,0 +1,55 @@
+/* 对齐 480px 页面列的右缘，桌面不贴到窗口最右；底部让出安全区 */
+.button {
+  position: fixed;
+  right: max(var(--space-4), calc((100vw - var(--back-to-top-column)) / 2 + var(--space-4)), env(safe-area-inset-right));
+  bottom: max(var(--space-4), calc(env(safe-area-inset-bottom) + var(--space-2)));
+  z-index: var(--z-overlay);
+  display: grid;
+  place-items: center;
+  width: var(--back-to-top-size);
+  height: var(--back-to-top-size);
+  padding: 0;
+  border: var(--back-to-top-stroke) solid var(--color-ink);
+  border-radius: 50%;
+  background: var(--color-paper);
+  box-shadow: var(--back-to-top-shadow);
+  color: var(--color-brand);
+  cursor: pointer;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    visibility var(--dur-base);
+}
+
+.button[data-visible='false'] {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(var(--space-2));
+  pointer-events: none;
+}
+
+.button:active {
+  transform: translate(var(--back-to-top-press), var(--back-to-top-press));
+  box-shadow: none;
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+.arrow {
+  width: var(--back-to-top-arrow);
+  height: var(--back-to-top-arrow);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

@@ -93,6 +93,7 @@
 | 洗护动效分镜草稿 | [motion-storyboard-v3.png](concepts/motion-storyboard-v3.png) | 材质与起势→清除→补落示意；存在格数偏差，准确范围见动效章节，不作为规则验收图 |
 | 宠物图鉴 | [petdex-v1.png](concepts/petdex-v1.png) | 入职卡收集、已解锁与未遇见状态、主人关系、选中卡片详情和翻面入口 |
 | 手机宠物图鉴 | [mobile-petdex-v1.png](concepts/mobile-petdex-v1.png) | 已确认；两列卡片、已收集与新收集优先、名字＋剪影、轻量搜索与新增入口 |
+| 图鉴返回顶部 | [petdex-back-to-top-v1.png](concepts/petdex-back-to-top-v1.png) | 2026-10-27 按钮造型确认并接入；滚过约一屏后右下角出现 56px 白底炭黑描边圆钮，橙色顶线＋向上箭头，右下硬阴影；点按平滑回顶（减少动态效果时直接跳），对齐 480px 页面列与底部安全区，页尾留出浮钮高度。箭头用 SVG，不进 PNG 图标库；图中 Lucky、Bunny、Hachi、Milu 等为生成示意，按钮压住宠物脸的位置不作为实现依据 |
 | 手机图鉴贴纸册 | [petdex-sticker-sheet-v3.png](concepts/petdex-sticker-sheet-v3.png) | 2026-10-24 确认下半部：撕边橙色胶带、米白毛边纸、玩家署名与收集数、纸外分享按钮；「列表 / 贴纸册」及以上保留当前实现。全部上架宠物固定 8 列，格位按主人英文名、再宠物英文名；已收集用贴纸、未收集用实际剪影，点击复用详情。分享先预览，再保存完整册页 PNG；不导出页面导航、切换与按钮 |
 | 贴纸册独立分享海报 | [sticker-album-share-v1.png](concepts/sticker-album-share-v1.png) | 2026-10-25 用户确认并本地接入；官方 MoeGo Logo 与现有中／英游戏字标、橙色胶带与米白册页、真实玩家署名与收集数、完整 8 列贴纸／剪影。底部改为「我的毛孩子朋友，都在这里啦 / All my furry friends, right here.」。图稿 Bob 与 38 / 80 仅为示意，实际导出读取当前册页，固定 1200px 宽、高度随宠物数量变化；不切图充当背景，不新增二维码或页面操作。见[实施记录](reviews/2026-10-25-sticker-album-share/PLAN.md) |
 | 手机已收集宠物详情 | [mobile-pet-detail-v2.png](concepts/mobile-pet-detail-v2.png) | 已确认；Maodu 详情弹层、主人 Bob、原图翻面与删除申请入口 |

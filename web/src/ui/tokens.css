@@ -467,6 +467,14 @@
   /* 图鉴详情卡：盖住页面与吸底按钮，低于对话框（资料删除申请叠在它上面） */
   --z-card: 90;
   --scrim: rgb(31 34 39 / 0.55);
+
+  /* 返回顶部浮钮：白底炭黑描边，向右下的硬阴影；按下时阴影收回 */
+  --back-to-top-size: 56px;
+  --back-to-top-arrow: 26px;
+  --back-to-top-stroke: 3px;
+  --back-to-top-press: 3px;
+  --back-to-top-shadow: var(--back-to-top-press) var(--back-to-top-press) 0 var(--color-ink);
+  --back-to-top-column: 480px;
 }
 
 /*
