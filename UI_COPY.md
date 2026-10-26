@@ -127,6 +127,10 @@
 | home.streak_active | 连续 {days} 天开工 · 今天已打卡 | {days}-day streak · clocked in today |
 | home.streak_pending | 连续 {days} 天开工 · 今天还没开工 | {days}-day streak · not clocked in yet today |
 | home.streak_none | 今天开一局，打卡从今天算起 | Play a round today to start your streak |
+| home.sound_tip_title | 开点声音，更好玩 | More fun with sound |
+| home.sound_tip_lead | 在下方「设置」中打开 | In Settings below, turn on |
+| home.sound_tip_features | 背景音乐和消除音效 | Background Music and Sound Effects |
+| home.sound_tip_tail | ，体验更好。 | for more fun.（前含空格） |
 | home.photo_notice | 宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob（毛肚和菠萝的铲屎官） | Pet photos are manually reviewed and processed, so mistakes may happen. If you spot an error, please contact @Bob on Slack (Maodu and Boluo's human). |
 | home.version | 版本 {version} | Version {version} |
 | home.footer_info | 信息使用说明 | Privacy |
@@ -140,6 +144,8 @@
 版本号下方展示 GitHub 仓库地址 `github.com/sakiila/moego-pet-match`，小字居中并保留下划线，点击在新标签页打开项目首页。`home.github_link` 用作链接的中英文可访问名称，提示新标签页行为；可见地址保持原文。
 
 首页主按钮共用「开始营业 / Open Shop」，进入普通宠物局准备，不直接开始计时；次级入口沿用图鉴、排行榜、我的宠物。个人最好只展示普通宠物局记录，不将鱼关成绩混入首页字段。人工处理提示保留用户指定原句，首页没有鱼关入口或解锁预告。
+
+2026-10-26 用户确认首次声音提示：同一浏览器首次选定身份进入首页后显示一次，气泡左上仅保留音乐图标，指向高亮的「设置」。说明按 lead / features / tail 组合，中文在 lead 后换行，英文自然折行；两项声音名称用橙色强调。点击关闭或设置收起，展示时即记住已提示；刷新、退出再选身份不重复。提示不改变音乐与音效开关；较长页面在提示出现时将设置入口滚入可视范围。
 
 点击右上角头像，在头像下方展开下拉框，显示「Clock Out」（中英文一致）；再次点击头像、点击外部或按 Escape 收起。点击「Clock Out」清除浏览器记住的身份并返回身份选择页。
 

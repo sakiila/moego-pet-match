@@ -1,0 +1,31 @@
+Create ONE polished, production-quality Chinese UI design mockup for an EXISTING MoeGo pet match-three game. The user explicitly requests ONE design, not three options. This is a focused design proposal for a first-browser-visit sound reminder after the player selects their identity and lands on the shop HOME.
+
+Target: mobile content-only screen, logical 390 x 844 pixels, rendered crisply at 780 x 1688 pixels (2x). Preserve natural proportions. No phone bezel, OS status bar, browser chrome, presentation board, labels outside the UI, or collage. One complete edge-to-edge mobile home screen.
+
+ATTACHED REFERENCE ROLES:
+1. /Users/bob/WebstormProjects/moego-pet-match/design/reviews/2026-10-24-page-polish/home-zh.png is the PRIMARY actual home screenshot and layout reference. Preserve the familiar real logo, black-orange 毛孩子全明星 wordmark, spacious white/light-gray background, subtitle, storefront with striped awning, black dog Elphaba pet sticker, manager nameplate, orange main CTA, three navigation entries, photo-processing note and bottom settings location. Match the reference appearance faithfully, do not redesign the page.
+2. /Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-settings-v1.png is ONLY reference for existing setting terminology, rounded orange/charcoal language, and music / sound-effect icons. DO NOT show the settings sheet in the output. The design shows the HOME with the new small reminder.
+
+DESIGN TASK:
+Add one charming, compact, ANCHORED NONMODAL COACHMARK directly ABOVE the existing bottom-footer Settings link. It invites a first-time browser visitor to turn on sound via settings. The main Start Shop button must remain visible and unobscured. No dark full-page scrim, no forced large dialog, no automatic enabling, no audio permission request. The page remains its normal brightness.
+
+Keep the existing HOME faithful to reference 1. Simplify mock data ONLY to reflect first use: replace the personal best number with a subtle neutral first-use line “准备好，开门营业吧！” below the main button instead of inventing a high score. Preserve real pet/manager example, nav labels 宠物图鉴 / 排行榜 / 我的宠物, and bottom links. Do not invent extra features, counters or onboarding steps. Current date anchor is 2026-10-26, but no date or version needs to be displayed. Primary existing CTA remains “开始营业”.
+
+NEW COACHMARK:
+- Float a warm white / very pale peach paper bubble about 344 logical px wide and 126-138 px high, with generous inner padding, subtly rounded 16px corners, a 1.5-2px charcoal outline, a restrained soft shadow, and a small downward pointer anchored accurately to the footer “设置” on the bottom right.
+- Place this bubble over the lower photo-notice region, with enough separation from the three nav entries and WITHOUT covering or pushing the orange start button or shop/manager art. It is an overlay, not a new page block.
+- Header has a small existing-style orange music-note + speaker icon group at left, exact title “开点声音，更好玩” in bold rounded charcoal Chinese, and a small clear neutral close X at top right, visually quiet with a comfortable touch target.
+- Exact body text, clear and spacious at a realistic 14px logical text size:
+“在下方「设置」中打开
+背景音乐和消除音效，体验更好。”
+Use appropriate line breaks to fit. Accent the two actual setting names “背景音乐” and “消除音效” with restrained orange semibold, rather than turning the whole paragraph orange.
+- No “去设置” button inside the bubble, since the existing footer Settings is the intended clear target. No separate acknowledgement button, no toggles, no illustration taking over the tip.
+- The actual existing footer “设置” link must be easy to see directly beneath the bubble pointer, wrapped in a small warm peach pill with orange outline and a small gear icon. Left footer links remain “信息使用说明” and “资料删除申请” in quiet gray. No giant tutorial arrow. The tiny pointer and highlighted Settings establish the relationship.
+- The coachmark title and body must be readable and spelled correctly. Do not add “首次登录” or localStorage or technical explanations into the actual UI.
+
+VISUAL SYSTEM:
+MoeGo orange #F96B1C, charcoal #1F2227, muted #5B6270, offwhite #FBFBFC, warm peach #FFE7D6. Bold rounded Chinese headings and readable sans body; consistent with provided app. Clear hierarchy, purposeful spacing, playful but clean and mature game UI. Keep orange for main CTA and targeted tip details. Use current outlined icons. No generic blue enterprise UI, gradients or glassmorphism, no fake emojis, no extra mascot wearing headphones.
+
+BEHAVIOR CONTEXT FOR DESIGN ONLY (do NOT print into image): show once per local browser after its first successful identity selection, never per account and never on every visit; close X dismisses it; choosing highlighted Settings dismisses coachmark and opens the existing settings sheet with both sound controls still off until user chooses. Sound remains voluntary. The reminder does not alter persisted preferences.
+
+Output just the finished single Chinese home screenshot with the anchored sound reminder, crisp all-visible content and safe bottom spacing.
