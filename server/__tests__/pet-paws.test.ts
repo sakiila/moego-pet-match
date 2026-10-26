@@ -1,8 +1,9 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { freshDatabase } from './helpers.ts';
+import { freshDatabase, buildAuthenticatedApp as buildApp } from './helpers.ts';
 import pg from 'pg';
 import { appRoleGrants } from '../src/db/appGrants.ts';
-import { buildApp } from '../src/app.ts';
+import { buildApp as buildRawApp } from '../src/app.ts';
+import { createSession } from '../src/services/auth.ts';
 import { LOCAL_TEST_URL } from '../src/config.ts';
 import { applyUnpublish, planUnpublish } from '../src/catalog/unpublish.ts';
 import { memoryStore } from '../src/storage/objectStore.ts';
@@ -37,6 +38,28 @@ beforeEach(async () => {
 });
 
 describe('宠物爪印簿', () => {
+  it('所有爪印接口拒绝未登录和冒用其他身份，会话必须与声明的玩家一致', async () => {
+    const sent = (await leave()).json();
+    const id = sent.mine.id;
+    const raw = buildRawApp({ pool: ctx.pool });
+    const tokens = { [visitor]: await createSession(ctx.pool, visitor), [owner]: await createSession(ctx.pool, owner) };
+    const requests = [
+      { method: 'GET' as const, url: '/api/pets/mochi/paws?playerId=' + visitor, actor: visitor },
+      { method: 'PUT' as const, url: '/api/pets/mochi/paws', payload: { playerId: visitor, message: 'love', version: 1 }, actor: visitor },
+      { method: 'POST' as const, url: '/api/pets/mochi/paws/' + id + '/reply', payload: { playerId: owner, version: 1 }, actor: owner },
+      { method: 'POST' as const, url: '/api/pets/mochi/paws/read', payload: { playerId: owner, kind: 'message', ids: [id] }, actor: owner },
+      { method: 'GET' as const, url: '/api/players/' + owner + '/paw-notices', actor: owner },
+    ];
+    try {
+      for (const request of requests) {
+        const { actor, ...options } = request;
+        expect((await raw.inject(options)).statusCode).toBe(401);
+        const other = actor === owner ? visitor : owner;
+        expect((await raw.inject({ ...options, headers: { cookie: 'pet_match_session=' + tokens[other] } })).statusCode).toBe(403);
+      }
+      expect((await book()).json().mine).toMatchObject({ message: 'play', version: 1, reply: null });
+    } finally { await raw.close(); }
+  });
   it('仅收集者或主人能读取；未收集不泄露内容，主人不必先收集', async () => {
     expect((await book()).json()).toMatchObject({ own: false, count: 0, mine: null, mineVersion: 0 });
     expect((await book(owner)).json()).toMatchObject({ own: true, count: 0 });

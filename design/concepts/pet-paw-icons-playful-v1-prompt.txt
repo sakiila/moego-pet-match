@@ -39,4 +39,3 @@ Make the utility symbols quiet and consistent, allowing the four emotional actio
 
 Tool: Codex built-in image_gen; transparent_background=false.
 References supplied as the three local image paths listed above.
-
