@@ -1,0 +1,88 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.label {
+  color: var(--fg);
+  font-weight: var(--weight-bold);
+}
+
+.control {
+  position: relative;
+  display: block;
+  width: calc(100% - var(--space-5));
+  max-width: var(--pin-input-max-width);
+  margin-inline: auto;
+  cursor: text;
+}
+
+.native {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  font-size: var(--text-md);
+  cursor: inherit;
+}
+
+.slots {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.slot {
+  display: grid;
+  place-items: center;
+  height: var(--pin-input-height);
+  border: var(--stroke) solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  color: var(--fg);
+}
+
+.slot[data-filled]::after {
+  content: '';
+  width: var(--pin-input-dot);
+  height: var(--pin-input-dot);
+  border-radius: var(--radius-pill);
+  background: currentColor;
+}
+
+.slot[data-active] {
+  border-color: var(--accent);
+  background: var(--pin-input-active-bg);
+}
+
+.slot[data-active]:not([data-filled])::after {
+  content: '';
+  width: var(--pin-input-caret-width);
+  height: var(--pin-input-caret-height);
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+
+.control[data-invalid] .slot {
+  border-color: var(--color-danger);
+  background: var(--error-bg);
+}
+
+.control[data-invalid] .slot[data-active]:not([data-filled])::after {
+  background: var(--color-danger);
+}
+
+.control[data-disabled] {
+  cursor: not-allowed;
+}
+
+.control[data-disabled] .slot {
+  background: var(--panel);
+  color: var(--fg-muted);
+}

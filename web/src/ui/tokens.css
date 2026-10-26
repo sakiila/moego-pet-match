@@ -20,6 +20,12 @@
   --sound-tip-pointer: 12px;
   --sound-tip-close: 28px;
   --touch-target: 44px;
+  --pin-input-max-width: 400px;
+  --pin-input-height: 72px;
+  --pin-input-dot: 12px;
+  --pin-input-caret-width: 3px;
+  --pin-input-caret-height: 28px;
+  --pin-input-active-bg: #fff4ec;
 
   /* 角色辅助色 */
   --color-cat-blue: #4a8fe0;

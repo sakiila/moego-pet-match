@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { ApiError } from '../../api/client';
 import type { ColleagueResult } from '../../api/types';
 import { useI18n } from '../../i18n';
 import { Button } from '../../ui/primitives/Button';
+import { PinInput } from '../../ui/primitives/PinInput';
 import { ColleagueCard } from '../ColleagueCard/ColleagueCard';
 import { StatusMessage } from '../StatusMessage/StatusMessage';
 import styles from './PinLogin.module.css';
@@ -25,6 +26,8 @@ export function PinLogin({ colleague, loadState, submit, onSuccess, onBack }: Pi
   const [pin, setPin] = useState('');
   const [confirmation, setConfirmation] = useState('');
   const [error, setError] = useState('');
+  const [invalidField, setInvalidField] = useState<'pin' | 'confirmation' | null>(null);
+  const errorId = useId();
   const [busy, setBusy] = useState(false);
   const sending = useRef(false);
 
@@ -43,16 +46,24 @@ export function PinLogin({ colleague, loadState, submit, onSuccess, onBack }: Pi
   async function signIn(event: FormEvent) {
     event.preventDefault();
     if (sending.current || hasPin === null) return;
-    if (!/^[0-9]{4}$/.test(pin)) return setError(t('auth.invalid_pin'));
-    if (!hasPin && pin !== confirmation) return setError(t('auth.pin_mismatch'));
+    if (!/^[0-9]{4}$/.test(pin)) {
+      setInvalidField('pin');
+      return setError(t('auth.invalid_pin'));
+    }
+    if (!hasPin && pin !== confirmation) {
+      setInvalidField('confirmation');
+      return setError(t('auth.pin_mismatch'));
+    }
     sending.current = true;
     setBusy(true);
     setError('');
+    setInvalidField(null);
     try {
       await submit(colleague.userId, pin, hasPin ? undefined : confirmation);
       onSuccess(colleague);
     } catch (failure) {
       const detail = failure instanceof ApiError ? failure.detail : undefined;
+      if (detail === 'wrong_pin' || detail === 'locked') setInvalidField('pin');
       if (detail === 'pin_exists' || detail === 'pin_required') {
         setPin('');
         setConfirmation('');
@@ -78,19 +89,13 @@ export function PinLogin({ colleague, loadState, submit, onSuccess, onBack }: Pi
             <h2 className={styles.title}>{t(hasPin ? 'auth.login_title' : 'auth.setup_title')}</h2>
             <p className={styles.hint}>{t(hasPin ? 'auth.login_hint' : 'auth.setup_hint')}</p>
           </div>
-          <label className={styles.field}>
-            <span>{t('auth.pin_label')}</span>
-            <input className={styles.input} type="password" inputMode="numeric" pattern="[0-9]{4}" maxLength={4} required
-              autoComplete={hasPin ? 'current-password' : 'new-password'} autoFocus value={pin} disabled={busy}
-              onChange={event => { setPin(event.target.value.replace(/[^0-9]/g, '').slice(0, 4)); setError(''); }} />
-          </label>
-          {!hasPin && <label className={styles.field}>
-            <span>{t('auth.confirm_label')}</span>
-            <input className={styles.input} type="password" inputMode="numeric" pattern="[0-9]{4}" maxLength={4} required
-              autoComplete="new-password" value={confirmation} disabled={busy}
-              onChange={event => { setConfirmation(event.target.value.replace(/[^0-9]/g, '').slice(0, 4)); setError(''); }} />
-          </label>}
-          {error && <div role="alert"><StatusMessage tone="error" text={error} /></div>}
+          <PinInput label={t('auth.pin_label')} autoComplete={hasPin ? 'current-password' : 'new-password'}
+            autoFocus value={pin} disabled={busy} invalid={invalidField === 'pin'} describedBy={invalidField === 'pin' ? errorId : undefined}
+            onChange={value => { setPin(value); setError(''); setInvalidField(null); }} />
+          {!hasPin && <PinInput label={t('auth.confirm_label')} autoComplete="new-password" value={confirmation} disabled={busy}
+            invalid={invalidField === 'confirmation'} describedBy={invalidField === 'confirmation' ? errorId : undefined}
+            onChange={value => { setConfirmation(value); setError(''); setInvalidField(null); }} />}
+          {error && <div id={errorId} role="alert"><StatusMessage tone="error" text={error} /></div>}
           <Button type="submit" size="lg" block disabled={busy || !ready} iconName="open-shop-white">
             {t(busy ? 'auth.submitting' : hasPin ? 'auth.login' : 'auth.setup')}
           </Button>
