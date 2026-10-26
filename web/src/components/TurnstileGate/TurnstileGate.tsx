@@ -14,7 +14,7 @@ function loadWidget(): Promise<TurnstileApi> {
   if (loading) return loading;
   loading = new Promise<TurnstileApi>((resolve, reject) => {
     const script = document.createElement('script');
-    const timer = setTimeout(() => { script.remove(); reject(new Error('verification_unavailable')); }, 10_000);
+    const timer = setTimeout(() => { script.remove(); reject(new Error('verification_unavailable')); }, 20_000);
     script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
     script.async = true;
     script.setAttribute('data-cfasync', 'false');
@@ -51,7 +51,8 @@ export function TurnstileGate({ siteKey, gameId, onToken, failed, rateLimited, o
       if (cancelled || !container.current) return;
       const id = api.render(container.current, {
         sitekey: siteKey, action: 'start_game', cData: gameId, theme: 'light', size: 'flexible', language: locale === 'zh' ? 'zh-CN' : 'en',
-        appearance: 'interaction-only', retry: 'never',
+        appearance: 'interaction-only', retry: 'auto', 'retry-interval': 8_000,
+        'refresh-expired': 'auto', 'refresh-timeout': 'auto',
         callback: (token: string) => { if (!cancelled) { setStatus('verified'); callback.current(token); } },
         'expired-callback': () => { if (!cancelled) { setStatus('checking'); callback.current(''); } },
         'error-callback': () => { if (!cancelled) { setStatus('failed'); callback.current(''); } },
