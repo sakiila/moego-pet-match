@@ -13,20 +13,22 @@ export interface SheetProps {
   children: ReactNode;
   /** 陈列页内联展示，不铺满视口。 */
   inline?: boolean;
+  /** 上方有详情卡时保留内容和滚动，但暂停名片交互及 Escape。 */
+  suspended?: boolean;
 }
 
 /** 底部抽屉：带关闭按钮，点背景或 Esc 关闭；内容超高时在抽屉内滚动。 */
-export function Sheet({ open, label, closeLabel, onClose, badge, children, inline }: SheetProps) {
+export function Sheet({ open, label, closeLabel, onClose, badge, children, inline, suspended = false }: SheetProps) {
   useEffect(() => {
-    if (!open) return;
+    if (!open || suspended) return;
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open, onClose]);
+  }, [open, onClose, suspended]);
 
   if (!open) return null;
   return (
-    <div className={`${styles.backdrop} ${inline ? styles.inline : ''}`} onClick={onClose}>
+    <div className={`${styles.backdrop} ${inline ? styles.inline : ''}`} onClick={onClose} inert={suspended || undefined} aria-hidden={suspended || undefined}>
       <div className={styles.sheet} role="dialog" aria-modal="true" aria-label={label} onClick={(e) => e.stopPropagation()}>
         <div className={styles.bar}>
           {badge}

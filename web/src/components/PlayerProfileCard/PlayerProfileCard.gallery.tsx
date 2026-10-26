@@ -5,6 +5,9 @@ import { PlayerProfileCard } from './PlayerProfileCard';
 import { useI18n } from '../../i18n';
 import { Button } from '../../ui/primitives/Button';
 import type { PlayerLikesState } from '../../game/playerLikes';
+import { PlayerPets } from '../PlayerPets/PlayerPets';
+import { PlayerProfileOverlay } from '../../screens/PlayerProfileOverlay';
+import { loadPlayerPetDetailPreview, loadPlayerPetsPreview, playerPetCards } from '../../dev/gallery/playerPets';
 
 const noop = () => {};
 const likes: PlayerLikesState = { view: { receivedLikes: 12, likedByViewer: false, canLike: true }, loading: false, sending: false, error: null, celebration: 0 };
@@ -13,17 +16,25 @@ const view: PlayerProfileView = {
   collection:{collected:18,total:80},equippedTitle:'friends',unlockedTitles:['cats','dogs','friends'],
   recentGames:[13770,12480,11960,10840,9620].map((score,i)=>({gameId:`example-${i}`,completedAt:new Date(Date.UTC(2026,9,24-Math.floor(i/2),8)).toISOString(),score,newCollected:[3,1,0,2,0][i]})),
 };
-const render = (value: PlayerProfileView | null = view, error?: 'not_found' | 'unavailable') => <PlayerProfileCard inline player={value ?? view} view={value} error={error} onRetry={noop} onClose={noop} likes={likes} onLike={noop} onLikesRetry={noop} />;
-function ModalPreview() {
+const petsPreview = <PlayerPets pets={playerPetCards} onOpen={noop} onRetry={noop} />;
+const render = (value: PlayerProfileView | null = view, error?: 'not_found' | 'unavailable') => <PlayerProfileCard inline player={value ?? view} view={value} error={error} onRetry={noop} onClose={noop} likes={likes} onLike={noop} onLikesRetry={noop} pets={petsPreview} />;
+const bob = { ...view, userId: 'U_TEST_BOB', name: 'Bob' };
+const loadProfilePreview = async () => bob;
+const loadLikesPreview = async () => likes.view!;
+const loadTitlesPreview = async () => [];
+function ModalPreview({ own = false }: { own?: boolean }) {
   const [open, setOpen] = useState(false);
   const { t } = useI18n();
   return <>
-    <Button onClick={() => setOpen(true)}>{t('profile.open', { playerName: view.name })}</Button>
-    {open && createPortal(<PlayerProfileCard player={view} view={{...view,unlockedTitles:[...ACHIEVEMENT_IDS]}} likes={likes} onLike={noop} onRetry={noop} onClose={() => setOpen(false)} />, document.body)}
+    <Button onClick={() => setOpen(true)}>{t('profile.open', { playerName: bob.name })}</Button>
+    {open && createPortal(<PlayerProfileOverlay player={bob} viewerId={own ? bob.userId : 'U_TEST_ALICE'} mode="normal"
+      load={loadProfilePreview} loadLikes={loadLikesPreview} loadViewerTitles={loadTitlesPreview}
+      loadPets={loadPlayerPetsPreview} loadPetDetail={loadPlayerPetDetailPreview} onOpenShop={() => setOpen(false)} onClose={() => setOpen(false)} />, document.body)}
   </>;
 }
 const entry: GalleryEntry = {name:'PlayerProfileCard',group:'components',states:{
   'modal · hover / touch / Escape': () => <ModalPreview />,
+  'own modal · uncollected portrait / flip': () => <ModalPreview own />,
   'default · latest rarity':()=>render(),
   'liked · permanent': () => <PlayerProfileCard inline player={view} view={view} likes={{ ...likes, view: { receivedLikes: 13, likedByViewer: true, canLike: false } }} onRetry={noop} onClose={noop} />,
   'own · read only': () => <PlayerProfileCard inline player={view} view={view} own likes={{ ...likes, view: { ...likes.view!, canLike: false } }} onRetry={noop} onClose={noop} />,

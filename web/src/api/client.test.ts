@@ -9,6 +9,7 @@ describe('gallery preview isolation', () => {
     ['read player', () => api.getPlayer('U03FPQWGTN2')],
     ['read achievements', () => api.getAchievements('U03FPQWGTN2')],
     ['read likes', () => api.getPlayerLikes('U03FPQWGTN2', 'U_TEST_ALICE')],
+    ['read household pets', () => api.getPlayerPets('U03FPQWGTN2', 'U_TEST_ALICE')],
     ['like player', () => api.likePlayer('U03FPQWGTN2', 'U_TEST_ALICE')],
     ['register game', () => api.registerGame('U03FPQWGTN2', 'normal')],
     ['save result', () => api.submitResult('game', 'U03FPQWGTN2', {} as ResultPayload)],

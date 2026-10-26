@@ -17,6 +17,8 @@
   overflow: visible;
 }
 
+.aboveSheet { z-index: var(--z-card-above-sheet); }
+
 .backdrop {
   position: fixed;
   inset: 0;

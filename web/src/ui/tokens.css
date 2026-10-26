@@ -457,6 +457,7 @@
   /* 层级 */
   --z-overlay: 10;
   --z-dialog: 100;
+  --z-card-above-sheet: calc(var(--z-dialog) + 1);
   /* 图鉴详情卡：盖住页面与吸底按钮，低于对话框（资料删除申请叠在它上面） */
   --z-card: 90;
   --scrim: rgb(31 34 39 / 0.55);

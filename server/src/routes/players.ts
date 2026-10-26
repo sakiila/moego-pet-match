@@ -8,9 +8,20 @@ import { readAchievements } from '../services/achievements.ts';
 import { ACHIEVEMENT_IDS } from '../../../web/src/game/achievementRules.ts';
 import { loadPlayerProfile } from '../services/playerProfile.ts';
 import { addPlayerLike, loadPlayerLikes } from '../services/playerLikes.ts';
+import { loadPlayerPets } from '../services/playerPets.ts';
 
 /** 回访校验所选身份：仍在可参与名单则返回资料与个人记录，否则 404；名单外的在职 Slack 同事首次选中时登记。 */
 export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, directory }) => {
+  app.get<{ Params: { id: string } }>('/api/players/:id/pets', async (request, reply) => {
+    const query = z.object({ viewerId: z.string().trim().min(1) }).safeParse(request.query);
+    if (!query.success) return reply.status(400).send({ error: 'invalid_request' });
+    const [owner, viewer] = await Promise.all([
+      findColleague(pool, request.params.id), findColleague(pool, query.data.viewerId),
+    ]);
+    if (!owner || !viewer) return reply.status(404).send({ error: 'not_found' });
+    return { pets: await loadPlayerPets(pool, owner.userId, viewer.userId) };
+  });
+
   app.get<{ Params: { id: string } }>('/api/players/:id/likes', async (request, reply) => {
     const query = z.object({ viewerId: z.string().min(1) }).safeParse(request.query);
     if (!query.success) return reply.status(400).send({ error: 'invalid_request' });

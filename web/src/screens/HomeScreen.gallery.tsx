@@ -2,6 +2,7 @@ import { COPYRIGHT, GITHUB_REPOSITORY_URL } from '../app/project';
 import { GAME_VERSION } from '../app/version';
 import type { GalleryEntry } from '../dev/gallery/types';
 import { HomeScreen, type HomeScreenProps } from './HomeScreen';
+import { loadPlayerPetDetailPreview, loadPlayerPetsPreview } from '../dev/gallery/playerPets';
 
 const noop = () => {};
 const loadLikes = async () => ({ receivedLikes: 12, likedByViewer: false, canLike: false });
@@ -10,7 +11,7 @@ const loadProfile = async (userId: string, mode: 'normal' | 'fish') => ({
   collection: { collected: 18, total: 80 }, equippedTitle: null, unlockedTitles: [], recentGames: [],
 });
 function HomePreview(props: Omit<HomeScreenProps, 'copyright'>) {
-  return <HomeScreen soundTipPreview={false} {...props} copyright={COPYRIGHT} loadLikes={loadLikes} loadProfile={loadProfile} />;
+  return <HomeScreen soundTipPreview={false} {...props} copyright={COPYRIGHT} loadLikes={loadLikes} loadProfile={loadProfile} loadPets={loadPlayerPetsPreview} loadPetDetail={loadPlayerPetDetailPreview} />;
 }
 const player = (best: number | null) => ({
   userId: 'U_TEST_BOB',
