@@ -24,7 +24,7 @@ export function buildAuthenticatedApp(deps: AppDeps) {
     const payload = opts.payload;
     const body = typeof payload === 'object' && !Buffer.isBuffer(payload) ? payload as { playerId?: string } : undefined;
     const multipartId = Buffer.isBuffer(payload) ? /name="playerId"\r\n\r\n([^\r\n]+)/.exec(payload.toString())?.[1] : undefined;
-    const privateId = /^\/api\/players\/([^/]+)(?:\/(?:title|achievements))?$/.exec(url.pathname)?.[1];
+    const privateId = /^\/api\/players\/([^/]+)(?:\/(?:title|achievements|paw-notices))?$/.exec(url.pathname)?.[1];
     const id = typeof body?.playerId === 'string' && body.playerId || multipartId || url.searchParams.get('playerId') || url.searchParams.get('viewerId') || privateId || 'U_TEST_BOB';
     if (!sessions.has(id)) sessions.set(id, createSession(deps.pool, id));
     const token = await sessions.get(id)!;

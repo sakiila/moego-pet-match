@@ -15,6 +15,8 @@
   min-height: 520px;
 }
 
+.aboveDetail { z-index: var(--z-paw-book); }
+
 .sheet {
   display: flex;
   flex-direction: column;

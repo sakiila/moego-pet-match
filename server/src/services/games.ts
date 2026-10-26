@@ -11,13 +11,15 @@ import { beijingDate } from './pets.ts';
 import { findColleague, loadPlayer } from './players.ts';
 import { lockAchievements, syncAchievements } from './achievements.ts';
 import { computeStreak, playedDates } from './streak.ts';
+import { GameMovesSchema, validateReplay } from './gameReplay.ts';
+import { sameToken } from './gameToken.ts';
 
 /** 第几局普通完整局后解锁 Peter 鱼关。 */
 export const FISH_UNLOCK_GAMES = 3;
 
 export class GameError extends Error {
   constructor(
-    readonly code: 'not_found' | 'locked' | 'not_ready' | 'invalid' | 'conflict',
+    readonly code: 'not_found' | 'locked' | 'not_ready' | 'invalid' | 'conflict' | 'verification_failed',
     readonly detail?: string,
   ) {
     super(code);
@@ -35,6 +37,7 @@ export async function registerGame(
   mode: GameMode,
   now = new Date(),
   random: () => number = () => randomInt(0, 2 ** 32) / 2 ** 32,
+  requireVerification = false,
 ): Promise<RegisteredGame> {
   const player = await loadPlayer(pool, playerId);
   if (!player) throw new GameError('not_found', 'player');
@@ -74,13 +77,13 @@ export async function registerGame(
   const boardDate = beijingDate(now);
   const seed = dailySeed(mode, boardDate);
   const inserted = await pool.query(
-    `INSERT INTO pet_match.games (player_id, mode, rules_version, seed, lineup, board_date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING game_id`,
-    [playerId, mode, RULES_VERSION, seed, lineup.map((p) => p.petId), boardDate],
+    `INSERT INTO pet_match.games (player_id, mode, rules_version, seed, lineup, board_date, requires_verification) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING game_id`,
+    [playerId, mode, RULES_VERSION, seed, lineup.map((p) => p.petId), boardDate, requireVerification],
   );
-  return { gameId: inserted.rows[0].game_id, seed, rulesVersion: RULES_VERSION, mode, lineup, ownPetIds, uncollectedPetIds, families };
+  return { gameId: inserted.rows[0].game_id, seed, rulesVersion: RULES_VERSION, mode, lineup, ownPetIds, uncollectedPetIds, families, ...(requireVerification ? { verificationRequired: true } : {}) };
 }
 
-const count = z.number().int().min(0);
+const count = z.number().int().min(0).max(2_147_483_647);
 export const ResultPayloadSchema = z
   .object({
     rulesVersion: z.number().int(),
@@ -94,6 +97,7 @@ export const ResultPayloadSchema = z
     validMoves: count,
     actedInLastSeconds: z.boolean(),
     pets: z.array(z.object({ id: z.string().min(1), served: count, firstServedSeq: count.nullable() })).length(RULES.kinds),
+    moves: GameMovesSchema.optional(),
   })
   .strict();
 
@@ -139,6 +143,7 @@ export async function settleGame(
   playerId: string,
   payload: ResultPayload,
   hooks: SettleHooks = {},
+  proof?: { token: string | undefined; now: Date; required: boolean },
 ): Promise<SettleResponse> {
   const hash = payloadHash(payload);
   return inTransaction(pool, async (client) => {
@@ -146,6 +151,8 @@ export async function settleGame(
     const g = game.rows[0];
     if (!g) throw new GameError('not_found', 'game');
     if (g.player_id !== playerId) throw new GameError('conflict', 'player');
+    if (proof?.required && !g.requires_verification) throw new GameError('invalid', 'legacy_game');
+    if (g.requires_verification && (!g.started_at || !sameToken(g.play_token_hash, proof?.token))) throw new GameError('invalid', 'game_proof');
 
     // 本局阵容里已下架的宠物：按当前目录计算（重试时也重新计算），前端据此不再展示它们的资料
     const removedOf = async () =>
@@ -166,6 +173,15 @@ export async function settleGame(
 
     const reason = checkConsistency(payload, g.lineup, g.rules_version);
     if (reason) throw new GameError('invalid', reason);
+    if (g.requires_verification) {
+      if (g.invalidated_at) throw new GameError('invalid', 'game_invalidated');
+      const elapsed = (proof?.now ?? new Date()).getTime() - new Date(g.started_at).getTime();
+      if (elapsed < RULES.durationMs - 100) throw new GameError('invalid', 'too_early');
+      if (elapsed > 10 * 60_000) throw new GameError('invalid', 'game_expired');
+      const replay = validateReplay(g, payload);
+      if (!replay.valid) throw new GameError('invalid', 'replay');
+      if (elapsed < replay.endMs - 100) throw new GameError('invalid', 'too_early');
+    }
     if (!(await findColleague(client, playerId))) throw new GameError('not_found', 'player');
 
     const mode: GameMode = g.mode;

@@ -26,6 +26,10 @@
   --pin-input-caret-width: 3px;
   --pin-input-caret-height: 28px;
   --pin-input-active-bg: #fff4ec;
+  --paw-choice-height: 52px;
+  --paw-header-image: 56px;
+  --paw-dot-size: 8px;
+  --paw-entry-width: 330px;
 
   /* 角色辅助色 */
   --color-cat-blue: #4a8fe0;
@@ -483,6 +487,7 @@
   --z-overlay: 10;
   --z-dialog: 100;
   --z-card-above-sheet: calc(var(--z-dialog) + 1);
+  --z-paw-book: calc(var(--z-card-above-sheet) + 1);
   /* 图鉴详情卡：盖住页面与吸底按钮，低于对话框（资料删除申请叠在它上面） */
   --z-card: 90;
   --scrim: rgb(31 34 39 / 0.55);

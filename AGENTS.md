@@ -100,3 +100,9 @@ codex exec -m gpt-6-sol -s workspace-write -C /Users/bob/WebstormProjects/moego-
 ## 2026-10-26 玩家点赞素材补充授权
 
 用户选定「举爪击掌」，明确要求按原图切图为透明 PNG，并实现、测试幂等和推送上线；点赞不可取消。未赞与已赞两枚允许从 `design/concepts/player-likes-high-five-v1.png` 原图直接提取，来源记录在 `assets/icons/player-likes-original-v1/`，透明母版在 `masters/17-player-likes/`，仍通过统一 `Icon` 使用。此例外只授权本次两枚举爪图标，不扩大到其他截图。
+
+## 2026-10-26 宠物爪印簿素材补充授权
+
+用户提供爪印簿三状态设计稿，明确要求按原图做元素组件裁切、不要手绘并修改代码。本轮 11 个小图形允许直接提取：橙色实心爪印、四个留言图标、已回爪描边爪印、灰色爪印、选中圆勾、展开箭头、详情入口箭头和关闭叉号。原始附件与像素保留记录在 `assets/icons/pet-paw-book-original-v1/`，透明母版在 `masters/18-pet-paw-book/`，经统一 `Icon` 使用；不得用 SVG 重绘替代。此授权仅限本轮列明图形，文字、按钮底色和布局继续为组件。
+
+同日用户要求重新设计并选择实际显示的第 2 稿“宠物小动作” `design/concepts/pet-paw-icons-playful-v1.png`。沿用原图裁切要求，当前 11 枚母版更新为该稿的高清提取；来源与校验在 `assets/icons/pet-paw-icons-playful-original-v1/`。旧母版移入 `assets/icons/pet-paw-book-original-v1/masters/` 留档，两个版本的原图均保留。

@@ -10,8 +10,10 @@ import { slackAdminNotifier } from './services/adminNotify.ts';
 import { slackDirectory } from './services/slackDirectory.ts';
 import { slackAvatarFetcher } from './storage/slackAvatar.ts';
 import { syncSlackMembers } from './services/syncSlackMembers.ts';
+import { productionTurnstile } from './services/turnstile.ts';
 
 const pool = createPool(config.databaseUrl);
+const gameSecurity = process.env.NODE_ENV === 'production' ? productionTurnstile(process.env) : undefined;
 // 访客仍可参与，但必须使用允许的公司域名邮箱并通过真人账号过滤。
 const directory = slackDirectory(process.env.SLACK_BOT_TOKEN, { allowGuests: true });
 // 默认本地目录对象存储（与 R2 相同的键布局）；OBJECT_STORE=r2 时使用 R2
@@ -19,6 +21,7 @@ const r2 = process.env.OBJECT_STORE === 'r2' ? r2FromEnv() : null;
 const store = r2 ? r2Store(r2) : localDirStore(process.env.OBJECT_STORE_DIR ?? fileURLToPath(new URL('../.store/', import.meta.url)));
 const app = buildApp({
   pool,
+  gameSecurity,
   staticDir: config.staticDir,
   gameVersion: config.gameVersion,
   directory,

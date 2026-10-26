@@ -77,6 +77,7 @@ async function transaction(db: pg.Pool | pg.Client, fn: (client: pg.PoolClient |
 
 export async function applyUnpublish(db: pg.Pool | pg.Client, store: ObjectStore, plan: UnpublishPlan, purgeImages?: PurgeStickerImages): Promise<{ failed: string[]; cdnPurged: boolean | null }> {
   await transaction(db, async (client) => {
+    await client.query("SELECT pg_advisory_xact_lock(hashtextextended('pet-paw:' || $1,0))", [plan.petId]);
     const status = (await client.query('SELECT status FROM pet_match.pets WHERE pet_id = $1 FOR UPDATE', [plan.petId])).rows[0]?.status;
     if (!status || status === 'removed') throw new Error(`pet ${plan.petId} changed since the plan was made`);
     await client.query(

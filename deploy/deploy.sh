@@ -64,9 +64,9 @@ try:
     allowed = {'PET_MATCH_DATABASE_URL', 'R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID',
                'R2_SECRET_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_BUCKET_NAME',
                'R2_JURISDICTION', 'SLACK_BOT_TOKEN', 'SLACK_NOTIFY_CHANNEL',
-               'SLACK_SIGNING_SECRET'}
+               'SLACK_SIGNING_SECRET', 'TURNSTILE_SITE_KEY', 'TURNSTILE_SECRET_KEY'}
     unknown = sorted(set(runtime) - allowed)
-    required = ['PET_MATCH_DATABASE_URL', 'R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID', 'R2_BUCKET_NAME']
+    required = ['PET_MATCH_DATABASE_URL', 'R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID', 'R2_BUCKET_NAME', 'TURNSTILE_SITE_KEY', 'TURNSTILE_SECRET_KEY']
     missing = [key for key in required if not str(runtime.get(key) or '').strip()]
     # 应用使用 ?? 选择新名称：空的新名称也会遮住旧名称，必须直接拒绝。
     secret = runtime.get('R2_SECRET_ACCESS_KEY')

@@ -1,5 +1,5 @@
 /** 生产应用角色的最小权限：名册与宠物只读，游戏数据可读写。Supabase 建库与只读角色回归测试共用。 */
-export const RW_TABLES = ['games', 'game_results', 'best_scores', 'collections', 'player_progress', 'submissions', 'quizzes', 'daily_managers', 'deletion_requests', 'slack_members', 'achievement_awards', 'player_titles', 'player_credentials', 'player_sessions'];
+export const RW_TABLES = ['games', 'game_results', 'best_scores', 'collections', 'player_progress', 'submissions', 'quizzes', 'daily_managers', 'deletion_requests', 'slack_members', 'achievement_awards', 'player_titles', 'game_request_limits', 'player_credentials', 'player_sessions', 'pet_paws'];
 export const RO_OBJECTS = ['colleagues', 'pets', 'fish_colors'];
 export const SOCIAL_TABLES = ['social_posts','social_media','social_comments','social_reactions','social_notices','social_reports','social_slack_jobs','social_deleted_files','social_sync_state'];
 
@@ -8,6 +8,7 @@ export function appRoleGrants(role: string): string[] {
     `GRANT USAGE ON SCHEMA pet_match TO ${role}`,
     `GRANT SELECT ON ${RO_OBJECTS.map((t) => `pet_match.${t}`).join(', ')} TO ${role}`,
     `GRANT SELECT, INSERT, UPDATE ON ${[...RW_TABLES,...SOCIAL_TABLES].map((t) => `pet_match.${t}`).join(', ')} TO ${role}`,
+    `GRANT USAGE, SELECT ON SEQUENCE pet_match.pet_paws_paw_id_seq TO ${role}`,
     `GRANT SELECT, INSERT ON pet_match.player_likes TO ${role}`,
     `REVOKE UPDATE, DELETE, TRUNCATE ON pet_match.player_likes FROM ${role}`,
   ];

@@ -1,0 +1,242 @@
+{
+  "selected_option": 2,
+  "source": "design/concepts/pet-paw-icons-playful-v1.png",
+  "source_sha256": "10b8d3bbeb7cd5e7af05f191177e842dbea09abda053df521883cc306ecd19a8",
+  "source_dimensions": [
+    1536,
+    1024
+  ],
+  "assets": [
+    {
+      "id": "paw-cute",
+      "crop": [
+        72,
+        155,
+        376,
+        425
+      ],
+      "visible_bounds_in_crop": [
+        9,
+        8,
+        289,
+        261
+      ],
+      "size": [
+        280,
+        253
+      ],
+      "opaque_rgb_identical_pixels": 41643,
+      "master_sha256": "2b8e091a5d1c057ed5bd12eb6ff97334d51b7f46c00fc5c478d1ea716f49db44"
+    },
+    {
+      "id": "paw-pets",
+      "crop": [
+        445,
+        171,
+        732,
+        427
+      ],
+      "visible_bounds_in_crop": [
+        18,
+        8,
+        279,
+        248
+      ],
+      "size": [
+        261,
+        240
+      ],
+      "opaque_rgb_identical_pixels": 42213,
+      "master_sha256": "31dbd414ad240dae0f001e88269c7c7ca912547032709ee806cb57b3114e7ef2"
+    },
+    {
+      "id": "paw-play",
+      "crop": [
+        825,
+        177,
+        1100,
+        421
+      ],
+      "visible_bounds_in_crop": [
+        9,
+        5,
+        263,
+        242
+      ],
+      "size": [
+        254,
+        237
+      ],
+      "opaque_rgb_identical_pixels": 34448,
+      "master_sha256": "93f23ad9b66ceaa1c4db2744c794edef7c9f1ab87e15327231818f109e90c36f"
+    },
+    {
+      "id": "paw-love",
+      "crop": [
+        1180,
+        190,
+        1478,
+        423
+      ],
+      "visible_bounds_in_crop": [
+        15,
+        9,
+        290,
+        215
+      ],
+      "size": [
+        275,
+        206
+      ],
+      "opaque_rgb_identical_pixels": 39701,
+      "master_sha256": "2e3145e77f08d6201a19d31c428c21f0e245ca39ed9d6867f8825f218cd8ee97"
+    },
+    {
+      "id": "paw-print",
+      "crop": [
+        92,
+        563,
+        234,
+        684
+      ],
+      "visible_bounds_in_crop": [
+        5,
+        5,
+        137,
+        117
+      ],
+      "size": [
+        132,
+        112
+      ],
+      "opaque_rgb_identical_pixels": 7834,
+      "master_sha256": "c27c600c970b0297018c7368545e14623efa6061691afe5cfb3ed47ecb6a4a9f"
+    },
+    {
+      "id": "paw-replied",
+      "crop": [
+        315,
+        559,
+        465,
+        686
+      ],
+      "visible_bounds_in_crop": [
+        4,
+        8,
+        142,
+        125
+      ],
+      "size": [
+        138,
+        117
+      ],
+      "opaque_rgb_identical_pixels": 9262,
+      "master_sha256": "b30069dc44b656d4d82dac6a264d0d3920623f17b8a8e303362e77963622ef07"
+    },
+    {
+      "id": "paw-print-muted",
+      "crop": [
+        538,
+        562,
+        692,
+        689
+      ],
+      "visible_bounds_in_crop": [
+        8,
+        4,
+        145,
+        118
+      ],
+      "size": [
+        137,
+        114
+      ],
+      "opaque_rgb_identical_pixels": 8179,
+      "master_sha256": "98b8efc701d4f15ca33ae36727ed5f6c1e01b52e710d4488bc060ab380e4e7bb"
+    },
+    {
+      "id": "paw-selected",
+      "crop": [
+        836,
+        576,
+        953,
+        692
+      ],
+      "visible_bounds_in_crop": [
+        6,
+        6,
+        109,
+        107
+      ],
+      "size": [
+        103,
+        101
+      ],
+      "opaque_rgb_identical_pixels": 7709,
+      "master_sha256": "878fe06848ab3d45e6b61160cd65db830cf350f226a42d41a2cedbe6c5a83a1c"
+    },
+    {
+      "id": "paw-expand",
+      "crop": [
+        1016,
+        596,
+        1125,
+        668
+      ],
+      "visible_bounds_in_crop": [
+        10,
+        7,
+        100,
+        63
+      ],
+      "size": [
+        90,
+        56
+      ],
+      "opaque_rgb_identical_pixels": 2048,
+      "master_sha256": "1942816d6834153b59a834e94a4560e3c257a1ca0a671d6408d6fee19e6606d5"
+    },
+    {
+      "id": "paw-entry-arrow",
+      "crop": [
+        1210,
+        581,
+        1283,
+        687
+      ],
+      "visible_bounds_in_crop": [
+        11,
+        7,
+        65,
+        95
+      ],
+      "size": [
+        54,
+        88
+      ],
+      "opaque_rgb_identical_pixels": 1962,
+      "master_sha256": "93c254525a893fbfd3100ef59ca0041c096dbb7276794132e1c5ec67535d061c"
+    },
+    {
+      "id": "paw-close",
+      "crop": [
+        1365,
+        582,
+        1462,
+        688
+      ],
+      "visible_bounds_in_crop": [
+        10,
+        10,
+        87,
+        87
+      ],
+      "size": [
+        77,
+        77
+      ],
+      "opaque_rgb_identical_pixels": 2830,
+      "master_sha256": "6433d197b263e66cd0192dcf9783de77e13748a55b38aa8f29b0ee691686cb06"
+    }
+  ]
+}

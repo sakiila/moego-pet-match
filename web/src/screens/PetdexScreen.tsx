@@ -5,6 +5,8 @@ import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { CollectionProgress } from '../components/CollectionProgress/CollectionProgress';
 import { EmptyState } from '../components/EmptyState/EmptyState';
 import { PetCard } from '../components/PetCard/PetCard';
+import { PawNotices } from '../components/PawNotices/PawNotices';
+import { usePawNotices } from '../game/usePawNotices';
 import { StickerSheet } from '../components/StickerSheet/StickerSheet';
 import { browseCollection, sheetCollection, type CollectionFilter } from '../game/collection';
 import { isDeveloperPet } from '../game/easterEggs';
@@ -38,6 +40,8 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
   const [filter, setFilter] = useState<CollectionFilter>('all');
   const [query, setQuery] = useState('');
   const detail = usePetDetail(player.userId, loadDetail);
+  const paws = usePawNotices(player.userId);
+  const [pawId, setPawId] = useState<string | null>(null);
   const backToTop = useBackToTop();
 
   const fetchCollection = useCallback(async () => {
@@ -70,6 +74,7 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
           </Button>
         }
       />
+      <PawNotices items={paws.replies} kind="reply" onOpen={(item, el) => { setPawId(item.petId); void detail.show(item.petId, item.petName, el); }} />
       {data && <CollectionProgress collected={data.collected} total={data.total} />}
       <Tabs
         value={view}
@@ -129,7 +134,7 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
         )
       )}
       <BackToTop visible={backToTop.visible} label={t('action.back_to_top')} onClick={backToTop.scrollToTop} />
-      <PetDetailOverlay pet={detail.open} playerId={player.userId} onClose={detail.close} onRetry={detail.show} onOpenShop={onOpenShop} />
+      <PetDetailOverlay pet={detail.open} playerId={player.userId} openPaws={pawId === detail.open?.petId} onClose={() => { setPawId(null); detail.close(); }} onRetry={detail.show} onOpenShop={onOpenShop} />
     </main>
   );
 }

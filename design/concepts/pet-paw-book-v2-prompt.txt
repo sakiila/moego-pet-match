@@ -1,0 +1,11 @@
+Use case: precise-object-edit
+Asset type: final visual review sheet for the existing MoeGo pet Pawprint Book, version 2.
+Input: design/concepts/pet-paw-book-v1.png — the only edit target, already reviewed. Built-in image_gen edit, transparent_background=false.
+
+Make exactly ONE targeted cleanup to the attached 1536 x 1024 artwork. The artifact has three equal portrait UI viewports showing three states of ONE already-approved feature. At the TOP LEFT of EACH viewport, BEHIND the dim scrim and above the main card/sheet, there is a small brown rounded QA-harness button labeled "查看 Bob 的玩家名片". It came from the style-reference testing screenshot and is not part of the real product.
+
+REMOVE those three tiny background harness buttons and their text, and fill their exact former areas with the matching uninterrupted muted gray underlying backdrop. Do not replace them with new app UI, text, logos, decorations, or controls. This is a cleanup of the dimmed background only.
+
+Keep EVERYTHING ELSE unchanged: output 1536 x 1024, same artboard and three columns, title and captions, Maodu's exact winking head and complete ears, Bob owner relationship, red developer stamp, portrait layout, 18 coworkers known count, overlapping letter avatars, separate "留个爪印" action, current close-X buttons and flip icon, all sheet positions and sizes, font and orange/white/charcoal palette. Preserve "爪印簿", "Maodu 毛肚", 12 unique visitors, all four exact options "被你萌到了" / "想摸摸头" / "想和你玩" / "给你比个心", selected play option, owner reply row, Mia / Alex / Sam / Lily, timestamps, the two "回个爪" buttons, completed "已回爪", and both "展开更多" actions. Existing gray dimmed parent close-X controls must remain gray and inactive-looking; do not remove the foreground book close controls.
+
+No restyling, no new scene, no new alternatives. Make only this precise background cleanup. Save intended final to design/concepts/pet-paw-book-v2.png, retaining v1 and both requests as provenance.

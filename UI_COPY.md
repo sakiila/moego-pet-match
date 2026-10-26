@@ -65,6 +65,12 @@
 | --- | --- | --- |
 | access.title | MoeGo 毛孩子全明星 | MoeGo Pet All-Stars |
 | access.subtitle | 和同事家的毛孩子，来一局 90 秒消消乐。 | A 90-second match-3 with your coworkers' pets. |
+| security.title | 开局验证 | Ready check |
+| security.checking | 开局前确认一下，准备好就能玩。 | One quick check before your shift. |
+| security.verified | 验证完成，可以开始这班啦。 | All checked. Ready for your shift! |
+| security.failed | 验证暂时没有通过，请重试。 | The check did not go through. Please try again. |
+| security.starting | 正在开局… | Starting… |
+| security.rate_limited | 操作有点频繁，请稍后再试。 | Too many attempts. Please wait a moment and try again. |
 | access.internal | 仅供 MoeGo 同事游玩 | For MoeGo Coworkers |
 
 副标题承担玩法说明。游戏入口直接提供下方的同事身份搜索与带名字的确认按钮，确认后进入门店；文案已接入身份页；页面状态与排版验收记录见 design-qa.md。
@@ -121,8 +127,8 @@
 | --- | --- | --- |
 | info.full.title | 这个游戏会用到哪些信息 | What This Game Uses |
 | info.full.intro | 这是为 MoeGo 同事制作、由 Bob 维护的小游戏。自愿参与，不上传宠物也能玩。 | A game made for MoeGo coworkers and maintained by Bob. Participation is optional; you can play without uploading a pet. |
-| info.full.collect | **会记录什么**：Slack 名册中的 ID、名字、头像和工作邮箱（邮箱用于搜索，不展示）；成绩、游玩与收集进度；你提交的宠物照片、名字、主人信息及删除申请。初始宠物资料来自同事分享的飞书文档。浏览器记住登录状态和偏好；服务器保存密码的加盐哈希、登录凭证及常规访问日志，不保存明文密码。 | **What we record**: Slack directory IDs, names, avatars, and work emails (for search, not display); scores, play and collection progress; pet photos, names, owner details, and removal requests you submit. Initial pet data comes from the shared Feishu document. Your browser remembers your sign-in and preferences; the server stores a salted PIN hash, sign-in sessions, and standard access logs, never your plain-text PIN. |
-| info.full.display | **会在哪里展示**：名字、头像、成绩、收集记录和称号会在排行榜、玩家卡或宠物卡展示。宠物贴纸和名字用于游戏，玩家卡会列出该同事已上架的宠物名字与收集状态；未收集的他人宠物显示剪影，已收集该宠物的玩家和主人还可查看主人说及处理后的照片。游戏不验证 Slack 身份，持有链接的人也可能查看，请勿转发链接。 | **Where it shows up**: names, avatars, scores, collection activity, and titles appear on leaderboards, player cards, or pet cards. Pet stickers and names are used in the game. Player cards list a coworker's published pet names and your collection status; other people's uncollected pets appear as silhouettes. Players who collect a pet and its owner can also see the owner's quote and processed photos. Slack identities are not verified; anyone with the link may be able to view this information. Please do not forward it. |
+| info.full.collect | **会记录什么**：Slack 名册中的 ID、名字、头像和工作邮箱（邮箱用于搜索，不展示）；成绩、游玩与收集进度；玩家点赞、宠物固定短句、主人回应及已读状态；你提交的宠物照片、名字、主人信息及删除申请。初始宠物资料来自同事分享的飞书文档。浏览器记住登录状态和偏好；服务器保存密码的加盐哈希、登录凭证及常规访问日志，不保存明文密码。 | **What we record**: Slack directory IDs, names, avatars, and work emails (for search, not display); scores, play and collection progress; player likes, preset pet messages, owner replies, and read status; pet photos, names, owner details, and removal requests you submit. Initial pet data comes from the shared Feishu document. Your browser remembers your sign-in and preferences; the server stores a salted PIN hash, sign-in sessions, and standard access logs, never your plain-text PIN. |
+| info.full.display | **会在哪里展示**：名字、头像、成绩、收集记录和称号会在排行榜、玩家卡或宠物卡展示。宠物贴纸和名字用于游戏，玩家卡会列出该同事已上架的宠物名字与收集状态；未收集的他人宠物显示剪影，已收集该宠物的玩家和主人还可查看主人说、处理后的照片，以及爪印簿中的同事姓名、头像、固定短句和主人回应。游戏不验证 Slack 身份，持有链接的人也可能查看，请勿转发链接。 | **Where it shows up**: names, avatars, scores, collection activity, and titles appear on leaderboards, player cards, or pet cards. Pet stickers and names are used in the game. Player cards list a coworker's published pet names and your collection status; other people's uncollected pets appear as silhouettes. Players who collect a pet and its owner can also see the owner's quote, processed photos, and the coworker names, avatars, preset messages, and owner replies in its Pawprint Book. Slack identities are not verified; anyone with the link may be able to view this information. Please do not forward it. |
 | info.full.ai | **AI 处理**：上传照片私有保存，通常会去除位置等元数据；设备无法处理时可能保留。Bob 会先去除这些信息，再交给外部 AI 图像服务制作贴纸，核对后上架。游戏只展示处理后的照片，请避免上传不愿分享的人脸、地址等内容。 | **AI processing**: uploads are stored privately. Location and other metadata are usually removed, but may remain if your device cannot process the photo. Bob removes that metadata before sending photos to an external AI image service for stickers, then reviews them before listing. Only processed photos are displayed. Avoid faces, addresses, or other content you do not want to share. |
 | info.full.storage | **存在哪里**：游戏服务和数据库在 RackNerd，图片在 Cloudflare R2（亚太）；服务器及 Bob 本地会保留缓存或处理副本。资料仅用于本次游戏，可能在你所在国家或地区以外存储或处理。 | **Where it is stored**: the game and database run on RackNerd; images are in Cloudflare R2 (Asia-Pacific), with cache or processing copies on the server and Bob's device. Data is used only for this game and may be stored or processed outside your country or region. |
 | info.full.removal | **想删除怎么办**：登录后在本页或「我的宠物」提交申请；也可直接在 Slack 联系 Bob，无需登录。Bob 人工核实处理，提交不会立即删除；可说明希望移除哪些个人资料。仅移除宠物会保留成绩；Clock Out 不会删除已保存资料。飞书、AI 服务、备份及已保存或分享的副本不能自动同步删除。 | **Want something removed?** Sign in to request removal here or in My Pets, or contact Bob on Slack without signing in. Specify which personal data to remove. Bob reviews requests manually; deletion is not immediate. Removing a pet keeps scores, and Clock Out does not delete saved data. Feishu, AI-service, backup, and saved or shared copies cannot be deleted automatically. |
@@ -383,7 +389,6 @@
 | collection.sheet_share | 分享贴纸册图片 | Share Sticker Album |
 | collection.sheet_share_hint | 我的毛孩子朋友，都在这里啦 | All my furry friends, right here. |
 | collection.sheet_preview | 贴纸册图片预览 | Sticker Album Preview |
-| pet.unlock_hint | 棋盘上服务过 TA，完整收工、成绩保存成功后，就会自动收集。 | Serve this pet on the board and finish the round. They'll join your collection automatically once your result is saved. |
 | pet.owner | 主人 | Owner |
 | pet.owner_developer | 本游戏开发者 | the game's developer |
 | pet.original_photo | 翻面看原图 | Flip for the Original Photo |
@@ -400,7 +405,7 @@
 
 `pet.known_by_*` 只在已收集或自家宠物详情正面底部出现，人数与下方同事头像均包含已收集的当前登录用户（2026-10-25 调整）；人数为 0 时整区隐藏，人数为 1 用 `_one`，其余用 `_other`；下方头像叠放超出 5 位时显示「+{count}」，`pet.known_by_more` 作为该标记的无障碍朗读文本。
 
-图鉴展示的关键文案已确认。解锁说明使用「自动收集」，对应本局实际服务过该宠物、完整结束且结果保存成功，不要求另点领取或手动保存。单纯登场、点选或查看卡片不算收集。搜索空结果只说明当前范围没有匹配，不表示该同事没有宠物。没有已收集宠物时，提示与未收集剪影列表并存，不以空白页替代列表。既定排序、搜索范围和收集条件不变。
+图鉴展示的关键文案已确认。2026-10-26 用户要求移除宠物详情下的收集条件长提示及英文。宠物仍在本局实际服务过、完整结束且结果保存成功后自动收集，不要求另点领取或手动保存。单纯登场、点选或查看卡片不算收集。搜索空结果只说明当前范围没有匹配，不表示该同事没有宠物。没有已收集宠物时，提示与未收集剪影列表并存，不以空白页替代列表。既定排序、搜索范围和收集条件不变。
 
 ### 6.2 我的宠物 · 关键文案已确认
 
@@ -904,3 +909,44 @@
 | social.refresh_failed | 动态暂时没更新，正在显示上次内容。 | Couldn't refresh. Showing the last loaded moments. |
 | social.disabled | 动态墙暂未开放 | Pet Moments isn't open yet |
 | social.disabled_body | 可以先回门店继续游玩。 | You can head back to the shop and keep playing. |
+## Pet Pawprint Book (2026-10-26)
+
+详情入口位于可翻转卡片下方。固定短句按语义保存，切换语言不重发；人数按有效留言身份去重，使用单复数文案。
+
+| Key | 中文 | English |
+| --- | --- | --- |
+| paw_book.title | 爪印簿 | Pawprint Book |
+| paw_book.label | {pet} 的爪印簿 | {pet}'s Pawprint Book |
+| paw_book.leave | 留个爪印 | Leave a Pawprint |
+| paw_book.left | 已留爪印 | Pawprint Left |
+| paw_book.open_own | 看看爪印 | View Pawprints |
+| paw_book.prompt | 给 TA 留一句 | Leave a little love |
+| paw_book.yours | 你的爪印 | Your Pawprint |
+| paw_book.others | 同事的爪印 | Pawprints from Coworkers |
+| paw_book.count_one | 1 位同事留过爪印 | 1 coworker left a pawprint |
+| paw_book.count_other | {count} 位同事留过爪印 | {count} coworkers left pawprints |
+| paw_book.message.cute | 被你萌到了 | You're adorable! |
+| paw_book.message.pets | 想摸摸头 | Can I pet you? |
+| paw_book.message.play | 想和你玩 | Let's play! |
+| paw_book.message.love | 给你比个心 | Sending you love! |
+| paw_book.withdraw | 撤回 | Remove |
+| paw_book.reply | 回个爪 | Send a Paw Back |
+| paw_book.replied | 已回爪 | Paw Sent Back |
+| paw_book.reply_text | {owner} 代 {pet} 回了一个爪印 | {owner} sent a paw back on behalf of {pet}. |
+| paw_book.locked | 收集 TA 后，可以留个爪印 | Collect this pet to leave a pawprint. |
+| paw_book.empty | 还没有爪印，来留第一枚吧 | No pawprints yet. Leave the first one! |
+| paw_book.empty_own | 同事留下的爪印会出现在这里 | Pawprints from coworkers will appear here. |
+| paw_book.new | 新 | New |
+| paw_book.new_count | {count} 条新爪印 | {count} new pawprints |
+| paw_book.new_count_one | 1 条新爪印 | 1 new pawprint |
+| paw_book.message_notice | {pet} 收到 {count} 个新爪印 | {pet} received {count} new pawprints |
+| paw_book.message_notice_one | {pet} 收到 1 个新爪印 | {pet} received 1 new pawprint |
+| paw_book.reply_notice | {pet} 的主人回了你一个爪印 | {pet}'s owner sent you a paw back. |
+| paw_book.more | 展开更多 | Show More |
+| paw_book.owner_hint | 代 {pet} 回应同事的喜欢 | Reply to coworkers on behalf of {pet}. |
+| paw_book.sending | 发送中… | Sending… |
+| paw_book.loading | 正在读取爪印… | Loading pawprints… |
+| paw_book.load_failed | 爪印暂时没读到，请重试 | Pawprints couldn't load. Please retry. |
+| paw_book.send_failed | 这次没确认成功，请重试 | We couldn't confirm that. Please retry. |
+| paw_book.unavailable | 暂时不能打开这本爪印簿 | This pawprint book is currently unavailable. |
+| paw_book.unread | 有新爪印互动 | New pawprint activity |

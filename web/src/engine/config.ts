@@ -1,5 +1,5 @@
-/** 规则版本：对局登记与结算时校验。版本 3：补落导演；4：每格 100 分；5：直线五连及以上直接生成吹风机。 */
-export const RULES_VERSION = 5;
+/** 规则版本：6 增加开局授权与服务端回放协议，计分仍沿用版本 5。 */
+export const RULES_VERSION = 6;
 
 /** 已确认的首版规则数值（V1_RULES / GAME_FLOW）。 */
 export const RULES = {

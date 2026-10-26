@@ -7,6 +7,8 @@ Widths cover 1x/2x/3x of the display sizes used in the game; the browser picks v
 from __future__ import annotations
 
 import json
+import argparse
+import re
 from pathlib import Path
 
 from PIL import Image
@@ -16,9 +18,9 @@ ROOT = HERE.parents[2]
 OUT = ROOT / 'web/src/ui/icons'
 WIDTHS = [32, 48, 72, 96, 144, 192, 288]
 PLAN = json.loads((HERE / 'extraction-plan.json').read_text())
-EXTRA_GROUPS = ['11-supplement', '12-prep-gestures', '13-collection-titles', '14-collection-title-avatars', '15-collection-title-showcase', '16-board-frontdesk', '17-player-likes']
+EXTRA_GROUPS = ['11-supplement', '12-prep-gestures', '13-collection-titles', '14-collection-title-avatars', '15-collection-title-showcase', '16-board-frontdesk', '17-player-likes', '18-pet-paw-book']
 WIDE_GROUPS = {'12-prep-gestures'}
-WIDE_ASSETS = {'rush-clip', 'closing-sign-zh', 'closing-sign-en', 'closing-sign-zh-hd-v2'}
+WIDE_ASSETS = {'rush-clip', 'closing-sign-zh', 'closing-sign-en', 'closing-sign-zh-hd-v2', 'paw-expand', 'paw-entry-arrow'}
 
 
 def fit(art: Image.Image, width: int, wide: bool) -> Image.Image:
@@ -31,16 +33,32 @@ def fit(art: Image.Image, width: int, wide: bool) -> Image.Image:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--group', help='Export only this group, preserving other PNG files and catalog entries')
+    selected = parser.parse_args().group
     png = OUT / 'png'
     png.mkdir(parents=True, exist_ok=True)
-    for old in png.glob('*.png'):
-        old.unlink()
     catalog: dict[str, dict] = {}
     # 原 10 批来自 extraction-plan.json；补充批（split_supplement.py 拆出）直接读 masters 目录
     groups = [(g['id'], g['assets']) for g in PLAN['groups']]
     groups += [(g, [{'id': p.stem, 'wide': g in WIDE_GROUPS or p.stem in WIDE_ASSETS} for p in sorted((HERE / 'masters' / g).glob('*.png'))]) for g in EXTRA_GROUPS]
+    if selected:
+        if selected not in {group_id for group_id, _ in groups}:
+            parser.error(f'Unknown group: {selected}')
+        existing = (OUT / 'catalog.ts').read_text()
+        for name, widths, aspect in re.findall(r"  '([^']+)': \{ widths: (\[[^]]+\]), aspect: ([\d.]+) \}", existing):
+            catalog[name] = {'widths': json.loads(widths), 'aspect': json.loads(aspect)}
+        if not catalog:
+            raise ValueError('Existing generated catalog could not be read')
+        groups = [(group_id, assets) for group_id, assets in groups if group_id == selected]
+    else:
+        for old in png.glob('*.png'):
+            old.unlink()
     for group_id, assets in groups:
         for asset in assets:
+            if selected:
+                for old in png.glob(f"{asset['id']}@*.png"):
+                    old.unlink()
             master = Image.open(HERE / 'masters' / group_id / f"{asset['id']}.png").convert('RGBA')
             bbox = master.getbbox()
             if asset['id'] in {'closing-sign-zh-hd-v2', 'title-hotpot-showcase'}:

@@ -15,6 +15,7 @@ import { SoundTip } from '../components/SoundTip/SoundTip';
 import { useSoundTip } from '../game/useSoundTip';
 import { stickerUrl } from '../game/pets';
 import { usePlayerLikes } from '../game/usePlayerLikes';
+import { usePawNotices } from '../game/usePawNotices';
 import type { PlayerLikesLoader } from '../game/playerLikes';
 import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
@@ -61,6 +62,7 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
   const [profile, setProfile] = useState(false);
   const soundTip = useSoundTip(soundTipPreview);
   const likes = usePlayerLikes(player.userId, player.userId, loadLikes);
+  const paws = usePawNotices(player.userId);
   return (
     <main className={`${styles.screen} ${styles.home}`}>
       <BrandHeader
@@ -80,9 +82,9 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
       </Button>
       <StreakLine streak={player.streak} />
       <nav className={styles.navRow}>
-        <NavTile icon="pet-collection" label={t('nav.collection')} onClick={onCollection} />
+        <NavTile icon="pet-collection" label={t('nav.collection')} onClick={onCollection} unread={paws.replies.length > 0} unreadLabel={t('paw_book.unread')} />
         <NavTile icon="leaderboard" label={t('nav.leaderboard')} onClick={onLeaderboard} />
-        <NavTile icon="my-pets" label={t('nav.my_pets')} onClick={onMyPets} />
+        <NavTile icon="my-pets" label={t('nav.my_pets')} onClick={onMyPets} unread={paws.messages.length > 0} unreadLabel={t('paw_book.unread')} />
       </nav>
       {onSocial && <SocialEntry onOpen={onSocial}/>}
       <PhotoNotice faces={DEVELOPER_PETS.map((id) => stickerUrl(id, 128))} />

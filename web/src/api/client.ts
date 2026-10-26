@@ -1,4 +1,4 @@
-import type { AchievementId, AchievementView, PlayerLikesView, PlayerPet, PlayerProfileView } from './types';
+import type { AchievementId, AchievementView, PlayerLikesView, PlayerPet, PlayerProfileView, PawBookView, PawMessage, PawNotices } from './types';
 import { isGalleryPath } from '../app/entryRoute';
 import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse, VersionInfo } from './types';
 
@@ -8,7 +8,7 @@ import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView
  */
 export class ApiError extends Error {
   constructor(
-    readonly kind: 'not_found' | 'unavailable' | 'invalid' | 'conflict' | 'unauthorized' | 'rate_limited',
+    readonly kind: 'not_found' | 'unavailable' | 'invalid' | 'conflict' | 'unauthorized' | 'verification_failed' | 'rate_limited',
     readonly detail?: string,
   ) {
     super(kind);
@@ -26,6 +26,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   }
   if (res.ok) return (await res.json()) as T;
   const body = (await res.json().catch(() => ({}))) as { error?: string; detail?: string };
+  if (res.status === 403 && body.error === 'verification_failed') throw new ApiError('verification_failed');
   if (res.status === 404) throw new ApiError('not_found', body.detail);
   if (res.status === 409) throw new ApiError('conflict', body.detail ?? body.error);
   if (res.status === 401 || (res.status === 403 && body.error === 'identity_mismatch')) {
@@ -92,12 +93,39 @@ async function submitPet(
   throw new UploadError('failed');
 }
 
+/** 爪印动作超时后由控制器重新读取，处理已落库但响应丢失的情况。 */
+function pawRequest<T>(path: string, init?: RequestInit): Promise<T> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 12_000);
+  return request<T>(path, { ...init, signal: controller.signal }).finally(() => clearTimeout(timer));
+}
+
+const gameTokens = new Map<string, string>();
+
 export const api = {
+  getGameSecurity: () => request<{ enabled: boolean; siteKey?: string }>('/api/game-security'),
+  startGame: async (gameId: string, playerId: string, turnstileToken: string, playToken: string) => {
+    const result = await request<{ startedAt: string }>(`/api/games/${encodeURIComponent(gameId)}/start`, {
+      method: 'POST', headers: { authorization: `Bearer ${playToken}` }, body: JSON.stringify({ playerId, turnstileToken }),
+    });
+    gameTokens.set(gameId, playToken);
+    if (gameTokens.size > 8) gameTokens.delete(gameTokens.keys().next().value!);
+    return result;
+  },
   getLoginState: (playerId: string, signal?: AbortSignal) => request<ColleagueResult & { hasPin: boolean }>(`/api/auth/players/${encodeURIComponent(playerId)}`, { signal }),
   signIn: (playerId: string, pin: string, confirmation?: string) => request<{ userId: string }>(`/api/auth/${confirmation === undefined ? 'login' : 'setup'}`, {
     method: 'POST', body: JSON.stringify({ playerId, pin, ...(confirmation === undefined ? {} : { confirmation }) }),
   }),
   logout: () => request<{ ok: true }>('/api/auth/logout', { method: 'POST', body: '{}' }),
+  getPawBook: (petId: string, playerId: string, cursor?: string | null) => pawRequest<PawBookView>(
+    `/api/pets/${encodeURIComponent(petId)}/paws?playerId=${encodeURIComponent(playerId)}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`),
+  changePaw: (petId: string, playerId: string, message: PawMessage | null, version: number, limit = 20) => pawRequest<PawBookView>(
+    `/api/pets/${encodeURIComponent(petId)}/paws`, { method: 'PUT', body: JSON.stringify({ playerId, message, version, limit }) }),
+  replyPaw: (petId: string, playerId: string, id: string, version: number, limit = 20) => pawRequest<PawBookView>(
+    `/api/pets/${encodeURIComponent(petId)}/paws/${encodeURIComponent(id)}/reply`, { method: 'POST', body: JSON.stringify({ playerId, version, limit }) }),
+  readPaws: (petId: string, playerId: string, ids: string[], kind: 'message' | 'reply') => pawRequest<{ ok: true }>(
+    `/api/pets/${encodeURIComponent(petId)}/paws/read`, { method: 'POST', body: JSON.stringify({ playerId, ids, kind }) }),
+  getPawNotices: (playerId: string) => pawRequest<PawNotices>(`/api/players/${encodeURIComponent(playerId)}/paw-notices`),
   getPlayerPets: (ownerId: string, viewerId: string, signal?: AbortSignal) => request<{ pets: PlayerPet[] }>(`/api/players/${encodeURIComponent(ownerId)}/pets?viewerId=${encodeURIComponent(viewerId)}`, { signal }).then(view => view.pets),
   getPlayerLikes: (targetId: string, viewerId: string, signal?: AbortSignal) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes?viewerId=${encodeURIComponent(viewerId)}`, { signal }),
   likePlayer: (targetId: string, playerId: string) => request<PlayerLikesView>(`/api/players/${encodeURIComponent(targetId)}/likes`, { method: 'POST', body: JSON.stringify({ playerId }) }),
@@ -128,6 +156,7 @@ export const api = {
   submitResult: (gameId: string, playerId: string, result: ResultPayload) =>
     request<SettleResponse>(`/api/games/${encodeURIComponent(gameId)}/result`, {
       method: 'POST',
+      headers: gameTokens.has(gameId) ? { authorization: `Bearer ${gameTokens.get(gameId)}` } : undefined,
       body: JSON.stringify({ playerId, result }),
     }),
 };

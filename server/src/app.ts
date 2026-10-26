@@ -8,6 +8,7 @@ import { gameRoutes } from './routes/games.ts';
 import { imageRoutes } from './routes/images.ts';
 import { leaderboardRoutes } from './routes/leaderboard.ts';
 import { petRoutes } from './routes/pets.ts';
+import { petPawRoutes } from './routes/petPaws.ts';
 import { playerRoutes } from './routes/players.ts';
 import { rosterRoutes } from './routes/roster.ts';
 import { deletionRoutes } from './routes/deletions.ts';
@@ -21,10 +22,12 @@ import { socialWorker } from './social/worker.ts';
 import type { AdminNotifier } from './services/adminNotify.ts';
 import type { SlackDirectory } from './services/slackDirectory.ts';
 import type { SubmissionHooks } from './services/submissions.ts';
+import type { TurnstileConfig } from './services/turnstile.ts';
 
 export interface AppDeps {
   social?: SocialOptions;
   pool: Pool;
+  gameSecurity?: TurnstileConfig;
   /** 测试用：结算事务中途注入失败。 */
   settleHooks?: SettleHooks;
   /** 测试用：上传写库前注入失败。 */
@@ -67,6 +70,7 @@ export function buildApp(deps: AppDeps) {
   app.register(gameRoutes, deps);
   app.register(leaderboardRoutes, deps);
   app.register(petRoutes, deps);
+  app.register(petPawRoutes, deps);
   app.register(imageRoutes, deps);
   app.register(submissionRoutes, deps);
   app.register(deletionRoutes, deps);

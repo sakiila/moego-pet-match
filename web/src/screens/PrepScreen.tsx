@@ -1,4 +1,5 @@
 import type { GameMode } from '../api/types';
+import type { ReactNode } from 'react';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
 import { ModeMark } from '../components/ModeMark/ModeMark';
 import { LineupPanel } from '../components/LineupPanel/LineupPanel';
@@ -20,13 +21,16 @@ export interface PrepScreenProps {
   /** 本局入选的自家宠物名字。 */
   ownPetNames?: string[];
   failed?: boolean;
+  verification?: ReactNode;
+  verificationReady?: boolean;
+  starting?: boolean;
   onStart: () => void;
   onRetry?: () => void;
   onBack?: () => void;
 }
 
 /** 开局准备：棋盘的计时前状态，读说明不计时；对局登记成功后才允许点「开始这班」进入 90 秒。鱼关换深蓝水下主题。 */
-export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames = [], failed, onStart, onRetry, onBack }: PrepScreenProps) {
+export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames = [], failed, verification, verificationReady = true, starting = false, onStart, onRetry, onBack }: PrepScreenProps) {
   const { t } = useI18n();
   const fish = mode === 'fish';
   return (
@@ -46,8 +50,9 @@ export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames
       ) : null}
       <RulesCard mode={mode} />
       <div className={styles.grow} />
-      <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onStart} disabled={!pets || loading || failed} aria-busy={loading} data-testid="start">
-        {t(loading && !failed ? 'prep.preparing' : 'prep.start')}
+      {verification}
+      <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onStart} disabled={!pets || loading || failed || !verificationReady || starting} aria-busy={loading || starting} data-testid="start">
+        {t(starting ? 'security.starting' : loading && !failed ? 'prep.preparing' : 'prep.start')}
       </Button>
     </main>
   );

@@ -25,6 +25,13 @@ it('素材全部就绪后允许开始', () => {
   expect(startButton(render({}))).not.toContain('disabled');
 });
 
+it('人机验证未完成或服务端正在开局时禁止重复开始', () => {
+  expect(startButton(render({ verificationReady: false }))).toContain('disabled');
+  const html = render({ starting: true });
+  expect(startButton(html)).toContain('disabled');
+  expect(html).toContain('正在开局');
+});
+
 it('图片准备失败后保留来客名单，显示重试并禁止开始', () => {
   const html = render({ failed: true, onRetry: () => {} });
   expect(html).toContain('Mochi');

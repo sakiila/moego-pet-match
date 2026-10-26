@@ -9,6 +9,7 @@ const entry: GalleryEntry = {
   name: 'NavTile',
   group: 'components',
   states: {
+    'new pawprints': () => <NavTile icon="my-pets" label="我的宠物" unread unreadLabel="有新爪印互动" onClick={noop} />,
     'home row (zh)': () => (
       <nav style={row}>
         <NavTile icon="pet-collection" label="宠物图鉴" onClick={noop} />

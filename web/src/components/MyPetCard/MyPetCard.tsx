@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { DeletionStatus as Status } from '../../api/types';
 import { useI18n } from '../../i18n';
 import { DeletionStatus } from '../DeletionStatus/DeletionStatus';
@@ -14,10 +14,11 @@ export interface MyPetCardProps {
   /** 传出这张卡片，详情卡从它飞出、关闭时飞回。 */
   onView: (el: HTMLElement) => void;
   onRequestRemoval: () => void;
+  notice?: ReactNode;
 }
 
 /** 我的宠物卡：完整头像、收集状态、查看资料与低强调的删除申请；未收集时说明如何收进图鉴。 */
-export function MyPetCard({ name, stickerSrc, collected, request, onView, onRequestRemoval }: MyPetCardProps) {
+export function MyPetCard({ name, stickerSrc, collected, request, onView, onRequestRemoval, notice }: MyPetCardProps) {
   const { t } = useI18n();
   const [failed, setFailed] = useState(false);
   return (
@@ -43,6 +44,7 @@ export function MyPetCard({ name, stickerSrc, collected, request, onView, onRequ
           )}
         </div>
       </div>
+      {notice}
       {!collected && <p className={styles.hint}>{t('my_pets.collection_hint')}</p>}
     </article>
   );

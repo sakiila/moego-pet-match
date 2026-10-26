@@ -15,6 +15,32 @@ export interface AchievementView {
 
 export type GameMode = 'normal' | 'fish';
 
+export type PawMessage = 'cute' | 'pets' | 'play' | 'love';
+export interface PetPaw {
+  id: string;
+  sender: { userId: string; name: string };
+  message: PawMessage;
+  version: number;
+  createdAt: string;
+  reply: { owner: { userId: string; name: string }; at: string } | null;
+  unreadMessage: boolean;
+  unreadReply: boolean;
+}
+export interface PawBookView {
+  petId: string;
+  petName: string;
+  own: boolean;
+  count: number;
+  unreadCount: number;
+  mine: PetPaw | null;
+  /** 撤回的关系也保留版本，阻止旧请求覆盖新的表达。 */
+  mineVersion: number;
+  entries: PetPaw[];
+  nextCursor: string | null;
+}
+export interface PawNotice { petId: string; petName: string; count: number }
+export interface PawNotices { messages: PawNotice[]; replies: PawNotice[] }
+
 /** 玩家永久点赞；独立加载，不影响成绩与名片的可用性。 */
 export interface PlayerLikesView {
   receivedLikes: number;
@@ -74,6 +100,14 @@ export interface RegisteredGame {
   uncollectedPetIds: string[];
   /** 本局阵容中属于同主多宠家庭的宠物 → 家庭标识（双宠团聚用）。 */
   families: Record<string, string>;
+  /** 正式环境开局前必须完成人机验证。 */
+  verificationRequired?: boolean;
+}
+
+export interface GameMove {
+  at: number;
+  from: { r: number; c: number };
+  to: { r: number; c: number };
 }
 
 /** 客户端提交的冻结结果（来自引擎 getSummary）。 */
@@ -90,6 +124,8 @@ export interface ResultPayload {
   validMoves: number;
   actedInLastSeconds: boolean;
   pets: { id: string; served: number; firstServedSeq: number | null }[];
+  /** 实际受理的交换，包括无效回弹；正式对局必须提供供服务端重演。 */
+  moves?: GameMove[];
 }
 
 export interface SettleResponse {

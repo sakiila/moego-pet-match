@@ -1,0 +1,47 @@
+Use case: ui-mockup
+Asset type: one feature-review artwork showing THREE STATES of the SAME approved MoeGo mobile pet Pawprint Book feature, not three alternatives.
+Primary request: Generate one polished high-resolution landscape artboard, approximately 2560 x 1920. Three equally sized portrait UI viewports across the artboard, each at the 390 x 844 logical mobile proportion, with modest outer white space and brief captions above each. No device frames, browser or OS chrome. Existing orange/white MoeGo product UI, not a new app or redesign.
+
+Input images and exact roles:
+1. design/reviews/2026-10-26-player-owned-pets/screenshots/own-uncollected-detail-390x844.png — actual current pet-detail presentation, creamy portrait collectible card, darkened backdrop, separate close, small red developer-certification mark, lower-right flip icon. STYLE/LAYOUT REFERENCE ONLY; the ginger Boluo in this screenshot is NOT the pet to show.
+2. design/reviews/2026-10-26-player-owned-pets/screenshots/profile-390x844.png — actual current app typography, peach-neutral surfaces, white round-corner sheet, profile row, existing orange emphasis. STYLE REFERENCE ONLY. Do not copy its player-likes row into this pet feature.
+3. /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-active-v1/512/pet_644053d683e0.png — genuine approved Maodu 毛肚 head sticker. THIS IS THE PET IDENTITY REFERENCE in ALL THREE STATES: brown/white tabby cat, tall complete ears, one eye winking, one green eye open, white muzzle, narrow white sticker rim, no body or clothing. Preserve this identity faithfully; do not show Boluo, another cat, a dog, a human hand, a costume, or a new pet illustration.
+
+Style and hierarchy:
+True white sheet surfaces, very light warm peach pet card #fff6ee, charcoal text #1f2227, MoeGo orange #f96b1c, soft gray dividers and quiet secondary text. Friendly rounded readable Chinese type with clear spacing. Main selected controls use pale orange fill + orange outline + a small check; most elements flat and restrained. Match real app UI over decorative scrapbook art. Subtle depth, small radii and ample breathing room, at least 44px-equivalent touch height. Use simple small paw/heart/ball symbols only as restrained code-drawable accents, no new detailed illustration/icon families. No thumbs-up or human hand gestures. No fake scores, badges, coins, gifts, premium currency, popularity ranks, rewards or new game mechanics. Names/counts below are fictional demonstration states, except Maodu belongs to Bob per existing project context.
+
+Artboard heading, outside the viewports: "宠物爪印簿". A tiny subtitle may read "留一句喜欢，回一个爪印". Three concise labels above respective viewports: "01 详情入口", "02 同事视角", "03 主人视角". Everything below those labels is actual product UI without diagram arrows or explanatory overlays.
+
+STATE 1 — pet-detail entry, viewer has COLLECTED Maodu and has not yet left a pawprint:
+- Muted/dimmed collection page behind a centered existing portrait pet card, as in reference 1. Keep a separate circular close-X at the upper-right of the screen. No visible owner details for uncollected background pets.
+- Cream collectible portrait card: large complete Maodu head, ample room, name "Maodu 毛肚", small owner line with a purple B initial avatar and exact "主人 Bob · 本游戏开发者". Small red developer-certification mark in upper-right, consistent with reference 1. Small actual-style flip-card symbol in the card's lower-right.
+- Near the card's lower portion preserve existing secondary social proof: exact "已有 18 位同事认识了 TA" and 4–5 tiny overlapping LETTER avatars. This is the existing collected-pet metric, not pawprint total.
+- Crucial: NEW entry is a SEPARATE compact horizontal pill/row immediately BELOW the portrait card, outside its flipping face. White or very pale peach, a small orange paw, exact "留个爪印", and a small right chevron. Comfortable 44–48 logical px height, roughly 300–330 logical px wide. Do NOT put it inside the flip target. No additional pawprint count on this entry.
+- All visible content fits the portrait viewport. Do not show deletion-request controls on this OTHER person's view. Do not add a large additional primary action.
+
+STATE 2 — colleague Lily viewing the book after leaving a message AND receiving an owner paw-back:
+- A white bottom sheet fills most of the portrait viewport, rounded top corners, with the previous portrait card behind it softly dimmed. No stacked duplicate close buttons in the foreground. Header shows a small genuine Maodu head, exact title "爪印簿", smaller pet name "Maodu 毛肚", and one close-X top-right.
+- Quiet secondary line "12 位同事留过爪印". This is unique active visitors, and includes Lily. The four-choice area is headed "你的爪印".
+- A clear 2x2 grid of text-forward chips, exact choices: "被你萌到了", "想摸摸头", "想和你玩", "给你比个心". "想和你玩" is SELECTED with pale peach fill, orange outline and tiny check. Other three are neutral. These choices change the same one message; do not number them or add item prices.
+- Immediately below grid: quiet "已留下爪印" on left and small text action "撤回" on right. Keep selected option comfortably readable.
+- A small soft-peach reply row: tiny B avatar and exact "Bob 代毛肚回了一个爪印" plus a small orange paw at the end. The row should read as a real owner's response, not an automatic pet chatbot.
+- Light divider, section title "同事的爪印". Three compact generous-height rows with circular letter avatars, names, one selected phrase and quiet relative time: Mia / "想摸摸头" / "刚刚"; Alex / "给你比个心" / "1 小时前"; Sam / "被你萌到了" / "昨天". Use neutral divider rows rather than nested heavy cards. These are OTHER visitors; do not duplicate Lily's own message in this list.
+- Bottom text action "展开更多". No keyboard, text input, freeform comments, send bar, shopping bag, report button, leaderboard, reply-to-reply threads or global social feed.
+
+STATE 3 — owner Bob viewing the SAME Maodu book:
+- Same sheet and compact pet header as state 2: "爪印簿", "Maodu 毛肚", close-X, "12 位同事留过爪印".
+- Omit the four visitor phrase choices entirely: the owner cannot leave a message for their own pet.
+- Small peach summary "2 条新爪印". Rows show avatar, name, short phrase and readable action at right.
+- Row 1: M avatar, "Mia", small "新" tag, "想摸摸头", orange-outline small button "回个爪".
+- Row 2: A avatar, "Alex", small "新" tag, "给你比个心", same button "回个爪".
+- Row 3: L avatar, "Lily", "想和你玩", quiet completed state "已回爪" and small orange paw; the owner has already responded to this visitor, consistent with STATE 2.
+- Bottom text action "展开更多". A quiet small note "代毛肚回应同事的喜欢" may appear lower down, leaving generous white space. No owner self-like, no three-option reply picker, no editing the pet, no nickname field, no duty to reply, no automatic response.
+
+Quality constraints:
+- All three viewports same height/width, coherent scaling, and every action above bottom safe area. Crisp legible exact Chinese; names intact and no nonsense filler. Exact four phrases above: never use "下次还点你".
+- Preserve one clear topmost close button per state. Keep 01 and 02 visually grounded in existing detail and sheet screenshots, not a standalone pet social-network screen.
+- Same pet identity and owner across three states. No copied whole screenshots used as final content; this is visual concept artwork to implement later with reusable components.
+- Deliver ONE artwork with three states of one design. No extra variants or feature diagrams.
+
+Tool: Codex built-in image_gen, transparent_background=false.
+Output intended for: design/concepts/pet-paw-book-v1.png.

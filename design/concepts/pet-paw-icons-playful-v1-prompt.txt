@@ -1,0 +1,41 @@
+Use case: ui-mockup
+Asset type: a polished custom ICON FAMILY design-review sheet for the existing MoeGo pet Pawprint Book. This is a bitmap design proposal for a user to choose; not code and not an implemented UI.
+Create realistic, production-quality component design artwork with a clear visual hierarchy, consistent line weight, intentional imagery and generous spacing.
+
+Target dimensions: exactly 1536 x 1024, landscape, pure white artboard, crisp high-resolution original icons.
+Current date anchor: 2026-10-26. Do not print a date.
+
+Context and input images:
+- Image 1: assets/icons/library-original-png-v2/reference/home-entry-icons-v3.png. The approved MoeGo brand icon system: rounded charcoal outlines, warm orange and ivory, simple charming cat/dog motifs, restrained dimensional highlights. This is a visual brand reference, not an edit target.
+- Image 2: assets/icons/pet-paw-book-original-v1/preview.png. The CURRENT eleven tiny extracted graphics. Use only to understand the eleven functions. REDESIGN them at much higher native size and polish; do not copy the pixelated appearance, dark blue QA tiles, English filenames, label layout, or transparency test boards.
+- Image 3: /tmp/moego-paw-qa/reply-390x844.png. Actual current Pawprint Book UI. Use it to judge context, orange-on-peach selection, white sheet and actual small icon legibility. Do not reproduce or redesign the full app, the pet photo, owner, portrait card, background or developer stamp.
+
+Keep this as ONE coherent art direction, never several styles in the same image.
+Palette anchors: orange #f96b1c, charcoal #1f2227, ivory #fff6ee, white #ffffff, pale peach #ffe7d6, quiet gray #9aa1ad. Blue #4a8fe0 is available only if the art direction calls for it.
+All artwork must be designed specifically for this pet game. Avoid stock emoji, emoji glyphs, icon-font screenshots, generic clipart, gradients that obscure silhouettes, photorealism, glassmorphism, neon glows, excessive texture, reward coins, gifts, currencies, letters inside icons, human hands, human fingers and thumbs-up gestures.
+Main pawprint means affection for a PET. Keep it a FLAT FOUR-TOE PAWPRINT, not an upright high-five paw with a wrist; the existing separate player-like feature already uses an upright high-five.
+
+Composition:
+- Top 90px: one clear Chinese title with the art direction name supplied below, and a small quiet subtitle "宠物爪印簿 · 图标设计".
+- Main row around y130-440: FOUR beautifully drawn isolated hero icons, equal optical size, about 190-220px each, centered in four balanced columns. Give at least 40px of clear white safety space around each drawing, without circle/square tile backgrounds. Chinese labels below each: "被你萌到了", "想摸摸头", "想和你玩", "给你比个心". Each glyph must remain distinct and readable when reduced to 24-28px.
+- Middle row around y500-700: left 60% of sheet shows three matching 90-110px pawprint states with labels "留个爪印", "已回爪", "次要提示". These MUST share exactly the same basic four-toe paw footprint: primary orange, outlined response orange, and a quiet gray state. Right 40% shows four matching 56-68px utility symbols with labels "选中", "展开", "进入", "关闭": orange filled circular white check, downward chevron, right chevron, charcoal X. These are functional controls, no experimental symbolism.
+- Bottom around y760-980: show compact real component previews, not another app screen. At left, a 2x2 group of four white rounded chips on white, with these SAME four icons rendered small alongside the SAME four phrase labels. Select "想和你玩" with pale peach, orange outline and the SAME circular check at the right. At right, show a compact rounded white/peach "留个爪印" button with the SAME primary pawprint, and a small "已回爪" status with the SAME outlined response paw. Keep room and do not crowd the drawings. Small caption "按钮预览".
+Use fine neutral dividers and typography only to organize the sheet, not heavy cards around every icon.
+There must be exactly ELEVEN independent glyph designs: 4 emotional actions + 3 paw states + 4 utilities; the bottom previews repeat those same designs faithfully.
+Do not invent or rename functionality. Never include the rejected phrase "下次还点你".
+No app navigation, scores, leaderboard, pet catalogue, avatar feed, QR, watermark, phone frame or browser chrome.
+Deliver ONE polished, review-ready artwork with large original drawings and consistent, usable small-size examples.
+
+Art direction name (exact title): "宠物小动作".
+Stay in the same MoeGo icon family, but make the four reactions more alive through animal behavior, slight playful tilt, gentle squash and expressive poses. Use the familiar blue-cat accent #4a8fe0 with orange and warm ivory, charcoal rounded outlines. Simple volume and one small highlight, not detailed illustration or animated film renders. Each icon has one dominant shape and at most one tiny supporting accent.
+Emotional hero interpretations:
+- "被你萌到了": a charming blue cat face with big delighted eyes, orange blush and a tiny floating heart.
+- "想摸摸头": the same blue-cat head with a soft cream PET PAW patting it from above; the cat squints happily. Compact enough to be read small; no human hand or human fingers.
+- "想和你玩": a dominant orange play ball nudged by one small cream pet paw, two clean ivory seam arcs, a little playful tilt.
+- "给你比个心": a dominant orange heart being hugged by two small cream pet paws, a slight friendly lean.
+Keep faces cute rather than babyish. Do not add full bodies, decorative stars around every symbol, multiple scene props, names or dialogue.
+The three flat pawprint states are coordinated orange/ivory, outlined orange, and gray, always four toes and a compact footprint, never an upright wrist gesture.
+Make the utility symbols quiet and consistent, allowing the four emotional actions to be the visual focus. Preserve the actual chip labels and interaction semantics.
+
+Tool: Codex built-in image_gen; transparent_background=false.
+References supplied as the three local image paths listed above.
