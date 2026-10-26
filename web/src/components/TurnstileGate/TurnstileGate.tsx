@@ -50,7 +50,7 @@ export function TurnstileGate({ siteKey, gameId, onToken, failed, rateLimited, o
     void loadWidget().then(api => {
       if (cancelled || !container.current) return;
       const id = api.render(container.current, {
-        sitekey: siteKey, action: 'start_game', cData: gameId, theme: 'light', size: 'flexible', language: locale,
+        sitekey: siteKey, action: 'start_game', cData: gameId, theme: 'light', size: 'flexible', language: locale === 'zh' ? 'zh-CN' : 'en',
         appearance: 'interaction-only', retry: 'never',
         callback: (token: string) => { if (!cancelled) { setStatus('verified'); callback.current(token); } },
         'expired-callback': () => { if (!cancelled) { setStatus('checking'); callback.current(''); } },
