@@ -3,7 +3,7 @@ import type { AchievementId, LeaderboardEntry } from '../../api/types';
 import { useI18n } from '../../i18n';
 import catSrc from '../../ui/art/hall-cat.webp';
 import crownSrc from '../../ui/art/hall-crown.webp';
-import dogSrc from '../../ui/art/hall-dog-v2.webp';
+import dogSrc from '../../ui/art/hall-dog-v3.webp';
 import laurelLeftSrc from '../../ui/art/hall-laurel-left.webp';
 import laurelRightSrc from '../../ui/art/hall-laurel-right.webp';
 import { AchievementAvatar } from '../AchievementAvatar/AchievementAvatar';
