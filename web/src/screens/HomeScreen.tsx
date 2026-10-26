@@ -6,6 +6,7 @@ import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { DEVELOPER_PETS, managerLineKey } from '../game/easterEggs';
 import { NavTile } from '../components/NavTile/NavTile';
 import { HomeFooter } from '../components/HomeFooter/HomeFooter';
+import { SocialEntry } from '../components/SocialEntry/SocialEntry';
 import { HomePlayerActions } from '../components/HomePlayerActions/HomePlayerActions';
 import { StreakLine } from '../components/StreakLine/StreakLine';
 import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
@@ -36,6 +37,8 @@ export interface HomeScreenProps {
   onCollection: () => void;
   onLeaderboard: () => void;
   onMyPets: () => void;
+  /** 社交模块开发预览入口；未接真实服务前生产不开放。 */
+  onSocial?: () => void;
   /** 信息使用说明；removal 为 true 时直接展开一般删除申请。 */
   onInfo: (removal: boolean) => void;
   onClockOut: () => void;
@@ -51,7 +54,7 @@ export interface HomeScreenProps {
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, clockOutError, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail, soundTipPreview }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onSocial, onInfo, onClockOut, clockOutError, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail, soundTipPreview }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
@@ -81,6 +84,7 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
         <NavTile icon="leaderboard" label={t('nav.leaderboard')} onClick={onLeaderboard} />
         <NavTile icon="my-pets" label={t('nav.my_pets')} onClick={onMyPets} />
       </nav>
+      {onSocial && <SocialEntry onOpen={onSocial}/>}
       <PhotoNotice faces={DEVELOPER_PETS.map((id) => stickerUrl(id, 128))} />
       <HomeFooter
         version={version}

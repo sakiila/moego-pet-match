@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>毛孩子动态 · 页面设计稿 v4</title>
+<style>
+:root{--orange:#f96b1c;--ink:#1f2227;--muted:#5b6270;--line:#e3e6eb;--soft:#fff2e8;--paper:#fff;--surface:#fbfbfc;--radius:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--surface);color:var(--ink);font:16px/1.65 ui-rounded,"PingFang SC","Microsoft YaHei",system-ui,sans-serif}a{color:inherit;text-underline-offset:4px}a:hover{color:var(--orange)}a:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+header{background:var(--paper);border-bottom:1px solid var(--line)}.brand{max-width:1240px;margin:auto;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand img{width:140px;height:auto}.tag{padding:5px 13px;border-radius:99px;background:var(--soft);color:#a3450f;font-size:13px}.hero{max-width:1240px;margin:auto;padding:50px 32px 32px}.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.2;margin:12px 0 18px;letter-spacing:-1px}.hero h1 em{font-style:normal;color:var(--orange)}.hero p{color:var(--muted);max-width:820px;margin:10px 0}.eyebrow{color:var(--orange);font-size:13px;letter-spacing:1px;font-weight:700}
+nav{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.97);border-block:1px solid var(--line)}.nav-inner{max-width:1240px;margin:auto;display:flex;gap:24px;padding:14px 32px;overflow-x:auto;white-space:nowrap}nav a{text-decoration:none;font-size:14px;font-weight:650}
+main{max-width:1240px;margin:auto;padding:0 32px 60px}section{padding-top:48px;margin-bottom:16px}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px}.section-head h2{font-size:25px;line-height:1.35;margin:0}.section-head>a{font-size:13px;white-space:nowrap}.desc{color:var(--muted);margin:14px 0 22px;max-width:960px}.board{display:block;text-decoration:none;background:white;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.board img{width:100%;height:auto;display:block}.caption{font-size:12px;color:var(--muted);margin:10px 0}
+.panel{padding:28px;background:white;border:1px solid var(--line);border-radius:var(--radius);margin:20px 0}.panel h3{font-size:18px;margin:0 0 14px}.panel p{margin:10px 0;color:var(--muted)}.toolbar-viewport{max-width:390px;margin:24px auto;padding:16px;background:white;border:1px solid var(--line);border-radius:18px}.quickbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 1px minmax(0,1fr);gap:5px;align-items:center}.quick{display:flex;gap:3px;justify-content:center;align-items:center;min-height:44px;border:1px solid var(--line);border-radius:14px;font-size:13px;white-space:nowrap}.quick img{width:32px;height:32px;object-fit:contain}.quick.selected{border-color:var(--orange);background:var(--soft);color:#c14b07}.divider{height:28px;background:var(--line)}.labels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;text-align:center;margin-top:10px;font-size:11px;color:var(--muted)}.icon-demo{display:grid;grid-template-columns:1fr 1fr;gap:16px}.icon-stage{min-height:180px;border-radius:16px;background:var(--surface);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:16px;gap:8px;border:1px solid var(--line)}.icon-stage.dark{background:#151719;color:white}.icon-stage img{width:128px;height:128px;object-fit:contain}.icon-stage span{font-size:12px}
+.flow{padding:18px 20px;background:var(--soft);border-radius:14px;margin:12px 0;line-height:1.8}.flow strong{display:block;margin-bottom:4px}.arrow{padding:0 8px;color:var(--orange)}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;margin:20px 0;background:white}table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}th,td{padding:16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#fff7f0;font-weight:650}tr:last-child td{border-bottom:0}td:first-child{width:170px;font-weight:600}td a{color:#aa4a13}code{font-size:12px;background:#f1f4f8;padding:2px 5px;border-radius:5px}
+.states{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.state{padding:20px;border:1px solid var(--line);border-radius:16px;background:white}.state h3{font-size:16px;margin:0 0 10px}.state p{font-size:14px;color:var(--muted);margin:8px 0}.sample-action{padding:8px 12px;text-align:center;border:1px solid var(--line);border-radius:99px;font-weight:600;color:var(--ink)!important}.sample-action.primary{color:white!important;background:var(--orange);border-color:var(--orange)}.sample-action.danger{color:#be3939!important;border-color:#edb9b9;background:#fff4f4}.small{font-size:13px;color:var(--muted)}footer{border-top:1px solid var(--line);padding:28px 32px;text-align:center;color:var(--muted);font-size:13px}footer a{margin:0 10px}
+@media(max-width:640px){.brand{padding:20px}.brand img{width:118px}.tag{font-size:11px}.hero{padding:32px 20px 24px}.hero p{font-size:14px}.nav-inner{padding:12px 20px;gap:20px}main{padding:0 16px 40px}section{padding-top:32px}.section-head{align-items:flex-start}.section-head h2{font-size:21px}.desc{font-size:14px}.panel{padding:18px}.toolbar-viewport{padding:12px}.quick{gap:1px}.quick img{width:30px;height:30px}.states{grid-template-columns:1fr}.icon-stage{min-height:150px}.icon-stage img{width:96px;height:96px}.board{border-radius:12px}.labels{font-size:10px}.flow{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body id="top">
+<header><div class="brand"><img src="sources/moego-logo.webp" alt="MoeGo"><span class="tag">页面设计稿 v4 · 待评审</span></div></header>
+<div class="hero"><div class="eyebrow">PET MOMENTS / DESIGN REVIEW</div><h1>毛孩子动态，<em>一路都能回去。</em></h1><p>6 个主要页面统一品牌栏：MoeGo 保持左上角，“回门店”放在顶部右侧。子页另有返回上一页的入口；照片、列表与消息按来路恢复位置。</p><p>快捷互动改用已选定的蓝猫、摸头、推球、抱心四枚图标，最右侧新增同风格评论图标。本页展示设计，不连接游戏接口。</p></div>
+<nav aria-label="设计稿目录"><div class="nav-inner"><a href="#browse">01 浏览与详情</a><a href="#publish">02 发布与我的</a><a href="#activity">03 消息与大图</a><a href="#components">04 图标与组件</a><a href="#flow">05 跳转与回退</a></div></nav>
+<main>
+<section id="browse">
+<div class="section-head"><h2>01 · 动态列表 / 动态详情</h2><a href="../../concepts/pet-social-browse-v4.png" target="_blank" rel="noopener">放大原图 ↗</a></div>
+<p class="desc">顶部保留全局“回门店”。列表的照片和正文是主角，四种互动与评论紧随其后；详情沿用同一张帖子卡，并加入留言列表和固定输入栏。</p>
+<a class="board" href="../../concepts/pet-social-browse-v4.png" target="_blank" rel="noopener"><img src="../../concepts/pet-social-browse-v4.png" alt="动态列表和详情设计稿，左上角 MoeGo、顶部回门店，四种宠物小动作和最右侧评论"></a>
+<p class="caption">详情图中显示“返回动态”；从消息或我的动态进入时，返回文案随来路变化。图中数量与新留言为示例。</p>
+</section>
+<section id="publish">
+<div class="section-head"><h2>02 · 发布动态 / 我的动态</h2><a href="../../concepts/pet-social-publish-v4.png" target="_blank" rel="noopener">放大原图 ↗</a></div>
+<p class="desc">发布页复用照片选择与可选宠物关联。发布成功进入新帖详情，返回时回到原入口；取消、浏览器返回或点顶部“回门店”，都先检查未发布的改动。我的动态复用帖子卡，只增加来源切换。</p>
+<a class="board" href="../../concepts/pet-social-publish-v4.png" target="_blank" rel="noopener"><img src="../../concepts/pet-social-publish-v4.png" alt="发布和我的动态设计稿，照片编辑器、草稿保护与统一快捷互动" loading="lazy"></a>
+</section>
+<section id="activity">
+<div class="section-head"><h2>03 · 互动消息 / 照片大图</h2><a href="../../concepts/pet-social-activity-v4.png" target="_blank" rel="noopener">放大原图 ↗</a></div>
+<p class="desc">消息页复用同一组互动图标，点击后打开对应动态或定位留言。大图页保留左上角标识和顶部“回门店”，关闭 X 则恢复原页面、图片与浏览位置。</p>
+<a class="board" href="../../concepts/pet-social-activity-v4.png" target="_blank" rel="noopener"><img src="../../concepts/pet-social-activity-v4.png" alt="互动消息和照片大图设计稿，按来路回退，暗色图片查看器保留 MoeGo 标识" loading="lazy"></a>
+<p class="caption">大图可由列表或详情直接打开，关闭后回到打开它的页面；“回门店”是独立的全局操作。</p>
+</section>
+<section id="components">
+<div class="section-head"><h2>04 · 图标与组件</h2><a href="../../concepts/pet-social-comment-icon-v2.png" target="_blank" rel="noopener">评论图标原图 ↗</a></div>
+<p class="desc">四个快捷图标沿用已选定的“宠物小动作”原稿；评论图标直接使用本次上传的原图：奶油白对话气泡、橙色三点、抱住边缘的小爪。评论始终在最右侧，不与快捷互动混在一起。</p>
+<div class="panel"><h3>快捷互动栏 · 原图组件预览</h3><p class="small">顺序固定。页面内以图标加计数显示，完整语义用于按钮名称与提示；下方文字是评审图例。这里使用四枚原图的逐字节副本，不重绘既有图标。</p>
+<div class="toolbar-viewport" role="img" aria-label="被你萌到了 4，想摸摸头 2，想和你玩 1 已选中，给你比个心 3，评论 2">
+<div class="quickbar">
+<div class="quick"><img src="sources/paw-cute.png" alt=""><span>4</span></div>
+<div class="quick"><img src="sources/paw-pets.png" alt=""><span>2</span></div>
+<div class="quick selected"><img src="sources/paw-play.png" alt=""><span>1</span></div>
+<div class="quick"><img src="sources/paw-love.png" alt=""><span>3</span></div>
+<div class="divider"></div>
+<div class="quick"><img src="../../concepts/pet-social-comment-icon-v2.png" alt=""><span>2</span></div>
+</div>
+<div class="labels"><span>被你萌到了</span><span>想摸摸头</span><span>想和你玩</span><span>给你比个心</span><span>评论</span></div>
+</div>
+<p class="small">前四项是对当前动态的互动；评论按钮负责进入或定位留言。图中的单个选中态仅示范外观，本轮未扩展或确定互斥、多选、次数等新规则，也不改变宠物爪印簿的原有规则。</p>
+<div class="icon-demo"><div class="icon-stage"><img src="../../concepts/pet-social-comment-icon-v2.png" alt="评论图标浅底"><span>评论 · 浅底</span></div><div class="icon-stage dark"><img src="../../concepts/pet-social-comment-icon-v2.png" alt="评论图标深底"><span>透明背景 · 深底检查</span></div></div>
+</div>
+<div class="table-wrap"><table><thead><tr><th>组件</th><th>复用 / 扩展</th><th>本版设计职责</th></tr></thead><tbody>
+<tr><td>品牌栏</td><td>复用现有 BrandHeader 的品牌与顶部操作结构，收拢社交页头</td><td>固定 MoeGo 左上角；“回门店”、语言和头像放右侧；暗色大图保留原标识浅色衬底。</td></tr>
+<tr><td>页面导航栏</td><td>扩展 SocialHeader 的上下文导航</td><td>返回文字随来源改变，右侧按页面提供发布、更多或全部已读。</td></tr>
+<tr><td>动态卡片</td><td>复用 SocialPostCard、Avatar 和图片布局</td><td>列表、详情、我的动态共享作者、正文、照片、来源与管理入口。</td></tr>
+<tr><td>快捷互动栏</td><td>扩展 SocialReactions；复用四枚图标原稿</td><td>四个固定语义与各自计数；评论单独位于最右侧。中英文名称由文案提供。</td></tr>
+<tr><td>评论图标</td><td>已确认使用上传原图，尚未接入图标库</td><td>沿用宠物小动作的描边、颜色与爪部造型；后续经统一 Icon 使用。</td></tr>
+<tr><td>留言与发布</td><td>复用 SocialComments、SocialCommentInput、SocialComposer</td><td>一层回复、可取消回复对象、照片编辑、上传状态与草稿保护。</td></tr>
+<tr><td>图片查看器 / 消息</td><td>复用 SocialPhotoViewer、SocialActivity</td><td>保留原图比例和当前索引；消息打开对应帖子，返回恢复消息列表位置。</td></tr>
+<tr><td>弹层与状态</td><td>复用 Sheet、Button、Toast、SocialEmpty</td><td>放弃草稿、删除、本站隐藏、问题反馈；加载、空、失败、已移除。</td></tr>
+</tbody></table></div>
+<div class="states">
+<div class="state"><h3>离开有改动的发布页</h3><p>“这条动态还没发布，要先离开吗？”</p><p class="sample-action primary">继续编辑</p><p class="sample-action">放弃并离开</p><p class="small">取消 / 回门店 / 系统返回，共用同一确认。放弃后前往原本点击的目标。</p></div>
+<div class="state"><h3>删除自己的站内动态</h3><p>“照片和本站留言会一起移除，删除后无法恢复。”</p><p class="sample-action danger">删除动态</p><p class="sample-action">保留动态</p><p class="small">确认成功后回到来路列表；失败留在当前弹层并可重试。</p></div>
+<div class="state"><h3>隐藏 Slack 同步动态</h3><p>“只从动态墙隐藏，Slack 原帖保留。”</p><p class="sample-action">从动态墙隐藏</p><p class="sample-action">取消</p><p class="small">隐藏与删除用明确的不同文案；其他人的动态保留反馈入口。</p></div>
+</div>
+<p class="caption">上述为静态组件示意。加载用骨架；失败留重试；空态保留发布入口；已移除状态保留返回入口，不继续显示旧照片预览。</p>
+</section>
+<section id="flow">
+<div class="section-head"><h2>05 · 跳转与回退规则</h2><a href="README.md">设计说明 ↗</a></div>
+<p class="desc">“返回上一页”和“回门店”分开：前者恢复来路，后者直接回游戏首页。浏览器 / 系统返回与页面返回保持一致，弹层先关闭弹层。</p>
+<div class="flow"><strong>浏览与留言</strong>门店<span class="arrow">→</span>动态列表<span class="arrow">→</span>动态详情<span class="arrow">→</span>照片大图<br><span class="small">逐级回退：大图 → 原页面 → 原列表位置。点列表照片也可直接开大图。</span></div>
+<div class="flow"><strong>从互动消息进入</strong>动态列表<span class="arrow">→</span>互动消息<span class="arrow">→</span>对应动态 / 留言<span class="arrow">→</span>照片大图<br><span class="small">详情显示“返回消息”，回去保留原消息位置；不统一跳回动态首页。</span></div>
+<div class="flow"><strong>从我的动态发布</strong>动态列表<span class="arrow">→</span>我的动态<span class="arrow">→</span>发布<span class="arrow">→</span>新帖详情<span class="arrow">→</span>我的动态<br><span class="small">来源页签、原浏览位置继续保留，新帖子及时可见；从动态列表发布则返回动态列表。</span></div>
+<div class="table-wrap"><table><thead><tr><th>当前位置 / 操作</th><th>目标</th><th>恢复内容</th></tr></thead><tbody>
+<tr><td>详情 · 返回</td><td>打开详情的动态列表、我的动态或消息页</td><td>原页签、筛选、滚动位置；从消息进入时定位对应留言。</td></tr>
+<tr><td>大图 · X / 系统返回</td><td>打开大图的原页面</td><td>帖子、原图片位置和浏览位置；不额外制造详情页。</td></tr>
+<tr><td>发布 · 取消 / 返回</td><td>空草稿直接返回；有改动先确认</td><td>继续编辑保留全部输入；上传或发布失败不清空。</td></tr>
+<tr><td>任意页 · 顶部回门店</td><td>游戏首页</td><td>发布页的未提交改动先走同一草稿确认。</td></tr>
+<tr><td>弹层 · 取消 / 关闭</td><td>原页面</td><td>恢复触发按钮焦点与浏览位置；不额外跳一页。</td></tr>
+<tr><td>直接打开深链接</td><td>默认返回动态列表；未登录先用现有 PIN 登录</td><td>登录完成回到原目标；不再新增独立 Slack 登录页。</td></tr>
+<tr><td>原帖已移除</td><td>显示通用移除态，可返回来路；无来路回动态列表</td><td>不展示过期照片、正文和敏感通知预览。</td></tr>
+<tr><td>查看 Slack 原帖</td><td>在外部标签 / Slack 打开</td><td>站内当前页面与位置保留；站内内容不写回 Slack。</td></tr>
+</tbody></table></div>
+<p class="small">设计范围：照片、文字、四种快捷互动与评论；不增加视频、双向同步或新登录机制。三组大图是静态视觉参考，实际像素尺寸见 manifest.json；手机内容按 390 × 844 的信息密度规划，尚未作为新实现做浏览器验收。</p>
+</section>
+</main>
+<footer><a href="#top">回到顶部 ↑</a><a href="README.md">交付说明</a><a href="manifest.json">素材记录</a>设计稿待评审 · 仅新增设计产物</footer>
+</body>
+</html>
+

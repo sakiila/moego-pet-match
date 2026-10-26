@@ -7,7 +7,7 @@ import { ModeMark } from '../ModeMark/ModeMark';
 import styles from './LineupPanel.module.css';
 
 /** 本局来客：头像、本局底色与名字一一对应，帮助在棋盘上认出各种棋子。鱼关显示 6 个鱼色类别名。 */
-export function LineupPanel({ pets, mode = 'normal' }: { pets: PetInfo[]; mode?: GameMode }) {
+export function LineupPanel({ pets, mode = 'normal', highResolution = true }: { pets: PetInfo[]; mode?: GameMode; highResolution?: boolean }) {
   const { t, locale } = useI18n();
   const headingId = useId();
   const illustrated = mode === 'normal';
@@ -23,7 +23,7 @@ export function LineupPanel({ pets, mode = 'normal' }: { pets: PetInfo[]; mode?:
         {pets.map((pet, kind) => (
           <div key={pet.id} className={styles.card} style={{ '--tint': `var(--pet-tint-${kind})` } as CSSProperties}>
             <div className={styles.avatar}>
-              <PetTile pet={pet} tint={kind} size={illustrated ? 120 : 64} variant={illustrated ? 'portrait' : 'tile'} />
+              <PetTile pet={pet} tint={kind} size={illustrated ? 120 : 64} variant={illustrated ? 'portrait' : 'tile'} highResolution={highResolution} />
             </div>
             <span className={styles.name} title={petDisplayName(pet, locale)}>
               {petDisplayName(pet, locale)}

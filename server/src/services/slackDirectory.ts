@@ -1,7 +1,7 @@
 /**
  * Slack 实时目录：独立同事名册的来源，也用于搜索补缺。
  * users.list 分页读取后在内存缓存，搜索与按 ID 取人都只查缓存；缓存过期后下一次请求才重新拉取。
- * 仅接受 MoeGo 邮箱的真人账号；allowGuests 只控制访客身份，不放宽邮箱与公共账号限制。
+ * 仅接受公司域名邮箱的真人账号；allowGuests 只控制访客身份，不放宽邮箱与公共账号限制。
  */
 export interface SlackMember {
   userId: string;
@@ -18,6 +18,7 @@ export interface FullSlackDirectory extends SlackDirectory {
   all(): Promise<SlackMember[]>;
 }
 
+const COMPANY_EMAIL_SUFFIXES = ['@moego.pet', '@mymoement.com'];
 // 未被 Slack 标为机器人的公共账号，按完整邮箱排除，避免误伤同岗位的真人同事。
 const NON_HUMAN_EMAILS = new Set(['infra@moego.pet', 'devops@moego.pet', 'admin_mslack@moego.pet', 'test.tim@moego.pet']);
 const PAGE_SIZE = 200;
@@ -38,7 +39,7 @@ export function toMember(u: RawUser, allowGuests = false): SlackMember | null {
   if (u.deleted || u.is_bot || (!allowGuests && (u.is_restricted || u.is_ultra_restricted)) || u.id === 'USLACKBOT') return null;
   const email = u.profile?.email?.trim() ?? null;
   const normalizedEmail = email?.toLowerCase();
-  if (!normalizedEmail?.endsWith('@moego.pet') || NON_HUMAN_EMAILS.has(normalizedEmail)) return null;
+  if (!normalizedEmail || !COMPANY_EMAIL_SUFFIXES.some(suffix => normalizedEmail.endsWith(suffix)) || NON_HUMAN_EMAILS.has(normalizedEmail)) return null;
   const name = u.profile?.real_name_normalized || u.profile?.real_name || u.profile?.display_name || u.name;
   return name ? { userId: u.id, name, email } : null;
 }

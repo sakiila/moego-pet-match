@@ -1,0 +1,42 @@
+# 毛孩子动态 · 品牌、导航与快捷互动设计稿
+
+状态：设计评审稿，尚未作为实现或上线指令。
+生成：Codex 内置 image_gen；以下按顺序保留完整生成与定向修订请求。
+初始方案日期锚点：2026-10-26；跨日至 2026-10-27 完成修订，图中示例日期保留。
+
+## 请求 1
+
+Use case: ui-mockup. Create ONE coherent revision board for an existing already selected MoeGo social wall. Same suite as the attached updated browse/detail board; do not invent a new style or visual direction. Target canvas1536 x1856. Two COMPLETE mobile frames side by side, each equivalent390x844, no device mockups/browser chrome, airy white presentation board. Outside heading "发布与管理 · 保留来路与草稿". Labels "03 发布动态" and "04 我的动态". Use readable accurate Chinese.
+
+REFERENCES: updated browse/detail board = mandatory shared header, logo location, type, spacing, visual language; existing publish-v2 board = photo/editor/content reference, not its old missing-logo header; moego-logo.webp = genuine brand mark to preserve exactly.
+
+EXACT SHARED SYSTEM: white #ffffff, orange #f96b1c, charcoal #1f2227, muted #5b6270, light separators #e3e6eb, light-orange #ffe7d6. Round bold typography, 16px mobile sidepadding, 8/12/16/24 rhythm,22px page heading,15px body,12px meta. Small outlined paw/heart/bone/camera icons and orange accents; primary button tiny charcoal offsetshadow. Avoid cards inside cards, excessive framing, gradients, 3D, purple or global bottom nav.
+
+BOTH FRAMES: fixed brand row56px, GENUINE MoeGo dog/check icon and wordmark at UPPER LEFT 16px inset about112x30. Same logo position as attached browse/detail. Right small "中 / EN" and orange round avatar "B".
+Next, contextual navigation row52px below brand row. Center page title, left explicit back/cancel destination, right one clear action. All fit390px comfortably.
+
+LEFT / PUBLISH: context row "< 取消" / "发动态" / orange "发布" pill. No extra publish button at bottom. Authorrow Bob avatar B, name Bob, privacy smallperson/lock outline + "同事可见". Active textarea example "今天的阳光，被小家伙承包了。" with modest cursor and quiet "17 / 2000" count, comfortably open writing surface. Photo picker grid: two square thumbnails side by side (same warm tabby sleeping in sunshine and closeup of its paws as existing reference), each top-right closeX in dark smallround control, then a same-sized dashed lightgray tile cameraicon "添加照片"; all three in one row. "照片 2 / 9" caption. Then simple optional linked-pet ROW (not big promotional card): small pawicon, label "关联毛孩子（选填）", value "暂不关联", right chevron. Lower understated pale-gray hint strip with small bulb: "照片与文字，分享一点日常。" next quiet line "发布后，同事可以点赞和留言。" Plenty of whitespace; no video entry or Slack login/send setting.
+
+RIGHT / MINE: context row "< 返回动态" / "我的动态" / orange compose-outline icon. Small compact profile B Bob, "我发布的照片和日常". Tabs exactly "我发布的" active orange underline / "Slack 同步". Feed reuses exact PostCard anatomy from attached updated board, no new card visual system. First Bob post original example "今天的阳光，被小家伙承包了。", "今天 10:26", ellipsis, same warm tabby photo (realistic and large) with "1/2" smalldark badge top-right; paw4 / heart3 selected light-orange with check / bone2 / separate comment3. Second Bob post "换了新窝，马上就睡着了" and "昨天14:18", image begins lower down. Do not include an unrelated pet portrait next to Bob's name.
+
+FLOW NOTES OUTSIDE frames, concise readable Chinese: "从哪里发布，就回哪里" and "发布成功 → 新帖详情 → 原列表". Small secondary note "取消有改动的草稿时，先确认放弃；失败保留内容". Do not draw a second random modal over the two primary page designs. This is a revision sheet, not competing options. Mock-date anchor2026-10-26 Asia/Shanghai, use relative today/yesterday. Preserve sample content as illustrative only.
+
+## 请求 2
+
+Use case: precise-object-edit / ui-mockup. Update the attached two-frame PUBLISH/MINE design board to match the user's final corrections, preserving all other content. Image1 edit target; image2 is the UPDATED APPROVED-IN-PROGRESS feed/detail suite with correct top row and four action icons+comment; image3 is the user-selected original “宠物小动作” icon sheet; image4 is exact new COMMENT bubble. Canvas1536x1856, each mobileframe390x844 proportions. This is one coherent suite, no alternative styles.
+
+ONLY MAKE THESE CHANGES:
+1. BOTH frames top brandrow: keep GENUINE MoeGo logo at upperleft16px same position/scale. Right utility group becomes “回门店” with subtle orange home/back-to-shop outline icon, tiny separator, “中 / EN”, orange B avatar, exactly as image2. Do not put “回门店” in the second row. Top actions must fit390px comfortably, no overlapping logo. Preserve second-row "< 取消" / "发动态" / orange"发布" on left; "< 返回动态" / "我的动态" / small compose on right.
+2. Correct LEFT editor character counter to "14 / 2000", since "今天的阳光，被小家伙承包了。" is14 characters. Keep actual text, photos2/9, camera tile, optional pet selector, same spacing and hint. The composer has NO post reactionbar.
+3. In RIGHT MINE FRAME, replace EVERY visible old three-reaction-plus-comment strip under each post with exactly FIVE pills like image2:
+blue delightedcat+heart = 被你萌到了
+cream paw pattingbluecat = 想摸摸头
+cream paw pushingorangeball = 想和你玩
+cream paws huggingorangeheart = 给你比个心
+new cream speechbubble orange3dots and creampaw = 评论, FAR RIGHT after quiet divider.
+Each pill~62px wide44px high, icon32px + compact count, five fit in ONE390px row; no long text labels insidepills, no generic emoji, no bones, no standalone old heart/pawprint. Use exact source designs from image3toprow and image4.
+First native Bob catpost counts4 /2 /1 /3 /3comments; select thirdPLAY only paleorange+border+tinycheck. Second visible catpost counts6 /2 /2 /5 /2comments, neutral all. These are demonstration counts.
+4. Outside bottom white margin preserve “从哪里发布，就回哪里”, “发布成功 → 新帖详情 → 原列表”. Update final short note to include both leaving methods: "取消或回门店前确认草稿 · 失败保留内容". Do not add new in-page dialogs.
+
+Keep cats/photos/author/sample dates/text same. Match all outlines, typography, orange/white, shape and new source icon finishes. No other layout change, no newpage, no video or bidirectional Slack. This is design-only.
+

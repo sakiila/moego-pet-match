@@ -70,31 +70,53 @@ export const petImage = (pet: PetInfo, size: 128 | 512 | 1024) => (pet.imageBase
 export const petDisplayName = (pet: PetInfo, locale: 'zh' | 'en') => (locale === 'en' && pet.nameEn ? pet.nameEn : pet.name);
 
 const PRELOAD_TIMEOUT_MS = 10_000;
+const OPTIONAL_IMAGE_RETRY_MS = 30_000;
+const pendingPetImages = new Map<string, { image: HTMLImageElement; promise: Promise<void> }>();
+const optionalImageFailures = new Map<string, number>();
 
 /**
- * 开局前预加载本局棋盘贴纸；任一失败或超时视为素材未就绪（准备页显示可重试）。
- * 默认等待128与512两档都就绪，覆盖放大棋盘；指定size时只加载该档。
- * 用 load/error 事件而非 decode()：页面在后台时 decode 可能一直不返回。
+ * 同一 URL 只合并正在加载的请求；下一轮仍确认浏览器中的图片可用。
+ * 用 load/error 而非 decode()：页面在后台时 decode 可能一直不返回。
  */
-export async function preloadPets(pets: PetInfo[], size?: 128 | 512): Promise<void> {
-  const sizes: readonly (128 | 512)[] = size === undefined ? [128, 512] : [size];
-  const loads = pets.flatMap((p) => sizes.map((imageSize) => {
-    const src = petImage(p, imageSize);
-    if (!src) return Promise.resolve();
-    return new Promise<void>((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve();
-      img.onerror = () => reject(new Error(`failed to load ${src}`));
-      img.src = src;
-    });
-  }));
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  const timeout = new Promise<never>((_, reject) => {
-    timer = setTimeout(() => reject(new Error('preload timeout')), PRELOAD_TIMEOUT_MS);
-  });
-  try {
-    await Promise.race([Promise.all(loads), timeout]);
-  } finally {
-    clearTimeout(timer);
+export function loadPetImage(src: string, priority: 'high' | 'low' = 'low'): Promise<void> {
+  if (typeof Image === 'undefined') return Promise.resolve();
+  if (priority === 'high') optionalImageFailures.delete(src);
+  else if ((optionalImageFailures.get(src) ?? 0) > Date.now()) return Promise.reject(new Error('image upgrade is cooling down'));
+  const pending = pendingPetImages.get(src);
+  if (pending) {
+    if (priority === 'high') pending.image.fetchPriority = 'high';
+    return pending.promise;
   }
+  const image = new Image();
+  image.fetchPriority = priority;
+  const promise = new Promise<void>((resolve, reject) => {
+    const finish = (error?: Error) => {
+      clearTimeout(timer);
+      image.onload = image.onerror = null;
+      if (error) reject(error);
+      else resolve();
+    };
+    const timer = setTimeout(() => finish(new Error('preload timeout')), PRELOAD_TIMEOUT_MS);
+    image.onload = () => finish();
+    image.onerror = () => finish(new Error(`failed to load ${src}`));
+    image.src = src;
+  });
+  pendingPetImages.set(src, { image, promise });
+  void promise.then(() => {
+    pendingPetImages.delete(src);
+    optionalImageFailures.delete(src);
+  }, () => {
+    pendingPetImages.delete(src);
+    // 补落会不断挂载新棋子，高清失败时短暂退避，避免每个棋子都重新请求。
+    if (image.fetchPriority !== 'high') optionalImageFailures.set(src, Date.now() + OPTIONAL_IMAGE_RETRY_MS);
+  });
+  return promise;
+}
+
+/** 开局只等待可直接显示的 128 贴纸；高清版由 PetTile 后台升级，失败不阻塞开局。 */
+export async function preloadPets(pets: PetInfo[], size: 128 | 512 = 128): Promise<void> {
+  await Promise.all(pets.map(pet => {
+    const src = petImage(pet, size);
+    return src ? loadPetImage(src, 'high') : Promise.resolve();
+  }));
 }

@@ -1,0 +1,5 @@
+Edit the first attached two-screen notifications/photo-viewer sheet ONLY. Preserve exact layout, typography, the ENTIRE right-hand cat photo viewer, and all photos of the native Bob cat post.
+In the LEFT notification list, every right-side thumbnail must show Bob's synthetic sample CAT photos from the right-hand viewer, never Erika's real dog Slack photo. Replace both dog thumbnails with cat or cat-paw thumbnails consistent with the right-hand viewer. Keep native source ownership coherent: a notification for your post must point to YOUR cat post.
+Change the notification actor "Bob 给你的动态送了点赞" to "Jamie 给你的动态送了点赞" with letter J avatar, so it doesn't imply a self-reaction notification while logged in as Bob.
+Keep "Mia 喜欢了你的动态" but change its dog thumbnail to cat. Keep Erika's mock comment text but its thumbnail must also be cat. All counts and quotes are design mock data, not real notifications.
+Replace glossy emoji heart icon with bespoke charcoal-outlined warm orange heart and replace comment bubbles with custom bubble icon from final attached icon sheet. Other orange/white styling stays. No new feature, no Slack writeback. Date anchor2026-10-26.

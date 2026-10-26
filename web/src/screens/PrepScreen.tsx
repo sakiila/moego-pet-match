@@ -35,7 +35,7 @@ export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames
       <BrandHeader title="scheduling" schedulingArt onBack={onBack} />
       {pets && (
         <>
-          <LineupPanel pets={pets} mode={mode} />
+          <LineupPanel pets={pets} mode={mode} highResolution={!loading && !failed} />
           {!fish && <OwnPetBanner names={ownPetNames} />}
         </>
       )}

@@ -1,0 +1,42 @@
+{
+  "fictional_demo_content": true,
+  "date": "2026-10-26",
+  "generations": {
+    "cat": {
+      "source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-c92d1a6f-0547-4823-a479-9ab511b6a296.png",
+      "prompt": "design/concepts/pet-social-demo-cat-v1-prompt.txt",
+      "original": "originals/demo-cat-v1.png",
+      "export": "web/src/dev/social/assets/demo-cat-v1.webp",
+      "generator": "Codex built-in ImageGen",
+      "export_settings": {
+        "width": 1200,
+        "quality": 84,
+        "format": "webp"
+      }
+    },
+    "dog": {
+      "source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-fa0a9e15-d0e4-43db-88aa-3c5476f364c3.png",
+      "prompt": "design/concepts/pet-social-demo-dog-v1-prompt.txt",
+      "original": "originals/demo-dog-v1.png",
+      "export": "web/src/dev/social/assets/demo-dog-v1.webp",
+      "generator": "Codex built-in ImageGen",
+      "export_settings": {
+        "width": 1200,
+        "quality": 84,
+        "format": "webp"
+      }
+    },
+    "paws": {
+      "source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-df765cad-d353-4d48-bc22-3dc7fb9fa615.png",
+      "prompt": "design/concepts/pet-social-demo-paws-v1-prompt.txt",
+      "original": "originals/demo-paws-v1.png",
+      "export": "web/src/dev/social/assets/demo-paws-v1.webp",
+      "generator": "Codex built-in ImageGen",
+      "export_settings": {
+        "width": 1200,
+        "quality": 84,
+        "format": "webp"
+      }
+    }
+  }
+}

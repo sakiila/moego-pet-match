@@ -1,0 +1,47 @@
+# 毛孩子动态 · 品牌、导航与快捷互动设计稿
+
+状态：设计评审稿，尚未作为实现或上线指令。
+生成：Codex 内置 image_gen；以下按顺序保留完整生成与定向修订请求。
+初始方案日期锚点：2026-10-26；跨日至 2026-10-27 完成修订，图中示例日期保留。
+
+## 请求 1
+
+Use case: ui-mockup. Generate ONE polished continuation board in the already chosen MoeGo social-wall design. NOT competing style alternatives. Canvas1536x1856, white board, two COMPLETE390x844-proportion mobile frames side by side, clean readable Chinese, no phone hardware/no browser chrome. Outside title "消息与大图 · 原路返回". Frame labels "05 互动消息" and "06 照片大图".
+
+REFERENCE1 updated browse/detail board = exact common header placement, brand, outlines, visual language. Reference2 updated publish/mine board = same Bob cat photos and UI to continue. Reference3 existing activity-v2 board = notification rows and viewer content, but must correct its missing-brand header. Reference4 genuine MoeGo logo = preserve dog/check and black/orange wordmark exactly.
+
+SYSTEM: white #ffffff, orange #f96b1c, charcoal #1f2227, muted #5b6270, line #e3e6eb, softorange #ffe7d6; rounded bold headings22px, body15px, metadata12px;16px mobile sidepadding, restrained outlined icons, no extra global bottom navigation. Current mock date anchor2026-10-26 Asia/Shanghai to keep the same suite; visible TODAY reflects that sample date. Names/photos/counts illustrative.
+
+LEFT / INBOX: SAME top brand row56px as both approved updated boards: GENUINE MoeGo logo at16px inset UPPER LEFT, about112x30, right "中 / EN" and orange B avatar. Second context row52px: "< 返回动态" / centered "互动消息" / subtle right action "全部已读". Divider. Groupheading "今天". Three unread rows on subtle peach tint separated by whitespace, not big outlinedcards: circular A avatar Alex, small bone glyph next to name/action, text "Alex 给你的动态送了小骨头", time10:32, square thumbnail of SAME sunny tabby Bob cat from mine/publish. Row2 S Sam, comment glyph, "Sam 留言了", preview "这个睡姿也太舒服了。", time10:28, paws thumbnail. Row3 M Mia, heart glyph, "Mia 喜欢了你的动态", time09:41, same tabby thumbnail. Then "昨天", two read rows whiteground separated by thin lines: J Jamie / "Jamie 给你的动态点了赞" / paw glyph / "10月25日 20:14" / paws thumbnail; E Erika / "Erika 留言了" / "太可爱了！" / "10月25日18:07" / sunny cat thumbnail. Correct authors, previews and same target post thumbnails. Tiny footer "只提醒与你有关的新互动". No source-Slack reaction import settings or sensitive admin counts.
+
+RIGHT / PHOTO VIEWER: one focused dark charcoal #111215 fullviewport photo viewer with brand retained. Header at SAME upper-left inset16px: genuine original black/orange MoeGo logo placed inside a compact WHITE rounded plate about116x34 for readable contrast, original logo proportions preserved. In SAME top bar: center count "1 / 2"; right small save/download glyph and a separate close X, both white with44px comfortable controls. No app profile/language here since this is a media overlay, no second global nav row. Large EXACT SAME SUNNY TABBY photo from mine/publish, uncropped wholephoto fit to width centered in darkstage with calm top/bottom space; avoid overzoom. Below photo tiny "Bob · 10月26日". Bottom thumbnailstrip 2photos (same sunnytabby and same paws), first thumbnail selected with orange outline and small check; dark surrounding surface. Place subtle text "上一张" and "下一张" if room, not dominant. Close X must be visible separate from download. No reaction or comment UI on image, no video/play controls, no background rawSlack screenshot.
+
+Outside frames at bottom two concise route lines with orange arrows:
+"互动消息 → 动态详情 → 照片大图"
+"关闭大图回原帖 · 返回详情回消息列表"
+Secondary note "回退保留未读定位与浏览位置". This is the actual proposed flow, ensure no false claim it was implemented. Do not add competing mockups/variants or new login pages.
+
+## 请求 2
+
+Use case: precise-object-edit / ui-mockup. Revise the EXISTING attached two-frame INBOX/PHOTO VIEWER board to finish the same MoeGo social-wall suite. Image1 edit target; image2 final browse/detail is exact shared header and quick-icon visual system; image3 user-selected original “宠物小动作” sheet; image4 new comment icon master. Keep board title, frame proportions, cats/photos, content hierarchy and white/orange/charcoal design. Canvas1536x1856.
+
+ONLY THESE SCOPED CHANGES:
+LEFT INBOX:
+- Shared brand row: authentic MoeGo logo anchored UPPER LEFT same position/scale. Right group: subtle orange shop/home icon+"回门店", tiny divider, "中 / EN", orange B avatar, matches image2. Contextrow remains "< 返回动态" / "互动消息" / "全部已读". No logo relocation.
+- Update notifications to the new four action semantics, removing all OLD bones and generic like/paw/heartglyphs. Use exact illustrated source icon designs,32px beside the text/name, consistent with feed:
+Today row1 Alex, icon cream paw pushing orange ball, text "Alex 想和你玩", time10:32, same sunnytabbythumbnail.
+Today row2 Sam, icon NEW cream speechbubble orange3dots with cream paw, text "Sam 留言了", same quote "这个睡姿也太舒服了。",time10:28,pawphotothumbnail.
+Today row3 Mia, icon exact orange heart hugged by cream paws, text "Mia 给你比个心", time09:41,sunnytabbythumbnail.
+Yesterday row1 Jamie, exact delighted BLUEcat+tinyheart, text "Jamie 被你萌到了",time"10月25日20:14",pawsphotothumbnail.
+Yesterday row2 Erika, exact cream paw pattingbluecat, text "Erika 想摸摸头",time"10月25日18:07",sunnycatthumbnail.
+Keep names as text separate from illustrated reaction symbols and SAME letter avatars A/S/M/J/E. Today palepeach unread tint, yesterdaywhite separatorrows. No bone left, no generic system glyphs for these5 interactions.
+- Tiny footer continues "只提醒与你有关的新互动".
+
+RIGHT FULLSCREEN VIEWER:
+- Logo remains UPPER LEFT on compact white rounded backing. It never disappears.
+- Add global “回门店” in the TOP brandbar on the RIGHT, BEFORE download/save and Xclose. Use small white text plus smallorange shop outlineicon,44px touchheight. Toprow anatomy fits390: logo112, returnshop64, download40, close40, small gaps and16px insets. If needed move ONLY photo count "1 / 2" to its own centered second slim row directly under brandbar to prevent crowding. Do not remove closeX or download, and do not place “回门店” over the photo.
+- Preserve same sunnytabby fullphotofit, Bob date10月26日, both thumbnails, selectedthumb orangeborder/check, previous/next controls, no socialreactionstrip in viewer.
+- Xclose returns to exact originating feed/detail scroll position; top “回门店” exits to gamehome. Do not render this as two identical backbuttons.
+
+Outside notes preserve flow "互动消息 → 动态详情 → 照片大图", "关闭大图回原帖 · 返回详情回消息列表", and returnposition note. Mockdate anchor2026-10-26 to match existing sampledata. No newscreens, no implementation claim.
+

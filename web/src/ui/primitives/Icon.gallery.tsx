@@ -2,9 +2,10 @@ import type { ReactNode } from 'react';
 import type { GalleryEntry } from '../../dev/gallery/types';
 import { FishFrame } from '../../dev/gallery/FishFrame';
 import { ICON_CATALOG } from '../icons/catalog';
+import { SOCIAL_GLYPHS } from '../icons/SocialGlyph';
 import { Icon, type IconName } from './Icon';
 
-const NAMES = [...Object.keys(ICON_CATALOG), 'my-titles', 'clock-out'] as IconName[];
+const NAMES = [...Object.keys(ICON_CATALOG), 'my-titles', 'clock-out', ...SOCIAL_GLYPHS] as IconName[];
 const SIZES = [24, 32, 48];
 
 function Grid({ names = NAMES }: { names?: IconName[] }) {

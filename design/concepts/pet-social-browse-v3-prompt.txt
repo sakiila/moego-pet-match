@@ -1,0 +1,62 @@
+# 毛孩子动态 · 品牌、导航与快捷互动设计稿
+
+状态：设计评审稿，尚未作为实现或上线指令。
+生成：Codex 内置 image_gen；以下按顺序保留完整生成与定向修订请求。
+初始方案日期锚点：2026-10-26；跨日至 2026-10-27 完成修订，图中示例日期保留。
+
+## 请求 1
+
+Use case: ui-mockup. Create ONE coherent revision board for an EXISTING, already selected MoeGo pet social wall design. This is not a new style exploration. Target canvas 1536 x 1856, white presentation board with TWO complete mobile UI frames side by side; EACH frame must keep exactly 390:844 mobile viewport proportions, with comfortable whitespace, generous margins, no hardware/device mockup or browser chrome. Heading outside UI: "浏览与留言 · 品牌与返回修订". Small frame labels outside: "01 动态列表" and "02 动态详情". Clearly readable production-quality Chinese UI.
+
+REFERENCES: Image 1 pet-social-browse-v2.png = existing selected feed/detail design and puppy/photo content to retain; image 2 mobile-home-v2.png = brand visual language, not a new page to reproduce; image 3 moego-logo.webp = GENUINE exact MoeGo dog/check icon and black/orange wordmark, preserve it faithfully, never replace with generic lettering; image 4 detail-390.jpg = current implemented detail layout to improve. Use references as grounding, no screenshot collaging.
+
+DESIGN SYSTEM: crisp white #ffffff, orange #f96b1c, charcoal #1f2227, gray #5b6270, light line #e3e6eb, soft orange #ffe7d6. Rounded bold Chinese headings, clean rounded body. 16px mobile side padding, 8/12/16/24 spacing, 22px page heading, 15px body, 12px metadata. Restrained 2px charcoal outlines and tiny offset shadow ONLY primary buttons; fine separators for posts. Friendly flat paw/heart/bone icons with charcoal outlines and orange accents. No gray background card wrapping the entire app, no glass/3D/purple, no floating bottom global nav, no dashboard widgets.
+
+MANDATORY SHARED HEADER ON BOTH PAGES:
+Top brand row 56px high: the genuine MoeGo logo anchored UPPER LEFT at 16px inset, about 112x30, same location/size on BOTH frames. Right side small "中 / EN" and circular orange avatar "B"; feed also a small bell with unread orange dot, retaining comfortable tap areas.
+SECOND context navigation row below brand row, about52px high: left an explicit chevron and destination label, centered page title, right one contextual operation. NEVER substitute a back arrow for the top-left logo. All typography and controls must fit the390px width with no clipping.
+Root feed second row: "< 回门店", centered "毛孩子动态", right orange pill "+ 发布". Detail second row: "< 返回动态", centered "动态详情", right ellipsis.
+A subtle line separates the header from content.
+
+FEED: quiet subtitle "照片里见，棋盘上见。" and two tabs "全部" active orange underline / "我的". One excellent large photo-focused post first. Author "Erika Intfen", orange E avatar, metadata "10月22日 · 来自 Slack", ellipsis. Text "Not parvo safe for a while, so stroller walks it is for now" followed by small heart. Use same brown puppy in green stroller, realistic photo, generous rounded image, NO artificial image decorations. Small provenance line "#the-pet-corner · 查看原帖 ↗". Reaction row three outlined pills paw4 / heart2 / bone1 plus separate outlined comment icon "2". Second post author Bob with one-line "今天也在认真晒太阳。" and a glimpse of warm cat photo near bottom shows list continuity. Do not add sample counters/metrics elsewhere.
+
+DETAIL: same exact shared header including top-left LOGO. Same Erika post and same original date/body/puppy. Photo slightly bigger, below provenance "查看 Slack 原帖 ↗". Reaction row paw4 / heart2 selected orange-soft fill + small checked badge / bone1. Divider. "留言 2", two single-level text comments: Alex "这位乘客也太可爱了！" / Bob "出门兜风也要坐专车。" with subtle times and "回复". Bottom sticky composer at safe area: tiny hint "留言仅在动态墙内可见", gray rounded input "留一句给毛孩子…" and orange send button; text-only comments, no attachment UI.
+
+Keep the same puppy, author and interaction counts across both pages. Current mock date anchor 2026-10-26 Asia/Shanghai; original Slack post date10月22日 must stay original.
+Outside frames at bottom, simple small orange arrows and concise labels: "动态列表 → 动态详情 → 照片大图"; next line "返回保留原页面与浏览位置". This board is a single proposed revision of two screens in one coherent suite, not competing options.
+
+## 请求 2
+
+Use case: precise-object-edit / ui-mockup. Make a STRICTLY LOCAL HEADER REVISION to the attached existing two-screen MoeGo browse/detail design board. User correction: “回门店 可以参考现有设计直接置顶” — place the Return to Shop action directly in the TOP BRAND ROW, like the existing game header. Image1 is edit target. Image2 is exact official MoeGo logo. Do not redesign content, photos, typography system, reactions, comments, lower notes, board framing, or add screens. Preserve canvas and both complete mobile frames.
+
+ON BOTH MOBILE FRAMES:
+Keep official MoeGo dog/check icon and wordmark anchored at UPPER LEFT same position, same proportions, about112x30 in390px viewport.
+Top brand row RIGHT utility group must now read "回门店" then "中 / EN" then orange circular B avatar. Use a small existing orange/charcoal back-to-shop outline arrow or house icon beside "回门店", subtle13px text, ordinary textbutton, not a giant orange primarybutton. 44px touch-height. This all fits390px: left logo112, right72+52+32 and small gaps,16px outer insets. Never move logo to center and never put “回门店” on a separate row.
+This is a global direct-to-shop action, visually distinct from second-row contextual back.
+
+LEFT FEED FRAME: REMOVE old "< 回门店" from the SECOND row, since it now lives on the top row. Re-align "毛孩子动态" as the LEFT-ALIGNED heading of secondrow; keep small unread bell and orange "+ 发布" button on the right. No duplicate Return to Shop text anywhere on this frame. Subtitle, tabs, authors, puppy/cat photos, original date, all existing reactions and comments unchanged.
+
+RIGHT DETAIL FRAME: retain SECOND contextualrow exactly "< 返回动态" / centered "动态详情" / ellipsis. This is previous-page back, separate from new global top-row “回门店”. Body unchanged.
+
+Keep all six new-page shared brandheader utility positions consistent. All Chinese text must be sharp and correct, no clipping or overlapping. This is the final proposed header revision only; no implementation or live-state claim.
+
+## 请求 3
+
+Use case: precise-object-edit / ui-mockup. Edit the attached EXISTING final browse/detail board with ONE scoped update: replace the quick-action strips with FOUR user-selected existing pet action icons and the NEW matching comment icon at the FAR RIGHT. This is not a style exploration. Image1 = edit target. Image2 = the USER-SELECTED original “宠物小动作” icon sheet, its top row contains all FOUR exact existing designs, MUST copy their identities/shapes/colors into the mockup without substituting generic emoji. Image3 = NEW proposed comment bubble master to place identically at the right.
+
+Keep all page layouts, official MoeGo logos anchored top-left, TOP-ROW “回门店” link, language/profile controls, lower contextual back, authors, puppy/cat photos, text, original dates, commentlist, sticky input, presentation title and notes unchanged.
+
+REPLACE ALL visible reaction bars in BOTH mobile frames with exactly FIVE compact pills in ONE row below each photo/provenance group:
+1 blue delighted cat and little heart = “被你萌到了”, count4
+2 cream paw patting SAME bluecat = “想摸摸头”, count2
+3 cream paw pushing orange playball = “想和你玩”, count1
+4 cream paws hugging orange heart = “给你比个心”, count3
+5 new cream speechbubble with three orange dots and a small cream paw hugging lower-right = COMMENT, count2, ALWAYS FAR RIGHT, after a quiet narrow divider.
+Use exact attached source-sheet top-row four icons and the separate comment master art, including bluecat expressions, paw, ball seams, heart, bubbletail. No generic pawprint/heart/bone replacement; remove old bone entirely.
+390px responsive anatomy: available width358px, five pills each~62px with~6px gaps,44px height,32px optically balanced original icon plus12-14px count, subtle lightgray border. Do NOT squeeze full long labels into the screen strip; icon+count only, labels belong to the small external legend. In detail ONLY, the PLAYBALL third item is selected with pale-orange fill, orange border and tiny orange checked badge; other items neutral. In feed all neutral. Counts and type order identical across both screens. Comment is navigation, no selected reaction badge.
+
+Add a small neatly aligned FIVE-item legend OUTSIDE the phone frames, below both frames and ABOVE existing bottom route note. Show the SAME5 icons at smallsize, exact labels in this order:
+“被你萌到了” / “想摸摸头” / “想和你玩” / “给你比个心” / “评论”
+Adjust ONLY the outside bottom white margin if room is needed; preserve mobile frames intact. Existing route note “动态列表 → 动态详情 → 照片大图” and return-position note remain.
+Keep canvas1536x1856, Chinese sharp, no clipping/overlap. This remains a design proposal, not implemented UI.
+

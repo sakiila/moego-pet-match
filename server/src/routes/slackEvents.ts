@@ -4,6 +4,7 @@ import type { FastifyPluginAsync } from 'fastify';
 import type { AppDeps } from '../app.ts';
 import { previewMetadata } from '../services/linkPreview.ts';
 import { postUnfurl, verifySlackSignature, type LinkSharedEvent, type PreviewText } from '../services/slackUnfurl.ts';
+import { acceptSyncEvent } from '../social/events.ts';
 
 const FALLBACK_TEXT: PreviewText = {
   title: 'MoeGo 毛孩子全明星 · Pet All-Stars',
@@ -15,7 +16,7 @@ const FALLBACK_TEXT: PreviewText = {
  * Slack 事件入口（App 的 Event Subscriptions Request URL）：校验签名，应答 URL 验证，
  * link_shared 先回 200 再在后台 chat.unfurl，避免 Slack 3 秒超时重试。
  */
-export const slackEventRoutes: FastifyPluginAsync<AppDeps> = async (app, { slack, staticDir, gameVersion }) => {
+export const slackEventRoutes: FastifyPluginAsync<AppDeps> = async (app, { slack, staticDir, gameVersion, pool, social }) => {
   if (!slack) return;
   // 签名按原始请求体计算：本插件内 JSON 不预先解析
   app.addContentTypeParser('application/json', { parseAs: 'string' }, (_req, body, done) => done(null, body));
@@ -45,6 +46,8 @@ export const slackEventRoutes: FastifyPluginAsync<AppDeps> = async (app, { slack
       return reply.status(400).send({ error: 'invalid_request' });
     }
     if (payload.type === 'url_verification') return { challenge: payload.challenge };
+    // 先持久保存队列再应答。重试同样受理，由 event_id 唯一约束去重。
+    if (social?.sync) await acceptSyncEvent(pool, payload, social.sync);
     // 重试说明第一次已收到；预览只需做一次
     if (payload.type === 'event_callback' && payload.event?.type === 'link_shared' && !header('x-slack-retry-num')) {
       const event = payload.event as LinkSharedEvent;

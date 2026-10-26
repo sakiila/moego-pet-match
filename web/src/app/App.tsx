@@ -1,5 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { ApiError, api } from '../api/client';
+import { socialApi } from '../api/social';
 import type { AchievementId, DailyManager, GameMode, PlayerView, RegisteredGame } from '../api/types';
 import { AchievementOverlay } from '../screens/AchievementOverlay';
 import { ScreenTransition } from '../components/ScreenTransition/ScreenTransition';
@@ -34,6 +35,7 @@ type Route =
   | { name: 'bootFailed' }
   | { name: 'identity'; query?: string }
   | { name: 'home' }
+  | { name: 'social' }
   | { name: 'leaderboard'; mode: GameMode }
   | { name: 'petdex' }
   | { name: 'upload' }
@@ -60,6 +62,7 @@ const devInvite = params.get('invite') === '1';
 const demoSeed = import.meta.env.DEV && params.has('demo') ? Number(params.get('demo')) : null;
 const demoPlay = Number(params.get('play')) || 0;
 const ReportShowcase = import.meta.env.DEV ? lazy(() => import('../dev/ReportShowcase').then((m) => ({ default: m.ReportShowcase }))) : null;
+const LiveSocial = lazy(() => import('../screens/SocialLiveScreen').then(m => ({ default:m.SocialLiveScreen })));
 
 export function App() {
   const { t } = useI18n();
@@ -70,6 +73,7 @@ export function App() {
   // 服务端已经换了版本（或规则版本不一致）：首页提示刷新；只提示，不打断对局与报告
   const [updateAvailable, setUpdateAvailable] = useState(false);
   const [showTitles, setShowTitles] = useState(false);
+  const [socialEnabled, setSocialEnabled] = useState(false);
   const [clockOutFailed, setClockOutFailed] = useState(false);
   const clockOutPending = useRef(false);
   const closeTitles = useCallback(() => setShowTitles(false), []);
@@ -107,7 +111,7 @@ export function App() {
       const restored = await api.getPlayer(saved);
       setPlayer(restored);
       if (import.meta.env.DEV && devReport) return void (await devJumpToReport(restored));
-      setRoute({ name: 'home' });
+      setRoute(location.pathname === '/moments' ? { name:'social' } : { name: 'home' });
     } catch (error) {
       if (error instanceof ApiError && (error.kind === 'not_found' || error.kind === 'unauthorized')) {
         savePlayerId(null);
@@ -134,6 +138,12 @@ export function App() {
     // 只在首次进入时校验记住的身份
     if (route.name === 'boot') void restore();
   }, []);
+  useEffect(() => {
+    if(route.name!=='home')return;
+    let cancelled=false;
+    void socialApi.config().then(config=>{if(!cancelled)setSocialEnabled(config.enabled);}).catch(()=>{});
+    return()=>{cancelled=true;};
+  },[route.name]);
 
   // 开局准备：先向服务端登记本局（种子与阵容），成功后才可开始计时
   const toPrep = useCallback(
@@ -268,6 +278,7 @@ export function App() {
             onCollection={toPetdex}
             onLeaderboard={() => setRoute({ name: 'leaderboard', mode: 'normal' })}
             onMyPets={() => setRoute({ name: 'myPets' })}
+            onSocial={socialEnabled ? () => location.assign('/moments') : import.meta.env.DEV ? () => location.assign('/dev/social') : undefined}
             onTitles={() => setShowTitles(true)}
             onInfo={(removal) => setRoute({ name: 'info', player: { userId: player.userId, name: player.name }, removal, back: 'home' })}
             onClockOut={async () => {
@@ -289,6 +300,8 @@ export function App() {
             clockOutError={clockOutFailed ? t('auth.logout_failed') : undefined}
           />
         ) : null;
+      case 'social':
+        return player ? <Suspense fallback={<main className={screen.screen}/>}><LiveSocial onHome={()=>location.assign('/')}/></Suspense> : null;
       case 'leaderboard':
         return player ? <LeaderboardScreen key={route.mode} player={player} initialMode={route.mode} onBack={toHome} onChallenge={(mode) => void toPrep(mode)} /> : null;
       case 'petdex':

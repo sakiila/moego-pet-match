@@ -39,6 +39,8 @@
 
 ## 选定展示文件
 
+2026-10-26 用户确认「毛孩子动态」设计并要求继续。当前选定六组图稿：[浏览与详情](concepts/pet-social-browse-v2.png)、[发布与我的动态](concepts/pet-social-publish-v2.png)、[消息与大图](concepts/pet-social-activity-v2.png)、[门店入口与身份建议](concepts/pet-social-entry-v2.png)、[边界状态](concepts/pet-social-states-v2.png)、[新增图标](concepts/pet-social-icons-v1.png)。现已完成独立演示及真实接口本地联调。演示模式仍只存在本机浏览器；真实模式写隔离的本地库，并只读同步指定 Slack 频道，不写回、不部署。真实模式复用游戏 PIN 登录，原独立 Slack 验证页为建议稿。新界面与图标按组件和 SVG 实现，不从整页图稿切取。计划和边界见 [实施阶段](reviews/2026-10-26-pet-social-wall/IMPLEMENTATION.md)。
+
 2026-10-25 英文喝彩补充：用户确认四条自录 Nice / Great / Amazing / Wow 及橙白贴纸式弹跳字效，已本地接入。喝彩在棋盘上缘附近出现约 800ms，每次操作完成后只显示最高档；沿用现有圆体、橙色与白描边，小星光由 CSS 绘制，布局与棋盘位置保持稳定。减少动态效果时只淡入淡出。触发规则见 V1_RULES「英文喝彩」，素材与处理记录见 [自录音效](../assets/audio/cheers-bob-v1/README.md)，接入与验收见 [实施记录](reviews/2026-10-25-game-cheers/PLAN.md)。本轮未新增或替换选定页面图稿。
 
 2026-10-25 实装反馈补充：用户要求放大棋盘。棋盘获得优先空间，中矮窗口先收紧页头与提示区，较宽窗口使用左右排布，手机边距与棋盘内边距适度缩小；当前438×780窗口外框306→425px。图案、贴纸及原始比例保持不变，见[尺寸验收](reviews/2026-10-25-board-frontdesk/BOARD_SIZE.md)，本条优先于旧截图中的空间比例。

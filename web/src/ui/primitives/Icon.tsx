@@ -1,9 +1,10 @@
 import type { CSSProperties } from 'react';
 import { ICON_CATALOG, type IconName as PngIconName } from '../icons/catalog';
 import { MenuGlyph, type MenuGlyphName } from '../icons/MenuGlyph';
+import { isSocialGlyph, SocialGlyph, type SocialGlyphName } from '../icons/SocialGlyph';
 import styles from './Icon.module.css';
 
-export type IconName = PngIconName | MenuGlyphName;
+export type IconName = PngIconName | MenuGlyphName | SocialGlyphName;
 
 const URLS = import.meta.glob<string>('../icons/png/*.png', { eager: true, query: '?url', import: 'default' });
 
@@ -38,6 +39,8 @@ export interface IconProps {
  * 按显示尺寸用 srcset 选 1x / 2x / 3x。
  */
 export function Icon({ name, size = 24, label, className, effect }: IconProps) {
+  if (isSocialGlyph(name)) return <svg className={`${styles.icon} ${className ?? ''}`} width={size} height={size} viewBox="0 0 34 34"
+    role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : true} focusable="false"><SocialGlyph name={name}/></svg>;
   if (name === 'my-titles' || name === 'clock-out') {
     return <svg className={`${styles.icon} ${className ?? ''}`} width={size} height={size} viewBox="0 0 32 32"
       role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : true} focusable="false">

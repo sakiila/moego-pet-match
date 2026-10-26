@@ -445,6 +445,25 @@
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
+  /* 毛孩子动态：移动端布局与照片视图。 */
+  --social-width: 480px;
+  --social-heading: 38px;
+  --social-create-width: 112px;
+  --social-link-color: #1664ad;
+  --social-hero-icon: 124px;
+  --social-thumb: 56px;
+  --social-avatar: 36px;
+  --social-photo-ratio: 2.25 / 1;
+  --social-detail-ratio: 1.72 / 1;
+  --social-composer-height: 144px;
+  --social-editor-bottom: 100px;
+  --social-photo-height: 62dvh;
+  --social-overlay-bg: rgb(31 34 39 / 0.5);
+  --social-viewer-bg: #101113;
+  --social-viewer-icon-filter: brightness(0) invert(1);
+  --social-viewer-meta-bg: rgb(255 255 255 / 0.12);
+  --social-notice-bg: #fff6ed;
+  --social-selected-bg: #fff2e8;
 
   /* 普通局准备页的阵容、夹板与操作示意尺寸 */
   --prep-portrait-size: 104px;

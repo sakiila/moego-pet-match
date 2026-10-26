@@ -15,11 +15,15 @@ import { submissionRoutes } from './routes/submissions.ts';
 import { slackEventRoutes } from './routes/slackEvents.ts';
 import { webRoutes } from './routes/web.ts';
 import { authRoutes } from './routes/auth.ts';
+import { socialRoutes } from './routes/social.ts';
+import type { SocialOptions } from './social/types.ts';
+import { socialWorker } from './social/worker.ts';
 import type { AdminNotifier } from './services/adminNotify.ts';
 import type { SlackDirectory } from './services/slackDirectory.ts';
 import type { SubmissionHooks } from './services/submissions.ts';
 
 export interface AppDeps {
+  social?: SocialOptions;
   pool: Pool;
   /** 测试用：结算事务中途注入失败。 */
   settleHooks?: SettleHooks;
@@ -56,6 +60,8 @@ export function buildApp(deps: AppDeps) {
   });
 
   app.register(authRoutes, deps);
+  app.register(socialRoutes, deps);
+  app.register(socialWorker, deps);
   app.register(rosterRoutes, deps);
   app.register(playerRoutes, deps);
   app.register(gameRoutes, deps);

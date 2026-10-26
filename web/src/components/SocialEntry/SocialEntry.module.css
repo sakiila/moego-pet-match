@@ -1,0 +1,27 @@
+.entry {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--social-thumb);
+  padding: var(--space-3);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--social-notice-bg);
+  color: var(--fg);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.text {
+  flex: 1;
+  min-width: 0;
+}
+.text strong {
+  display: block;
+  font-size: var(--text-lg);
+}
+.text small {
+  color: var(--fg-muted);
+  font-size: var(--text-xs);
+}

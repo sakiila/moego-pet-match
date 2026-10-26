@@ -21,6 +21,8 @@ const entry: GalleryEntry = {
   group: 'components',
   states: {
     'roster portrait': () => <div style={{ width: 96, height: 96 }}><PetTile pet={REAL[0]} tint={0} size={120} variant="portrait" /></div>,
+    'portrait · small image, upgrade deferred': () => <div style={{ width: 96, height: 96 }}><PetTile pet={REAL[0]} tint={0} size={120} variant="portrait" highResolution={false} /></div>,
+    'large tile · small image, upgrade deferred': () => <div style={{ width: 96, height: 96 }}><PetTile pet={REAL[0]} tint={0} size={96} highResolution={false} /></div>,
     'placeholder (48)': () => row(PLACEHOLDER_PETS, 48),
     'real stickers (48)': () => row(REAL, 48),
     'real stickers (96)': () => row(REAL, 96),

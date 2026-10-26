@@ -1,0 +1,10 @@
+# 用户指定评论图标 · 页面修订
+
+2026-10-27。仅修订设计稿，使用 Codex 内置 image_gen；用户附件直接作为图片参考。
+附件：/var/folders/63/893bc91d0r9_hy8qy73f7xsw0000gn/T/codex-clipboard-bd60537f-b988-4a0e-9216-acd45c87f1da.png
+
+## 完整请求 1
+
+Use case: precise-object-edit. Image1 is EDIT TARGET, existing MoeGo PUBLISH/MY POSTS design board1142x1377. Image2 is the USER-SELECTED actual COMMENT ICON master. Replace ONLY the comment glyph in the far-right post action slot of EACH of the two visible posts on the RIGHT screen with a proportional miniature of image2. The source bubble is a soft OVAL tilted at an angle, NOT a rectangular chatbox: preserve its smoothly curved oval cream body, short pointy lower-left tail, THREE ORANGE DOTS, charcoal thick contour, small cream paw hugging lower-right, orange pair of joy ticks above right, highlights. Do not redraw it as a flat rounded-square system icon, and don't omit the orange ticks. Entire art fits each existing32px icon region; count3 top and count2 bottom remain separate to the right. Original image2 background is transparent; do not introduce black background.
+No other edits. Keep the entire LEFT composer untouched including top-left official MoeGo, top 回门店, cancel/publish, Bob, input text,14/2000, 2/9 photos, selector, hint. Keep RIGHT top logo and utilities, 返回动态, title, tabs, all Bob posts, cat photos, four original pet action icons to the left, ordering/counts/selection, divider, card sizes, spacing. Keep board title, all text and lower route notes. Preserve board dimensions and composition exactly. This is a single icon asset replacement in a static design review.
+

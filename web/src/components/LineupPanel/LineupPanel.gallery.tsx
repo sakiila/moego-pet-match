@@ -10,6 +10,7 @@ const entry: GalleryEntry = {
   states: {
     empty: () => <LineupPanel pets={[]} />,
     'reference lineup': () => <LineupPanel pets={PREVIEW_PREP_PETS} />,
+    'small images · upgrades deferred': () => <LineupPanel pets={PREVIEW_PREP_PETS} highResolution={false} />,
     'six pets': () => <LineupPanel pets={PLACEHOLDER_PETS} />,
     'fish · six colors': () => (
       <FishFrame>

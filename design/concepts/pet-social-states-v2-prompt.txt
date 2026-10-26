@@ -1,0 +1,11 @@
+Edit the first attached support-state review sheet, using the SECOND attached browse sheet as the EXACT navigation/header reference and the LAST icons sheet as icon reference. Preserve the overall 2-artboard-plus-side-components arrangement and white/orange/charcoal style. This is one corrected design, no alternatives.
+LEFT EMPTY SCREEN:
+Header must match feed: top back-to-shop on left, small MoeGo logo, activity bell and B avatar on right. Title "毛孩子动态", subtitle "照片里见，棋盘上见。", orange +发动态. Under it use ONLY two underline tabs "全部" (selected) / "我的" (not selected), no three-pill filters, no "来自同事" or extra tab. Center use modest EMPTY photo-card/paw illustration; no pet portrait or invented content. Exact empty headline "第一张照片，等你来晒", secondary "分享毛孩子的一点日常。", CTA "发一条动态". Keep skeleton and retry component examples BELOW/OUTSIDE this artboard, clearly labels 状态示例.
+RIGHT DELETION SCREEN:
+Background is Bob's own "我的动态" screen matching publishing design: title 我的动态, tabs "我发布的" (selected underline) / "Slack 同步"; no new 全部 or 来自同事 pills. Native cat photo post below, no imported puppy. Overlay and bottom sheet preserve good existing layout. Exact confirmation "删除这条动态？" and "照片和留言会一起移除。删除后无法恢复。"; red destructive "删除动态", neutral "保留动态".
+SIDE MENU COMPONENT EXAMPLES:
+1 label "自己发布的动态": menu "删除动态".
+2 label "自己从 Slack 同步的动态": "查看原帖" and "从动态墙隐藏". Small helpful note below "只在本站隐藏，原帖保留". Local hiding is available ONLY to original post author or administrator, not every viewer.
+3 label "他人的动态": menu "反馈问题".
+4 source removed state: exact "这条动态已移除" with "返回动态" button. Do not expose deleted original photo or text. This is a separate component example.
+Use bespoke heart/comment/bell icons rather than glossy emoji where present. No video, no Slack writeback, text-only comments. Date anchor2026-10-26.

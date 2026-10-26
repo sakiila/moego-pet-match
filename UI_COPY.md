@@ -752,3 +752,155 @@
 | likes.open_own | 查看我的玩家名片：收到 {count} 个赞 | View my player card: {count} likes received |
 | likes.open_own_one | 查看我的玩家名片：收到 {count} 个赞 | View my player card: {count} like received |
 | likes.open_own_loading | 查看我的玩家名片和收到的赞 | View my player card and received likes |
+
+## 毛孩子动态 · 本机交互预览（2026-10-26）
+
+本阶段仅在开发预览与陈列页展示，不连接 Slack，不上传资料，不作为生产身份验证。站内帖子表情与既有永久玩家点赞分开。后续真实服务接入时须同步调整仅适用于预览的提示。
+
+| Key | 中文 | English |
+| --- | --- | --- |
+| social.title | 毛孩子动态 | Pet Moments |
+| social.subtitle | 照片里见，棋盘上见。 | See you in photos. See you on the board. |
+| social.entry_hint | 看看大家今天有多可爱 | See what the pets are up to |
+| social.preview | 交互预览 · 内容仅保存在此浏览器 | Interactive preview · Saved in this browser only |
+| social.preview_gate | 演示模式：使用示例身份，不会连接 Slack。 | Demo mode uses a sample identity. No Slack connection. |
+| social.preview_enter | 以示例身份进入 | Continue with a sample identity |
+| social.preview_home | 返回预览门店 | Back to preview shop |
+| social.all | 全部 | All |
+| social.mine | 我的 | Mine |
+| social.my_posts | 我的动态 | My Moments |
+| social.my_description | 我发布的照片和日常 | Photos and little moments I've shared |
+| social.published | 我发布的 | My posts |
+| social.imported | Slack 同步 | From Slack |
+| social.from_slack | 来自 Slack | From Slack |
+| social.original | 查看 Slack 原帖 | View original in Slack |
+| social.publish | 发布 | Post |
+| social.new_post | 发动态 | New post |
+| social.post_detail | 动态详情 | Pet Moment |
+| social.cancel | 取消 | Cancel |
+| social.author | {name} 的动态 | A moment from {name} |
+| social.today | 今天 | Today |
+| social.yesterday | 昨天 | Yesterday |
+| social.comment_count | 留言 {count} | Comments {count} |
+| social.reply | 回复 | Reply |
+| social.replying | 回复 {name} | Replying to {name} |
+| social.reply_cancel | 取消回复 | Cancel reply |
+| social.comment_placeholder | 留一句给毛孩子… | Leave a little note… |
+| social.comment_local | 留言仅在动态墙内可见 | Comments stay here in Pet Moments |
+| social.send | 发送 | Send |
+| social.paw | 点赞 | High five |
+| social.heart | 喜欢 | Love |
+| social.bone | 小骨头 | Little bone |
+| social.reaction_label | {reaction}，{count}，{state} | {reaction}, {count}, {state} |
+| social.selected | 已选 | selected |
+| social.unselected | 未选 | not selected |
+| social.photo_alt | {name} 分享的照片 {index} | Photo {index} shared by {name} |
+| social.view_photo | 查看照片 {index}，共 {count} 张 | View photo {index} of {count} |
+| social.photo_count | {index} / {count} | {index} / {count} |
+| social.add_photos | 添加照片 | Add photos |
+| social.remove_photo | 移除照片 {index} | Remove photo {index} |
+| social.photos_count | 照片 {count} / {max} | Photos {count} / {max} |
+| social.colleagues_only | 同事可见 | Colleagues only |
+| social.post_placeholder | 分享毛孩子的一点日常… | Share a little moment with your pet… |
+| social.link_pet | 关联毛孩子（选填） | Link a pet (optional) |
+| social.no_pet | 不关联 | No pet linked |
+| social.publish_hint | 发布后，同事可以送爪印和留言。 | Colleagues can send paws and leave notes. |
+| social.photos_only | 只支持照片与文字 | Photos and text only |
+| social.publish_busy | 正在发布… | Posting… |
+| social.photo_busy | 正在处理照片… | Preparing photos… |
+| social.publish_success | 动态已加入本机预览 | Post added to this local preview |
+| social.empty_title | 第一张照片，等你来晒 | The first photo is yours to share |
+| social.empty_body | 分享毛孩子的一点日常。 | Share a little moment with your pet. |
+| social.empty_action | 发一条动态 | Share a moment |
+| social.empty_mine | 还没有你发布的动态 | You haven't posted a moment yet |
+| social.empty_imported | 还没有同步的动态 | No synced moments yet |
+| social.loading | 正在看看毛孩子们… | Checking in on the pets… |
+| social.load_failed | 暂时没加载出来 | Couldn't load the moments |
+| social.retry | 重试 | Retry |
+| social.activity | 互动消息 | Activity |
+| social.mark_read | 全部已读 | Mark all read |
+| social.no_activity | 还没有新互动 | No new activity yet |
+| social.no_activity_body | 有人送来爪印或留言时，会出现在这里。 | Paws and comments from colleagues will appear here. |
+| social.activity_hint | 只提醒与你有关的新互动 | Only new interactions involving you |
+| social.notice_paw | {name} 给你的动态点了赞 | {name} high-fived your post |
+| social.notice_heart | {name} 喜欢了你的动态 | {name} loved your post |
+| social.notice_bone | {name} 给你的动态送了小骨头 | {name} sent your post a little bone |
+| social.notice_comment | {name} 留言了 | {name} left a comment |
+| social.unread | 未读 | Unread |
+| social.more | 更多操作 | More actions |
+| social.delete | 删除动态 | Delete post |
+| social.hide | 从动态墙隐藏 | Hide from Pet Moments |
+| social.feedback | 反馈问题 | Report a problem |
+| social.feedback_title | 反馈这条动态 | Report this post |
+| social.feedback_hint | 写下需要处理的问题（预览仅在本机记录）。 | Describe the problem (recorded locally in this preview). |
+| social.feedback_saved | 反馈已在本次预览中记录 | Feedback recorded for this preview |
+| social.delete_title | 删除这条动态？ | Delete this moment? |
+| social.delete_body | 照片和留言会一起移除。删除后无法恢复。 | Its photos and comments will be removed. This cannot be undone. |
+| social.keep | 保留动态 | Keep the post |
+| social.hide_title | 从动态墙隐藏？ | Hide from Pet Moments? |
+| social.hide_body | 只在本站隐藏，Slack 原帖保留。 | Hidden here only. The Slack original stays. |
+| social.hidden | 已从动态墙隐藏 | Hidden from Pet Moments |
+| social.deleted | 动态已删除 | Post deleted |
+| social.removed | 这条动态已移除 | This moment has been removed |
+| social.removed_body | 照片和留言不再展示。 | Its photos and comments are no longer available. |
+| social.back_feed | 返回动态 | Back to moments |
+| social.delete_comment | 删除这条留言 | Delete this comment |
+| social.discard_title | 要放弃这条动态吗？ | Discard this draft? |
+| social.discard_body | 照片和文字尚未发布。 | Your photos and text haven't been posted. |
+| social.discard | 放弃并离开 | Discard and leave |
+| social.keep_editing | 继续编辑 | Keep editing |
+| social.gate_title | 同事的毛孩子，都在这里 | Your colleagues' pets, all here |
+| social.gate_body | 验证 MoeGo Slack 身份后，就能看照片、发动态和留言。 | Verify your MoeGo Slack identity to see photos, share moments and leave comments. |
+| social.gate_scope | 照片和留言仅对获准同事开放 | Photos and comments are for approved colleagues only |
+| social.slack_continue | 使用 Slack 继续 | Continue with Slack |
+| social.info | 动态与照片使用说明 | Photos and moments notice |
+| social.info_body | 照片与文字仅向获准同事展示。Slack 内容单向导入，站内互动不回写 Slack。你可以删除自己发布的动态，或隐藏自己的同步动态。当前是本机交互预览，不会连接 Slack 或上传资料。 | Photos and text are visible only to approved colleagues. Slack imports are one-way; interactions here are not sent to Slack. You can delete your own posts or hide your synced posts. This is a local interactive preview. Nothing is uploaded or connected to Slack. |
+| social.storage_failed | 本机保存暂时不可用；当前内容只在本次预览有效。 | Local saving isn't available. Changes last only for this preview session. |
+| social.photo_type | 只支持 JPG、PNG、WebP 照片，不支持视频。 | Use JPG, PNG or WebP photos. Video isn't supported. |
+| social.photo_large | 单张照片请控制在 12 MB 以内。 | Please keep each photo under 12 MB. |
+| social.photo_decode | 这张照片没读出来，请换一张。 | Couldn't read this photo. Please try another. |
+| social.photo_limit | 最多添加 {max} 张照片。 | Add up to {max} photos. |
+| social.invalid_post | 请填写文字或添加照片。 | Write something or add a photo first. |
+| social.preview_reset | 重置演示数据 | Reset demo data |
+| social.preview_reset_title | 重置本机演示数据？ | Reset this browser's demo data? |
+| social.preview_reset_body | 你在预览中添加的照片、动态和留言会被清除。 | Photos, posts and comments you added in this preview will be cleared. |
+| social.preview_reset_confirm | 重置预览 | Reset preview |
+| social.preview_states | 预览状态 | Preview state |
+| social.state_normal | 正常 | Normal |
+| social.state_empty | 空 | Empty |
+| social.state_loading | 加载 | Loading |
+| social.state_error | 失败 | Error |
+| social.state_gate | 身份验证 | Identity |
+| social.demo_pet | 演示毛孩子 | Demo pet |
+| social.long_name | Alexandria Catherine Montgomery-Wellington | Alexandria Catherine Montgomery-Wellington |
+| social.menu_label | 动态操作 | Post actions |
+| social.close | 关闭 | Close |
+| social.download | 保存照片 | Save photo |
+| social.previous_photo | 上一张照片 | Previous photo |
+| social.next_photo | 下一张照片 | Next photo |
+| social.no_comments | 来留第一句话吧。 | Be the first to leave a little note. |
+| social.comment_empty | 请先写一句留言。 | Write a comment first. |
+| social.chars | {count} / {max} | {count} / {max} |
+| social.back | 返回 | Back |
+| social.reset_done | 演示数据已重置 | Demo data reset |
+
+
+## 毛孩子动态 · 真实服务补充（2026-10-26）
+
+真实服务复用游戏登录，不显示“仅保存在此浏览器”的演示提示。原有演示入口单独保留。
+
+| Key | 中文 | English |
+| --- | --- | --- |
+| social.action_failed | 没有保存成功，请重试。 | Couldn't save. Please try again. |
+| social.publish_saved | 动态已发布 | Your moment is posted |
+| social.publish_conflict | 这条动态可能已发布，请回列表确认。 | This moment may already be posted. Please check the feed. |
+| social.photo_failed | 照片没有上传成功，请重试。 | Couldn't upload this photo. Please try again. |
+| social.load_more | 加载更多 | Load more |
+| social.earlier_comments | 查看更早的留言 | Show earlier comments |
+| social.feedback_sent | 反馈已收到 | Feedback received |
+| social.live_feedback_hint | 写下需要处理的问题。 | Tell us what needs attention. |
+| social.live_info_body | 照片、文字、表情和留言仅向已登录且仍在同事名册中的用户展示。#the-pet-corner 的内容单向同步，站内互动不回写 Slack。你可以删除自己发布的动态，或从本站隐藏自己的同步动态；原帖仍由 Slack 管理。未发布的照片在 24 小时后清理。删帖或原帖删除后，相关内容与照片入口立即失效，后台继续清理存储副本。 | Photos, text, reactions and comments are visible only to signed-in, eligible colleagues. Content from #the-pet-corner is imported one way; interactions here are not sent to Slack. You can delete your posts or hide your synced posts here; Slack originals stay under Slack's control. Unpublished photos are cleaned up after 24 hours. Removed posts and their photo links stop being available immediately; storage cleanup continues in the background. |
+| social.saving | 正在保存… | Saving… |
+| social.refresh_failed | 动态暂时没更新，正在显示上次内容。 | Couldn't refresh. Showing the last loaded moments. |
+| social.disabled | 动态墙暂未开放 | Pet Moments isn't open yet |
+| social.disabled_body | 可以先回门店继续游玩。 | You can head back to the shop and keep playing. |

@@ -1,0 +1,135 @@
+{
+  "status": "design_review_only",
+  "business_source_modified": false,
+  "reference_date": "2026-10-26",
+  "completed_date": "2026-10-27",
+  "generator": "Codex built-in image_gen",
+  "images": [
+    {
+      "path": "design/concepts/pet-social-browse-v4.png",
+      "width": 1142,
+      "height": 1377,
+      "mode": "RGB",
+      "sha256": "337d75623efe3f40831d347065ab0902691f3cc36696f55cbd8697025c9ab6d4",
+      "source": "/Users/bob/.codex/generated_images/01a178e3-1f19-74b1-95c1-e74cbf57e64d/exec-45f6fa4f-b006-4f6e-a36d-c770ea8f776d.png"
+    },
+    {
+      "path": "design/concepts/pet-social-publish-v4.png",
+      "width": 1142,
+      "height": 1377,
+      "mode": "RGB",
+      "sha256": "43c1b3ef531b36c84a1454688b9c1a59fb934b2dfa5b84a183179c827528154a",
+      "source": "/Users/bob/.codex/generated_images/01a178e3-1f19-74b1-95c1-e74cbf57e64d/exec-32239292-37dc-418f-b2b1-8504f6b9fe59.png"
+    },
+    {
+      "path": "design/concepts/pet-social-activity-v4.png",
+      "width": 1042,
+      "height": 1510,
+      "mode": "RGB",
+      "sha256": "0cdbff0e75ea89828f3e74d915ee64f63722f632a351a32e1328ac2b51bc8ec7",
+      "source": "/Users/bob/.codex/generated_images/01a178e3-1f19-74b1-95c1-e74cbf57e64d/exec-f440c43a-377e-44d5-9bf8-7d4fbe73a757.png"
+    },
+    {
+      "path": "design/concepts/pet-social-comment-icon-v2.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "sha256": "1bb499cd12573afac5e9e78249efd418eb20f321d20ee79acfaa049950cd6818",
+      "source": "/var/folders/63/893bc91d0r9_hy8qy73f7xsw0000gn/T/codex-clipboard-bd60537f-b988-4a0e-9216-acd45c87f1da.png",
+      "user_supplied": true,
+      "byte_identical_to_attachment": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        39,
+        116,
+        1218,
+        1182
+      ]
+    }
+  ],
+  "reused_original_icons": [
+    {
+      "name": "paw-cute",
+      "source": "/Users/bob/.codex/worktrees/pet-paw-release/moego-pet-match/assets/icons/library-original-png-v2/masters/18-pet-paw-book/paw-cute.png",
+      "review_copy": "design/reviews/2026-10-27-pet-social-navigation/sources/paw-cute.png",
+      "sha256": "2b8e091a5d1c057ed5bd12eb6ff97334d51b7f46c00fc5c478d1ea716f49db44",
+      "byte_identical": true
+    },
+    {
+      "name": "paw-pets",
+      "source": "/Users/bob/.codex/worktrees/pet-paw-release/moego-pet-match/assets/icons/library-original-png-v2/masters/18-pet-paw-book/paw-pets.png",
+      "review_copy": "design/reviews/2026-10-27-pet-social-navigation/sources/paw-pets.png",
+      "sha256": "31dbd414ad240dae0f001e88269c7c7ca912547032709ee806cb57b3114e7ef2",
+      "byte_identical": true
+    },
+    {
+      "name": "paw-play",
+      "source": "/Users/bob/.codex/worktrees/pet-paw-release/moego-pet-match/assets/icons/library-original-png-v2/masters/18-pet-paw-book/paw-play.png",
+      "review_copy": "design/reviews/2026-10-27-pet-social-navigation/sources/paw-play.png",
+      "sha256": "93f23ad9b66ceaa1c4db2744c794edef7c9f1ab87e15327231818f109e90c36f",
+      "byte_identical": true
+    },
+    {
+      "name": "paw-love",
+      "source": "/Users/bob/.codex/worktrees/pet-paw-release/moego-pet-match/assets/icons/library-original-png-v2/masters/18-pet-paw-book/paw-love.png",
+      "review_copy": "design/reviews/2026-10-27-pet-social-navigation/sources/paw-love.png",
+      "sha256": "2e3145e77f08d6201a19d31c428c21f0e245ca39ed9d6867f8825f218cd8ee97",
+      "byte_identical": true
+    }
+  ],
+  "history_images": [
+    {
+      "path": "design/concepts/pet-social-browse-v3.png",
+      "width": 1142,
+      "height": 1377,
+      "mode": "RGB",
+      "sha256": "30d09a4e2ea77e5d8e0977201dbee5564651e5272bef6a54d4e4511afed4aacf",
+      "generated_source": "/Users/bob/.codex/generated_images/01a178e3-1f19-74b1-95c1-e74cbf57e64d/exec-acb0e946-e8c5-4b57-b9cc-c122852b716e.png"
+    },
+    {
+      "path": "design/concepts/pet-social-publish-v3.png",
+      "width": 1142,
+      "height": 1377,
+      "mode": "RGB",
+      "sha256": "35e018138bfc64e75ea8aa90cf66177338f350afa476b68e050bd4ffd3739973",
+      "generated_source": "/Users/bob/.codex/generated_images/01a178e3-1f19-74b1-95c1-e74cbf57e64d/exec-253e00d1-52c1-4b32-9df6-a742f840cfc5.png"
+    },
+    {
+      "path": "design/concepts/pet-social-activity-v3.png",
+      "width": 1042,
+      "height": 1510,
+      "mode": "RGB",
+      "sha256": "5bd83325e24cbd9fe232607b6843b2f05f957e3b9a336066ace0f65fb4b483ff",
+      "generated_source": "/Users/bob/.codex/generated_images/01a178e3-1f19-74b1-95c1-e74cbf57e64d/exec-951620ef-5c03-44d3-919b-ed342da50990.png"
+    },
+    {
+      "path": "design/concepts/pet-social-comment-icon-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "sha256": "9803ebeccb614cab7ce432e5e91af91f3d89b9ef0f8f0baf114c157ce548bf0a",
+      "generated_source": "/Users/bob/.codex/generated_images/01a178e3-1f19-74b1-95c1-e74cbf57e64d/exec-28884b79-747b-434b-8463-4333273fa02f.png",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        39,
+        116,
+        1218,
+        1182
+      ]
+    }
+  ],
+  "review_revision": "v4",
+  "comment_icon_selection": {
+    "selected_by_user": true,
+    "canonical_path": "design/concepts/pet-social-comment-icon-v2.png",
+    "attachment_sha256": "1bb499cd12573afac5e9e78249efd418eb20f321d20ee79acfaa049950cd6818",
+    "copy_method": "byte_for_byte",
+    "production_integrated": false
+  }
+}

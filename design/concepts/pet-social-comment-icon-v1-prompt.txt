@@ -1,0 +1,16 @@
+# 毛孩子动态 · 品牌、导航与快捷互动设计稿
+
+状态：设计评审稿，尚未作为实现或上线指令。
+生成：Codex 内置 image_gen；以下按顺序保留完整生成与定向修订请求。
+初始方案日期锚点：2026-10-26；跨日至 2026-10-27 完成修订，图中示例日期保留。
+
+## 请求 1
+
+Use case: illustration-story. Asset type: ONE new COMMENT icon for MoeGo, isolated transparent-background artwork, not a page mockup or icon contact sheet. 1024x1024 square canvas with true transparent alpha, generous safe padding, complete uncropped icon.
+
+Primary request: Design a single charming speech-bubble comment icon that belongs to the EXACT same approved “宠物小动作” icon family as the four attached original icons (happy blue cat, cream animal paw patting blue cat, cream animal paw pushing orange ball, cream animal paws hugging orange heart). These four are style references only; do not reproduce four icons, invent new variants for them, or put them in output.
+
+Create a dominant rounded ivory-white SPEECH BUBBLE with one clearly visible short lower-left tail, bold charcoal #151e2b rounded contour matching the reference lineweight, THREE orange #ff6b12 round dots inside centered. One small cream animal paw hugs the lower-right edge of the speechbubble, with simple rounded toe lobes and no human fingers; use the same paw anatomy and warmcream material as the play/heart original references. A tiny pair of orange joyful motion ticks at upper right matches the family. Keep bubble shape dominant and instantly recognizable at32px. Gentle off-axis tilt and very restrained warm highlights exactly like reference artwork; no additional drop-shadow blob, tile, card, circle or externalframe.
+
+No text, letters, words, numbers, watermark, cat face inside the bubble, hearts, bones, video or microphone. Not a flat generic system glyph; match the friendly thick charcoal-contour illustration finish of the source family. True transparency outside the art; do NOT render a white square background or checkerboard. Preserve intentional white and cream interior fill. This is a new proposed comment icon only, four existing source icons remain unchanged.
+

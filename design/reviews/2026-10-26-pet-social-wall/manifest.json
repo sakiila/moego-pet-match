@@ -1,0 +1,277 @@
+{
+  "title": "毛孩子动态墙 · 设计评审 v1",
+  "date": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "status": "service_integrated_locally",
+  "generator": "Codex built-in image_gen",
+  "runtime_implemented": true,
+  "slack_monitoring_enabled": true,
+  "final_sheets": [
+    {
+      "id": "entry",
+      "title": "入口与身份",
+      "file": "pet-social-entry-v2.png",
+      "pages": "门店入口 / 首次进入与身份验证",
+      "description": "保留开始营业主动作，用紧凑动态入口连接新功能。Slack 验证页是本稿的建议方案，验证前使用通用插画。"
+    },
+    {
+      "id": "browse",
+      "title": "浏览与留言",
+      "file": "pet-social-browse-v2.png",
+      "pages": "动态列表 / 动态详情",
+      "description": "照片优先，爪印、爱心、小骨头紧跟照片。Slack 保留原作者、原日期和原帖入口；站内留言仅在动态墙内可见。"
+    },
+    {
+      "id": "publish",
+      "title": "发布与我的动态",
+      "file": "pet-social-publish-v2.png",
+      "pages": "发布动态 / 我的动态",
+      "description": "照片加几句话即可发布，关联宠物选填。我的动态分成我发布的与 Slack 同步，便于区分内容来源与管理方式。"
+    },
+    {
+      "id": "activity",
+      "title": "互动与照片",
+      "file": "pet-social-activity-v2.png",
+      "pages": "互动消息 / 照片大图",
+      "description": "只提醒与自己有关的互动，打开后定位到对应动态或评论。大图保留照片比例，多图可切换。"
+    },
+    {
+      "id": "states",
+      "title": "边界状态与管理",
+      "file": "pet-social-states-v2.png",
+      "pages": "空态 / 加载 / 失败 / 删除 / 原帖移除",
+      "description": "站内动态删除、Slack 动态本站隐藏、他人动态反馈分开处理。组件样例为互斥状态，不同时出现在页面上。"
+    },
+    {
+      "id": "icons",
+      "title": "新增图标",
+      "file": "pet-social-icons-v1.png",
+      "pages": "8 组图标与选中状态",
+      "description": "动态入口、发布、留言、互动消息、爱心、小骨头、删除、查看原帖。沿用炭黑圆角描边与橙白主色。"
+    }
+  ],
+  "generations": [
+    {
+      "key": "browse",
+      "path": "../../concepts/pet-social-browse-v1.png",
+      "prompt": "../../concepts/pet-social-browse-v1-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-6d05f214-a1de-43c1-a7f9-30c723c3eafb.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-home-v2.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-petdex-v1.png",
+        "/var/folders/63/893bc91d0r9_hy8qy73f7xsw0000gn/T/codex-clipboard-84636f17-da83-42b6-ac84-ddc796a173b6.png"
+      ],
+      "status": "superseded_draft",
+      "width": 1356,
+      "height": 1159,
+      "sha256": "a710949051ed7223d4dfad94b7c2aeac075922edafba02a35fc8066339f180c5",
+      "bytes": 1662131
+    },
+    {
+      "key": "publish",
+      "path": "../../concepts/pet-social-publish-v1.png",
+      "prompt": "../../concepts/pet-social-publish-v1-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-aa9208f6-8706-4057-9ef4-21b95fa67c57.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-home-v2.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-petdex-v1.png",
+        "/var/folders/63/893bc91d0r9_hy8qy73f7xsw0000gn/T/codex-clipboard-84636f17-da83-42b6-ac84-ddc796a173b6.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-browse-v1.png"
+      ],
+      "status": "superseded_draft",
+      "width": 1357,
+      "height": 1159,
+      "sha256": "05e11d80593a47c1c41a82c38d3012cda7fe73ee7a68cdf98ba978011594da80",
+      "bytes": 1561219
+    },
+    {
+      "key": "activity",
+      "path": "../../concepts/pet-social-activity-v1.png",
+      "prompt": "../../concepts/pet-social-activity-v1-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-d2c0bb8c-b1f0-4582-af59-cb2aba681e60.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-home-v2.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-petdex-v1.png",
+        "/var/folders/63/893bc91d0r9_hy8qy73f7xsw0000gn/T/codex-clipboard-84636f17-da83-42b6-ac84-ddc796a173b6.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-publish-v1.png"
+      ],
+      "status": "superseded_draft",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "734c8ef5ca94a6c841c25ecd3e6d3b67399ce376a424ca9693e4af70171d42e9",
+      "bytes": 1481112
+    },
+    {
+      "key": "entry",
+      "path": "../../concepts/pet-social-entry-v1.png",
+      "prompt": "../../concepts/pet-social-entry-v1-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-5e73ea9e-059d-4210-8db3-258d5fd8e83c.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-home-v2.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-petdex-v1.png",
+        "/var/folders/63/893bc91d0r9_hy8qy73f7xsw0000gn/T/codex-clipboard-84636f17-da83-42b6-ac84-ddc796a173b6.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-browse-v1.png"
+      ],
+      "status": "superseded_draft",
+      "width": 1305,
+      "height": 1206,
+      "sha256": "c9e3e559cc415656ec7cc27d2a9940b9f24c6012b247863081c681791881aca3",
+      "bytes": 1563029
+    },
+    {
+      "key": "states",
+      "path": "../../concepts/pet-social-states-v1.png",
+      "prompt": "../../concepts/pet-social-states-v1-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-1aaeaee0-e983-43fe-b657-5818f5e1ca13.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-home-v2.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-petdex-v1.png",
+        "/var/folders/63/893bc91d0r9_hy8qy73f7xsw0000gn/T/codex-clipboard-84636f17-da83-42b6-ac84-ddc796a173b6.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-publish-v1.png"
+      ],
+      "status": "superseded_draft",
+      "width": 1325,
+      "height": 1187,
+      "sha256": "74e1193f4f90ee84fbda6e205dbe6173b67e889ecfa70791d508b6235ffe7654",
+      "bytes": 1514562
+    },
+    {
+      "key": "icons",
+      "path": "../../concepts/pet-social-icons-v1.png",
+      "prompt": "../../concepts/pet-social-icons-v1-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-016f5563-1b96-4fcd-8833-d7f7bf2ce368.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-entry-icons-v3.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/common-actions-original-v3.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-browse-v1.png"
+      ],
+      "status": "review_draft",
+      "width": 1330,
+      "height": 1182,
+      "sha256": "1651fc69ee2705506d20642d1461e0e52127472d085a71bf70ca2309fe0dfe1c",
+      "bytes": 1392455
+    },
+    {
+      "key": "browse_v2",
+      "path": "../../concepts/pet-social-browse-v2.png",
+      "prompt": "../../concepts/pet-social-browse-v2-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-51c95d6f-5612-4889-b229-cfc0762cdb18.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-browse-v1.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-icons-v1.png"
+      ],
+      "status": "review_draft",
+      "width": 1357,
+      "height": 1159,
+      "sha256": "b3de0656b94ca686c5ecc9c6f1cc8a3148440dbf39ca48cfa2caf213bfc67667",
+      "bytes": 1903124
+    },
+    {
+      "key": "entry_v2",
+      "path": "../../concepts/pet-social-entry-v2.png",
+      "prompt": "../../concepts/pet-social-entry-v2-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-cc525f55-6249-401b-8845-133d2a63cb6a.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-entry-v1.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-icons-v1.png"
+      ],
+      "status": "review_draft",
+      "width": 1305,
+      "height": 1205,
+      "sha256": "81e04bdd217b7cc5c940d2f3df85c8a9a25c5faa619ae5451f0473072e1002cc",
+      "bytes": 1752069
+    },
+    {
+      "key": "states_v2",
+      "path": "../../concepts/pet-social-states-v2.png",
+      "prompt": "../../concepts/pet-social-states-v2-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-0a5e6989-ecf3-4632-a3ab-474f08322e2d.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-states-v1.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-browse-v2.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-publish-v1.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-icons-v1.png"
+      ],
+      "status": "review_draft",
+      "width": 1325,
+      "height": 1187,
+      "sha256": "75e248c42f0af711e6ab52844dfb884aa598a856f6b4854ce9a58f335d668bfc",
+      "bytes": 1482159
+    },
+    {
+      "key": "activity_v2",
+      "path": "../../concepts/pet-social-activity-v2.png",
+      "prompt": "../../concepts/pet-social-activity-v2-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-c7b1df3c-707d-40d2-ad54-1df8c8b08707.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-activity-v1.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-publish-v1.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-icons-v1.png"
+      ],
+      "status": "review_draft",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "e671d0293e66ad473ba230595d9c504ad9828b96c853fae864fd8cc7b412d009",
+      "bytes": 1710353
+    },
+    {
+      "key": "publish_v2",
+      "path": "../../concepts/pet-social-publish-v2.png",
+      "prompt": "../../concepts/pet-social-publish-v2-prompt.txt",
+      "generated_source": "/Users/bob/.codex/generated_images/01a177ac-2fa6-73b2-97f5-4ec3886ff680/exec-528ea12d-72aa-409e-a6bc-3ce687b66554.png",
+      "input_images": [
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-publish-v1.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-browse-v2.png",
+        "/Users/bob/WebstormProjects/moego-pet-match/design/concepts/pet-social-icons-v1.png"
+      ],
+      "status": "review_draft",
+      "width": 1358,
+      "height": 1159,
+      "sha256": "8a2fa2f566d1ae342b074bef914b85af5365c11a6a988548d1f6e4a3c1602b80",
+      "bytes": 1798897
+    }
+  ],
+  "validation": {
+    "png_signature_crc_and_data": "passed",
+    "prompt_files": "passed",
+    "local_review_links": "passed",
+    "images_checked": 11,
+    "local_resources_checked": 20,
+    "browser_visual_check": "passed: review header and browse/detail sheet inspected in Codex in-app browser",
+    "note": "Static design sheets only; no runtime social feature tests.",
+    "http_resources": "passed",
+    "http_resource_count": 7,
+    "service_checks": {
+      "server_tests": 306,
+      "web_tests": 367,
+      "server_typecheck": "passed",
+      "web_typecheck": "passed",
+      "web_build": "passed",
+      "server_bundle": "passed",
+      "anonymous_media_status": 401,
+      "live_slack_posts": 8,
+      "live_slack_photos": 11,
+      "scope": "isolated_local_only"
+    }
+  },
+  "notes": [
+    "8 main pages + supporting states + 8 new icon groups",
+    "Original user-provided Slack screenshot is a content reference only",
+    "Synthetic cat photos, new comments, counts and notifications are mock data",
+    "Identity gate is a design recommendation",
+    "Live API and Slack reads are integrated in an isolated local environment. Production flags default off; this task did not push or deploy."
+  ],
+  "review_url": "http://127.0.0.1:5192/reviews/2026-10-26-pet-social-wall/index.html#browse",
+  "frontend_preview_implemented": true,
+  "preview_url": "http://127.0.0.1:5180/dev/social",
+  "local_slack_monitoring_enabled": true,
+  "live_local_url": "http://localhost:5181/__social_qa",
+  "deployed_by_this_task": false,
+  "monitoring_scope": "isolated_local_only",
+  "production_configuration_changed_by_this_task": false
+}

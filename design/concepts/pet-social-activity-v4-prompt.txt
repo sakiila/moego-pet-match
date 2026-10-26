@@ -1,0 +1,11 @@
+# 用户指定评论图标 · 页面修订
+
+2026-10-27。仅修订设计稿，使用 Codex 内置 image_gen；用户附件直接作为图片参考。
+附件：/var/folders/63/893bc91d0r9_hy8qy73f7xsw0000gn/T/codex-clipboard-bd60537f-b988-4a0e-9216-acd45c87f1da.png
+
+## 完整请求 1
+
+Use case: precise-object-edit. Image1 is EDIT TARGET: existing MoeGo INBOX/PHOTO VIEWER two-page design board1042x1510. Image2 is the EXACT USER-SUPPLIED COMMENT ICON. Replace ONLY the illustrated comment symbol beside Sam's comment notification on the LEFT page with a proportional miniature of image2. Match the soft OVAL cream speech-bubble silhouette, angled curved body, little lower-left tail, three shaded orange dots, thick charcoal outline, small cream paw hugging lower-right, two orange motion ticks at upper-right. Oval bubble, not a rectangular generic chatbox. Preserve the source highlights and warmcream. Fit original art into existing icon slot with no squashing or black background. Notification text Sam留言了, quotation, time and thumbnail remain the same.
+
+Everything else unchanged: actual canvas1042x1510, board title, two whole frames, official MoeGo logos UPPER LEFT, top-row 回门店, language/profile, contextualback, all other source-original pet reaction icons, names, avatars, dates, cat thumbnails, counts, unreadpeach surfaces, layout and spacing. Entire RIGHT dark photo viewer must remain untouched, including logo whiteplate, top回门店/save/X,1/2 counter, sunnycat image, date, thumbnails and arrows. Preserve lower flow annotations and board composition exactly. No new redesign, screens, controls, state or rules. Only this comment artwork replacement.
+

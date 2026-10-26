@@ -16,6 +16,8 @@ const entry: GalleryEntry = {
           <PetCard name="7-Eleven" collected={false} imageSrc="/img/silhouettes/pet_c7ad902c2024/512" onOpen={() => {}} />
         </>,
       ),
+    'collected without owner': () =>
+      grid(<PetCard name="Shiliu" collected imageSrc="/img/pets/pet_cfb67d9ae65b/512" owner={null} onOpen={() => {}} />),
     'developer egg: Maodu (collected) / Boluo (not collected)': () =>
       grid(
         <>

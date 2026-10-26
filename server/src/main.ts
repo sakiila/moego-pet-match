@@ -12,7 +12,7 @@ import { slackAvatarFetcher } from './storage/slackAvatar.ts';
 import { syncSlackMembers } from './services/syncSlackMembers.ts';
 
 const pool = createPool(config.databaseUrl);
-// 访客仍可参与，但必须使用 MoeGo 邮箱并通过真人账号过滤。
+// 访客仍可参与，但必须使用允许的公司域名邮箱并通过真人账号过滤。
 const directory = slackDirectory(process.env.SLACK_BOT_TOKEN, { allowGuests: true });
 // 默认本地目录对象存储（与 R2 相同的键布局）；OBJECT_STORE=r2 时使用 R2
 const r2 = process.env.OBJECT_STORE === 'r2' ? r2FromEnv() : null;
@@ -22,6 +22,13 @@ const app = buildApp({
   staticDir: config.staticDir,
   gameVersion: config.gameVersion,
   directory,
+  social: process.env.PET_SOCIAL_ENABLED === 'true' ? {
+    publicOrigin: process.env.PET_SOCIAL_PUBLIC_ORIGIN ?? (process.env.NODE_ENV === 'production' ? 'https://star.baobo.me' : 'http://127.0.0.1:5180'),
+    adminIds: (process.env.SLACK_ADMIN_MEMBER_ID ?? '').split(',').map(id => id.trim()).filter(Boolean),
+    sync: process.env.PET_SOCIAL_SLACK_SYNC_ENABLED === 'true' && process.env.SLACK_BOT_TOKEN ? {
+      teamId: 'T011CF3CMJN', channelId: 'C0APZBRK49E', token: process.env.SLACK_BOT_TOKEN,
+    } : undefined,
+  } : undefined,
   notify: slackAdminNotifier(process.env.SLACK_BOT_TOKEN, process.env.SLACK_NOTIFY_CHANNEL),
   slack: process.env.SLACK_SIGNING_SECRET && process.env.SLACK_BOT_TOKEN ? { signingSecret: process.env.SLACK_SIGNING_SECRET, token: process.env.SLACK_BOT_TOKEN } : null,
   images: {

@@ -9,12 +9,14 @@ import './ui/global.css';
 
 const isGallery = isGalleryPath(window.location.pathname);
 const Gallery = isGallery ? lazy(() => import('./dev/gallery/Gallery')) : null;
+const SocialPreview = import.meta.env.DEV && location.pathname === '/dev/social'
+  ? lazy(() => import('./dev/social/SocialPreview')) : null;
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <I18nProvider>
       <FeedbackProvider>
-      {Gallery ? (
+      {SocialPreview ? <Suspense fallback={null}><SocialPreview/></Suspense> : Gallery ? (
         <Suspense fallback={null}>
           <Gallery />
         </Suspense>

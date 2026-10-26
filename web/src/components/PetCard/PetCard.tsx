@@ -39,7 +39,7 @@ export function PetCard({ name, collected, imageSrc, owner, developer = false, o
             </span>
           </span>
         ) : (
-          <span className={`${styles.chip} ${styles.muted}`}>{t('collection.filter_uncollected')}</span>
+          <span className={`${styles.chip} ${styles.muted}`}>{t(collected ? 'collection.filter_collected' : 'collection.filter_uncollected')}</span>
         )}
       </button>
     </Tilt>

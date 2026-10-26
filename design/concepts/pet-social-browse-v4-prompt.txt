@@ -1,0 +1,21 @@
+# 用户指定评论图标 · 页面修订
+
+2026-10-27。仅修订设计稿，使用 Codex 内置 image_gen；用户附件直接作为图片参考。
+附件：/var/folders/63/893bc91d0r9_hy8qy73f7xsw0000gn/T/codex-clipboard-bd60537f-b988-4a0e-9216-acd45c87f1da.png
+
+## 完整请求 1
+
+Use case: precise-object-edit. Image1 is the EDIT TARGET, an existing approved-in-progress MoeGo two-page social-wall UI design board. Image2 is the exact USER-SUPPLIED COMMENT ICON to use. Make ONE strictly local change: replace the comment icon artwork in the FAR-RIGHT action button of BOTH feed and detail screens, and in the bottom "评论" legend, with Image2. Preserve its oval ivory speech-bubble silhouette, original three shaded orange dots, thick charcoal contour, small cream animal paw hugging lower-right, and two orange motion marks above right. Fit the complete icon proportionally inside each existing icon slot; no squashing, clipping or simplification into a generic square bubble. Keep original icon optical size consistent with four preceding icons, count2 separate to its right. Keep icons on transparent/white page surface, do not add black square background.
+
+Everything else must remain as close to original pixels as possible: canvas1142x1377, same two mobile frames, genuine MoeGo upper-left logos, top-row 回门店, language/profile, contextual 返回动态, all layout, original Chinese/English text, dog/cat photos, dates, four existing BLUEcat/patting/ball/heart icons and their order and numbers, selected third action, the thin separator before comment, comment list and input, board title and external legends. This is an icon replacement, not a redesign, no new UI or extra feature. Preserve complete board framing. The user wants this exact supplied icon used rather than an approximated generic comment glyph.
+
+## 完整请求 2
+
+Use case: precise-object-edit. Two images: image1 EDIT TARGET browse/detail design board1142x1377; image2 REQUIRED final comment artwork supplied by the user. Correct ONLY the THREE comment-icon miniatures (far-right pill under dog photo on left, far-right pill under dog photo on right, far-right legend below frames). They are still too rectangular. Replace them with image2's oval angled speechbubble, preserving its smoothly curved uninterrupted oval contour WITHOUT rectangular corners, big ivory body, lowerleft pointedtail, THREE orange shaded dots, cream animal paw at lowerright, TWO orange tickstrokes at upperright. Use the WHOLE original illustration scaled into the available slot. In the bottom legend render it about54x54, so ovalshape, paw andticks clearly visible. Within pills render the whole art32x32, count2 separate to itsright. Keep transparent background, no black square. No new design of the comment art.
+
+Preserve all other artwork/text/pixels/layout: all MoeGo upperleft logos, TOP回门店, languages/avatars, page titles, actionbuttons, tabs, photos, post bodies, dates, originals' four quick actionillustrations withcounts4/2/1/3, selectedplayball, comments, input, framing, board title and all other legends/route notes. The icon MUST have the same visibly rounded OVAL silhouette as the provided source, not the old square chat glyph. Do not alter any other element.
+
+## 完整请求 3
+
+Precisely edit ONLY the TWO far-right COMMENT PILLS in image1. The new oval cream comment icon is correct but too large and hides count2. Make each comment illustration about30% SMALLER so its optical size equals the four neighboring illustrated icons. Inside each pill: small complete oval icon at LEFT, clearly legible charcoal digit "2" to its RIGHT with a4px gap. Keep icon shape, paw, orange dots/ticks and whole art from image2, proportional, unclipped. LEFT pill is approximately x454-540,y852-906 on1142x1377 board; make art roughly40px wide, leave rightmost20px for clear count2. RIGHT pill is approximately x1000-1090,y809-868; same layout small completeicon + count2. Keep both pill outlines and positions. DO NOT remove count2. Do not change the separate bottom legend or any other part of the image, all photos/text/headers/layout/other icons remain unchanged. Final board must look like five compact equally sized icon+counter buttons per strip, new oval comment still FAR RIGHT.
+

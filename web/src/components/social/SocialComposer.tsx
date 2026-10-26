@@ -1,0 +1,121 @@
+import { useRef } from 'react';
+import { useI18n } from '../../i18n';
+import { MAX_PHOTOS, MAX_POST_LENGTH, type SocialPerson, type SocialPhoto, type SocialPet } from '../../social/model';
+import { Avatar } from '../../ui/primitives/Avatar';
+import { Icon } from '../../ui/primitives/Icon';
+import { SocialHeader } from './SocialChrome';
+import styles from './Social.module.css';
+
+export interface SocialComposerProps {
+  author: SocialPerson;
+  body: string;
+  photos: SocialPhoto[];
+  pets: SocialPet[];
+  petId: string;
+  processing: boolean;
+  publishing: boolean;
+  error?: string;
+  onBody: (value: string) => void;
+  onPet: (value: string) => void;
+  onFiles: (files: File[]) => void;
+  onRemovePhoto: (id: string) => void;
+  onCancel: () => void;
+  onPublish: () => void;
+}
+export function SocialComposer(props: SocialComposerProps) {
+  const { t } = useI18n();
+  const input = useRef<HTMLInputElement>(null);
+  const busy = props.processing || props.publishing;
+  return (
+    <>
+      <SocialHeader title={t('social.new_post')} onBack={props.onCancel} backLabel={t('social.cancel')}>
+        <button
+          className={styles.smallCta}
+          onClick={props.onPublish}
+          disabled={busy || (!props.body.trim() && !props.photos.length)}
+        >
+          {t(props.publishing ? 'social.publish_busy' : 'social.publish')}
+        </button>
+      </SocialHeader>
+      <div className={styles.authorRow}>
+        <Avatar name={props.author.name} src={props.author.avatarSrc} seed={props.author.id} size={40} />
+        <div>
+          <strong className={styles.name}>{props.author.name}</strong>
+          <span className={styles.meta}>{t('social.colleagues_only')}</span>
+        </div>
+      </div>
+      <textarea
+        className={styles.editor}
+        value={props.body}
+        onChange={(e) => props.onBody(e.target.value)}
+        maxLength={MAX_POST_LENGTH}
+        disabled={props.publishing}
+        placeholder={t('social.post_placeholder')}
+        aria-label={t('social.post_placeholder')}
+      />
+      <span className={styles.meta}>{t('social.chars', { count: props.body.length, max: MAX_POST_LENGTH })}</span>
+      <div className={styles.photoGrid}>
+        {props.photos.map((photo, i) => (
+          <div key={photo.id} className={styles.photoTile}>
+            <img src={photo.src} alt={photo.alt} />
+            <button
+              className={styles.remove}
+              disabled={busy}
+              onClick={() => props.onRemovePhoto(photo.id)}
+              aria-label={t('social.remove_photo', { index: i + 1 })}
+            >
+              <Icon name="close" size={16} />
+            </button>
+          </div>
+        ))}
+        {props.photos.length < MAX_PHOTOS && (
+          <div className={styles.photoTile}>
+            <button className={styles.addPhoto} disabled={busy} onClick={() => input.current?.click()}>
+              <Icon name="choose-photo" size={32} />
+              {t(props.processing ? 'social.photo_busy' : 'social.add_photos')}
+            </button>
+          </div>
+        )}
+      </div>
+      <input
+        ref={input}
+        type="file"
+        className={styles.hiddenInput}
+        accept="image/jpeg,image/png,image/webp"
+        multiple
+        aria-label={t('social.add_photos')}
+        onChange={(e) => {
+          const files = Array.from(e.currentTarget.files ?? []);
+          e.currentTarget.value = '';
+          props.onFiles(files);
+        }}
+      />
+      <p className={styles.meta}>{t('social.photos_count', { count: props.photos.length, max: MAX_PHOTOS })}</p>
+      {props.error && (
+        <p className={styles.danger} role="alert">
+          {props.error}
+        </p>
+      )}
+      {!!props.pets.length && (
+        <div className={styles.petSelect}>
+          <Icon name="my-pets" size={38} />
+          <label>
+            {t('social.link_pet')}
+            <select value={props.petId} onChange={(e) => props.onPet(e.target.value)} disabled={busy}>
+              <option value="">{t('social.no_pet')}</option>
+              {props.pets.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+      )}
+      <div className={styles.hint}>
+        <p>{t('social.publish_hint')}</p>
+        <p className={styles.meta}>{t('social.photos_only')}</p>
+      </div>
+    </>
+  );
+}

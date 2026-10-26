@@ -155,7 +155,7 @@ docker compose --env-file release.env logs --tail 100 pet-match
 
 生产连接：`postgresql://pet_match_app:<密码>@postgresql:5432/pet_match?sslmode=disable`。`sslmode=disable` 仅用于同机 Docker 内网；远程管理通过 SSH 隧道，不开放额外公网端口。数据库所有者为 `pet_match_owner`，应用角色只有运行需要的查询、插入与更新权限。不要向应用容器提供管理员连接。
 
-同事信息直接从 Slack `users.list` 过滤：只接受 `@moego.pet` 邮箱，排除停用、机器人、Slackbot 与明确列出的公共账号（见 `server/src/services/slackDirectory.ts`），访客也适用同样限制。启动时和每五分钟刷新 `pet_match.slack_members`，不再符合条件的已有账号标记为停用、保留历史记录；一次同步在单个事务完成，空目录、分页不完整或请求失败不会清空已保存名单。`pet_match.colleagues` 仅展示有效账号。`public."user"` 不迁移，也不再用于运行时查询。
+同事信息直接从 Slack `users.list` 过滤：只接受 `@moego.pet` 或 `@mymoement.com` 邮箱，排除停用、机器人、Slackbot 与明确列出的公共／测试账号（见 `server/src/services/slackDirectory.ts`），访客也适用同样限制。启动时和每五分钟刷新 `pet_match.slack_members`，不再符合条件的已有账号标记为停用，符合条件的已有账号恢复有效、保留历史记录；一次同步在单个事务完成，空目录、分页不完整或请求失败不会清空已保存名单。`pet_match.colleagues` 仅展示有效账号。`public."user"` 不迁移，也不再用于运行时查询。
 
 本机 `.env` 的 `PET_MATCH_ADMIN_DATABASE_URL` 指向 SSH 隧道，不能再通过旧 JDBC/Supabase 配置维护生产。先保持隧道运行：
 
