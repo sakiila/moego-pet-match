@@ -85,3 +85,30 @@ it('新规则同步停用已入库的外部邮箱和公共账号，搜索与身�
     await app.close();
   }
 });
+
+it('允许 mymoement.com 后，完整同步恢复已有停用账号，搜索与身份选择沿用原 ID', async () => {
+  const userId = 'U_MOMENT_TEAMMATE';
+  await ctx.pool.query(
+    'INSERT INTO pet_match.slack_members (user_id, name, email, active) VALUES ($1, $2, $3, false)',
+    [userId, 'Company Teammate', 'teammate@mymoement.com'],
+  );
+  const directory = slackDirectory('xoxb-test', {
+    allowGuests: true,
+    fetchImpl: (async () => ({
+      status: 200,
+      json: async () => ({ ok: true, members: [{ id: userId, profile: { real_name: 'Company Teammate', email: 'teammate@mymoement.com' } }] }),
+    })) as unknown as typeof fetch,
+  })!;
+  expect(await syncSlackMembers(ctx.pool, await directory.all())).toBe(1);
+  const app = buildApp({ pool: ctx.pool, directory });
+  try {
+    const search = await app.inject({ method: 'GET', url: '/api/roster?q=teammate' });
+    expect(search.json().results).toEqual([{ userId, name: 'Company Teammate' }]);
+    const player = await app.inject({ method: 'GET', url: `/api/players/${userId}` });
+    expect(player.statusCode).toBe(200);
+    expect(player.json().userId).toBe(userId);
+    expect((await ctx.pool.query('SELECT active FROM pet_match.slack_members WHERE user_id=$1', [userId])).rows[0].active).toBe(true);
+  } finally {
+    await app.close();
+  }
+});

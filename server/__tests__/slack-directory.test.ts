@@ -17,7 +17,16 @@ describe('Slack 目录过滤', () => {
     expect(toMember(raw({ team_id: 'T_OTHER', profile: { real_name_normalized: 'Y', email: 'y@moego.pet' } }))?.userId).toBe('U1');
   });
 
-  it.each([undefined, null, '', 'person@partner.com', 'person@othermoego.pet', 'person@moego.pet.example.com', 'person@sub.moego.pet'])(
+  it.each(['person@mymoement.com', ' Person@MYMOEMENT.COM '])('保留另一个公司域名邮箱 %s，仍按账号状态过滤', (email) => {
+    const user = raw({ profile: { real_name: 'Company Teammate', email } });
+    expect(toMember(user)).toEqual({ userId: 'U1', name: 'Company Teammate', email: email.trim() });
+    expect(toMember({ ...user, deleted: true }, true)).toBeNull();
+    expect(toMember({ ...user, is_bot: true }, true)).toBeNull();
+    expect(toMember({ ...user, is_restricted: true })).toBeNull();
+    expect(toMember({ ...user, is_restricted: true }, true)?.userId).toBe('U1');
+  });
+
+  it.each([undefined, null, '', 'person@partner.com', 'person@othermoego.pet', 'person@moego.pet.example.com', 'person@sub.moego.pet', 'person@moment.com', 'person@othermymoement.com', 'person@mymoement.com.example.com', 'person@sub.mymoement.com'])(
     '即使属于 MoeGo 工作区或允许访客，邮箱 %s 也不能通过', (email) => {
       const user = raw({ is_restricted: true, profile: { real_name: 'External', email } });
       expect(toMember(user, true)).toBeNull();

@@ -48,7 +48,7 @@ RackNerd 的 Node 后端返回搜索与身份选择所需的最小资料；浏�
 | Slack 用户 ID | Slack `id` 保存为 `slack_members.user_id` | 关联玩家记录与宠物归属，改名或重名不改变既有记录 |
 | 显示名字与搜索 | Slack 资料中的姓名保存为 `name`；按姓名包含或邮箱前缀搜索 | 身份选择、排行榜和宠物主人展示 |
 | Slack 头像 | Node 用 `SLACK_BOT_TOKEN` 获取头像并本地缓存，经 `/img/avatars/:userId` 代理返回 | 身份选择、排行榜及主人竞猜；缺失时回退默认头像 |
-| 可参与名单 | 必须有 `@moego.pet` 邮箱（忽略大小写与首尾空格）；排除停用、机器人、Slackbot 和公共／测试账号 `infra@moego.pet`、`devops@moego.pet`、`admin_MSlack@moego.pet`、`test.tim@moego.pet`；有效访客也须满足同样条件 | 准入依据 `colleagues` 的有效条目；完整同步会停用已入库但不再符合条件的账号，保留其历史记录；人数随目录变化 |
+| 可参与名单 | 必须有 `@moego.pet` 或 `@mymoement.com` 邮箱（忽略大小写与首尾空格）；排除停用、机器人、Slackbot 和公共／测试账号 `infra@moego.pet`、`devops@moego.pet`、`admin_MSlack@moego.pet`、`test.tim@moego.pet`；有效访客也须满足同样条件 | 准入依据 `colleagues` 的有效条目；完整同步会停用已入库但不再符合条件的账号，恢复符合条件的已有账号，保留其历史记录；人数随目录变化 |
 | 同步与失败边界 | 完整分页成功后在同一事务更新姓名、邮箱和有效状态；空名单、缺页或请求失败不覆盖已保存名单 | 防止临时故障清空身份；已停用账号不由搜索或选择重新启用 |
 | 宠物主人关联 | 沿用已核对的主人 Slack `user_id`，不按显示名字重新匹配 | 自家宠物优先、图鉴与竞猜 |
 
