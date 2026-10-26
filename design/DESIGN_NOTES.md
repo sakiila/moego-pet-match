@@ -73,6 +73,7 @@
 | 报告下一件事 | [mobile-report-next-up-v1.png](concepts/mobile-report-next-up-v1.png) | 2026-10-24 选定并接入；新收集卡与导航之间一条「毛孩子开口」气泡：左侧 MVP 小圆贴纸（浅橙底），白色圆角气泡带左指小尾巴、细炭黑描边与小偏移阴影，橙色小标签「下一件事」、一句第一人称预告、右下「去图鉴 ›」；实现时头像 44px、尾巴用 CSS 三角 |
 | 毛孩子光荣榜 | [hall-of-fame-title-zh-v2.png](concepts/hall-of-fame-title-zh-v2.png)、[hall-of-fame-title-en-v6.png](concepts/hall-of-fame-title-en-v6.png) | 2026-10-24 已确认并接入排行榜；中英标题字标、麦穗、两侧蓝猫与黑白狗贴纸（`hall-of-fame-laurel-v1`、`-cat-v1`、`-dog-v1`）；2026-10-26 小狗先从原图提取 v3 修复透明蒙版，再按用户标注仅平滑肚皮左右两处折角，当前采用[平滑修正 v4](../assets/illustrations/ui/hall-dog-v4.png)，两处区域外与 v3 保持一致；两侧贴纸向台阶后收进 4px 避免摇摆露缝；阶梯领奖台用 CSS；布局参考 `references/hall-of-fame-reference.webp`，不采用其中的鱼缸解锁提示 |
 | 补充图标 | [supplement-marks-original-v1.png](concepts/supplement-marks-original-v1.png) | 2026-10-24 已确认；选中小勾、向前箭头、未收集书签，补齐图标库缺口；已拆图接入游戏 |
+| 四位密码输入 · A 独立圆角格 | [四格对比稿 A 栏](concepts/four-digit-pin-options-v1.png) | 2026-10-26 用户选定 A 并接入首次设置与后续登录；独立圆角格、橙色焦点、圆点遮蔽、错误红框；同日先调整为铺满，随后按用户反馈适度收窄并居中：两侧至少留 12px，整组最大 400px，四格继续等分。`PinInput` 以原生密码框配合 CSS 四格显示，支持粘贴、方向键、退格和点击替换；图稿仅作视觉参考，不切图。 |
 | 手机首次入口与身份确认 | [mobile-identity-v2.png](concepts/mobile-identity-v2.png) | 已确认；游戏名与 90 秒介绍、直接搜索与选中 Bob、默认头像、带名字的按钮与信息摘要，同页完成 |
 | 门店首页 | [home-v2.png](concepts/home-v2.png) | 开始营业按钮、今日店长、个人纪录、上传与图鉴入口；图中鱼缸区已取消，后续加入人工处理提示 |
 | 手机门店首页 | [mobile-home-v2.png](concepts/mobile-home-v2.png) | 已确认；Deedee 店长与既定宣言、唯一主动作开始营业、普通局个人最好、三个次级入口和完整人工处理提示 |
