@@ -13,6 +13,7 @@ import { isDeveloperPet } from '../game/easterEggs';
 import { avatarUrl, preloadImage, silhouetteUrl, stickerUrl } from '../game/pets';
 import { usePetDetail } from '../game/usePetDetail';
 import { useI18n } from '../i18n';
+import { BackToTop, useBackToTop } from '../ui/primitives/BackToTop';
 import { Button } from '../ui/primitives/Button';
 import { SearchInput } from '../ui/primitives/SearchInput';
 import { Tabs } from '../ui/primitives/Tabs';
@@ -41,6 +42,7 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
   const detail = usePetDetail(player.userId, loadDetail);
   const paws = usePawNotices(player.userId);
   const [pawId, setPawId] = useState<string | null>(null);
+  const backToTop = useBackToTop();
 
   const fetchCollection = useCallback(async () => {
     setFailed(false);
@@ -61,7 +63,7 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
   const searchEmpty = view === 'list' && !!data && pets.length === 0 && !!query.trim();
 
   return (
-    <main className={styles.screen}>
+    <main className={`${styles.screen} ${styles.backToTopClear}`}>
       <BrandHeader
         title="collection"
         heading={t('nav.collection')}
@@ -131,6 +133,7 @@ export function PetdexScreen({ player, onBack, onOpenShop, onUpload, load = api.
           />
         )
       )}
+      <BackToTop visible={backToTop.visible} label={t('action.back_to_top')} onClick={backToTop.scrollToTop} />
       <PetDetailOverlay pet={detail.open} playerId={player.userId} openPaws={pawId === detail.open?.petId} onClose={() => { setPawId(null); detail.close(); }} onRetry={detail.show} onOpenShop={onOpenShop} />
     </main>
   );

@@ -53,6 +53,7 @@
 | action.refresh | 刷新 | Refresh |
 | action.cancel | 取消 | Cancel |
 | action.close | 关闭 | Close |
+| action.back_to_top | 返回顶部 | Back to top |
 
 「再开一局」继续当前报告的模式；首页「开始营业」固定普通宠物局。名称沿用相应页面语境，不增加模式选择窗口。
 

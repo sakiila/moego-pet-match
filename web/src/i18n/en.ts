@@ -26,6 +26,7 @@ export const en: Record<MessageKey, string> = {
   'home.sound_tip_tail': ' for more fun.',
   'action.cancel': 'Cancel',
   'action.close': 'Close',
+  'action.back_to_top': 'Back to top',
   'prep.loading': 'Getting the pets ready…',
   'prep.preparing': 'Getting ready…',
   'prep.guests': 'This Round\'s Guests',
