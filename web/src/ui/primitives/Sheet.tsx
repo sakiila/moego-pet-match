@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react';
-import { Icon } from './Icon';
+import { Icon, type IconName } from './Icon';
 import styles from './Sheet.module.css';
 
 export interface SheetProps {
@@ -7,6 +7,7 @@ export interface SheetProps {
   /** 无障碍名称（弹层不一定有可见标题）。 */
   label: string;
   closeLabel: string;
+  closeIcon?: IconName;
   onClose: () => void;
   /** 左上角的小标记，如「已收集」。 */
   badge?: ReactNode;
@@ -21,7 +22,7 @@ export interface SheetProps {
 }
 
 /** 底部抽屉：带关闭按钮，点背景或 Esc 关闭；内容超高时在抽屉内滚动。 */
-export function Sheet({ open, label, closeLabel, onClose, badge, children, inline, suspended = false, aboveDetail = false, trapFocus = false, returnFocus }: SheetProps) {
+export function Sheet({ open, label, closeLabel, closeIcon = 'close', onClose, badge, children, inline, suspended = false, aboveDetail = false, trapFocus = false, returnFocus }: SheetProps) {
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!open || suspended || inline || !trapFocus) return;
@@ -57,7 +58,7 @@ export function Sheet({ open, label, closeLabel, onClose, badge, children, inlin
         <div className={styles.bar}>
           {badge}
           <button type="button" className={styles.close} aria-label={closeLabel} onClick={onClose}>
-            <Icon name="close" size={20} />
+            <Icon name={closeIcon} size={20} />
           </button>
         </div>
         <div className={styles.body}>{children}</div>

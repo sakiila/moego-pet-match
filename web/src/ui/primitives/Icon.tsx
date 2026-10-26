@@ -1,10 +1,9 @@
 import type { CSSProperties } from 'react';
 import { ICON_CATALOG, type IconName as PngIconName } from '../icons/catalog';
 import { MenuGlyph, type MenuGlyphName } from '../icons/MenuGlyph';
-import { isPawGlyph, PawGlyph, type PawGlyphName } from '../icons/PawGlyph';
 import styles from './Icon.module.css';
 
-export type IconName = PngIconName | MenuGlyphName | PawGlyphName;
+export type IconName = PngIconName | MenuGlyphName;
 
 const URLS = import.meta.glob<string>('../icons/png/*.png', { eager: true, query: '?url', import: 'default' });
 
@@ -39,8 +38,6 @@ export interface IconProps {
  * 按显示尺寸用 srcset 选 1x / 2x / 3x。
  */
 export function Icon({ name, size = 24, label, className, effect }: IconProps) {
-  if (isPawGlyph(name)) return <svg className={`${styles.icon} ${className ?? ''}`} width={size} height={size} viewBox="0 0 32 32"
-    role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : true} focusable="false"><PawGlyph name={name} /></svg>;
   if (name === 'my-titles' || name === 'clock-out') {
     return <svg className={`${styles.icon} ${className ?? ''}`} width={size} height={size} viewBox="0 0 32 32"
       role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : true} focusable="false">

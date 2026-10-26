@@ -35,7 +35,7 @@ function PawReply({ paw, petName, avatarSrc, onRead }: SharedProps & { paw: PetP
   if (!paw.reply) return null;
   return <div ref={seen} className={styles.reply} data-testid="paw-reply">
     <Avatar name={paw.reply.owner.name} seed={paw.reply.owner.userId} src={avatarSrc(paw.reply.owner.userId)} size={28} />
-    <span>{t('paw_book.reply_text', { owner: paw.reply.owner.name, pet: petName })}</span><Icon name="paw-print" size={22} />
+    <span>{t('paw_book.reply_text', { owner: paw.reply.owner.name, pet: petName })}</span><Icon name="paw-print" size={24} />
   </div>;
 }
 
@@ -51,7 +51,7 @@ function PawRow({ paw, own, petName, busy, avatarSrc, onRead, onReply }: SharedP
       <span className={styles.phrase}>{t(`paw_book.message.${paw.message}`)}</span>
       {!own && paw.reply && <PawReply paw={paw} petName={petName} avatarSrc={avatarSrc} onRead={onRead} />}
     </div>
-    {own ? paw.reply ? <span className={styles.done}><Icon name="paw-print" size={18} />{t('paw_book.replied')}</span>
+    {own ? paw.reply ? <span className={styles.done}>{t('paw_book.replied')}<Icon name="paw-replied" size={20} /></span>
       : <button className={styles.respond} type="button" disabled={busy} onClick={() => onReply(paw)}>{t('paw_book.reply')}</button>
       : <time className={styles.date} dateTime={paw.createdAt}>{new Date(paw.createdAt).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', { month: 'short', day: 'numeric' })}</time>}
   </div>;
@@ -77,7 +77,7 @@ export function PawBook({ petName, stickerSrc, state, onChange, onReply, onRetry
   const count = view?.count ?? 0;
   const rows = view?.entries.slice(0, visible) ?? [];
   const more = !!view && (visible < view.entries.length || !!view.nextCursor);
-  return <Sheet open aboveDetail trapFocus returnFocus={returnFocus} inline={inline} label={t('paw_book.label', { pet: petName })} closeLabel={t('action.close')} onClose={onClose}
+  return <Sheet open aboveDetail trapFocus returnFocus={returnFocus} inline={inline} label={t('paw_book.label', { pet: petName })} closeLabel={t('action.close')} closeIcon="paw-close" onClose={onClose}
     badge={<header className={styles.header}><img src={stickerSrc} alt="" /><div><h2>{t('paw_book.title')}</h2><p>{petName}</p></div></header>}>
     <section className={styles.book} data-testid="paw-book" aria-busy={state.loading || sending}>
       {view && <p className={styles.count}>{t(count === 1 ? 'paw_book.count_one' : 'paw_book.count_other', { count: count.toLocaleString(locale) })}</p>}
@@ -91,8 +91,8 @@ export function PawBook({ petName, stickerSrc, state, onChange, onReply, onRetry
         <div className={styles.choices}>
           {CHOICES.map(({ message, icon }) => <button key={message} type="button" className={styles.choice}
             aria-pressed={view.mine?.message === message} disabled={sending} onClick={() => onChange(message)} data-testid={`paw-${message}`}>
-            <Icon name={icon} size={24} /><span>{t(`paw_book.message.${message}`)}</span>
-            {view.mine?.message === message && <span className={styles.check} aria-hidden><Icon name="selected-check" size={20} /></span>}
+            <Icon name={icon} size={40} /><span>{t(`paw_book.message.${message}`)}</span>
+            {view.mine?.message === message && <span className={styles.check} aria-hidden><Icon name="paw-selected" size={24} /></span>}
           </button>)}
         </div>
         <div className={styles.mineStatus} aria-live="polite">
@@ -101,7 +101,7 @@ export function PawBook({ petName, stickerSrc, state, onChange, onReply, onRetry
         </div>
         {view.mine?.reply && <PawReply paw={view.mine} petName={petName} avatarSrc={avatarSrc} onRead={onRead} />}
       </div>}
-      {view?.own && view.unreadCount > 0 && <div className={styles.summary}><Icon name="paw-print" size={28} />{t(view.unreadCount === 1 ? 'paw_book.new_count_one' : 'paw_book.new_count', { count: view.unreadCount.toLocaleString(locale) })}</div>}
+      {view?.own && view.unreadCount > 0 && <div className={styles.summary}><Icon name="paw-print" size={32} />{t(view.unreadCount === 1 ? 'paw_book.new_count_one' : 'paw_book.new_count', { count: view.unreadCount.toLocaleString(locale) })}</div>}
       {view && (view.own || count === 0 || view.entries.length > 0) && <div className={styles.entries}>
         {!view.own && <h3>{t('paw_book.others')}</h3>}
         {count === 0 && <p className={styles.muted}>{t(view.own ? 'paw_book.empty_own' : 'paw_book.empty')}</p>}
@@ -109,9 +109,9 @@ export function PawBook({ petName, stickerSrc, state, onChange, onReply, onRetry
         {more && <button type="button" className={styles.more} disabled={loadingMore || sending} onClick={() => {
           if (visible >= view.entries.length) onMore();
           setVisible(v => v + 20);
-        }}>{t(loadingMore ? 'paw_book.loading' : 'paw_book.more')}<Icon name="forward-arrow" size={16} /></button>}
+        }}>{t(loadingMore ? 'paw_book.loading' : 'paw_book.more')}<Icon name="paw-expand" size={10} /></button>}
       </div>}
-      {view?.own && <p className={styles.ownerHint}>{t('paw_book.owner_hint', { pet: petName })}</p>}
+      {view?.own && <p className={styles.ownerHint}><Icon name="paw-print-muted" size={20} /><span>{t('paw_book.owner_hint', { pet: petName })}</span></p>}
     </section>
   </Sheet>;
 }

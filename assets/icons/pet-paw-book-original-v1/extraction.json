@@ -1,0 +1,252 @@
+{
+  "source_sha256": "bf1169914f9472aa53b3c3c88ccd4da3abb82ab99ccbc40e6d88ab706ac90af0",
+  "source_dimensions": [
+    1536,
+    1024
+  ],
+  "source": "User attachment codex-clipboard-96adea34-e635-4e8c-94f6-4dfab9e3f304.png",
+  "assets": [
+    {
+      "id": "paw-print",
+      "crop": [
+        1044,
+        500,
+        1087,
+        538
+      ],
+      "visible_bounds_in_crop": [
+        3,
+        5,
+        39,
+        37
+      ],
+      "size": [
+        36,
+        32
+      ],
+      "preserve_enclosed_source_fill": false,
+      "opaque_rgb_identical_pixels": 586,
+      "master_sha256": "1d304156bca1b036980f97a5e196493db01e59ba8ee8737e5982440158f45c88"
+    },
+    {
+      "id": "paw-cute",
+      "crop": [
+        594,
+        525,
+        628,
+        560
+      ],
+      "visible_bounds_in_crop": [
+        2,
+        2,
+        32,
+        29
+      ],
+      "size": [
+        30,
+        27
+      ],
+      "preserve_enclosed_source_fill": true,
+      "opaque_rgb_identical_pixels": 483,
+      "master_sha256": "e2427330690bca0bcd92722f9971d4d68149e755a88baf5e5c923103e30ed548"
+    },
+    {
+      "id": "paw-pets",
+      "crop": [
+        796,
+        524,
+        832,
+        560
+      ],
+      "visible_bounds_in_crop": [
+        3,
+        3,
+        32,
+        29
+      ],
+      "size": [
+        29,
+        26
+      ],
+      "preserve_enclosed_source_fill": false,
+      "opaque_rgb_identical_pixels": 193,
+      "master_sha256": "60efe8a7a4fad5222e5358b5eb55440606d1a234101d0a6d0d48048f63fc44a6"
+    },
+    {
+      "id": "paw-play",
+      "crop": [
+        592,
+        592,
+        631,
+        629
+      ],
+      "visible_bounds_in_crop": [
+        5,
+        3,
+        33,
+        31
+      ],
+      "size": [
+        28,
+        28
+      ],
+      "preserve_enclosed_source_fill": true,
+      "opaque_rgb_identical_pixels": 538,
+      "master_sha256": "964763fbb3c7178e36697074024f4286ff4a387ada95f688bb9ee394500810eb"
+    },
+    {
+      "id": "paw-love",
+      "crop": [
+        796,
+        592,
+        832,
+        629
+      ],
+      "visible_bounds_in_crop": [
+        3,
+        5,
+        31,
+        31
+      ],
+      "size": [
+        28,
+        26
+      ],
+      "preserve_enclosed_source_fill": false,
+      "opaque_rgb_identical_pixels": 148,
+      "master_sha256": "342fd25ef3146dca7ae949c4aafd66f7833ce988da057323226fba70744090aa"
+    },
+    {
+      "id": "paw-replied",
+      "crop": [
+        1377,
+        716,
+        1412,
+        748
+      ],
+      "visible_bounds_in_crop": [
+        5,
+        3,
+        31,
+        27
+      ],
+      "size": [
+        26,
+        24
+      ],
+      "preserve_enclosed_source_fill": false,
+      "opaque_rgb_identical_pixels": 172,
+      "master_sha256": "389b136e49cb7c0e945f9eb64125998f9796047eb3318b24e39d62e94c92e7ad"
+    },
+    {
+      "id": "paw-print-muted",
+      "crop": [
+        1122,
+        942,
+        1150,
+        967
+      ],
+      "visible_bounds_in_crop": [
+        3,
+        2,
+        26,
+        23
+      ],
+      "size": [
+        23,
+        21
+      ],
+      "preserve_enclosed_source_fill": false,
+      "opaque_rgb_identical_pixels": 187,
+      "master_sha256": "6900d0bc18aec2e9e1db3b7c9d8cdc13212701a4fa3ac57832cb216bbf1c4a36"
+    },
+    {
+      "id": "paw-selected",
+      "crop": [
+        721,
+        592,
+        756,
+        627
+      ],
+      "visible_bounds_in_crop": [
+        3,
+        3,
+        32,
+        32
+      ],
+      "size": [
+        29,
+        29
+      ],
+      "preserve_enclosed_source_fill": true,
+      "opaque_rgb_identical_pixels": 553,
+      "master_sha256": "0450e908b339c70aa6fb7532ce7c71e050da1f774408ba621544c505c1c0e3a1"
+    },
+    {
+      "id": "paw-expand",
+      "crop": [
+        796,
+        965,
+        815,
+        981
+      ],
+      "visible_bounds_in_crop": [
+        1,
+        2,
+        16,
+        12
+      ],
+      "size": [
+        15,
+        10
+      ],
+      "preserve_enclosed_source_fill": false,
+      "opaque_rgb_identical_pixels": 35,
+      "master_sha256": "e52b87f1685db5805e26dcaf32ba5731ac6562dcbcf896e539d2f4066f978b7f"
+    },
+    {
+      "id": "paw-entry-arrow",
+      "crop": [
+        453,
+        868,
+        472,
+        895
+      ],
+      "visible_bounds_in_crop": [
+        5,
+        5,
+        15,
+        21
+      ],
+      "size": [
+        10,
+        16
+      ],
+      "preserve_enclosed_source_fill": false,
+      "opaque_rgb_identical_pixels": 39,
+      "master_sha256": "132f9226b54b212a14c578c873d51a6ad1ce6cdb302292d74360250e584cd4b8"
+    },
+    {
+      "id": "paw-close",
+      "crop": [
+        928,
+        367,
+        951,
+        391
+      ],
+      "visible_bounds_in_crop": [
+        1,
+        3,
+        20,
+        21
+      ],
+      "size": [
+        19,
+        18
+      ],
+      "preserve_enclosed_source_fill": false,
+      "opaque_rgb_identical_pixels": 116,
+      "master_sha256": "a9ed73cbe2c87a8e6ff31095380592aec9a082207742f69fd013b8ef65efe317"
+    }
+  ]
+}

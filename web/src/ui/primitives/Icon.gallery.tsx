@@ -4,7 +4,7 @@ import { FishFrame } from '../../dev/gallery/FishFrame';
 import { ICON_CATALOG } from '../icons/catalog';
 import { Icon, type IconName } from './Icon';
 
-const NAMES = [...Object.keys(ICON_CATALOG), 'my-titles', 'clock-out', 'paw-print', 'paw-cute', 'paw-pets', 'paw-play', 'paw-love'] as IconName[];
+const NAMES = [...Object.keys(ICON_CATALOG), 'my-titles', 'clock-out'] as IconName[];
 const SIZES = [24, 32, 48];
 
 function Grid({ names = NAMES }: { names?: IconName[] }) {
@@ -32,6 +32,7 @@ const entry: GalleryEntry = {
   name: 'Icon',
   group: 'primitives',
   states: {
+    'paw book · source PNG crops': () => <Grid names={['paw-print','paw-cute','paw-pets','paw-play','paw-love','paw-replied','paw-print-muted','paw-selected','paw-expand','paw-entry-arrow','paw-close']} />,
     'player menu (20 / 24 / 32)': () => <div style={{ display: 'flex', gap: 16 }}>{(['my-titles', 'clock-out'] as const).map(name => <span key={name} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>{[20, 24, 32].map(size => <Icon key={size} name={name} size={size} label={name} />)}</span>)}</div>,
     'light (24 / 32 / 48)': () => (
       <Surface bg="var(--color-paper)">
