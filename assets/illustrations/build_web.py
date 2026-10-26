@@ -26,8 +26,8 @@ ITEMS = {
     'ui/hall-laurel-left.png': ('hall-laurel-left', 72),
     'ui/hall-laurel-right.png': ('hall-laurel-right', 72),
     'ui/hall-cat.png': ('hall-cat', 240),
-    # v3 从已确认原图重新提取，保留原始 RGB 与肚皮轮廓；v1/v2 留档。
-    'ui/hall-dog-v3.png': ('hall-dog-v3', 240),
+    # v4 按用户标注仅平滑肚皮两处折角；区域外与 v3 一致。
+    'ui/hall-dog-v4.png': ('hall-dog-v4', 240),
     # 皇冠 v2：端正、带白边（品红底出图，tools/remove_key.py 去底）
     'ui/hall-crown-v2.png': ('hall-crown', 144),
 }
