@@ -39,6 +39,7 @@ export interface HomeScreenProps {
   /** 信息使用说明；removal 为 true 时直接展开一般删除申请。 */
   onInfo: (removal: boolean) => void;
   onClockOut: () => void;
+  clockOutError?: string;
   onTitles?: () => void;
   /** 陈列页使用示例数据，不读取玩家 API。 */
   loadLikes?: PlayerLikesLoader;
@@ -50,7 +51,7 @@ export interface HomeScreenProps {
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail, soundTipPreview }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onInfo, onClockOut, clockOutError, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail, soundTipPreview }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
@@ -70,6 +71,7 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
       {manager && <ManagerCard name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} line={t(managerLineKey(manager.pet.petId))} onOpen={() => setPoster(true)} />}
       <div className={styles.grow} />
       {updateAvailable && <StatusMessage text={t('home.update_available')} actionLabel={t('action.refresh')} actionIcon="retry" onAction={onRefresh} />}
+      {clockOutError && <StatusMessage tone="error" text={clockOutError} actionLabel={t('action.retry')} onAction={onClockOut} />}
       <Button size="lg" block onClick={onOpenShop} data-testid="open-shop">
         {t('action.open_shop')}
       </Button>

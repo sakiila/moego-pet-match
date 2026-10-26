@@ -1,6 +1,6 @@
 import pg from 'pg';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import { LOCAL_TEST_URL } from '../src/config.ts';
 import { appRoleGrants } from '../src/db/appGrants.ts';
 import { freshDatabase } from './helpers.ts';

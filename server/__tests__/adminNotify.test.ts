@@ -2,7 +2,7 @@ import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import sharp from 'sharp';
 import { formatAdminEvent, photoPreview, slackAdminNotifier, type AdminEvent } from '../src/services/adminNotify.ts';
 import { DiskCache } from '../src/storage/diskCache.ts';

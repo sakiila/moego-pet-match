@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import { slackDirectory, toMember, type SlackDirectory } from '../src/services/slackDirectory.ts';
 import { freshDatabase } from './helpers.ts';
 

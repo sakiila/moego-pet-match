@@ -1,3 +1,4 @@
+import { requirePlayer } from '../services/requirePlayer.ts';
 import type { FastifyPluginAsync } from 'fastify';
 import type { AppDeps } from '../app.ts';
 import { loadPlayer, registerFromSlack } from '../services/players.ts';
@@ -15,6 +16,7 @@ export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, dir
   app.get<{ Params: { id: string } }>('/api/players/:id/pets', async (request, reply) => {
     const query = z.object({ viewerId: z.string().trim().min(1) }).safeParse(request.query);
     if (!query.success) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, pool, query.data.viewerId)) return;
     const [owner, viewer] = await Promise.all([
       findColleague(pool, request.params.id), findColleague(pool, query.data.viewerId),
     ]);
@@ -25,6 +27,7 @@ export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, dir
   app.get<{ Params: { id: string } }>('/api/players/:id/likes', async (request, reply) => {
     const query = z.object({ viewerId: z.string().min(1) }).safeParse(request.query);
     if (!query.success) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, pool, query.data.viewerId)) return;
     const view = await loadPlayerLikes(pool, request.params.id, query.data.viewerId);
     return view ?? reply.status(404).send({ error: 'not_found' });
   });
@@ -32,6 +35,7 @@ export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, dir
   app.post<{ Params: { id: string } }>('/api/players/:id/likes', async (request, reply) => {
     const body = z.object({ playerId: z.string().min(1) }).strict().safeParse(request.body);
     if (!body.success) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, pool, body.data.playerId)) return;
     const targetId = request.params.id;
     const sourceId = body.data.playerId;
     if (targetId === sourceId) {
@@ -60,6 +64,8 @@ export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, dir
       }
     }
     if (!player) return reply.status(404).send({ error: 'not_found' });
+    if (!await requirePlayer(request, reply, pool, player.userId)) return;
+    reply.header('cache-control', 'no-store');
     const titles = await inTransaction(pool, client => readAchievements(client, player!.userId));
     if (titles.equippedTitle) player.equippedTitle = titles.equippedTitle;
     else delete player.equippedTitle;
@@ -68,7 +74,7 @@ export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, dir
 
   app.get<{ Params: { id: string } }>('/api/players/:id/achievements', async (request, reply) => {
     const playerId = request.params.id;
-    if (!await findColleague(pool, playerId)) return reply.status(404).send({ error: 'not_found' });
+    if (!await requirePlayer(request, reply, pool, playerId)) return;
     return inTransaction(pool, client => readAchievements(client, playerId));
   });
 
@@ -76,7 +82,7 @@ export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, dir
     const body = z.object({ title: z.enum(ACHIEVEMENT_IDS).nullable() }).strict().safeParse(request.body);
     if (!body.success) return reply.status(400).send({ error: 'invalid_request' });
     const playerId = request.params.id;
-    if (!await findColleague(pool, playerId)) return reply.status(404).send({ error: 'not_found' });
+    if (!await requirePlayer(request, reply, pool, playerId)) return;
     const result = await inTransaction(pool, async client => {
       const view = await readAchievements(client, playerId);
       if (body.data.title && !view.achievements.some(a => a.id === body.data.title && a.unlockedAt)) return null;

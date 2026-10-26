@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, expect, it } from 'vitest';
 import { freshDatabase } from './helpers.ts';
-import { buildApp } from '../src/app.ts';
+import { buildAuthenticatedApp as buildApp } from './helpers.ts';
 import { slackDirectory } from '../src/services/slackDirectory.ts';
 import { syncSlackMembers } from '../src/services/syncSlackMembers.ts';
 

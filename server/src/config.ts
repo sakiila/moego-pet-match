@@ -1,6 +1,10 @@
 /** 运行配置。本地默认连 docker-compose 的开发库；正式环境用 RackNerd PostgreSQL 专用角色。 */
 export const LOCAL_DEV_URL = 'postgres://postgres:postgres@localhost:54329/pet_match_dev';
-export const LOCAL_TEST_URL = 'postgres://postgres:postgres@localhost:54329/pet_match_test';
+export const LOCAL_TEST_URL = process.env.PET_MATCH_TEST_DATABASE_URL ?? 'postgres://postgres:postgres@localhost:54329/pet_match_test';
+const testDatabase = new URL(LOCAL_TEST_URL);
+if (!['localhost', '127.0.0.1'].includes(testDatabase.hostname) || !testDatabase.pathname.endsWith('_test')) {
+  throw new Error('test database must be local and its name must end with _test');
+}
 
 /**
  * 数据库选择：显式 DATABASE_URL 优先；只有 NODE_ENV=production 才使用 .env 里的正式库
