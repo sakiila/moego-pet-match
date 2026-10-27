@@ -1,5 +1,6 @@
 import { RULES } from '../../../web/src/engine/config.ts';
 import { coatDistance, type Coat } from '../catalog/coat.ts';
+import type { Faction } from '../../../web/src/game/factionWeek.ts';
 
 /** 已确认的阵容抽样初值（V1_RULES「自家宠物抽样」「未收集倾向」），可随试玩调整。 */
 export const LINEUP_WEIGHTS = {
@@ -24,6 +25,8 @@ export interface CandidatePet {
   ownerUserId: string | null;
   /** 毛色特征；缺失时不参与撞色降权。 */
   coat?: Coat | null;
+  /** 归一后的猫狗物种，只在阵营周配额抽样时使用。 */
+  species?: Faction | null;
 }
 
 function pickWithout<T>(items: T[], weight: (t: T) => number, random: () => number): T {
@@ -46,8 +49,12 @@ export function sampleLineup(
   playerId: string,
   collected: ReadonlySet<string>,
   random: () => number,
+  /** 阵营周已报名玩家：猫、狗各占几种（docs/events/CAT_DOG_WEEK.md 第 5 节）；不传为普通抽样。 */
+  speciesQuota?: number,
 ): { lineup: string[]; own: string[] } {
-  const own = pets.filter((p) => p.ownerUserId === playerId);
+  const remaining: Record<Faction, number> | null = speciesQuota ? { cat: speciesQuota, dog: speciesQuota } : null;
+  // 配额抽样时非猫非狗的自家宠物本期不入选；自家宠物占用对应物种名额
+  const own = pets.filter((p) => p.ownerUserId === playerId && (!remaining || p.species));
   const others = pets.filter((p) => p.ownerUserId !== playerId);
 
   let ownCount = 0;
@@ -62,6 +69,7 @@ export function sampleLineup(
     const p = pickWithout(ownPool, () => 1, random);
     chosenOwn.push(p);
     ownPool.splice(ownPool.indexOf(p), 1);
+    if (remaining && p.species) remaining[p.species]--;
   }
 
   const allCollected = others.every((p) => collected.has(p.petId));
@@ -72,10 +80,19 @@ export function sampleLineup(
   const lookAlike = (p: CandidatePet) =>
     !!p.coat && [...chosenOwn, ...chosenOthers].some((q) => q.coat && coatDistance(p.coat!, q.coat) < LINEUP_WEIGHTS.coatSimilar);
   const weight = (p: CandidatePet) => base(p) * (lookAlike(p) ? LINEUP_WEIGHTS.coatPenalty : 1);
+  // 配额内的物种优先；某物种不够时用另一物种补，猫狗都不够时才用其他物种
+  const candidates = () => {
+    if (!remaining) return pool;
+    const open = pool.filter((p) => p.species && remaining[p.species] > 0);
+    if (open.length) return open;
+    const catsDogs = pool.filter((p) => p.species);
+    return catsDogs.length ? catsDogs : pool;
+  };
   while (chosenOwn.length + chosenOthers.length < RULES.kinds && pool.length > 0) {
-    const p = pickWithout(pool, weight, random);
+    const p = pickWithout(candidates(), weight, random);
     chosenOthers.push(p);
     pool.splice(pool.indexOf(p), 1);
+    if (remaining && p.species) remaining[p.species]--;
   }
   return { lineup: [...chosenOwn, ...chosenOthers].map((p) => p.petId), own: chosenOwn.map((p) => p.petId) };
 }

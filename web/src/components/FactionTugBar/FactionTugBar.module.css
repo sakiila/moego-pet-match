@@ -1,0 +1,84 @@
+.root {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.ends {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.side {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+.side[data-faction='cat'] { color: var(--faction-cat); }
+.side[data-faction='dog'] { color: var(--faction-dog); }
+
+/* 绳子：底色为汪派，左段为喵派，宽度随占比平滑移动 */
+.bar {
+  position: relative;
+  height: var(--faction-bar-height);
+  border: var(--stroke) solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--faction-dog);
+  overflow: hidden;
+}
+
+.cat {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--cat-share);
+  background: var(--faction-cat);
+  transition: width 600ms var(--ease-out);
+}
+
+.knot {
+  position: absolute;
+  top: 50%;
+  left: var(--cat-share);
+  width: calc(var(--faction-bar-height) * 0.7);
+  height: calc(var(--faction-bar-height) * 0.7);
+  border-radius: 50%;
+  background: var(--color-paper);
+  box-shadow: 0 0 0 2px var(--color-ink);
+  transform: translate(-50%, -50%);
+  transition: left 600ms var(--ease-out);
+}
+
+.points {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+
+.level {
+  flex: 1;
+  text-align: center;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-muted);
+}
+
+.root[data-compact] .side,
+.root[data-compact] .points,
+.root[data-compact] .level {
+  font-size: var(--text-xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat,
+  .knot {
+    transition: none;
+  }
+}

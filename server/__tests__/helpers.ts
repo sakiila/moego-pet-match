@@ -20,7 +20,7 @@ export function buildAuthenticatedApp(deps: AppDeps) {
     const opts = typeof options === 'string' ? { url: options } : options;
     if (opts.headers?.cookie) return inject(opts);
     const url = new URL(typeof opts.url === 'string' ? opts.url : opts.url?.pathname ?? '/', 'http://localhost');
-    if (!/^\/api\/(?:players|pets|games|quizzes|my-pets|deletion-requests|submissions)(?:\/|$)/.test(url.pathname) && !url.pathname.startsWith('/img/photos/')) return inject(opts);
+    if (!/^\/api\/(?:players|pets|games|quizzes|my-pets|deletion-requests|submissions|faction)(?:\/|$)/.test(url.pathname) && !url.pathname.startsWith('/img/photos/')) return inject(opts);
     const payload = opts.payload;
     const body = typeof payload === 'object' && !Buffer.isBuffer(payload) ? payload as { playerId?: string } : undefined;
     const multipartId = Buffer.isBuffer(payload) ? /name="playerId"\r\n\r\n([^\r\n]+)/.exec(payload.toString())?.[1] : undefined;

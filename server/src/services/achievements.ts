@@ -1,6 +1,6 @@
 import type pg from 'pg';
 import type { AchievementView } from '../../../web/src/api/types.ts';
-import { ACHIEVEMENTS, HIDDEN_ACHIEVEMENT_IDS, servedHotpot, type AchievementId, type AchievementMetric } from '../../../web/src/game/achievementRules.ts';
+import { ACHIEVEMENTS, EVENT_ACHIEVEMENT_IDS, HIDDEN_ACHIEVEMENT_IDS, servedHotpot, type AchievementId, type AchievementMetric } from '../../../web/src/game/achievementRules.ts';
 
 /** 所有授予与佩戴操作按玩家串行，避免两个不同对局或补发请求同时越过同一门槛。 */
 export async function lockAchievements(client: pg.PoolClient, playerId: string) {
@@ -55,7 +55,7 @@ export async function syncAchievements(client: pg.PoolClient, playerId: string, 
 
 /**
  * 返回汇总进度，不返回未认识的宠物及主人关系。已获得的徽章保留当时目标与完成状态。
- * 隐藏成就固定排在最后：解锁前只返回不带进度的占位（current 0 / target 1，界面显示「隐藏称号」与灰蒙层），解锁后以已完成状态返回。
+ * 限时活动徽章只在获得后返回。隐藏成就固定排在最后：解锁前只返回不带进度的占位（current 0 / target 1，界面显示「隐藏称号」与灰蒙层），解锁后以已完成状态返回。
  */
 export async function readAchievements(client: pg.PoolClient, playerId: string): Promise<AchievementView> {
   await syncAchievements(client, playerId);
@@ -73,6 +73,11 @@ export async function readAchievements(client: pg.PoolClient, playerId: string):
         const award = awards.rows.find(a => a.achievement_id === rule.id);
         const target = award?.target_value ?? (rule.target === 'catalog' ? values.total : rule.target);
         return { id:rule.id, current:award ? target : Math.min(values[rule.metric],target), target, unlockedAt:award ? at(award) : null };
+      }),
+      // 限时活动徽章只返回已获得的
+      ...EVENT_ACHIEVEMENT_IDS.flatMap(id => {
+        const award = awards.rows.find(a => a.achievement_id === id);
+        return award ? [{ id, current: award.target_value, target: award.target_value, unlockedAt: at(award) }] : [];
       }),
       ...hidden,
     ],

@@ -1,6 +1,6 @@
-# 猫派 vs 狗派周素材（v1，待生成）
+# 猫派 vs 狗派周素材（v1，已选定）
 
-活动规则见 [docs/events/CAT_DOG_WEEK.md](../../../docs/events/CAT_DOG_WEEK.md)。代码已用占位图接入，替换下列母版并重新导出后立即生效，无需改代码。
+活动规则见 [docs/events/CAT_DOG_WEEK.md](../../../docs/events/CAT_DOG_WEEK.md)。2026-10-27 Bob 选定 [四枚素材 v1](../../../design/concepts/catdog-week-icons-v1.png)，已替换下列 8 个占位母版并导出网页尺寸，无需改代码。原图、提取方式和每个母版的 SHA-256 见 [manifest.json](manifest.json)，提取脚本为 [extract.py](extract.py)，完整请求见 [prompt](../../../design/concepts/catdog-week-icons-v1-prompt.txt)。
 
 ## 需要的 4 个图形 → 8 个母版文件
 

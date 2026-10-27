@@ -17,6 +17,7 @@ import { slackEventRoutes } from './routes/slackEvents.ts';
 import { webRoutes } from './routes/web.ts';
 import { authRoutes } from './routes/auth.ts';
 import { socialRoutes } from './routes/social.ts';
+import { factionRoutes } from './routes/faction.ts';
 import type { SocialOptions } from './social/types.ts';
 import { socialWorker } from './social/worker.ts';
 import type { AdminNotifier } from './services/adminNotify.ts';
@@ -69,6 +70,7 @@ export function buildApp(deps: AppDeps) {
   app.register(playerRoutes, deps);
   app.register(gameRoutes, deps);
   app.register(leaderboardRoutes, deps);
+  app.register(factionRoutes, deps);
   app.register(petRoutes, deps);
   app.register(petPawRoutes, deps);
   app.register(imageRoutes, deps);

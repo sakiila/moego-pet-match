@@ -35,6 +35,13 @@
   --color-cat-blue: #4a8fe0;
   --color-dog-yellow: #f7b733;
   --color-dog-red: #e5533d;
+  /* 猫派 vs 狗派周：喵派橙、汪派蓝，拔河条与阵营卡共用 */
+  --faction-cat: var(--color-brand);
+  --faction-cat-soft: var(--color-brand-soft);
+  --faction-dog: var(--color-cat-blue);
+  --faction-dog-soft: #e8f1fc;
+  --faction-bar-height: 14px;
+  --faction-crest-size: 40px;
 
   /* 本局 6 种宠物的浅底色（按本局 kind 分配，跨局可变，不作为宠物永久身份） */
   --pet-tint-0: #d6e8ff;

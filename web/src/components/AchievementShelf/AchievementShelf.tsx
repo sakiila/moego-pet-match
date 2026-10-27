@@ -5,7 +5,7 @@ import { Icon } from '../../ui/primitives/Icon';
 import { StatusMessage } from '../StatusMessage/StatusMessage';
 import { AchievementBadge, achievementName, achievementCondition } from '../AchievementBadge/AchievementBadge';
 import { ACHIEVEMENT_DISPLAY_ORDER, ACHIEVEMENT_RARITY, ACHIEVEMENT_RARITY_ORDER } from '../../game/achievementRarity';
-import { HIDDEN_ACHIEVEMENT_IDS } from '../../game/achievementRules';
+import { HIDDEN_ACHIEVEMENT_IDS, isEventAchievement } from '../../game/achievementRules';
 import { RarityGuide } from '../RarityGuide/RarityGuide';
 import { RarityTag } from '../RarityTag/RarityTag';
 import styles from './AchievementShelf.module.css';
@@ -32,7 +32,7 @@ export function AchievementShelf({ view, failed, saving, saveFailed, onRetry, on
         <RarityGuide rarities={ACHIEVEMENT_RARITY_ORDER} />
         {failed ? <StatusMessage tone="error" text={t('achievement.load_failed')} actionLabel={t('action.retry')} onAction={onRetry} /> : !view ? <p role="status">{t('achievement.loading')}</p> : <>
           <div className={styles.summary}>
-            <strong>{t('achievement.unlocked_count', { count: view.achievements.filter(a => a.unlockedAt).length, total: view.achievements.length })}</strong>
+            <strong>{t('achievement.unlocked_count', { count: view.achievements.filter(a => a.unlockedAt && !isEventAchievement(a.id)).length, total: view.achievements.filter(a => !isEventAchievement(a.id)).length })}</strong>
             <button type="button" className={styles.remove} disabled={saving || !view.equippedTitle} onClick={() => onSelect(null)}>{t('achievement.remove')}</button>
           </div>
           {saveFailed && <StatusMessage tone="error" text={t('achievement.equip_failed')} />}

@@ -25,6 +25,13 @@ const entry: GalleryEntry = {
         standing={{ rank: 3, score: 134200, leaderScore: 146600, participants: 12 }}
       />
     ),
+    'faction week: all four tags (record, rank, streak, +team points)': () => (
+      <ScoreCard mode="normal" score={98400} saveState="saved" newRecord mvp={{ pet: maodu, kind: 1 }} review="review.pet.rush_success" title="title.scheduling_pro" stats={stats}
+        standing={{ rank: 2, score: 98400, leaderScore: 120000, participants: 12 }} streak={{ days: 4, today: true, firstToday: true }} faction={{ faction: 'dog', points: 128, capped: false }} />
+    ),
+    'faction week: capped for today': () => (
+      <ScoreCard mode="normal" score={24800} saveState="saved" newRecord={false} mvp={{ pet: maodu, kind: 1 }} review="review.pet.normal" title="title.pet_officer" stats={stats} faction={{ faction: 'cat', points: 0, capped: true }} />
+    ),
     'today standing: first + new record': () => (
       <ScoreCard
         mode="normal"

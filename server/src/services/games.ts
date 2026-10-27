@@ -13,6 +13,8 @@ import { lockAchievements, syncAchievements } from './achievements.ts';
 import { computeStreak, playedDates } from './streak.ts';
 import { GameMovesSchema, validateReplay } from './gameReplay.ts';
 import { sameToken } from './gameToken.ts';
+import { lineupQuota, recordFactionContribution } from './faction.ts';
+import { factionSpecies } from '../../../web/src/game/factionWeek.ts';
 import { newRefillKey, validateLive } from './livePlay.ts';
 
 /** 第几局普通完整局后解锁 Peter 鱼关。 */
@@ -59,16 +61,17 @@ export async function registerGame(
       .slice(0, RULES.kinds)
       .map(({ petId, name, nameEn }) => ({ petId, name, nameEn }));
   } else {
-    const pets = await pool.query(`SELECT pet_id, name, owner_user_id, family_id, coat FROM pet_match.pets WHERE status = 'published'`);
+    const pets = await pool.query(`SELECT pet_id, name, owner_user_id, family_id, coat, species FROM pet_match.pets WHERE status = 'published'`);
     if (pets.rows.length < RULES.kinds) throw new GameError('not_ready', 'not enough published pets');
     const collected = new Set<string>(
       (await pool.query('SELECT pet_id FROM pet_match.collections WHERE player_id = $1', [playerId])).rows.map((r) => r.pet_id),
     );
     const sampled = sampleLineup(
-      pets.rows.map((r) => ({ petId: r.pet_id, ownerUserId: r.owner_user_id, coat: r.coat })),
+      pets.rows.map((r) => ({ petId: r.pet_id, ownerUserId: r.owner_user_id, coat: r.coat, species: factionSpecies(r.species) })),
       playerId,
       collected,
       random,
+      mode === 'normal' ? await lineupQuota(pool, playerId, beijingDate(now)) : undefined,
     );
     if (sampled.lineup.length < RULES.kinds) throw new GameError('not_ready', 'not enough pets for a full lineup');
     const nameOf = new Map<string, string>(pets.rows.map((r) => [r.pet_id, r.name]));
@@ -268,6 +271,7 @@ export async function settleGame(
     const clocksIn = mode !== 'ai' && payload.validMoves > 0;
     const streak = { ...computeStreak(clocksIn ? [boardDate, ...before] : before, beijingDate()), firstToday: clocksIn && !before.includes(boardDate) };
     const quiz = counted ? await maybeCreateQuiz(client, gameId, playerId, completed, payload) : null;
+    const faction = await recordFactionContribution(client, g, boardDate, payload);
 
     const response: SettleResponse = {
       gameId,
@@ -279,6 +283,7 @@ export async function settleGame(
       removedPetIds: await removedOf(),
       newAchievements,
       streak,
+      ...(faction ? { faction } : {}),
     };
     await client.query(
       `INSERT INTO pet_match.game_results (game_id, payload, payload_hash, score, counted, response) VALUES ($1, $2, $3, $4, $5, $6)`,
