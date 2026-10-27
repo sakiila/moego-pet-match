@@ -78,11 +78,14 @@ function mergePage(
 /** 真实服务容器；视觉和交互仍复用同一组已验收组件。 */
 export function SocialLiveScreen({
   onHome,
+  start,
   onTitles,
   onClockOut,
   equippedTitle,
 }: {
   onHome: () => void;
+  /** 进入后先在动态列表，再前进到该页（如首页菜单的「我的动态」）。 */
+  start?: SocialPage;
   onTitles?: () => void;
   onClockOut?: () => void;
   /** 由外层玩家状态提供，换称号后即时更新头像徽章。 */
@@ -91,12 +94,6 @@ export function SocialLiveScreen({
   const { t } = useI18n();
   const [state, setState] = useState<SocialState>(initial);
   const [profile, setProfile] = useState<SocialPerson | null>(null);
-  // 首页头像菜单以 ?view=mine 进入；读一次后去掉参数，刷新不再重复跳转。
-  const [openOnStart] = useState<SocialPage | undefined>(() => {
-    if (new URLSearchParams(location.search).get('view') !== 'mine') return undefined;
-    history.replaceState(history.state, '', location.pathname);
-    return { name: 'mine' };
-  });
   const data = useRef(state);
   const revision = useRef(0);
   const requestEpoch = useRef(0);
@@ -381,7 +378,7 @@ export function SocialLiveScreen({
         onHome={onHome}
         onReset={() => {}}
         onAuthor={setProfile}
-        openOnStart={openOnStart}
+        openOnStart={start}
         onTitles={onTitles}
         onClockOut={onClockOut}
         browserHistory

@@ -32,12 +32,16 @@ interface Session {
   game: GameState;
 }
 
+/** 页面加载时是否来自旧的 /moments 链接；只在加载时判断一次，收工后作废。 */
+let legacySocial = location.pathname === '/moments'
+  ? { start: new URLSearchParams(location.search).get('view') === 'mine' ? ('mine' as const) : undefined }
+  : null;
 type Route =
   | { name: 'boot' }
   | { name: 'bootFailed' }
   | { name: 'identity'; query?: string }
   | { name: 'home' }
-  | { name: 'social' }
+  | { name: 'social'; start?: 'mine' }
   | { name: 'leaderboard'; mode: GameMode }
   | { name: 'petdex' }
   | { name: 'upload' }
@@ -118,7 +122,16 @@ export function App() {
       const restored = await api.getPlayer(saved);
       setPlayer(restored);
       if (import.meta.env.DEV && devReport) return void (await devJumpToReport(restored));
-      setRoute(location.pathname === '/moments' ? { name:'social' } : { name: 'home' });
+      // 旧的 /moments 链接：回到首页网址并补一条首页记录，之后与首页入口一致；重复执行不再多压记录。
+      if (legacySocial) {
+        if (location.pathname === '/moments') history.replaceState(null, '', '/');
+        if (history.state?.social !== 0) history.pushState({ social: 0 }, '');
+        setRoute({ name: 'social', start: legacySocial.start });
+      } else {
+        // 在动态墙里刷新会回到首页：清掉当前记录上的动态墙层级，避免被当成墙内页面。
+        if (typeof history.state?.social === 'number') history.replaceState(null, '');
+        setRoute({ name: 'home' });
+      }
     } catch (error) {
       if (error instanceof ApiError && (error.kind === 'not_found' || error.kind === 'unauthorized')) {
         savePlayerId(null);
@@ -245,6 +258,26 @@ export function App() {
     setRoute({ name: 'home' });
   }, []);
   const toPetdex = useCallback(() => setRoute({ name: 'petdex' }), []);
+  /** 动态墙是页内页面：进入时压一条同网址的根记录，系统返回能逐级退回首页。 */
+  const openSocial = (start?: 'mine') => {
+    history.pushState({ social: 0 }, '');
+    setRoute({ name: 'social', start });
+  };
+  /** 回门店：一次退掉动态墙压入的全部记录，由下方监听切回首页。 */
+  const leaveSocial = () => {
+    const depth = history.state?.social;
+    if (typeof depth === 'number') history.go(-(depth + 1));
+    else setRoute({ name: 'home' });
+  };
+  useEffect(() => {
+    if (route.name !== 'social') return;
+    // 动态墙自己先处理弹层与草稿拦截（可能重新压回记录），下一拍再看是否已退出根页。
+    const exit = () => setTimeout(() => {
+      if (typeof history.state?.social !== 'number') setRoute((current) => (current.name === 'social' ? { name: 'home' } : current));
+    });
+    window.addEventListener('popstate', exit);
+    return () => window.removeEventListener('popstate', exit);
+  }, [route.name]);
   const petsOf = (s: Session) =>
     s.game.lineup.map((id) => petFromLineup(s.registered.lineup.find((p) => p.petId === id)!, s.registered.mode));
   const ownNamesOf = (s: Session) =>
@@ -257,6 +290,7 @@ export function App() {
     setClockOutFailed(false);
     try {
       await api.logout();
+      legacySocial = null;
       setShowTitles(false);
       savePlayerId(null);
       setPlayer(null);
@@ -304,8 +338,8 @@ export function App() {
             onCollection={toPetdex}
             onLeaderboard={() => setRoute({ name: 'leaderboard', mode: 'normal' })}
             onMyPets={() => setRoute({ name: 'myPets' })}
-            onSocial={socialEnabled ? () => location.assign('/moments') : import.meta.env.DEV ? () => location.assign('/dev/social') : undefined}
-            onMyPosts={socialEnabled ? () => location.assign('/moments?view=mine') : undefined}
+            onSocial={socialEnabled ? () => openSocial() : import.meta.env.DEV ? () => location.assign('/dev/social') : undefined}
+            onMyPosts={socialEnabled ? () => openSocial('mine') : undefined}
             onTitles={() => setShowTitles(true)}
             onInfo={(removal) => setRoute({ name: 'info', player: { userId: player.userId, name: player.name }, removal, back: 'home' })}
             onClockOut={() => void clockOut()}
@@ -313,9 +347,10 @@ export function App() {
           />
         ) : null;
       case 'social':
-        return player ? <Suspense fallback={<main className={screen.screen}/>}><LiveSocial onHome={()=>location.assign('/')}
+        return player ? <Suspense fallback={<main className={screen.screen}/>}><LiveSocial onHome={leaveSocial}
+          start={route.start === 'mine' ? { name: 'mine' } : undefined}
           onTitles={() => setShowTitles(true)} equippedTitle={player.equippedTitle ?? null}
-          onClockOut={() => void clockOut().then(ok => { if (ok) history.replaceState(null, '', '/'); })}/></Suspense> : null;
+          onClockOut={() => void clockOut()}/></Suspense> : null;
       case 'leaderboard':
         return player ? <LeaderboardScreen key={route.mode} player={player} initialMode={route.mode} onBack={toHome} onChallenge={(mode) => void toPrep(mode)} /> : null;
       case 'petdex':

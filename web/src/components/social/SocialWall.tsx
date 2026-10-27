@@ -124,8 +124,9 @@ export function SocialWall({
     });
   };
   /** 回到来路页并恢复浏览位置；深链接没有来路时回动态列表。 */
-  const restore = () => {
-    const previous = history.current.pop();
+  const restore = (depth = history.current.length - 1) => {
+    let previous = history.current.pop();
+    while (history.current.length > Math.max(depth, 0)) previous = history.current.pop();
     motion.current = 'back';
     setPage(previous?.page ?? { name: 'feed' });
     setReplyTo(undefined);
@@ -287,18 +288,20 @@ export function SocialWall({
   }, [page, onPageChange]);
   useEffect(() => {
     if (!browserHistory) return;
-    const pop = () => {
+    // 每条历史记录的 state.social 是动态墙内的层级（根页为 0）；离开根页由外层回门店。
+    const pop = (event: PopStateEvent) => {
       const guard = leaveGuard.current;
       // 弹层、大图和未发布草稿先拦下这次返回，留在原页。
       if (guard.overlay || guard.dirty) {
-        window.history.pushState({ social: history.current.length + 1 }, '');
+        window.history.pushState({ social: history.current.length }, '');
         if (guard.overlay) {
           setOverlay(null);
           setPhotoView(null);
         } else setOverlay({ kind: 'discard', leave: 'back' });
         return;
       }
-      guard.restore();
+      const depth = event.state?.social;
+      if (typeof depth === 'number' && depth < history.current.length) guard.restore(depth);
     };
     window.addEventListener('popstate', pop);
     return () => window.removeEventListener('popstate', pop);
