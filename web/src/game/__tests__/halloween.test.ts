@@ -1,9 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { halloweenActive, halloweenPreview, nextHalloweenBoundary, parseHalloweenWindow } from '../halloween';
+import { configuredHalloweenWindow, DEFAULT_HALLOWEEN_WINDOW, halloweenActive, halloweenPreview, nextHalloweenBoundary, parseHalloweenWindow } from '../halloween';
 
 const window = parseHalloweenWindow('2026-10-30T00:00:00+08:00', '2026-11-02T00:00:00+08:00')!;
 
 describe('Halloween three-day presentation window', () => {
+  it('ships the first event window without requiring Docker build arguments', () => {
+    expect(configuredHalloweenWindow()).toEqual(window);
+    expect(DEFAULT_HALLOWEEN_WINDOW).toEqual(window);
+    expect(halloweenActive(Date.parse('2026-10-28T07:00:00+08:00'))).toBe(false);
+    expect(configuredHalloweenWindow('', '')).toBeNull();
+    expect(configuredHalloweenWindow('2026-10-31T00:00:00+08:00')).toBeNull();
+    expect(configuredHalloweenWindow(undefined, '2026-11-02T00:00:00+08:00')).toBeNull();
+    const alternate = configuredHalloweenWindow('2026-10-31T00:00:00+08:00', '2026-11-03T00:00:00+08:00');
+    expect(alternate!.endsAt - alternate!.startsAt).toBe(72 * 60 * 60 * 1000);
+  });
   it('uses an inclusive start and exclusive end without depending on the device timezone', () => {
     expect(window.startsAt).toBe(Date.parse('2026-10-29T16:00:00Z'));
     expect(halloweenActive(window.startsAt - 1, window)).toBe(false);

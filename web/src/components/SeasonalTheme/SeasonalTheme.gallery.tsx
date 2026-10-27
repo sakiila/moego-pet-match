@@ -5,7 +5,7 @@ import { GAME_VERSION } from '../../app/version';
 import type { GalleryEntry } from '../../dev/gallery/types';
 import {
   HALLOWEEN_MANAGER, HALLOWEEN_PETS, HALLOWEEN_PLAYER, HALLOWEEN_ROWS, HALLOWEEN_SUMMARY,
-  loadHalloweenAchievements, loadHalloweenLeaderboard, loadHalloweenLikes, loadHalloweenPetDetail,
+  loadHalloweenAchievements, loadHalloweenFaction, loadHalloweenLeaderboard, loadHalloweenLikes, loadHalloweenPetDetail,
   loadHalloweenPets, loadHalloweenProfile, loadHalloweenStanding, loadHalloweenTitles,
   previewSettlement, sendHalloweenLike,
 } from '../../dev/halloweenFixtures';
@@ -37,6 +37,8 @@ const frame = frameAt({ board: parseBoard(HALLOWEEN_ROWS).board, score: 12400, r
 function HomePreview({ onStart = noop, onLeaderboard = noop }: { onStart?: () => void; onLeaderboard?: () => void }) {
   return <HomeScreen player={HALLOWEEN_PLAYER} manager={HALLOWEEN_MANAGER} copyright={COPYRIGHT}
     version={GAME_VERSION} repositoryUrl={GITHUB_REPOSITORY_URL} soundTipPreview={false}
+    loadFaction={loadHalloweenFaction}
+    joinFaction={loadHalloweenFaction}
     loadLikes={loadHalloweenLikes} loadProfile={loadHalloweenProfile} loadPets={loadHalloweenPets} loadPetDetail={loadHalloweenPetDetail}
     onOpenShop={onStart} onLeaderboard={onLeaderboard} onCollection={noop} onMyPets={noop}
     onSocial={noop} onInfo={noop} onClockOut={noop} />;

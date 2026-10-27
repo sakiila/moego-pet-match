@@ -16,10 +16,18 @@ export function parseHalloweenWindow(start?: string, end?: string): HalloweenWin
     : null;
 }
 
-export const HALLOWEEN_WINDOW = parseHalloweenWindow(
-  import.meta.env.VITE_HALLOWEEN_START,
-  import.meta.env.VITE_HALLOWEEN_END,
-);
+/** 首期沿用已展示的三天排期：北京时间10/30至11/1，11/2零时结束。 */
+export const DEFAULT_HALLOWEEN_WINDOW = parseHalloweenWindow(
+  '2026-10-30T00:00:00+08:00',
+  '2026-11-02T00:00:00+08:00',
+)!;
+
+/** 整对配置才可覆盖首期；部分或无效覆盖关闭主题，避免误用日期。 */
+export function configuredHalloweenWindow(start?: string, end?: string): HalloweenWindow | null {
+  return start === undefined && end === undefined ? DEFAULT_HALLOWEEN_WINDOW : parseHalloweenWindow(start, end);
+}
+
+export const HALLOWEEN_WINDOW = configuredHalloweenWindow(import.meta.env.VITE_HALLOWEEN_START, import.meta.env.VITE_HALLOWEEN_END);
 
 export function halloweenActive(now: number, window: HalloweenWindow | null = HALLOWEEN_WINDOW): boolean {
   return !!window && now >= window.startsAt && now < window.endsAt;

@@ -1,9 +1,10 @@
-import type { DailyManager, GameMode, LeaderboardScope, LeaderboardView, PetDetail, PlayerPet, PlayerProfileView, PlayerView, SettleResponse } from '../api/types';
+import type { DailyManager, FactionState, GameMode, LeaderboardScope, LeaderboardView, PetDetail, PlayerPet, PlayerProfileView, PlayerView, SettleResponse } from '../api/types';
 import type { GameSummary } from '../engine';
 import { PREVIEW_PREP_PETS } from './prepPets';
 
 /** Gallery-only examples. None of these loaders call the API or persist a game. */
 export const HALLOWEEN_PETS = PREVIEW_PREP_PETS;
+export const loadHalloweenFaction = async (): Promise<FactionState> => ({ phase: 'hidden' });
 export const HALLOWEEN_ROWS = ['ADBCEFA', 'BCEFADB', 'EFADBCE', 'DBhACEF', 'CEFADxB', 'FADBCEF', 'ABCEFDA'];
 export const HALLOWEEN_PLAYER: PlayerView = {
   userId: 'U_TEST_BOB', name: 'Bob',
