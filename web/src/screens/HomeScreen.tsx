@@ -7,6 +7,10 @@ import { DEVELOPER_PETS, managerLineKey } from '../game/easterEggs';
 import { NavTile } from '../components/NavTile/NavTile';
 import { HomeFooter } from '../components/HomeFooter/HomeFooter';
 import { SocialEntry } from '../components/SocialEntry/SocialEntry';
+import { FactionCard } from '../components/FactionCard/FactionCard';
+import { FactionDetail } from '../components/FactionDetail/FactionDetail';
+import { FactionJoinSheet } from '../components/FactionJoinSheet/FactionJoinSheet';
+import { useFactionWeek, type FactionJoiner, type FactionLoader } from '../game/useFactionWeek';
 import { HomePlayerActions } from '../components/HomePlayerActions/HomePlayerActions';
 import { StreakLine } from '../components/StreakLine/StreakLine';
 import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
@@ -52,12 +56,15 @@ export interface HomeScreenProps {
   loadProfile?: ProfileLoader;
   loadPets?: PlayerPetsLoader;
   loadPetDetail?: (petId: string, playerId: string) => Promise<PetDetail>;
+  /** 阵营周数据；陈列页传示例，不访问接口。 */
+  loadFaction?: FactionLoader;
+  joinFaction?: FactionJoiner;
   /** 陈列页可固定提示状态，不读写浏览器的一次性展示记录。 */
   soundTipPreview?: boolean;
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onSocial, onMyPosts, onInfo, onClockOut, clockOutError, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail, soundTipPreview }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onSocial, onMyPosts, onInfo, onClockOut, clockOutError, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail, loadFaction, joinFaction, soundTipPreview }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
@@ -65,6 +72,8 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
   const soundTip = useSoundTip(soundTipPreview);
   const likes = usePlayerLikes(player.userId, player.userId, loadLikes);
   const paws = usePawNotices(player.userId);
+  const faction = useFactionWeek(player.userId, loadFaction, joinFaction);
+  const [factionSheet, setFactionSheet] = useState<'join' | 'detail' | null>(null);
   return (
     <main className={`${styles.screen} ${styles.home}`}>
       <BrandHeader
@@ -77,6 +86,7 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
       <div className={styles.grow} />
       {manager && <ManagerCard name={manager.pet.name} stickerSrc={stickerUrl(manager.pet.petId, 512)} line={t(managerLineKey(manager.pet.petId))} onOpen={() => setPoster(true)} />}
       <div className={styles.grow} />
+      <FactionCard state={faction.state} overtake={faction.overtake} onJoin={() => setFactionSheet('join')} onOpen={() => setFactionSheet('detail')} />
       {updateAvailable && <StatusMessage text={t('home.update_available')} actionLabel={t('action.refresh')} actionIcon="retry" onAction={onRefresh} />}
       {clockOutError && <StatusMessage tone="error" text={clockOutError} actionLabel={t('action.retry')} onAction={onClockOut} />}
       <Button size="lg" block onClick={onOpenShop} data-testid="open-shop">
@@ -103,6 +113,12 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
         ]}
       />
       <SettingsDialog open={settings} onClose={() => setSettings(false)} />
+      {factionSheet === 'join' && faction.state && faction.state.phase !== 'hidden' && (
+        <FactionJoinSheet endsOn={faction.state.endsOn} onJoin={faction.join} onClose={() => setFactionSheet(null)} />
+      )}
+      {factionSheet === 'detail' && faction.state && faction.state.phase !== 'hidden' && (
+        <FactionDetail state={faction.state} onJoin={() => setFactionSheet('join')} onClose={() => setFactionSheet(null)} />
+      )}
       {poster && manager && <ManagerPosterOverlay manager={manager} onClose={() => setPoster(false)} />}
       {profile && <PlayerProfileOverlay player={player} viewerId={player.userId} mode="normal" load={loadProfile} loadLikes={loadLikes}
         loadPets={loadPets} loadPetDetail={loadPetDetail}

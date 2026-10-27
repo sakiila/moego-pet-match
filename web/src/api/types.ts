@@ -1,6 +1,8 @@
 /** 前后端共用的接口数据形状；server 直接引用本文件。 */
 import type { AchievementId } from '../game/achievementRules.ts';
+import type { Faction, FactionLead } from '../game/factionWeek.ts';
 export type { AchievementId } from '../game/achievementRules.ts';
+export type { Faction, FactionLead } from '../game/factionWeek.ts';
 
 export interface AchievementStatus {
   id: AchievementId;
@@ -144,6 +146,50 @@ export interface SettleResponse {
   newAchievements?: AchievementId[];
   /** 结算后的连续开工天数；firstToday 为本局是否今天第一次打卡。旧结算快照可能没有此字段。 */
   streak?: Streak & { firstToday: boolean };
+  /** 阵营周已报名玩家本局为阵营带来的积分；capped 为当天已满 5 局、本局不计。未参赛或非活动期没有此字段。 */
+  faction?: FactionContribution;
+}
+
+export interface FactionContribution {
+  faction: Faction;
+  points: number;
+  capped: boolean;
+}
+
+export interface FactionPerson { userId: string; name: string; points: number }
+export interface FactionPetStat { petId: string; name: string; cells: number }
+
+export interface FactionSideView {
+  /** 报名人数与至少计过 1 局的人数（平衡系数按后者）。 */
+  members: number;
+  active: number;
+  factor: number;
+  /** 迷雾期为 null，只给领先程度。 */
+  points: number | null;
+  adjusted: number | null;
+}
+
+/** 猫派 vs 狗派周（docs/events/CAT_DOG_WEEK.md）。hidden 表示当前不展示活动。 */
+export type FactionState = { phase: 'hidden' } | FactionView;
+
+export interface FactionView {
+  phase: 'active' | 'fog' | 'ended';
+  eventId: string;
+  startsOn: string;
+  endsOn: string;
+  sides: Record<Faction, FactionSideView>;
+  lead: FactionLead;
+  me: {
+    faction: Faction | null;
+    /** 本期个人积分（迷雾期也给自己的数）。 */
+    points: number;
+    /** 今天还能计分的局数；未报名或已收官为 null。 */
+    todayLeft: number | null;
+  };
+  /** 昨日看点：双方积分最高的成员与被服务最多的宠物；开赛首日为 null。 */
+  yesterday: { stars: Record<Faction, FactionPerson | null>; pets: Record<Faction, FactionPetStat | null> } | null;
+  /** 收官结果；只在 ended 阶段提供。badge 为本人获得的限时徽章。 */
+  result: { winner: Faction | null; top: Record<Faction, FactionPerson[]>; pets: Record<Faction, FactionPetStat | null>; badge: AchievementId | null } | null;
 }
 
 export interface QuizQuestion {

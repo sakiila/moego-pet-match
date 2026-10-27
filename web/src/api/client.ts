@@ -1,4 +1,4 @@
-import type { AchievementId, AchievementView, PlayerLikesView, PlayerPet, PlayerProfileView, PawBookView, PawMessage, PawNotices } from './types';
+import type { AchievementId, AchievementView, Faction, FactionState, PlayerLikesView, PlayerPet, PlayerProfileView, PawBookView, PawMessage, PawNotices } from './types';
 import { isGalleryPath } from '../app/entryRoute';
 import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse, VersionInfo } from './types';
 
@@ -146,6 +146,9 @@ export const api = {
   getPetDetail: (petId: string, playerId: string) =>
     request<PetDetail>(`/api/pets/${encodeURIComponent(petId)}?playerId=${encodeURIComponent(playerId)}`),
   getManager: () => request<DailyManager>('/api/manager'),
+  getFaction: (playerId: string) => request<FactionState>(`/api/faction?playerId=${encodeURIComponent(playerId)}`),
+  joinFaction: (playerId: string, faction: Faction) =>
+    request<FactionState>('/api/faction/join', { method: 'POST', body: JSON.stringify({ playerId, faction }) }),
   getVersion: () => request<VersionInfo>('/api/version'),
   getMyPets: (playerId: string) => request<{ pets: MyPet[] }>(`/api/my-pets?playerId=${encodeURIComponent(playerId)}`).then((r) => r.pets),
   getDeletionRequests: (playerId: string) =>

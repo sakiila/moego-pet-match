@@ -117,6 +117,7 @@ export function ReportScreen(props: ReportScreenProps) {
         host={mode === 'normal' && manager ? { name: manager.pet.name, stickerSrc: stickerUrl(manager.pet.petId, 512) } : null}
         standing={standing}
         streak={saved?.streak ?? null}
+        faction={saved?.faction ?? null}
         certified={mode === 'normal' && mvpKind !== null && !removed.has(pets[mvpKind].id) && isDeveloperPet(pets[mvpKind].id)}
       />
       <SaveStatus state={save} onRetry={onRetry} />

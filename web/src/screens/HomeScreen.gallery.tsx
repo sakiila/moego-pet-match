@@ -4,6 +4,7 @@ import type { GalleryEntry } from '../dev/gallery/types';
 import { HomeScreen, type HomeScreenProps } from './HomeScreen';
 import { loadPlayerPetDetailPreview, loadPlayerPetsPreview } from '../dev/gallery/playerPets';
 import { useI18n } from '../i18n';
+import { FACTION_SAMPLES } from '../components/FactionCard/factionFixtures';
 
 const noop = () => {};
 const loadLikes = async () => ({ receivedLikes: 12, likedByViewer: false, canLike: false });
@@ -20,6 +21,13 @@ const player = (best: number | null) => ({
   best: { normal: best, fish: null },
   progress: { completedNormalGames: 0, fishUnlocked: false }, streak: { days: 0, today: false },
 });
+
+// 阵营周示例：loader 放在模块级，保证引用稳定
+const factionNotJoined = async () => FACTION_SAMPLES.notJoined;
+const factionCat = async () => FACTION_SAMPLES.cat;
+const factionFog = async () => FACTION_SAMPLES.fog;
+const factionEnded = async () => FACTION_SAMPLES.endedWin;
+const factionJoin = async () => FACTION_SAMPLES.cat;
 
 const manager = { date: '2026-10-23', pet: { petId: 'pet_4750baaed3f0', name: 'Sanxian' } };
 
@@ -45,6 +53,10 @@ const entry: GalleryEntry = {
     ),
     'with record': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(24800)} manager={manager} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
     'update available · refresh prompt above 开始营业': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(24800)} manager={manager} updateAvailable onRefresh={() => alert('reload')} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
+    'faction week · not joined': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(24800)} manager={manager} loadFaction={factionNotJoined} joinFaction={factionJoin} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
+    'faction week · joined cat + streak': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={{ ...player(24800), streak: { days: 3, today: true } }} manager={manager} loadFaction={factionCat} joinFaction={factionJoin} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
+    'faction week · fog': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(24800)} manager={manager} loadFaction={factionFog} joinFaction={factionJoin} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
+    'faction week · ended, won badge': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(24800)} manager={manager} loadFaction={factionEnded} joinFaction={factionJoin} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
     'manager unavailable': () => <HomePreview repositoryUrl={GITHUB_REPOSITORY_URL} version={GAME_VERSION} player={player(24800)} manager={null} onOpenShop={noop} onCollection={noop} onLeaderboard={noop} onMyPets={noop} onInfo={noop} onClockOut={noop} />,
   },
 };

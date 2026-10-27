@@ -1,5 +1,5 @@
 /** 生产应用角色的最小权限：名册与宠物只读，游戏数据可读写。Supabase 建库与只读角色回归测试共用。 */
-export const RW_TABLES = ['games', 'game_results', 'best_scores', 'collections', 'player_progress', 'submissions', 'quizzes', 'daily_managers', 'deletion_requests', 'slack_members', 'achievement_awards', 'player_titles', 'game_request_limits', 'player_credentials', 'player_sessions', 'pet_paws'];
+export const RW_TABLES = ['games', 'game_results', 'best_scores', 'collections', 'player_progress', 'submissions', 'quizzes', 'daily_managers', 'deletion_requests', 'slack_members', 'achievement_awards', 'player_titles', 'game_request_limits', 'player_credentials', 'player_sessions', 'pet_paws', 'faction_members', 'faction_contributions', 'faction_results'];
 export const RO_OBJECTS = ['colleagues', 'pets', 'fish_colors'];
 export const SOCIAL_TABLES = ['social_posts','social_media','social_comments','social_reactions','social_notices','social_reports','social_slack_jobs','social_deleted_files','social_sync_state'];
 

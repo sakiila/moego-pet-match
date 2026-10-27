@@ -1,5 +1,5 @@
 /** 收集成就由服务端按已保存图鉴判定；此处的稳定 id 同时用于图片、文案与佩戴选择。 */
-export const ACHIEVEMENT_IDS = ['cats', 'dogs', 'friends', 'species', 'neighbors', 'family', 'album', 'hotpot'] as const;
+export const ACHIEVEMENT_IDS = ['cats', 'dogs', 'friends', 'species', 'neighbors', 'family', 'album', 'hotpot', 'meowchamp26', 'woofchamp26'] as const;
 export type AchievementId = (typeof ACHIEVEMENT_IDS)[number];
 export type AchievementMetric = 'cats' | 'dogs' | 'collected' | 'species' | 'owners' | 'families';
 /** 按累计图鉴判定的七项收集成就；隐藏成就不在此表（见下）。 */
@@ -25,5 +25,12 @@ export const HIDDEN_ACHIEVEMENT_IDS: readonly AchievementId[] = ['hotpot'];
  */
 export const conditionRevealed = (id: AchievementId, unlockedByViewer: readonly AchievementId[]) =>
   !HIDDEN_ACHIEVEMENT_IDS.includes(id) || unlockedByViewer.includes(id);
+/**
+ * 限时活动徽章（猫派 vs 狗派周，docs/events/CAT_DOG_WEEK.md）：只由收官结算授予胜方成员。
+ * 未获得时不返回、不显示占位，也不计入「我的称号」的解锁统计。
+ */
+export const EVENT_ACHIEVEMENT_IDS: readonly AchievementId[] = ['meowchamp26', 'woofchamp26'];
+export const isEventAchievement = (id: AchievementId) => EVENT_ACHIEVEMENT_IDS.includes(id);
+
 /** 本局服务到的宠物 id 是否满足「火锅搭子」。 */
 export const servedHotpot = (servedPetIds: readonly string[]) => HOTPOT_PETS.every((id) => servedPetIds.includes(id));

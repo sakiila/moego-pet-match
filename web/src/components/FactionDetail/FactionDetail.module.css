@@ -1,0 +1,184 @@
+.title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-display);
+}
+
+.root {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.dates,
+.note,
+.empty {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.note {
+  text-align: center;
+}
+
+.winner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-display);
+}
+
+.sides {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.side {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.side[data-faction='dog'] {
+  text-align: right;
+}
+
+.factor {
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.me {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-2);
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+
+.me[data-faction='cat'] { background: var(--faction-cat-soft); }
+.me[data-faction='dog'] { background: var(--faction-dog-soft); }
+
+.today {
+  font-weight: var(--weight-regular);
+  color: var(--color-ink-muted);
+}
+
+.join {
+  min-height: 44px;
+  border: var(--stroke) solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-brand);
+  font: inherit;
+  font-weight: var(--weight-bold);
+  color: var(--color-paper);
+  cursor: pointer;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.badge[data-earned] {
+  background: var(--achievement-rainbow-bg);
+  color: var(--color-ink);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.section h3 {
+  margin: 0;
+  font-size: var(--text-md);
+}
+
+.group {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.group h4 {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.group h4[data-faction='cat'] { color: var(--faction-cat); }
+.group h4[data-faction='dog'] { color: var(--faction-dog); }
+
+.list {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  padding: var(--space-1) var(--space-2);
+  border-left: 4px solid var(--faction-cat);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.person[data-faction='dog'] {
+  border-left-color: var(--faction-dog);
+}
+
+.rank {
+  width: 1.2em;
+  font-weight: var(--weight-bold);
+  text-align: center;
+}
+
+.sticker {
+  flex: none;
+  object-fit: contain;
+}
+
+.name {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+
+.name small {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  color: var(--color-ink-muted);
+}
+
+.value {
+  flex: none;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-muted);
+}
