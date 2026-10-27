@@ -19,7 +19,7 @@ export const en: Record<MessageKey, string> = {
   'security.verified': 'All checked. Ready for your shift!',
   'security.failed': 'The check did not go through. Please try again.',
   'security.starting': 'Starting…',
-  'security.verifying': 'Sniffing…',
+  'security.verifying': 'Pets getting in place…',
   'security.rate_limited': 'Too many attempts. Please wait a moment and try again.',
   'app.title': 'Pet All-Stars',
   "social.title": "Pet Moments",

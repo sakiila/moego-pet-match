@@ -18,7 +18,7 @@ export const zh = {
   'security.verified': '验证完成，可以开始这班啦。',
   'security.failed': '验证暂时没有通过，请重试。',
   'security.starting': '正在开局…',
-  'security.verifying': '闻一闻～',
+  'security.verifying': '毛孩子就位中…',
   'security.rate_limited': '操作有点频繁，请稍后再试。',
   'app.title': '毛孩子全明星',
   "social.title": "毛孩子动态",
