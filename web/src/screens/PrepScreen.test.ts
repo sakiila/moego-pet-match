@@ -34,7 +34,7 @@ it('人机验证未完成或服务端正在开局时禁止重复开始', () => {
 
 it('人机验证在后台进行时，按钮写明正在确认并保持不可点', () => {
   const html = render({ verificationReady: false, verifying: true });
-  expect(html).toContain('毛孩子闻一闻');
+  expect(html).toContain('闻一闻～');
   expect(startButton(html)).toContain('disabled');
   expect(startButton(html)).toContain('aria-busy="true"');
   expect(render({ verificationReady: false, verifying: true, loading: true })).toContain('阵容加载中');
