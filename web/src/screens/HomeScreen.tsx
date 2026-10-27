@@ -40,6 +40,8 @@ export interface HomeScreenProps {
   onMyPets: () => void;
   /** 社交模块开发预览入口；未接真实服务前生产不开放。 */
   onSocial?: () => void;
+  /** 头像菜单「我的动态」；动态墙未开放时不传。 */
+  onMyPosts?: () => void;
   /** 信息使用说明；removal 为 true 时直接展开一般删除申请。 */
   onInfo: (removal: boolean) => void;
   onClockOut: () => void;
@@ -55,7 +57,7 @@ export interface HomeScreenProps {
 }
 
 /** 门店：今日店长欢迎、单一主动作「开始营业」、三个次级入口与页尾链接。 */
-export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onSocial, onInfo, onClockOut, clockOutError, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail, soundTipPreview }: HomeScreenProps) {
+export function HomeScreen({ player, version, repositoryUrl, copyright, manager, updateAvailable = false, onRefresh, onOpenShop, onCollection, onLeaderboard, onMyPets, onSocial, onMyPosts, onInfo, onClockOut, clockOutError, onTitles, loadLikes, loadProfile, loadPets, loadPetDetail, soundTipPreview }: HomeScreenProps) {
   const { t } = useI18n();
   const [poster, setPoster] = useState(false);
   const [settings, setSettings] = useState(false);
@@ -69,7 +71,7 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
         title="game"
         tagline="access.subtitle"
         trailing={
-          <HomePlayerActions player={player} likes={likes} onProfile={() => setProfile(true)} onClockOut={onClockOut} onTitles={onTitles} />
+          <HomePlayerActions player={player} likes={likes} onProfile={() => setProfile(true)} onClockOut={onClockOut} onTitles={onTitles} onMyPosts={onMyPosts} />
         }
       />
       <div className={styles.grow} />

@@ -39,6 +39,8 @@ export interface SocialWallProps {
   /** 头像下拉的「我的称号」与「收工」；开发预览不传。 */
   onTitles?: () => void;
   onClockOut?: () => void;
+  /** 从其他页面深链进入（如首页「我的动态」）：先在动态列表，再前进到该页，返回回到动态。 */
+  openOnStart?: SocialPage;
   onPrepareRoute?: (page: SocialPage) => Promise<void>;
   onPageChange?: (page: SocialPage) => void;
   readPhoto: (file: File) => Promise<SocialPhoto>;
@@ -62,6 +64,7 @@ export function SocialWall({
   onAuthor,
   onTitles,
   onClockOut,
+  openOnStart,
   onPrepareRoute,
   onPageChange,
   readPhoto,
@@ -273,6 +276,12 @@ export function SocialWall({
       setPending([...inFlight.current]);
     }
   };
+  const started = useRef(false);
+  useEffect(() => {
+    if (started.current || !openOnStart) return;
+    started.current = true;
+    navigate(openOnStart);
+  }, [openOnStart]);
   useEffect(() => {
     onPageChange?.(page);
   }, [page, onPageChange]);

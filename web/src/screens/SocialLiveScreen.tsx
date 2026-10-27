@@ -91,6 +91,12 @@ export function SocialLiveScreen({
   const { t } = useI18n();
   const [state, setState] = useState<SocialState>(initial);
   const [profile, setProfile] = useState<SocialPerson | null>(null);
+  // 首页头像菜单以 ?view=mine 进入；读一次后去掉参数，刷新不再重复跳转。
+  const [openOnStart] = useState<SocialPage | undefined>(() => {
+    if (new URLSearchParams(location.search).get('view') !== 'mine') return undefined;
+    history.replaceState(history.state, '', location.pathname);
+    return { name: 'mine' };
+  });
   const data = useRef(state);
   const revision = useRef(0);
   const requestEpoch = useRef(0);
@@ -375,6 +381,7 @@ export function SocialLiveScreen({
         onHome={onHome}
         onReset={() => {}}
         onAuthor={setProfile}
+        openOnStart={openOnStart}
         onTitles={onTitles}
         onClockOut={onClockOut}
         browserHistory

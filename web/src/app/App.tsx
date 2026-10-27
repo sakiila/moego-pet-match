@@ -305,6 +305,7 @@ export function App() {
             onLeaderboard={() => setRoute({ name: 'leaderboard', mode: 'normal' })}
             onMyPets={() => setRoute({ name: 'myPets' })}
             onSocial={socialEnabled ? () => location.assign('/moments') : import.meta.env.DEV ? () => location.assign('/dev/social') : undefined}
+            onMyPosts={socialEnabled ? () => location.assign('/moments?view=mine') : undefined}
             onTitles={() => setShowTitles(true)}
             onInfo={(removal) => setRoute({ name: 'info', player: { userId: player.userId, name: player.name }, removal, back: 'home' })}
             onClockOut={() => void clockOut()}
