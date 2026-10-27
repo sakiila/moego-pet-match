@@ -15,6 +15,7 @@ import { GameMovesSchema, validateReplay } from './gameReplay.ts';
 import { sameToken } from './gameToken.ts';
 import { lineupQuota, recordFactionContribution } from './faction.ts';
 import { factionSpecies } from '../../../web/src/game/factionWeek.ts';
+import { newRefillKey, validateLive } from './livePlay.ts';
 
 /** 第几局普通完整局后解锁 Peter 鱼关。 */
 export const FISH_UNLOCK_GAMES = 3;
@@ -31,6 +32,8 @@ export class GameError extends Error {
 /**
  * 登记新局：确认身份在名单内（鱼局需已解锁），抽 6 只上架宠物；
  * 种子按登记当天的北京自然日派生（每日同盘），日期一并记录供今日榜分组。
+ * 正式环境的普通局与鱼关由服务端执棋（live）：种子只决定开局棋盘，补落由每局私密的 refill_key 决定。
+ * AI 挑战（ai）沿用开放协议：公开种子、整局提交走法，不需要人机验证，只上 AI 榜。
  * random 只决定阵容抽样，返回 [0, 1)；测试传固定种子，生产用加密随机数。
  */
 export async function registerGame(
@@ -68,7 +71,7 @@ export async function registerGame(
       playerId,
       collected,
       random,
-      await lineupQuota(pool, playerId, beijingDate(now)),
+      mode === 'normal' ? await lineupQuota(pool, playerId, beijingDate(now)) : undefined,
     );
     if (sampled.lineup.length < RULES.kinds) throw new GameError('not_ready', 'not enough pets for a full lineup');
     const nameOf = new Map<string, string>(pets.rows.map((r) => [r.pet_id, r.name]));
@@ -77,13 +80,20 @@ export async function registerGame(
     uncollectedPetIds = sampled.lineup.filter((id) => !collected.has(id));
     for (const r of pets.rows) if (r.family_id && sampled.lineup.includes(r.pet_id)) families[r.pet_id] = r.family_id;
   }
+  // AI 局不记图鉴，不提示「新宠」
+  if (mode === 'ai') uncollectedPetIds = [];
   const boardDate = beijingDate(now);
   const seed = dailySeed(mode, boardDate);
+  const verified = requireVerification && mode !== 'ai';
   const inserted = await pool.query(
-    `INSERT INTO pet_match.games (player_id, mode, rules_version, seed, lineup, board_date, requires_verification) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING game_id`,
-    [playerId, mode, RULES_VERSION, seed, lineup.map((p) => p.petId), boardDate, requireVerification],
+    `INSERT INTO pet_match.games (player_id, mode, rules_version, seed, lineup, board_date, requires_verification, live, refill_key)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $7, $8) RETURNING game_id`,
+    [playerId, mode, RULES_VERSION, seed, lineup.map((p) => p.petId), boardDate, verified, verified ? newRefillKey() : null],
   );
-  return { gameId: inserted.rows[0].game_id, seed, rulesVersion: RULES_VERSION, mode, lineup, ownPetIds, uncollectedPetIds, families, ...(requireVerification ? { verificationRequired: true } : {}) };
+  return {
+    gameId: inserted.rows[0].game_id, seed, rulesVersion: RULES_VERSION, mode, lineup, ownPetIds, uncollectedPetIds, families,
+    ...(verified ? { verificationRequired: true, live: true } : {}),
+  };
 }
 
 const count = z.number().int().min(0).max(2_147_483_647);
@@ -154,7 +164,7 @@ export async function settleGame(
     const g = game.rows[0];
     if (!g) throw new GameError('not_found', 'game');
     if (g.player_id !== playerId) throw new GameError('conflict', 'player');
-    if (proof?.required && !g.requires_verification) throw new GameError('invalid', 'legacy_game');
+    if (proof?.required && !g.requires_verification && g.mode !== 'ai') throw new GameError('invalid', 'legacy_game');
     if (g.requires_verification && (!g.started_at || !sameToken(g.play_token_hash, proof?.token))) throw new GameError('invalid', 'game_proof');
 
     // 本局阵容里已下架的宠物：按当前目录计算（重试时也重新计算），前端据此不再展示它们的资料
@@ -181,10 +191,12 @@ export async function settleGame(
       const elapsed = (proof?.now ?? new Date()).getTime() - new Date(g.started_at).getTime();
       if (elapsed < RULES.durationMs - 100) throw new GameError('invalid', 'too_early');
       if (elapsed > 10 * 60_000) throw new GameError('invalid', 'game_expired');
-      const replay = validateReplay(g, payload);
+      const replay = g.live ? validateLive(g, payload) : validateReplay(g, payload);
       if (!replay.valid) throw new GameError('invalid', 'replay');
       if (elapsed < replay.endMs - 100) throw new GameError('invalid', 'too_early');
     }
+    // AI 挑战不计时、不做人机验证，但成绩必须由提交的走法重演得出。
+    if (g.mode === 'ai' && !validateReplay(g, payload).valid) throw new GameError('invalid', 'replay');
     if (!(await findColleague(client, playerId))) throw new GameError('not_found', 'player');
 
     const mode: GameMode = g.mode;
@@ -251,11 +263,12 @@ export async function settleGame(
       );
     }
 
-    const newAchievements = await syncAchievements(client, playerId, gameId, servedListed);
+    // AI 局只上 AI 榜：不计称号、打卡、局数、鱼关解锁与猜主人
+    const newAchievements = mode === 'ai' ? [] : await syncAchievements(client, playerId, gameId, servedListed);
     // 连续开工：本局有有效操作就算今天打卡（结果还没写入，手动把登记日加进去）
     const boardDate: string = (await client.query('SELECT board_date::text AS d FROM pet_match.games WHERE game_id = $1', [gameId])).rows[0].d;
     const before = await playedDates(client, playerId);
-    const clocksIn = payload.validMoves > 0;
+    const clocksIn = mode !== 'ai' && payload.validMoves > 0;
     const streak = { ...computeStreak(clocksIn ? [boardDate, ...before] : before, beijingDate()), firstToday: clocksIn && !before.includes(boardDate) };
     const quiz = counted ? await maybeCreateQuiz(client, gameId, playerId, completed, payload) : null;
     const faction = await recordFactionContribution(client, g, boardDate, payload);

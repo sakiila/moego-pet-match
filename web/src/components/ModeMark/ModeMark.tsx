@@ -13,10 +13,17 @@ export interface ModeMarkProps {
   tone?: 'default' | 'onAccent';
 }
 
-/** 模式标识：普通宠物局为爪印，鱼关为天蓝色小鱼。用于开局／再来一局按钮、排行榜页签、阵容标题等。装饰性，读屏跳过。 */
+/** 模式标识：普通宠物局为爪印，鱼关为天蓝色小鱼，AI 挑战为「AI」字牌。用于开局／再来一局按钮、排行榜页签、阵容标题等。装饰性，读屏跳过。 */
 export function ModeMark({ mode, size = 24, tone = 'default' }: ModeMarkProps) {
   const [failed, setFailed] = useState(false);
   if (mode === 'normal') return <Icon name={tone === 'onAccent' ? 'open-shop-white' : 'open-shop'} size={size} />;
+  if (mode === 'ai') {
+    return (
+      <span className={`${styles.ai} ${tone === 'onAccent' ? styles.aiOnAccent : ''}`} style={{ width: size, height: size, fontSize: size * 0.42 }} aria-hidden>
+        AI
+      </span>
+    );
+  }
   if (failed) return null;
   return <img className={styles.fish} src={FISH_MARK_SRC} width={size} height={size} alt="" aria-hidden onError={() => setFailed(true)} draggable={false} />;
 }

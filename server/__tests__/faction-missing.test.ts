@@ -4,7 +4,7 @@ import { joinFaction, loadFaction } from '../src/services/faction.ts';
 import { registerGame, settleGame } from '../src/services/games.ts';
 import { freshDatabase } from './helpers.ts';
 
-/** 生产迁移手动执行：代码先于 022 上线时，开局与结算照常，活动静默。 */
+/** 生产迁移手动执行：代码先于 023 上线时，开局与结算照常，活动静默。 */
 describe('阵营周表尚未迁移', () => {
   let ctx: Awaited<ReturnType<typeof freshDatabase>>;
   const DAY1 = new Date('2026-10-28T04:00:00Z');

@@ -29,12 +29,12 @@ export function computeStreak(dates: readonly string[], today: string): Streak {
   return { days, today: playedToday };
 }
 
-/** 该玩家有过有效操作的已保存对局的登记日期，倒序去重，最多取最近 400 天。 */
+/** 该玩家有过有效操作的已保存对局（不含 AI 挑战）的登记日期，倒序去重，最多取最近 400 天。 */
 export async function playedDates(db: Queryable, playerId: string): Promise<string[]> {
   const { rows } = await db.query(
     `SELECT DISTINCT g.board_date::text AS d
      FROM pet_match.games g JOIN pet_match.game_results r ON r.game_id = g.game_id
-     WHERE g.player_id = $1 AND coalesce((r.payload->>'validMoves')::int, 0) > 0
+     WHERE g.player_id = $1 AND g.mode <> 'ai' AND coalesce((r.payload->>'validMoves')::int, 0) > 0
      ORDER BY d DESC LIMIT 400`,
     [playerId],
   );

@@ -1,5 +1,5 @@
-/** 规则版本：6 增加开局授权与服务端回放协议，计分仍沿用版本 5。 */
-export const RULES_VERSION = 6;
+/** 规则版本：7 正式局改为服务端执棋（补落由服务端逐步私密决定），并新增 AI 挑战；计分仍沿用版本 5。 */
+export const RULES_VERSION = 7;
 
 /** 已确认的首版规则数值（V1_RULES / GAME_FLOW）。 */
 export const RULES = {
@@ -11,6 +11,17 @@ export const RULES = {
   maxMultiplier: 5,
   lastSecondsMs: 3_000,
   hintIdleMs: 5_000,
+} as const;
+
+/**
+ * 正式局逐步执棋的时钟约束（服务端与前端共用）。
+ * 系统洗牌时前端暂停游戏时钟 shufflePauseMs；服务端按洗牌次数放宽，
+ * 走子时刻不得领先墙钟 leadMs，也不得累计落后墙钟（扣除洗牌暂停）超过 lagMs。
+ */
+export const PLAY = {
+  shufflePauseMs: 700,
+  leadMs: 1_000,
+  lagMs: 8_000,
 } as const;
 
 /**

@@ -47,6 +47,8 @@ export interface TipView {
 
 export interface TipInputs {
   finishing: boolean;
+  /** 服务端执棋连接中断。 */
+  offline?: boolean;
   shuffling: boolean;
   event?: StickerEvent | null;
   tutorial: Tutorial | null;
@@ -54,9 +56,10 @@ export interface TipInputs {
   lastSeconds: boolean;
 }
 
-/** 棋盘外提示区同一时刻至多一条：收尾 > 洗牌 > 局内事件贴纸 > 带教 > 卡关提示 > 最后 10 秒。 */
+/** 棋盘外提示区同一时刻至多一条：收尾 > 连接中断 > 洗牌 > 局内事件贴纸 > 带教 > 卡关提示 > 最后 10 秒。 */
 export function pickTip(t: TipInputs): TipView | null {
   if (t.finishing) return { key: 'round.finishing' };
+  if (t.offline) return { key: 'board.live_offline' };
   if (t.shuffling) return { key: 'board.shuffle' };
   if (t.event) return t.event;
   if (t.tutorial === 'combo') return { key: 'tutorial.tool_combo' };

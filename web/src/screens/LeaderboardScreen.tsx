@@ -42,7 +42,7 @@ const NEAR_RADIUS = 2;
  */
 export function LeaderboardScreen({ player, initialMode = 'normal', initialScope = 'today', onBack, onChallenge, load = api.getLeaderboard, loadProfile, loadViewerTitles = loadUnlockedTitles, loadLikes, sendLike, loadPets, loadPetDetail }: LeaderboardScreenProps) {
   const { t } = useI18n();
-  const [mode, setMode] = useState<GameMode>(initialMode === 'fish' && player.progress.fishUnlocked ? 'fish' : 'normal');
+  const [mode, setMode] = useState<GameMode>(initialMode === 'ai' || (initialMode === 'fish' && player.progress.fishUnlocked) ? initialMode : 'normal');
   const [scope, setScope] = useState<LeaderboardScope>(initialScope);
   const [view, setView] = useState<View>('near');
   const [data, setData] = useState<LeaderboardView | null>(null);
@@ -97,6 +97,7 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
   });
   const modes = [tab('normal', t('leaderboard.pets'))];
   if (player.progress.fishUnlocked) modes.push(tab('fish', t('leaderboard.fish')));
+  modes.push(tab('ai', t('leaderboard.ai')));
   const today = scope === 'today';
   const emptyKey = today ? (data?.entries.length === 0 ? 'leaderboard.today_empty' : 'leaderboard.today_no_score') : 'leaderboard.no_score';
 
@@ -114,7 +115,8 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
           { value: 'all', label: t('leaderboard.all_time') },
         ]}
       />
-      {today && data && <BoardDateCaption date={data.date} />}
+      {today && data && mode !== 'ai' && <BoardDateCaption date={data.date} />}
+      {mode === 'ai' && <StatusMessage text={t('leaderboard.ai_note')} />}
       {failed && <StatusMessage tone="error" text={t('leaderboard.load_failed')} actionLabel={t('action.retry')} actionIcon="retry" onAction={fetchBoard} />}
       {data && (
         <>
@@ -144,7 +146,7 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
       )}
       <div className={styles.stickyActions}>
         <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={() => onChallenge(mode)} data-testid="challenge">
-          {t('leaderboard.challenge')}
+          {t(mode === 'ai' ? 'leaderboard.ai_challenge' : 'leaderboard.challenge')}
         </Button>
       </div>
       {selectedPlayer && <PlayerProfileOverlay key={`${selectedPlayer.userId}:${mode}`} player={selectedPlayer} viewerId={player.userId} mode={mode} load={loadProfile} loadViewerTitles={loadViewerTitles} loadLikes={loadLikes} sendLike={sendLike} onClose={() => setSelectedPlayer(null)}

@@ -167,7 +167,7 @@ CREATE TABLE pet_match.faction_contributions (
 
 ## 14. 实现说明（2026-10-27）
 
-- 活动常量与纯函数：`web/src/game/factionWeek.ts`；服务：`server/src/services/faction.ts`；接口：`GET /api/faction`、`POST /api/faction/join`；迁移 `022_faction_week.sql`（表 `faction_members`、`faction_contributions`、`faction_results`，并扩展成就 id）。
+- 活动常量与纯函数：`web/src/game/factionWeek.ts`；服务：`server/src/services/faction.ts`；接口：`GET /api/faction`、`POST /api/faction/join`；迁移 `023_faction_week.sql`（表 `faction_members`、`faction_contributions`、`faction_results`，并扩展成就 id）。
 - 前端组件：`FactionTugBar`、`FactionCard`、`FactionJoinSheet`、`FactionDetail`、`FactionTag`，均已登记陈列页；首页卡放在店长橱窗与「开始营业」之间，报告标签并入 ScoreCard 标签行。
 - 拉锯数据服务端缓存 30 秒，报名、计分、收官时清空；前端在页面可见时每 30 秒刷新。反超提示用本机记住的上次领先方，只提示一次。
 - 素材：`faction-cat`、`faction-dog`、`title-meowchamp26(-avatar/-showcase)`、`title-woofchamp26(-avatar/-showcase)` 目前为代码生成的占位图，母版在 `masters/20-catdog-week/`。

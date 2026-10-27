@@ -7,6 +7,7 @@ import { managerPosterModel, shareCardModel } from '../../game/shareCard';
 import { useShareCard } from '../../game/useShareCard';
 import { useI18n } from '../../i18n';
 import { drawManagerPoster, drawShareCard } from '../../ui/canvas/drawShareCard';
+import { themeOf } from '../../game/mode';
 import { ShareSheet } from './ShareSheet';
 
 const ids = ['pet_644053d683e0', 'pet_b05057985e11', 'pet_4750baaed3f0', 'pet_c7ad902c2024', 'pet_7104fa8cdaea', 'pet_01714a23d2b5'];
@@ -33,7 +34,7 @@ function Live({ mode = 'normal', pets = PETS, s, playerName = 'Bob 包博', noMa
   const { t, locale } = useI18n();
   const draw = useMemo(() => {
     const model = shareCardModel({ summary: s, pets, mode, playerName, manager: noManager ? null : manager, locale, t });
-    return () => drawShareCard(model, mode);
+    return () => drawShareCard(model, themeOf(mode));
   }, [s, pets, mode, playerName, noManager, locale, t]);
   const card = useShareCard(draw, `share-${mode}.png`);
   return <ShareSheet open inline state={card.state} canShare={card.canShare} onSave={card.save} onShare={card.share} onRetry={card.retry} onClose={() => {}} />;

@@ -10,6 +10,7 @@ import { UnderwaterBackdrop } from '../components/UnderwaterBackdrop/UnderwaterB
 import type { PetInfo } from '../game/pets';
 import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
+import { themeOf } from '../game/mode';
 import styles from './Screen.module.css';
 
 export interface PrepScreenProps {
@@ -39,7 +40,7 @@ export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames
       <BrandHeader title="scheduling" schedulingArt onBack={onBack} />
       {pets && (
         <>
-          <LineupPanel pets={pets} mode={mode} highResolution={!loading && !failed} />
+          <LineupPanel pets={pets} mode={themeOf(mode)} highResolution={!loading && !failed} />
           {!fish && <OwnPetBanner names={ownPetNames} />}
         </>
       )}

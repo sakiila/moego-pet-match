@@ -17,7 +17,7 @@ export class FactionError extends Error {
 }
 
 /**
- * 生产迁移手动执行（deploy/DEPLOY.md）：代码先于 022 迁移上线时，活动整体静默，不影响开局与结算。
+ * 生产迁移手动执行（deploy/DEPLOY.md）：代码先于 023 迁移上线时，活动整体静默，不影响开局与结算。
  * to_regclass 不会因表不存在报错，放在结算事务里也安全；确认存在后不再查询。
  */
 let tablesReady = false;
