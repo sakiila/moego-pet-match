@@ -53,7 +53,7 @@ export async function postViews(db: SocialDb, rows: Record<string, any>[], viewe
         .filter((m) => m.post_id === row.id)
         .map((m, i) => ({ id: m.id, src: mediaUrl(m.id), alt: `${row.name} · ${i + 1}` })),
       pet: row.pet_name
-        ? { id: row.pet_id, name: row.pet_name, stickerSrc: `/img/stickers/${encodeURIComponent(row.pet_id)}?size=128` }
+        ? { id: row.pet_id, name: row.pet_name, stickerSrc: `/img/pets/${encodeURIComponent(row.pet_id)}/128` }
         : undefined,
       reactions: Object.fromEntries(
         REACTION_KINDS.map((kind) => [kind, summary[kind]?.selected ? [viewerId] : []]),

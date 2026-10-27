@@ -113,6 +113,18 @@ describe('社交服务：真实会话、媒体隔离与事务', () => {
     expect((await app.inject({ url: '/api/social/session', headers: auth(alice) })).json().viewer).not.toHaveProperty('title');
     await ctx.pool.query('DELETE FROM pet_match.player_titles WHERE player_id=$1', [owner]);
   });
+  it('关联宠物与自己的宠物贴纸地址指向真实图片路由', async () => {
+    await ctx.pool.query(
+      "INSERT INTO pet_match.pets(pet_id,name,status,owner_user_id,sticker_key) VALUES('social-pet','Maodu','published',$1,'pets/social-pet/v1') ON CONFLICT(pet_id) DO UPDATE SET owner_user_id=$1,sticker_key='pets/social-pet/v1',status='published'",
+      [owner],
+    );
+    await store.put('pets/social-pet/v1/128.png', image, 'image/png');
+    const created = await post(bob, '/api/social/posts', { id: randomUUID(), body: 'With pet', photoIds: [], petId: 'social-pet' });
+    const src = created.json().pet.stickerSrc;
+    expect((await app.inject({ url: src })).statusCode).toBe(200);
+    const mine = (await app.inject({ url: '/api/social/session', headers: auth(bob) })).json().pets;
+    expect((await app.inject({ url: mine.find((p: { id: string }) => p.id === 'social-pet').stickerSrc })).statusCode).toBe(200);
+  });
   it('不接受视频、伪造类型或跨站写入', async () => {
     expect((await upload(bob, Buffer.from('not an image'), 'video/mp4')).statusCode).toBe(415);
     expect((await upload(bob, Buffer.from('<svg/>'), 'image/png')).statusCode).toBe(415);

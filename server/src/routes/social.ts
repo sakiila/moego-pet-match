@@ -95,7 +95,7 @@ export const socialRoutes: FastifyPluginAsync<AppDeps> = async (
       pets: pets.rows.map((p) => ({
         id: p.pet_id,
         name: p.name,
-        stickerSrc: `/img/stickers/${encodeURIComponent(p.pet_id)}?size=128`,
+        stickerSrc: `/img/pets/${encodeURIComponent(p.pet_id)}/128`,
       })),
       canModerate: social.adminIds.includes(id),
       unreadCount: count,
