@@ -7,7 +7,7 @@ export default {
   states: {
     default: () => (
       <SocialHeader title="毛孩子动态" onHome={() => {}} identity={identity}>
-        <button>＋ 发布</button>
+        <button>发布</button>
       </SocialHeader>
     ),
     subpage: () => (

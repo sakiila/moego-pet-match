@@ -67,11 +67,6 @@
 .rootNav .utility {
   justify-self: end;
 }
-.publishCta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-}
 .utility {
   display: flex;
   align-items: center;

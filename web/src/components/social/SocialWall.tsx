@@ -438,8 +438,8 @@ export function SocialWall({
                     <span className={styles.unreadDot} />
                   )}
                 </button>
-                <button className={`${styles.smallCta} ${styles.publishCta}`} onClick={() => navigate({ name: 'compose' })}>
-                  ＋ {t('social.publish')}
+                <button className={styles.smallCta} onClick={() => navigate({ name: 'compose' })}>
+                  {t('social.publish')}
                 </button>
               </>
             ) : page.name === 'activity' ? (
