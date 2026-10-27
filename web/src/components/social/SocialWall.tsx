@@ -455,12 +455,8 @@ export function SocialWall({
                 {t('social.mark_read')}
               </button>
             ) : mine ? (
-              <button
-                className={`${styles.iconButton} ${styles.createButton}`}
-                aria-label={t('social.new_post')}
-                onClick={() => navigate({ name: 'compose' })}
-              >
-                <Icon name="social-pencil" size={24} />
+              <button className={styles.smallCta} onClick={() => navigate({ name: 'compose' })}>
+                {t('social.publish')}
               </button>
             ) : (
               <button

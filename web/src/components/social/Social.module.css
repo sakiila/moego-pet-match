@@ -1022,9 +1022,6 @@ button.authorButton,
     animation: none;
   }
 }
-.createButton {
-  background: var(--accent);
-}
 .tipCard {
   display: flex;
   align-items: center;
