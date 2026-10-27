@@ -15,6 +15,7 @@ const entry: GalleryEntry = {
     'only one': () => <Podium entries={[e(1, 'Emma', 4980)]} />,
     'tie for first': () => <Podium entries={[e(1, 'Emma', 4980), e(1, 'Mia', 4980), e(3, 'Yoo', 3920)]} />,
     'six-digit scores': () => <Podium entries={[e(1, 'Mia', 123456), e(2, 'Alex', 98765), e(3, 'Sam', 87654)]} />,
+    'first + last names': () => <Podium entries={[e(1, 'Vicky Ren', 9999), e(2, 'Kevin Zhang', 4260), e(3, 'Annie Liu', 3920)]} />,
     'long names': () => <Podium entries={[e(1, 'Maximilian Featherstonehaugh', 9999), e(2, 'Zhang Wei(张伟)', 4260), e(3, 'Samantha Sullivan', 3920)]} />,
   },
 };

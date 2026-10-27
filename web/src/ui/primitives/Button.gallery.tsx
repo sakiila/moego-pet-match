@@ -15,7 +15,7 @@ const entry: GalleryEntry = {
     'large block': () => <Button size="lg" block><Label k="action.open_shop" /></Button>,
     'with icon (large)': () => <Button size="lg" block iconName="open-shop-white"><Label k="action.open_shop" /></Button>,
     'with icon (secondary)': () => <Button variant="secondary" iconName="save-image"><Label k="share.save" /></Button>,
-    'with icon disabled': () => <Button size="lg" block disabled iconName="open-shop-white"><Label k="identity.title" /></Button>,
+    'with icon disabled': () => <Button size="lg" block disabled iconName="open-shop-white"><Label k="identity.choose_first" /></Button>,
     disabled: () => <Button disabled><Label k="action.retry" /></Button>,
     'long text': () => <Button variant="secondary">Back to the Shop and Keep Playing Later</Button>,
   },

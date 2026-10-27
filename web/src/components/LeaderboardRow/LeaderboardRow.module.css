@@ -77,3 +77,10 @@
 .colleague {
   grid-column: 2 / 4;
 }
+
+.range {
+  margin: 0;
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}

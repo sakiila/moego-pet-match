@@ -103,7 +103,7 @@ export function IdentityScreen({ onConfirm, onInfo, search = api.searchRoster, i
       <div className={styles.grow} />
       <InfoSummary />
       <Button size="lg" block iconName="open-shop-white" disabled={!selected} onClick={() => selected && setSigningIn(selected)} data-testid="identity-confirm">
-        {selected ? t('identity.confirm', { playerName: selected.name }) : t('identity.title')}
+        {selected ? t('identity.confirm', { playerName: selected.name }) : t('identity.choose_first')}
       </Button>
       {onInfo && (
         <PageLinks

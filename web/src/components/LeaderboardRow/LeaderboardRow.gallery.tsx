@@ -1,5 +1,5 @@
 import type { GalleryEntry } from '../../dev/gallery/types';
-import { LeaderboardHeader, LeaderboardRow } from './LeaderboardRow';
+import { LeaderboardHeader, LeaderboardRange, LeaderboardRow } from './LeaderboardRow';
 
 const e = (rank: number, name: string, score: number) => ({ rank, userId: name, name, score });
 
@@ -11,6 +11,8 @@ const entry: GalleryEntry = {
     'legendary · C size': () => <LeaderboardRow entry={{ ...e(4, 'Bob', 31000), equippedTitle: 'album' }} isMe={false} tied={false} />,
     'hotpot · unified showcase': () => <LeaderboardRow entry={{ ...e(4, 'Bob', 31000), equippedTitle: 'hotpot' }} isMe={false} tied={false} />,
     header: () => <LeaderboardHeader />,
+    'near range': () => <LeaderboardRange from={2} to={6} />,
+    'near range · from top': () => <LeaderboardRange from={1} to={3} />,
     'top three': () => (
       <div style={{ display: 'grid', gap: 8 }}>
         <LeaderboardRow entry={e(1, 'Emma', 49800)} isMe={false} tied={false} />

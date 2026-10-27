@@ -16,7 +16,7 @@ const startButton = (html: string) => html.match(/<button[^>]*data-testid="start
 it('图片尚未全部就绪时先展示本局宠物，但禁止开始计时', () => {
   const html = render({ loading: true });
   expect(html).toContain('Mochi');
-  expect(html).toContain('准备中');
+  expect(html).toContain('阵容加载中');
   expect(startButton(html)).toContain('disabled=""');
   expect(startButton(html)).toContain('aria-busy="true"');
 });

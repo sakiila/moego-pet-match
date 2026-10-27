@@ -35,6 +35,12 @@ export function LeaderboardRow({ entry, isMe, tied, onSelect, titleRevealed = fa
 }
 
 /** 列表表头：名次 / 同事 / 最好成绩（今日榜为「今日最好」），列宽与 LeaderboardRow 一致。 */
+/** 「我附近」视图上方的一行小字：标明列表只是本人前后的名次段，与全榜区分。 */
+export function LeaderboardRange({ from, to }: { from: number; to: number }) {
+  const { t } = useI18n();
+  return <p className={styles.range} data-testid="leaderboard-range">{t('leaderboard.near_range', { from, to })}</p>;
+}
+
 export function LeaderboardHeader({ scoreLabel = 'leaderboard.best_score' }: { scoreLabel?: MessageKey }) {
   const { t } = useI18n();
   return (

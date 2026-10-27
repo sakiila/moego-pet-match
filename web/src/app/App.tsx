@@ -7,7 +7,7 @@ import { ScreenTransition } from '../components/ScreenTransition/ScreenTransitio
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { PRESETS } from '../dev/presets';
 import { createGame, RULES_VERSION, type GameState, type GameSummary } from '../engine';
-import { petFromLineup, preloadPets } from '../game/pets';
+import { petFromLineup, preloadPets, waitForLineup } from '../game/pets';
 import { needsRefresh } from '../game/updateCheck';
 import { useI18n } from '../i18n';
 import { BoardScreen } from '../screens/BoardScreen';
@@ -187,9 +187,9 @@ export function App() {
           refill: preset?.refill,
         });
         const session = { registered, game };
-        // 阵容先展示，缓存命中的宠物立即出现；素材全部就绪后才允许开始计时。
+        // 阵容先展示，缓存命中的宠物立即出现；小图就绪或等满几秒后允许开始计时。
         setRoute({ name: 'prep', mode, session, ready: false, failed: false });
-        await preloadPets(registered.lineup.map((p) => petFromLineup(p, mode)));
+        await waitForLineup(registered.lineup.map((p) => petFromLineup(p, mode)));
         if (attempt !== prepAttempt.current) return;
         setRoute(current => current.name === 'prep' && current.session === session ? { ...current, ready: true } : current);
       } catch {

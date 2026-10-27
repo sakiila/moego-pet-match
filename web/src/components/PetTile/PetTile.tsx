@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties } from 'react';
-import { loadPetImage, petImage, type PetInfo } from '../../game/pets';
+import { loadPetImage, markPetImageShown, petImage, petImageShown, type PetInfo } from '../../game/pets';
 import styles from './PetTile.module.css';
 
 export interface PetTileProps {
@@ -17,10 +17,13 @@ export interface PetTileProps {
 export function PetTile({ pet, tint, size, variant = 'tile', highResolution = true }: PetTileProps) {
   const [largeReady, setLargeReady] = useState<string | null>(null);
   const [failed, setFailed] = useState<string[]>([]);
+  const [shown, setShown] = useState<string[]>([]);
   const style = { '--tint': `var(--pet-tint-${tint % 6})`, '--size': size ? `${size}px` : undefined } as CSSProperties;
   const preview = petImage(pet, 128);
   const large = size && size * 2 > 128 ? petImage(pet, 512) : null;
   const src = large && largeReady === large && !failed.includes(large) ? large : preview;
+  // 贴纸到达前（开局兜底放行时可能还在加载）先显示表情，失败则一直显示表情。
+  const ready = !!src && !failed.includes(src) && (petImageShown(src) || shown.includes(src));
 
   useEffect(() => {
     if (!highResolution || !large) return;
@@ -35,9 +38,12 @@ export function PetTile({ pet, tint, size, variant = 'tile', highResolution = tr
 
   return (
     <div className={styles.tile} data-variant={variant} style={style} role="img" aria-label={pet.name}>
-      {src && !failed.includes(src) ? (
-        <img className={styles.sticker} src={src} alt="" draggable={false} onError={() => setFailed(previous => [...previous, src])} />
-      ) : (
+      {src && !failed.includes(src) && (
+        <img className={styles.sticker} src={src} alt="" draggable={false} data-pending={!ready || undefined}
+          onLoad={() => { markPetImageShown(src); setShown(previous => [...previous, src]); }}
+          onError={() => setFailed(previous => [...previous, src])} />
+      )}
+      {!ready && (
         <span className={styles.face} aria-hidden>
           {pet.emoji}
         </span>

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { loadPetImage, petImage, preloadPets, type PetInfo } from '../pets';
+import { LINEUP_WAIT_MS, loadPetImage, petImage, preloadPets, waitForLineup, type PetInfo } from '../pets';
 
 class FakeImage {
   static instances: FakeImage[] = [];
@@ -155,5 +155,47 @@ describe('preloadPets opening readiness', () => {
   it('占位宠物无需请求图片', async () => {
     await expect(preloadPets([{ id: 'demo', name: 'Demo', emoji: '🐶' }])).resolves.toBeUndefined();
     expect(FakeImage.instances).toHaveLength(0);
+  });
+});
+
+describe('waitForLineup 开局兜底等待', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    FakeImage.instances = [];
+    vi.stubGlobal('Image', FakeImage);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.useRealTimers();
+  });
+
+  const settled = (promise: Promise<void>) => {
+    let done = false;
+    void promise.then(() => { done = true; });
+    return () => done;
+  };
+
+  it('小图全部就绪时立即放行', async () => {
+    const isDone = settled(waitForLineup([pet]));
+    finishImages(128, 'load');
+    await vi.advanceTimersByTimeAsync(0);
+    expect(isDone()).toBe(true);
+  });
+
+  it('个别请求卡住时，等满兜底时间就放行，不等到 10 秒超时', async () => {
+    const isDone = settled(waitForLineup([pet]));
+    await vi.advanceTimersByTimeAsync(LINEUP_WAIT_MS - 1);
+    expect(isDone()).toBe(false);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(isDone()).toBe(true);
+    expect(LINEUP_WAIT_MS).toBeLessThan(10_000);
+    finishImages(128, 'load');
+  });
+
+  it('小图加载失败也放行，由棋子回退表情', async () => {
+    const wait = waitForLineup([pet]);
+    finishImages(128, 'error');
+    await expect(wait).resolves.toBeUndefined();
   });
 });

@@ -101,6 +101,7 @@
 | auth.change_player | 返回选择身份 | Choose another profile |
 | auth.logout_failed | 暂时没能退出，请重试。 | We couldn’t sign you out. Please try again. |
 | identity.title | 你是哪位同事？ | Who's Playing? |
+| identity.choose_first | 先选择你的名字 | Pick Your Name |
 | identity.search | 搜索你的 Slack 名字 | Search your Slack name |
 | identity.hint | 选择自己的身份，成绩和图鉴会记在这里。 | Choose your own profile. Your scores and collection will be saved to it. |
 | identity.selected | 当前选择：{playerName} | Selected: {playerName} |
@@ -188,7 +189,7 @@
 | Key | 中文 | English |
 | --- | --- | --- |
 | prep.loading | 毛孩子正在集合…… | Getting the pets ready… |
-| prep.preparing | 准备中… | Getting ready… |
+| prep.preparing | 阵容加载中… | Loading lineup… |
 | prep.guests | 本局来客 | This Round's Guests |
 | prep.guests_lead | 本局 | This Round's |
 | prep.guests_accent | 来客 | Guests |
@@ -440,9 +441,10 @@
 | --- | --- | --- |
 | leaderboard.pets | 宠物店 | Pet Shop |
 | leaderboard.fish | 摸鱼分店 | Fish Tank |
-| leaderboard.near_me | 我的名次 | My Rank |
+| leaderboard.near_me | 我附近 | Near Me |
 | leaderboard.all | 全榜 | All Rankings |
-| leaderboard.find_me | 回到我的名次 | Back to My Rank |
+| leaderboard.find_me | 回到我附近 | Back to Near Me |
+| leaderboard.near_range | 第 {from}–{to} 名 · 你的前后 | Ranks {from}–{to} · around you |
 | leaderboard.rank | 名次 | Rank |
 | leaderboard.best_score | 最好成绩 | Best Score |
 | leaderboard.no_score | 本模式还没有你的已保存成绩。开一局，留下第一笔纪录。 | No saved score in this mode yet. Play a round to get on the board. |
@@ -492,7 +494,7 @@
 
 2026-10-24 排行榜页改为「毛孩子光荣榜 / Pet Hall of Fame」标题字标（图片，读屏读 `leaderboard.hall_of_fame`）与副标题 `leaderboard.tagline`；排行记录的是个人最好成绩，副标题不写「今天」。领奖台分数用 `leaderboard.points`。领奖台上方不再显示 `leaderboard.top_players`。鱼关页签仍只对已发现鱼关的玩家显示，不加锁定标签或解锁预告。
 
-聚焦本人及相邻名次的视图标签已确认使用「我的名次 / My Rank」，保留已定的邻近排名列表，不改成只显示本人；「回到我的名次」回到该视图。全榜标签用「All Rankings」，与棋盘区分。无成绩提示仅在数据读取成功且当前模式确无已保存成绩时显示，读取失败用对应重试提示；真实已保存的 0 分仍是记录。无成绩时先展示全榜，不生成虚构名次。本页展示的关键文案已确认，排名规则与模式入口不变。
+聚焦本人及相邻名次的视图标签 2026-10-27 改为「我附近 / Near Me」（原「我的名次 / My Rank」易被理解为完整名次），列表上方用 `leaderboard.near_range` 标出实际名次段；保留已定的邻近排名列表，不改成只显示本人；「回到我附近」回到该视图。全榜标签用「All Rankings」，与棋盘区分。无成绩提示仅在数据读取成功且当前模式确无已保存成绩时显示，读取失败用对应重试提示；真实已保存的 0 分仍是记录。无成绩时先展示全榜，不生成虚构名次。本页展示的关键文案已确认，排名规则与模式入口不变。
 
 ## 8. 已发现后的 Peter 小鱼关 · 关键文案已确认
 

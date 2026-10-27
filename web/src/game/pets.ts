@@ -72,6 +72,11 @@ export const petDisplayName = (pet: PetInfo, locale: 'zh' | 'en') => (locale ===
 const PRELOAD_TIMEOUT_MS = 10_000;
 const OPTIONAL_IMAGE_RETRY_MS = 30_000;
 const pendingPetImages = new Map<string, { image: HTMLImageElement; promise: Promise<void> }>();
+const shownPetImages = new Set<string>();
+
+/** 本页已成功加载过的贴纸可直接显示；其余先显示表情，避免开局放行后出现空白棋子。 */
+export const petImageShown = (src: string) => shownPetImages.has(src);
+export const markPetImageShown = (src: string) => { shownPetImages.add(src); };
 const optionalImageFailures = new Map<string, number>();
 
 /**
@@ -104,6 +109,7 @@ export function loadPetImage(src: string, priority: 'high' | 'low' = 'low'): Pro
   pendingPetImages.set(src, { image, promise });
   void promise.then(() => {
     pendingPetImages.delete(src);
+    shownPetImages.add(src);
     optionalImageFailures.delete(src);
   }, () => {
     pendingPetImages.delete(src);
@@ -119,4 +125,20 @@ export async function preloadPets(pets: PetInfo[], size: 128 | 512 = 128): Promi
     const src = petImage(pet, size);
     return src ? loadPetImage(src, 'high') : Promise.resolve();
   }));
+}
+
+/** 正常冷启动不到 1 秒；超过这个时间多半是个别请求卡住，不值得让玩家干等。 */
+export const LINEUP_WAIT_MS = 3_000;
+
+/**
+ * 开局准备：最多等 LINEUP_WAIT_MS 让小图就绪，到时或失败都放行。
+ * 未就绪的贴纸由 PetTile 继续加载，失败时回退表情，不阻塞开局。
+ */
+export async function waitForLineup(pets: PetInfo[], waitMs = LINEUP_WAIT_MS): Promise<void> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  await Promise.race([
+    preloadPets(pets).catch(() => {}),
+    new Promise<void>(resolve => { timer = setTimeout(resolve, waitMs); }),
+  ]);
+  clearTimeout(timer);
 }

@@ -4,7 +4,7 @@ import type { AchievementId, GameMode, LeaderboardEntry, LeaderboardScope, Leade
 import { conditionRevealed } from '../game/achievementRules';
 import { BoardDateCaption } from '../components/BoardDateCaption/BoardDateCaption';
 import { BrandHeader } from '../components/BrandHeader/BrandHeader';
-import { LeaderboardHeader, LeaderboardRow } from '../components/LeaderboardRow/LeaderboardRow';
+import { LeaderboardHeader, LeaderboardRange, LeaderboardRow } from '../components/LeaderboardRow/LeaderboardRow';
 import { ModeMark } from '../components/ModeMark/ModeMark';
 import { Podium } from '../components/Podium/Podium';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
@@ -133,6 +133,7 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
             />
           )}
           <div className={styles.list} data-testid="leaderboard-rows">
+            {view === 'near' && data.me && rows.length > 0 && <LeaderboardRange from={rows[0].rank} to={rows[rows.length - 1].rank} />}
             {rows.length > 0 && <LeaderboardHeader scoreLabel={today ? 'leaderboard.today_best' : 'leaderboard.best_score'} />}
             {rows.map((e) => (
               <LeaderboardRow key={e.userId} entry={e} isMe={e.userId === player.userId} tied={(tiedRanks.get(e.rank) ?? 0) > 1} onSelect={setSelectedPlayer}

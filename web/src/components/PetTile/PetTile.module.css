@@ -10,6 +10,11 @@
   user-select: none;
 }
 
+.face,
+.sticker {
+  grid-area: 1 / 1;
+}
+
 .face {
   font-size: calc(var(--size, 48px) * 0.62);
   line-height: 1;
@@ -23,6 +28,10 @@
   object-fit: contain;
   pointer-events: none;
   -webkit-user-drag: none;
+}
+
+.sticker[data-pending] {
+  opacity: 0;
 }
 
 

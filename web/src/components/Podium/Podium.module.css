@@ -104,15 +104,15 @@
 }
 
 .center .step {
-  height: 150px;
+  height: 162px;
 }
 
 .left .step {
-  height: 126px;
+  height: 138px;
 }
 
 .right .step {
-  height: 110px;
+  height: 122px;
 }
 
 .gold {
@@ -147,14 +147,18 @@
   height: 26px;
 }
 
+/* 窄栏放不下常见的「名 姓」：最多两行，再长才省略 */
 .name {
+  display: -webkit-box;
   min-width: 0;
   overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   font-size: var(--text-sm);
   font-weight: 900;
   line-height: 1.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-align: center;
+  overflow-wrap: break-word;
   color: var(--color-ink);
 }
 
