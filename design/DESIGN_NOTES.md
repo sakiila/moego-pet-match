@@ -49,6 +49,7 @@
 
 | 页面 | 文件 | 设计重点 |
 | --- | --- | --- |
+| 猫派 vs 狗派周徽记与冠军徽章 | [四枚素材 v1](concepts/catdog-week-icons-v1.png) | 2026-10-27 用户选定；橙色尖耳喵派、蓝色垂耳汪派，冠军版增加彩虹边框与金色皇冠。由内置 ImageGen 生成，按原图提取为 8 个透明 PNG 母版，经统一 Icon 使用；[提示词](concepts/catdog-week-icons-v1-prompt.txt)、[提取与 SHA-256 记录](../assets/icons/catdog-week-original-v1/manifest.json)。390 × 844 下检查中英文陈列状态、18px 标签与 72px 选边卡；本条仅记录素材选定与本地验证，生产迁移和部署另行核验。 |
 | 宠物爪印簿图标 · 宠物小动作 | [实际第 2 稿](concepts/pet-paw-icons-playful-v1.png) | 2026-10-26 用户选择；蓝猫、摸头、推球、抱心与 7 枚状态/控件图标，全部按原图裁切为透明 PNG，经统一 Icon 使用；[来源与像素校验](../assets/icons/pet-paw-icons-playful-original-v1/README.md)。四个互动图标为 40px，收紧按钮内部竖向留白；文字和底色仍是组件，旧小切图与原稿留档 |
 | 宠物爪印簿 | [三状态 v2](concepts/pet-paw-book-v2.png) | 2026-10-26 用户认可方向并要求继续实现；详情卡下独立入口、四种短句、主人一键回爪、游戏内未读提示。同事与主人共用白底 Sheet，保留原宠物卡翻面。用户后续明确要求原图裁切、不要手绘；11 枚小图形已按附件提取透明 PNG，经统一 Icon 使用，文字与底色仍为组件；[提取来源与像素记录](../assets/icons/pet-paw-book-original-v1/README.md)；[规则与实现](reviews/2026-10-26-pet-paw-book/PROPOSAL.md) |
 | 首次浏览器声音提示 | [first-visit-sound-tip-v2.png](concepts/first-visit-sound-tip-v2.png) | 2026-10-26 用户确认方向并要求本地接入：左上只保留音符、移除喇叭；浅暖色轻提示指向页尾高亮设置，说明开启背景音乐与消除音效体验更好，可关闭，同一浏览器一次。组件用 CSS、tokens 与现有 Icon 绘制；实际气泡收紧以避开导航文字，保留原首页文案、真实店长与三行页尾。见[计划与验收](reviews/2026-10-26-first-visit-sound-tip/PLAN.md)；同日用户追加授权并入 main 推送上线，发布结果以部署任务回执为准。 |
