@@ -25,13 +25,15 @@ export interface PrepScreenProps {
   verification?: ReactNode;
   verificationReady?: boolean;
   starting?: boolean;
+  /** 人机验证正在后台进行（尚未拿到 token、也没有失败）：按钮写明在等什么。 */
+  verifying?: boolean;
   onStart: () => void;
   onRetry?: () => void;
   onBack?: () => void;
 }
 
 /** 开局准备：棋盘的计时前状态，读说明不计时；对局登记成功后才允许点「开始这班」进入 90 秒。鱼关换深蓝水下主题。 */
-export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames = [], failed, verification, verificationReady = true, starting = false, onStart, onRetry, onBack }: PrepScreenProps) {
+export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames = [], failed, verification, verificationReady = true, starting = false, verifying = false, onStart, onRetry, onBack }: PrepScreenProps) {
   const { t } = useI18n();
   const fish = mode === 'fish';
   return (
@@ -52,8 +54,8 @@ export function PrepScreen({ mode = 'normal', pets, loading = false, ownPetNames
       <RulesCard mode={mode} />
       <div className={styles.grow} />
       {verification}
-      <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onStart} disabled={!pets || loading || failed || !verificationReady || starting} aria-busy={loading || starting} data-testid="start">
-        {t(starting ? 'security.starting' : loading && !failed ? 'prep.preparing' : 'prep.start')}
+      <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onStart} disabled={!pets || loading || failed || !verificationReady || starting} aria-busy={loading || starting || verifying} data-testid="start">
+        {t(starting ? 'security.starting' : loading && !failed ? 'prep.preparing' : verifying && !failed ? 'security.verifying' : 'prep.start')}
       </Button>
     </main>
   );

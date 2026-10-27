@@ -32,6 +32,14 @@ it('人机验证未完成或服务端正在开局时禁止重复开始', () => {
   expect(html).toContain('正在开局');
 });
 
+it('人机验证在后台进行时，按钮写明正在确认并保持不可点', () => {
+  const html = render({ verificationReady: false, verifying: true });
+  expect(html).toContain('毛孩子闻一闻');
+  expect(startButton(html)).toContain('disabled');
+  expect(startButton(html)).toContain('aria-busy="true"');
+  expect(render({ verificationReady: false, verifying: true, loading: true })).toContain('阵容加载中');
+});
+
 it('图片准备失败后保留来客名单，显示重试并禁止开始', () => {
   const html = render({ failed: true, onRetry: () => {} });
   expect(html).toContain('Mochi');

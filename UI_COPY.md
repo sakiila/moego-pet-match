@@ -70,6 +70,7 @@
 | security.verified | 验证完成，可以开始这班啦。 | All checked. Ready for your shift! |
 | security.failed | 验证暂时没有通过，请重试。 | The check did not go through. Please try again. |
 | security.starting | 正在开局… | Starting… |
+| security.verifying | 毛孩子闻一闻，马上就好～ | Quick sniff check… almost ready! |
 | security.rate_limited | 操作有点频繁，请稍后再试。 | Too many attempts. Please wait a moment and try again. |
 | access.internal | 仅供 MoeGo 同事游玩 | For MoeGo Coworkers |
 

@@ -13,6 +13,7 @@ const entry: GalleryEntry = {
     'long names · two own pets': () => <PrepScreen pets={PREVIEW_PREP_PETS.map((p, i) => i === 1 ? { ...p, name: 'Sir Fluffington the Magnificent' } : p)} ownPetNames={['Sir Fluffington the Magnificent', 'Boluo']} onStart={noop} onBack={noop} />,
     loading: () => <PrepScreen pets={null} onStart={noop} onBack={noop} />,
     'images loading · lineup visible': () => <PrepScreen pets={PREVIEW_PREP_PETS} loading onStart={noop} onBack={noop} />,
+    'verifying in background': () => <PrepScreen pets={PREVIEW_PREP_PETS} verificationReady={false} verifying onStart={noop} onBack={noop} />,
     'images failed · retry': () => <PrepScreen pets={PREVIEW_PREP_PETS} failed onRetry={noop} onStart={noop} onBack={noop} />,
     failed: () => <PrepScreen pets={null} failed onRetry={noop} onStart={noop} onBack={noop} />,
     fish: () => <PrepScreen pets={SAMPLE_FISH} mode="fish" onStart={noop} onBack={noop} />,

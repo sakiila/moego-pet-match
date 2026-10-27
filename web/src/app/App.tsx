@@ -384,6 +384,7 @@ export function App() {
             failed={route.failed}
             verificationReady={!verification.required || !!verification.token}
             starting={verification.starting}
+            verifying={verification.required && !verification.token && !verification.failed}
             verification={verification.required && route.session && <TurnstileGate
               key={`${route.session.registered.gameId}:${verification.attempt}`}
               siteKey={verification.siteKey} gameId={route.session.registered.gameId}
