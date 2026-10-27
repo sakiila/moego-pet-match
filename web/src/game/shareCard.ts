@@ -56,7 +56,7 @@ export function shareCardModel({ summary, pets, mode, playerName, manager, local
     hero = { src: stickerUrl(manager.pet.petId, 1024), label: `${t('home.manager')} · ${manager.pet.name}`, kind: 'manager' };
   }
   return {
-    mode: t(mode === 'fish' ? 'leaderboard.fish' : 'leaderboard.pets'),
+    mode: t(mode === 'fish' ? 'leaderboard.fish' : mode === 'ai' ? 'leaderboard.ai' : 'leaderboard.pets'),
     brand: { lead: t('brand.title_lead'), accent: t('brand.title_accent') },
     hero,
     title: t(judgeTitle(summary)),

@@ -182,7 +182,7 @@ describe('统一结算', () => {
 describe('玩家记录读取', () => {
   it('刷新后读取已保存的个人最好与进度', async () => {
     const res = (await ctx.app.inject({ method: 'GET', url: '/api/players/U_TEST_BOB' })).json();
-    expect(res.best).toEqual({ normal: 2100, fish: 2100 });
+    expect(res.best).toEqual({ normal: 2100, fish: 2100, ai: null });
     expect(res.progress).toEqual({ completedNormalGames: 5, fishUnlocked: true });
   });
 });

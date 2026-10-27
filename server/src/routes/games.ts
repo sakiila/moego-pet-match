@@ -11,9 +11,10 @@ import { checkGameRate, startVerifiedGame } from '../services/gameSecurity.ts';
 import { findColleague } from '../services/players.ts';
 import { isIP } from 'node:net';
 import { requestBudget } from '../services/requestBudget.ts';
+import { LiveMoveBody, playLiveMove } from '../services/livePlay.ts';
 
 const playerIdSchema = z.string().min(1).max(80);
-const RegisterBody = z.object({ playerId: playerIdSchema, mode: z.enum(['normal', 'fish']) });
+const RegisterBody = z.object({ playerId: playerIdSchema, mode: z.enum(['normal', 'fish', 'ai']) });
 const SettleBody = z.object({ playerId: playerIdSchema, result: ResultPayloadSchema });
 const StartBody = z.object({ playerId: playerIdSchema, turnstileToken: z.string().max(2048) });
 const AnswerBody = z.object({ playerId: z.string().min(1), choice: z.string().min(1).nullable() });
@@ -70,6 +71,18 @@ export const gameRoutes: FastifyPluginAsync<AppDeps> = async (app, deps) => {
     if (!await rate(body.data.playerId, 'start', reply)) return;
     try {
       return await startVerifiedGame(deps.pool, request.params.id, body.data.playerId, body.data.turnstileToken, playToken, deps.gameSecurity, now());
+    } catch (error) { return sendGameError(reply, error); }
+  });
+
+  // 服务端执棋：正式局每次交换都在这里结算，补落从不提前下发。
+  app.post<{ Params: { id: string } }>('/api/games/:id/moves', { bodyLimit: 4096 }, async (request, reply) => {
+    if (!z.string().uuid().safeParse(request.params.id).success) return reply.status(404).send({ error: 'not_found' });
+    const body = LiveMoveBody.safeParse(request.body);
+    if (!body.success) return reply.status(400).send({ error: 'invalid_request' });
+    if (!await requirePlayer(request, reply, deps.pool, body.data.playerId)) return;
+    try {
+      const { playerId, index, move } = body.data;
+      return await playLiveMove(deps.pool, request.params.id, playerId, bearer(request.headers.authorization), index, move, now());
     } catch (error) { return sendGameError(reply, error); }
   });
 

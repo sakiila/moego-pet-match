@@ -7,6 +7,7 @@ const entry: GalleryEntry = {
   group: 'components',
   states: {
     default: () => <RulesCard />,
+    'AI challenge': () => <RulesCard mode="ai" />,
     fish: () => (
       <FishFrame>
         <RulesCard mode="fish" />

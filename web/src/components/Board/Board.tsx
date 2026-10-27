@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent } from 'react';
 import type { GameMode } from '../../api/types';
+import { themeOf } from '../../game/mode';
 import { TIMING, type Move, type Pos } from '../../engine';
 import { particlesPerCell } from '../../game/feedback';
 import { INPUT, resolveDrag, resolveTap } from '../../game/input';
@@ -236,7 +237,7 @@ export function Board({
                   {piece.type === 'pet' ? (
                     <PetTile pet={pets[piece.kind]} tint={piece.kind} size={cellPx} />
                   ) : (
-                    <ToolPiece tool={piece.tool} mode={mode} />
+                    <ToolPiece tool={piece.tool} mode={themeOf(mode)} />
                   )}
                 </div>
               </div>

@@ -47,7 +47,7 @@ export const playerRoutes: FastifyPluginAsync<AppDeps> = async (app, { pool, dir
   });
 
   app.get<{ Params: { id: string } }>('/api/players/:id/profile', async (request, reply) => {
-    const query = z.object({mode:z.enum(['normal','fish']).default('normal')}).safeParse(request.query);
+    const query = z.object({mode:z.enum(['normal','fish','ai']).default('normal')}).safeParse(request.query);
     if (!query.success) return reply.status(400).send({error:'invalid_request'});
     const profile = await loadPlayerProfile(pool, request.params.id, query.data.mode);
     return profile ?? reply.status(404).send({error:'not_found'});

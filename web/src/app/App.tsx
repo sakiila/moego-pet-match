@@ -25,6 +25,7 @@ import { useGameVerification } from '../game/useGameVerification';
 import screen from '../screens/Screen.module.css';
 import { loadSavedPlayerId, savePlayerId } from './identity';
 import { GAME_VERSION } from './version';
+import { liveSubmitter } from '../game/live';
 import { COPYRIGHT, GITHUB_REPOSITORY_URL } from './project';
 
 interface Session {
@@ -403,6 +404,7 @@ export function App() {
             startAt={startAt}
             uncollected={new Set(route.session.registered.uncollectedPetIds)}
             families={route.session.registered.families}
+            live={route.session.registered.live && player ? liveSubmitter(route.session.registered.gameId, player.userId) : undefined}
             onFinished={(summary) => setRoute({ name: 'report', session: route.session, summary })}
             onExit={toHome}
           />

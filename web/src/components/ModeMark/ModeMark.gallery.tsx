@@ -15,12 +15,15 @@ const entry: GalleryEntry = {
         <ModeMark mode="normal" size={32} />
         <ModeMark mode="fish" size={24} />
         <ModeMark mode="fish" size={32} />
+        <ModeMark mode="ai" size={24} />
+        <ModeMark mode="ai" size={32} />
       </div>
     ),
     'on primary button': () => (
       <div style={{ display: 'grid', gap: 12 }}>
         <Button size="lg" block icon={<ModeMark mode="normal" tone="onAccent" size={32} />}>开始这班</Button>
         <Button size="lg" block icon={<ModeMark mode="fish" tone="onAccent" size={32} />}>开始这班</Button>
+        <Button size="lg" block icon={<ModeMark mode="ai" tone="onAccent" size={32} />}>开始 AI 挑战</Button>
       </div>
     ),
     'fish theme': () => (

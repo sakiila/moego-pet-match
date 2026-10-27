@@ -1,4 +1,4 @@
-import type { GameMode } from '../../api/types';
+import type { BoardTheme } from '../../game/mode';
 import type { ManagerPosterModel, ShareCardModel } from '../../game/shareCard';
 import { SHARE_URL } from '../../game/shareUrl';
 
@@ -10,7 +10,7 @@ type Ctx = CanvasRenderingContext2D;
 type Tokens = ReturnType<typeof readTokens>;
 
 /** 颜色与字体从 tokens 读取；鱼关的变量挂在 data-theme="fish" 上，临时挂一个节点读出。 */
-function readTokens(mode: GameMode) {
+function readTokens(mode: BoardTheme) {
   const probe = document.createElement('div');
   if (mode === 'fish') probe.dataset.theme = 'fish';
   probe.style.display = 'none';
@@ -355,7 +355,7 @@ function shareUrl(ctx: Ctx, k: Tokens) {
   ctx.restore();
 }
 
-function background(ctx: Ctx, mode: GameMode, k: Tokens) {
+function background(ctx: Ctx, mode: BoardTheme, k: Tokens) {
   const { width: W, height: H } = SHARE_CARD;
   const [x, y, w, h] = LAYOUT[mode].paper;
   if (mode === 'fish') {
@@ -409,7 +409,7 @@ function background(ctx: Ctx, mode: GameMode, k: Tokens) {
   ctx.stroke();
 }
 
-function header(ctx: Ctx, model: Pick<ShareCardModel, 'mode' | 'brand'>, mode: GameMode, k: Tokens) {
+function header(ctx: Ctx, model: Pick<ShareCardModel, 'mode' | 'brand'>, mode: BoardTheme, k: Tokens) {
   const y = LAYOUT[mode].header;
   const fg = mode === 'fish' ? k.paper : k.ink;
   const sep = /[A-Za-z]$/.test(model.brand.lead) ? ' ' : '';
@@ -458,7 +458,7 @@ function header(ctx: Ctx, model: Pick<ShareCardModel, 'mode' | 'brand'>, mode: G
   }
 }
 
-function hero(ctx: Ctx, img: HTMLCanvasElement, mode: GameMode, k: Tokens) {
+function hero(ctx: Ctx, img: HTMLCanvasElement, mode: BoardTheme, k: Tokens) {
   const [cx, cy, bw, bh] = LAYOUT[mode].hero;
   const scale = Math.min(bw / img.width, bh / img.height);
   const w = img.width * scale;
@@ -482,7 +482,7 @@ function hero(ctx: Ctx, img: HTMLCanvasElement, mode: GameMode, k: Tokens) {
   ctx.restore();
 }
 
-function plate(ctx: Ctx, label: string, mode: GameMode, k: Tokens) {
+function plate(ctx: Ctx, label: string, mode: BoardTheme, k: Tokens) {
   const y = LAYOUT[mode].plate;
   const { size } = fit(ctx, (s) => `800 ${s}px ${k.font}`, label, 620, 1, 44, 28);
   const w = ctx.measureText(label).width + (mode === 'fish' ? 90 : 120);
@@ -495,7 +495,7 @@ function plate(ctx: Ctx, label: string, mode: GameMode, k: Tokens) {
 }
 
 /** 评语气泡：在留给它的高度内选最大的字号；没有主角时居中放在页头与分数之间，并放大。 */
-function review(ctx: Ctx, text: string, mode: GameMode, hasHero: boolean, k: Tokens) {
+function review(ctx: Ctx, text: string, mode: BoardTheme, hasHero: boolean, k: Tokens) {
   const L = LAYOUT[mode];
   const quoted = `“${text}”`;
   const [top0, bottom] = hasHero ? L.bubble : [L.header + 120, L.scoreLabel - 60];
@@ -523,7 +523,7 @@ function review(ctx: Ctx, text: string, mode: GameMode, hasHero: boolean, k: Tok
   lines.forEach((l, i) => ctx.fillText(l, 540, top + 35 + lh * (i + 0.5)));
 }
 
-function score(ctx: Ctx, model: ShareCardModel, mode: GameMode, k: Tokens) {
+function score(ctx: Ctx, model: ShareCardModel, mode: BoardTheme, k: Tokens) {
   const L = LAYOUT[mode];
   const { size } = fit(ctx, (s) => `900 ${s}px ${k.font}`, model.score, 760, 1, 200, 110);
   const w = ctx.measureText(model.score).width;
@@ -578,7 +578,7 @@ async function loadFonts(family: string) {
 }
 
 /** 按冻结的卡面内容绘制成绩卡并导出 PNG。主角图读取失败时整体失败（由预览提供重试）。 */
-export async function drawShareCard(model: ShareCardModel, mode: GameMode): Promise<Blob> {
+export async function drawShareCard(model: ShareCardModel, mode: BoardTheme): Promise<Blob> {
   const k = readTokens(mode);
   await loadFonts(k.font);
   const img = !model.hero ? null : model.hero.src ? trimmed(await loadImage(model.hero.src)) : genericMark(k);

@@ -5,7 +5,7 @@ import type { AppDeps } from '../app.ts';
 import { beijingDate } from '../services/pets.ts';
 
 const Query = z.object({
-  mode: z.enum(['normal', 'fish']).default('normal'),
+  mode: z.enum(['normal', 'fish', 'ai']).default('normal'),
   scope: z.enum(['today', 'all']).default('all'),
   playerId: z.string().optional(),
 });

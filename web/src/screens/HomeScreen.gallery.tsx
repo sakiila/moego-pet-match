@@ -1,13 +1,14 @@
 import { COPYRIGHT, GITHUB_REPOSITORY_URL } from '../app/project';
 import { GAME_VERSION } from '../app/version';
 import type { GalleryEntry } from '../dev/gallery/types';
+import type { GameMode } from '../api/types';
 import { HomeScreen, type HomeScreenProps } from './HomeScreen';
 import { loadPlayerPetDetailPreview, loadPlayerPetsPreview } from '../dev/gallery/playerPets';
 import { useI18n } from '../i18n';
 
 const noop = () => {};
 const loadLikes = async () => ({ receivedLikes: 12, likedByViewer: false, canLike: false });
-const loadProfile = async (userId: string, mode: 'normal' | 'fish') => ({
+const loadProfile = async (userId: string, mode: GameMode) => ({
   userId, name: 'Bob', mode, bestScore: 24800, completedGames: 12,
   collection: { collected: 18, total: 80 }, equippedTitle: null, unlockedTitles: [], recentGames: [],
 });
