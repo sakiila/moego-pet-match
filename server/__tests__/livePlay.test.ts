@@ -104,16 +104,26 @@ describe('服务端执棋', () => {
 
   it('结算以服务端棋局为准：用本地公开种子重演的成绩不被接受', async () => {
     const { game, token, startedAt } = await begin();
-    let local = createGame({ seed: game.seed, lineup: lineupOf(game) });
+    // 固定为服务端连消更久的棋局，覆盖两边 busyUntil 不同的情况。
+    const seed = 16;
+    await ctx.pool.query('UPDATE pet_match.games SET seed = $2, refill_key = $3 WHERE game_id = $1', [game.gameId, seed, Buffer.alloc(32, 7)]);
+    let local = createGame({ seed, lineup: lineupOf(game) });
+    let server = local;
+    let waitedForServer = false;
     const moves = [];
     for (let i = 0; i < 5; i++) {
-      const m = { ...findHint(local)!, at: Math.max(i * 1000, local.busyUntil) };
+      const localAt = Math.max(i * 1000, local.busyUntil);
+      waitedForServer ||= server.busyUntil > localAt;
+      const m = { ...findHint(local)!, at: Math.max(localAt, server.busyUntil) };
       at(startedAt, m.at);
-      expect((await move(game, token, i, m)).statusCode).toBe(200);
+      const response = await move(game, token, i, m);
+      expect(response.statusCode, response.body).toBe(200);
+      server = response.json().state as GameState;
       const next = trySwap(local, m.from, m.to, m.at);
       if (!next.ok) throw new Error('fixture');
       local = next.state; moves.push(m);
     }
+    expect(waitedForServer).toBe(true);
     at(startedAt, 95_000);
     const forged = { ...toResultPayload(getSummary(local), game.rulesVersion), moves };
     const r = await app.inject({ method: 'POST', url: `/api/games/${game.gameId}/result`, headers: { authorization: `Bearer ${token}` }, payload: { playerId: player, result: forged } });
