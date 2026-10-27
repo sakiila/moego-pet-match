@@ -64,7 +64,9 @@ try:
     allowed = {'PET_MATCH_DATABASE_URL', 'R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID',
                'R2_SECRET_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_BUCKET_NAME',
                'R2_JURISDICTION', 'SLACK_BOT_TOKEN', 'SLACK_NOTIFY_CHANNEL',
-               'SLACK_SIGNING_SECRET', 'TURNSTILE_SITE_KEY', 'TURNSTILE_SECRET_KEY'}
+               'SLACK_SIGNING_SECRET', 'TURNSTILE_SITE_KEY', 'TURNSTILE_SECRET_KEY',
+               'PET_SOCIAL_ENABLED', 'PET_SOCIAL_SLACK_SYNC_ENABLED', 'PET_SOCIAL_PUBLIC_ORIGIN',
+               'SLACK_ADMIN_MEMBER_ID'}
     unknown = sorted(set(runtime) - allowed)
     required = ['PET_MATCH_DATABASE_URL', 'R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID', 'R2_BUCKET_NAME', 'TURNSTILE_SITE_KEY', 'TURNSTILE_SECRET_KEY']
     missing = [key for key in required if not str(runtime.get(key) or '').strip()]
