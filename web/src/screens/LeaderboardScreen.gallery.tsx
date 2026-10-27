@@ -1,4 +1,4 @@
-import type { LeaderboardView, PlayerProfileView } from '../api/types';
+import type { GameMode, LeaderboardView, PlayerProfileView } from '../api/types';
 import type { GalleryEntry } from '../dev/gallery/types';
 import { LeaderboardScreen } from './LeaderboardScreen';
 import { ACHIEVEMENT_IDS } from '../game/achievementRules';
@@ -23,7 +23,7 @@ const ranked: LeaderboardView = {
   me: { rank: 7, userId: 'bob', name: 'Bob', score: 24800, equippedTitle: 'album' },
 };
 
-const profilePreview = async (userId: string, mode: 'normal' | 'fish'): Promise<PlayerProfileView> => {
+const profilePreview = async (userId: string, mode: GameMode): Promise<PlayerProfileView> => {
   const person = ranked.entries.find(entry => entry.userId === userId)!;
   return {
     userId, name: person.name, mode, bestScore: person.score, completedGames: 12,
@@ -62,6 +62,9 @@ const entry: GalleryEntry = {
     ),
     'opened on fish tab (from Fish Report)': () => (
       <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(true)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
+    ),
+    'opened on AI tab (from AI Report)': () => (
+      <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(false)} initialMode="ai" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />
     ),
     'fish requested but locked → pet shop tab': () => (
       <LeaderboardScreen {...petPreview} loadLikes={likesPreview} sendLike={sendLikePreview} loadProfile={profilePreview} loadViewerTitles={viewerTitlesPreview} player={player(false)} initialMode="fish" onBack={noop} onChallenge={noop} load={async (mode) => ({ ...ranked, mode })} />

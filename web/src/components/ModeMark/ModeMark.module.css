@@ -7,3 +7,26 @@
   transform: scale(1.4);
   user-select: none;
 }
+
+/* AI 挑战：圆角字牌，字号随尺寸缩放 */
+.ai {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  border: var(--stroke) solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: var(--weight-display);
+  line-height: 1;
+  letter-spacing: 0;
+  vertical-align: middle;
+  user-select: none;
+}
+
+.aiOnAccent {
+  border-color: var(--accent-fg);
+  background: transparent;
+  color: var(--accent-fg);
+}

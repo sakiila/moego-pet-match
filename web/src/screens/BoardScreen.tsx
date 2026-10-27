@@ -16,6 +16,7 @@ import type { PetInfo } from '../game/pets';
 import { useGameSession } from '../game/useGameSession';
 import { selectFarewellPets } from '../game/farewell';
 import { MOTION } from '../ui/motion';
+import type { SubmitMove } from '../game/live';
 import { preloadIcon } from '../ui/primitives/Icon';
 
 export interface BoardScreenProps {
@@ -28,11 +29,13 @@ export interface BoardScreenProps {
   /** 本局阵容中尚未收集的宠物与家庭分组（局内贴纸用）。 */
   uncollected?: ReadonlySet<string>;
   families?: Readonly<Record<string, string>>;
+  /** 正式局由服务端执棋：每次交换提交给它。 */
+  live?: SubmitMove;
   onFinished: (summary: GameSummary) => void;
   onExit: () => void;
 }
 
-export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncollected, families, onFinished, onExit }: BoardScreenProps) {
+export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncollected, families, live, onFinished, onExit }: BoardScreenProps) {
   useEffect(() => {
     preloadIcon('closing-sign-zh-hd-v2', 240);
     preloadIcon('closing-sign-en', 240);
@@ -49,7 +52,7 @@ export function BoardScreen({ mode = 'normal', game, pets, speed, startAt, uncol
   }, [ending, reduced]);
   const [quitOpen, setQuitOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const session = useGameSession(game, setEnding, { speed, startAt, mode, uncollected, families, cheersEnabled: !quitOpen && !settingsOpen });
+  const session = useGameSession(game, setEnding, { speed, startAt, mode, uncollected, families, live, cheersEnabled: !quitOpen && !settingsOpen });
   const { view } = session;
 
   // 退出确认期间计时继续；到时自动关闭弹层并照常收尾结算

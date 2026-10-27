@@ -228,6 +228,7 @@
 | tutorial.dryer | 吹风机到位！和任意邻格交换，吹走整个棋盘。 | Hair dryer ready! Swap it with any neighbor to blow the whole board clear. |
 | board.move_hint | 卡住啦？试试这一步。 | Stuck? Try This Move. |
 | board.shuffle | 换个站位，继续营业。 | A quick reshuffle, then back to work. |
+| board.live_offline | 网络断了，这局先停在这里，已有成绩照常保存。 | Connection lost. This round stops here; your score so far still counts. |
 | rush.title | 临时加单！ | Rush Order! |
 | rush.goal | 20 秒内服务 12 格 | Clear 12 tiles in 20s |
 | rush.progress | 已服务 {count}/12 格 · 催单剩余 {seconds} 秒 | {count}/12 tiles · Rush time: {seconds}s |
@@ -441,6 +442,9 @@
 | --- | --- | --- |
 | leaderboard.pets | 宠物店 | Pet Shop |
 | leaderboard.fish | 摸鱼分店 | Fish Tank |
+| leaderboard.ai | AI 榜 | AI Board |
+| leaderboard.ai_note | 这里是 AI 挑战的成绩：AI 代打随便用，和真人榜分开排名。 | AI Challenge scores live here. Bots welcome; this board is ranked apart from human play. |
+| leaderboard.ai_challenge | 开始 AI 挑战 | Start AI Challenge |
 | leaderboard.near_me | 我附近 | Near Me |
 | leaderboard.all | 全榜 | All Rankings |
 | leaderboard.find_me | 回到我附近 | Back to Near Me |
@@ -505,6 +509,7 @@
 | fish.prep_title | 小鱼也来排班啦 | The Fish Have Appointments Too |
 | fish.board_title | 小鱼也来排班啦 | The Fish Have Appointments Too |
 | fish.prep_rule | 交换相邻棋子，让 3 个及以上同色小鱼连成一线。 | Swap neighbors. Line up 3 or more fish of the same color. |
+| ai.prep_rule | AI 挑战：可以让 AI 代打，成绩只上 AI 榜，不计图鉴、打卡和称号。 | AI Challenge: let a bot play if you like. Scores go to the AI Board only, not your Petdex, streak, or titles. |
 | fish.big_wave | 大浪花 | Big Wave |
 | fish.conch | 海螺 | Conch |
 | fish.conch_hint | 和邻格交换，螺口喷出水流，清一行或一列。 | Swap with a neighbor to sweep a row or column. |

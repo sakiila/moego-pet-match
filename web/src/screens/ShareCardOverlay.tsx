@@ -6,6 +6,7 @@ import type { PetInfo } from '../game/pets';
 import { shareCardModel } from '../game/shareCard';
 import { useShareCard } from '../game/useShareCard';
 import { useI18n } from '../i18n';
+import { themeOf } from '../game/mode';
 import { drawShareCard } from '../ui/canvas/drawShareCard';
 
 export interface ShareCardOverlayProps {
@@ -29,7 +30,7 @@ export function ShareCardOverlay({ mode, summary, pets, playerName, manager, rem
   const removedKey = removed.join(',');
   const draw = useMemo(() => {
     const model = shareCardModel({ summary, pets, mode, playerName, manager, locale, t, removed: new Set(removedKey ? removedKey.split(',') : []), score });
-    return () => drawShareCard(model, mode);
+    return () => drawShareCard(model, themeOf(mode));
   }, [summary, pets, mode, playerName, manager, locale, t, removedKey, score]);
   const card = useShareCard(draw, `moego-pet-allstars-${mode}-${score}.png`);
   return <ShareSheet open state={card.state} canShare={card.canShare} onSave={card.save} onShare={card.share} onRetry={card.retry} onClose={onClose} />;

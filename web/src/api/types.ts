@@ -1,5 +1,6 @@
 /** 前后端共用的接口数据形状；server 直接引用本文件。 */
 import type { AchievementId } from '../game/achievementRules.ts';
+import type { GameState, Timeline } from '../engine/types.ts';
 export type { AchievementId } from '../game/achievementRules.ts';
 
 export interface AchievementStatus {
@@ -13,7 +14,8 @@ export interface AchievementView {
   equippedTitle: AchievementId | null;
 }
 
-export type GameMode = 'normal' | 'fish';
+/** ai：AI 挑战，开放协议（公开种子、整局提交走法），只上 AI 榜。 */
+export type GameMode = 'normal' | 'fish' | 'ai';
 
 export type PawMessage = 'cute' | 'pets' | 'play' | 'love';
 export interface PetPaw {
@@ -75,7 +77,7 @@ export interface Streak {
 export interface PlayerView {
   userId: string;
   name: string;
-  best: { normal: number | null; fish: number | null };
+  best: { normal: number | null; fish: number | null; ai?: number | null };
   progress: { completedNormalGames: number; fishUnlocked: boolean };
   equippedTitle?: AchievementId | null;
   streak: Streak;
@@ -102,6 +104,14 @@ export interface RegisteredGame {
   families: Record<string, string>;
   /** 正式环境开局前必须完成人机验证。 */
   verificationRequired?: boolean;
+  /** 服务端执棋：每次交换都提交服务端，由服务端决定补落；种子只决定开局棋盘。 */
+  live?: boolean;
+}
+
+/** 服务端执棋的一步：服务端结算后的棋局状态（不含随机数状态）与本步时间线。 */
+export interface LiveMoveResponse {
+  state: GameState;
+  timeline: Timeline;
 }
 
 export interface GameMove {

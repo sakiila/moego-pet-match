@@ -40,7 +40,7 @@ describe('玩家身份校验', () => {
     expect(res.json()).toEqual({
       userId: 'U_TEST_BOB',
       name: 'Bob',
-      best: { normal: null, fish: null },
+      best: { normal: null, fish: null, ai: null },
       progress: { completedNormalGames: 0, fishUnlocked: false },
       streak: { days: 0, today: false },
     });

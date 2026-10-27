@@ -1,4 +1,4 @@
-import type { AchievementId, AchievementView, PlayerLikesView, PlayerPet, PlayerProfileView, PawBookView, PawMessage, PawNotices } from './types';
+import type { AchievementId, AchievementView, PlayerLikesView, PlayerPet, PlayerProfileView, PawBookView, PawMessage, PawNotices, GameMove, LiveMoveResponse } from './types';
 import { isGalleryPath } from '../app/entryRoute';
 import type { CollectionView, ColleagueResult, DailyManager, DeletionRequestView, MyPet, PetDetail, GameMode, LeaderboardScope, LeaderboardView, PlayerView, QuizResult, RegisteredGame, ResultPayload, SettleResponse, VersionInfo } from './types';
 
@@ -111,6 +111,14 @@ export const api = {
     gameTokens.set(gameId, playToken);
     if (gameTokens.size > 8) gameTokens.delete(gameTokens.keys().next().value!);
     return result;
+  },
+  /** 服务端执棋：提交一次交换，取回服务端结算的棋局与时间线；同一步重试幂等。 */
+  playMove: (gameId: string, playerId: string, index: number, move: GameMove) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 6_000);
+    return request<LiveMoveResponse>(`/api/games/${encodeURIComponent(gameId)}/moves`, {
+      method: 'POST', headers: { authorization: `Bearer ${gameTokens.get(gameId) ?? ''}` }, body: JSON.stringify({ playerId, index, move }), signal: controller.signal,
+    }).finally(() => clearTimeout(timer));
   },
   getLoginState: (playerId: string, signal?: AbortSignal) => request<ColleagueResult & { hasPin: boolean }>(`/api/auth/players/${encodeURIComponent(playerId)}`, { signal }),
   signIn: (playerId: string, pin: string, confirmation?: string) => request<{ userId: string }>(`/api/auth/${confirmation === undefined ? 'login' : 'setup'}`, {

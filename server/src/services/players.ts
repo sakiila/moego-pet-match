@@ -46,7 +46,7 @@ export async function loadPlayer(db: Queryable, userId: string): Promise<PlayerV
   return {
     ...colleague,
     ...(progress.rows[0]?.equipped_title ? { equippedTitle: progress.rows[0].equipped_title } : {}),
-    best: { normal: bestOf('normal'), fish: bestOf('fish') },
+    best: { normal: bestOf('normal'), fish: bestOf('fish'), ai: bestOf('ai') },
     progress: {
       completedNormalGames: progress.rows[0]?.completed_normal_games ?? 0,
       fishUnlocked: progress.rows[0]?.fish_unlocked_at != null,

@@ -1,16 +1,18 @@
 import type { GameMode } from '../../api/types';
 import { useI18n } from '../../i18n';
 import { Icon } from '../../ui/primitives/Icon';
+import { themeOf } from '../../game/mode';
+import { ModeMark } from '../ModeMark/ModeMark';
 import styles from './RulesCard.module.css';
 
-/** 开局前只教三消与两种交换方式；工具用法留到首次自然出现时提示。鱼关强调同色匹配。 */
+/** 开局前只教三消与两种交换方式；工具用法留到首次自然出现时提示。鱼关强调同色匹配；AI 挑战说明成绩只上 AI 榜。 */
 export function RulesCard({ mode = 'normal' }: { mode?: GameMode }) {
   const { t, locale } = useI18n();
   const duration = t('prep.timer_duration');
   const [beforeDuration, afterDuration] = t('prep.timer_hint').split(duration);
   return (
     <>
-      <div className={styles.card} data-mode={mode}>
+      <div className={styles.card} data-mode={themeOf(mode)}>
         <p className={styles.row}>
           <Icon name="prep-adjacent-swap" size={52} className={styles.instructionIcon} />
           <span>{t(mode === 'fish' ? 'fish.prep_rule' : 'prep.rule')}</span>
@@ -19,8 +21,14 @@ export function RulesCard({ mode = 'normal' }: { mode?: GameMode }) {
           <Icon name="prep-sequential-tap" size={52} className={styles.instructionIcon} />
           <span>{t('prep.controls')}</span>
         </p>
+        {mode === 'ai' && (
+          <p className={styles.row}>
+            <span className={styles.instructionIcon}><ModeMark mode="ai" size={44} /></span>
+            <span>{t('ai.prep_rule')}</span>
+          </p>
+        )}
       </div>
-      <p className={styles.timer} data-mode={mode} data-locale={locale}>
+      <p className={styles.timer} data-mode={themeOf(mode)} data-locale={locale}>
         <Icon name="time-left" size={28} />
         <span>{beforeDuration}<strong className={styles.duration}>{duration}</strong>{afterDuration}</span>
       </p>

@@ -17,6 +17,7 @@ import { judgeMvp, judgeTitle, pickReview } from '../game/report';
 import type { Standing } from '../game/standing';
 import { useI18n } from '../i18n';
 import { Button } from '../ui/primitives/Button';
+import { themeOf } from '../game/mode';
 import styles from './Screen.module.css';
 
 export interface ReportScreenProps {
@@ -104,7 +105,7 @@ export function ReportScreen(props: ReportScreenProps) {
       {fish && <UnderwaterBackdrop />}
       <BrandHeader title={fish ? 'fish-report' : 'report'} tagline={subtitle} onBack={onHome} />
       <ScoreCard
-        mode={mode}
+        mode={themeOf(mode)}
         score={quizResult?.score ?? saved?.score ?? summary.score}
         quizBonus={quizResult?.bonus}
         saveState={save.kind === 'saved' ? 'saved' : save.kind === 'saving' ? 'saving' : 'failed'}
