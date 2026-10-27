@@ -33,6 +33,7 @@ export const ICON_CATALOG = {
   'flip-card-vertical-v3': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
   'forward-arrow': { widths: [32, 48, 72, 96, 144, 192, 257], aspect: 1 },
   'hair-dryer': { widths: [32, 48, 72, 96, 144, 192, 288], aspect: 1 },
+  'halloween-pumpkin': { widths: [32, 48, 72, 78], aspect: 1 },
   'haptics': { widths: [32, 48, 72, 96, 144, 173], aspect: 1 },
   'information': { widths: [32, 48, 72, 96, 144, 161], aspect: 1 },
   'language': { widths: [32, 48, 72, 96, 144, 162], aspect: 1 },

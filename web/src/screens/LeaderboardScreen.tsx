@@ -9,6 +9,7 @@ import { ModeMark } from '../components/ModeMark/ModeMark';
 import { Podium } from '../components/Podium/Podium';
 import { StatusMessage } from '../components/StatusMessage/StatusMessage';
 import { useI18n } from '../i18n';
+import { SeasonalSurface } from '../components/SeasonalTheme/SeasonalTheme';
 import { Button } from '../ui/primitives/Button';
 import { Tabs } from '../ui/primitives/Tabs';
 import styles from './Screen.module.css';
@@ -102,7 +103,7 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
   const emptyKey = today ? (data?.entries.length === 0 ? 'leaderboard.today_empty' : 'leaderboard.today_no_score') : 'leaderboard.no_score';
 
   return (
-    <main className={`${styles.screen} ${styles.withStickyActions}`}>
+    <SeasonalSurface surface="leaderboard" mode={mode} className={`${styles.screen} ${styles.withStickyActions}`}>
       <BrandHeader title="hall" tagline="leaderboard.tagline" onBack={onBack} />
       <Tabs value={mode} options={modes} onChange={setMode} label={t('nav.leaderboard')} />
       <Tabs
@@ -151,6 +152,6 @@ export function LeaderboardScreen({ player, initialMode = 'normal', initialScope
       </div>
       {selectedPlayer && <PlayerProfileOverlay key={`${selectedPlayer.userId}:${mode}`} player={selectedPlayer} viewerId={player.userId} mode={mode} load={loadProfile} loadViewerTitles={loadViewerTitles} loadLikes={loadLikes} sendLike={sendLike} onClose={() => setSelectedPlayer(null)}
         loadPets={loadPets} loadPetDetail={loadPetDetail} onOpenShop={() => { setSelectedPlayer(null); onChallenge('normal'); }} />}
-    </main>
+    </SeasonalSurface>
   );
 }

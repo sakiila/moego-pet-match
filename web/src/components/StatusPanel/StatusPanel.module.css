@@ -51,3 +51,21 @@
 @media (prefers-reduced-motion: reduce) {
   .urgent { animation: none; }
 }
+:global([data-season='halloween']) .card {
+  border-radius: 0;
+  background: transparent;
+  padding-inline: var(--space-1);
+}
+:global([data-season='halloween']) .score {
+  border-inline-start: var(--stroke) solid var(--line);
+}
+:global([data-season='halloween']) .label,
+:global([data-season='halloween']) .value {
+  color: var(--fg);
+}
+:global([data-season='halloween']) .time .value {
+  color: var(--accent);
+}
+:global([data-season='halloween']) .urgent .value {
+  color: var(--color-danger);
+}

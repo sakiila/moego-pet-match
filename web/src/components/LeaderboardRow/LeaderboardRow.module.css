@@ -84,3 +84,85 @@
   font-size: var(--text-sm);
   color: var(--color-ink-muted);
 }
+:global([data-season='halloween']) .row {
+  min-height: var(--touch-target);
+  grid-template-columns: var(--space-6) var(--space-6) minmax(0, 1fr) max-content;
+  gap: var(--space-1) var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border-color: var(--season-panel-line);
+  background: var(--panel);
+  color: var(--fg);
+}
+:global([data-season='halloween']) .avatar > * {
+  width: var(--space-6);
+  height: var(--space-6);
+}
+:global([data-season='halloween']) .rank > * {
+  max-width: var(--space-6);
+  max-height: var(--space-6);
+}
+:global([data-season='halloween']) .me {
+  border-color: var(--accent);
+  background: var(--card);
+  color: var(--season-paper-ink);
+}
+:global([data-season='halloween']) .me .score {
+  color: var(--season-paper-accent);
+}
+:global([data-season='halloween']) .tied {
+  background: var(--season-panel-line);
+  color: var(--fg);
+}
+:global([data-season='halloween']) .header {
+  min-height: var(--space-6);
+  border-color: transparent;
+  color: var(--fg-muted);
+}
+:global([data-season='halloween']) .range {
+  color: var(--fg-muted);
+}
+
+/* 同分说明占姓名下方，头像与分数跨两行；不额外增加整行高度。 */
+:global([data-season-surface='leaderboard']) .row {
+  min-height: var(--touch-target);
+  row-gap: 0;
+  font-size: var(--text-sm);
+}
+:global([data-season-surface='leaderboard']) .avatar :global([role='img']) {
+  width: var(--space-6);
+  height: var(--space-6);
+  font-size: var(--text-sm);
+}
+:global([data-season-surface='leaderboard']) .row:has(.meta) .rank,
+:global([data-season-surface='leaderboard']) .row:has(.meta) .avatar,
+:global([data-season-surface='leaderboard']) .row:has(.meta) .score {
+  grid-row: 1 / 3;
+}
+:global([data-season-surface='leaderboard']) .row:has(.meta) .name {
+  align-self: end;
+}
+:global([data-season-surface='leaderboard']) .meta {
+  grid-column: 3;
+  align-self: start;
+  gap: 0;
+}
+:global([data-season-surface='leaderboard']) .tied {
+  padding-block: 0;
+  line-height: 1.15;
+  font-size: var(--text-xs);
+}
+:global([data-season-surface='leaderboard']) .score {
+  font-size: var(--text-md);
+}
+:global([data-season-surface='leaderboard']) .header {
+  min-height: var(--season-leader-header-height);
+  padding-block: 0;
+  font-size: var(--text-xs);
+}
+:global([data-season-surface='leaderboard']) .header .score {
+  font-size: var(--text-xs);
+}
+:global([data-season-surface='leaderboard']) .range {
+  font-size: var(--text-xs);
+  line-height: 1.25;
+}

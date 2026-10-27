@@ -1,0 +1,37 @@
+User follow-up (2026-10-27): 风格2，首页和结算页面和排行榜页面也设计一下
+Selected theme: design/concepts/halloween-purple-night-v1.png (second displayed result from the first ideation set).
+Scope: static design previews only. No runtime implementation, production data, commit, push or deployment.
+Event dates shown are a proposed preview assumption: 2026-10-30 through 2026-11-01 Asia/Shanghai.
+Generated with built-in ImageGen, not CLI/API fallback.
+transparent_background: false
+referenced_image_paths:
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-purple-night-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-report-slim-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/momo.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/boluo.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/koa.png
+
+Full prompt:
+Use case: ui-mockup. Create ONE polished, production-quality seasonal UI concept for the existing MoeGo 毛孩子全明星 pet match-three web game. The user has SELECTED the purple-night Halloween gameplay design in reference Image 1, and this request extends that EXACT visual system to one other page. This is a fixed chosen style, not another alternative. Current date anchor 2026-10-27 Asia/Shanghai. Halloween is October 31; display the same proposed preview schedule "10.30—11.01 · 限时3天" in a compact label. Dates are a design assumption; no live event is claimed.
+
+Target dimensions: 390 x 844 logical mobile viewport, rendered at 853 x 1844 physical pixels to match Image 1. App content only, edge to edge. No device frame, phone body, notch, OS clock/status/battery, browser chrome, gallery board, explanatory captions, page name outside the app, or multiple screens in one image. Natural viewport ratio and readable Chinese. Recompose spacing sensibly; never squash typography or images.
+
+Chosen style: calm deep aubergine background #281E36 with restrained plum #42304F surfaces; warm ivory #FFF4DF for main labels and receipt paper; pumpkin orange #FF8A2B for primary actions and emphasis; small lilac highlights. Follow reference Image 1's warm lantern light, cozy Halloween night, bold friendly rounded lettering, charcoal-purple outlines, white-edged pet stickers, clear hierarchy and intentional whitespace. Small lanterns/pumpkins, a few distant bat silhouettes and tiny gold star sparks can decorate edges behind content, while text and controls stay visually calm. Use the actual MoeGo logo in cream/orange on the dark background, original playful feature wordmark shapes. Keep existing brand and product names. Pets retain original fur colors, face, ear shape and expression. Give pet illustrations ONE tiny crooked deep-purple witch/wizard hat with an orange band and small gold buckle; sit it to one side on the head, without hiding eye, ear silhouette or face. No capes, necks or bodies for real pet head stickers.
+
+Preserve the existing product information, page structure, existing navigation and real workflow. This is a visual seasonal skin. No candy currency, candy collection mission, Halloween-only ranking, temporary achievements, special prizes, gift chests, new unlocks, sign-in bonus or extra call-to-action. Don't add features to fill the frame. Use realistic MOCK data, do not claim actual online stats. Buttons and text must be legible at phone size. Layout differentiation uses grouping, spacing, flat tonal hierarchy and light dividers; do not wrap everything in extra nested cards. All requested Chinese text verbatim. Existing illustrated icons can use warm cream/orange/lilac appropriate to the skin. Avoid horror, gore, skull motifs, tiny illegible text, clipped controls, overloaded decorations.
+
+Page: SETTLEMENT / GROOMING REPORT CARD for a saved normal pet-shop round. Image 2 is the selected compact report layout, NOT the older long report page; preserve this compact receipt, horizontal MVP, harvest, manager tip and fixed two-button layout. Text below reflects CURRENT code and takes precedence over older mock content. Image 3 actual pet Momo is MVP, Image 4 Boluo and Image 5 Koa are new collected pets. Deedee is the white long-eared dog from Image 1 and is the separate daily manager in the bottom tip.
+
+One complete 390x844 screen with natural spacing:
+- Top compact MoeGo logo left; "回门店", "中 / EN" right.
+- Existing rounded feature wordmark "Grooming Report Card", across one line or a deliberate balanced two-line shape, warm cream "Grooming" and pumpkin orange "Report Card", keeping original bold friendly letter shapes. Subtitle "这班辛苦啦，看看毛孩子怎么说。" plus a SMALL muted seasonal line "10.30—11.01 · 限时3天". These occupy about y12-147 logical px.
+- Main warm IVORY RECEIPT PAPER from x14 y158 width362 to approximately y540, with subtle paper edge, dashed separators, small black barcode near the serrated bottom; same recognizable receipt shape as Image 2. Do not turn the receipt into a pumpkin shape or Halloween gift card.
+- Receipt upper line "本局得分" at left and a small green/neutral successful check plus "本局结果已保存" at right. Dominant giant pumpkin-orange score "24,800".
+- One compact status line of existing tags: "个人新纪录！" · "今日第 7 名" · "打卡第 3 天". No score gap or extra stats panel.
+- Receipt center shows Momo (the faithful gray yellow-eyed cat from Image 3) as a white-edged head sticker with tiny purple wizard hat in a pale lavender square on left, and "本局 MVP：Momo" plus quote "赶上了，我撤回那个眼神。" on right. Momo face stays larger than the hat; keep original large ears and eye color. A SMALL orange existing playful flower stamp reading "急什么我会消" overlaps the portrait corner, not the eyes. This is an existing game-result title, not a new seasonal achievement. Do not show a pumpkin medal, candy bonus panel or standalone Trick or Treat reward. The successful rush bonus is already in the total.
+- Under a dashed line, three neat receipt rows with right-aligned orange values: "服务格数 120", "最高连消 4", "工具发动次数 3". Keep legible at 14px. One short barcode and zigzag receipt bottom.
+- Outside the receipt below: section title "本局收获" and subtle count "2". A row of two compact pastel pet cards "Boluo" and "Koa", with the EXACT orange cat and cream parrot from images 4 and 5, each wearing small hat. Avoid the wrong species/name mismatches visible in older concept Image 2. No new achievement card in this particular round, no "去图鉴" link in this header.
+- Below that, one compact ivory speech bubble with tiny hat-wearing Deedee head OUTSIDE on the left, orange label "店长说", and exact existing gameplay tip "两把相邻的梳子交换，合体清十字，试试看！". This daily manager is distinct from Momo MVP. This scene has no eligible owner quiz or fish invitation; do not add either.
+- Bottom fixed action bar on calm dark plum, sufficient padding from content: wide pumpkin-orange "再开一局" button and secondary ivory outlined "分享成绩" button with simple share icon, equal heights about 50px, both fully visible. These are the only report actions besides top Return. No footer nav or signature.
+
+Keep receipt, MVP, score and pets as the heroes, with only small pumpkin lanterns at outer header edges. Foreground paper dark ink contrast must be clear. Background is the SAME deep aubergine night of the chosen board, not bright white all around. The receipt remains cream paper. Do not make every report section its own outer card or stack all possible feature states into the screen.

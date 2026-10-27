@@ -1,0 +1,1081 @@
+{
+  "authorization": "2026-10-27 user: 可以，按这个图片来切图适配",
+  "scope": "Only isolated Halloween illustration/decoration. No UI text, controls, complete tickets or page screenshots.",
+  "sources": {
+    "board": {
+      "path": "design/concepts/halloween-purple-night-v2.png",
+      "snapshot": "sources/board.png",
+      "sha256": "64752cac4cd7e70a39bf29c7a502bf8c06c4f751590516d16c43669e0b6ea44a"
+    },
+    "home": {
+      "path": "design/concepts/halloween-home-purple-night-v2.png",
+      "snapshot": "sources/home.png",
+      "sha256": "12b8abda01cde1f1827e69282c4c0efaa06c623d45df2f1e64ad31b531187d6c"
+    },
+    "report": {
+      "path": "design/concepts/halloween-report-purple-night-v2.png",
+      "snapshot": "sources/report.png",
+      "sha256": "603c76837200262a12158c0d7d09115da9125e08fb5a58b762b822316e153af1"
+    },
+    "leaderboard": {
+      "path": "design/concepts/halloween-leaderboard-purple-night-v3.png",
+      "snapshot": "sources/leaderboard.png",
+      "sha256": "92b5dee21d5ff14b56f102fc9f244d55215ee822c992f50fdf5472466cf3b2de"
+    }
+  },
+  "assets": {
+    "header-left.webp": {
+      "path": "web/src/ui/art/halloween/header-left.webp",
+      "width": 180,
+      "height": 365,
+      "bytes": 31220,
+      "sha256": "24623022db43c6bd641076197fc3787ab5c1a3c9720a2bc761b19496df4cf022",
+      "crop": [
+        0,
+        0,
+        180,
+        365
+      ],
+      "geometry": {
+        "keep_polygons_source": [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              84,
+              0
+            ],
+            [
+              71,
+              20
+            ],
+            [
+              43,
+              22
+            ],
+            [
+              35,
+              50
+            ],
+            [
+              35,
+              102
+            ],
+            [
+              16,
+              156
+            ],
+            [
+              0,
+              181
+            ]
+          ],
+          [
+            [
+              0,
+              90
+            ],
+            [
+              34,
+              95
+            ],
+            [
+              41,
+              105
+            ],
+            [
+              70,
+              105
+            ],
+            [
+              79,
+              121
+            ],
+            [
+              75,
+              158
+            ],
+            [
+              35,
+              167
+            ],
+            [
+              0,
+              223
+            ]
+          ],
+          [
+            [
+              0,
+              216
+            ],
+            [
+              180,
+              216
+            ],
+            [
+              180,
+              335
+            ],
+            [
+              0,
+              353
+            ]
+          ]
+        ],
+        "remove_polygons_source": [
+          [
+            [
+              39,
+              173
+            ],
+            [
+              96,
+              173
+            ],
+            [
+              96,
+              232
+            ],
+            [
+              39,
+              232
+            ]
+          ]
+        ],
+        "feather_alpha": "10 one-pixel inward erosion bands, alpha 25.5 through 255; never expands outside selected polygons"
+      },
+      "opaque_rgb_byte_exact": true,
+      "opaque_pixels": 24798,
+      "note": "Transparent left-edge tree/lantern/pumpkin/fence illustration. At 390px page width, show about 82px wide and 167px high, anchored top-left."
+    },
+    "header-right.webp": {
+      "path": "web/src/ui/art/halloween/header-right.webp",
+      "width": 203,
+      "height": 365,
+      "bytes": 33056,
+      "sha256": "1a487325cadea75b121c72f0a67d0151217281d29891816a217f039839eef251",
+      "crop": [
+        650,
+        0,
+        853,
+        365
+      ],
+      "geometry": {
+        "keep_polygons_source": [
+          [
+            [
+              826,
+              85
+            ],
+            [
+              853,
+              79
+            ],
+            [
+              853,
+              214
+            ],
+            [
+              823,
+              207
+            ],
+            [
+              823,
+              160
+            ]
+          ],
+          [
+            [
+              782,
+              192
+            ],
+            [
+              815,
+              180
+            ],
+            [
+              853,
+              181
+            ],
+            [
+              853,
+              365
+            ],
+            [
+              668,
+              365
+            ],
+            [
+              668,
+              282
+            ],
+            [
+              702,
+              278
+            ],
+            [
+              710,
+              250
+            ],
+            [
+              745,
+              224
+            ]
+          ]
+        ],
+        "feather_alpha": "10 one-pixel inward erosion bands, alpha 25.5 through 255; never expands outside selected polygons"
+      },
+      "opaque_rgb_byte_exact": true,
+      "opaque_pixels": 25048,
+      "note": "Transparent right-edge castle/pumpkin illustration. At 390px page width, show about 93px wide and 167px high, anchored top-right. Transparent source space retains placement."
+    },
+    "pumpkin-emblem.png": {
+      "path": "web/src/ui/art/halloween/pumpkin-emblem.png",
+      "width": 91,
+      "height": 85,
+      "bytes": 7942,
+      "sha256": "9527209a1d12a171eb562fa97119c4736e7d5019a2b039259622bbbc2fc22035",
+      "crop": [
+        45,
+        506,
+        136,
+        591
+      ],
+      "geometry": {
+        "alpha": "clamp((RGB max-min - 30)/12, 0, 1); RGB remains unchanged"
+      },
+      "opaque_rgb_byte_exact": true,
+      "opaque_pixels": 4149,
+      "note": "Original small pumpkin on the rush ticket. Native 91x85; no upscale. Use through the shared Icon catalog if treated as UI icon."
+    },
+    "storefront.webp": {
+      "path": "web/src/ui/art/halloween/storefront.webp",
+      "width": 800,
+      "height": 570,
+      "bytes": 182734,
+      "sha256": "cb82d65dae49e28d98f11e04a4f285c10649d851e1621da10f8898bae7803ffc",
+      "crop": [
+        24,
+        374,
+        824,
+        944
+      ],
+      "geometry": {
+        "keep_polygons_source": [
+          [
+            [
+              76,
+              449
+            ],
+            [
+              139,
+              397
+            ],
+            [
+              174,
+              382
+            ],
+            [
+              206,
+              376
+            ],
+            [
+              650,
+              376
+            ],
+            [
+              686,
+              389
+            ],
+            [
+              772,
+              449
+            ],
+            [
+              777,
+              473
+            ],
+            [
+              773,
+              495
+            ],
+            [
+              758,
+              508
+            ],
+            [
+              742,
+              511
+            ],
+            [
+              731,
+              505
+            ],
+            [
+              724,
+              496
+            ],
+            [
+              710,
+              506
+            ],
+            [
+              688,
+              511
+            ],
+            [
+              666,
+              506
+            ],
+            [
+              650,
+              495
+            ],
+            [
+              637,
+              506
+            ],
+            [
+              615,
+              511
+            ],
+            [
+              592,
+              506
+            ],
+            [
+              578,
+              496
+            ],
+            [
+              561,
+              506
+            ],
+            [
+              541,
+              511
+            ],
+            [
+              518,
+              506
+            ],
+            [
+              504,
+              496
+            ],
+            [
+              490,
+              507
+            ],
+            [
+              468,
+              512
+            ],
+            [
+              447,
+              507
+            ],
+            [
+              430,
+              496
+            ],
+            [
+              414,
+              507
+            ],
+            [
+              392,
+              511
+            ],
+            [
+              369,
+              506
+            ],
+            [
+              355,
+              495
+            ],
+            [
+              340,
+              507
+            ],
+            [
+              317,
+              511
+            ],
+            [
+              295,
+              506
+            ],
+            [
+              282,
+              495
+            ],
+            [
+              268,
+              507
+            ],
+            [
+              245,
+              511
+            ],
+            [
+              223,
+              506
+            ],
+            [
+              207,
+              495
+            ],
+            [
+              192,
+              507
+            ],
+            [
+              171,
+              511
+            ],
+            [
+              149,
+              506
+            ],
+            [
+              135,
+              495
+            ],
+            [
+              120,
+              508
+            ],
+            [
+              99,
+              512
+            ],
+            [
+              83,
+              504
+            ],
+            [
+              75,
+              492
+            ]
+          ],
+          [
+            [
+              108,
+              507
+            ],
+            [
+              151,
+              508
+            ],
+            [
+              151,
+              832
+            ],
+            [
+              108,
+              832
+            ]
+          ],
+          [
+            [
+              706,
+              507
+            ],
+            [
+              756,
+              507
+            ],
+            [
+              756,
+              833
+            ],
+            [
+              706,
+              833
+            ]
+          ],
+          [
+            [
+              88,
+              511
+            ],
+            [
+              102,
+              510
+            ],
+            [
+              105,
+              536
+            ],
+            [
+              123,
+              550
+            ],
+            [
+              122,
+              582
+            ],
+            [
+              112,
+              610
+            ],
+            [
+              92,
+              616
+            ],
+            [
+              66,
+              610
+            ],
+            [
+              55,
+              582
+            ],
+            [
+              56,
+              554
+            ],
+            [
+              81,
+              538
+            ]
+          ],
+          [
+            [
+              68,
+              650
+            ],
+            [
+              94,
+              640
+            ],
+            [
+              111,
+              654
+            ],
+            [
+              124,
+              674
+            ],
+            [
+              147,
+              675
+            ],
+            [
+              160,
+              687
+            ],
+            [
+              168,
+              706
+            ],
+            [
+              186,
+              707
+            ],
+            [
+              198,
+              718
+            ],
+            [
+              202,
+              737
+            ],
+            [
+              187,
+              752
+            ],
+            [
+              173,
+              760
+            ],
+            [
+              172,
+              775
+            ],
+            [
+              157,
+              788
+            ],
+            [
+              168,
+              800
+            ],
+            [
+              162,
+              827
+            ],
+            [
+              149,
+              833
+            ],
+            [
+              69,
+              833
+            ],
+            [
+              58,
+              822
+            ],
+            [
+              55,
+              790
+            ],
+            [
+              37,
+              775
+            ],
+            [
+              29,
+              752
+            ],
+            [
+              34,
+              734
+            ],
+            [
+              42,
+              721
+            ],
+            [
+              41,
+              698
+            ],
+            [
+              48,
+              675
+            ]
+          ],
+          [
+            [
+              205,
+              723
+            ],
+            [
+              220,
+              718
+            ],
+            [
+              223,
+              738
+            ],
+            [
+              239,
+              742
+            ],
+            [
+              258,
+              755
+            ],
+            [
+              275,
+              781
+            ],
+            [
+              283,
+              807
+            ],
+            [
+              278,
+              825
+            ],
+            [
+              265,
+              833
+            ],
+            [
+              181,
+              833
+            ],
+            [
+              173,
+              820
+            ],
+            [
+              173,
+              787
+            ],
+            [
+              182,
+              759
+            ],
+            [
+              200,
+              743
+            ]
+          ],
+          [
+            [
+              720,
+              550
+            ],
+            [
+              797,
+              550
+            ],
+            [
+              810,
+              559
+            ],
+            [
+              810,
+              650
+            ],
+            [
+              800,
+              660
+            ],
+            [
+              721,
+              660
+            ],
+            [
+              712,
+              650
+            ],
+            [
+              712,
+              560
+            ]
+          ],
+          [
+            [
+              65,
+              832
+            ],
+            [
+              782,
+              832
+            ],
+            [
+              793,
+              841
+            ],
+            [
+              795,
+              853
+            ],
+            [
+              784,
+              863
+            ],
+            [
+              783,
+              915
+            ],
+            [
+              772,
+              925
+            ],
+            [
+              74,
+              925
+            ],
+            [
+              61,
+              916
+            ],
+            [
+              61,
+              864
+            ],
+            [
+              52,
+              858
+            ],
+            [
+              52,
+              843
+            ]
+          ]
+        ],
+        "remove_polygons_source": [
+          [
+            [
+              474,
+              507
+            ],
+            [
+              727,
+              507
+            ],
+            [
+              734,
+              579
+            ],
+            [
+              722,
+              618
+            ],
+            [
+              575,
+              646
+            ],
+            [
+              541,
+              654
+            ],
+            [
+              528,
+              650
+            ],
+            [
+              522,
+              632
+            ],
+            [
+              474,
+              619
+            ]
+          ],
+          [
+            [
+              608,
+              768
+            ],
+            [
+              783,
+              768
+            ],
+            [
+              783,
+              852
+            ],
+            [
+              608,
+              852
+            ]
+          ]
+        ],
+        "window_local_rect": [
+          127,
+          137,
+          556,
+          321
+        ],
+        "speech_overlay_local_rect": [
+          450,
+          133,
+          262,
+          151
+        ],
+        "name_overlay_local_rect": [
+          584,
+          394,
+          175,
+          84
+        ]
+      },
+      "opaque_rgb_byte_exact": true,
+      "opaque_pixels": 206263,
+      "note": "Native 800x570 empty illustrated frame. Transparent interior needs a warm CSS window backing; actual pet, speech and plaque remain live components. Portions hidden under original speech/plaque cannot be recovered, so live overlays must cover the declared transparent notches."
+    },
+    "title-zh.webp": {
+      "path": "web/src/ui/art/halloween/title-zh.webp",
+      "source": "web/src/ui/art/title-zh.webp",
+      "source_sha256": "c842c78aae56919885726eb0793c097ebf086aecdde1622499b30862e0b7c4d3",
+      "width": 1080,
+      "height": 354,
+      "bytes": 148646,
+      "sha256": "f5cd9330163d1c7d048486769eb3170ac569ed7a2d3a405ca7d5bf113643e690",
+      "changed_pixels": 63431,
+      "selector": "max RGB <125 and max-min<=42 and alpha>0",
+      "replacement_rgb": [
+        255,
+        244,
+        223
+      ],
+      "alpha_byte_exact": true,
+      "all_other_pixels_byte_exact": true,
+      "note": "Existing title art recolor only; no lettering, shape, orange detail or resolution changed."
+    },
+    "title-en.webp": {
+      "path": "web/src/ui/art/halloween/title-en.webp",
+      "source": "web/src/ui/art/title-en.webp",
+      "source_sha256": "88291dc9cc794b93fccf99714ab158afd56c964500ed88162744574b62f20a6f",
+      "width": 1080,
+      "height": 371,
+      "bytes": 130428,
+      "sha256": "2540ed8de5b137a8e67bdd17bd319788a5eec1ebd6c28d56fd3443abef0c1719",
+      "changed_pixels": 28721,
+      "selector": "max RGB <125 and max-min<=42 and alpha>0",
+      "replacement_rgb": [
+        255,
+        244,
+        223
+      ],
+      "alpha_byte_exact": true,
+      "all_other_pixels_byte_exact": true,
+      "note": "Existing title art recolor only; no lettering, shape, orange detail or resolution changed."
+    },
+    "smart-scheduling.webp": {
+      "path": "web/src/ui/art/halloween/smart-scheduling.webp",
+      "source": "web/src/ui/art/smart-scheduling.webp",
+      "source_sha256": "633148fbf964f43cd38fb2591258fe5e3d708809c6d5366e26c46aecc639e044",
+      "width": 1080,
+      "height": 200,
+      "bytes": 112144,
+      "sha256": "505c92ece17bb4d0e8b24d1f155f81ac88e6c772b919e00ef686e60805d0c574",
+      "changed_pixels": 25797,
+      "selector": "max RGB <125 and max-min<=42 and alpha>0",
+      "replacement_rgb": [
+        255,
+        244,
+        223
+      ],
+      "alpha_byte_exact": true,
+      "all_other_pixels_byte_exact": true,
+      "note": "Existing title art recolor only; no lettering, shape, orange detail or resolution changed."
+    },
+    "grooming-report-card.webp": {
+      "path": "web/src/ui/art/halloween/grooming-report-card.webp",
+      "source": "web/src/ui/art/grooming-report-card.webp",
+      "source_sha256": "348d01dc102a58223ddb15c3c1c15f64f9e4d305b6007af3774629d3dc08d9e8",
+      "width": 1080,
+      "height": 307,
+      "bytes": 159990,
+      "sha256": "59004d84aaaec012e197564387484f284615b4b7f25a03871cd619e03b1a76ae",
+      "changed_pixels": 70912,
+      "selector": "max RGB <125 and max-min<=42 and alpha>0",
+      "replacement_rgb": [
+        255,
+        244,
+        223
+      ],
+      "alpha_byte_exact": true,
+      "all_other_pixels_byte_exact": true,
+      "note": "Existing title art recolor only; no lettering, shape, orange detail or resolution changed."
+    },
+    "hall-title-zh.webp": {
+      "path": "web/src/ui/art/halloween/hall-title-zh.webp",
+      "source": "web/src/ui/art/hall-title-zh.webp",
+      "source_sha256": "72a13c27b7b9b3290ec6fbafbeb10bb8cdd6611c5858edd5545f08a14ecd2813",
+      "width": 1080,
+      "height": 215,
+      "bytes": 152304,
+      "sha256": "bb548afa7cda7c808f23bc450590a4d81922bc6b30b3c3a77414fd21dba16a78",
+      "changed_pixels": 60359,
+      "selector": "max RGB <125 and max-min<=42 and alpha>0",
+      "replacement_rgb": [
+        255,
+        244,
+        223
+      ],
+      "alpha_byte_exact": true,
+      "all_other_pixels_byte_exact": true,
+      "note": "Existing title art recolor only; no lettering, shape, orange detail or resolution changed."
+    },
+    "hall-title-en.webp": {
+      "path": "web/src/ui/art/halloween/hall-title-en.webp",
+      "source": "web/src/ui/art/hall-title-en.webp",
+      "source_sha256": "93dd8275cad9d93a2cf714af9c4318ac37c42fa98746062ac9fd6ff5e591c5f0",
+      "width": 1080,
+      "height": 145,
+      "bytes": 106964,
+      "sha256": "b4202ed5e96c87d9bb19b2cf44cd0b93bf34f22f35edb9cef0a0c7ddbb8bc3c8",
+      "changed_pixels": 17770,
+      "selector": "max RGB <125 and max-min<=42 and alpha>0",
+      "replacement_rgb": [
+        255,
+        244,
+        223
+      ],
+      "alpha_byte_exact": true,
+      "all_other_pixels_byte_exact": true,
+      "note": "Existing title art recolor only; no lettering, shape, orange detail or resolution changed."
+    },
+    "grooming-report-card-inline.webp": {
+      "path": "web/src/ui/art/halloween/grooming-report-card-inline.webp",
+      "source": "web/src/ui/art/halloween/grooming-report-card.webp",
+      "source_sha256": "59004d84aaaec012e197564387484f284615b4b7f25a03871cd619e03b1a76ae",
+      "width": 1837,
+      "height": 195,
+      "bytes": 92792,
+      "sha256": "a54ec66147766814a392e79214b55b81a487100ddbae240116f25222230754b2",
+      "parts": [
+        {
+          "part": "left emphasis",
+          "source_crop": [
+            0,
+            61,
+            92,
+            238
+          ],
+          "output_xy": [
+            4,
+            9
+          ],
+          "native_size": [
+            92,
+            177
+          ],
+          "rgba_byte_exact": true
+        },
+        {
+          "part": "Grooming",
+          "source_crop": [
+            61,
+            0,
+            844,
+            187
+          ],
+          "output_xy": [
+            112,
+            4
+          ],
+          "native_size": [
+            783,
+            187
+          ],
+          "rgba_byte_exact": true
+        },
+        {
+          "part": "Report Card",
+          "source_crop": [
+            192,
+            152,
+            1005,
+            307
+          ],
+          "output_xy": [
+            923,
+            20
+          ],
+          "native_size": [
+            813,
+            155
+          ],
+          "rgba_byte_exact": true
+        },
+        {
+          "part": "right emphasis",
+          "source_crop": [
+            999,
+            121,
+            1080,
+            200
+          ],
+          "output_xy": [
+            1752,
+            58
+          ],
+          "native_size": [
+            81,
+            79
+          ],
+          "rgba_byte_exact": true
+        }
+      ],
+      "layout": "Native-size parts centered vertically on one equal-height transparent canvas; original emphasis marks retained",
+      "resampling": false,
+      "foreground_rgba_byte_exact": true,
+      "foreground_pixel_count": 143990,
+      "note": "Single-line derivative of the two-line source. Every nontransparent original pixel is retained exactly once; original two-line file remains unchanged."
+    }
+  }
+}

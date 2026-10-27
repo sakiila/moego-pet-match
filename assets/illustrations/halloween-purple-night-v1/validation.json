@@ -1,0 +1,19 @@
+{
+  "scope": "Native-resolution alpha-composited illustration review, not browser/UI acceptance",
+  "checks": {
+    "all_four_crops_inspected_on_blue_and_plum": true,
+    "no_ui_text_in_visible_decoration": true,
+    "no_pet_speech_or_name_in_storefront": true,
+    "pumpkin_complete_no_paper": true,
+    "opaque_rgb_source_exact": true,
+    "wordmark_alpha_and_non_neutral_colors_exact": true,
+    "inline_report_native_pixel_reflow": true,
+    "inline_report_all_143990_foreground_pixels_preserved_once": true,
+    "inline_report_final_webp_rgba_exact": true
+  },
+  "known_constraints": [
+    "Original speech/name cover parts of the right post/counter; live components must cover the declared transparent notches.",
+    "Window is intentionally transparent and needs warm-color backing.",
+    "Dark neutral wordmark recolor is deterministic; original glyphs/alpha/orange pixels retained."
+  ]
+}

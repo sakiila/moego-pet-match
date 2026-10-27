@@ -30,3 +30,9 @@
 .repository:hover {
   color: var(--fg);
 }
+:global([data-season='halloween']) .version {
+  color: var(--fg-muted);
+}
+:global([data-season='halloween']) .footer {
+  margin-top: var(--space-1);
+}

@@ -1,0 +1,37 @@
+User request (2026-10-27): 那就先不做这个帽子，检查其他设计
+Decision: cancel all pet/brand-animal wizard hats; preserve selected purple-night Halloween visual system.
+Scope: static design review and revised concept previews only, no application-code/data/production edits.
+Built-in ImageGen, transparent_background: false. Original generated image retained; this is a new version.
+Event label: 万圣节限定 · 限时3天. No start/end date has been approved. Rank date is a future 2026-10-31 illustrative state, not an event-opening claim.
+referenced_image_paths:
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-purple-night-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-board-frontdesk-v2.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/deedee.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/maodu.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/momo.png
+
+Full ImageGen prompt:
+Use case: precise-object-edit / seasonal UI design correction. The user selected this purple-night Halloween visual system, then explicitly CANCELLED ALL WIZARD HATS and asked us to inspect the remaining designs. Revise the supplied target screen within the existing chosen visual direction. This remains a STATIC DESIGN PREVIEW, not a runtime implementation.
+
+NON-NEGOTIABLE OUTPUT: ONE edge-to-edge mobile app screen, exact canvas 853 pixels wide x 1844 pixels tall, matching primary target Image 1 (logical 390x844). No phone/device frame, status bar, browser UI, outside caption, montage or side-by-side comparison. Recompose only if necessary for specified text readability; do not stretch or squash the image.
+
+Keep the same deep aubergine #281E36 night, muted plum #42304F surfaces, warm ivory #FFF4DF paper/text, pumpkin-orange #FF8A2B fills and existing cozy lantern-lit atmosphere. Preserve the chosen typography, brand identity, page structure, relative positions, component silhouettes and all content EXCEPT the enumerated corrections. Do not redesign the theme. Reduce nothing just to fit extra decoration, and add no new ornament, cards, buttons or features.
+
+REMOVE EVERY HAT from ALL real pet stickers and brand animals. Restore natural top-of-head fur, ears, feathers and white sticker outline faithfully from supplied original assets. No hats anywhere: no little hats, no witch caps, no wizard hats, no replacement headwear, no capes, no pumpkins worn by animals. Preserve each pet's original species, fur markings, face, ear shape and pose; use exact source identities instead of newly designed generic pets. Pet size stays unchanged. User/player initials and avatars remain unchanged and uncostumed.
+
+Readability correction to apply ONLY where relevant: on BRIGHT ORANGE filled buttons and selected mode tabs, use bold DEEP AUBERGINE ink #281E36 and matching dark icons instead of pale/white lettering. Preserve their orange fill, shape and size. On IVORY PAPER, orange text and important numeric values use a deeper burnt-orange #B9470F so they remain distinct from the paper; ordinary labels use dark charcoal-plum and secondary labels a clear medium plum #5B5265. Keep main orange-on-dark title accents and the orange clock numbers on dark background as before. Do not globally recolor every orange decorative mark.
+
+Current real date anchor: 2026-10-27 Asia/Shanghai. The event's exact start/end dates have not been approved. Replace the date-based event pill on this target with EXACT compact text "万圣节限定 · 限时3天", retain tiny pumpkin decoration, remove "10.30—11.01" entirely. This records the user-approved three-day duration without treating a proposed date range as confirmed. No date countdown, new event schedule or new activity rewards.
+
+No changed matching, scoring, ranking or unlock rules. No candy currency, special achievement, Halloween-only leaderboard, reward chest or extra CTA. Header/body controls remain fully legible and unclipped. All Chinese supplied below must be rendered verbatim. Keep static night illustration behind clear text areas, not across faces, numbers or buttons.
+
+Target page: GAMEPLAY during the existing service rush. Image 1 is the edit target, Image 2 is the approved uncostumed original gameplay reference, Images 3/4/5 are exact original Deedee/Maodu/Momo heads. The orange cat Boluo, black dog Marley and cream parrot Koa can be restored from Image 2. Remove hats from EVERY one of the 47 pet cells; two tools are unchanged. Natural full ears/foreheads and real sticker appearances from Image 2 must be preserved. No loss of pet scale.
+
+Required content corrections:
+1. Current screenshot score "2,480" is an outdated scale example, inconsistent with current 100-point base scoring. Replace ONLY that score with "12,400", a mid-round illustrative total. It remains just a mock score, not data from production. Keep "分数" label and star.
+2. Keep "本局剩余" / "00:48", service-ticket headline EXACTLY "不给糖就捣蛋！", "还剩 8 秒", "已服务 7/12 格". The existing progress bar fill must visually be 7/12 = 58.3% of track. Only the ticket's orange letter accents on ivory darken slightly to the specified burnt orange for readability; the orange border/clip/fill retain pumpkin color. Keep existing two clocks distinctly labeled, existing comb-tool hint, "设置" and "退出".
+3. The grid MUST stay exactly 7 rows by 7 columns = 49 square cells. The BOARD is the largest operational region, approximately 376 logical px wide, with six DISTINCT pastel cell tints consistent for the same pet. Do not turn all cells orange/purple. Preserve the full input board's cell identities and positions exactly, including comb row4 col3, scissors row5 col6 and the orange row4 clear-range indication. No new matching triples, candy pieces, eighth column or missing row.
+4. Event pill becomes "万圣节限定 · 限时3天". Keep Smart Scheduling wordmark and subtitle, logo/language placement, large readable time/score pair, fixed ticket position above the board. Decorations stay outside cells, never shrink the board. Keep lower tool hint text as input, no added user instructions or features.
+
+Everything else unchanged from Image 1, especially its near full-width board, lavender tray edge, cream ticket, warm top pumpkin-lantern illustration, original comb/scissors artwork, short footer and complete viewport composition. This is one precise refinement of the selected design, not a new style.
+Brand correction: the existing MoeGo logo is a real approved black/dark-ink and orange asset. Show that original unmodified logo shape and colors inside a SMALL simple warm-ivory logo backing on the top-left, following the existing product's dark-theme logo treatment. Keep overall topbar geometry and all other controls; the light backing hugs the logo with slight breathing space, not a full header banner. Do not invent or redraw a different logo, and do not change the main chosen feature wordmark style.

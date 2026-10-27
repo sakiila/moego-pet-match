@@ -97,6 +97,10 @@ codex exec -m gpt-6-sol -s workspace-write -C /Users/bob/WebstormProjects/moego-
 - 不迁移、不修改 Supabase `public."user"` 原表的结构、数据或权限。生产游戏只读写 RackNerd `pet_match` 数据库，独立同事名单保存在 `pet_match.slack_members`。
 - 不自行推送 main（即部署）、修改 DNS、连接或改动 RackNerd 服务器与 1Panel（以及原 DMIT 服务器），除非用户明确要求。
 
+## 2026-10-27 万圣节主题切图授权
+
+用户确认最新四张无帽稿，并明确要求“按这个图片来切图适配”。本轮允许从 `halloween-purple-night-v2.png`、`halloween-home-purple-night-v2.png`、`halloween-report-purple-night-v2.png`、`halloween-leaderboard-purple-night-v3.png` 精确提取南瓜灯、边角夜景与空店面框等独立装饰插画；来源、裁切/透明掩码与校验记录在 `assets/illustrations/halloween-purple-night-v1/`。小南瓜图标通过统一 Icon 使用，宠物、Logo、已有图标与字标仍复用原素材；字标只派生保留原字形的浅色适配。不得裁取整页、整张页头/店长卡、文字、按钮、小票、进度条、棋格或榜单作为 UI 图片。全部帽子已取消；本授权仅限此次确认稿的列明装饰，不扩展到其他页面截图。
+
 ## 2026-10-27 动态墙评论图标授权
 
 用户指定 `design/concepts/pet-social-comment-icon-v2.png`（用户附件逐字节副本）作为动态墙评论图标，原样复制为图标库母版 `masters/19-pet-social/social-comment.png`，来源记录在 `assets/icons/pet-social-comment-original-v1/`，经统一 `Icon` 使用。快捷互动复用已入库的 `paw-cute/pets/play/love`。此授权仅限这一枚评论图标。

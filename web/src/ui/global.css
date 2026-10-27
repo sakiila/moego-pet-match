@@ -12,6 +12,10 @@ body {
   min-height: 100%;
 }
 
+body:has([data-season='halloween']) {
+  background: var(--season-page-bg);
+}
+
 /* 弹层锁滚动时滚动条不消失，页面不会横向抖一下 */
 html {
   scrollbar-gutter: stable;

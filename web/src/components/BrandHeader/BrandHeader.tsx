@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useI18n, type MessageKey } from '../../i18n';
 import { Icon } from '../../ui/primitives/Icon';
+import { SeasonalBadge, useSeasonalTheme } from '../SeasonalTheme/SeasonalTheme';
 import logoSrc from '../../ui/art/moego-logo.webp';
 import titleEnSrc from '../../ui/art/title-en.webp';
 import titleZhSrc from '../../ui/art/title-zh.webp';
@@ -11,6 +12,8 @@ import reportSrc from '../../ui/art/grooming-report-card.webp';
 import fishReportSrc from '../../ui/art/fish-report-card.webp';
 import collectionSrc from '../../ui/art/pet-collection.webp';
 import styles from './BrandHeader.module.css';
+
+const SEASONAL_ART = import.meta.glob<string>('../../ui/art/halloween/*.webp', { eager: true, query: '?url', import: 'default' });
 
 export interface BrandHeaderProps {
   /** game：游戏名；scheduling：Smart Scheduling；fish：鱼关；hall：光荣榜；report / fish-report：结算页；collection：图鉴字标。 */
@@ -40,7 +43,13 @@ export interface BrandHeaderProps {
 /** 顶部：MoeGo 字标 + 中/EN 切换 + 标题；切换只改界面文字，不影响本局。 */
 export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, onBack, headingAccent, headingAction, schedulingArt = false, boardArt = false, barOnly = false, backLabel }: BrandHeaderProps) {
   const { t, locale, setLocale } = useI18n();
+  const seasonal = useSeasonalTheme();
+  const wordmark = (name: string, fallback: string) => seasonal ? SEASONAL_ART[`../../ui/art/halloween/${name}.webp`] ?? fallback : fallback;
   const report = title === 'report' || title === 'fish-report';
+  const headerClass = boardArt ? styles.boardHeader : schedulingArt ? styles.preparation : report ? styles.reportHeader : undefined;
+  const seasonalClass = seasonal ? title === 'game' ? styles.seasonalHome : title === 'hall' ? styles.seasonalHall : undefined : undefined;
+  const className = [headerClass, seasonalClass].filter(Boolean).join(' ') || undefined;
+  const inlineReport = seasonal && title === 'report' ? SEASONAL_ART['../../ui/art/halloween/grooming-report-card-inline.webp'] : undefined;
   const collection = title === 'collection';
   const pageHeading = heading ?? (collection ? t('nav.collection') : undefined);
   const headingContent = collection
@@ -57,7 +66,7 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
           return [first, rest.join(' ')];
         })();
   return (
-    <header className={boardArt ? styles.boardHeader : schedulingArt ? styles.preparation : report ? styles.reportHeader : undefined}>
+    <header className={className} data-locale={locale}>
       <div className={styles.bar}>
         <span className={styles.logoFrame}>
           <img className={styles.logo} src={logoSrc} alt="MoeGo" width={120} height={32} />
@@ -94,20 +103,20 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
         <h1 className={headingClass}>{headingContent}</h1>
       ) : report ? (
         <h1 className={styles.reportTitle}>
-          <img src={title === 'fish-report' ? fishReportSrc : reportSrc} alt={t(title === 'fish-report' ? 'fish.report_title' : 'report.title')} width={1080} height={title === 'fish-report' ? 393 : 307} />
+          <img src={title === 'fish-report' ? fishReportSrc : inlineReport ?? wordmark('grooming-report-card', reportSrc)} alt={t(title === 'fish-report' ? 'fish.report_title' : 'report.title')} width={inlineReport ? 1837 : 1080} height={title === 'fish-report' ? 393 : inlineReport ? 195 : 307} />
         </h1>
       ) : title === 'scheduling' && (schedulingArt || boardArt) ? (
         <h1 className={styles.schedulingTitle}>
-          <img src={schedulingSrc} alt={t('board.title')} width={1080} height={200} />
+          <img src={wordmark('smart-scheduling', schedulingSrc)} alt={t('board.title')} width={1080} height={200} />
         </h1>
       ) : title === 'game' ? (
         <h1 className={styles.gameTitle}>
           {/* 标题字标（Codex 出图，已确认）；读屏读原文字 */}
-          <img src={locale === 'en' ? titleEnSrc : titleZhSrc} alt={`${lead}${locale === 'en' ? ' ' : ''}${accent}`} />
+          <img src={wordmark(`title-${locale}`, locale === 'en' ? titleEnSrc : titleZhSrc)} alt={`${lead}${locale === 'en' ? ' ' : ''}${accent}`} />
         </h1>
       ) : title === 'hall' ? (
         <h1 className={styles.gameTitle}>
-          <img src={locale === 'en' ? hallEnSrc : hallZhSrc} alt={t('leaderboard.hall_of_fame')} />
+          <img src={wordmark(`hall-title-${locale}`, locale === 'en' ? hallEnSrc : hallZhSrc)} alt={t('leaderboard.hall_of_fame')} />
         </h1>
       ) : (
         <h1 className={styles.title}>
@@ -117,6 +126,7 @@ export function BrandHeader({ title = 'scheduling', tagline, trailing, heading, 
         </h1>
       )}
       {tagline && <p className={`${styles.tagline} ${title === 'game' || title === 'hall' ? styles.gameTagline : ''}`}>{t(tagline)}</p>}
+      {!barOnly && <SeasonalBadge />}
     </header>
   );
 }

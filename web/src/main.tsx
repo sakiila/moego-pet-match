@@ -4,6 +4,7 @@ import { App } from './app/App';
 import { isGalleryPath } from './app/entryRoute';
 import { FeedbackProvider } from './audio/FeedbackProvider';
 import { I18nProvider } from './i18n';
+import { SeasonalThemeProvider } from './components/SeasonalTheme/SeasonalTheme';
 import './ui/fonts.css';
 import './ui/global.css';
 
@@ -15,6 +16,7 @@ const SocialPreview = import.meta.env.DEV && location.pathname === '/dev/social'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <I18nProvider>
+      <SeasonalThemeProvider>
       <FeedbackProvider>
       {SocialPreview ? <Suspense fallback={null}><SocialPreview/></Suspense> : Gallery ? (
         <Suspense fallback={null}>
@@ -24,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
         <App />
       )}
       </FeedbackProvider>
+      </SeasonalThemeProvider>
     </I18nProvider>
   </StrictMode>,
 );

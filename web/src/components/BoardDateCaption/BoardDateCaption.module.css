@@ -14,3 +14,15 @@
   flex: none;
   color: var(--color-brand);
 }
+
+:global([data-season-surface='leaderboard']) .caption {
+  min-height: var(--season-date-height);
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: var(--text-xs);
+  line-height: 1.25;
+}
+:global([data-season-surface='leaderboard']) .icon {
+  width: var(--text-sm);
+  height: var(--text-sm);
+}

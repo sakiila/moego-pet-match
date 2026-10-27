@@ -1,0 +1,36 @@
+User follow-up (2026-10-27): 风格2，首页和结算页面和排行榜页面也设计一下
+Selected theme: design/concepts/halloween-purple-night-v1.png (second displayed result from the first ideation set).
+Scope: static design previews only. No runtime implementation, production data, commit, push or deployment.
+Event dates shown are a proposed preview assumption: 2026-10-30 through 2026-11-01 Asia/Shanghai.
+Generated with built-in ImageGen, not CLI/API fallback.
+transparent_background: false
+referenced_image_paths:
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-purple-night-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/design/reviews/2026-10-24-page-polish/home-zh.png
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/home-storefront-v2.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/deedee.png
+
+Full prompt:
+Use case: ui-mockup. Create ONE polished, production-quality seasonal UI concept for the existing MoeGo 毛孩子全明星 pet match-three web game. The user has SELECTED the purple-night Halloween gameplay design in reference Image 1, and this request extends that EXACT visual system to one other page. This is a fixed chosen style, not another alternative. Current date anchor 2026-10-27 Asia/Shanghai. Halloween is October 31; display the same proposed preview schedule "10.30—11.01 · 限时3天" in a compact label. Dates are a design assumption; no live event is claimed.
+
+Target dimensions: 390 x 844 logical mobile viewport, rendered at 853 x 1844 physical pixels to match Image 1. App content only, edge to edge. No device frame, phone body, notch, OS clock/status/battery, browser chrome, gallery board, explanatory captions, page name outside the app, or multiple screens in one image. Natural viewport ratio and readable Chinese. Recompose spacing sensibly; never squash typography or images.
+
+Chosen style: calm deep aubergine background #281E36 with restrained plum #42304F surfaces; warm ivory #FFF4DF for main labels and receipt paper; pumpkin orange #FF8A2B for primary actions and emphasis; small lilac highlights. Follow reference Image 1's warm lantern light, cozy Halloween night, bold friendly rounded lettering, charcoal-purple outlines, white-edged pet stickers, clear hierarchy and intentional whitespace. Small lanterns/pumpkins, a few distant bat silhouettes and tiny gold star sparks can decorate edges behind content, while text and controls stay visually calm. Use the actual MoeGo logo in cream/orange on the dark background, original playful feature wordmark shapes. Keep existing brand and product names. Pets retain original fur colors, face, ear shape and expression. Give pet illustrations ONE tiny crooked deep-purple witch/wizard hat with an orange band and small gold buckle; sit it to one side on the head, without hiding eye, ear silhouette or face. No capes, necks or bodies for real pet head stickers.
+
+Preserve the existing product information, page structure, existing navigation and real workflow. This is a visual seasonal skin. No candy currency, candy collection mission, Halloween-only ranking, temporary achievements, special prizes, gift chests, new unlocks, sign-in bonus or extra call-to-action. Don't add features to fill the frame. Use realistic MOCK data, do not claim actual online stats. Buttons and text must be legible at phone size. Layout differentiation uses grouping, spacing, flat tonal hierarchy and light dividers; do not wrap everything in extra nested cards. All requested Chinese text verbatim. Existing illustrated icons can use warm cream/orange/lilac appropriate to the skin. Avoid horror, gore, skull motifs, tiny illegible text, clipped controls, overloaded decorations.
+
+Page: HOME, the front door to the pet shop. Image 2 is the existing home layout reference, Image 3 is the current approved empty shop-window frame artwork, Image 4 is the real Deedee pet sticker. Image 2 is an older capture: content overrides listed here reflect CURRENT code and take precedence over old copy. Keep recognizable shop-window shape, stripe awning, small scissors sign, plant without paw on its pot, and the counter's single paw mark; adapt the awning stripes to orange and plum, counter and window to warmly lit cream. Do not turn the shop into a castle or haunted mansion. Give the existing Deedee head a small crooked purple witch hat. Orange jack-o'-lantern decoration rests beside the existing plant; one tiny warm lantern hangs at an awning edge. Window remains the hero, body not added to Deedee.
+
+Composition, one complete screen:
+- Compact top bar: MoeGo cream/orange logo left; right a small paw/high-five likes count "28", language "中 / EN" and purple circular player avatar "B". Do not add a second top navigation row.
+- Large expressive existing Chinese wordmark "毛孩子全明星", cream first part and pumpkin orange second part; subtitle exactly "和同事家的毛孩子，来一局 90 秒消消乐。". Compact small seasonal label "10.30—11.01 · 限时3天" underneath. Header and title combined height ~165 logical px maximum.
+- Shop window centered, approx x20 y174 width350 height248. Deedee occupies a generous readable center; ivory speech bubble "你负责排班，
+我负责可爱。" and wooden name plaque "今日店长 · Deedee". Keep face larger than decorations. This is a sample daily manager, not a claim about actual today's online manager.
+- One wide 56px tall pumpkin-orange button "开始营业" around y435; use chunky rounded Chinese text, dark plum bottom edge matching chosen game style. NO paw icon on this button, per latest approved storefront direction.
+- Small calm streak line below: "连续 3 天开工 · 今天已打卡". Do not reproduce the old personal-best-score line: current home no longer renders it.
+- Three equal lightweight icon entrances in one row: "宠物图鉴", "排行榜", "我的宠物". Existing friendly outlined book, trophy, dog/cat icons in cream/orange. No separate enclosing cards; fine low-contrast dividers acceptable.
+- One subtle horizontal social entry below the three links, mock enabled state: small white-edged pet head cluster at left, "毛孩子动态", secondary line "看看大家今天有多可爱", small right chevron. This is an already-existing optional feature, not a new seasonal task. Use plum tone surface; keep it visually secondary to Start.
+- Below, a small but readable 13px photo notice in a muted plum flat band with two tiny original cat heads and the EXACT text: "宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob（毛肚和菠萝的铲屎官）". Allow up to 3 short lines.
+- Footer lightweight row "信息使用说明  ·  资料删除申请  ·  设置", and a very small "© 2026 MoeGo · 由 Bob 制作" below. Avoid inventing a release version number. Fit bottom fully in viewport with comfortable safe spacing.
+
+This complete screen can be compact but never cramped: preserve 14-16px body, 12-13px notice, 44px or larger CTA tap target. The window illustration is the hero, Start is the sole primary action. No fishtank entrance, no public progress, no Halloween prize card or event popup. This is HOME, so no visible gameplay timer, scores, grid or "不给糖就捣蛋" mission ticket needed here.

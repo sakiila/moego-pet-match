@@ -3,6 +3,19 @@
   align-items: flex-end;
   gap: var(--space-2);
 }
+:global([data-season='halloween']) .speaker {
+  margin-bottom: var(--space-1);
+}
+:global([data-season='halloween']) .bubble {
+  padding: var(--space-1) var(--space-2);
+}
+:global([data-season='halloween']) .label {
+  margin-bottom: 0;
+  line-height: 1.25;
+}
+:global([data-season='halloween']) .text {
+  line-height: 1.3;
+}
 
 /* 说话的毛孩子：小圆贴纸，浅橙底、白描边（mobile-report-next-up-v1） */
 .speaker {
@@ -68,3 +81,22 @@
   color: var(--color-ink);
 }
 
+:global([data-season='halloween']) .bubble {
+  border-color: var(--season-paper-ink);
+  background: var(--card);
+  color: var(--season-paper-ink);
+  box-shadow: var(--season-shadow);
+}
+:global([data-season='halloween']) .withTail::before {
+  border-right-color: var(--season-paper-ink);
+}
+:global([data-season='halloween']) .withTail::after {
+  border-right-color: var(--card);
+}
+:global([data-season='halloween']) .label {
+  color: var(--season-paper-accent);
+}
+:global([data-season='halloween']) .text {
+  color: var(--season-paper-ink);
+  font-size: var(--text-sm);
+}

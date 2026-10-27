@@ -283,3 +283,102 @@
     animation: none;
   }
 }
+:global([data-season='halloween']) .score {
+  color: var(--season-paper-accent);
+}
+:global([data-season='halloween']) .step {
+  border-color: var(--season-paper-ink);
+}
+:global([data-season='halloween']) .name {
+  color: var(--season-paper-ink);
+}
+:global([data-season='halloween']) .titlePreview,
+:global([data-season='halloween']) .titlePreview > span:last-child {
+  color: var(--fg-muted);
+}
+
+/* 季节排行榜保留完整领奖台，为同屏的附近五行让出空间。长名字仍可自然增高。 */
+:global([data-season-surface='leaderboard']) .podium {
+  min-height: var(--season-podium-height, calc(var(--space-6) * 5 + var(--space-3)));
+  padding: var(--space-2) var(--space-6) 0;
+}
+:global([data-season-surface='leaderboard']) .pet {
+  width: var(--season-podium-pet-width);
+}
+:global([data-season-surface='leaderboard']) .avatar {
+  margin-bottom: calc(-1 * var(--space-3));
+  padding: calc(var(--space-1) / 2);
+}
+:global([data-season-surface='leaderboard']) .avatar > * {
+  width: var(--space-6);
+  height: var(--space-6);
+}
+:global([data-season-surface='leaderboard']) .avatar :global([role='img']) {
+  width: var(--space-6);
+  height: var(--space-6);
+  font-size: var(--text-sm);
+}
+:global([data-season-surface='leaderboard']) .crown {
+  width: var(--season-podium-crown-width);
+  margin-bottom: calc(-1 * var(--space-2));
+  translate: var(--space-1) 0;
+}
+:global([data-season-surface='leaderboard']) .step {
+  height: auto;
+  gap: calc(var(--space-1) / 2);
+  padding-top: var(--space-4);
+}
+:global([data-season-surface='leaderboard']) .center .step {
+  min-height: var(--season-podium-center-height);
+}
+:global([data-season-surface='leaderboard']) .left .step {
+  min-height: var(--season-podium-left-height);
+}
+:global([data-season-surface='leaderboard']) .right .step {
+  min-height: var(--season-podium-right-height);
+}
+:global([data-season-surface='leaderboard']) .name {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+:global([data-season-surface='leaderboard']) .laurel {
+  height: var(--space-4);
+}
+:global([data-season-surface='leaderboard']) .score {
+  overflow: visible;
+  text-overflow: clip;
+  font-size: var(--text-xs);
+}
+:global([data-season-surface='leaderboard']) .center .score {
+  font-size: var(--text-sm);
+}
+:global([data-season-surface='leaderboard']) .rank {
+  font-size: var(--season-podium-rank-size);
+}
+:global([data-season-surface='leaderboard']) .center .rank {
+  font-size: var(--season-podium-winner-rank-size);
+}
+:global([data-season-surface='leaderboard']) .sparkles {
+  height: calc(var(--space-6) * 2);
+}
+:global([data-season-surface='leaderboard']) .dashes {
+  top: var(--space-4);
+  left: calc(50% - var(--space-6));
+  width: var(--space-4);
+  height: var(--space-4);
+}
+:global([data-season-surface='leaderboard']) .starBig {
+  top: var(--space-2);
+  left: calc(50% + var(--space-5));
+  width: var(--space-4);
+  height: var(--space-4);
+}
+:global([data-season-surface='leaderboard']) .starSmall {
+  top: var(--space-5);
+  left: calc(50% + var(--space-6));
+  width: var(--space-3);
+  height: var(--space-3);
+}

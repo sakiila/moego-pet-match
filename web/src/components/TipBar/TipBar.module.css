@@ -39,3 +39,8 @@
 .face + .face {
   margin-left: -8px;
 }
+:global([data-season='halloween']) .tip {
+  background: var(--panel);
+  color: var(--fg);
+  box-shadow: var(--season-shadow);
+}

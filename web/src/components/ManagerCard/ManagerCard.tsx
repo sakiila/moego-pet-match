@@ -1,7 +1,10 @@
 import { useId, useState } from 'react';
 import { useI18n } from '../../i18n';
+import { useSeasonalTheme } from '../SeasonalTheme/SeasonalTheme';
 import storefrontSrc from '../../ui/art/storefront-v2.webp';
 import styles from './ManagerCard.module.css';
+
+const SEASONAL_FRAME = import.meta.glob<string>('../../ui/art/halloween/storefront.webp', { eager: true, query: '?url', import: 'default' });
 
 export interface ManagerCardProps {
   name: string;
@@ -44,7 +47,10 @@ function BubbleOutline() {
 
 /** 今日店长：全公司同一只；宣言为游戏模板台词，不冒充主人原话。 */
 export function ManagerCard({ name, stickerSrc, variant = 'shop', onOpen, line }: ManagerCardProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const seasonal = useSeasonalTheme();
+  const [frameFailed, setFrameFailed] = useState(false);
+  const seasonalFrame = seasonal && !frameFailed ? SEASONAL_FRAME['../../ui/art/halloween/storefront.webp'] : undefined;
   const quote = line ?? t('home.manager_line');
   const [failed, setFailed] = useState(false);
   // 贴纸读取失败时保留同尺寸空位，橱窗布局不塌
@@ -72,10 +78,10 @@ export function ManagerCard({ name, stickerSrc, variant = 'shop', onOpen, line }
   }
 
   return (
-    <figure className={styles.shop} data-testid="manager-card">
+    <figure className={styles.shop} data-storefront={seasonalFrame ? 'halloween' : undefined} data-testid="manager-card" data-locale={locale}>
       {onOpen && <button type="button" className={styles.open} onClick={onOpen} aria-label={t('manager.poster_title')} data-testid="manager-open" />}
       {/* 店面框插画（遮阳棚、立柱、盆栽、招牌、柜台），橱窗留空，店长与气泡、名牌由代码叠加 */}
-      <img className={styles.frame} src={storefrontSrc} alt="" draggable={false} />
+      <img className={styles.frame} src={seasonalFrame ?? storefrontSrc} alt="" draggable={false} onError={() => setFrameFailed(true)} />
       <div className={styles.window}>{sticker}</div>
       {/* 头像两侧的橙色短线（mobile-home-v2），交替闪烁 */}
       <span className={`${styles.spark} ${styles.sparkLeft}`} aria-hidden />

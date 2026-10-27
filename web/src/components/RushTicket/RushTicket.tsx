@@ -2,6 +2,7 @@ import type { GameMode } from '../../api/types';
 import { RULES } from '../../engine';
 import { useI18n } from '../../i18n';
 import { Icon } from '../../ui/primitives/Icon';
+import { HalloweenEmblem, useSeasonalTheme } from '../SeasonalTheme/SeasonalTheme';
 import styles from './RushTicket.module.css';
 
 export type RushTicketView =
@@ -18,6 +19,7 @@ export interface RushTicketProps {
 export function RushTicket({ view, mode = 'normal' }: RushTicketProps) {
   const { t, locale } = useI18n();
   const fish = mode === 'fish';
+  const halloween = useSeasonalTheme(mode);
   const count = view.state === 'active'
     ? Math.max(0, Math.min(view.served, RULES.rush.target))
     : RULES.rush.target;
@@ -38,9 +40,9 @@ export function RushTicket({ view, mode = 'normal' }: RushTicketProps) {
             {view.state === 'active' ? (
               <>
                 <div className={styles.title}>
-                  <Icon name="rush-clipboard" className={styles.titleIcon} size={32} />
+                  {halloween ? <HalloweenEmblem className={styles.titleIcon} /> : <Icon name="rush-clipboard" className={styles.titleIcon} size={32} />}
                   <span className={styles.titleText}>
-                    {fish ? t('fish.rush_title') : (
+                    {halloween ? t('halloween.rush_title') : fish ? t('fish.rush_title') : (
                       <>{t('rush.title_lead')}<span className={styles.accent}>{t('rush.title_accent')}</span></>
                     )}
                   </span>

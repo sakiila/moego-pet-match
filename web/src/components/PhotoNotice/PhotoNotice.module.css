@@ -30,3 +30,19 @@
 .face + .face {
   margin-left: -10px;
 }
+:global([data-season='halloween']) .notice {
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--panel);
+  color: var(--fg);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  line-height: 1.5;
+  box-shadow: var(--season-shadow);
+}
+:global([data-season='halloween']) .face {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  object-fit: contain;
+}

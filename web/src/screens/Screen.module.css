@@ -20,6 +20,25 @@
   gap: var(--space-2);
 }
 
+.home[data-season='halloween'] {
+  gap: var(--space-1);
+}
+
+.screen[data-season-surface='leaderboard'] {
+  gap: var(--season-ranking-gap);
+  padding-top: var(--space-2);
+  padding-bottom: var(--season-sticky-clear);
+}
+
+.screen[data-season-surface='report'] {
+  gap: var(--space-2);
+  padding-bottom: var(--season-sticky-clear);
+}
+
+.screen[data-season-surface='leaderboard'] .list {
+  gap: var(--space-1);
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -122,6 +141,15 @@
   background: var(--bg);
 }
 
+[data-season='halloween'] .stickyActions {
+  padding-block: var(--space-2);
+}
+
+[data-season='halloween'] .stickyActions button {
+  min-height: var(--season-action-height);
+  font-size: var(--text-lg);
+}
+
 /* 底部并排的主次两个操作（报告：再开一局 / 分享成绩） */
 .actionPair {
   display: grid;
@@ -197,6 +225,12 @@
 /* 报告页：小票出完之后，其余内容依次淡入上浮（一直可点，只是视觉上延后） */
 .afterPrint > :not(header):not([data-print]) {
   animation: after-print 520ms var(--ease-out) calc(var(--print-start) + var(--print-ms) + 100ms) both;
+}
+
+/* 新增的装饰不参与收据揭晓；固定操作从第一帧即可使用。 */
+.afterPrint[data-season='halloween'] > [data-season-backdrop],
+.afterPrint[data-season='halloween'] > .stickyActions {
+  animation: none;
 }
 
 .afterPrint > :not(header):not([data-print]):nth-child(4) {

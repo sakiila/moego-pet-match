@@ -9,6 +9,7 @@ import { ReportHarvest } from '../components/ReportHarvest/ReportHarvest';
 import { SaveStatus, type SaveState } from '../components/SaveStatus/SaveStatus';
 import { UnderwaterBackdrop } from '../components/UnderwaterBackdrop/UnderwaterBackdrop';
 import { ScoreCard } from '../components/ScoreCard/ScoreCard';
+import { SeasonalSurface } from '../components/SeasonalTheme/SeasonalTheme';
 import type { GameSummary } from '../engine';
 import { pickNextUp } from '../game/nextUp';
 import { stickerUrl, type PetInfo } from '../game/pets';
@@ -101,7 +102,7 @@ export function ReportScreen(props: ReportScreenProps) {
 
   // 鱼报告：不涉及普通图鉴、竞猜、鱼关邀请与预告（服务端也不返回这些）
   return (
-    <main className={`${styles.screen} ${styles.withStickyActions} ${styles.afterPrint}`} data-theme={fish ? 'fish' : undefined}>
+    <SeasonalSurface surface="report" mode={mode} className={`${styles.screen} ${styles.withStickyActions} ${styles.afterPrint}`} data-theme={fish ? 'fish' : undefined}>
       {fish && <UnderwaterBackdrop />}
       <BrandHeader title={fish ? 'fish-report' : 'report'} tagline={subtitle} onBack={onHome} />
       <ScoreCard
@@ -154,6 +155,6 @@ export function ReportScreen(props: ReportScreenProps) {
           {t('share.open')}
         </Button>
       </div>
-    </main>
+    </SeasonalSurface>
   );
 }

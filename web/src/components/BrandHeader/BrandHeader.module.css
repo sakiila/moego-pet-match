@@ -217,3 +217,76 @@
     margin: var(--space-2) auto 0;
   }
 }
+:global([data-season='halloween']) .logoFrame {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+}
+:global([data-season='halloween']) .lang,
+:global([data-season='halloween']) .tagline {
+  color: var(--fg);
+}
+:global([data-season='halloween']) .lang button[aria-pressed='true'],
+:global([data-season='halloween']) .back {
+  color: var(--accent);
+}
+:global([data-season='halloween']) .gameTitle {
+  margin-top: var(--space-3);
+}
+:global([data-season='halloween']) .gameTitle img {
+  width: min(100%, var(--season-wordmark-width));
+}
+:global([data-season='halloween']) .boardHeader .logo {
+  height: var(--board-brand-height);
+}
+.seasonalHome .gameTitle {
+  --season-title-ratio: var(--season-home-title-ratio-zh);
+  --season-title-trim: var(--season-home-title-trim-zh);
+  position: relative;
+  width: var(--season-home-title-width);
+  aspect-ratio: var(--season-title-ratio);
+  margin: var(--space-1) auto 0;
+  overflow: hidden;
+}
+.seasonalHome[data-locale='en'] .gameTitle {
+  --season-title-ratio: var(--season-home-title-ratio-en);
+  --season-title-trim: var(--season-home-title-trim-en);
+}
+.seasonalHome .gameTitle img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  margin-top: calc(-1 * var(--season-title-trim));
+}
+.seasonalHome .gameTagline,
+.seasonalHall .gameTagline,
+:global([data-season='halloween']) .reportHeader .tagline {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+}
+.seasonalHome :global([data-testid='seasonal-badge']),
+.seasonalHall :global([data-testid='seasonal-badge']),
+:global([data-season='halloween']) .reportHeader :global([data-testid='seasonal-badge']) {
+  margin-top: var(--space-1);
+  padding-block: 0;
+  font-size: var(--text-xs);
+}
+.seasonalHome :global([data-testid='seasonal-badge']) img,
+.seasonalHall :global([data-testid='seasonal-badge']) img,
+:global([data-season='halloween']) .reportHeader :global([data-testid='seasonal-badge']) img {
+  width: var(--space-4);
+  height: var(--space-4);
+}
+.seasonalHall .gameTitle {
+  width: var(--season-home-title-width);
+  margin: var(--space-1) auto 0;
+}
+.seasonalHall .gameTitle img {
+  width: 100%;
+}
+:global([data-season='halloween']) .reportHeader .reportTitle {
+  margin-top: var(--space-1);
+}

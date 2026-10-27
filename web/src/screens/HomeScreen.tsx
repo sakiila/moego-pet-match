@@ -12,6 +12,7 @@ import { FactionDetail } from '../components/FactionDetail/FactionDetail';
 import { FactionJoinSheet } from '../components/FactionJoinSheet/FactionJoinSheet';
 import { useFactionWeek, type FactionJoiner, type FactionLoader } from '../game/useFactionWeek';
 import { HomePlayerActions } from '../components/HomePlayerActions/HomePlayerActions';
+import { SeasonalSurface } from '../components/SeasonalTheme/SeasonalTheme';
 import { StreakLine } from '../components/StreakLine/StreakLine';
 import { SettingsDialog } from '../components/SettingsDialog/SettingsDialog';
 import { PhotoNotice } from '../components/PhotoNotice/PhotoNotice';
@@ -75,7 +76,7 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
   const faction = useFactionWeek(player.userId, loadFaction, joinFaction);
   const [factionSheet, setFactionSheet] = useState<'join' | 'detail' | null>(null);
   return (
-    <main className={`${styles.screen} ${styles.home}`}>
+    <SeasonalSurface surface="home" className={`${styles.screen} ${styles.home}`}>
       <BrandHeader
         title="game"
         tagline="access.subtitle"
@@ -98,7 +99,8 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
         <NavTile icon="leaderboard" label={t('nav.leaderboard')} onClick={onLeaderboard} />
         <NavTile icon="my-pets" label={t('nav.my_pets')} onClick={onMyPets} unread={paws.messages.length > 0} unreadLabel={t('paw_book.unread')} />
       </nav>
-      {onSocial && <SocialEntry onOpen={onSocial}/>}
+      {onSocial && <SocialEntry onOpen={onSocial} faces={Array.from(new Set([manager?.pet.petId, ...DEVELOPER_PETS]
+        .filter((id): id is string => !!id))).slice(0, 2).map(id => stickerUrl(id, 128))}/>}
       <PhotoNotice faces={DEVELOPER_PETS.map((id) => stickerUrl(id, 128))} />
       <HomeFooter
         version={version}
@@ -124,6 +126,6 @@ export function HomeScreen({ player, version, repositoryUrl, copyright, manager,
         loadPets={loadPets} loadPetDetail={loadPetDetail}
         onOpenShop={() => { setProfile(false); onOpenShop(); }}
         onClose={() => { setProfile(false); void likes.refresh(); }} />}
-    </main>
+    </SeasonalSurface>
   );
 }

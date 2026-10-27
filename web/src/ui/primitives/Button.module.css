@@ -87,3 +87,17 @@
   margin-inline-end: var(--space-2);
   vertical-align: top;
 }
+:global([data-season='halloween']) .primary {
+  background: var(--accent);
+  color: var(--season-ink);
+}
+:global([data-season='halloween']) .secondary {
+  background: var(--card);
+  color: var(--season-paper-ink);
+}
+:global([data-season-surface='home']) .large {
+  min-height: calc(var(--touch-target) + var(--space-3));
+}
+:global([data-season='halloween']) .primary .icon > img {
+  filter: var(--season-action-icon-filter);
+}

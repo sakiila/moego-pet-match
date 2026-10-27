@@ -293,3 +293,16 @@
     transition: none;
   }
 }
+:global([data-season='halloween']) .ticket {
+  --fg: var(--season-paper-ink);
+  --fg-muted: var(--season-paper-muted);
+  --line: var(--season-paper-line);
+  background: var(--card);
+  color: var(--season-paper-ink);
+}
+:global([data-season='halloween']) .accent,
+:global([data-season='halloween']) .seconds,
+:global([data-season='halloween']) .fraction strong,
+:global([data-season='halloween']) .bonus strong {
+  color: var(--season-paper-accent);
+}

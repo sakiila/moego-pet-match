@@ -1,0 +1,60 @@
+User request (2026-10-27): 那就先不做这个帽子，检查其他设计
+Decision: cancel all pet/brand-animal wizard hats; preserve selected purple-night Halloween visual system.
+Scope: static design review and revised concept previews only, no application-code/data/production edits.
+Built-in ImageGen, transparent_background: false. Original generated image retained; this is a new version.
+Event label: 万圣节限定 · 限时3天. No start/end date has been approved. Rank date is a future 2026-10-31 illustrative state, not an event-opening claim.
+referenced_image_paths:
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-home-purple-night-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/deedee.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/maodu.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/icons/library-original-png-v2/masters/17-player-likes/player-like-high-five.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/brand/moego-logo.png
+
+Full ImageGen prompt:
+Use case: precise-object-edit / seasonal UI design correction. The user selected this purple-night Halloween visual system, then explicitly CANCELLED ALL WIZARD HATS and asked us to inspect the remaining designs. Revise the supplied target screen within the existing chosen visual direction. This remains a STATIC DESIGN PREVIEW, not a runtime implementation.
+
+NON-NEGOTIABLE OUTPUT: ONE edge-to-edge mobile app screen, exact canvas 853 pixels wide x 1844 pixels tall, matching primary target Image 1 (logical 390x844). No phone/device frame, status bar, browser UI, outside caption, montage or side-by-side comparison. Recompose only if necessary for specified text readability; do not stretch or squash the image.
+
+Keep the same deep aubergine #281E36 night, muted plum #42304F surfaces, warm ivory #FFF4DF paper/text, pumpkin-orange #FF8A2B fills and existing cozy lantern-lit atmosphere. Preserve the chosen typography, brand identity, page structure, relative positions, component silhouettes and all content EXCEPT the enumerated corrections. Do not redesign the theme. Reduce nothing just to fit extra decoration, and add no new ornament, cards, buttons or features.
+
+REMOVE EVERY HAT from ALL real pet stickers and brand animals. Restore natural top-of-head fur, ears, feathers and white sticker outline faithfully from supplied original assets. No hats anywhere: no little hats, no witch caps, no wizard hats, no replacement headwear, no capes, no pumpkins worn by animals. Preserve each pet's original species, fur markings, face, ear shape and pose; use exact source identities instead of newly designed generic pets. Pet size stays unchanged. User/player initials and avatars remain unchanged and uncostumed.
+
+Readability correction to apply ONLY where relevant: on BRIGHT ORANGE filled buttons and selected mode tabs, use bold DEEP AUBERGINE ink #281E36 and matching dark icons instead of pale/white lettering. Preserve their orange fill, shape and size. On IVORY PAPER, orange text and important numeric values use a deeper burnt-orange #B9470F so they remain distinct from the paper; ordinary labels use dark charcoal-plum and secondary labels a clear medium plum #5B5265. Keep main orange-on-dark title accents and the orange clock numbers on dark background as before. Do not globally recolor every orange decorative mark.
+
+Current real date anchor: 2026-10-27 Asia/Shanghai. The event's exact start/end dates have not been approved. Replace the date-based event pill on this target with EXACT compact text "万圣节限定 · 限时3天", retain tiny pumpkin decoration, remove "10.30—11.01" entirely. This records the user-approved three-day duration without treating a proposed date range as confirmed. No date countdown, new event schedule or new activity rewards.
+
+No changed matching, scoring, ranking or unlock rules. No candy currency, special achievement, Halloween-only leaderboard, reward chest or extra CTA. Header/body controls remain fully legible and unclipped. All Chinese supplied below must be rendered verbatim. Keep static night illustration behind clear text areas, not across faces, numbers or buttons.
+Brand correction: the existing MoeGo logo is a real approved black/dark-ink and orange asset. Show that original unmodified logo shape and colors inside a SMALL simple warm-ivory logo backing on the top-left, following the existing product's dark-theme logo treatment. Keep overall topbar geometry and all other controls; the light backing hugs the logo with slight breathing space, not a full header banner. Do not invent or redraw a different logo, and do not change the main chosen feature wordmark style.
+
+Target page: HOME. Image 1 is the edit target. Image 2 is the ORIGINAL uncostumed Deedee, Image 3 is the ORIGINAL winking tabby-and-white Maodu, Image 4 is the EXACT approved "high-five paw" like icon, Image 5 the approved original MoeGo logo. Keep the shop window the hero, same purple/orange striped awning and warm lit cream interior, original plant/scissors/counter paw, Deedee name plaque, speech bubble, all navigation and overall proportions. Do not replace the cozy shop with a haunted castle.
+
+Specific corrections:
+1. Remove Deedee's LARGE purple hat and restore the natural complete top of head and ears from Image 2; keep the head same size and position in the window. Remove hats from both little pets in the existing social-entry strip and every other animal, restore natural fur/ears. The store decorations, pumpkins and lanterns themselves remain.
+2. Top-left use the ORIGINAL black/orange MoeGo logo from Image 5 on small ivory backing. Top-right remains likes "28", "中 / EN", player circle "B". Replace the generic orange paw before 28 with the actual upward high-five paw Image 4 at appropriate small size, not a new generic paw. No extra header row.
+3. Main "开始营业" button stays same orange shape, location and scale; make its text BOLD DEEP PLUM (#281E36) instead of white, with no extra paw icon. Keep the same three entrances "宠物图鉴" / "排行榜" / "我的宠物", same names and simple original icons. Keep "连续 3 天开工 · 今天已打卡" and the existing optional social-entry mock enabled: "毛孩子动态" / "看看大家今天有多可爱". No invented score summary or extra mission.
+4. Improve the FOOTER PHOTO NOTICE: current text is too tiny, roughly 10px at logical phone size. Render at a clear 12–13px logical size, light cream on calm flat plum, allow three short lines and slightly taller notice band, using modest nearby vertical whitespace if needed. Keep entire exact text:
+"宠物照片由人工核对和处理，难免有误，如有纰漏，请 Slack 联系 @Bob（毛肚和菠萝的铲屎官）"
+The two little heads beside this notice must be actual Maodu (winking tabby-white cat, Image 3) and Boluo (orange big-eared cat already in Image 1), NOT the gray cat currently pictured. No hats on either.
+5. Preserve all existing footer info links: "信息使用说明" / "资料删除申请" / "设置". Restore the existing version and GitHub footer areas omitted by previous mock, quiet but readable:
+"版本 20261027.14 · © 2026 MoeGo · 由 Bob 制作"
+and a separate simple "GitHub" link below. This version is just the local checkout's design-example version, not a claim of live release. Keep all footer rows fully inside the 844 logical px viewport, with comfortable bottom margin. Do not shrink main buttons or real pet just to add decorative content. Can reduce a little excess whitespace below the window and near footer to fit the extra line.
+6. Event label becomes EXACTLY "万圣节限定 · 限时3天", with tiny pumpkin icons as before; remove the old proposed date range. Keep "毛孩子全明星", subtitle "和同事家的毛孩子，来一局 90 秒消消乐。", speech "你负责排班，我负责可爱。", name "今日店长 · Deedee" unchanged. All fur/species/name identities remain faithful.
+
+Only these scoped corrections; keep visual balance, original shop structure, existing interaction hierarchy and warm night mood. No new panels, event prizes or feature changes. One complete exact 853x1844 portrait screen.
+
+Refinement: final selected home output comes from this second ImageGen pass, which makes the photo notice exactly three readable lines. The previous intermediate was kept under the built-in output path.
+referenced_image_paths:
+- /Users/bob/.codex/generated_images/01a17daa-bb5c-79a3-9775-a7e8cdcf598c/exec-f659ac9e-2a69-4f3f-bb39-7876b9dd9de8.png
+
+Full refinement prompt:
+Use case: precise-object-edit. Make ONLY a small text-layout readability correction to the supplied finished HOME design. Output the SAME exact 853x1844 portrait canvas, same composition and all other pixels/design elements as closely as possible. No device frame, no montage.
+
+The PHOTO NOTICE BAND near the bottom, directly below the "毛孩子动态" strip and above the three footer links, still uses overly small type and two long lines. Change ONLY this band: increase the notice text to 28 physical pixels high (equivalent to 12.8px at a 390px-wide phone), with 34 physical pixels line height and warm-ivory text on its existing calm purple band. This text MUST be set as exactly THREE explicit lines with these line breaks:
+"宠物照片由人工核对和处理，"
+"难免有误，如有纰漏，请 Slack 联系 @Bob"
+"（毛肚和菠萝的铲屎官）"
+Keep all wording verbatim, no shortening. The notice text area starts after the two existing small cat heads, not above them. The longest middle line may wrap at a space only if necessary to preserve the size, but NEVER shrink the text. Prefer the exact three lines above.
+
+Keep the notice's two correct original cats (Maodu the winking tabby-and-white cat, Boluo the orange big-eared cat) left of the text, vertically centered; no hats. The notice band's top and left/right edges remain the same; increase its height downward by about 20 physical pixels if needed to accommodate three readable lines. Shift the footer link row, version/copyright line and GitHub link together down ONLY as much as required, using existing bottom whitespace so all still fit fully inside the 1844px canvas with at least 14px bottom margin.
+
+Everything else MUST stay unchanged: no hats anywhere; original MoeGo logo on ivory backing; upward high-five +28; language / B avatar; title; exact "万圣节限定 · 限时3天"; purple-orange shop awning; natural full uncostumed Deedee with same face/size; speech/name plaque; orange Start button with DARK PLUM "开始营业"; streak; three navigation links; social entry; photo cats; complete existing footer "信息使用说明 · 资料删除申请 · 设置", "版本 20261027.14 · © 2026 MoeGo · 由 Bob 制作", "GitHub". Do not enlarge or redesign any other element, do not alter its illustration or geometry, no new features. This is only the three-line readable notice-band fix.

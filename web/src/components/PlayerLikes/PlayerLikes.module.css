@@ -50,3 +50,9 @@
   .likeButton, .pill { transition: none; }
   .likeButton:active:not(:disabled), .pill:active { transform: none; }
 }
+:global([data-season='halloween']) .pill {
+  padding-inline: var(--space-1);
+  border-color: transparent;
+  background: transparent;
+  color: var(--fg);
+}

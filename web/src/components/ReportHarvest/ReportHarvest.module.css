@@ -2,6 +2,31 @@
   display: grid;
   gap: var(--space-3);
 }
+:global([data-season='halloween']) .box {
+  gap: var(--space-1);
+}
+:global([data-season='halloween']) .title {
+  font-size: var(--text-md);
+  line-height: 1.3;
+}
+:global([data-season='halloween']) .row {
+  gap: var(--space-2);
+  padding-bottom: var(--space-1);
+}
+:global([data-season='halloween']) .row > * {
+  flex-basis: var(--season-harvest-card-width);
+}
+:global([data-season='halloween']) .card {
+  padding: var(--space-2);
+}
+:global([data-season='halloween']) .card img {
+  width: var(--season-harvest-face-size);
+  height: var(--season-harvest-face-size);
+  max-width: 100%;
+}
+:global([data-season='halloween']) .name {
+  line-height: 1.25;
+}
 
 .title {
   margin: 0;
@@ -99,4 +124,21 @@
 
 .card:disabled {
   cursor: default;
+}
+:global([data-season='halloween']) .title {
+  color: var(--fg);
+}
+:global([data-season='halloween']) .count {
+  color: var(--accent);
+}
+:global([data-season='halloween']) .card {
+  color: var(--season-paper-ink);
+}
+:global([data-season='halloween']) .badge {
+  border-color: var(--season-paper-line);
+  background: var(--card);
+}
+:global([data-season='halloween']) .tag {
+  background: var(--accent);
+  color: var(--season-ink);
 }

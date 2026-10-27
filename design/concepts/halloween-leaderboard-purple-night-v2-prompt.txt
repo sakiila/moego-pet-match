@@ -1,0 +1,34 @@
+User request: 风格2，首页和结算页面和排行榜页面也设计一下
+Built-in ImageGen revision to unify the leaderboard canvas with the chosen board, home and report, 853x1844. Previous wider v1 is preserved as an intermediate, not the final preview.
+Scope: static design preview only. Same event dates remain an assumption. No code changes, production operations or deployment.
+transparent_background: false
+referenced_image_paths:
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-leaderboard-purple-night-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-purple-night-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-home-purple-night-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-report-purple-night-v1.png
+
+Full prompt:
+Use case: precise-object-edit / mobile UI re-composition. Revise ONLY the canvas aspect ratio and the spacing/layout necessary to fit it for the LEADERBOARD shown in Image 1. The design style and content are APPROVED for continuation; the problem is its generated canvas is 935 x 1683, which is too wide. REQUIRED OUTPUT CANVAS is 853 pixels WIDE by 1844 pixels TALL, portrait ratio 0.46258, the EXACT SAME DIMENSIONS as Images 2, 3, and 4. Output one edge-to-edge 853x1844 mobile app image. DO NOT output 935x1683 again. Do not stretch or warp the existing image; recompose the UI naturally for the NARROWER TALLER viewport, equivalent to logical 390x844. Do not paste the old screen onto another background, add side bars, add phone/device/frame, add captions, create a contact sheet or crop content. THE FINAL IMAGE BOUNDARY ITSELF must have 853x1844 dimensions. Image 1 is the edit target; Image 2 selected gameplay skin and Images 3 home / 4 report are supporting style and ASPECT RATIO references. Keep visual consistency with them, not their page content.
+
+Current real date anchor: 2026-10-27 Asia/Shanghai. This remains a mock future event-day preview, 2026-10-31. Existing proposed 3-day label remains exactly "10.30—11.01 · 限时3天", not production-confirmed.
+
+Preserve ALL existing text, mock values, pet illustrations, trophy podium, tabs, brand, icons, pumpkin lights, color language and relative hierarchy of Image 1. Use its beautiful deep-purple night, ivory-orange wordmark, friendly hats on the decorative blue cat and black-white dog, warm ivory/gold podium, orange button. Keep colleague initials uncostumed. No new features or new illustrations.
+
+Recompose to these natural 390x844 logical slots, scaling TYPE AND ICONS UNIFORMLY within each component, never squash:
+- y12-48 compact MoeGo, 回门店, 中 / EN.
+- y62-147 title 毛孩子光荣榜, subtitle 谁把毛孩子安排得最明白？, small event label. Keep title a single line if possible with same characteristic stroke shapes.
+- y163-205 宠物店 active / 摸鱼分店 mode switch.
+- y220-252 今日榜 active / 总榜; y263 helper 10 月 31 日 · 今天全公司同一盘棋.
+- y293-475 complete 2-1-3 podium. Left Sam Pineda / 42,600 分 / 2, middle Emma / 49,800 分 / 1 and E avatar + crown, right Yoo / 39,200 分 / 3. Side blue cat/black-white dog with hats stay fully visible, faces not obscured. Podium tapers in width to fit phone but portrait circles stay circular.
+- y487-515 我附近 active / 全榜, y526 caption 第 5–9 名 · 你的前后.
+- y544-743 grouped header 名次 / 同事 / 今日最好 and five clear rows; exact rows:
+5 / L / Lily / 32,600
+6 / R / Rachel / 29,000
+7 / B / Bob + 你 / 24,800 (ONLY highlighted row, cream paper/orange border)
+7 / L / Luz + 同分并列 / 24,800
+9 / J / Jack / 23,400.
+Keep all names and numbers readable, right-align score column, no overlaps. Thin separators, calm surfaces.
+- y775-828 single orange 再挑战一次 button fully visible. Bottom margin ~16px.
+
+All essential content from Image 1 preserved. Whitespace distributed vertically to match this taller canvas. Please honor exact target 853x1844 and same aspect as supporting Images 2-4.

@@ -51,3 +51,41 @@
   border-bottom-color: var(--color-brand);
   color: var(--color-brand);
 }
+:global([data-season='halloween']) .pill {
+  border-color: var(--season-panel-line);
+  background: var(--panel);
+}
+:global([data-season='halloween']) .pill button {
+  color: var(--fg);
+}
+:global([data-season='halloween']) .pill button[aria-selected='true'] {
+  background: var(--accent);
+  color: var(--season-ink);
+}
+:global([data-season='halloween']) .underline button {
+  color: var(--fg-muted);
+}
+:global([data-season='halloween']) .underline button[aria-selected='true'] {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+:global([data-season='halloween']) .pill button[aria-selected='true'] > img {
+  filter: var(--season-action-icon-filter);
+}
+
+:global([data-season-surface='leaderboard']) .pill {
+  min-height: var(--season-tab-pill-height);
+  padding: calc(var(--space-1) / 2);
+}
+:global([data-season-surface='leaderboard']) .pill button {
+  min-height: calc(var(--season-tab-pill-height) - var(--space-1) - var(--stroke) * 2);
+  padding-block: 0;
+  font-size: var(--text-md);
+  line-height: 1.2;
+}
+:global([data-season-surface='leaderboard']) .underline button {
+  min-height: var(--season-tab-underline-height);
+  padding: var(--space-1);
+  font-size: var(--text-md);
+  line-height: 1.1;
+}

@@ -1,0 +1,47 @@
+User follow-up (2026-10-27): 风格2，首页和结算页面和排行榜页面也设计一下
+Selected theme: design/concepts/halloween-purple-night-v1.png (second displayed result from the first ideation set).
+Scope: static design previews only. No runtime implementation, production data, commit, push or deployment.
+Event dates shown are a proposed preview assumption: 2026-10-30 through 2026-11-01 Asia/Shanghai.
+Generated with built-in ImageGen, not CLI/API fallback.
+transparent_background: false
+referenced_image_paths:
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-purple-night-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/mobile-leaderboard-daily-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/ui/hall-cat.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/illustrations/ui/hall-dog-v4.png
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/hall-of-fame-title-zh-v2.png
+
+Full prompt:
+Use case: ui-mockup. Create ONE polished, production-quality seasonal UI concept for the existing MoeGo 毛孩子全明星 pet match-three web game. The user has SELECTED the purple-night Halloween gameplay design in reference Image 1, and this request extends that EXACT visual system to one other page. This is a fixed chosen style, not another alternative. Current date anchor 2026-10-27 Asia/Shanghai. Halloween is October 31; display the same proposed preview schedule "10.30—11.01 · 限时3天" in a compact label. Dates are a design assumption; no live event is claimed.
+
+Target dimensions: 390 x 844 logical mobile viewport, rendered at 853 x 1844 physical pixels to match Image 1. App content only, edge to edge. No device frame, phone body, notch, OS clock/status/battery, browser chrome, gallery board, explanatory captions, page name outside the app, or multiple screens in one image. Natural viewport ratio and readable Chinese. Recompose spacing sensibly; never squash typography or images.
+
+Chosen style: calm deep aubergine background #281E36 with restrained plum #42304F surfaces; warm ivory #FFF4DF for main labels and receipt paper; pumpkin orange #FF8A2B for primary actions and emphasis; small lilac highlights. Follow reference Image 1's warm lantern light, cozy Halloween night, bold friendly rounded lettering, charcoal-purple outlines, white-edged pet stickers, clear hierarchy and intentional whitespace. Small lanterns/pumpkins, a few distant bat silhouettes and tiny gold star sparks can decorate edges behind content, while text and controls stay visually calm. Use the actual MoeGo logo in cream/orange on the dark background, original playful feature wordmark shapes. Keep existing brand and product names. Pets retain original fur colors, face, ear shape and expression. Give pet illustrations ONE tiny crooked deep-purple witch/wizard hat with an orange band and small gold buckle; sit it to one side on the head, without hiding eye, ear silhouette or face. No capes, necks or bodies for real pet head stickers.
+
+Preserve the existing product information, page structure, existing navigation and real workflow. This is a visual seasonal skin. No candy currency, candy collection mission, Halloween-only ranking, temporary achievements, special prizes, gift chests, new unlocks, sign-in bonus or extra call-to-action. Don't add features to fill the frame. Use realistic MOCK data, do not claim actual online stats. Buttons and text must be legible at phone size. Layout differentiation uses grouping, spacing, flat tonal hierarchy and light dividers; do not wrap everything in extra nested cards. All requested Chinese text verbatim. Existing illustrated icons can use warm cream/orange/lilac appropriate to the skin. Avoid horror, gore, skull motifs, tiny illegible text, clipped controls, overloaded decorations.
+
+Page: LEADERBOARD / 毛孩子光荣榜, current normal pet-shop TODAY ranking in an already fish-unlocked player's mock account. Image 2 provides existing hierarchy and stepped podium, Image 3 exact blue brand cat, Image 4 exact black-white brand dog (approved current smooth belly silhouette), Image 5 selected Chinese title wordmark. Keep these brand pets' character and natural silhouette. Give ONLY these decorative blue cat/black-white dog small purple witch hats; colleague avatars remain human/player initials, not pet heads. Image 2's date and some tab copy are historical and MUST be replaced by the exact latest text below.
+
+Make one complete 390x844 logical screen, 853x1844 physical. Hierarchy: compact brand/header, title+event, two simple ranking controls, 2-1-3 podium, local rank list, fixed sole primary "再挑战一次". It is an EXISTING leaderboard in a Halloween skin, NOT a seasonal event leaderboard or candy contest. Keep the date controls structurally separate from the seasonal 3-day label.
+
+Exact content and sensible layout:
+- Compact top bar at y12: MoeGo left, "回门店" and "中 / EN" right.
+- Existing expressive "毛孩子光荣榜" wordmark from Image 5, "毛孩子" warm cream and "光荣榜" pumpkin orange; subtitle "谁把毛孩子安排得最明白？". Keep playful hand-lettered stroke shapes, not generic font. One restrained small seasonal line "10.30—11.01 · 限时3天".
+- Full-width two-segment mode switch "宠物店" ACTIVE orange with cream paw icon / "摸鱼分店" inactive muted plum with blue fish icon. The mock account has unlocked fish, no lock icon.
+- Lightweight tabs "今日榜" ACTIVE with orange underline / "总榜" inactive. Below, EXACT daily board helper "10 月 31 日 · 今天全公司同一盘棋". This is a preview of the FUTURE event-day state on 2026-10-31, not a claim that the real current date 2026-10-27 is Oct 31. No second "今日榜" heading or invented Halloween-only tab.
+- Three stepped podiums in 2 · 1 · 3 order, first place tallest at center, subtle matte ivory-gold center, muted lavender-silver left, warm peach-copper right. Values:
+  left SECOND = circular initial "S", "Sam Pineda", "42,600 分", huge translucent "2";
+  middle FIRST = circular initial "E", gold crown and small laurel, "Emma", "49,800 分", huge "1";
+  right THIRD = circular initial "Y", "Yoo", "39,200 分", huge "3".
+Names remain original, Sam may use two lines at natural break. These are MOCK names/scores from existing gallery data, not verified real stats. Cream/orange score typography high contrast. Blue brand cat and black-white dog at lower OUTER edges of podium with their hats, natural paws/leg/belly shapes, much smaller than podium. They don't overlap names or numeric values. A tiny decorative pumpkin near each outer edge is enough. Approx podium y295-480, sensible image sizes.
+- Under podium: tabs "我附近" ACTIVE orange underline / "全榜" inactive. Caption "第 5–9 名 · 你的前后". No pagination, page numbers or load-more.
+- One compact grouped five-row list with header "名次  同事  今日最好"; high contrast ivory text against calm dark plum or lightly tinted rows. Small initials avatars before names. Values EXACTLY:
+  "5" / "Lily" / "32,600"
+  "6" / "Rachel" / "29,000"
+  "7" / "Bob" + small orange "你" pill / "24,800"
+  "7" / "Luz" + small quiet label "同分并列" / "24,800"
+  "9" / "Jack" / "23,400".
+Bob and Luz are actually tied at 7, so next row 9, don't renumber 8. Highlight only Bob row with warm cream paper, pumpkin-orange border and dark ink; this ties to Bob's 24,800 and today 7th in the matching report design. Other rows are simple grouped surfaces separated by subtle rules, not bulky stacked cards. Keep scores right-aligned, rank/avatars/name columns aligned. Five ~36-40px rows will fit at y530-755 with no cramped type.
+- Bottom fixed primary action "再挑战一次", pumpkin orange, ~52px high, full width with safe margin and matching rounded dark plum bottom edge. No share or collect button, no new nav bar.
+
+Warm orange lanterns at HEADER EDGES, small stars/bat silhouettes behind header, flat clear dark plum behind rows. The foreground ranking readability is the priority. Never put hats on colleague initials or substitute pets for their avatars. Do not change ranking logic or remove the actual mode/period/nearby controls to fit extra decoration. No duplicate best-score summary or badges invented for this skin.

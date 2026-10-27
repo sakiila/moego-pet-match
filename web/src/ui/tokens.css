@@ -561,6 +561,101 @@
   }
 }
 
+/* 万圣节图稿的色彩与插画定位；未处在活动 Surface 时不覆盖默认或鱼关主题。 */
+:root {
+  --season-page-bg: #281e36;
+  --season-ink: #281e36;
+  --season-paper-ink: #302335;
+  --season-paper-muted: #5b5265;
+  --season-paper-accent: #b9470f;
+  --season-paper-line: #ddd3ca;
+  --season-panel-line: #796489;
+  --season-shadow: 0 5px 0 #1c1329;
+  --season-storefront-image: none;
+  --season-storefront-ratio: 800 / 570;
+  --season-window-left: 15.875%;
+  --season-window-top: 24.035%;
+  --season-window-width: 69.5%;
+  --season-window-height: 56.316%;
+  --season-window-bg: #ffe3a9;
+  --season-manager-size: 100%;
+  --season-manager-left: 16%;
+  --season-bubble-left: 56.25%;
+  --season-bubble-top: 23.33%;
+  --season-bubble-width: 32.75%;
+  --season-caption-left: 73%;
+  --season-caption-bottom: 16.14%;
+  --season-caption-width: 21.875%;
+  --season-caption-en-left: 64%;
+  --season-caption-en-width: 31%;
+  --season-caption-height: 14.737%;
+  --season-wordmark-width: 340px;
+  --season-home-title-ratio-zh: 1080 / 212;
+  --season-home-title-ratio-en: 1080 / 193;
+  --season-home-title-trim-zh: 6.019%;
+  --season-home-title-trim-en: 5.741%;
+  --season-home-title-width: 86%;
+  --season-action-icon-filter: brightness(0);
+  --season-harvest-card-width: 112px;
+  --season-harvest-face-size: 88px;
+  --season-entry-face-size: 48px;
+  --season-nav-icon-size: 40px;
+  --season-podium-center-height: 112px;
+  --season-podium-height: 172px;
+  --season-ranking-gap: 2px;
+  --season-podium-left-height: 96px;
+  --season-podium-right-height: 88px;
+  --season-podium-crown-width: 32px;
+  --season-podium-rank-size: 32px;
+  --season-podium-winner-rank-size: 40px;
+  --season-podium-pet-width: 52px;
+  --season-tab-pill-height: 44px;
+  --season-tab-underline-height: 36px;
+  --season-leader-header-height: 20px;
+  --season-date-height: 18px;
+  --season-sticky-clear: 80px;
+  --season-stamp-size: 64px;
+  --season-action-height: 52px;
+  --season-window-backdrop-left: 13.125%;
+  --season-window-backdrop-top: 20.175%;
+  --season-window-backdrop-width: 75%;
+  --season-window-backdrop-height: 60.175%;
+  --season-decor-top: 0px;
+  --season-decor-width-left: 21.1%;
+  --season-decor-width-right: 23.8%;
+  --season-badge-edge: #755482;
+  --season-badge-bg: #493052;
+  --season-badge-size: 14px;
+  --season-badge-leading: 1.4;
+  --season-badge-icon: 20px;
+}
+
+[data-season='halloween'] {
+  --bg: var(--season-page-bg);
+  --fg: #fff4df;
+  --fg-muted: #c5b1da;
+  --accent: #ff8a2b;
+  --accent-fg: var(--season-ink);
+  --panel: #42304f;
+  --card: #fff4df;
+  --line: #70547f;
+  --border: var(--season-ink);
+  --board-border: #9671b5;
+  --board-bg: #fff4df;
+  --time-bg: transparent;
+  --score-bg: transparent;
+  --receipt-paper: #fff4df;
+  --error-bg: #5b2c43;
+  --urgent-bg: #5b2c43;
+  --shadow-offset: var(--season-shadow);
+}
+
+[data-season-surface='board'] {
+  --board-page-gap: var(--space-1);
+  --board-page-block: var(--space-2);
+  --season-badge-size: 13px;
+}
+
 /* 棋盘喝彩：橙白贴纸字，字号随棋盘容器缩小，800ms 内弹入、停留、淡出。 */
 :root {
   --cheer-anchor-y: 18%;

@@ -1,6 +1,8 @@
 import type { MessageKey } from './zh';
 
 export const en: Record<MessageKey, string> = {
+  'halloween.limited': 'Halloween · 3 Days Only',
+  'halloween.rush_title': 'Trick or Treat!',
   "social.action_failed": "Couldn't save. Please try again.",
   "social.publish_saved": "Your moment is posted",
   "social.publish_conflict": "This moment may already be posted. Please check the feed.",

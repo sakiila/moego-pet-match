@@ -340,3 +340,90 @@
   font-size: var(--text-sm);
   color: var(--color-ink-muted);
 }
+:global([data-season='halloween']) .bubble,
+:global([data-season='halloween']) .nameplate,
+:global([data-season='halloween']) .plate {
+  color: var(--season-paper-ink);
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween'] {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: var(--season-storefront-ratio);
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween']::before {
+  content: '';
+  position: absolute;
+  left: var(--season-window-backdrop-left);
+  top: var(--season-window-backdrop-top);
+  width: var(--season-window-backdrop-width);
+  height: var(--season-window-backdrop-height);
+  background: var(--season-window-bg);
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween'] .frame {
+  z-index: 2;
+  pointer-events: none;
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween'] .window {
+  z-index: 1;
+  left: var(--season-window-left);
+  top: var(--season-window-top);
+  width: var(--season-window-width);
+  height: var(--season-window-height);
+  right: auto;
+  bottom: auto;
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween'] .sticker {
+  bottom: 0;
+  left: var(--season-manager-left);
+  height: var(--season-manager-size);
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween'] .bubble {
+  z-index: 3;
+  top: var(--season-bubble-top);
+  left: var(--season-bubble-left);
+  right: auto;
+  width: var(--season-bubble-width);
+  max-width: var(--season-bubble-width);
+  padding: var(--space-2) var(--space-3);
+  rotate: 0deg;
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween'] .caption {
+  z-index: 4;
+  left: var(--season-caption-left);
+  right: auto;
+  bottom: var(--season-caption-bottom);
+  width: var(--season-caption-width);
+  max-width: var(--season-caption-width);
+  min-height: var(--season-caption-height);
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween'] .nameplate {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0 var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  background: var(--card);
+  font-size: var(--text-xs);
+}
+
+:global([data-season='halloween']) .shop[data-storefront='halloween'][data-locale='en'] .role {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween'] .name {
+  grid-column: 1 / -1;
+  font-size: var(--text-sm);
+}
+:global([data-season='halloween']) .shop[data-storefront='halloween'] .open {
+  z-index: 5;
+}
+
+:global([data-season='halloween']) .shop[data-storefront='halloween'][data-locale='en'] .caption {
+  left: var(--season-caption-en-left);
+  width: var(--season-caption-en-width);
+  max-width: var(--season-caption-en-width);
+}
+
+:global([data-season='halloween']) .shop[data-storefront='halloween'][data-locale='en'] .nameplate {
+  grid-template-columns: minmax(0, 1fr) auto;
+}

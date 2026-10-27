@@ -1,0 +1,44 @@
+User request (2026-10-27): 那就先不做这个帽子，检查其他设计
+Decision: cancel all pet/brand-animal wizard hats; preserve selected purple-night Halloween visual system.
+Scope: static design review and revised concept previews only, no application-code/data/production edits.
+Built-in ImageGen, transparent_background: false. Original generated image retained; this is a new version.
+Event label: 万圣节限定 · 限时3天. No start/end date has been approved. Rank date is a future 2026-10-31 illustrative state, not an event-opening claim.
+referenced_image_paths:
+- /Users/bob/WebstormProjects/moego-pet-match/design/concepts/halloween-report-purple-night-v1.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/momo.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/boluo.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/koa.png
+- /Users/bob/WebstormProjects/moego-pet-match/assets/pets/stickers-b-head-v1/512/deedee.png
+
+Full ImageGen prompt:
+Use case: precise-object-edit / seasonal UI design correction. The user selected this purple-night Halloween visual system, then explicitly CANCELLED ALL WIZARD HATS and asked us to inspect the remaining designs. Revise the supplied target screen within the existing chosen visual direction. This remains a STATIC DESIGN PREVIEW, not a runtime implementation.
+
+NON-NEGOTIABLE OUTPUT: ONE edge-to-edge mobile app screen, exact canvas 853 pixels wide x 1844 pixels tall, matching primary target Image 1 (logical 390x844). No phone/device frame, status bar, browser UI, outside caption, montage or side-by-side comparison. Recompose only if necessary for specified text readability; do not stretch or squash the image.
+
+Keep the same deep aubergine #281E36 night, muted plum #42304F surfaces, warm ivory #FFF4DF paper/text, pumpkin-orange #FF8A2B fills and existing cozy lantern-lit atmosphere. Preserve the chosen typography, brand identity, page structure, relative positions, component silhouettes and all content EXCEPT the enumerated corrections. Do not redesign the theme. Reduce nothing just to fit extra decoration, and add no new ornament, cards, buttons or features.
+
+REMOVE EVERY HAT from ALL real pet stickers and brand animals. Restore natural top-of-head fur, ears, feathers and white sticker outline faithfully from supplied original assets. No hats anywhere: no little hats, no witch caps, no wizard hats, no replacement headwear, no capes, no pumpkins worn by animals. Preserve each pet's original species, fur markings, face, ear shape and pose; use exact source identities instead of newly designed generic pets. Pet size stays unchanged. User/player initials and avatars remain unchanged and uncostumed.
+
+Readability correction to apply ONLY where relevant: on BRIGHT ORANGE filled buttons and selected mode tabs, use bold DEEP AUBERGINE ink #281E36 and matching dark icons instead of pale/white lettering. Preserve their orange fill, shape and size. On IVORY PAPER, orange text and important numeric values use a deeper burnt-orange #B9470F so they remain distinct from the paper; ordinary labels use dark charcoal-plum and secondary labels a clear medium plum #5B5265. Keep main orange-on-dark title accents and the orange clock numbers on dark background as before. Do not globally recolor every orange decorative mark.
+
+Current real date anchor: 2026-10-27 Asia/Shanghai. The event's exact start/end dates have not been approved. Replace the date-based event pill on this target with EXACT compact text "万圣节限定 · 限时3天", retain tiny pumpkin decoration, remove "10.30—11.01" entirely. This records the user-approved three-day duration without treating a proposed date range as confirmed. No date countdown, new event schedule or new activity rewards.
+
+No changed matching, scoring, ranking or unlock rules. No candy currency, special achievement, Halloween-only leaderboard, reward chest or extra CTA. Header/body controls remain fully legible and unclipped. All Chinese supplied below must be rendered verbatim. Keep static night illustration behind clear text areas, not across faces, numbers or buttons.
+Brand correction: the existing MoeGo logo is a real approved black/dark-ink and orange asset. Show that original unmodified logo shape and colors inside a SMALL simple warm-ivory logo backing on the top-left, following the existing product's dark-theme logo treatment. Keep overall topbar geometry and all other controls; the light backing hugs the logo with slight breathing space, not a full header banner. Do not invent or redraw a different logo, and do not change the main chosen feature wordmark style.
+
+Target page: REPORT / SETTLEMENT. Image 1 is the edit target; Images 2/3/4/5 are the exact original head stickers Momo (gray cat with yellow eyes), Boluo (orange big-eared cat), Koa (cream parrot), Deedee (white long-eared dog). Remove the hats from MVP Momo, both newly collected pet cards Boluo/Koa, and the tiny Deedee daily-manager head. Restore each original uncostumed head from those assets, natural ears/feathers and correct head proportions, same head size in same component slots. Keep all original pets' actual expressions and white sticker outlines. No new clothes or accessories.
+
+Preserve the entire existing receipt and page hierarchy, following this exact content:
+- Topbar original MoeGo logo on small ivory backing, "回门店", "中 / EN". Keep "Grooming Report Card" feature wordmark and subtitle "这班辛苦啦，看看毛孩子怎么说。".
+- Seasonal pill MUST say "万圣节限定 · 限时3天", with no actual date range.
+- Ivory serrated receipt: "本局得分", large "24,800", successful check and "本局结果已保存"; status tags "个人新纪录！", "今日第 7 名", "打卡第 3 天".
+- MVP area left Momo on lavender ground, right "本局 MVP：Momo" and exact quote "赶上了，我撤回那个眼神。". Existing small playful red/orange flower stamp "急什么我会消" stays unchanged, does not cover eyes. This existing result title is NOT a new Halloween achievement.
+- Receipt rows "服务格数 120", "最高连消 4", "工具发动次数 3", same dotted leaders, barcode, serrated bottom.
+- Below, "本局收获 2", original uncostumed Boluo and Koa cards with correct names. No new prize or badge.
+- Independent Deedee head beside ivory speech bubble, orange/darker burnt-orange heading "店长说", exact existing tip "两把相邻的梳子交换，合体清十字，试试看！". No quiz or fish invitation in this particular mock state.
+- Bottom fixed paired buttons: orange "再开一局", ivory "分享成绩", same existing paw and share icons and their shapes.
+
+Readability corrections to verify:
+The primary orange "再开一局" button text and paw icon become DARK PLUM, retaining orange button fill. Secondary "分享成绩" remains dark ink on ivory. The huge score 24,800 and important small orange numeric values/tag text on IVORY paper become the readable deeper burnt-orange #B9470F; they should still look orange, not brown-black or maroon. Deep plum for normal text. The small "本局结果已保存" must use readable medium plum #5B5265 rather than faint gray; retain its green check. Keep main cream/orange wordmark on purple and existing glowing pumpkin decor, but no increased visual clutter.
+
+Do not add a candy bonus, separate rush reward panel, more statistics, a Halloween badge or navigation grid. Keep complete receipt, harvest, manager and fixed buttons fully inside 853x1844, same generous hierarchy as source. Only remove hats and apply the enumerated text/date/contrast/logo changes. One faithful refinement of this selected screen.

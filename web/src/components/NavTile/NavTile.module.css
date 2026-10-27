@@ -66,3 +66,15 @@
   left: 0;
   border-left: 1px solid var(--line);
 }
+:global([data-season='halloween']) .tile {
+  min-height: calc(var(--touch-target) + var(--space-5));
+  align-content: center;
+  gap: var(--space-1);
+  padding-block: var(--space-1);
+  font-size: var(--text-sm);
+}
+:global([data-season='halloween']) .iconFrame,
+:global([data-season='halloween']) .icon {
+  width: var(--season-nav-icon-size);
+  height: var(--season-nav-icon-size);
+}

@@ -968,3 +968,14 @@
 | paw_book.send_failed | 这次没确认成功，请重试 | We couldn't confirm that. Please retry. |
 | paw_book.unavailable | 暂时不能打开这本爪印簿 | This pawprint book is currently unavailable. |
 | paw_book.unread | 有新爪印互动 | New pawprint activity |
+
+## 2026-10-27 万圣节限时主题
+
+仅在已启用的普通宠物店万圣节主题中使用；不改变鱼关、任务窗口、目标或奖励。活动配置须为带时区的三天窗口，开发与陈列预览可单独开启。
+
+| Key | 中文 | English |
+| --- | --- | --- |
+| halloween.limited | 万圣节限定 · 限时3天 | Halloween · 3 Days Only |
+| halloween.rush_title | 不给糖就捣蛋！ | Trick or Treat! |
+
+成功、过期、服务进度、剩余秒数和 +1000 反馈沿用现有催单文案；没有新增糖果货币或节日奖励。
