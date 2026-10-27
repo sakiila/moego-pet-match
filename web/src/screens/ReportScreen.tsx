@@ -143,9 +143,9 @@ export function ReportScreen(props: ReportScreenProps) {
           }}
         />
       )}
-      {/* 尾声只放一条：解锁那一局是鱼关邀请，其余是「店长说」预告 */}
+      {/* 尾声只放一条：解锁那一局是鱼关邀请，其余是「店长说」预告；AI 局不计收集与称号，没有预告 */}
       {!fish && saved?.progress.unlockedNow && <FishInvitation onOpen={onFishInvite} />}
-      {!fish && nextUp && <NextUp nextUp={nextUp} speaker={speaker} />}
+      {mode === 'normal' && nextUp && <NextUp nextUp={nextUp} speaker={speaker} />}
       <div className={`${styles.stickyActions} ${styles.actionPair}`}>
         <Button size="lg" block icon={<ModeMark mode={mode} tone="onAccent" size={32} />} onClick={onPlayAgain} data-testid="play-again">
           {t('action.play_again')}
