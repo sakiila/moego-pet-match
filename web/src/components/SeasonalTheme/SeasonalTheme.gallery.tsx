@@ -114,6 +114,7 @@ export default {
   group: 'screens',
   states: {
     home: () => theme(<HomePreview />),
+    'scheduled-home': () => <HomePreview />,
     'board-active': () => theme(<BoardPreview />),
     'board-hidden': () => theme(<BoardPreview rush={{ state: 'hidden' }} />),
     'board-success': () => theme(<BoardPreview rush={{ state: 'success' }} />),

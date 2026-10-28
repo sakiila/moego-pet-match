@@ -1,6 +1,6 @@
 // Key 与 UI_COPY.md 对应；随页面接入逐步补齐。
 export const zh = {
-  'halloween.limited': '万圣节限定 · 限时3天',
+  'halloween.limited': '万圣节限定 · {end}结束',
   'halloween.rush_title': '不给糖就捣蛋！',
   "social.action_failed": "没有保存成功，请重试。",
   "social.publish_saved": "动态已发布",

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
 import type { GameMode } from '../../api/types';
-import { halloweenActive, halloweenPreview, nextHalloweenBoundary } from '../../game/halloween';
+import { halloweenActive, halloweenEndLabel, halloweenPreview, nextHalloweenBoundary } from '../../game/halloween';
 import { useI18n } from '../../i18n';
 import { Icon } from '../../ui/primitives/Icon';
 import styles from './SeasonalTheme.module.css';
@@ -59,11 +59,11 @@ export function SeasonalSurface({ as: Element = 'main', surface, mode = 'normal'
 
 export function SeasonalBadge() {
   const active = useContext(SurfaceTheme);
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   if (!active) return null;
   return <p className={styles.badge} data-testid="seasonal-badge">
     <Icon name="halloween-pumpkin" size={20} />
-    <span>{t('halloween.limited')}</span>
+    <span>{t('halloween.limited', { end: halloweenEndLabel(locale) })}</span>
     <Icon name="halloween-pumpkin" size={20} />
   </p>;
 }
