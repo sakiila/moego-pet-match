@@ -28,7 +28,7 @@ const escapeMrkdwn = (text: string) => text.replace(/&/g, '&amp;').replace(/</g,
 
 /** 一个链接的预览：标题链接 + 简介，下面是整宽海报。 */
 export function unfurlBlocks(link: string, text: PreviewText, version?: string) {
-  const image = version ? `${POSTER_URL}?v=${encodeURIComponent(version)}` : POSTER_URL;
+  const image = version ? `${POSTER_URL}&v=${encodeURIComponent(version)}` : POSTER_URL;
   return {
     blocks: [
       { type: 'section', text: { type: 'mrkdwn', text: `*<${link}|${escapeMrkdwn(text.title)}>*\n${escapeMrkdwn(text.description)}` } },

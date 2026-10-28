@@ -35,7 +35,7 @@ describe('预览内容', () => {
   it('标题链接与简介，下面是整宽海报', () => {
     const { blocks } = unfurlBlocks('https://star.baobo.me/', { title: 'A <b>', description: 'D & E', alt: 'Alt' }, '20261025.7');
     expect(blocks[0]).toEqual({ type: 'section', text: { type: 'mrkdwn', text: '*<https://star.baobo.me/|A &lt;b&gt;>*\nD &amp; E' } });
-    expect(blocks[1]).toEqual({ type: 'image', image_url: 'https://star.baobo.me/og.jpg?v=20261025.7', alt_text: 'Alt', image_width: 1200, image_height: 630 });
+    expect(blocks[1]).toEqual({ type: 'image', image_url: 'https://star.baobo.me/og.jpg?image=square-en-v1&v=20261025.7', alt_text: 'Alt', image_width: 1200, image_height: 1200 });
   });
 });
 
@@ -84,7 +84,7 @@ describe('事件入口', () => {
     expect(init.headers).toMatchObject({ authorization: 'Bearer xoxb-test' });
     const body = JSON.parse(init.body as string);
     expect(body).toMatchObject({ channel: 'C1', ts: '123.456' });
-    expect(body.unfurls['https://star.baobo.me/?v=2'].blocks[1]).toMatchObject({ type: 'image', image_url: 'https://star.baobo.me/og.jpg?v=20261025.7' });
+    expect(body.unfurls['https://star.baobo.me/?v=2'].blocks[1]).toMatchObject({ type: 'image', image_url: 'https://star.baobo.me/og.jpg?image=square-en-v1&v=20261025.7' });
   });
 
   it('输入框预览用 unfurl_id 与 source', async () => {

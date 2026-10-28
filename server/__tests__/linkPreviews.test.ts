@@ -26,7 +26,7 @@ let dist: string;
 beforeAll(async () => {
   dist = mkdtempSync(join(tmpdir(), 'pet-match-link-previews-'));
   writeFileSync(join(dist, 'index.html'), index);
-  writeFileSync(join(dist, 'og.jpg'), await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#fff' } }).jpeg().toBuffer());
+  writeFileSync(join(dist, 'og.jpg'), await sharp({ create: { width: 1200, height: 1200, channels: 3, background: '#fff' } }).jpeg().toBuffer());
   app = buildApp({ pool: {} as Pool, staticDir: dist });
   await app.ready();
 });
@@ -146,11 +146,11 @@ describe('标准 oEmbed 表示', () => {
     const res = await get(embedUrl(`${ORIGIN}/?unfurl=oembed-photo`));
     expect(res.statusCode).toBe(200);
     expect(res.headers['content-type']).toContain('application/json');
-    expect(res.json()).toMatchObject({ version: '1.0', type: 'photo', title: 'Pets & Friends', width: 1200, height: 630 });
+    expect(res.json()).toMatchObject({ version: '1.0', type: 'photo', title: 'Pets & Friends', width: 1200, height: 1200 });
     const image = await get(localUrl(res.json().url));
     expect(image.statusCode).toBe(200);
     expect(image.headers['content-type']).toContain('image/jpeg');
-    expect(await sharp(image.rawPayload).metadata()).toMatchObject({ width: 1200, height: 630 });
+    expect(await sharp(image.rawPayload).metadata()).toMatchObject({ width: 1200, height: 1200 });
   });
 
   it.each([[401, 100], [92, 630], [1200, 49], [1, 1]])('遵守 %i×%i 尺寸约束，且声明与实际 JPEG 一致', async (maxwidth, maxheight) => {
@@ -159,7 +159,7 @@ describe('标准 oEmbed 表示', () => {
     const embed = res.json();
     expect(embed.width).toBeLessThanOrEqual(maxwidth);
     expect(embed.height).toBeLessThanOrEqual(maxheight);
-    if (embed.width > 1 && embed.height > 1) expect(Math.abs(embed.width / embed.height - 1200 / 630)).toBeLessThan(0.05);
+    if (embed.width > 1 && embed.height > 1) expect(Math.abs(embed.width / embed.height - 1200 / 1200)).toBeLessThan(0.05);
     const image = await get(localUrl(embed.url));
     expect(image.statusCode).toBe(200);
     expect(await sharp(image.rawPayload).metadata()).toMatchObject({ width: embed.width, height: embed.height });
@@ -170,7 +170,7 @@ describe('标准 oEmbed 表示', () => {
     const res = await get(embedUrl(page, '&format=json&maxwidth=640'));
     expect(res.statusCode).toBe(200);
     const embed = res.json();
-    expect(embed).toMatchObject({ type: 'rich', width: 640, height: 336 });
+    expect(embed).toMatchObject({ type: 'rich', width: 640, height: 640 });
     expect(embed.html).toContain('<img ');
     expect(embed.html).toContain(`href="${ORIGIN}/?unfurl=oembed-rich&amp;v=trial"`);
     expect(embed.html).toContain('width="640"');
@@ -193,7 +193,7 @@ describe('标准 oEmbed 表示', () => {
   it('超出原图的尺寸约束不放大图片；未知参数可忽略', async () => {
     const res = await get(embedUrl(`${ORIGIN}/`, '&maxwidth=5000&maxheight=5000&other=ignored'));
     expect(res.statusCode).toBe(200);
-    expect(res.json()).toMatchObject({ width: 1200, height: 630 });
+    expect(res.json()).toMatchObject({ width: 1200, height: 1200 });
   });
 
   it('不同尺寸的突发请求不会无限进入 Sharp 队列，忙时可重试', async () => {

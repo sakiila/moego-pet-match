@@ -1,7 +1,7 @@
 export const SHARE_ORIGIN = 'https://star.baobo.me';
-export const POSTER_URL = `${SHARE_ORIGIN}/og.jpg`;
+export const POSTER_URL = `${SHARE_ORIGIN}/og.jpg?image=square-en-v1`;
 export const POSTER_WIDTH = 1200;
-export const POSTER_HEIGHT = 630;
+export const POSTER_HEIGHT = 1200;
 export const PREVIEW_VARIANTS = ['og', 'twitter', 'oembed-photo', 'oembed-rich'] as const;
 export type PreviewVariant = (typeof PREVIEW_VARIANTS)[number];
 
